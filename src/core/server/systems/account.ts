@@ -2,7 +2,7 @@ import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { Account } from '../interface/iAccount';
-import { Collections } from '../interface/iDatabaseCollections';
+import { Collections } from '../database/collections';
 
 let isDoneLoading = false;
 let id = -1;

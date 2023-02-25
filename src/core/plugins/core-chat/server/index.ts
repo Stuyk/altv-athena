@@ -1,8 +1,8 @@
-import { PluginSystem } from '@AthenaServer/systems/plugins';
+import * as Athena from '@AthenaServer/api';
 import { init } from './src/chat';
 import './src/commands';
 
 const PLUGIN_NAME = 'chat';
-PluginSystem.registerPlugin(PLUGIN_NAME, () => {
+Athena.systems.plugins.registerPlugin(PLUGIN_NAME, () => {
     init();
 });

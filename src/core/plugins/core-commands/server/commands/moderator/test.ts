@@ -1,5 +1,5 @@
 // import * as alt from 'alt-server';
-// import { Athena } from '@AthenaServer/api/athena';
+// import * as Athena from '@AthenaServer/api/athena';
 // import { command } from '@AthenaServer/decorators/commands';
 // import { PedController } from '@AthenaServer/streamers/ped';
 // import { WorldNotificationController } from '@AthenaServer/streamers/worldNotifications';

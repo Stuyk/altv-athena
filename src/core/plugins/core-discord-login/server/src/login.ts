@@ -2,23 +2,16 @@ import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
-import { playerConst } from '@AthenaServer/api/consts/constPlayer';
-import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
-import { PlayerEvents } from '@AthenaServer/events/playerEvents';
-import VehicleFuncs from '@AthenaServer/extensions/vehicleFuncs';
 import { Account } from '@AthenaServer/interface/iAccount';
-import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
+import { Collections } from '@AthenaServer/database/collections';
 import { DiscordUser } from '@AthenaServer/interface/iDiscordUser';
 import { AccountSystem } from '@AthenaServer/systems/account';
 import { AgendaSystem } from '@AthenaServer/systems/agenda';
 import { Injections } from '@AthenaServer/systems/injections';
 import { LoginInjectionNames, TryLoginCallback } from '@AthenaServer/systems/injections/login';
-import { VehicleSystem } from '@AthenaServer/systems/vehicle';
 import { DevModeOverride } from '@AthenaServer/systems/dev';
-import { onTick } from '@AthenaServer/systems/tick';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 
-const UserRelation: { [key: number]: string } = {};
 const TryLoginInjections: Array<TryLoginCallback> = [];
 
 class InternalFunctions {
@@ -44,7 +37,7 @@ class InternalFunctions {
             id: account.discord,
         } as DiscordUser;
 
-        await playerConst.set.account(player, account);
+        await Athena.player.set.account(player, account);
     }
 }
 
@@ -56,8 +49,6 @@ export class LoginController {
      * @memberof LoginController
      */
     static init() {
-        PlayerEvents.on('selected-character', LoginController.bindPlayerToID);
-        alt.on('playerDisconnect', LoginController.tryDisconnect);
         DevModeOverride.setDevAccountCallback(InternalFunctions.developerModeCallback);
     }
 
@@ -172,52 +163,7 @@ export class LoginController {
             }
         }
 
-        await playerConst.set.account(player, account);
+        await Athena.player.set.account(player, account);
         AgendaSystem.goNext(player);
-    }
-
-    /**
-     * When a player logs out, we want to save their data and despawn all their vehicles.
-     * @param {alt.Player} player - alt.Player - The player that is logging out.
-     * @param {string} reason - The reason the player logged out.
-     * @returns The player's database ID.
-     */
-    static tryDisconnect(player: alt.Player, reason: string): void {
-        const id = player.id;
-        const data = Athena.document.character.get(player);
-
-        if (DEFAULT_CONFIG.DESPAWN_VEHICLES_ON_LOGOUT && typeof id === 'number') {
-            const characterID = LoginController.getDatabaseIdForPlayer(id);
-            VehicleFuncs.despawnAll(characterID);
-        }
-
-        if (!player || !player.valid) {
-            return;
-        }
-
-        if (player.isPushingVehicle) {
-            VehicleSystem.stopPush(player);
-        }
-
-        onTick(player);
-
-        if (typeof data === 'undefined') {
-            return;
-        }
-
-        alt.log(`${data.name} has logged out.`);
-    }
-
-    static bindPlayerToID(player: alt.Player): void {
-        if (!player || !player.valid) {
-            return;
-        }
-
-        const data = Athena.document.character.get(player);
-        UserRelation[player.id] = data._id;
-    }
-
-    static getDatabaseIdForPlayer(id: number): string | null {
-        return UserRelation[id];
     }
 }

@@ -27,7 +27,6 @@ dist-ssr
 server.cfg
 server.toml
 doc
-typedoc.json
 !scripts/streamer/dist
 package-lock.json
 
@@ -39,6 +38,7 @@ src-webviews/public/plugins/*
 !src-webviews/public/plugins/*/.gitkeep
 src/core/plugins/private-*
 src/core/plugins/athena-plugin-*
+docs/
 
 # Yarn stuff
 .yarn/

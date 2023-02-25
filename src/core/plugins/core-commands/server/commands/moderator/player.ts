@@ -1,6 +1,7 @@
 import alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
-import { AdminController } from '@AthenaServer/systems/admin';
+import * as Athena from '@AthenaServer/api';
+import Database from '@stuyk/ezmongodb';
+
 import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
@@ -84,8 +85,8 @@ Athena.systems.messenger.commands.register(
 
         const data = Athena.document.character.get(target);
         Athena.player.safe.setPosition(target, target.pos.x, target.pos.y, target.pos.z);
-        Athena.player.set.frozen(target, true);
         Athena.player.emit.notification(player, `Froze ${data.name} successfully!`);
+        target.frozen = true;
     },
 );
 
@@ -101,8 +102,8 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(target);
-        Athena.player.set.frozen(target, false);
         Athena.player.emit.notification(player, `Unfroze ${data.name} successfully!`);
+        target.frozen = false;
     },
 );
 
@@ -148,7 +149,7 @@ Athena.systems.messenger.commands.register(
         const data = Athena.document.character.get(target);
         Athena.player.emit.notification(player, `${data.name} was banned from the Server.`);
         target.kick(`You were banned from the Server - ${reason}`);
-        await Athena.database.funcs.updatePartialData(
+        await Database.updatePartialData(
             accountData._id,
             { banned: true, reason: reason },
             Athena.database.collections.Accounts,
@@ -165,7 +166,7 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        const unbanned = AdminController.unbanPlayer(discordIdentifier);
+        const unbanned = Athena.controllers.admin.unbanPlayer(discordIdentifier);
         if (unbanned) {
             const data = Athena.document.character.get(player);
             Athena.player.emit.message(player, `Unbanned ${discordIdentifier} (Discord)`);
@@ -193,7 +194,7 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(target);
-        await Athena.systems.permission.character.add(target, perm);
+        await Athena.systems.permission.add('character', target, perm);
 
         const response = `Added permission to ${data.name}, ${perm}`;
         Athena.player.emit.message(player, response);
@@ -217,7 +218,7 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(target);
-        await Athena.systems.permission.character.remove(target, perm);
+        await Athena.systems.permission.remove('character', target, perm);
 
         const response = `Removed permission from ${data.name}, ${perm}`;
         Athena.player.emit.message(player, response);
@@ -241,7 +242,7 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(target);
-        await Athena.systems.permission.character.clear(target);
+        await Athena.systems.permission.clear('character', target);
 
         const response = `Cleared permissions for ${data.name}.`;
         Athena.player.emit.message(player, response);

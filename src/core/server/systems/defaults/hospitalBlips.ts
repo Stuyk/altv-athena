@@ -1,7 +1,5 @@
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import * as alt from 'alt-server';
-
-import { PluginSystem } from '../plugins';
 
 /**
  * THIS IS A DEFAULT SYSTEM.
@@ -45,11 +43,14 @@ const Internal = {
     },
 };
 
-export const DefaultHospitalBlips = {
-    disable: () => {
-        enabled = false;
-        alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
-    },
-};
+/**
+ * Disable default hospital blips from being created
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
+    alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
+}
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 
-import { PluginSystem } from '../plugins';
-import { Athena } from '@AthenaServer/api/athena';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 /**
@@ -23,8 +22,8 @@ const Internal = {
             return;
         }
 
-        Athena.events.player.on('respawned', Internal.unequipAllWeapons);
-        Athena.events.player.on('selected-character', Internal.processPlayer);
+        Athena.player.events.on('respawned', Internal.unequipAllWeapons);
+        Athena.player.events.on('selected-character', Internal.processPlayer);
         alt.onClient(SYSTEM_EVENTS.PLAYER_TOOLBAR_INVOKE, Internal.invoke);
     },
     /**
@@ -43,7 +42,7 @@ const Internal = {
      * @param {number} slot
      */
     invoke(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar') {
-        Athena.systems.itemManager.utility.useItem(player, slot, type);
+        Athena.systems.inventory.manager.useItem(player, slot, type);
     },
     /**
      * Unequip all weapons on respawn.
@@ -66,15 +65,18 @@ const Internal = {
         }
 
         Athena.document.character.set(player, 'toolbar', data.toolbar);
-        Athena.systems.itemWeapon.update(player);
+        Athena.systems.inventory.weapons.update(player);
     },
 };
 
-export const DefaultToolbarSystem = {
-    disable: () => {
-        enabled = false;
-        alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
-    },
-};
+/**
+ * Disable the toolbar hotkeys / processing on server-side.
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
+    alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
+}
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

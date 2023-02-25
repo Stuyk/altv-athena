@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Interaction } from '../../shared/interfaces/interaction';
-import { sha256Random } from '../utility/encryption';
+import { sha256Random } from '../utility/hash';
 
 const DEFAULT_INTERACTION_HEIGHT = 3;
 

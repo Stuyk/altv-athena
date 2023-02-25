@@ -1,19 +1,17 @@
 import * as alt from 'alt-server';
-
-import ConfigUtil from './utility/config';
+import connection from './database/connection';
+import reconnect from './utility/reconnect';
+import serverConfig from './utility/config';
 import Database from '@stuyk/ezmongodb';
-import MongoUtil from './utility/mongo';
-
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 import { IConfig } from './interface/iConfig';
-import { ReconnectHelper } from './utility/reconnect';
 
 const startTime = Date.now();
 let config: IConfig | undefined;
 
 class Startup {
     static async begin() {
-        config = ConfigUtil.get();
+        config = serverConfig.get();
         Startup.database();
         await Startup.load();
     }
@@ -31,12 +29,12 @@ class Startup {
             process.exit(1);
         }
 
-        const url = MongoUtil.getURL(config);
-        const collections = MongoUtil.getCollections();
+        const url = connection.getURL(config);
+        const collections = connection.getCollections();
 
-        Database.init(url, MongoUtil.getName(config), collections)
+        Database.init(url, connection.getName(config), collections)
             .catch(() => {
-                MongoUtil.throwConnectionError();
+                connection.throwConnectionError();
             })
             .then((res) => {
                 if (res) {
@@ -44,7 +42,7 @@ class Startup {
                     return;
                 }
 
-                MongoUtil.throwConnectionError();
+                connection.throwConnectionError();
             });
     }
 
@@ -68,7 +66,7 @@ class Startup {
 
     static async toggleEntry() {
         alt.off('playerConnect', Startup.handleEarlyConnect);
-        ReconnectHelper.invoke();
+        reconnect.invoke();
     }
 
     static handleEarlyConnect(player: alt.Player) {

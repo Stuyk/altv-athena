@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { ATHENA_DEBUG_EVENTS } from '../../shared/events';
 
 interface LastStoredData {

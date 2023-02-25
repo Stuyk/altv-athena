@@ -1,9 +1,3 @@
-import atms from '../../../shared/information/atms';
-import { VehicleData } from '../../../shared/information/vehicles';
-import vendingMachines from '../../../shared/information/vendingMachines';
-
-export const dataConst = {
-    atms,
-    vehicles: VehicleData,
-    vendingMachines,
-};
+export { default as atms } from '../../../shared/information/atms';
+export { VehicleData as vehicles } from '../../../shared/information/vehicles';
+export { default as vendingMachines } from '../../../shared/information/vendingMachines';

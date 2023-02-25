@@ -1,9 +1,3 @@
-import { LoginInjections } from '../../systems/injections/login';
-import { PlayerInjections } from '../../systems/injections/player';
-import { VehicleInjection } from '../../systems/injections/vehicles';
-
-export const injectionsConst = {
-    login: LoginInjections,
-    player: PlayerInjections,
-    vehicle: VehicleInjection,
-};
+export { LoginInjections as login } from '../../systems/injections/login';
+export { PlayerInjections as player } from '../../systems/injections/player';
+export { VehicleInjection as vehicle } from '../../systems/injections/vehicles';

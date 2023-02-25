@@ -63,7 +63,7 @@
         </style>
     </head>
     <body id="body">
-        <div class="input-wrapper">
+        <div id="input-wrapper" class="input-wrapper">
             <div class="filler"></div>
             <div class="suggestion" id="suggestion-3"></div>
             <div class="suggestion" id="suggestion-2"></div>

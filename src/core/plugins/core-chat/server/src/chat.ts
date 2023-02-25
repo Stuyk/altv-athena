@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { CHAT_CONFIG } from '../../shared/config';
 
 function handleMessage(player: alt.Player, msg: string) {
@@ -9,10 +9,10 @@ function handleMessage(player: alt.Player, msg: string) {
         return;
     }
 
-    const closestPlayers = Athena.get.players.inRange(player.pos, CHAT_CONFIG.settings.range);
-    Athena.systems.messenger.players.send(closestPlayers, `${data.name}: ${msg}`);
+    const closestPlayers = Athena.getters.players.inRange(player.pos, CHAT_CONFIG.settings.range);
+    Athena.systems.messenger.messaging.sendToPlayers(closestPlayers, `${data.name}: ${msg}`);
 }
 
 export function init() {
-    Athena.systems.messenger.messages.addCallback(handleMessage);
+    Athena.systems.messenger.messaging.addCallback(handleMessage);
 }

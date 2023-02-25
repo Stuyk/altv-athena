@@ -19,7 +19,7 @@ const SWC_CONFIG = {
         },
         target: 'es2020',
     },
-    sourceMaps: true,
+    sourceMaps: false,
 };
 
 function sanitizePath(p) {
@@ -108,6 +108,9 @@ async function transpileFile(file) {
 
     return new Promise(async (resolve) => {
         const result = await swc.transformFile(file, SWC_CONFIG);
+        if (!result) {
+            console.warn(`Failed to compile: ${targetPath}`);
+        }
 
         // The path resolvers are really awful, so writing a custom one here.
         if (result.code.includes('@Athena')) {

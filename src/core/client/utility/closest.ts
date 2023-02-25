@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
+import * as vector from '@AthenaShared/utility/vector';
 import { IVector3 } from 'alt-shared';
-
-import { getClosestOfType } from '@AthenaShared/utility/closest';
 
 /**
  * A limited version of getting the closest vehicle.
@@ -15,7 +14,7 @@ import { getClosestOfType } from '@AthenaShared/utility/closest';
  */
 export function getClosestVehicle(pos: IVector3): alt.Vehicle | undefined {
     const vehicles = alt.Vehicle.all.filter((p) => p && p.valid && p.pos.x !== 0 && p.pos.y !== 0 && p.pos.z !== 0);
-    return getClosestOfType<alt.Vehicle>(pos, vehicles);
+    return vector.getClosestOfType<alt.Vehicle>(pos, vehicles);
 }
 
 /**
@@ -30,5 +29,5 @@ export function getClosestVehicle(pos: IVector3): alt.Vehicle | undefined {
  */
 export function getClosestPlayer(pos: IVector3): alt.Player | undefined {
     const players = alt.Player.all.filter((p) => p && p.valid && p.pos.x !== 0 && p.pos.y !== 0 && p.pos.z !== 0);
-    return getClosestOfType<alt.Player>(pos, players);
+    return vector.getClosestOfType<alt.Player>(pos, players);
 }

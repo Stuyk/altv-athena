@@ -1,9 +1,8 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { Player } from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { AgendaSystem } from '@AthenaServer/systems/agenda';
-import { CharacterSystem } from '@AthenaServer/systems/character';
 import { Character } from '@AthenaShared/interfaces/character';
 import { CHARACTER_SELECT_CONFIG } from '../../shared/config';
 import { CHARACTER_SELECT_EVENTS } from '../../shared/events';
@@ -75,7 +74,7 @@ class InternalFunctions {
         }
 
         alt.emitClient(player, CHARACTER_SELECT_EVENTS.DONE);
-        CharacterSystem.select(player, CharacterList[player.id][index]);
+        Athena.systems.character.select(player, CharacterList[player.id][index]);
 
         if (CharacterList[player.id]) {
             delete CharacterList[player.id];
@@ -100,13 +99,13 @@ class InternalFunctions {
             return;
         }
 
-        const playerCharacters: Array<Character> = await CharacterSystem.getCharacters(accountData._id);
+        const playerCharacters: Array<Character> = await Athena.systems.character.getCharacters(accountData._id);
         if (!playerCharacters || playerCharacters.length <= 0) {
             if (CharacterList[player.id]) {
                 delete CharacterList[player.id];
             }
 
-            CharacterSystem.invokeCreator(player, 0);
+            Athena.systems.character.invokeCreator(player, 0);
             return;
         }
 
@@ -121,7 +120,7 @@ class InternalFunctions {
             }
 
             alt.emitClient(player, CHARACTER_SELECT_EVENTS.DONE);
-            CharacterSystem.select(player, playerCharacters[0]);
+            Athena.systems.character.select(player, playerCharacters[0]);
             return;
         }
 
@@ -177,7 +176,7 @@ class InternalFunctions {
         }
 
         alt.emitClient(player, CHARACTER_SELECT_EVENTS.DONE);
-        CharacterSystem.invokeCreator(player, CharacterList[player.id].length);
+        Athena.systems.character.invokeCreator(player, CharacterList[player.id].length);
     }
 }
 

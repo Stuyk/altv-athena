@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 import { getWeatherFromString, WEATHER_KEY } from '@AthenaShared/utility/weather';
-import { PluginSystem } from '../plugins';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 
 /**
  * THIS IS A DEFAULT SYSTEM.
@@ -32,20 +31,6 @@ let interval: number;
 
 const Internal = {
     /**
-     * Updates the player weather to match current weather system.
-     *
-     * @param {alt.Player} player
-     */
-    updatePlayer(player: alt.Player) {
-        if (!enabled) {
-            return;
-        }
-
-        Athena.player.emit.message(player, `Weather is now ${weathers[0]}.`);
-        player.setWeather(getWeatherFromString(weathers[0]));
-    },
-
-    /**
      * Simple global weather system. Rotates through an array periodically.
      * Synchronizes it with all players.
      */
@@ -64,7 +49,7 @@ const Internal = {
         weathers.push(weathers.shift());
 
         for (let player of loggedInPlayers) {
-            Internal.updatePlayer(player);
+            updatePlayer(player);
         }
     },
     init() {
@@ -72,27 +57,53 @@ const Internal = {
             return;
         }
 
-        Athena.events.player.on('selected-character', Internal.updatePlayer);
+        Athena.player.events.on('selected-character', updatePlayer);
         alt.setInterval(Internal.handleWeatherUpdate, TIME_BETWEEN_UPDATES);
         alt.log(`~lc~Default System: ~g~Weather`);
     },
 };
 
-export const DefaultWeatherSystem = {
-    disable: () => {
-        enabled = false;
+/**
+ * Updates the player weather to match current weather system.
+ *
+ * @param {alt.Player} player
+ */
+export function updatePlayer(player: alt.Player) {
+    if (!enabled) {
+        return;
+    }
 
-        if (typeof interval !== 'undefined') {
-            alt.clearInterval(interval);
-            interval = undefined;
-        }
+    Athena.player.emit.message(player, `Weather is now ${weathers[0]}.`);
+    player.setWeather(getWeatherFromString(weathers[0]));
+}
 
-        alt.log(`Default Weather System Turned Off`);
-    },
-    getCurrentWeather(asString = false): number | string {
-        return asString ? weathers[0] : getWeatherFromString(weathers[0]);
-    },
-    updatePlayer: Internal.updatePlayer,
-};
+/**
+ * Disable the default weather from updating players.
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
 
-PluginSystem.callback.add(Internal.init);
+    if (typeof interval !== 'undefined') {
+        alt.clearInterval(interval);
+        interval = undefined;
+    }
+
+    alt.log(`Default Weather System Turned Off`);
+}
+
+export function getCurrentWeather(asString: false): number;
+export function getCurrentWeather(asString: true): string;
+/**
+ * Get the current weather as a string or number.
+ *
+ * @export
+ * @param {boolean} [asString=false]
+ * @return {(number | string)}
+ */
+export function getCurrentWeather(asString = false): number | string {
+    return asString ? weathers[0] : getWeatherFromString(weathers[0]);
+}
+
+Athena.systems.plugins.addCallback(Internal.init);

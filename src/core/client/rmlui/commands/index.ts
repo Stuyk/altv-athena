@@ -66,14 +66,33 @@ const InternalFunctions = {
             return undefined;
         }
 
+        const inputWrapper = document.getElementByID('input-wrapper');
+        inputWrapper.removeChild(element);
+        element.destroy();
+
+        if (typeof inputWrapper === 'undefined') {
+            alt.logWarning(`Could not find rmlui commands element with id 'input-wrapper'`);
+            return undefined;
+        }
+
         // Before you go and try to move the caret position to the end of the input box.
         // There is no way to move the caret position.
         // There is no access to element.setSelectionRange
         // There is no access to element.move
         // Unfocus and Refocus does not work either
         // Pretty much no option to make the caret position at the end of the input box for RMLUI.
+
         const fullCommand = '/' + suggestions[0].name;
-        element.setAttribute('value', fullCommand);
+        const newElement = document.createElement('input');
+        newElement.setAttribute('value', fullCommand);
+        newElement.setAttribute('id', 'input');
+        newElement.setAttribute('type', 'text');
+        inputWrapper.appendChild(newElement);
+
+        alt.nextTick(() => {
+            newElement.focus();
+            newElement.click();
+        });
     },
     getCurrentMessage(): string {
         const element = document.getElementByID('input');
@@ -81,7 +100,7 @@ const InternalFunctions = {
             alt.logWarning(`Could not find rmlui commands element with id 'input'`);
             return undefined;
         }
-
+        ``;
         const msg = element.getAttribute('value');
         return msg;
     },

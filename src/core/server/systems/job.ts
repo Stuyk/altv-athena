@@ -5,8 +5,8 @@ import JobEnums, { Objective } from '../../shared/interfaces/job';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance, distance2d } from '../../shared/utility/vector';
-import { Athena } from '../api/athena';
-import { sha256Random } from '../utility/encryption';
+import * as Athena from '../api';
+import { sha256Random } from '../utility/hash';
 
 const JobInstances: { [key: string]: Job } = {};
 const criteriaAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];

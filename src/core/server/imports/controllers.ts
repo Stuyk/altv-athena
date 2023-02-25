@@ -1,0 +1,9 @@
+import '../controllers/admin';
+import '../controllers/blip';
+import '../controllers/doors';
+import '../controllers/interaction';
+import '../controllers/marker';
+import '../controllers/object';
+import '../controllers/staticPed';
+import '../controllers/textlabel';
+import '../controllers/worldNotifications';

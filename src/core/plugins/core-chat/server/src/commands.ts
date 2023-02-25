@@ -1,5 +1,5 @@
 import alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { CHAT_CONFIG } from '@AthenaPlugins/core-chat/shared/config';
 
 Athena.systems.messenger.commands.register(
@@ -14,13 +14,13 @@ Athena.systems.messenger.commands.register(
         }
 
         const fullMessage = args.join(' ');
-        const closestPlayers = Athena.get.players.inRange(player.pos, CHAT_CONFIG.settings.commands.doDistance);
+        const closestPlayers = Athena.getters.players.inRange(player.pos, CHAT_CONFIG.settings.commands.doDistance);
         const data = Athena.document.character.get(player);
         if (typeof data === 'undefined') {
             return;
         }
 
-        Athena.systems.messenger.players.send(
+        Athena.systems.messenger.messaging.sendToPlayers(
             closestPlayers,
             `${CHAT_CONFIG.settings.commands.roleplayColour}* ${fullMessage} ((${data.name}))`,
         );
@@ -39,13 +39,13 @@ Athena.systems.messenger.commands.register(
         }
 
         const fullMessage = args.join(' ');
-        const closestPlayers = Athena.get.players.inRange(player.pos, CHAT_CONFIG.settings.commands.lowDistance);
+        const closestPlayers = Athena.getters.players.inRange(player.pos, CHAT_CONFIG.settings.commands.lowDistance);
         const data = Athena.document.character.get(player);
         if (typeof data === 'undefined') {
             return;
         }
 
-        Athena.systems.messenger.players.send(
+        Athena.systems.messenger.messaging.sendToPlayers(
             closestPlayers,
             `${CHAT_CONFIG.settings.commands.lowColour}${data.name} ${fullMessage}`,
         );
@@ -64,13 +64,13 @@ Athena.systems.messenger.commands.register(
         }
 
         const fullMessage = args.join(' ');
-        const closestPlayers = Athena.get.players.inRange(player.pos, CHAT_CONFIG.settings.commands.meDistance);
+        const closestPlayers = Athena.getters.players.inRange(player.pos, CHAT_CONFIG.settings.commands.meDistance);
         const data = Athena.document.character.get(player);
         if (typeof data === 'undefined') {
             return;
         }
 
-        Athena.systems.messenger.players.send(
+        Athena.systems.messenger.messaging.sendToPlayers(
             closestPlayers,
             `${CHAT_CONFIG.settings.commands.roleplayColour}${data.name} ${fullMessage}`,
         );
@@ -89,13 +89,13 @@ Athena.systems.messenger.commands.register(
         }
 
         const fullMessage = args.join(' ');
-        const closestPlayers = Athena.get.players.inRange(player.pos, CHAT_CONFIG.settings.commands.oocDistance);
+        const closestPlayers = Athena.getters.players.inRange(player.pos, CHAT_CONFIG.settings.commands.oocDistance);
         const data = Athena.document.character.get(player);
         if (typeof data === 'undefined') {
             return;
         }
 
-        Athena.systems.messenger.players.send(
+        Athena.systems.messenger.messaging.sendToPlayers(
             closestPlayers,
             `${CHAT_CONFIG.settings.commands.oocColour}${data.name}: ((${fullMessage}))`,
         );
@@ -136,12 +136,12 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        Athena.systems.messenger.player.send(
+        Athena.systems.messenger.messaging.send(
             player,
             `${CHAT_CONFIG.settings.commands.whisperColour}You whisper: '${fullMessage}' to ${targetData.name}`,
         );
 
-        Athena.systems.messenger.player.send(
+        Athena.systems.messenger.messaging.send(
             target,
             `${CHAT_CONFIG.settings.commands.whisperColour}${data.name}: ((${fullMessage}))`,
         );

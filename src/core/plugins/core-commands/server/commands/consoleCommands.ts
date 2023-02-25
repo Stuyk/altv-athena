@@ -1,7 +1,7 @@
 // import Database from '@stuyk/ezmongodb';
 // import * as alt from 'alt-server';
 // import fs from 'fs';
-// import { Athena } from '@AthenaServer/api/athena';
+// import * as Athena from '@AthenaServer/api/athena';
 // import { Account } from '@AthenaServer/interface/iAccount';
 // import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
 // import { AdminController } from '@AthenaServer/systems/admin';

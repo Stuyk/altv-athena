@@ -2,9 +2,9 @@ import { Character } from '@AthenaShared/interfaces/character';
 import * as alt from 'alt-server';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Athena } from '../api/athena';
+import * as Athena from '../api';
 import { DEFAULT_CONFIG } from '../athena/main';
-import VehicleFuncs from '../extensions/vehicleFuncs';
+// import VehicleFuncs from '../extensions/vehicleFuncs';
 import { Injections } from './injections';
 import { PlayerInjectionNames, PlayerSaveTickCallback } from './injections/player';
 
@@ -87,9 +87,9 @@ function handlePing(player: alt.Player): void {
 
     // Only the driver of the vehicle should be responsible for vehicle updates.
     if (player.vehicle && player.vehicle.driver === player) {
-        if (!player.vehicle.nextSave || Date.now() > player.vehicle.nextSave) {
-            player.vehicle.nextSave = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_VEHICLE_SAVES;
-            VehicleFuncs.update(player.vehicle);
-        }
+        // if (!player.vehicle.nextSave || Date.now() > player.vehicle.nextSave) {
+        //     player.vehicle.nextSave = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_VEHICLE_SAVES;
+        //     VehicleFuncs.update(player.vehicle);
+        // }
     }
 }

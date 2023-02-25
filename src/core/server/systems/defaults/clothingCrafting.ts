@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 
-import { PluginSystem } from '../plugins';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { ClothingInfo, StoredItem } from '@AthenaShared/interfaces/item';
 
 /**
@@ -36,7 +35,7 @@ const Internal = {
             return;
         }
 
-        Athena.systems.itemCrafting.recipe.add({
+        Athena.systems.inventory.crafting.addRecipe({
             uid: `clothing`,
             combo: ['clothing', 'clothing'],
             quantities: [1, 1],
@@ -52,11 +51,14 @@ const Internal = {
     },
 };
 
-export const DefaultClothingCrafting = {
-    disable: () => {
-        enabled = false;
-        alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
-    },
-};
+/**
+ * Disable the default clothing crafting combinations.
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
+    alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
+}
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

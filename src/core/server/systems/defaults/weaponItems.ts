@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 
 import { getWeaponMap } from '@AthenaShared/information/weaponList';
-import { PluginSystem } from '../plugins';
-import { ItemFactory } from '../inventory/factory';
 
 /**
  * THIS IS A DEFAULT SYSTEM.
@@ -28,7 +27,7 @@ const Internal = {
         Object.keys(weapons).forEach((name) => {
             const weapon = weapons[name];
             promises.push(
-                ItemFactory.async.upsert({
+                Athena.systems.inventory.factory.upsertAsync({
                     dbName: name,
                     icon: weapon.icon,
                     name: weapon.name,
@@ -45,11 +44,15 @@ const Internal = {
     },
 };
 
-export const DefaultWeaponItemsSystem = {
-    disable: () => {
-        enabled = false;
-        alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
-    },
-};
+/**
+ * Disable all weapon items from being created / used.
+ * Does not remove them if they already exist in the database.
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
+    alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
+}
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

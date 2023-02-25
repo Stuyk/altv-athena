@@ -1,8 +1,7 @@
-import { PluginSystem } from '@AthenaServer/systems/plugins';
+import * as Athena from '@AthenaServer/api';
 import { CharacterCreatorView } from './src/view';
 
 const PLUGIN_NAME = 'character-creator';
-
-PluginSystem.registerPlugin(PLUGIN_NAME, () => {
+Athena.systems.plugins.registerPlugin(PLUGIN_NAME, () => {
     CharacterCreatorView.init();
 });

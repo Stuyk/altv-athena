@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { Athena } from '../api/athena';
 import { AgendaOrder, AgendaSystem } from './agenda';
 
 let callback: (player: alt.Player) => Promise<void>;

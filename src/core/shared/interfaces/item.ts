@@ -232,6 +232,14 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
      * @memberof StoredItem
      */
     icon?: string;
+
+    /**
+     * Flag this item as uncraftable. Just in case it has a shared base.
+     *
+     * @type {boolean}
+     * @memberof StoredItem
+     */
+    disableCrafting?: boolean;
 }
 
 /**

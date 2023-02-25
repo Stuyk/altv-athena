@@ -1,10 +1,7 @@
 import * as alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
 import { clothingComponentToIconName, clothingItemToIconName } from '@AthenaShared/utility/clothing';
-
-
-Athena.systems.permission.account.has
 
 Athena.systems.messenger.commands.register(
     'setclothing',
@@ -49,8 +46,8 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(player);
-        const storableItem = Athena.systems.itemClothing.outfit.create.fromPlayer(player, [{ id: idReal }]);
-        const result = await Athena.systems.itemManager.inventory.add(storableItem, data.inventory, 'inventory');
+        const storableItem = Athena.systems.inventory.clothing.outfitFromPlayer(player, [{ id: idReal }]);
+        const result = await Athena.systems.inventory.manager.add(storableItem, data.inventory, 'inventory');
         if (typeof result === 'undefined') {
             return;
         }
@@ -134,11 +131,8 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(player);
-        const storableItem = Athena.systems.itemClothing.outfit.create.fromPlayer(player, [
-            { id: idReal, isProp: true },
-        ]);
-
-        const result = await Athena.systems.itemManager.inventory.add(storableItem, data.inventory, 'inventory');
+        const storableItem = Athena.systems.inventory.clothing.outfitFromPlayer(player, [{ id: idReal, isProp: true }]);
+        const result = await Athena.systems.inventory.manager.add(storableItem, data.inventory, 'inventory');
         if (typeof result === 'undefined') {
             return;
         }
