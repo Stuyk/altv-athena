@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
-import { CharacterSystem } from '@AthenaServer/systems/character';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo';
 import { CHARACTER_CREATOR_CONFIG } from '../../shared/config';
@@ -18,7 +17,7 @@ class InternalFunctions {
      * @memberof CharacterCreatorView
      */
     static verifyName(player: alt.Player, name: string) {
-        const isValidName = CharacterSystem.isNameTaken(name);
+        const isValidName = Athena.systems.character.isNameTaken(name);
         alt.emitClient(player, CHARACTER_CREATOR_EVENTS.VERIFY_NAME, isValidName);
     }
 
@@ -54,7 +53,7 @@ class InternalFunctions {
             return;
         }
 
-        const didCreate = await CharacterSystem.create(player, appearance, info, name);
+        const didCreate = await Athena.systems.character.create(player, appearance, info, name);
         if (!didCreate) {
             InternalFunctions.show(player, CreatorList[player.id] ? CreatorList[player.id] : 0);
             return;
@@ -90,7 +89,7 @@ export class CharacterCreatorView {
     static init() {
         // Makes this character creator the primary character creator if it is loaded...
         // This can be overwritten by changing the callback for this function.
-        CharacterSystem.setCreatorCallback(InternalFunctions.show);
+        Athena.systems.character.setCreatorCallback(InternalFunctions.show);
 
         alt.onClient(CHARACTER_CREATOR_EVENTS.VERIFY_NAME, InternalFunctions.verifyName);
         alt.onClient(CHARACTER_CREATOR_EVENTS.DONE, InternalFunctions.done);

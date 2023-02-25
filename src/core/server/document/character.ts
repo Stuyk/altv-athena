@@ -13,7 +13,7 @@ const DEBUG_MODE = false; // Use this to see what state is being set.
 /**
  * Binds a player identifier to a Character document.
  * This document is cleared on disconnected automatically.
- * This should be the first thing you do after having a user authenticate.
+ * This should be the first thing you do after having a user authenticate and select a character.
  *
  * @param {alt.Player} player
  * @param {Character} document
@@ -48,6 +48,7 @@ export function unbind(id: number) {
  *
  * Can also append custom objects to the generic type to obtain custom data from the database.
  *
+ * @example
  * ```ts
  * interface Testing {
  *     myProperty: string;
@@ -109,7 +110,7 @@ export function getField<T = {}, ReturnType = any>(
  * @template T
  * @param {alt.Player} player
  * @param {(keyof KnownKeys<Character & T>)} fieldName
- * @param {*} value
+ * @param {any} value
  * @return {void}
  */
 export async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(

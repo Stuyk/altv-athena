@@ -4,138 +4,133 @@ import SockJS from 'sockjs-client';
 import { IStream, IStreamMessage } from '../../shared/interfaces/iStream';
 import { DEFAULT_CONFIG } from '../athena/main';
 
+const Routes = {
+    pong: pong,
+    update: update,
+};
+
 const DEFAULT_CONNECTION = 'http://127.0.0.1:3399';
 const sock = new SockJS(DEFAULT_CONNECTION);
-const callbacks: { [key: string]: (player: alt.Player, streamedData: Array<any>) => void } = {};
+let callbacks: { [key: string]: (player: alt.Player, streamedData: Array<any>) => void } = {};
 let ready = false;
 let hasInitialized = false;
 
 /**
- * Should not be exported. Do not export.
- * @class Internal
+ * Send a ping message to the server and then send a configuration message.
+ * @returns None
  */
-const Internal = {
-    /**
-     * Send a ping message to the server and then send a configuration message.
-     * @returns None
-     */
-    init() {
-        const pingMessage: IStreamMessage = {
-            id: -1,
-            route: 'ping',
-            data: 'Ready!',
-        };
+function init() {
+    const pingMessage: IStreamMessage = {
+        id: -1,
+        route: 'ping',
+        data: 'Ready!',
+    };
 
-        sock.send(JSON.stringify(pingMessage));
+    sock.send(JSON.stringify(pingMessage));
 
-        const configMessage: IStreamMessage = {
-            id: -1,
-            route: 'config',
-            data: DEFAULT_CONFIG.STREAM_CONFIG,
-        };
+    const configMessage: IStreamMessage = {
+        id: -1,
+        route: 'config',
+        data: DEFAULT_CONFIG.STREAM_CONFIG,
+    };
 
-        sock.send(JSON.stringify(configMessage));
-    },
+    sock.send(JSON.stringify(configMessage));
+}
 
-    /**
-     * Stream Update Response from Streamer Service
-     * @static
-     * @param {number} id
-     * @param {IStream} data
-     * @return {*}
-     * @memberof Internal
-     */
-    update(id: number, data: IStream) {
-        const player = alt.Player.all.find((p) => p.id === id);
+/**
+ * Stream Update Response from Streamer Service
+ * @static
+ * @param {number} id
+ * @param {IStream} data
+ * @return {*}
+ * @memberof Internal
+ */
+function update(id: number, data: IStream) {
+    const player = alt.Player.all.find((p) => p.id === id);
+    if (!player || !player.valid) {
+        return;
+    }
+
+    const keys = Object.keys(callbacks);
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+
+        if (!callbacks[key]) {
+            continue;
+        }
+
+        if (!data[key]) {
+            continue;
+        }
+
+        callbacks[key](player, data[key]);
+    }
+}
+
+/**
+ * Parse Data from the WebSocket Server
+ * @static
+ * @param {string} message
+ * @return {*}
+ * @memberof Internal
+ */
+function receive(message: string) {
+    const msg: IStreamMessage = JSON.parse(message);
+    if (!Routes[msg.route]) {
+        return;
+    }
+
+    Routes[msg.route](msg.id, msg.data);
+}
+
+/**
+ * Used to call streamer updates for each player.
+ * @static
+ * @memberof Internal
+ */
+function tick() {
+    alt.Player.all.forEach((player) => {
         if (!player || !player.valid) {
             return;
         }
 
-        const keys = Object.keys(callbacks);
-        for (let i = 0; i < keys.length; i++) {
-            const key = keys[i];
-
-            if (!callbacks[key]) {
-                continue;
-            }
-
-            if (!data[key]) {
-                continue;
-            }
-
-            callbacks[key](player, data[key]);
-        }
-    },
-
-    /**
-     * Parse Data from the WebSocket Server
-     * @static
-     * @param {string} message
-     * @return {*}
-     * @memberof Internal
-     */
-    receive(message: string) {
-        const msg: IStreamMessage = JSON.parse(message);
-        if (!Routes[msg.route]) {
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
             return;
         }
 
-        Routes[msg.route](msg.id, msg.data);
-    },
+        requestUpdate(player);
+    });
+}
+/**
+ * Used to request an update for a specific player.
+ * @static
+ * @param {alt.Player} player
+ * @memberof Internal
+ */
+function requestUpdate(player: alt.Player) {
+    const playerInfo: IStreamMessage = {
+        id: player.id,
+        route: 'update',
+        data: {
+            pos: player.pos,
+            dimension: player.dimension,
+        },
+    };
 
-    /**
-     * Used to call streamer updates for each player.
-     * @static
-     * @memberof Internal
-     */
-    tick() {
-        alt.Player.all.forEach((player) => {
-            if (!player || !player.valid) {
-                return;
-            }
+    sock.send(JSON.stringify(playerInfo));
+}
 
-            const data = Athena.document.character.get(player);
-            if (typeof data === 'undefined') {
-                return;
-            }
-
-            Internal.requestUpdate(player);
-        });
-    },
-    /**
-     * Used to request an update for a specific player.
-     * @static
-     * @param {alt.Player} player
-     * @memberof Internal
-     */
-    requestUpdate(player: alt.Player) {
-        const playerInfo: IStreamMessage = {
-            id: player.id,
-            route: 'update',
-            data: {
-                pos: player.pos,
-                dimension: player.dimension,
-            },
-        };
-
-        sock.send(JSON.stringify(playerInfo));
-    },
-    /**
-     * Message back from sending a ping request.
-     * @static
-     * @param {string} data
-     * @memberof Internal
-     */
-    async pong(id: number, data: string) {
-        alt.log(data);
-        ready = true;
-    },
-};
-
-const Routes = {
-    pong: Internal.pong,
-    update: Internal.update,
-};
+/**
+ * Message back from sending a ping request.
+ * @static
+ * @param {string} data
+ * @memberof Internal
+ */
+async function pong(id: number, data: string) {
+    alt.log(data);
+    ready = true;
+}
 
 /**
  * Register a custom callback function.
@@ -152,6 +147,8 @@ export async function registerCallback<T>(
     callback: (player: alt.Player, streamedData: Array<T>) => void,
     range: number = 100,
 ) {
+    await alt.Utils.waitFor(() => typeof callbacks !== 'undefined');
+
     callbacks[key] = callback;
 
     await new Promise((resolve: Function) => {
@@ -174,6 +171,7 @@ export async function registerCallback<T>(
         },
     };
 
+    alt.log(`~c~Streamer: ~lg~${key}`);
     sock.send(JSON.stringify(playerInfo));
 }
 
@@ -236,11 +234,11 @@ if (!hasInitialized) {
         }, 5000);
     }, 5000);
 
-    sock.onopen = Internal.init;
+    sock.onopen = init;
     sock.onmessage = (message: MessageEvent) => {
         didGetFirstCallback = true;
-        Internal.receive(message.data);
+        receive(message.data);
     };
 
-    alt.setInterval(Internal.tick, DEFAULT_CONFIG.STREAM_CONFIG.TimeBetweenUpdates);
+    alt.setInterval(tick, DEFAULT_CONFIG.STREAM_CONFIG.TimeBetweenUpdates);
 }

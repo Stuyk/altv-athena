@@ -5,12 +5,12 @@ import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 import { PED_CONFIG_FLAG } from '@AthenaShared/flags/pedflags';
-import { KeybindController } from '@AthenaClient/events/keyup';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 import './push';
 import { PushVehicle } from './push';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 const Internal = {
     init() {
@@ -19,7 +19,7 @@ const Internal = {
         alt.onServer(SYSTEM_EVENTS.VEHICLE_ENGINE, VehicleController.toggleEngine);
         alt.on('enteredVehicle', VehicleController.enterVehicle);
         alt.on('leftVehicle', VehicleController.removeSeatBelt);
-        VehicleController.registerKeybinds;
+        VehicleController.registerKeybinds();
     },
 };
 
@@ -30,14 +30,18 @@ export const VehicleController = {
      * @memberof VehicleController
      */
     registerKeybinds() {
-        KeybindController.registerKeybind({
+        AthenaClient.hotkeys.add({
             key: KEY_BINDS.VEHICLE_ENGINE,
-            singlePress: VehicleController.emitEngine,
+            description: 'Vehicle Engine Toggle',
+            identifier: 'toggle-vehicle-engine',
+            keyDown: VehicleController.emitEngine,
         });
 
-        KeybindController.registerKeybind({
+        AthenaClient.hotkeys.add({
             key: KEY_BINDS.VEHICLE_LOCK,
-            singlePress: VehicleController.emitLock,
+            description: 'Vehicle Lock Toggle',
+            identifier: 'toggle-vehicle-lock',
+            keyDown: VehicleController.emitLock,
         });
     },
 

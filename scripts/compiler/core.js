@@ -19,7 +19,7 @@ const SWC_CONFIG = {
         },
         target: 'es2020',
     },
-    sourceMaps: 'inline',
+    sourceMaps: false,
 };
 
 function sanitizePath(p) {

@@ -6,8 +6,6 @@ import Database from '@stuyk/ezmongodb';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 import { IConfig } from './interface/iConfig';
 
-console.log(serverConfig);
-
 const startTime = Date.now();
 let config: IConfig | undefined;
 
