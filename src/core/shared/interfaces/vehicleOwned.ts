@@ -1,8 +1,7 @@
 import { Vehicle_Behavior } from '../enums/vehicle';
-import { BaseVehicle } from './vehicleBase';
-import VehicleDamage from './vehicleDamage';
-import { VehicleState } from './vehicleState';
 import VehicleTuning from './vehicleTuning';
+import { BaseVehicle } from './vehicleBase';
+import { VehicleState } from './vehicleState';
 
 export interface OwnedVehicle extends BaseVehicle {
     /**
@@ -25,7 +24,13 @@ export interface OwnedVehicle extends BaseVehicle {
      * @type {VehicleTuning}
      * @memberof IVehicle
      */
-    tuning?: Partial<VehicleTuning> | undefined;
+    tuning?: Partial<VehicleTuning> | VehicleTuning | undefined;
 
-    state?: VehicleState;
+    /**
+     * Data that matches the alt.Vehicle API setters
+     *
+     * @type {Partial<VehicleState> | VehicleState}
+     * @memberof OwnedVehicle
+     */
+    state?: Partial<VehicleState> | VehicleState;
 }

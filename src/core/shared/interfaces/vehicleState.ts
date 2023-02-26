@@ -159,15 +159,12 @@ export interface VehicleState {
      * Enables or disables the manual engine control.
      */
     manualEngineControl: boolean;
-    /**
-     * Gets or sets the current mod kit of a vehicle.
-     */
-    modKit: number;
 
     /**
      * Enables or disables a neon light on a specific position.
      */
     neon: IVehicleNeon;
+
     /**
      * Gets or sets the color of the neon lights.
      */
@@ -177,18 +174,22 @@ export interface VehicleState {
      * Gets or sets the current number plate style.
      */
     numberPlateIndex: number;
+
     /**
      * Gets or sets the current text displayed on the number plate.
      */
     numberPlateText: string;
+
     /**
      * Gets or sets the pearl color of a vehicle.
      */
     pearlColor: number;
+
     /**
      * Gets or sets the current health amount of the petrol tank.
      */
     petrolTankHealth: number;
+
     /**
      * Gets or sets the current primary color of a vehicle.
      */
@@ -198,22 +199,27 @@ export interface VehicleState {
      * Gets or sets the roof livery of a vehicle.
      */
     roofLivery: number;
+
     /**
      * Gets or sets the roof state of a vehicle (closed or open).
      */
     roofState: boolean;
+
     /**
      * Gets or sets the current secondary color.
      */
     secondaryColor: number;
+
     /**
      * Gets or sets the siren state of a vehicle.
      */
     sirenActive: boolean;
+
     /**
      * Gets or sets the color of the tire smoke.
      */
     tireSmokeColor: alt.RGBA;
+
     /**
      * Gets or sets the wheel color.
      */

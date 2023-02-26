@@ -1,1 +1,1 @@
-export * as vehicle from './vehicleEvents';
+export * as vehicle from '../vehicle/events';

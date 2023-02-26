@@ -119,9 +119,13 @@ export function next(player: alt.Player) {
 
     const index = playerFlow[player.id].index;
     if (!playerFlow[player.id].flow[index]) {
-        // FINISH LOGIN FLOW HERE. DO SOMETHING ELSE. LOOK AT AGENDA REE
+        delete playerFlow[player.id];
         return;
     }
 
     playerFlow[player.id].flow[index].callback(player);
 }
+
+alt.on('playerDisconnect', (player: alt.Player) => {
+    delete playerFlow[player.id];
+});

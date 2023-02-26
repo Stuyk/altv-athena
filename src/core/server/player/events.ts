@@ -15,6 +15,8 @@ export type AthenaPlayerEvents =
     | 'player-health-set'
     | 'player-armour-set'
     | 'player-pos-set'
+    | 'player-left-vehicle-seat'
+    | 'player-entered-vehicle-as-driver'
     | 'pickup-item'
     | 'respawned'
     | 'selected-character'
@@ -197,6 +199,30 @@ export function on(eventName: 'selected-character', callback: (player: alt.Playe
  * @param {(player: alt.Player) => void} callback
  */
 export function on(eventName: 'respawned', callback: (player: alt.Player) => void);
+
+/**
+ * Called when a player has left a vehicle seat.
+ *
+ * @export
+ * @param {'player-left-vehicle-seat'} eventName
+ * @param {(player: alt.Player, seat: number) => void} callback
+ */
+export function on(
+    eventName: 'player-left-vehicle-seat',
+    callback: (player: alt.Player, vehicle: alt.Vehicle, seat: number) => void,
+);
+
+/**
+ * Called when a player enters a vehicle as a driver.
+ *
+ * @export
+ * @param {'player-entered-vehicle-as-driver'} eventName
+ * @param {(player: alt.Player, vehicle: alt.Vehicle) => void} callback
+ */
+export function on(
+    eventName: 'player-entered-vehicle-as-driver',
+    callback: (player: alt.Player, vehicle: alt.Vehicle) => void,
+);
 
 /**
  * Trigger a callback specific to Athena Player Events.

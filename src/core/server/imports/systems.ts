@@ -11,7 +11,7 @@ import '../systems/messenger/messaging';
 import '../systems/plugins';
 import '../systems/streamer';
 import '../systems/tick';
-import '../systems/vehicle';
+import '../vehicle/vehicle';
 
 // Defaults Systems - With Toggleable Configs
 import '../systems/defaults/ammo';

@@ -1,12 +1,6 @@
-import * as alt from 'alt-shared';
 import IVehicleHandling from './vehicleHandling';
 import IVehicleMod from './vehicleMod';
 import { IVehicleNeon, NumberPlateStyle, RGBA, WindowTint } from 'alt-server';
-
-type finish = number;
-
-export type PaintFinish = [finish, finish];
-export type PaintJob = [alt.RGBA, alt.RGBA];
 
 export default interface IVehicleTuning {
     /**
@@ -32,20 +26,6 @@ export default interface IVehicleTuning {
      * @memberof IVehicleTuning
      */
     handling: Partial<IVehicleHandling>;
-
-    /**
-     * The paint that should be applied to this vehicle
-     *
-     * ```
-     * [1, 1]
-     * // OR
-     * [ new alt.RGBA(255, 0, 0, 255), new alt.RGBA(255, 0, 0, 255) ];
-     * ```
-     *
-     * @type {(PaintJob | PaintFinish)}
-     * @memberof IVehicle
-     */
-    paint?: PaintJob | PaintFinish;
 
     /**
      * Pearl Color, -1 does not apply
