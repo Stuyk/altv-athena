@@ -2,7 +2,6 @@ import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import * as Athena from '../api';
-import { AgendaSystem } from '../systems/agenda';
 import { DevModeOverride } from '../systems/dev';
 import ConfigUtil from '../utility/config';
 
@@ -44,8 +43,7 @@ async function handlePlayerConnect(player: alt.Player): Promise<void> {
         return;
     }
 
-    // What is this? It's a series of steps the client follows for a login sequence.
-    AgendaSystem.goNext(player, true);
+    Athena.systems.loginFlow.next(player);
 }
 
 alt.onClient(SYSTEM_EVENTS.BEGIN_CONNECTION, handlePlayerConnect);

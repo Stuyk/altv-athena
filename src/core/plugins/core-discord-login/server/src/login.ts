@@ -6,13 +6,8 @@ import { Account } from '@AthenaServer/interface/iAccount';
 import { Collections } from '@AthenaServer/database/collections';
 import { DiscordUser } from '@AthenaServer/interface/iDiscordUser';
 import { AccountSystem } from '@AthenaServer/systems/account';
-import { AgendaSystem } from '@AthenaServer/systems/agenda';
-import { Injections } from '@AthenaServer/systems/injections';
-import { LoginInjectionNames, TryLoginCallback } from '@AthenaServer/systems/injections/login';
 import { DevModeOverride } from '@AthenaServer/systems/dev';
 import * as Athena from '@AthenaServer/api';
-
-const TryLoginInjections: Array<TryLoginCallback> = [];
 
 class InternalFunctions {
     /**
@@ -62,7 +57,7 @@ export class LoginController {
      */
     static async show(player: alt.Player) {
         if (!player.discord) {
-            AgendaSystem.goNext(player, true);
+            Athena.systems.loginFlow.register(player);
             return;
         }
 
@@ -86,23 +81,6 @@ export class LoginController {
 
         delete player.pendingLogin;
         delete player.discordToken;
-
-        const tryBeforeLoginInjections = Injections.get<TryLoginCallback>(LoginInjectionNames.TRY_LOGIN_ACCOUNT_BEGIN);
-        for (const callback of tryBeforeLoginInjections) {
-            const result = await callback(player, account);
-            if (typeof result === 'string') {
-                player.kick(result);
-                return;
-            }
-        }
-
-        for (const callback of TryLoginInjections) {
-            const didPass = await callback(player, account);
-
-            if (!didPass) {
-                return;
-            }
-        }
 
         if (player.discord && player.discord.username) {
             alt.log(`[Athena] (${player.id}) ${player.discord.username} has authenticated.`);
@@ -154,16 +132,7 @@ export class LoginController {
             return;
         }
 
-        const tryAfterLoginCallback = Injections.get<TryLoginCallback>(LoginInjectionNames.TRY_LOGIN_ACCOUNT_END);
-        for (const callback of tryAfterLoginCallback) {
-            const result = await callback(player, account);
-            if (typeof result === 'string') {
-                player.kick(result);
-                return;
-            }
-        }
-
         await Athena.player.set.account(player, account);
-        AgendaSystem.goNext(player);
+        Athena.systems.loginFlow.next(player);
     }
 }

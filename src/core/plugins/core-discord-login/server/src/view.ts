@@ -2,8 +2,6 @@ import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
 import axios, { AxiosRequestConfig } from 'axios';
-import { AgendaSystem } from '@AthenaServer/systems/agenda';
-import { AgendaOrder } from '@AthenaServer/systems/agenda';
 import { DISCORD_LOGIN_EVENTS } from '../../shared/events';
 import { LoginController } from './login';
 import { DISCORD_LOCALES } from '../../shared/locales';
@@ -81,7 +79,7 @@ export class LoginView {
     static init() {
         alt.on('playerDisconnect', LoginView.handleDisconnect);
         alt.onClient(DISCORD_LOGIN_EVENTS.TO_SERVER.TRY_FINISH, tryToFinishLogin);
-        AgendaSystem.set(AgendaOrder.LOGIN_SYSTEM, LoginView.prepare);
+        Athena.systems.loginFlow.add('authentication', 1, LoginView.prepare);
     }
 
     /**
@@ -122,6 +120,7 @@ export class LoginView {
             return;
         }
 
+        alt.log(`Verified JWT Token`);
         const account: Partial<Account> | null = await Database.fetchData<Account>(
             '_id',
             identifier,

@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { AgendaOrder, AgendaSystem } from './agenda';
+import * as Athena from '@AthenaServer/api';
 
 let callback: (player: alt.Player) => Promise<void>;
 
@@ -26,7 +26,7 @@ export class DevModeOverride {
         }
 
         await callback(player);
-        AgendaSystem.initPlayer(player);
-        AgendaSystem.goToAgenda(player, AgendaOrder.CHARACTER_SELECT);
+        Athena.systems.loginFlow.register(player);
+        Athena.systems.loginFlow.next(player);
     }
 }

@@ -6,7 +6,6 @@ export * as document from '@AthenaServer/document/index';
 export * as events from '@AthenaServer/events/index';
 export * as extensions from './consts/constExtensions';
 export * as getters from '@AthenaServer/getters/index';
-export * as injections from './consts/constInjections';
 export * as player from '@AthenaServer/player/index';
 export * as systems from '@AthenaServer/systems/index';
 export * as utility from '@AthenaServer/utility/index';

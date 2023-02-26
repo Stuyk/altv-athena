@@ -17,7 +17,7 @@ let weightedFlow: Array<FlowInfo> = [];
  * @param {(player: alt.Player) => void} callback
  * @return {boolean}
  */
-function add(name: string, weight: number, callback: (player: alt.Player) => void): boolean {
+export function add(name: string, weight: number, callback: (player: alt.Player) => void): boolean {
     name = name.toLowerCase();
 
     for (let i = 0; i < weightedFlow.length; i++) {
@@ -52,7 +52,7 @@ function add(name: string, weight: number, callback: (player: alt.Player) => voi
  * @param {string} name
  * @return {boolean}
  */
-function remove(name: string): boolean {
+export function remove(name: string): boolean {
     name = name.toLowerCase();
 
     const index = weightedFlow.findIndex((x) => x.name === name);
@@ -68,7 +68,7 @@ function remove(name: string): boolean {
  * Returns all currently registered flow information, their weight, name, and callbacks.
  * @return {Array<FlowInfo>}
  */
-function getWeightedFlow(): Array<FlowInfo> {
+export function getWeightedFlow(): Array<FlowInfo> {
     return weightedFlow;
 }
 
@@ -78,7 +78,7 @@ function getWeightedFlow(): Array<FlowInfo> {
  * @param {alt.Player} player
  * @return {{ index: number; flow: Array<FlowInfo> }}
  */
-function getFlow(player: alt.Player): { index: number; flow: Array<FlowInfo> } {
+export function getFlow(player: alt.Player): { index: number; flow: Array<FlowInfo> } {
     return playerFlow[player.id];
 }
 
@@ -88,7 +88,7 @@ function getFlow(player: alt.Player): { index: number; flow: Array<FlowInfo> } {
  *
  * @param {alt.Player} player
  */
-function register(player: alt.Player) {
+export function register(player: alt.Player) {
     playerFlow[player.id] = { index: 0, flow: [...weightedFlow] };
     playerFlow[player.id].flow[0].callback(player);
 }
@@ -98,7 +98,7 @@ function register(player: alt.Player) {
  *
  * @param {alt.Player} player
  */
-function unregister(player: alt.Player) {
+export function unregister(player: alt.Player) {
     delete playerFlow[player.id];
 }
 
@@ -109,7 +109,7 @@ function unregister(player: alt.Player) {
  *
  * @param {alt.Player} player
  */
-function next(player: alt.Player) {
+export function next(player: alt.Player) {
     if (!playerFlow[player.id]) {
         register(player);
         return;
@@ -125,17 +125,3 @@ function next(player: alt.Player) {
 
     playerFlow[player.id].flow[index].callback(player);
 }
-
-export const LoginFlow = {
-    system: {
-        add,
-        getWeightedFlow,
-        remove,
-    },
-    player: {
-        getFlow,
-        next,
-        register,
-        unregister,
-    },
-};

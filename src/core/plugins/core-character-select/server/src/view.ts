@@ -2,7 +2,6 @@ import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { Player } from 'alt-server';
 import * as Athena from '@AthenaServer/api';
-import { AgendaSystem } from '@AthenaServer/systems/agenda';
 import { Character } from '@AthenaShared/interfaces/character';
 import { CHARACTER_SELECT_CONFIG } from '../../shared/config';
 import { CHARACTER_SELECT_EVENTS } from '../../shared/events';
@@ -10,12 +9,9 @@ import { CHARACTER_SELECT_EVENTS } from '../../shared/events';
 // Player identifiers and their characters...
 const CharacterList: { [id: string]: Array<Character> } = {};
 
-// Recommended as the last step before spawning a player
-const AgendaIndex = 99;
-
 class InternalFunctions {
     static init() {
-        AgendaSystem.set(AgendaIndex, InternalFunctions.show);
+        Athena.systems.loginFlow.add('character-select', 99, InternalFunctions.show);
         alt.onClient(CHARACTER_SELECT_EVENTS.SELECT, InternalFunctions.select);
         alt.onClient(CHARACTER_SELECT_EVENTS.NEW, InternalFunctions.newCharacter);
         alt.onClient(CHARACTER_SELECT_EVENTS.DELETE, InternalFunctions.deleteCharacter);
