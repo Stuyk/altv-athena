@@ -275,3 +275,39 @@ export async function characters(playerOrAccount: alt.Player | Account | string)
         Athena.database.collections.Characters,
     );
 }
+
+/**
+ * Determine if a player is currently dead / marked as dead.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @return {boolean}
+ */
+export function isDead(player: alt.Player): boolean {
+    const data = Athena.document.character.get(player);
+    if (typeof data === 'undefined') {
+        return false;
+    }
+
+    return data.isDead ? data.isDead : false;
+}
+
+/**
+ * Determine if a player is valid, and spawned as a character.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @return {boolean}
+ */
+export function isValid(player: alt.Player): boolean {
+    if (!player || !player.valid) {
+        return false;
+    }
+
+    const data = Athena.document.character.get(player);
+    if (typeof data === 'undefined') {
+        return false;
+    }
+
+    return true;
+}

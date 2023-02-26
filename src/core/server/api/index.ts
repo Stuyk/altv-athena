@@ -9,5 +9,5 @@ export * as getters from '@AthenaServer/getters/index';
 export * as player from '@AthenaServer/player/index';
 export * as systems from '@AthenaServer/systems/index';
 export * as utility from '@AthenaServer/utility/index';
-// export * as vehicle from './consts/constVehicle';
+export * as vehicle from '@AthenaServer/vehicle/index';
 export * as webview from '@AthenaServer/webview/index';

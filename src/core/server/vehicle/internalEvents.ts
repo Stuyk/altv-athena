@@ -1,17 +1,26 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
-import * as tempVehicles from './tempVehicles';
-
-import { update } from './controls';
-import { SEAT } from './shared';
-
+/**
+ * Called when a player has sat down in a seat in a vehicle.
+ *
+ * @param {alt.Player} player
+ * @param {alt.Vehicle} vehicle
+ * @param {number} seat
+ */
 function enter(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
-    if (seat === SEAT.DRIVER) {
+    if (seat === Athena.vehicle.shared.SEAT.DRIVER) {
         Athena.player.events.trigger('player-entered-vehicle-as-driver', player, vehicle);
     }
 }
 
+/**
+ * Called when a player has opened the door and is sliding into a seat.
+ *
+ * @param {alt.Player} player
+ * @param {alt.Vehicle} vehicle
+ * @param {number} seat
+ */
 function entering(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
     //
 }
@@ -25,22 +34,22 @@ function entering(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
  * @return {*}
  */
 function leave(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
-    if (seat === SEAT.DRIVER) {
-        update(vehicle);
+    if (seat === Athena.vehicle.shared.SEAT.DRIVER) {
+        Athena.vehicle.controls.update(vehicle);
     }
 
     Athena.player.events.trigger('player-left-vehicle-seat', player, vehicle, seat);
 
     // Check for temporary
-    if (!tempVehicles.has(vehicle)) {
+    if (!Athena.vehicle.tempVehicles.has(vehicle)) {
         return;
     }
 
-    if (seat !== SEAT.DRIVER) {
+    if (seat !== Athena.vehicle.shared.SEAT.DRIVER) {
         return;
     }
 
-    if (!tempVehicles.shouldBeDestroyed(vehicle)) {
+    if (!Athena.vehicle.tempVehicles.shouldBeDestroyed(vehicle)) {
         return;
     }
 
@@ -57,7 +66,7 @@ function leave(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
  * @param {alt.Vehicle} vehicle
  */
 function destroyed(vehicle: alt.Vehicle) {
-    if (!tempVehicles.has(vehicle)) {
+    if (!Athena.vehicle.tempVehicles.has(vehicle)) {
         return;
     }
 
@@ -75,8 +84,8 @@ function removeEntity(entity: alt.Entity) {
     }
 
     const id = entity.id;
-    if (tempVehicles.has(id)) {
-        tempVehicles.remove(id);
+    if (Athena.vehicle.tempVehicles.has(id)) {
+        Athena.vehicle.tempVehicles.remove(id);
     }
 }
 

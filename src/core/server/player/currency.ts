@@ -7,6 +7,7 @@ type DefaultCurrency = 'bank' | 'cash';
 /**
  * Add currency type to the player.
  *
+ * @example
  * ```ts
  * const didAddFullAmount = Athena.player.currency.add(somePlayer, 'cash', 25);
  * ```
@@ -55,6 +56,7 @@ export function add<CustomCurrency>(
 /**
  * Remove currency type from the player.
  *
+ * @example
  * ```ts
  * const didSubFullAmount = Athena.player.currency.sub(somePlayer, 'cash', 25);
  * ```
@@ -102,6 +104,7 @@ export function sub<CustomCurrency>(
 /**
  * Replace the current currency type value with this exact value.
  *
+ * @example
  * ```ts
  * const didSetFullAmount = Athena.player.currency.set(somePlayer, 'bank', 25);
  * ```
@@ -138,6 +141,7 @@ export function set<CustomCurrency>(
  * Only subtracts 'bank' and 'cash' currency types.
  * Always takes from cash first.
  *
+ * @example
  * ```ts
  * const didRemoveFullAmount = Athena.player.currency.subAllCurrencies(somePlayer, 25);
  * ```

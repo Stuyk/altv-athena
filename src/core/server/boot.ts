@@ -9,6 +9,6 @@ import './extensions/vehicleFuncs';
 import './imports/commands';
 import './imports/systems';
 import './imports/controllers';
-import './imports/effects';
+import './imports/vehicle';
 import './imports/utilities';
 import '../plugins/athena/server/imports';

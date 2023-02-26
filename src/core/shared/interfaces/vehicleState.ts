@@ -6,15 +6,6 @@ export interface VehicleState {
     /**
      * Gets or sets the active radio station.
      *
-     * @example
-     * ```js
-     * const someVehicle = alt.Vehicle.all[0];
-     * const stationNumber = someVehicle.activeRadioStation;
-     * console.log(`Current Station: ${stationNumber}`);
-     *
-     * someVehicle.activeRadioStation = 255;
-     * console.log(`Vehicle radio station was turned off.`);
-     * ```
      */
     activeRadioStation: number;
 
@@ -28,14 +19,7 @@ export interface VehicleState {
     bodyHealth: number;
 
     /**
-     * Gets or sets the custom primary color as a RGBA type.
-     *
-     * @example
-     * ```js
-     * const someVehicle = new alt.Vehicle('elegy', 0, 0, 0, 0, 0, 0);
-     * someVehicle.customPrimaryColor = new alt.RGBA(255, 0, 0);
-     * console.log(`Vehicle custom primary color was set to red`);
-     * ```
+     * Gets or sets the custom primary color as a RGBA type
      */
     customPrimaryColor: alt.RGBA;
 
@@ -57,12 +41,6 @@ export interface VehicleState {
 
     /**
      * Applies some decoration effects to the vehicle (e.g.: It makes the hydra looking rusty or applies snow to the front bumper of `policeold1`). Does not work on every vehicle model.
-     *
-     * @example
-     * ```js
-     * const someVehicle = new alt.Vehicle('elegy', 0, 0, 0, 0, 0, 0);
-     * someVehicle.darkness = 500;
-     * ```
      */
     darkness: number;
 
@@ -71,11 +49,6 @@ export interface VehicleState {
      *
      * Dash board colors range from 0 to 159.
      *
-     * @example
-     * ```js
-     * const someVehicle = new alt.Vehicle('elegy', 0, 0, 0, 0, 0, 0);
-     * someVehicle.dashboardColor = 139;
-     * ```
      */
     dashboardColor: number;
 
@@ -90,35 +63,6 @@ export interface VehicleState {
      * Default maximum engine health is 1000.
      * The `vehicle.repair()` function should be used to repair a vehicle if the engine health is less than or equal to zero.
      *
-     * This example demonstrates that when you drive through a ColShape it will repair the vehicle.
-     *
-     * @example
-     * ```js
-     * const someColShape = new alt.ColshapeCircle(-1295.9208984375, 86.0835189819336, 2);
-     * someColShape.repairVehicles = true;
-     *
-     * alt.on('entityEnterColshape', (colshape, entity) => {
-     *       // Check if the entity is a vehicle or not.
-     *     if (!(entity instanceof alt.Vehicle)) {
-     *        return;
-     *     }
-     *
-     *     // Check if it's the right colshape to do this.
-     *     if (!colshape.repairVehicles) {
-     *        return;
-     *     }
-     *
-     *     if (entity.destroyed) {
-     *         entity.repair();
-     *         console.log('Repaired Destroyed Vehicle');
-     *         return;
-     *     }
-     *
-     *     entity.engineHealth = 1000;
-     *     console.log('Repaired Vehicle')
-     * });
-     * ```
-     *
      */
     engineHealth: number;
 
@@ -127,11 +71,6 @@ export interface VehicleState {
      *
      * The functionality of the vehicle engine can be triggered on either client-side or server-side. If you want to trigger the engine on client-side use native.setVehicleEngineOn.
      *
-     * @example
-     * ```js
-     * const vehicle = new alt.Vehicle('elegy', 0, 0, 0, 0, 0, 0);
-     * vehicle.engineOn = true;
-     * ```
      */
     engineOn: boolean;
 

@@ -14,10 +14,9 @@ const vehicleEvents: Array<{ eventName: string; callback: (vehicle: alt.Vehicle,
 
 /**
  * Usually called by internal functions. Can be used to manually trigger an Athena Event though.
- * @static
+
  * @param {AthenaVehicleEvents} eventName
  * @param {alt.Vehicle} vehicle
- * @memberof VehicleEvents
  */
 export function trigger<CustomEvents = AthenaVehicleEvents>(
     eventName: CustomEvents,
@@ -35,10 +34,9 @@ export function trigger<CustomEvents = AthenaVehicleEvents>(
 
 /**
  * Trigger a callback specific to Athena Vehicle Events.
- * @static
+
  * @param {AthenaVehicleEvents} eventName
  * @param {(player: alt.Player) => void} callback
- * @memberof VehicleEvents
  */
 export function on<CustomEvents = AthenaVehicleEvents>(
     eventName: CustomEvents,

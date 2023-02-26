@@ -9,6 +9,7 @@ const deleteOnLeave: { [vehicle_id: string]: true } = {};
  *
  * @export
  * @param {alt.Vehicle} vehicle
+ * @param {{ owner?: number; deleteOnLeave?: boolean }} options
  */
 export function add(vehicle: alt.Vehicle, options: { owner?: number; deleteOnLeave?: boolean }) {
     tempVehicles.push(vehicle.id);
@@ -28,7 +29,7 @@ export function add(vehicle: alt.Vehicle, options: { owner?: number; deleteOnLea
  * @export
  * @param {number} id
  */
-export function remove(id: number) {
+export function remove(id: number): void {
     for (let i = tempVehicles.length - 1; i >= 0; i--) {
         if (tempVehicles[i] !== id) {
             continue;
@@ -46,11 +47,27 @@ export function remove(id: number) {
  *
  * @export
  * @param {alt.Vehicle | number} vehicle
- * @return {*}
+ * @return {boolean}
  */
-export function has(vehicle: alt.Vehicle | number) {
+export function has(vehicle: alt.Vehicle | number): boolean {
     const id = vehicle instanceof alt.Vehicle ? vehicle.id : vehicle;
     return tempVehicles.findIndex((x) => x === id) >= 0;
+}
+
+/**
+ * Check if player is owner of a temporary vehicle.
+ *
+ * @export
+ * @param {alt.Vehicle} player
+ * @param {alt.Vehicle} vehicle
+ * @return
+ */
+export function isOwner(player: alt.Player, vehicle: alt.Vehicle): boolean {
+    if (typeof tempOwnedVehicles[vehicle.id] === 'undefined') {
+        return true;
+    }
+
+    return tempOwnedVehicles[vehicle.id] === player.id;
 }
 
 /**
@@ -58,8 +75,8 @@ export function has(vehicle: alt.Vehicle | number) {
  *
  * @export
  * @param {alt.Vehicle} vehicle
- * @return {*}
+ * @return {boolean}
  */
-export function shouldBeDestroyed(vehicle: alt.Vehicle) {
-    return deleteOnLeave[vehicle.id];
+export function shouldBeDestroyed(vehicle: alt.Vehicle): boolean {
+    return typeof deleteOnLeave[vehicle.id] !== 'undefined';
 }
