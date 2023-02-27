@@ -1,5 +1,8 @@
-import * as Athena from '@AthenaServer/api';
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
+import { Account } from '@AthenaServer/interface/iAccount';
+import { Character } from '@AthenaShared/interfaces/character';
+import Database from '@stuyk/ezmongodb';
 
 type DefaultPerms = 'admin' | 'moderator';
 type SupportedDocuments = 'account' | 'character';
@@ -325,6 +328,97 @@ export function hasAll<CustomPerms = ''>(
     perms: Array<DefaultPerms | CustomPerms>,
 ): boolean {
     return InternalFunctions.hasAll(player, perms, type);
+}
+
+/**
+ * Get all documents that have a specified permission in their permissions array.
+ * Will return an empty array if no permissions are found.
+ *
+ * @export
+ * @template CustomPerms
+ * @param {('character' | 'account')} type
+ * @param {(Array<DefaultPerms | CustomPerms>)} perms
+ */
+export async function getAll<CustomPerms = ''>(
+    type: 'character' | 'account',
+    perm: DefaultPerms | CustomPerms,
+): Promise<Array<Account> | Array<Character>> {
+    const db = await Database.getDatabaseInstance();
+    const collectionName =
+        type === 'character' ? Athena.database.collections.Characters : Athena.database.collections.Accounts;
+    const collection = db.collection(collectionName);
+    const results = await collection.find({ permissions: perm }).toArray();
+    const converted = results.map((x) => {
+        return {
+            ...x,
+            _id: x._id.toString(),
+        };
+    });
+
+    if (type === 'character') {
+        return converted as Array<Character>;
+    }
+
+    return converted as Array<Account>;
+}
+
+/**
+ * Remove specified permission from all instances of an account or character.
+ * Automatically rebinds the document after updating.
+ *
+ * @export
+ * @param {('character' | 'account')} type
+ * @param {(DefaultPerms | CustomPerms)} perm
+ * @param {Array<string>} ids
+ */
+export async function removeAll<CustomPerms = ''>(
+    type: 'character' | 'account',
+    perm: DefaultPerms | CustomPerms,
+    ids: Array<string>,
+): Promise<void> {
+    const collectionName =
+        type === 'character' ? Athena.database.collections.Characters : Athena.database.collections.Accounts;
+
+    const promises = [];
+
+    for (let _id of ids) {
+        const document = await Database.fetchData<{ _id: unknown; permissions: Array<string> }>(
+            '_id',
+            _id,
+            collectionName,
+        );
+
+        document._id = String(document._id);
+        const index = document.permissions.findIndex((x) => x === String(perm));
+        if (index <= -1) {
+            continue;
+        }
+
+        promises.push(
+            new Promise(async (resolve: Function) => {
+                document.permissions.splice(index, 1);
+                await Database.updatePartialData(_id, { permissions: document.permissions }, collectionName);
+
+                let player: alt.Player;
+                if (type === 'account') {
+                    player = Athena.getters.player.byAccount(String(document._id));
+                }
+
+                if (type === 'character') {
+                    player = Athena.getters.player.byDatabaseID(String(document._id));
+                }
+
+                if (!player) {
+                    return resolve();
+                }
+
+                Athena.document[type].set(player, 'permissions', document.permissions);
+                return resolve();
+            }),
+        );
+    }
+
+    await Promise.all(promises);
 }
 
 export default {

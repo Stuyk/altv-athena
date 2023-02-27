@@ -6,11 +6,9 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 import { PED_CONFIG_FLAG } from '@AthenaShared/flags/pedflags';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
-
-import './push';
-import { PushVehicle } from './push';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 import { AthenaClient } from '@AthenaClient/api/athena';
+import { EntitySelector } from './entitySelector';
 
 const Internal = {
     init() {
@@ -72,7 +70,17 @@ export const VehicleController = {
             return;
         }
 
-        alt.emitServer(VEHICLE_EVENTS.SET_LOCK);
+        const target = EntitySelector.get.selection();
+        if (target.type !== 'vehicle') {
+            return;
+        }
+
+        const vehicle = alt.Vehicle.all.find((x) => x.id === target.id);
+        if (!vehicle) {
+            return;
+        }
+
+        alt.emitServer(VEHICLE_EVENTS.SET_LOCK, vehicle);
     },
 
     /**
@@ -159,8 +167,7 @@ export const VehicleController = {
         }
 
         const isDead = alt.Player.local.meta.isDead;
-        const isPushing = PushVehicle.isPushing();
-        if (!isDead && !isLocked && !isPushing) {
+        if (!isDead && !isLocked) {
             return;
         }
 

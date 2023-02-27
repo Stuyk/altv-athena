@@ -6,7 +6,6 @@ import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Character, CharacterDefaults } from '@AthenaShared/interfaces/character';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
-import { CharacterCreateCallback, PlayerCallback, PlayerInjectionNames } from './injections/player';
 import { Injections } from './injections';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo';
@@ -78,14 +77,6 @@ export async function create(
         return false;
     }
 
-    const afterInjections = Injections.get<CharacterCreateCallback>(PlayerInjectionNames.AFTER_CHARACTER_CREATE);
-    for (const callback of afterInjections) {
-        const appendedDocumentOrVoid = await callback(player, document);
-        if (appendedDocumentOrVoid) {
-            document = appendedDocumentOrVoid;
-        }
-    }
-
     document._id = document._id.toString(); // Re-cast id object as string.
     select(player, document);
     return true;
@@ -119,11 +110,6 @@ export async function select(player: alt.Player, character: Character) {
     alt.log(
         `Selected | ${data.name} | ID: (${player.id}) | Character ID: ${data.character_id} | Account: ${data.account_id}`,
     );
-
-    const beforeInjections = Injections.get<PlayerCallback>(PlayerInjectionNames.BEFORE_CHARACTER_SELECT);
-    for (const callback of beforeInjections) {
-        await callback(player);
-    }
 
     if (!data.inventory) {
         await Athena.document.character.set(player, 'equipment', []);
@@ -200,11 +186,6 @@ export async function select(player: alt.Player, character: Character) {
         player.frozen = false;
         player.visible = true;
         player.hasFullySpawned = true;
-
-        const afterInjections = Injections.get<PlayerCallback>(PlayerInjectionNames.AFTER_CHARACTER_SELECT);
-        for (const callback of afterInjections) {
-            await callback(player);
-        }
 
         Athena.player.events.trigger('selected-character', player);
     }, 500);
