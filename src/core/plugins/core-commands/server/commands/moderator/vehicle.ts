@@ -1,5 +1,20 @@
 import alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
+
+Athena.systems.messenger.commands.register(
+    'tempvehicle',
+    '/tempvehicle [model]',
+    ['admin'],
+    (player: alt.Player, model: string) => {
+        const vehicle = Athena.vehicle.spawn.temporary({ model, pos: player.pos, rot: player.rot }, true);
+        if (!vehicle) {
+            return;
+        }
+
+        player.setIntoVehicle(vehicle, Athena.vehicle.shared.SEAT.DRIVER);
+    },
+);
+
 // import { command } from '@AthenaServer/decorators/commands';
 // import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 // import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';

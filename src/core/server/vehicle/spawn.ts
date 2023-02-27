@@ -13,12 +13,15 @@ import { VehicleSpawnInfo } from './shared';
  */
 export function temporary(vehicleInfo: VehicleSpawnInfo, deleteOnLeave = false): alt.Vehicle {
     const vehicle = new alt.Vehicle(vehicleInfo.model, vehicleInfo.pos, vehicleInfo.rot);
+    vehicle.manualEngineControl = true;
+
     Athena.vehicle.tempVehicles.add(vehicle, { deleteOnLeave });
 
     if (vehicleInfo.data) {
         Athena.vehicle.tuning.applyState(vehicle, vehicleInfo.data);
     }
 
+    Athena.vehicle.events.trigger('vehicle-spawned', vehicle);
     return vehicle;
 }
 
@@ -33,12 +36,15 @@ export function temporary(vehicleInfo: VehicleSpawnInfo, deleteOnLeave = false):
  */
 export function temporaryOwned(player: alt.Player, vehicleInfo: VehicleSpawnInfo, deleteOnLeave = false): alt.Vehicle {
     const vehicle = new alt.Vehicle(vehicleInfo.model, vehicleInfo.pos, vehicleInfo.rot);
+    vehicle.manualEngineControl = true;
+
     Athena.vehicle.tempVehicles.add(vehicle, { owner: player.id, deleteOnLeave });
 
     if (vehicleInfo.data) {
         Athena.vehicle.tuning.applyState(vehicle, vehicleInfo.data);
     }
 
+    Athena.vehicle.events.trigger('vehicle-spawned', vehicle);
     return vehicle;
 }
 
@@ -50,6 +56,7 @@ export function temporaryOwned(player: alt.Player, vehicleInfo: VehicleSpawnInfo
  */
 export function persistent(document: OwnedVehicle): alt.Vehicle {
     const vehicle = new alt.Vehicle(document.model, document.pos, document.rot);
+    vehicle.manualEngineControl = true;
 
     if (document.state) {
         Athena.vehicle.tuning.applyState(vehicle, document.state);
@@ -59,5 +66,6 @@ export function persistent(document: OwnedVehicle): alt.Vehicle {
         Athena.vehicle.tuning.applyTuning(vehicle, document.tuning);
     }
 
+    Athena.vehicle.events.trigger('vehicle-spawned', vehicle);
     return vehicle;
 }

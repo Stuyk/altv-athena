@@ -25,30 +25,38 @@ function sharedOwnershipChecks(player: alt.Player, vehicle: alt.Vehicle) {
 /**
  * Toggles a vehicle lock as if a player toggled it.
  *
- * @export
  * @param {alt.Player} player
  * @param {alt.Vehicle} vehicle
- * @return {*}
  */
 export function toggleLock(player: alt.Player, vehicle: alt.Vehicle) {
+    if (!vehicle) {
+        vehicle = player.vehicle;
+    }
+
     if (!sharedOwnershipChecks(player, vehicle)) {
         return;
     }
 
-    const newState = Athena.vehicle.controls.toggleLock(vehicle);
-    const eventToEmit = newState ? 'doors-locked' : 'doors-unlocked';
+    const isLocked = Athena.vehicle.controls.toggleLock(vehicle);
+    const soundName = isLocked ? 'car_unlock' : 'car_lock';
+    Athena.player.emit.sound2D(player, soundName);
+
+    const eventToEmit = isLocked ? 'doors-locked' : 'doors-unlocked';
     Athena.vehicle.events.trigger(eventToEmit, vehicle, player);
 }
 
 /**
  * Toggles an engine lock as if a player toggled it.
  *
- * @export
  * @param {alt.Player} player
  * @param {alt.Vehicle} vehicle
  * @return {*}
  */
 export function toggleEngine(player: alt.Player, vehicle: alt.Vehicle) {
+    if (!vehicle) {
+        vehicle = player.vehicle;
+    }
+
     if (!sharedOwnershipChecks(player, vehicle)) {
         return;
     }
@@ -61,13 +69,15 @@ export function toggleEngine(player: alt.Player, vehicle: alt.Vehicle) {
 /**
  * Toggles a door lock as if a player toggled it.
  *
- * @export
  * @param {alt.Player} player
  * @param {alt.Vehicle} vehicle
  * @param {number} door
- * @return {*}
  */
 export function toggleDoor(player: alt.Player, vehicle: alt.Vehicle, door: number) {
+    if (!vehicle) {
+        vehicle = player.vehicle;
+    }
+
     if (typeof door !== 'number') {
         return;
     }

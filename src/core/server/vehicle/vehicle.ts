@@ -289,10 +289,10 @@ import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 // //         }
 
 // //         // Update Vehicle Lock State
-// //         vehicle.lockState =
-// //             (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED
-// //                 ? VEHICLE_LOCK_STATE.UNLOCKED
-// //                 : VEHICLE_LOCK_STATE.LOCKED;
+        // vehicle.lockState =
+        //     (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED
+        //         ? VEHICLE_LOCK_STATE.UNLOCKED
+        //         : VEHICLE_LOCK_STATE.LOCKED;
 
 // //         playerConst.emit.notification(player, vehicle.lockState === VEHICLE_LOCK_STATE.LOCKED ? 'Locked' : 'Unlocked');
 // //         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCK, vehicle.lockState);

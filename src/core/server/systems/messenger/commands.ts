@@ -24,7 +24,7 @@ export function execute(player: alt.Player, commandName: string, args: Array<any
     }
 
     const dataName = cmdInfo.isCharacterPermission ? 'character' : 'account';
-    if (!Athena.systems.permission[dataName].hasOne(player, cmdInfo.permissions)) {
+    if (!Athena.systems.permission.hasOne(dataName, player, cmdInfo.permissions)) {
         Athena.player.emit.message(player, `/${commandName} - No Permission for Usage`);
         Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         return;

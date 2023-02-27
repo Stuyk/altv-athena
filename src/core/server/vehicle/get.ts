@@ -10,7 +10,7 @@ import * as Athena from '@AthenaServer/api';
  * ```
  *
  * @export
- * @return {Array<alt.Vehicle>}
+ * @return {Array<alt.Vehicle>} An array of temporary vehicles.
  */
 export function temporaryVehicles(): Array<alt.Vehicle> {
     return alt.Vehicle.all.filter((vehicle) => {
@@ -27,7 +27,7 @@ export function temporaryVehicles(): Array<alt.Vehicle> {
  * ```
  *
  * @export
- * @return {Array<alt.Vehicle>}
+ * @return {Array<alt.Vehicle>} An array of owned vehicles.
  */
 export function ownedVehicles(): Array<alt.Vehicle> {
     return alt.Vehicle.all.filter((vehicle) => {
@@ -47,7 +47,7 @@ export function ownedVehicles(): Array<alt.Vehicle> {
  *
  * @export
  * @param {(alt.Player | string)} player
- * @return {Array<alt.Vehicle>}
+ * @return {Array<alt.Vehicle>} An array of vehicles owned and spawned by a player.
  */
 export function playerOwnedVehicles(player: alt.Player | string) {
     const _id = typeof player === 'string' ? player : Athena.document.character.getField(player, '_id');

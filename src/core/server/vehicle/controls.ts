@@ -1,3 +1,5 @@
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { VEHICLE_LOCK_STATE } from '@AthenaShared/enums/vehicle';
 import * as alt from 'alt-server';
 
 /**
@@ -5,14 +7,15 @@ import * as alt from 'alt-server';
  *
  * @export
  * @param {alt.Vehicle} vehicle
- * @return {boolean}
+ * @return {boolean} The new state of the lock. true = locked
  */
 export function toggleLock(vehicle: alt.Vehicle): boolean {
-    //
+    vehicle.lockState =
+        (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED
+            ? VEHICLE_LOCK_STATE.UNLOCKED
+            : VEHICLE_LOCK_STATE.LOCKED;
 
-    let status = false;
-
-    return status;
+    return (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED;
 }
 
 /**
@@ -20,14 +23,16 @@ export function toggleLock(vehicle: alt.Vehicle): boolean {
  *
  * @export
  * @param {alt.Vehicle} vehicle
- * @return {boolean}
+ * @return {boolean} The new state of the engine. true = on
  */
 export function toggleEngine(vehicle: alt.Vehicle): boolean {
-    //
+    if (vehicle.driver) {
+        vehicle.driver.emit(SYSTEM_EVENTS.VEHICLE_ENGINE, !vehicle.engineOn);
+    } else {
+        vehicle.engineOn = !vehicle.engineOn;
+    }
 
-    let status = false;
-
-    return status;
+    return vehicle.engineOn;
 }
 
 /**
@@ -36,7 +41,7 @@ export function toggleEngine(vehicle: alt.Vehicle): boolean {
  * @export
  * @param {alt.Vehicle} vehicle
  * @param {number} door
- * @return {*}  {boolean}
+ * @return {boolean} The new state of the door. true = open
  */
 export function toggleDoor(vehicle: alt.Vehicle, door: number): boolean {
     //
