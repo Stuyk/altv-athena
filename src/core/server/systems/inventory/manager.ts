@@ -24,8 +24,8 @@ export interface ItemQuantityChange {
     remaining: number;
 }
 
-type InventoryType = 'inventory' | 'toolbar' | 'custom';
-type ComplexSwap = { slot: number; data: Array<StoredItem>; size: InventoryType | number; type: InventoryType };
+export type InventoryType = 'inventory' | 'toolbar' | 'custom';
+export type ComplexSwap = { slot: number; data: Array<StoredItem>; size: InventoryType | number; type: InventoryType };
 export type ComplexSwapReturn = { from: Array<StoredItem>; to: Array<StoredItem> };
 
 /**

@@ -75,7 +75,7 @@ export function getClosestVectorByPos<T>(pos: alt.IVector3, arrayOfPositions: T[
  * @param {alt.IVector3} pos
  * @param {Array<{ pos: alt.IVector3; valid: boolean }>} elements
  * @param {number} maxDistance
- * @return {*}  {Array<T>}
+ * @return {Array<T>}
  */
 export function getClosestTypes<T extends { pos: alt.IVector3; valid: boolean }>(
     pos: alt.IVector3,
@@ -256,7 +256,7 @@ export function getClosestEntity<T>(
  *
  * @param {number} x
  * @param {number} z
- * @return {*}  {number}
+ * @return {number}
  */
 function fwdX(x: number, z: number): number {
     const num = Math.abs(Math.cos(x));
@@ -268,7 +268,7 @@ function fwdX(x: number, z: number): number {
  *
  * @param {number} x
  * @param {number} z
- * @return {*}  {number}
+ * @return {number}
  */
 function fwdY(x: number, z: number): number {
     const num = Math.abs(Math.cos(x));
@@ -279,7 +279,7 @@ function fwdY(x: number, z: number): number {
  *
  *
  * @param {number} x
- * @return {*}  {number}
+ * @return {number}
  */
 function fwdZ(x: number): number {
     return Math.sin(x);

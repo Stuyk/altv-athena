@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 
-type IdentifierStrategy = 'account_id' | 'character_id' | 'server_id';
+export type IdentifierStrategy = 'account_id' | 'character_id' | 'server_id';
 
 let strategy: IdentifierStrategy = 'server_id';
 

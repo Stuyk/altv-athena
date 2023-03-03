@@ -1560,7 +1560,7 @@ const WeaponList: { [key: string]: Weapon } = {
  * Get a weapon hash by its string name.
  * @export
  * @param {string} name
- * @return {*}  {(number | null)}
+ * @return {(number | null)}
  */
 export function getWeaponByName(name: string): Weapon | null {
     return WeaponList[name];

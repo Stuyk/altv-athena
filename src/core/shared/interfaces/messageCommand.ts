@@ -40,3 +40,13 @@ export interface MessageCommand<T> {
      */
     callback: CommandCallback<T>;
 }
+
+export interface DetailedCommand extends Omit<MessageCommand<null>, 'callback'> {
+    /**
+     * An array of parameters that belong to this command
+     *
+     * @type {Array<string>}
+     * @memberof DetailedCommand
+     */
+    params: Array<string>;
+}

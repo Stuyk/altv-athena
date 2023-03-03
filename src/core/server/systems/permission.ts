@@ -4,8 +4,8 @@ import { Account } from '@AthenaServer/interface/iAccount';
 import { Character } from '@AthenaShared/interfaces/character';
 import Database from '@stuyk/ezmongodb';
 
-type DefaultPerms = 'admin' | 'moderator';
-type SupportedDocuments = 'account' | 'character';
+export type DefaultPerms = 'admin' | 'moderator';
+export type SupportedDocuments = 'account' | 'character';
 
 const InternalFunctions = {
     /**
@@ -421,6 +421,33 @@ export async function removeAll<CustomPerms = ''>(
     await Promise.all(promises);
 }
 
+export function getPermissions(entity: alt.Player, type: 'character' | 'account');
+export function getPermissions(entity: alt.Vehicle, type: 'vehicle');
+/**
+ * Get permissions for a given entity and type
+ *
+ * @export
+ * @param {alt.Entity} entity
+ * @param {('account' | 'character' | 'vehicle')} type
+ * @return {Array<string>}
+ */
+export function getPermissions(entity: alt.Entity, type: 'account' | 'character' | 'vehicle'): Array<string> {
+    let data;
+    switch (type) {
+        case 'account':
+            data = Athena.document.account.get(entity as alt.Player);
+            return data.permissions ? data.permissions : [];
+        case 'character':
+            data = Athena.document.account.get(entity as alt.Player);
+            return data.permissions ? data.permissions : [];
+        case 'vehicle':
+            data = Athena.document.vehicle.get(entity as alt.Vehicle);
+            return data.permissions ? data.permissions : [];
+        default:
+            return [];
+    }
+}
+
 export default {
     add,
     remove,
@@ -428,4 +455,6 @@ export default {
     has,
     hasOne,
     hasAll,
+    getAll,
+    removeAll,
 };

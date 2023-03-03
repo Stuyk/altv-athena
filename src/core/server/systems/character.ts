@@ -6,7 +6,6 @@ import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Character, CharacterDefaults } from '@AthenaShared/interfaces/character';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
-import { Injections } from './injections';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo';
 import { ObjectId } from 'mongodb';

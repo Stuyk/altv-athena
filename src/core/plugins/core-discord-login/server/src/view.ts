@@ -120,7 +120,6 @@ export class LoginView {
             return;
         }
 
-        alt.log(`Verified JWT Token`);
         const account: Partial<Account> | null = await Database.fetchData<Account>(
             '_id',
             identifier,

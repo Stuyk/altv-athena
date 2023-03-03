@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
-type InventoryType = 'inventory' | 'toolbar';
-type EffectCallback = (player: alt.Player, slot: number, type: 'inventory' | 'toolbar') => void;
+export type InventoryType = 'inventory' | 'toolbar';
+export type EffectCallback = (player: alt.Player, slot: number, type: 'inventory' | 'toolbar') => void;
 
 const effects: Map<string, EffectCallback> = new Map();
 

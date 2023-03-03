@@ -5,7 +5,7 @@ import { KnownKeys } from '@AthenaShared/utility/knownKeys';
 import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
 import Database from '@stuyk/ezmongodb';
 
-type KeyChangeCallback = (vehicle: alt.Vehicle, newValue: any, oldValue: any) => void;
+export type KeyChangeCallback = (vehicle: alt.Vehicle, newValue: any, oldValue: any) => void;
 
 const callbacks: { [key: string]: Array<KeyChangeCallback> } = {};
 const cache: { [id: string]: OwnedVehicle } = {};

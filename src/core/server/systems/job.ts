@@ -278,7 +278,7 @@ export class Job {
      * This checks for positions, range, etc.
      * @private
      * @param {Objective} objective
-     * @return {*}  {boolean}
+     * @return {boolean}
      * @memberof JobBuilder
      */
     private verifyType(objective: Objective): boolean {
@@ -334,7 +334,7 @@ export class Job {
      * using a vehicle, no weapons, no dying, etc.
      * @private
      * @param {Objective} objective
-     * @return {*}  {boolean}
+     * @return {boolean}
      * @memberof JobBuilder
      */
     private verifyCriteria(objective: Objective): boolean {
@@ -596,7 +596,7 @@ export class Job {
 
     /**
      * Get the current objective the player is completing.
-     * @return {*}  {(Objective | null)}
+     * @return {(Objective | null)}
      * @memberof JobBuilder
      */
     getCurrentObjective(): Objective | null {
@@ -669,7 +669,7 @@ function handleJobAction(player: alt.Player, triggerName: string) {
  * Get the player's current Job Instance.
  * @export
  * @param {alt.Player} player
- * @return {Job | undefined}  {(Job | undefined)}
+ * @return {Job | undefined}
  */
 export function getPlayerJob(player: alt.Player): Job | undefined {
     return JobInstances[player.id];

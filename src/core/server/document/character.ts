@@ -4,7 +4,7 @@ import { Character } from '@AthenaShared/interfaces/character';
 import { KnownKeys } from '@AthenaShared/utility/knownKeys';
 import Database from '@stuyk/ezmongodb';
 
-type KeyChangeCallback = (player: alt.Player, newValue: any, oldValue: any) => void;
+export type KeyChangeCallback = (player: alt.Player, newValue: any, oldValue: any) => void;
 
 const callbacks: { [key: string]: Array<KeyChangeCallback> } = {};
 const cache: { [id: string]: Character } = {};

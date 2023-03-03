@@ -11,7 +11,7 @@ import * as Athena from '@AthenaServer/api';
  * @export
  * @param {alt.Player} player
  * @param {alt.Vehicle} vehicle
- * @param {{ includePermissions?: boolean; includeKeys?: boolean; includeAdminOverride?: boolean; preventWhileAttached?: boolean; }} [options={}]
+ * @param {{ includePermissions?: boolean; includeKeys?: boolean; includeAdminOverride?: boolean; preventWhileAttached?: boolean; }}
  * @return {boolean}
  */
 export function isOwner(

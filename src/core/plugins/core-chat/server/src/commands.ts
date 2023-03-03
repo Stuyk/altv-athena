@@ -147,3 +147,14 @@ Athena.systems.messenger.commands.register(
         );
     },
 );
+
+Athena.systems.messenger.commands.register(
+    'test123',
+    '/test123 [id] [...message] - Whisper to another player.',
+    [],
+    (player: alt.Player, someString: string, someNumber: number) => {
+        const commands = Athena.systems.messenger.commands.getCommands(player);
+
+        console.log(commands);
+    },
+);

@@ -2,8 +2,9 @@ import * as alt from 'alt-server';
 
 import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
 import * as Athena from '@AthenaServer/api';
-import { CommandCallback, MessageCommand } from '@AthenaShared/interfaces/messageCommand';
+import { CommandCallback, DetailedCommand, MessageCommand } from '@AthenaShared/interfaces/messageCommand';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { getParamNames } from '@AthenaShared/utility/getParamNames';
 
 const commands: { [command_name: string]: Omit<MessageCommand<alt.Player>, 'name'> } = {};
 
@@ -37,7 +38,6 @@ export function execute(player: alt.Player, commandName: string, args: Array<any
  * Get command information by command name.
  *
  * @param {string} commandName
- * @return {*}
  */
 export function get(commandName: string) {
     commandName = commandName.toLowerCase().replaceAll('/', '');
@@ -47,7 +47,6 @@ export function get(commandName: string) {
  * Register a new command that can be called.
  *
  * @param {MessageCommand} command
- * @return {*}
  */
 export function register(
     name: string,
@@ -100,8 +99,50 @@ export function populateCommands(player: alt.Player) {
     player.emit(MESSENGER_EVENTS.TO_CLIENT.COMMANDS, validCommands);
 }
 
+/**
+ * Get all commands the player has access to.
+ * Includes names of individual parameters for each callback function as well.
+ * Excludes callbacks.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @return {Array<DetailedCommand>}
+ */
+export function getCommands(player: alt.Player): Array<DetailedCommand> {
+    const accountData = Athena.document.account.get(player);
+    const characterData = Athena.document.character.get(player);
+
+    if (typeof accountData === 'undefined' || typeof characterData === 'undefined') {
+        return [];
+    }
+
+    const validCommands: Array<Omit<MessageCommand<alt.Player>, 'callback'> & { params: Array<string> }> = [];
+    Object.keys(commands).forEach((key) => {
+        const command = commands[key];
+        const dataName = command.isCharacterPermission ? 'character' : 'account';
+
+        if (!Athena.systems.permission.hasOne(dataName, player, command.permissions)) {
+            return;
+        }
+
+        // Always remove first param since it is a player
+        const params = getParamNames(command.callback);
+        params.shift();
+
+        validCommands.push({
+            name: key,
+            description: command.description,
+            permissions: command.permissions,
+            isCharacterPermission: command.isCharacterPermission,
+            params,
+        });
+    });
+
+    return validCommands;
+}
+
 alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, () => {
     Athena.player.events.on('selected-character', populateCommands);
 });
 
-export default { execute, get, populateCommands, register };
+export default { execute, get, getCommands, populateCommands, register };

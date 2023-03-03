@@ -5,7 +5,7 @@ import * as commands from './commands';
 import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
-type MessageCallback = (player: alt.Player, msg: string) => void;
+export type MessageCallback = (player: alt.Player, msg: string) => void;
 
 const tagOrComment = new RegExp(
     '<(?:' +

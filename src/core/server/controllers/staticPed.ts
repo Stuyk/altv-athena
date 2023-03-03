@@ -52,7 +52,7 @@ export function append(pedData: IPed): string {
  * Remove a global pedestrian
  * @static
  * @param {string} uid
- * @return {*}  {boolean}
+ * @return {boolean}
  */
 export function remove(uid: string): boolean {
     const index = globalPeds.findIndex((ped) => ped.uid === uid);

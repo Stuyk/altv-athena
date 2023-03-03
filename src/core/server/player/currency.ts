@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import { CurrencyTypes } from '@AthenaShared/enums/currency';
 
-type DefaultCurrency = 'bank' | 'cash';
+export type DefaultCurrency = 'bank' | 'cash';
 
 /**
  * Add currency type to the player.

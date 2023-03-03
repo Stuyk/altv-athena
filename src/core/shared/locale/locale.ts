@@ -40,7 +40,7 @@ export class LocaleController {
      * @static
      * @param {string} key
      * @param {...any[]} args
-     * @return {*}  {string}
+     * @return {string}
      * @memberof LocaleController
      */
     static get(key: string, ...args: any[]): string {
@@ -61,7 +61,7 @@ export class LocaleController {
      * Returns an object of strings with labels for WebViews.
      * @static
      * @param {string} key
-     * @return {*}  {Object}
+     * @return {Object}
      * @memberof LocaleController
      */
     static getWebviewLocale(key: string): Object {

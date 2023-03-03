@@ -3,7 +3,7 @@ export const UID = {
      * Generates a UID based on string characters in the English alphabet.
      *
      * @static
-     * @return {*}  {string}
+     * @return {string}
      * @memberof UID
      */
     generate(): string {

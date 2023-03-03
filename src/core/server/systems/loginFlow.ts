@@ -4,7 +4,11 @@ import * as alt from 'alt-server';
 // Should keep track of all players current login flow.
 // The login flow can be moved forward for individual players.
 
-type FlowInfo = { name: string; weight: number; callback: (player: alt.Player) => void };
+export interface FlowInfo {
+    name: string;
+    weight: number;
+    callback: (player: alt.Player) => void;
+}
 
 const playerFlow: { [id: string]: { index: number; flow: Array<FlowInfo> } } = {};
 let weightedFlow: Array<FlowInfo> = [];

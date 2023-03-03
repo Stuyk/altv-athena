@@ -32,7 +32,7 @@ export function append(blip: Blip): string {
 /**
  * Removes a text label based on uid.
  * @param {string} uid
- * @return {*}  {boolean}
+ * @return {boolean}
  */
 export function remove(uid: string): boolean {
     const index = globalBlips.findIndex((label) => label.uid === uid);

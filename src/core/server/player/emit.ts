@@ -22,7 +22,7 @@ import { AcceptDeclineEvent } from '@AthenaShared/interfaces/acceptDeclineEvent'
  * List of all alarms: https://github.com/DurtyFree/gta-v-data-dumps/blob/master/alarmSounds.json
  * @param {alt.Player} player
  * @param {string} name
- * @return {*}  {void}
+ * @return {void}
  * @memberof EmitPrototype
  */
 export function startAlarm(player: alt.Player, name: string): void {
@@ -78,7 +78,7 @@ export function stopAllAlarms(player: alt.Player) {
  * @param {string} name
  * @param {ANIMATION_FLAGS} flags
  * @param {number} [duration=-1]
- * @return {*}  {void}
+ * @return {void}
  * @memberof EmitPrototype
  */
 export function animation(

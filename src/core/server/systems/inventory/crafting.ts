@@ -4,11 +4,11 @@ import * as Athena from '@AthenaServer/api';
 import { StoredItem } from '@AthenaShared/interfaces/item';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
-type dbName = string;
+export type dbName = string;
 
-type ItemCombo = [dbName, dbName];
+export type ItemCombo = [dbName, dbName];
 
-type Quantities = [number, number];
+export type Quantities = [number, number];
 
 export interface CraftRecipe {
     /**
