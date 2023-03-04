@@ -182,10 +182,12 @@ export class Job {
         for (let i = 0; i < objectiveData.length; i++) {
             const callbackOnStart = objectiveData[i].callbackOnStart;
             const callbackOnFinish = objectiveData[i].callbackOnFinish;
+            const callbackOnCheck = objectiveData[i].callbackOnCheck;
             const objectiveClone = deepCloneObject<Objective>(objectiveData[i]);
 
             objectiveClone.callbackOnStart = callbackOnStart;
             objectiveClone.callbackOnFinish = callbackOnFinish;
+            objectiveClone.callbackOnCheck = callbackOnCheck;
 
             uniqueObjectives.push(objectiveClone);
         }
