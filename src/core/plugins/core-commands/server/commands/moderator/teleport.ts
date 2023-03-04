@@ -100,17 +100,17 @@ Athena.systems.messenger.commands.register(
     'tpto',
     '/tpto [partial_name]',
     ['admin'],
-    async (player: alt.Player, name: string) => {
-        if (!name) {
+    async (player: alt.Player, partial_name: string) => {
+        if (!partial_name) {
             Athena.player.emit.message(player, `tpto <partial_name>`);
             return;
         }
 
-        if (name.includes('_')) {
-            name = name.replace('_', '');
+        if (partial_name.includes('_')) {
+            partial_name = partial_name.replace('_', '');
         }
 
-        const target = Athena.getters.player.byPartialName(name);
+        const target = Athena.getters.player.byPartialName(partial_name);
         if (!target || !target.valid) {
             Athena.player.emit.message(player, `Could not find that player.`);
             return;
@@ -129,17 +129,17 @@ Athena.systems.messenger.commands.register(
     'tphere',
     '/tphere [partial_name]',
     ['admin'],
-    async (player: alt.Player, name: string) => {
-        if (!name) {
+    async (player: alt.Player, partial_name: string) => {
+        if (!partial_name) {
             Athena.player.emit.message(player, `tpto <partial_name>`);
             return;
         }
 
-        if (name.includes('_')) {
-            name = name.replace('_', '');
+        if (partial_name.includes('_')) {
+            partial_name = partial_name.replace('_', '');
         }
 
-        const target = Athena.getters.player.byPartialName(name);
+        const target = Athena.getters.player.byPartialName(partial_name);
         if (!target || !target.valid) {
             Athena.player.emit.message(player, `Could not find that player.`);
             return;
@@ -154,18 +154,13 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
-    'tpall',
-    '/tpall [partial_name]',
-    ['admin'],
-    async (player: alt.Player, name: string) => {
-        const onlinePlayers = Athena.getters.players.online();
-        for (let target of onlinePlayers) {
-            if (!target || !target.valid) {
-                return;
-            }
-
-            Athena.player.safe.setPosition(target, player.pos.x, player.pos.y, player.pos.z);
+Athena.systems.messenger.commands.register('tpall', '/tpall', ['admin'], async (player: alt.Player) => {
+    const onlinePlayers = Athena.getters.players.online();
+    for (let target of onlinePlayers) {
+        if (!target || !target.valid) {
+            return;
         }
-    },
-);
+
+        Athena.player.safe.setPosition(target, player.pos.x, player.pos.y, player.pos.z);
+    }
+});
