@@ -3,7 +3,7 @@ import * as Athena from '@AthenaServer/api';
 
 Athena.systems.messenger.commands.register(
     'tempvehicle',
-    '/tempvehicle [model]',
+    '/tempvehicle [model] - Adds a temporary vehicle to drive around. Despawns on exit.',
     ['admin'],
     (player: alt.Player, model: string) => {
         const vehicle = Athena.vehicle.spawn.temporary({ model, pos: player.pos, rot: player.rot }, true);
@@ -12,6 +12,25 @@ Athena.systems.messenger.commands.register(
         }
 
         player.setIntoVehicle(vehicle, Athena.vehicle.shared.SEAT.DRIVER);
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'addvehicle',
+    '/addvehicle [model] - Adds an owned vehicle to self',
+    ['admin'],
+    (player: alt.Player, model: string) => {
+        if (!model) {
+            return;
+        }
+
+        const data = Athena.document.character.get(player);
+        if (data.isDead) {
+            return;
+        }
+
+        const fwd = Athena.utility.vector.getVectorInFrontOfPlayer(player, 5);
+        Athena.vehicle.add.toPlayer(player, model, fwd);
     },
 );
 

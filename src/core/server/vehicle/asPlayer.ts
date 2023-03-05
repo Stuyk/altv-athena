@@ -73,7 +73,7 @@ export function toggleEngine(player: alt.Player, vehicle: alt.Vehicle) {
  * @param {alt.Vehicle} vehicle
  * @param {number} door
  */
-export function toggleDoor(player: alt.Player, vehicle: alt.Vehicle, door: number) {
+export function toggleDoor(player: alt.Player, vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 | 5) {
     if (!vehicle) {
         vehicle = player.vehicle;
     }
@@ -83,6 +83,10 @@ export function toggleDoor(player: alt.Player, vehicle: alt.Vehicle, door: numbe
     }
 
     if (!sharedOwnershipChecks(player, vehicle)) {
+        return;
+    }
+
+    if (Athena.vehicle.controls.isLocked(vehicle)) {
         return;
     }
 

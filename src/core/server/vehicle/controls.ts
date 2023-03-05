@@ -43,12 +43,23 @@ export function toggleEngine(vehicle: alt.Vehicle): boolean {
  * @param {number} door
  * @return {boolean} The new state of the door. true = open
  */
-export function toggleDoor(vehicle: alt.Vehicle, door: number): boolean {
-    //
+export function toggleDoor(vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 | 5): boolean {
+    const isClosed = vehicle.getDoorState(door) === 0 ? true : false;
+    const doorState = isClosed === false ? 0 : 7;
+    vehicle.setDoorState(door, doorState);
 
-    let status = false;
+    return isClosed === false;
+}
 
-    return status;
+/**
+ * Returns true if the vehicle is currently locked.
+ *
+ * @export
+ * @param {alt.Vehicle} vehicle
+ * @return {*}
+ */
+export function isLocked(vehicle: alt.Vehicle) {
+    return (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED;
 }
 
 export function update(vehicle: alt.Vehicle) {

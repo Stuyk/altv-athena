@@ -77,4 +77,21 @@ export interface BaseVehicle {
      * @memberof BaseVehicle
      */
     permissions: Array<string>;
+
+    /**
+     * The fuel level for this vehicle.
+     *
+     * @type {number}
+     * @memberof BaseVehicle
+     */
+    fuel: number;
+
+    /**
+     * Set this value to an indexable garage.
+     * If this value is set it means it will not be spawned when a player joins.
+     *
+     * @type {number}
+     * @memberof BaseVehicle
+     */
+    garageInfo?: number;
 }

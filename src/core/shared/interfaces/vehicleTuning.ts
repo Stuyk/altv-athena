@@ -1,6 +1,6 @@
 import IVehicleMod from './vehicleMod';
 
-export default interface IVehicleTuning {
+export interface IVehicleTuning {
     /**
      * Cannot exceed modkit count
      *
@@ -25,3 +25,5 @@ export default interface IVehicleTuning {
      */
     // handling: Partial<IVehicleHandling>;
 }
+
+export default IVehicleTuning;

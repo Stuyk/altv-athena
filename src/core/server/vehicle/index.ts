@@ -1,3 +1,4 @@
+export * as add from './add';
 export * as asPlayer from './asPlayer';
 export * as controls from './controls';
 export * as events from './events';

@@ -193,6 +193,17 @@ export function onChange<T = {}>(fieldName: keyof KnownKeys<OwnedVehicle & T>, c
     }
 }
 
+/**
+ * Check if a vehicle document already exists and a vehicle is attached to it.
+ *
+ * @export
+ * @param {string} _id
+ * @return {boolean}
+ */
+export function exists(_id: string): boolean {
+    return Object.values(cache).find((x) => x._id.toString() === _id.toString()) !== undefined;
+}
+
 alt.on('removeEntity', (entity: alt.Entity) => {
     if (!(entity instanceof alt.Vehicle)) {
         return;
@@ -204,6 +215,7 @@ alt.on('removeEntity', (entity: alt.Entity) => {
 interface VehicleDocFuncs {
     bind: typeof bind;
     unbind: typeof unbind;
+    exists: typeof exists;
     get: typeof get;
     getField: typeof getField;
     set: typeof set;
@@ -213,6 +225,7 @@ interface VehicleDocFuncs {
 
 const Overrides: Partial<VehicleDocFuncs> = {};
 
+export function override(functionName: 'exists', callback: typeof exists);
 export function override(functionName: 'bind', callback: typeof bind);
 export function override(functionName: 'unbind', callback: typeof unbind);
 export function override(functionName: 'get', callback: typeof get);
