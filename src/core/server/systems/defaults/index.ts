@@ -5,5 +5,7 @@ export * as hospitalBlips from './hospitalBlips';
 export * as inventorySync from './inventorySync';
 export * as time from './time';
 export * as toolbar from './toolbar';
+export * as vehiclesDespawnOnLeave from './vehiclesDespawnOnLeave';
+export * as vehiclesSpawnOnJoin from './vehiclesSpawnOnJoin';
 export * as weaponItems from './weaponItems';
 export * as weather from './weather';

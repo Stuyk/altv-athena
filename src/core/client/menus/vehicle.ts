@@ -1,11 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { distance } from '@AthenaShared/utility/vector';
-import { PushVehicle } from '@AthenaClient/systems/push';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
 import { WheelMenu } from '@AthenaClient/views/wheelMenu';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 type VehicleMenuInjection = (target: alt.Vehicle, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
@@ -114,19 +114,16 @@ export const VehicleWheelMenu = {
         const type = native.getVehicleClass(vehicle);
 
         // Not Pushing & Vehicle is Currently Unlocked
-        if (!PushVehicle.isPushing() && !isLocked && !isDestroyed) {
-            if (!BLACKLISTED_VEHICLE_TYPES.includes(type)) {
+        if (!isLocked && !isDestroyed) {
+            for (let i = 0; i < 5; i++) {
                 options.push({
-                    name: 'Push',
-                    callback: PushVehicle.start,
-                    data: [vehicle],
+                    name: `Door ${i}`,
+                    callback: (vehicle: alt.Vehicle, door: number) => {
+                        alt.emitServer(VEHICLE_EVENTS.SET_DOOR, vehicle, door);
+                    },
+                    data: [vehicle, i],
                 });
             }
-        } else if (PushVehicle.isPushing()) {
-            options.push({
-                name: 'Stop Push',
-                callback: PushVehicle.clear,
-            });
         }
 
         for (const callback of Injections) {

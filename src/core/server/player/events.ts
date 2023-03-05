@@ -1,4 +1,5 @@
 import { InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
+import { Character } from '@AthenaShared/interfaces/character';
 import { StoredItem } from '@AthenaShared/interfaces/item';
 import * as alt from 'alt-server';
 
@@ -7,17 +8,18 @@ export type AthenaPlayerEvents =
     | 'increased-play-time'
     | 'item-equipped'
     | 'item-unequipped'
-    | 'player-died'
-    | 'player-uniform-set'
-    | 'player-uniform-cleared'
-    | 'player-skin-set'
-    | 'player-skin-cleared'
-    | 'player-health-set'
-    | 'player-armour-set'
-    | 'player-pos-set'
-    | 'player-left-vehicle-seat'
-    | 'player-entered-vehicle-as-driver'
     | 'pickup-item'
+    | 'player-armour-set'
+    | 'player-died'
+    | 'player-disconnected'
+    | 'player-entered-vehicle-as-driver'
+    | 'player-health-set'
+    | 'player-left-vehicle-seat'
+    | 'player-pos-set'
+    | 'player-skin-cleared'
+    | 'player-skin-set'
+    | 'player-uniform-cleared'
+    | 'player-uniform-set'
     | 'respawned'
     | 'selected-character'
     | 'set-account-data'
@@ -222,6 +224,21 @@ export function on(
 export function on(
     eventName: 'player-entered-vehicle-as-driver',
     callback: (player: alt.Player, vehicle: alt.Vehicle) => void,
+);
+
+/**
+ * Triggers when a player id is unbound from a document.
+ * Formally known as a disconnect event.
+ * PLAYER WILL BE UNDEFINED, DO NOT USE VARIABLE
+ *
+ * @export
+ * @template T
+ * @param {'player-disconnected'} eventName
+ * @param {((player: alt.Player, id: number, document: Character | T) => void)} callback
+ */
+export function on<T>(
+    eventName: 'player-disconnected',
+    callback: (player: alt.Player, id: number, document: Character | T) => void,
 );
 
 /**

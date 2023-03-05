@@ -6,9 +6,9 @@
  */
 
 export const KEY_BINDS = {
-    // E
-    INTERACT: 69,
-    INTERACT_ALT: 13,
+    INTERACT: 69, // E
+    INTERACT_ALT: 13, // Enter
+    INTERACT_CYCLE: 9, // TAB
     // F
     VEHICLE_FUNCS: 70, // Driver
     VEHICLE_OPTIONS: 85, // Vehicle Options

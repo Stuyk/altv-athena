@@ -51,6 +51,10 @@ const InternalFunctions = {
      * Opens the message box for commands or messages.
      */
     async openMessageBox() {
+        if (alt.isConsoleOpen()) {
+            return;
+        }
+
         const result = await AthenaClient.rmlui.commandInput.create({
             placeholder: 'Send a message or type a command...',
             commands: AthenaClient.messenger.getCommands(),

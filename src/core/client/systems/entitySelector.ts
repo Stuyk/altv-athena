@@ -17,24 +17,15 @@ import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle' | 'interaction';
 type TargetInfo = { id: number; pos: alt.IVector3; type: ValidEntityTypes; dist: number; height: number };
 
-const TIME_TO_TOGGLE_TAB = 250;
-
-const TAB_KEY_GAME_CONTROL = 37;
-const ENTER_KEY_GAME_CONTROL = 18;
-
-let MAX_TARGETS = 10;
-let MAX_DISTANCE = 10;
+let MAX_TARGETS = 50;
 let everyTick: number;
-let isSelecting = false;
 let selections: Array<TargetInfo> = [];
 let selectionIndex = 0;
-let tabStartTime = 0;
-let startPosition;
-let isReleased = true;
-let isAlwaysOn = false;
+let lastSelection: TargetInfo;
 let nextUpdate = Date.now();
+let timeBetweenUpdates = 5000;
 let showMarker = true;
-let color: alt.RGBA = new alt.RGBA(255, 255, 255, 100);
+let color: alt.RGBA = new alt.RGBA(255, 255, 255, 200);
 let size = new alt.Vector3(0.1, 0.05, 0.1);
 let latestInteraction: Interaction;
 
@@ -46,6 +37,7 @@ const Internal = {
             key: KEY_BINDS.INTERACT,
             description: 'Interact',
             identifier: 'interact-hotkey',
+            modifier: 'shift',
             keyDown: Internal.invokeSelection,
         });
 
@@ -55,25 +47,16 @@ const Internal = {
             identifier: 'interact-hotkey-alt',
             keyDown: Internal.invokeSelection,
         });
-    },
-    toggle() {
-        if (AthenaClient.webview.isAnyMenuOpen()) {
-            return;
-        }
 
-        if (isSelecting) {
-            isSelecting = false;
-            startPosition = undefined;
-            selections = [];
-            handleFrontendSound('BACK', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
-            return;
-        }
+        AthenaClient.hotkeys.add({
+            key: KEY_BINDS.INTERACT_CYCLE,
+            description: 'Interact Change Target',
+            identifier: 'interact-hotkey-cycle',
+            keyDown: Internal.selectClosestEntity,
+        });
 
-        startPosition = alt.Player.local.pos;
         selectionIndex = 0;
-        isSelecting = true;
         Internal.updateSelectionList();
-        handleFrontendSound('SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
     },
     convert(dataSet: Array<alt.Entity>, type: ValidEntityTypes): Array<TargetInfo> {
         let entityInfo: Array<TargetInfo> = [];
@@ -92,10 +75,6 @@ const Internal = {
         return entityInfo;
     },
     updateSelectionList() {
-        if (!isSelecting) {
-            return;
-        }
-
         const players = [...alt.Player.streamedIn];
         const vehicles = [...alt.Vehicle.streamedIn];
         const objects = [...alt.Object.all];
@@ -113,12 +92,30 @@ const Internal = {
         });
 
         selections = entityInfo.slice(0, entityInfo.length < 5 ? entityInfo.length : MAX_TARGETS);
-    },
-    selectClosestEntity() {
-        if (!isSelecting) {
+
+        if (typeof lastSelection === 'undefined') {
+            if (selections.length >= 1) {
+                lastSelection = selections[0];
+                selectionIndex = 0;
+            }
+
             return;
         }
 
+        if (selections.length <= 0) {
+            lastSelection = undefined;
+            return;
+        }
+
+        let index = selections.findIndex((x) => x.id === lastSelection.id);
+        if (index <= -1) {
+            index = 0;
+        }
+
+        lastSelection = selections[index];
+        selectionIndex = index;
+    },
+    selectClosestEntity() {
         if (AthenaClient.webview.isAnyMenuOpen()) {
             return;
         }
@@ -132,38 +129,12 @@ const Internal = {
             selectionIndex = 0;
         }
 
+        lastSelection = selections[selectionIndex];
         handleFrontendSound('SKIP', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
     },
-    handleControlToggling() {
-        const isShortPress = Date.now() - tabStartTime < TIME_TO_TOGGLE_TAB;
-        if (native.isDisabledControlJustPressed(0, TAB_KEY_GAME_CONTROL) && isReleased) {
-            isReleased = false;
-            tabStartTime = Date.now();
-            return;
-        }
-
-        if (native.isDisabledControlJustReleased(0, TAB_KEY_GAME_CONTROL)) {
-            isReleased = true;
-            if (!isShortPress) {
-                return;
-            }
-
-            Internal.selectClosestEntity();
-            return;
-        }
-
-        if (!isShortPress && !isReleased) {
-            isReleased = true;
-            Internal.toggle();
-        }
-    },
     invokeSelection() {
-        if (!isSelecting) {
-            if (latestInteraction) {
-                ClientInteraction.invoke();
-                return;
-            }
-
+        if (latestInteraction) {
+            ClientInteraction.invoke();
             return;
         }
 
@@ -174,7 +145,6 @@ const Internal = {
 
         switch (selection.type) {
             case 'npc':
-                Internal.toggle();
                 NpcWheelMenu.openMenu(selection.id);
                 break;
             case 'player':
@@ -183,7 +153,6 @@ const Internal = {
                     break;
                 }
 
-                Internal.toggle();
                 PlayerWheelMenu.openMenu(targetPlayer);
                 break;
             case 'vehicle':
@@ -192,7 +161,6 @@ const Internal = {
                     break;
                 }
 
-                Internal.toggle();
                 VehicleWheelMenu.openMenu(targetVehicle);
                 break;
             case 'object':
@@ -223,7 +191,6 @@ const Internal = {
                     0,
                 );
 
-                Internal.toggle();
                 alt.emitServer(SYSTEM_EVENTS.INTERACTION_PICKUP_ITEM, droppedItem._id);
                 break;
             case 'pos':
@@ -234,30 +201,14 @@ const Internal = {
         }
     },
     tick() {
-        if (!isAlwaysOn) {
-            Internal.handleControlToggling();
-        }
-
-        if (!isSelecting) {
-            return;
-        }
-
         if (AthenaClient.webview.isAnyMenuOpen()) {
             return;
         }
 
-        if (isAlwaysOn && Date.now() > nextUpdate) {
-            nextUpdate = Date.now() + 250;
+        if (Date.now() > nextUpdate) {
+            nextUpdate = Date.now() + timeBetweenUpdates;
             selectionIndex = 0;
             Internal.updateSelectionList();
-        }
-
-        if (!isAlwaysOn) {
-            const dist = AthenaClient.utility.distance2D(alt.Player.local.pos, startPosition);
-            if (dist > MAX_DISTANCE && !alt.Player.local.vehicle) {
-                Internal.toggle();
-                return;
-            }
         }
 
         if (selections.length <= 0) {
@@ -270,31 +221,27 @@ const Internal = {
             isNaN(selections[selectionIndex].height) ? 1 : selections[selectionIndex].height,
         );
 
-        if (showMarker) {
-            drawMarkerSimple(MARKER_TYPE.CHEVRON_UP, pos, new alt.Vector3(0, 180, 0), size, color, true);
-        }
-
-        const enterKeyPressed =
-            native.isControlJustReleased(0, ENTER_KEY_GAME_CONTROL) ||
-            native.isDisabledControlJustReleased(0, ENTER_KEY_GAME_CONTROL);
-
-        if (!enterKeyPressed) {
+        if (!showMarker) {
             return;
         }
 
-        Internal.invokeSelection();
+        if (alt.Player.local.vehicle && selections[selectionIndex].id === alt.Player.local.vehicle.scriptID) {
+            drawMarkerSimple(
+                MARKER_TYPE.CHEVRON_UP,
+                alt.Player.local.vehicle.pos.add(0, 0, 2),
+                new alt.Vector3(0, 180, 0),
+                size,
+                color,
+                true,
+            );
+            return;
+        }
+
+        drawMarkerSimple(MARKER_TYPE.CHEVRON_UP, pos, new alt.Vector3(0, 180, 0), size, color, true);
     },
 };
 
 export const EntitySelector = {
-    /**
-     * Is the entity selector currently running?
-     *
-     * @return {boolean}
-     */
-    isSelecting(): boolean {
-        return isSelecting;
-    },
     get: {
         /**
          * Return the currently selected entity.
@@ -325,18 +272,6 @@ export const EntitySelector = {
          */
         interaction(interaction: Interaction | undefined) {
             latestInteraction = interaction;
-        },
-        /**
-         * Never turns off entity selection.
-         * Forces the closest object to always be selected.
-         * Very performance heavy, and not recommended for most PCs.
-         *
-         */
-        alwaysOn() {
-            isAlwaysOn = true;
-            if (!isSelecting) {
-                Internal.toggle();
-            }
         },
         /**
          * Turn the marker off.

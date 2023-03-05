@@ -219,7 +219,9 @@ alt.on('playerDisconnect', (player: alt.Player) => {
         return;
     }
 
-    unbind(player.id);
+    const id = player.id;
+    Athena.player.events.trigger('player-disconnected', player, id, cache[id]);
+    unbind(id);
 });
 
 interface CharacterDocFuncs {

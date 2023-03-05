@@ -31,6 +31,11 @@ function disableDefaultBehavior(): void {
     native.disableControlAction(0, 13, true);
     native.disableControlAction(0, 14, true);
     native.disableControlAction(0, 15, true);
+    native.disableControlAction(0, 37, true);
+    native.disableControlAction(0, 192, true);
+    native.disableControlAction(0, 204, true);
+    native.disableControlAction(0, 211, true);
+    native.disableControlAction(0, 349, true);
 
     // Disable Default Controls
     native.disableControlAction(0, 104, true); // H

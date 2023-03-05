@@ -1,6 +1,7 @@
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { VEHICLE_LOCK_STATE } from '@AthenaShared/enums/vehicle';
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 
 /**
  * Toggles a vehicle door lock.
@@ -62,6 +63,43 @@ export function isLocked(vehicle: alt.Vehicle) {
     return (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED;
 }
 
-export function update(vehicle: alt.Vehicle) {
-    //
+/**
+ * Update the given vehicle in the database.
+ *
+ * @export
+ * @param {alt.Vehicle} vehicle
+ * @return {*}
+ */
+export async function update(vehicle: alt.Vehicle) {
+    if (!vehicle || !vehicle.valid) {
+        return;
+    }
+
+    const data = Athena.document.vehicle.get(vehicle);
+    if (typeof data === 'undefined') {
+        return;
+    }
+
+    if (data.state) {
+        data.state = {
+            ...data.state,
+            bodyHealth: vehicle.bodyHealth,
+            engineHealth: vehicle.engineHealth,
+            engineOn: vehicle.engineOn,
+            lockState: vehicle.lockState,
+            lightState: vehicle.lightState,
+            dirtLevel: vehicle.dirtLevel,
+        };
+    } else {
+        data.state = {
+            bodyHealth: vehicle.bodyHealth,
+            engineHealth: vehicle.engineHealth,
+            engineOn: vehicle.engineOn,
+            lockState: vehicle.lockState,
+            lightState: vehicle.lightState,
+            dirtLevel: vehicle.dirtLevel,
+        };
+    }
+
+    Athena.document.vehicle.setBulk(vehicle, { pos: vehicle.pos, rot: vehicle.rot, state: data.state });
 }

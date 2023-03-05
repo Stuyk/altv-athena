@@ -71,16 +71,28 @@ export const VehicleController = {
         }
 
         const target = EntitySelector.get.selection();
-        if (target.type !== 'vehicle') {
+        if (target) {
+            if (target.type !== 'vehicle') {
+                return;
+            }
+
+            const vehicle = alt.Vehicle.all.find((x) => {
+                return x.scriptID === target.id;
+            });
+
+            if (!vehicle) {
+                return;
+            }
+
+            alt.emitServer(VEHICLE_EVENTS.SET_LOCK, vehicle);
             return;
         }
 
-        const vehicle = alt.Vehicle.all.find((x) => x.id === target.id);
-        if (!vehicle) {
+        if (!alt.Player.local.vehicle) {
             return;
         }
 
-        alt.emitServer(VEHICLE_EVENTS.SET_LOCK, vehicle);
+        alt.emitServer(VEHICLE_EVENTS.SET_LOCK, alt.Player.local.vehicle);
     },
 
     /**

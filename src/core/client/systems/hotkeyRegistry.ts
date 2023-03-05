@@ -170,14 +170,21 @@ const Internal = {
         keyInfo.keyUp();
     },
     keyHeld() {
+        let isModifierDown = false;
+
         // Check Modifier Keys First
         Object.keys(keyModifier).forEach((keyName) => {
             if (alt.isKeyDown(keyModifier[keyName].key)) {
                 keyModifier[keyName].pressed = true;
+                isModifierDown = true;
             } else {
                 keyModifier[keyName].pressed = false;
             }
         });
+
+        if (isModifierDown) {
+            native.disableControlAction(0, 86, true);
+        }
 
         // Check matching keys in keyDownTime
         Object.keys(keyDownTime).forEach((identifier) => {

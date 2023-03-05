@@ -4,6 +4,7 @@ import * as Athena from '@AthenaServer/api';
 import Database from '@stuyk/ezmongodb';
 import { Character } from '@AthenaShared/interfaces/character';
 import { Account } from '@AthenaServer/interface/iAccount';
+import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
 
 /**
  * Gets an online player by account identifier based on their MongoDB account _id.
@@ -242,6 +243,22 @@ export function closestOwnedVehicle(player: alt.Player): alt.Vehicle | undefined
     // return vehicles[0];
 
     return undefined;
+}
+
+/**
+ * Get all owned vehicles from the database for a given character.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @return {Promise<Array<OwnedVehicle>>}
+ */
+export async function ownedVehicleDocuments(player: alt.Player): Promise<Array<OwnedVehicle>> {
+    const document = Athena.document.character.get(player);
+    if (typeof document === 'undefined') {
+        return [];
+    }
+
+    return await Database.fetchAllByField('owner', document._id, Athena.database.collections.Vehicles);
 }
 
 /**
