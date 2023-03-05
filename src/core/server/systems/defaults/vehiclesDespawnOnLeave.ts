@@ -23,6 +23,7 @@ const Internal = {
         }
 
         Athena.player.events.on('player-disconnected', Internal.processPlayer);
+        alt.log(`~lc~Default System: ~g~${SYSTEM_NAME}`);
     },
     async processPlayer(player: alt.Player, id: number, document: Character) {
         let removedVehicles = 0;
@@ -46,14 +47,14 @@ const Internal = {
             try {
                 vehicle.destroy();
                 removedVehicles += 1;
-            } catch (err) {}
+            } catch (err) {
+                console.log(err);
+            }
 
             Athena.document.vehicle.unbind(vehicleId);
         }
 
-        if (removedVehicles > 1) {
-            alt.log(`~y~Removed ${removedVehicles} owned by ${document.name} on disconnect.`);
-        }
+        alt.log(`~y~Removed ${removedVehicles} vehicles owned by ${document.name} on disconnect.`);
     },
 };
 

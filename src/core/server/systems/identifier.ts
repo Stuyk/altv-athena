@@ -44,7 +44,6 @@ export function setPlayerIdentifier(player: alt.Player) {
         throw new Error(`Could not set identifier for player: ${player.id}, data was not defined.`);
     }
 
-    alt.log(`${data.name} ID join and set to ${identifier} using id strategy ${strategy}.`);
     player.setSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID, identifier);
 }
 

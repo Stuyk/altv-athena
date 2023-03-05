@@ -21,13 +21,27 @@ const Internal = {
         }
 
         Athena.player.events.on('selected-character', Internal.processPlayer);
+        alt.log(`~lc~Default System: ~g~${SYSTEM_NAME}`);
     },
     async processPlayer(player: alt.Player) {
+        const playerName = Athena.document.character.getField(player, 'name');
+        if (!playerName) {
+            return;
+        }
+
         const vehicles = await Athena.getters.player.ownedVehicleDocuments(player);
+        let count = 0;
 
         for (let vehicle of vehicles) {
-            Athena.vehicle.spawn.persistent(vehicle);
+            const veh = Athena.vehicle.spawn.persistent(vehicle);
+            if (typeof veh === 'undefined') {
+                continue;
+            }
+
+            count += 1;
         }
+
+        alt.log(`~y~${count} vehicles owned by ${playerName} spawned.`);
     },
 };
 
