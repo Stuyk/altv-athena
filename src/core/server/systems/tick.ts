@@ -3,10 +3,6 @@ import * as alt from 'alt-server';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import * as Athena from '../api';
-import { DEFAULT_CONFIG } from '../athena/main';
-// import VehicleFuncs from '../extensions/vehicleFuncs';
-import { Injections } from './injections';
-import { PlayerInjectionNames, PlayerSaveTickCallback } from './injections/player';
 
 const timeBetweenPings = 4950;
 
@@ -38,15 +34,15 @@ export async function onTick(player: alt.Player): Promise<void> {
         injections.armour = player.armour;
     }
 
-    const saveTickInjections = Injections.get<PlayerSaveTickCallback>(PlayerInjectionNames.PLAYER_SAVE_TICK);
-    for (const callback of saveTickInjections) {
-        try {
-            injections = { ...injections, ...callback(player) };
-        } catch (err) {
-            console.warn(`Got Save Injection Error for Player: ${err}`);
-            continue;
-        }
-    }
+    // const saveTickInjections = Injections.get<PlayerSaveTickCallback>(PlayerInjectionNames.PLAYER_SAVE_TICK);
+    // for (const callback of saveTickInjections) {
+    //     try {
+    //         injections = { ...injections, ...callback(player) };
+    //     } catch (err) {
+    //         console.warn(`Got Save Injection Error for Player: ${err}`);
+    //         continue;
+    //     }
+    // }
 
     if (Object.keys(injections).length <= 0) {
         return;

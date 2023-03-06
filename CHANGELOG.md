@@ -273,6 +273,29 @@ Hotkey Registry
 - Option to allow the keybind while in any page menu
 - Ability to enable / disable a keybind through the API
 - Key Modifiers - Shift, Alt, CTRL
+
+Vehicle System
+- Removed VehicleFuncs
+- Removed Old Vehicle System
+- Added New Pathway (Athena.vehicle.x)
+- Vehicle ownership is character _id
+- Added permissions to vehicle ownership
+- Added ability to add characters to vehicle keys
+- Added functions to add / remove characters to keys
+- Differentiated ownership from keys
+- Updated vehicle controller on client-side
+- Updated vehicle controller on server-side
+- Updated vehicle document
+
+Spawn Vehicles on Join
+- Added default system that spawns player owned vehicles on join
+- Added way to disable this system
+
+Spawn Vehicles on Leave
+- Added defaulty system that despawns vehicles on leave
+- Added way to disable this system
+
+Began Deprecation of src/core/athena/main.ts File
 ```
 
 

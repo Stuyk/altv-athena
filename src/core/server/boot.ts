@@ -5,7 +5,6 @@ import './api';
 import './imports/events';
 import './extensions/extPlayer';
 import './extensions/extColshape';
-import './extensions/vehicleFuncs';
 import './imports/commands';
 import './imports/systems';
 import './imports/controllers';
