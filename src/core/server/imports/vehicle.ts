@@ -7,4 +7,3 @@ import '@AthenaServer/vehicle/ownership';
 import '@AthenaServer/vehicle/spawn';
 import '@AthenaServer/vehicle/tempVehicles';
 import '@AthenaServer/vehicle/tuning';
-import '@AthenaServer/vehicle/vehicle';
