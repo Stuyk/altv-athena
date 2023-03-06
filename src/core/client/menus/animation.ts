@@ -2,7 +2,6 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 import { playAnimation } from '@AthenaClient/systems/animations';
-import { PushVehicle } from '@AthenaClient/systems/push';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 import commonAnims from './animationMenus/commonAnims';
@@ -31,10 +30,6 @@ function handleAnimationMenu() {
     }
 
     if (isAnyMenuOpen()) {
-        return;
-    }
-
-    if (PushVehicle.isPushing()) {
         return;
     }
 
