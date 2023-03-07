@@ -8,8 +8,8 @@ const globalBlips: Array<Blip> = [];
 /**
  * Adds a global blip the player loads when they join.
  *
- * See [alt:V Blip Sprites](https://docs.altv.mp/gta/articles/references/blips.html)
- * See [alt:V Blip Colors](https://docs.altv.mp/gta/articles/references/blips.html#colors)
+ * - See [alt:V Blip Sprites](https://docs.altv.mp/gta/articles/references/blips.html)
+ * - See [alt:V Blip Colors](https://docs.altv.mp/gta/articles/references/blips.html#colors)
  *
  * @example
  * ```ts
@@ -107,6 +107,9 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  * Add a blip to the player.
  * Only the player specified can see this blip.
  *
+ * - See [alt:V Blip Sprites](https://docs.altv.mp/gta/articles/references/blips.html)
+ * - See [alt:V Blip Colors](https://docs.altv.mp/gta/articles/references/blips.html#colors)
+ *
  * @example
  * ```ts
  * const uid = Athena.controllers.blip.addToPlayer(somePlayer, {
@@ -117,8 +120,6 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  *     text: 'My Blip!',
  *     sprite: 80
  * });
- *
- * Athena.controllers.blip.remove(uid);
  * ```
  *
  * @param {alt.Player} player
