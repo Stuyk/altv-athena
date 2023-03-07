@@ -8,11 +8,15 @@ import * as Athena from '@AthenaServer/api';
 
 /**
  * Used to ban a player from the server.
- * @static
+ *
+ * @example
+ * ```ts
+ * Athena.controllers.admin.banPlayer(player, 'was a bad person :(')
+ * ```
+ *
  * @param {alt.Player} player
  * @param {string} reason
  * @return {Promise<boolean>}
- * @memberof AdminController
  */
 export async function banPlayer(player: alt.Player, reason: string): Promise<boolean> {
     const accountData = Athena.document.account.get(player);
@@ -31,12 +35,17 @@ export async function banPlayer(player: alt.Player, reason: string): Promise<boo
 
 /**
  * Used to unban a player from the server.
- * @static
+ *
+ * @example
+ * ```ts
+ * Athena.controllers.admin.unbanPlayerByDiscord('202685967935471617');
+ * ```
+ *
  * @param {string} discord
  * @return {Promise<boolean>}
  * @memberof AdminController
  */
-export async function unbanPlayer(discord: string): Promise<boolean> {
+export async function unbanPlayerByDiscord(discord: string): Promise<boolean> {
     const account = await Database.fetchData<Account>('discord', discord, Collections.Accounts);
     if (!account) {
         return false;
@@ -53,13 +62,13 @@ export async function unbanPlayer(discord: string): Promise<boolean> {
 
 interface AdminControllerFuncs {
     banPlayer: typeof banPlayer;
-    unbanPlayer: typeof unbanPlayer;
+    unbanPlayerByDiscord: typeof unbanPlayerByDiscord;
 }
 
 const Overrides: Partial<AdminControllerFuncs> = {};
 
 export function override(functionName: 'banPlayer', callback: typeof banPlayer);
-export function override(functionName: 'unbanPlayer', callback: typeof unbanPlayer);
+export function override(functionName: 'unbanPlayerByDiscord', callback: typeof unbanPlayerByDiscord);
 export function override(functionName: keyof AdminControllerFuncs, callback: any): void {
     Overrides[functionName] = callback;
 }

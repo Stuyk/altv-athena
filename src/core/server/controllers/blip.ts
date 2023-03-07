@@ -6,11 +6,21 @@ import { Blip } from '../../shared/interfaces/blip';
 const globalBlips: Array<Blip> = [];
 
 /**
- * Adds a global label the player loads when they join.
- * Also appends it to any online players.
- * Requires a UID to remove it later.
+ * Adds a global blip the player loads when they join.
  *
- * @param {Blip} label
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.blip.append({
+ *     color: 5,
+ *     pos: { x: 0, y: 0, z: 0},
+ *     scale: 0.2,
+ *     shortRange: true,
+ *     text: 'My Blip!',
+ *     sprite: 80
+ * });
+ * ```
+ *
+ * @param {Blip} blip
  * @returns {string} A uid to remove it later.
  */
 export function append(blip: Blip): string {
@@ -30,7 +40,22 @@ export function append(blip: Blip): string {
 }
 
 /**
- * Removes a text label based on uid.
+ * Removes a blip based on uid.
+ *
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.blip.append({
+ *     color: 5,
+ *     pos: { x: 0, y: 0, z: 0},
+ *     scale: 0.2,
+ *     shortRange: true,
+ *     text: 'My Blip!',
+ *     sprite: 80
+ * });
+ *
+ * Athena.controllers.blip.remove(uid);
+ * ```
+ *
  * @param {string} uid
  * @return {boolean}
  */
@@ -47,6 +72,23 @@ export function remove(uid: string): boolean {
 
 /**
  * Remove a blip from the player.
+ * Do not worry about removing blips on disconnect.
+ *
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.blip.addToPlayer(somePlayer, {
+ *     color: 5,
+ *     pos: { x: 0, y: 0, z: 0},
+ *     scale: 0.2,
+ *     shortRange: true,
+ *     text: 'My Blip!',
+ *     sprite: 80
+ * });
+ *
+ * Athena.controllers.blip.removeFromPlayer(somePlayer, uid);
+ * ```
+ *
+ *
  * @param {alt.Player} player
  * @param {string} uid
  */
@@ -60,6 +102,22 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
 
 /**
  * Add a blip to the player.
+ * Only the player specified can see this blip.
+ *
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.blip.addToPlayer(somePlayer, {
+ *     color: 5,
+ *     pos: { x: 0, y: 0, z: 0},
+ *     scale: 0.2,
+ *     shortRange: true,
+ *     text: 'My Blip!',
+ *     sprite: 80
+ * });
+ *
+ * Athena.controllers.blip.remove(uid);
+ * ```
+ *
  * @param {alt.Player} player
  * @param {Blip} blipData
  */
@@ -71,6 +129,18 @@ export function addToPlayer(player: alt.Player, blipData: Blip) {
     alt.emitClient(player, SYSTEM_EVENTS.APPEND_BLIP, blipData);
 }
 
+/**
+ * Used to load all blips on client-side for a player.
+ * This is already called when the gamemode starts. Not necessary to call twice.
+ *
+ * @example
+ * ```ts
+ * Athena.controllers.blip.populateGlobalBlips(somePlayer);
+ * ```
+ *
+ * @export
+ * @param {alt.Player} player
+ */
 export function populateGlobalBlips(player: alt.Player) {
     alt.emitClient(player, SYSTEM_EVENTS.POPULATE_BLIPS, globalBlips);
 }
