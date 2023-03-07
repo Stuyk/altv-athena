@@ -27,10 +27,17 @@ const InternalController = {
  *
  * These are mostly visual. Refer to `Athena.systems.inventory.drops` to make actual item drops.
  *
+ * Returns a uid or generates one if not specified.
+ *
+ *
  * @param {ItemDrop} itemDrop
  * @return {string}
  */
 export function append(itemDrop: ItemDrop): string {
+    if (Overrides.append) {
+        return Overrides.append(itemDrop);
+    }
+
     globalDrops.push(itemDrop);
     InternalController.refresh();
     return String(itemDrop._id);
@@ -43,6 +50,10 @@ export function append(itemDrop: ItemDrop): string {
  * @return {boolean}
  */
 export function remove(id: string): boolean {
+    if (Overrides.remove) {
+        return Overrides.remove(id);
+    }
+
     const index = globalDrops.findIndex((label) => label._id === id);
     if (index <= -1) {
         return false;

@@ -8,6 +8,8 @@ const globalBlips: Array<Blip> = [];
 /**
  * Adds a global blip the player loads when they join.
  *
+ * Returns a uid or generates one if not specified.
+ *
  * - See [alt:V Blip Sprites](https://docs.altv.mp/gta/articles/references/blips.html)
  * - See [alt:V Blip Colors](https://docs.altv.mp/gta/articles/references/blips.html#colors)
  *
@@ -27,6 +29,10 @@ const globalBlips: Array<Blip> = [];
  * @returns {string} A uid to remove it later.
  */
 export function append(blip: Blip): string {
+    if (Overrides.append) {
+        return Overrides.append(blip);
+    }
+
     if (!blip.uid) {
         blip.uid = Athena.utility.hash.sha256Random(JSON.stringify(blip));
     }
@@ -63,6 +69,10 @@ export function append(blip: Blip): string {
  * @return {boolean}
  */
 export function remove(uid: string): boolean {
+    if (Overrides.remove) {
+        return Overrides.remove(uid);
+    }
+
     const index = globalBlips.findIndex((label) => label.uid === uid);
     if (index <= -1) {
         return false;
@@ -96,6 +106,10 @@ export function remove(uid: string): boolean {
  * @param {string} uid
  */
 export function removeFromPlayer(player: alt.Player, uid: string) {
+    if (Overrides.removeFromPlayer) {
+        return Overrides.removeFromPlayer(player, uid);
+    }
+
     if (!uid) {
         throw new Error(`Did not specify a uid for object removal. ObjectController.removeFromPlayer`);
     }
@@ -106,6 +120,8 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
 /**
  * Add a blip to the player.
  * Only the player specified can see this blip.
+ *
+ * Returns a uid or generates one if not specified.
  *
  * - See [alt:V Blip Sprites](https://docs.altv.mp/gta/articles/references/blips.html)
  * - See [alt:V Blip Colors](https://docs.altv.mp/gta/articles/references/blips.html#colors)
@@ -126,6 +142,10 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  * @param {Blip} blipData
  */
 export function addToPlayer(player: alt.Player, blipData: Blip) {
+    if (Overrides.addToPlayer) {
+        return Overrides.addToPlayer(player, blipData);
+    }
+
     if (!blipData.uid) {
         throw new Error(`Object ${JSON.stringify(blipData)} does not have a uid. ObjectController.addToPlayer`);
     }
@@ -146,6 +166,10 @@ export function addToPlayer(player: alt.Player, blipData: Blip) {
  * @param {alt.Player} player
  */
 export function populateGlobalBlips(player: alt.Player) {
+    if (Overrides.populateGlobalBlips) {
+        return Overrides.populateGlobalBlips(player);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.POPULATE_BLIPS, globalBlips);
 }
 

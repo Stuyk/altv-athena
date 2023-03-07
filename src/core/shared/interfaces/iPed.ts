@@ -35,7 +35,7 @@ export interface IPed {
      * @type {string}
      * @memberof IPed
      */
-    uid: string;
+    uid?: string;
 
     /**
      * A list of random animations to play on this pedestrian.

@@ -40,10 +40,24 @@ const InternalController = {
 
 /**
  * Adds a text label to the global streamer.
+ *
+ * Returns a uid or generates one if not specified.
+ *
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.textLabel.append({ text: 'Hello World!', pos: { x: 0, y: 0, z: 0 }});
+ *
+ * Athena.controllers.textLabel.append({ uid: 'uid-you-specify', text: 'Hello World!', pos: { x: 0, y: 0, z: 0 }});
+ * ```
+ *
  * @param {TextLabel} label
  * @returns {string} uid for removal
  */
 export function append(label: TextLabel): string {
+    if (Overrides.append) {
+        return Overrides.append(label);
+    }
+
     if (!label.uid) {
         label.uid = Athena.utility.hash.sha256Random(JSON.stringify(label));
     }
@@ -62,14 +76,31 @@ export function append(label: TextLabel): string {
 
 /**
  * Update a text label globally, or for a player.
+ *
  * Not defining the player tries to update the label globally.
+ *
  * Try not to perfrom this updates in an everyTick, and only update text labels.
+ *
+ * Specify player as the last parameter to update their instance; otherwise updates all players if uid matches.
+ *
+ * @example
+ * ```ts
+ * Athena.controllers.textLabel.update(someUid, { text: 'Hello World!' });
+ *
+ * Athena.controllers.textLabel.update('uid-you-specify', { text: 'Hello World!' });
+ *
+ * Athena.controllers.textLabel.update('uid-you-specify', { text: 'Hello World!' }, somePlayer);
+ * ```
  *
  * @param {string} uid
  * @param {alt.Player} [player=undefined]
  * @memberof ServerTextLabelController
  */
 export function update(uid: string, label: Partial<TextLabel>, player: alt.Player = undefined): boolean {
+    if (Overrides.update) {
+        return Overrides.update(uid, label, player);
+    }
+
     if (typeof player === 'undefined') {
         const index = globalTextLabels.findIndex((x) => x.uid === uid);
         if (index === -1) {
@@ -89,10 +120,22 @@ export function update(uid: string, label: Partial<TextLabel>, player: alt.Playe
 
 /**
  * Removes a text label based on uid from the global streamer
+ *
+ * @example
+ * ```ts
+ * Athena.controllers.textLabel.remove(someUid);
+ *
+ * Athena.controllers.textLabel.remove('uid-you-specify');
+ * ```
+ *
  * @param {string} uid
  * @return {boolean}
  */
 export function remove(uid: string): boolean {
+    if (Overrides.remove) {
+        return Overrides.remove(uid);
+    }
+
     const index = globalTextLabels.findIndex((label) => label.uid === uid);
     if (index <= -1) {
         return false;
@@ -105,10 +148,22 @@ export function remove(uid: string): boolean {
 
 /**
  * Remove a local text label from a player.
+ *
+ * @example
+ * ```ts
+ * Athena.controllers.textLabel.removeFromPlayer(somePlayer, someUid);
+ *
+ * Athena.controllers.textLabel.removeFromPlayer(somePlayer, 'uid-you-specify');
+ * ```
+ *
  * @param {alt.Player} player
  * @param {string} uid
  */
 export function removeFromPlayer(player: alt.Player, uid: string) {
+    if (Overrides.removeFromPlayer) {
+        return Overrides.removeFromPlayer(player, uid);
+    }
+
     if (!uid) {
         throw new Error(`Did not specify a uid for text label removal. TextLabelController.removeFromPlayer`);
     }
@@ -118,11 +173,23 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
 
 /**
  * Add a local text label to player.
+ *
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.textLabel.addToPlayer(somePlayer, { text: 'Hello World!', pos: { x: 0, y: 0, z: 0 }});
+ *
+ * Athena.controllers.textLabel.addToPlayer(somePlayer, { uid: 'uid-you-specify', text: 'Hello World!', pos: { x: 0, y: 0, z: 0 }});
+ * ```
+ *
  * @param {alt.Player} player
  * @param {TextLabel} textLabel
  * @returns {string} uid for removal
  */
 export function addToPlayer(player: alt.Player, textLabel: TextLabel): string {
+    if (Overrides.addToPlayer) {
+        return Overrides.addToPlayer(player, textLabel);
+    }
+
     if (!textLabel.uid) {
         textLabel.uid = Athena.utility.hash.sha256Random(JSON.stringify(textLabel));
     }
@@ -134,7 +201,13 @@ export function addToPlayer(player: alt.Player, textLabel: TextLabel): string {
 
 InternalController.init();
 
-type TextLabelFuncs = ControllerFuncs<typeof append, typeof remove, typeof addToPlayer, typeof removeFromPlayer>;
+type TextLabelFuncs = ControllerFuncs<
+    typeof append,
+    typeof remove,
+    typeof addToPlayer,
+    typeof removeFromPlayer,
+    typeof update
+>;
 
 const Overrides: Partial<TextLabelFuncs> = {};
 
@@ -142,6 +215,7 @@ export function override(functionName: 'append', callback: typeof append);
 export function override(functionName: 'remove', callback: typeof remove);
 export function override(functionName: 'addToPlayer', callback: typeof addToPlayer);
 export function override(functionName: 'removeFromPlayer', callback: typeof removeFromPlayer);
+export function override(functionName: 'update', callback: typeof update);
 /**
  * Used to override any text label streamer functionality
  *

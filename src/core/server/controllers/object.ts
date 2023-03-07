@@ -45,18 +45,31 @@ const InternalController = {
  *
  * Create an MLO, or use something like CodeWalker to create large scale map changes.
  *
+ * Returns a uid or generates one if not specified.
+ *
  * @example
  * ```ts
  * const uid = Athena.controllers.object.append({
  *      model: 'prop_pizza_oven_01',
  *      pos: { x: 0, y: 0, z: 0}
  * });
+ *
+ * Athena.controllers.object.append({
+ *      uid: 'the-uid-you-specified',
+ *      model: 'prop_pizza_oven_01',
+ *      pos: { x: 0, y: 0, z: 0}
+ * });
+ *
  * ```
  *
  * @param {IObject} objectData
  * @return {string} uid for object
  */
 export function append(objectData: IObject): string {
+    if (Overrides.append) {
+        return Overrides.append(objectData);
+    }
+
     if (!objectData.uid) {
         objectData.uid = sha256Random(JSON.stringify(objectData));
     }
@@ -74,6 +87,8 @@ export function append(objectData: IObject): string {
  * @example
  * ```ts
  * const result = Athena.controllers.object.remove(someUid);
+ *
+ * Athena.controllers.object.remove('the-uid-you-specified');
  * ```
  *
  * @export
@@ -81,6 +96,10 @@ export function append(objectData: IObject): string {
  * @return {boolean}
  */
 export function remove(uid: string): boolean {
+    if (Overrides.remove) {
+        return Overrides.remove(uid);
+    }
+
     let wasFound = false;
     for (let i = globalObjects.length - 1; i >= 0; i--) {
         if (globalObjects[i].uid !== uid) {
@@ -113,6 +132,10 @@ export function remove(uid: string): boolean {
  * @param {boolean} isInterior Remove all objects that are interior based.
  */
 export function removeFromPlayer(player: alt.Player, uid: string, removeAllInterior = false) {
+    if (Overrides.removeFromPlayer) {
+        return Overrides.removeFromPlayer(player, uid, removeAllInterior);
+    }
+
     if (!uid) {
         throw new Error(`Did not specify a uid for object removal. ObjectController.removeFromPlayer`);
     }
@@ -122,6 +145,8 @@ export function removeFromPlayer(player: alt.Player, uid: string, removeAllInter
 
 /**
  * Add an object to the player that only they can see.
+ *
+ * Returns a uid or generates one if not specified.
  *
  * @example
  * ```ts
@@ -136,6 +161,10 @@ export function removeFromPlayer(player: alt.Player, uid: string, removeAllInter
  * @returns {string} uid for object
  */
 export function addToPlayer(player: alt.Player, objectData: IObject): string {
+    if (Overrides.addToPlayer) {
+        return Overrides.addToPlayer(player, objectData);
+    }
+
     if (!objectData.uid) {
         objectData.uid = sha256Random(JSON.stringify(objectData));
     }
@@ -168,6 +197,10 @@ export function addToPlayer(player: alt.Player, objectData: IObject): string {
  * @param {alt.Player} [player=undefined]
  */
 export function updatePosition(uid: string, pos: alt.IVector3, player: alt.Player = undefined): boolean {
+    if (Overrides.updatePosition) {
+        return Overrides.updatePosition(uid, pos, player);
+    }
+
     if (typeof player === 'undefined') {
         const index = globalObjects.findIndex((x) => x.uid === uid);
         if (index === -1) {
