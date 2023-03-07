@@ -35,9 +35,12 @@
 <ul class="tsd-signatures tsd-kind-type-literal">
 <li class="tsd-signature"><span class="tsd-signature-symbol">(</span>blip<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Blip</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Adds a global label the player loads when they join.
-Also appends it to any online players.
-Requires a UID to remove it later.</p>
+<div class="tsd-comment tsd-typography"><p>Adds a global blip the player loads when they join.</p>
+<p>See <a href="https://docs.altv.mp/gta/articles/references/blips.html">alt:V Blip Sprites</a>
+See <a href="https://docs.altv.mp/gta/articles/references/blips.html#colors">alt:V Blip Colors</a></p>
+
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-10">uid</span><span class="hl-1"> = </span><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">controllers</span><span class="hl-1">.</span><span class="hl-0">blip</span><span class="hl-1">.</span><span class="hl-8">append</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">color:</span><span class="hl-1"> </span><span class="hl-9">5</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">pos:</span><span class="hl-1"> { </span><span class="hl-0">x:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">y:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">z:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">},</span><br/><span class="hl-1">    </span><span class="hl-0">scale:</span><span class="hl-1"> </span><span class="hl-9">0.2</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">shortRange:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">text:</span><span class="hl-1"> </span><span class="hl-7">&#39;My Blip!&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">sprite:</span><span class="hl-1"> </span><span class="hl-9">80</span><br/><span class="hl-1">});</span>
+</code></pre>
 
 <h3>Returns</h3><p>A uid to remove it later.</p>
 </div>
@@ -49,7 +52,7 @@ Requires a UID to remove it later.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4></li></ul></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/9e130da/src/core/server/controllers/blip.ts#L85">server/controllers/blip.ts:85</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/07fdc7f/src/core/server/controllers/blip.ts#L158">server/controllers/blip.ts:158</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="override-1">override<span class="tsd-signature-symbol">(</span>functionName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;remove&quot;</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>uid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><a href="#override-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Used to override any blip controller function.</p>
@@ -67,7 +70,10 @@ Requires a UID to remove it later.</p>
 <ul class="tsd-signatures tsd-kind-type-literal">
 <li class="tsd-signature"><span class="tsd-signature-symbol">(</span>uid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Removes a text label based on uid.</p>
+<div class="tsd-comment tsd-typography"><p>Removes a blip based on uid.</p>
+
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-10">uid</span><span class="hl-1"> = </span><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">controllers</span><span class="hl-1">.</span><span class="hl-0">blip</span><span class="hl-1">.</span><span class="hl-8">append</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">color:</span><span class="hl-1"> </span><span class="hl-9">5</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">pos:</span><span class="hl-1"> { </span><span class="hl-0">x:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">y:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">z:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">},</span><br/><span class="hl-1">    </span><span class="hl-0">scale:</span><span class="hl-1"> </span><span class="hl-9">0.2</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">shortRange:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">text:</span><span class="hl-1"> </span><span class="hl-7">&#39;My Blip!&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">sprite:</span><span class="hl-1"> </span><span class="hl-9">80</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">controllers</span><span class="hl-1">.</span><span class="hl-0">blip</span><span class="hl-1">.</span><span class="hl-8">remove</span><span class="hl-1">(</span><span class="hl-0">uid</span><span class="hl-1">);</span>
+</code></pre>
 
 <h3>Returns</h3></div>
 <div class="tsd-parameters">
@@ -78,7 +84,7 @@ Requires a UID to remove it later.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4></li></ul></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/9e130da/src/core/server/controllers/blip.ts#L86">server/controllers/blip.ts:86</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/07fdc7f/src/core/server/controllers/blip.ts#L159">server/controllers/blip.ts:159</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="override-2">override<span class="tsd-signature-symbol">(</span>functionName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;addToPlayer&quot;</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span>, blipData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Blip</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><a href="#override-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Used to override any blip controller function.</p>
@@ -96,7 +102,11 @@ Requires a UID to remove it later.</p>
 <ul class="tsd-signatures tsd-kind-type-literal">
 <li class="tsd-signature"><span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span>, blipData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Blip</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Add a blip to the player.</p>
+<div class="tsd-comment tsd-typography"><p>Add a blip to the player.
+Only the player specified can see this blip.</p>
+
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-10">uid</span><span class="hl-1"> = </span><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">controllers</span><span class="hl-1">.</span><span class="hl-0">blip</span><span class="hl-1">.</span><span class="hl-8">addToPlayer</span><span class="hl-1">(</span><span class="hl-0">somePlayer</span><span class="hl-1">, {</span><br/><span class="hl-1">    </span><span class="hl-0">color:</span><span class="hl-1"> </span><span class="hl-9">5</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">pos:</span><span class="hl-1"> { </span><span class="hl-0">x:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">y:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">z:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">},</span><br/><span class="hl-1">    </span><span class="hl-0">scale:</span><span class="hl-1"> </span><span class="hl-9">0.2</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">shortRange:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">text:</span><span class="hl-1"> </span><span class="hl-7">&#39;My Blip!&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">sprite:</span><span class="hl-1"> </span><span class="hl-9">80</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">controllers</span><span class="hl-1">.</span><span class="hl-0">blip</span><span class="hl-1">.</span><span class="hl-8">remove</span><span class="hl-1">(</span><span class="hl-0">uid</span><span class="hl-1">);</span>
+</code></pre>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -108,7 +118,7 @@ Requires a UID to remove it later.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/9e130da/src/core/server/controllers/blip.ts#L87">server/controllers/blip.ts:87</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/07fdc7f/src/core/server/controllers/blip.ts#L160">server/controllers/blip.ts:160</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="override-3">override<span class="tsd-signature-symbol">(</span>functionName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;removeFromPlayer&quot;</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span>, uid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><a href="#override-3" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Used to override any blip controller function.</p>
@@ -126,7 +136,11 @@ Requires a UID to remove it later.</p>
 <ul class="tsd-signatures tsd-kind-type-literal">
 <li class="tsd-signature"><span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span>, uid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Remove a blip from the player.</p>
+<div class="tsd-comment tsd-typography"><p>Remove a blip from the player.
+Do not worry about removing blips on disconnect.</p>
+
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-10">uid</span><span class="hl-1"> = </span><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">controllers</span><span class="hl-1">.</span><span class="hl-0">blip</span><span class="hl-1">.</span><span class="hl-8">addToPlayer</span><span class="hl-1">(</span><span class="hl-0">somePlayer</span><span class="hl-1">, {</span><br/><span class="hl-1">    </span><span class="hl-0">color:</span><span class="hl-1"> </span><span class="hl-9">5</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">pos:</span><span class="hl-1"> { </span><span class="hl-0">x:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">y:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">z:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">},</span><br/><span class="hl-1">    </span><span class="hl-0">scale:</span><span class="hl-1"> </span><span class="hl-9">0.2</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">shortRange:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">text:</span><span class="hl-1"> </span><span class="hl-7">&#39;My Blip!&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">sprite:</span><span class="hl-1"> </span><span class="hl-9">80</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">controllers</span><span class="hl-1">.</span><span class="hl-0">blip</span><span class="hl-1">.</span><span class="hl-8">removeFromPlayer</span><span class="hl-1">(</span><span class="hl-0">somePlayer</span><span class="hl-1">, </span><span class="hl-0">uid</span><span class="hl-1">);</span>
+</code></pre>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -138,7 +152,7 @@ Requires a UID to remove it later.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/9e130da/src/core/server/controllers/blip.ts#L88">server/controllers/blip.ts:88</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/07fdc7f/src/core/server/controllers/blip.ts#L161">server/controllers/blip.ts:161</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="override-4">override<span class="tsd-signature-symbol">(</span>functionName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;populateGlobalBlips&quot;</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><a href="#override-4" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Used to override any blip controller function.</p>
@@ -156,6 +170,13 @@ Requires a UID to remove it later.</p>
 <ul class="tsd-signatures tsd-kind-type-literal">
 <li class="tsd-signature"><span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Used to load all blips on client-side for a player.
+This is already called when the gamemode starts. Not necessary to call twice.</p>
+
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">controllers</span><span class="hl-1">.</span><span class="hl-0">blip</span><span class="hl-1">.</span><span class="hl-8">populateGlobalBlips</span><span class="hl-1">(</span><span class="hl-0">somePlayer</span><span class="hl-1">);</span>
+</code></pre>
+
+<h3>Export</h3></div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -164,7 +185,7 @@ Requires a UID to remove it later.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/9e130da/src/core/server/controllers/blip.ts#L89">server/controllers/blip.ts:89</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/07fdc7f/src/core/server/controllers/blip.ts#L162">server/controllers/blip.ts:162</a></li></ul></aside></li></ul></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tree">
 <div class="tree-settings">
@@ -199,12 +220,13 @@ Requires a UID to remove it later.</p>
 <li><a class="category__link js-category-link category__link--ts" href="../modules/server_controllers_admin.html" data-id="/modules/server_controllers_admin.html">admin.ts</a>
 <ul>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_controllers_admin.banPlayer.html" data-id="/functions/server_controllers_admin.banPlayer.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>banPlayer</a></li>
-<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_controllers_admin.unbanPlayer.html" data-id="/functions/server_controllers_admin.unbanPlayer.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>unbanPlayer</a></li></ul></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_controllers_admin.unbanPlayerByDiscord.html" data-id="/functions/server_controllers_admin.unbanPlayerByDiscord.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>unbanPlayerByDiscord</a></li></ul></li>
 <li><a class="category__link js-category-link category__link--ts" href="../modules/server_controllers_blip.html" data-id="/modules/server_controllers_blip.html">blip.ts</a>
 <ul>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_controllers_blip.addToPlayer.html" data-id="/functions/server_controllers_blip.addToPlayer.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>addToPlayer</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_controllers_blip.append.html" data-id="/functions/server_controllers_blip.append.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>append</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_controllers_blip.override.html" data-id="/functions/server_controllers_blip.override.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>override</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_controllers_blip.populateGlobalBlips.html" data-id="/functions/server_controllers_blip.populateGlobalBlips.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>populateGlobalBlips</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_controllers_blip.remove.html" data-id="/functions/server_controllers_blip.remove.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>remove</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_controllers_blip.removeFromPlayer.html" data-id="/functions/server_controllers_blip.removeFromPlayer.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>removeFromPlayer</a></li></ul></li>
 <li><a class="category__link js-category-link category__link--ts" href="../modules/server_controllers_doors.html" data-id="/modules/server_controllers_doors.html">doors.ts</a>
