@@ -16,6 +16,11 @@ Athena.systems.messenger.commands.register('toggledoor', '/toggledoor', ['admin'
         return;
     }
 
+    if (Athena.utility.vector.distance(player.pos, closestDoor.pos) >= 5) {
+        Athena.player.emit.message(player, 'No door in reach found.');
+        return;
+    }
+
     Athena.controllers.doors.update(closestDoor.uid, !closestDoor.isUnlocked);
-    Athena.player.emit.message(player, `Toggling Door ${closestDoor.uid}. Unlocked: ${!closestDoor.isUnlocked}`);
+    Athena.player.emit.message(player, `Toggling Door ${closestDoor.uid}. Unlocked: ${closestDoor.isUnlocked}`);
 });
