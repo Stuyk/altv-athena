@@ -55,6 +55,7 @@ const InternalFunctions = {
 
     /**
      * When an entity enters the collision shape, the function is called.
+     *
      * @param {InteractionShape} colshape - The colshape that was entered.
      * @param {alt.Entity} entity - The entity that entered the colshape.
      * @returns None
@@ -148,6 +149,10 @@ const InternalFunctions = {
         }
 
         if (!(entity instanceof alt.Player)) {
+            return;
+        }
+
+        if (!entity || !entity.valid) {
             return;
         }
 
@@ -263,9 +268,21 @@ const InternalFunctions = {
  *
  * > Always subtract 1 from the 'z' axis when getting positions in-game.
  *
+ * Returns a uid or generates one if not specified.
+ *
  * @example
  * ```ts
  * const uid = Athena.controllers.interaction.append({
+ *    position: { x: 0, y: 0, z: 0 },
+ *    isPlayerOnly: true,
+ *    isVehicleOnly: false,
+ *    callback(player: alt.Player) {
+ *        alt.log(`${player.id} interacted with an interaction!`)
+ *    }
+ * });
+ *
+ * Athena.controllers.interaction.append({
+ *    uid: 'the-uid-you-specified',
  *    position: { x: 0, y: 0, z: 0 },
  *    isPlayerOnly: true,
  *    isVehicleOnly: false,
@@ -279,6 +296,10 @@ const InternalFunctions = {
  * @returns A string representing the uid of the interaction.
  */
 export function append(interaction: Interaction): string {
+    if (Overrides.append) {
+        return Overrides.append(interaction);
+    }
+
     if (!interaction.uid) {
         interaction.uid = Athena.utility.hash.sha256Random(JSON.stringify(interaction));
     }
@@ -308,38 +329,75 @@ export function append(interaction: Interaction): string {
 }
 
 /**
- * Remove a user from the list of users.
- * @param {string} uid - The unique identifier of the object to remove.
+ * Removes an interaction from existence.
+ *
+ * Removes the associated ColShape as well.
+ *
+ * @example
+ * ```ts
+ * Athena.controllers.interaction.remove(someUid);
+ *
+ * Athena.controllers.interaction.remove('the-uid-you-specified');
+ * ```
+ *
+ * @param {string} uid - The unique identifier of the interaction to remove.
  * @returns None
  */
 export function remove(uid: string): void {
+    if (Overrides.remove) {
+        return Overrides.remove(uid);
+    }
+
     InternalFunctions.remove(uid);
 }
 
 /**
- * Cannot generate summary
+ * Returns interaction information.
+ *
+ * This includes the internal ColShapes as well.
+ *
+ * @example
+ * ```ts
+ * const interaction = Athena.controllers.interaction.get('the-uid-you-specified');
+ * ```
+ *
  * @param {string} uid - The unique identifier of the interaction.
  * @returns The InteractionShape object.
  */
-export function get(uid: string): InteractionShape | null {
+export function get(uid: string): InteractionShape | undefined {
+    if (Overrides.get) {
+        return Overrides.get(uid);
+    }
+
     const index = interactions.findIndex((shape) => shape.interaction && shape.interaction.uid === uid);
     if (index <= -1) {
-        return null;
+        return undefined;
     }
 
     return interactions[index];
 }
 
 /**
- * Used to obtain current interactions
+ * Used to obtain current interactions that are bound to a player id.
  *
  * @export
  * @return {{ [player_id: string]: InteractionShape }}
  */
 export function getBindings(): { [player_id: string]: InteractionShape } {
+    if (Overrides.getBindings) {
+        return Overrides.getBindings();
+    }
+
     return InteractionBindings;
 }
 
+alt.on('playerDisconnect', (player: alt.Player) => {
+    if (!player || !player.valid) {
+        return;
+    }
+
+    delete InteractionBindings[player.id];
+});
 alt.on('entityLeaveColshape', InternalFunctions.leave);
 alt.on('entityEnterColshape', InternalFunctions.enter);
 alt.onClient(SYSTEM_EVENTS.INTERACTION, InternalFunctions.trigger);

@@ -6,7 +6,6 @@ import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance, distance2d } from '../../shared/utility/vector';
 import * as Athena from '../api';
-import { sha256Random } from '../utility/hash';
 
 const JobInstances: { [key: string]: Job } = {};
 const criteriaAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];
@@ -63,7 +62,7 @@ export class Job {
     private id: number;
     private player: alt.Player;
     private objectives: Array<Objective> = [];
-    private vehicles: Array<alt.Vehicle> = [];
+    private vehicles: Array<{ uid: string; vehicle: alt.Vehicle }> = [];
     private startTime: number;
     private completedCallback: (job: Job) => Promise<void>;
     private quitCallback: (job: Job, reason: string) => void;
@@ -123,10 +122,8 @@ export class Job {
         color1?: alt.RGBA,
         color2?: alt.RGBA,
     ): alt.Vehicle {
-        const veh = Athena.vehicle.funcs.sessionVehicle(player, model, pos, rot);
+        const veh = Athena.vehicle.spawn.temporaryOwned(player, { model: model, pos, rot }, false);
         const data = Athena.document.character.get(player);
-
-        veh.uid = sha256Random(JSON.stringify(data));
 
         if (!color1) {
             color1 = new alt.RGBA(255, 255, 255, 255);
@@ -138,7 +135,7 @@ export class Job {
 
         veh.customPrimaryColor = color1;
         veh.customSecondaryColor = color2;
-        this.vehicles.push(veh);
+        this.vehicles.push({ vehicle: veh, uid: Athena.utility.hash.sha256Random(JSON.stringify(data)) });
         return veh;
     }
 
@@ -149,7 +146,7 @@ export class Job {
     removeAllVehicles() {
         for (let i = 0; i < this.vehicles.length; i++) {
             try {
-                this.vehicles[i].destroy();
+                this.vehicles[i].vehicle.destroy();
             } catch (err) {}
         }
     }
@@ -165,6 +162,10 @@ export class Job {
             if (this.vehicles[i].uid !== uid) {
                 continue;
             }
+
+            try {
+                this.vehicles[i].vehicle.destroy();
+            } catch (err) {}
 
             this.vehicles.splice(i, 1);
             return;
@@ -372,19 +373,20 @@ export class Job {
                 return false;
             }
 
-            if (!this.player.vehicle.uid) {
-                return false;
-            }
-
-            let foundVehicle = false;
-            for (let i = 0; i < this.vehicles.length; i++) {
-                if (this.vehicles[i].uid === this.player.vehicle.uid) {
-                    foundVehicle = true;
-                    break;
+            let isInJobVehicle = false;
+            for (let itr of this.vehicles) {
+                if (!itr.vehicle || !itr.vehicle.valid) {
+                    continue;
                 }
+
+                if (itr.vehicle.id !== this.player.vehicle.id) {
+                    continue;
+                }
+
+                isInJobVehicle = true;
             }
 
-            if (!foundVehicle) {
+            if (!isInJobVehicle) {
                 return false;
             }
         }
@@ -393,16 +395,16 @@ export class Job {
         if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.FAIL_ON_JOB_VEHICLE_DESTROY)) {
             let allValid = true;
             for (let i = 0; i < this.vehicles.length; i++) {
-                if (!this.vehicles[i].valid) {
+                if (!this.vehicles[i].vehicle.valid) {
                     continue;
                 }
 
-                if (this.vehicles[i].engineHealth <= 50) {
+                if (this.vehicles[i].vehicle.engineHealth <= 50) {
                     allValid = false;
                     break;
                 }
 
-                if (this.vehicles[i].destroyed) {
+                if (this.vehicles[i].vehicle.destroyed) {
                     allValid = false;
                     break;
                 }
@@ -417,11 +419,11 @@ export class Job {
         if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.JOB_VEHICLE_NEARBY)) {
             let foundValid = false;
             for (let i = 0; i < this.vehicles.length; i++) {
-                if (!this.vehicles[i].valid) {
+                if (!this.vehicles[i].vehicle.valid) {
                     continue;
                 }
 
-                const dist = distance2d(this.vehicles[i].pos, objective.pos);
+                const dist = distance2d(this.vehicles[i].vehicle.pos, objective.pos);
                 if (dist >= 50) {
                     continue;
                 }

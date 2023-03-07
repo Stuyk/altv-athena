@@ -11,7 +11,7 @@ const KEY = 'peds';
 const InternalFunctions = {
     /**
      * Initialize the PedController Streamer Service
-     * @static
+
      * @memberof PedController
      */
     init() {
@@ -24,7 +24,7 @@ const InternalFunctions = {
 
     /**
      * Refresh all global pedestrians.
-     * @static
+
      * @memberof PedController
      */
     refresh() {
@@ -34,11 +34,26 @@ const InternalFunctions = {
 
 /**
  * Create a global static ped for the server.
- * @static
+ *
+ * A static pedestrian does not move, and simply stands there.
+ *
+ *  * Returns a uid or generates one if not specified.
+ *
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.staticPed.append({ model: 'g_f_importexport_01', pos: { x: 0, y: 0, z: 0} })
+ *
+ * Athena.controllers.staticPed.append({ uid: 'the-id-you-specified', model: 'g_f_importexport_01', pos: { x: 0, y: 0, z: 0} })
+ * ```
+ *
  * @param {IPed} pedData
  * @return {string} uid for the ped
  */
 export function append(pedData: IPed): string {
+    if (Overrides.append) {
+        return Overrides.append(pedData);
+    }
+
     if (!pedData.uid) {
         pedData.uid = Athena.utility.hash.sha256Random(JSON.stringify(pedData));
     }
@@ -50,11 +65,22 @@ export function append(pedData: IPed): string {
 
 /**
  * Remove a global pedestrian
- * @static
+ *
+ * @example
+ * ```ts
+ * Athena.controllers.staticPed.remove(someUid)
+ *
+ * Athena.controllers.staticPed.remove('the-id-you-specified');
+ * ```
+ *
  * @param {string} uid
  * @return {boolean}
  */
 export function remove(uid: string): boolean {
+    if (Overrides.remove) {
+        return Overrides.remove(uid);
+    }
+
     const index = globalPeds.findIndex((ped) => ped.uid === uid);
     if (index <= -1) {
         return false;
@@ -68,11 +94,23 @@ export function remove(uid: string): boolean {
 
 /**
  * Remove a pedestrian from a player.
- * @static
+ *
+ * @example
+ * ```ts
+ * Athena.controllers.staticPed.removeFromPlayer(somePlayer, someUid)
+ *
+ * Athena.controllers.staticPed.removeFromPlayer(somePlayer, 'the-id-you-specified');
+ * ```
+ *
+ *
  * @param {alt.Player} player
  * @param {string} uid
  */
 export function removeFromPlayer(player: alt.Player, uid: string) {
+    if (Overrides.removeFromPlayer) {
+        return Overrides.removeFromPlayer(player, uid);
+    }
+
     if (!uid) {
         throw new Error(`Did not specify a uid for ped removal. PedController.removeFromPlayer`);
     }
@@ -82,12 +120,25 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
 
 /**
  * Add a single ped that only a single player can see
- * @static
+ *
+ * Returns a uid or generates one if not specified.
+ *
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.staticPed.addToPlayer(somePlayer, { model: 'g_f_importexport_01', pos: { x: 0, y: 0, z: 0} })
+ *
+ * Athena.controllers.staticPed.addToPlayer(somePlayer, { uid: 'the-id-you-specified', model: 'g_f_importexport_01', pos: { x: 0, y: 0, z: 0} })
+ * ```
+ *
  * @param {alt.Player} player
  * @param {IPed} pedData
  * @return {string}
  */
 export function addToPlayer(player: alt.Player, pedData: IPed): string {
+    if (Overrides.addToPlayer) {
+        return Overrides.addToPlayer(player, pedData);
+    }
+
     if (!pedData.uid) {
         pedData.uid = Athena.utility.hash.sha256Random(JSON.stringify(pedData));
     }
@@ -96,6 +147,25 @@ export function addToPlayer(player: alt.Player, pedData: IPed): string {
     return pedData.uid;
 }
 
+/**
+ * Make a pedestrian play a specific animation.
+ *
+ * @example
+ * ```ts
+ * Athena.controllers.staticPed.playAnimation('the-id-you-specified', playAnimation('test', [
+ *      {
+ *          dict: 'mp_ped_interaction',
+ *          name: 'hugs_guy_a',
+ *          duration: 2000,
+ *          flags: 0,
+ *      },
+ * ]);
+ * ```
+ *
+ * @export
+ * @param {string} uid
+ * @param {Animation[]} animation
+ */
 export function playAnimation(uid: string, animation: Animation[]) {
     alt.emitAllClients(SYSTEM_EVENTS.PLAY_ANIMATION_FOR_PED, uid, animation);
 }
@@ -110,6 +180,7 @@ export function override(functionName: 'append', callback: typeof append);
 export function override(functionName: 'remove', callback: typeof remove);
 export function override(functionName: 'addToPlayer', callback: typeof addToPlayer);
 export function override(functionName: 'removeFromPlayer', callback: typeof removeFromPlayer);
+
 /**
  * Used to override any static ped streamer functionality.
  *

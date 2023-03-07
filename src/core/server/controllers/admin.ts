@@ -19,6 +19,10 @@ import * as Athena from '@AthenaServer/api';
  * @return {Promise<boolean>}
  */
 export async function banPlayer(player: alt.Player, reason: string): Promise<boolean> {
+    if (Overrides.banPlayer) {
+        return Overrides.banPlayer(player, reason);
+    }
+
     const accountData = Athena.document.account.get(player);
     if (typeof accountData === 'undefined') {
         return false;
@@ -46,6 +50,10 @@ export async function banPlayer(player: alt.Player, reason: string): Promise<boo
  * @memberof AdminController
  */
 export async function unbanPlayerByDiscord(discord: string): Promise<boolean> {
+    if (Overrides.unbanPlayerByDiscord) {
+        return Overrides.unbanPlayerByDiscord(discord);
+    }
+
     const account = await Database.fetchData<Account>('discord', discord, Collections.Accounts);
     if (!account) {
         return false;

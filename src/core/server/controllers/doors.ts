@@ -67,6 +67,10 @@ const InternalController = {
  * @return {string}
  */
 export function append(door: Door): string {
+    if (Overrides.append) {
+        return Overrides.append(door);
+    }
+
     if (!door.uid) {
         door.uid = Athena.utility.hash.sha256Random(JSON.stringify(door));
     }
@@ -89,6 +93,10 @@ export function append(door: Door): string {
  * @return {boolean}
  */
 export function remove(uid: string): boolean {
+    if (Overrides.remove) {
+        return Overrides.remove(uid);
+    }
+
     const index = globalDoors.findIndex((label) => label.uid === uid);
     if (index <= -1) {
         return false;
@@ -115,6 +123,10 @@ export function remove(uid: string): boolean {
  * @return {boolean}
  */
 export async function update(uid: string, isUnlocked: boolean): Promise<boolean> {
+    if (Overrides.update) {
+        return Overrides.update(uid, isUnlocked);
+    }
+
     const index = globalDoors.findIndex((label) => label.uid === uid);
     if (index <= -1) {
         return false;
@@ -136,9 +148,7 @@ export async function update(uid: string, isUnlocked: boolean): Promise<boolean>
 
 InternalController.init();
 
-interface DoorControllerFuncs extends ControllerFuncs<typeof append, typeof remove> {
-    update: typeof update;
-}
+type DoorControllerFuncs = ControllerFuncs<typeof append, typeof remove, void, void, typeof update>;
 
 const Overrides: Partial<DoorControllerFuncs> = {};
 

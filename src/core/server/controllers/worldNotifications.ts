@@ -31,6 +31,10 @@ const InternalFunctions = {
  * @memberof WorldNotificationController
  */
 export function append(notification: IWorldNotification): string {
+    if (Overrides.append) {
+        return Overrides.append(notification);
+    }
+
     if (!notification.uid) {
         notification.uid = Athena.utility.hash.sha256Random(JSON.stringify(notification));
     }
@@ -47,6 +51,10 @@ export function append(notification: IWorldNotification): string {
  * @memberof WorldNotificationController
  */
 export function remove(uid: string): boolean {
+    if (Overrides.remove) {
+        return Overrides.remove(uid);
+    }
+
     const index = globalNotifications.findIndex((label) => label.uid === uid);
     if (index <= -1) {
         return false;
@@ -63,6 +71,10 @@ export function remove(uid: string): boolean {
  * @param {string} uid
  */
 export function removeFromPlayer(player: alt.Player, uid: string) {
+    if (Overrides.removeFromPlayer) {
+        return Overrides.removeFromPlayer(player, uid);
+    }
+
     if (!uid) {
         throw new Error(`Did not specify a uid for notifiction removal. WorldNotificationController.removeFromPlayer`);
     }
@@ -77,6 +89,10 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  * @returns {string} uid for notification
  */
 export function addToPlayer(player: alt.Player, notification: IWorldNotification): string {
+    if (Overrides.addToPlayer) {
+        return Overrides.addToPlayer(player, notification);
+    }
+
     if (!notification.uid) {
         notification.uid = Athena.utility.hash.sha256Random(JSON.stringify(notification));
     }
@@ -91,6 +107,10 @@ export function addToPlayer(player: alt.Player, notification: IWorldNotification
  * @param {Array<IWorldNotification>} notifications
  */
 export function update(player: alt.Player, notifications: Array<IWorldNotification>) {
+    if (Overrides.update) {
+        return Overrides.update(player, notifications);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.POPULATE_WORLD_NOTIFICATIONS, notifications);
 }
 
@@ -100,7 +120,8 @@ type WorldNotificationFuncs = ControllerFuncs<
     typeof append,
     typeof remove,
     typeof addToPlayer,
-    typeof removeFromPlayer
+    typeof removeFromPlayer,
+    typeof update
 >;
 
 const Overrides: Partial<WorldNotificationFuncs> = {};
@@ -109,6 +130,7 @@ export function override(functionName: 'append', callback: typeof append);
 export function override(functionName: 'remove', callback: typeof remove);
 export function override(functionName: 'addToPlayer', callback: typeof addToPlayer);
 export function override(functionName: 'removeFromPlayer', callback: typeof removeFromPlayer);
+export function override(functionName: 'update', callback: typeof update);
 /**
  * Used to override any in-world streamer notifications
  *
