@@ -55,6 +55,7 @@ const InternalFunctions = {
 
     /**
      * When an entity enters the collision shape, the function is called.
+     *
      * @param {InteractionShape} colshape - The colshape that was entered.
      * @param {alt.Entity} entity - The entity that entered the colshape.
      * @returns None
@@ -148,6 +149,10 @@ const InternalFunctions = {
         }
 
         if (!(entity instanceof alt.Player)) {
+            return;
+        }
+
+        if (!entity || !entity.valid) {
             return;
         }
 
@@ -308,8 +313,11 @@ export function append(interaction: Interaction): string {
 }
 
 /**
- * Remove a user from the list of users.
- * @param {string} uid - The unique identifier of the object to remove.
+ * Removes an interaction from existence.
+ *
+ * Removes the associated ColShape as well.
+ *
+ * @param {string} uid - The unique identifier of the interaction to remove.
  * @returns None
  */
 export function remove(uid: string): void {
@@ -317,21 +325,24 @@ export function remove(uid: string): void {
 }
 
 /**
- * Cannot generate summary
+ * Returns interaction information.
+ *
+ * This includes the internal ColShapes as well.
+ *
  * @param {string} uid - The unique identifier of the interaction.
  * @returns The InteractionShape object.
  */
-export function get(uid: string): InteractionShape | null {
+export function get(uid: string): InteractionShape | undefined {
     const index = interactions.findIndex((shape) => shape.interaction && shape.interaction.uid === uid);
     if (index <= -1) {
-        return null;
+        return undefined;
     }
 
     return interactions[index];
 }
 
 /**
- * Used to obtain current interactions
+ * Used to obtain current interactions that are bound to a player id.
  *
  * @export
  * @return {{ [player_id: string]: InteractionShape }}
@@ -340,6 +351,13 @@ export function getBindings(): { [player_id: string]: InteractionShape } {
     return InteractionBindings;
 }
 
+alt.on('playerDisconnect', (player: alt.Player) => {
+    if (!player || !player.valid) {
+        return;
+    }
+
+    delete InteractionBindings[player.id];
+});
 alt.on('entityLeaveColshape', InternalFunctions.leave);
 alt.on('entityEnterColshape', InternalFunctions.enter);
 alt.onClient(SYSTEM_EVENTS.INTERACTION, InternalFunctions.trigger);

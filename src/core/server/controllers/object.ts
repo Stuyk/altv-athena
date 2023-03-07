@@ -39,7 +39,20 @@ const InternalController = {
 };
 
 /**
- * Add an object to the global stream.
+ * Add an object to the global world.
+ *
+ * These objects should not be used to construct interiors.
+ *
+ * Create an MLO, or use something like CodeWalker to create large scale map changes.
+ *
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.object.append({
+ *      model: 'prop_pizza_oven_01',
+ *      pos: { x: 0, y: 0, z: 0}
+ * });
+ * ```
+ *
  * @param {IObject} objectData
  * @return {string} uid for object
  */
@@ -54,12 +67,19 @@ export function append(objectData: IObject): string {
 }
 
 /**
-     * Remove an object from the global stream.
-
-     * @param {string} uid
-     * @return {boolean}
-
-     */
+ * Removes an object from the global world.
+ *
+ * If the object was found and removed this will return true.
+ *
+ * @example
+ * ```ts
+ * const result = Athena.controllers.object.remove(someUid);
+ * ```
+ *
+ * @export
+ * @param {string} uid
+ * @return {boolean}
+ */
 export function remove(uid: string): boolean {
     let wasFound = false;
     for (let i = globalObjects.length - 1; i >= 0; i--) {
@@ -82,6 +102,12 @@ export function remove(uid: string): boolean {
 
 /**
  * Remove an object from the player that only they can see.
+ *
+ * @example
+ * ```ts
+ * Athena.controllers.object.removeFromPlayer(somePlayer, someUid);
+ * ```
+ *
  * @param {alt.Player} player
  * @param {string} uid
  * @param {boolean} isInterior Remove all objects that are interior based.
@@ -96,6 +122,15 @@ export function removeFromPlayer(player: alt.Player, uid: string, removeAllInter
 
 /**
  * Add an object to the player that only they can see.
+ *
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.object.addToPlayer(somePlayer, {
+ *      model: 'prop_pizza_oven_01',
+ *      pos: { x: 0, y: 0, z: 0}
+ * });
+ * ```
+ *
  * @param {alt.Player} player
  * @param {IObject} objectData
  * @returns {string} uid for object
@@ -111,7 +146,22 @@ export function addToPlayer(player: alt.Player, objectData: IObject): string {
 
 /**
  * Updates the position for an object.
- * NOT ALL OBJECTS CAN BE MOVED DYNAMICALLY.
+ *
+ * > NOT ALL OBJECTS CAN BE MOVED DYNAMICALLY.
+ *
+ * @example
+ *
+ * ### Non-Player Object
+ *
+ * ```ts
+ * Athena.controllers.object.updatePosition(someUid, { x: 0, y: 0, z: 0});
+ * ```
+ *
+ * ### Player Object
+ *
+ * ```ts
+ * Athena.controllers.object.updatePosition(someUid, { x: 0, y: 0, z: 0}, somePlayer);
+ * ```
  *
  * @param {string} uid
  * @param {alt.IVector3} pos

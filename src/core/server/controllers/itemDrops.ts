@@ -23,6 +23,10 @@ const InternalController = {
 /**
  * Append item drop information to the server.
  *
+ * Do not use this for creating item drops the players can pickup.
+ *
+ * These are mostly visual. Refer to `Athena.systems.inventory.drops` to make actual item drops.
+ *
  * @param {ItemDrop} itemDrop
  * @return {string}
  */
@@ -33,7 +37,7 @@ export function append(itemDrop: ItemDrop): string {
 }
 
 /**
- * Removes an item drop.
+ * Removes an item drop in-world.
  *
  * @param {string} uid
  * @return {boolean}
