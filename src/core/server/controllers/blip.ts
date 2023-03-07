@@ -8,6 +8,9 @@ const globalBlips: Array<Blip> = [];
 /**
  * Adds a global blip the player loads when they join.
  *
+ * See [alt:V Blip Sprites](https://docs.altv.mp/gta/articles/references/blips.html)
+ * See [alt:V Blip Colors](https://docs.altv.mp/gta/articles/references/blips.html#colors)
+ *
  * @example
  * ```ts
  * const uid = Athena.controllers.blip.append({
