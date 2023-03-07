@@ -47,7 +47,21 @@ const InternalController = {
 
 /**
  * Append door information to be controlled.
+ *
  * Returns the door uid to remove all door controls if necessary.
+ *
+ * All doors in the game are already added to the gamemode by default.
+ *
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.doors.append({
+ *   uid: 'my-cool-door-or-whatever',
+ *   description: 'Pacific Standard Bank Main Right Door',
+ *   isUnlocked: true,
+ *   model: 110411286,
+ *   pos: { x: 232.6054, y: 214.1584, z: 106.4049 },
+ * });
+ * ```
  *
  * @param {Door} door
  * @return {string}
@@ -65,6 +79,12 @@ export function append(door: Door): string {
 /**
  * Remove all controls from a door.
  *
+ * @example
+ * ```ts
+ * // uid is a variable here
+ * Athena.controllers.doors.remove(uid);
+ * ```
+ *
  * @param {string} uid
  * @return {boolean}
  */
@@ -81,7 +101,14 @@ export function remove(uid: string): boolean {
 
 /**
  * Update door lock status.
- * Call this function to change door controls.
+ *
+ * Call this function to change door lock status.
+ *
+ * @example
+ * ```ts
+ * // set to true to unlock
+ * Athena.controllers.doors.update('117', true);
+ * ```
  *
  * @param {string} uid
  * @param {boolean} isUnlocked

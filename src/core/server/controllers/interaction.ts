@@ -251,7 +251,29 @@ const InternalFunctions = {
 };
 
 /**
- * Add an interaction to the scene. An interaction is where a player can walk up to an invisible marker and press the interaction key to trigger a callback.
+ * Add an interaction to the scene.
+ *
+ * An interaction is where a player can walk up to an invisible marker and press the interaction key to trigger a callback.
+ *
+ * Interactions are accessible by all players.
+ *
+ * Additional options may be added to the example interaction below.
+ *
+ * See type interface in VSCode for more information.
+ *
+ * > Always subtract 1 from the 'z' axis when getting positions in-game.
+ *
+ * @example
+ * ```ts
+ * const uid = Athena.controllers.interaction.append({
+ *    position: { x: 0, y: 0, z: 0 },
+ *    isPlayerOnly: true,
+ *    isVehicleOnly: false,
+ *    callback(player: alt.Player) {
+ *        alt.log(`${player.id} interacted with an interaction!`)
+ *    }
+ * });
+ * ```
  *
  * @param {Interaction} interaction - The interaction object to be added.
  * @returns A string representing the uid of the interaction.
