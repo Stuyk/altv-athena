@@ -20,8 +20,23 @@
 <ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
 <li class="tsd-signature tsd-anchor-link" id="updatePosition">update<wbr/>Position<span class="tsd-signature-symbol">(</span>uid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, pos<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IVector3</span>, player<span class="tsd-signature-symbol">??: </span><span class="tsd-signature-type">Player</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#updatePosition" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Updates the position for an object.
-NOT ALL OBJECTS CAN BE MOVED DYNAMICALLY.</p>
+<div class="tsd-comment tsd-typography"><p>Updates the position for an object.</p>
+<blockquote>
+<p>NOT ALL OBJECTS CAN BE MOVED DYNAMICALLY.</p>
+</blockquote>
+
+<h3>Example</h3>
+<a href="#non-player-object" id="non-player-object" style="color: inherit; text-decoration: none;">
+  <h3>Non-Player Object</h3>
+</a>
+<pre><code class="language-ts"><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">controllers</span><span class="hl-1">.</span><span class="hl-0">object</span><span class="hl-1">.</span><span class="hl-8">updatePosition</span><span class="hl-1">(</span><span class="hl-0">someUid</span><span class="hl-1">, { </span><span class="hl-0">x:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">y:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">z:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">});</span>
+</code></pre>
+
+<a href="#player-object" id="player-object" style="color: inherit; text-decoration: none;">
+  <h3>Player Object</h3>
+</a>
+<pre><code class="language-ts"><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">controllers</span><span class="hl-1">.</span><span class="hl-0">object</span><span class="hl-1">.</span><span class="hl-8">updatePosition</span><span class="hl-1">(</span><span class="hl-0">someUid</span><span class="hl-1">, { </span><span class="hl-0">x:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">y:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-0">z:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">}, </span><span class="hl-0">somePlayer</span><span class="hl-1">);</span>
+</code></pre>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -34,7 +49,7 @@ NOT ALL OBJECTS CAN BE MOVED DYNAMICALLY.</p>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> player: <span class="tsd-signature-type">Player</span><span class="tsd-signature-symbol"> = undefined</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/f8eadcf/src/core/server/controllers/object.ts#L120">server/controllers/object.ts:120</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/db15b03/src/core/server/controllers/object.ts#L170">server/controllers/object.ts:170</a></li></ul></aside></li></ul></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tree">
 <div class="tree-settings">
