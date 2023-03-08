@@ -166,6 +166,42 @@ async function exampleItems() {
         quantities: [1, 1],
         result: { dbName: 'potato-with-cheese', quantity: 1 },
     });
+
+    Athena.systems.inventory.factory.upsertAsync({
+        dbName: 'burger',
+        data: { health: 5 },
+        icon: 'burger',
+        name: 'Burger',
+        maxStack: 8,
+        weight: 1,
+        behavior: { canDrop: true, canStack: true, canTrade: true, destroyOnDrop: false, isToolbar: true },
+        consumableEventToCall: 'edible',
+    });
+
+    Athena.systems.inventory.effects.add(
+        'edible',
+        async (player: alt.Player, slot: number, type: 'inventory' | 'toolbar') => {
+            const propertyName = String(type);
+            const data = Athena.document.character.get(player);
+            if (typeof data === 'undefined' || typeof data[propertyName] === 'undefined') {
+                return;
+            }
+
+            const item = Athena.systems.inventory.slot.getAt<{ health: number }>(slot, data[propertyName]);
+            if (typeof item === 'undefined') {
+                return;
+            }
+
+            const didRemove = await Athena.player.inventory.sub(player, { dbName: item.dbName, quantity: 1 });
+            if (!didRemove) {
+                Athena.player.emit.notification(player, `Could not eat ${item.dbName}`);
+                return;
+            }
+
+            Athena.player.safe.addHealth(player, item.data.health);
+            Athena.player.emit.notification(player, `You ate 1 ${item.dbName}`);
+        },
+    );
 }
 
 exampleItems();
