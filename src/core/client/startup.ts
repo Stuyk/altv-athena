@@ -80,6 +80,7 @@ import './utility/lerp';
 import './utility/notification';
 import './utility/polygonShape';
 import './utility/sandbox';
+import './utility/screenFade';
 import './utility/screenshot';
 import './utility/shard';
 import './utility/spinner';

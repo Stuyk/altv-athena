@@ -573,6 +573,28 @@ export function acceptDeclineEvent(player: alt.Player, eventInfo: AcceptDeclineE
     player.emit(SYSTEM_EVENTS.ACCEPT_DECLINE_EVENT_SET, eventInfo);
 }
 
+/**
+ * Turns the player's screen black over time.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {number} timeInMs
+ */
+export function fadeScreenToBlack(player: alt.Player, timeInMs: number) {
+    player.emit(SYSTEM_EVENTS.SCREEN_FADE_TO_BLACK, timeInMs);
+}
+
+/**
+ * Removes the black filter over the screen over time.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {number} timeInMs
+ */
+export function fadeScreenFromBlack(player: alt.Player, timeInMs: number) {
+    player.emit(SYSTEM_EVENTS.SCREEN_FADE_TO_BLACK, timeInMs);
+}
+
 interface EmitFunctions {
     acceptDeclineEvent: typeof acceptDeclineEvent;
     animation: typeof animation;
@@ -588,6 +610,8 @@ interface EmitFunctions {
     createShard: typeof createShard;
     createSpinner: typeof createSpinner;
     inputMenu: typeof inputMenu;
+    fadeScreenToBlack: typeof fadeScreenToBlack;
+    fadeScreenFromBlack: typeof fadeScreenFromBlack;
     message: typeof message;
     meta: typeof meta;
     notification: typeof notification;
@@ -620,6 +644,8 @@ export function override(functionName: 'createProgressBar', callback: typeof cre
 export function override(functionName: 'createShard', callback: typeof createShard);
 export function override(functionName: 'createSpinner', callback: typeof createSpinner);
 export function override(functionName: 'inputMenu', callback: typeof inputMenu);
+export function override(functionName: 'fadeScreenFromBlack', callback: typeof fadeScreenFromBlack);
+export function override(functionName: 'fadeScreenToBlack', callback: typeof fadeScreenToBlack);
 export function override(functionName: 'message', callback: typeof message);
 export function override(functionName: 'meta', callback: typeof meta);
 export function override(functionName: 'notification', callback: typeof notification);

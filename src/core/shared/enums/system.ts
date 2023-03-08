@@ -126,6 +126,9 @@ export enum SYSTEM_EVENTS {
     SET_ACTION_MENU = 'actions:Set',
     SET_VIEW_URL = 'actions:SetViewURL',
     //
+    SCREEN_FADE_TO_BLACK = 'screen:fade:to:black',
+    SCREEN_FADE_FROM_BLACK = 'screen:fade:from:black',
+    //
     SCREENSHOT_POPULATE_DATA = 'screenshot:Populate:Data',
     SCREENSHOT_CREATE = 'screenshot:Create',
     //
