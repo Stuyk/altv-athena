@@ -48,6 +48,11 @@ const Internal = {
  * Disable all weapon items from being created / used.
  * Does not remove them if they already exist in the database.
  *
+ * @example
+ * ```ts
+ * Athena.systems.default.weaponItems.disable();
+ * ```
+ *
  * @export
  */
 export function disable() {

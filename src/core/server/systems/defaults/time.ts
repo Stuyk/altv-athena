@@ -54,6 +54,7 @@ const Internal = {
 /**
  * Updates the player time to match the current server time.
  *
+ *
  * @param {alt.Player} player
  */
 export function updatePlayer(player: alt.Player) {
@@ -72,6 +73,11 @@ export function updatePlayer(player: alt.Player) {
 
 /**
  * Disable the default time synchronization on server-side.
+ *
+ * @example
+ * ```ts
+ * Athena.systems.default.time.disable();
+ * ```
  *
  * @export
  */

@@ -48,6 +48,12 @@ const Internal = {
 /**
  * Disable vehicles spawning when a player joins.
  *
+ *
+ * @example
+ * ```ts
+ * Athena.systems.default.vehiclesSpawnOnJoin.disable();
+ * ```
+ *
  * @export
  */
 export function disable() {

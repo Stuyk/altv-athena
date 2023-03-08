@@ -119,11 +119,19 @@ const Internal = {
     },
 };
 
-export const DefaultAmmoSystem = {
-    disable: () => {
-        enabled = false;
-        alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
-    },
-};
+/**
+ * Used to disable the default ammo system that comes with Athena.
+ *
+ * @example
+ * ```ts
+ * Athena.systems.default.ammo.disable();
+ * ```
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
+    alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
+}
 
 Athena.systems.plugins.addCallback(Internal.init);

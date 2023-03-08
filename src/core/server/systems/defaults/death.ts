@@ -111,6 +111,12 @@ const Internal = {
 /**
  * Disable default death system from working.
  *
+ *
+ * @example
+ * ```ts
+ * Athena.systems.default.death.disable();
+ * ```
+ *
  * @export
  */
 export function disable() {
