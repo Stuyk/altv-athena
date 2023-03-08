@@ -20,7 +20,7 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        await Athena.systems.inventory.clothing.setSkin(player, model);
+        await Athena.systems.inventory.clothing.setSkin(target, model);
     },
 );
 
