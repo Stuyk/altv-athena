@@ -173,19 +173,12 @@ export async function select(player: alt.Player, character: Character) {
         // Propagation
         // Athena.controllers.chat.populateCommands(player);
         Athena.controllers.blip.populateGlobalBlips(player);
-
-        // Vehicle Spawning
-        if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START && DEFAULT_CONFIG.SPAWN_VEHICLES_ON_JOIN) {
-            // const vehicles = await Athena.vehicle.funcs.getPlayerVehicles(data._id);
-            // Athena.vehicle.funcs.spawnPlayerVehicles(vehicles);
-        }
-
-        // Finish Selection
         Athena.systems.inventory.weapons.update(player);
         player.frozen = false;
         player.visible = true;
         player.hasFullySpawned = true;
 
+        Athena.player.emit.fadeScreenFromBlack(player, 2000);
         Athena.player.events.trigger('selected-character', player);
     }, 500);
 }

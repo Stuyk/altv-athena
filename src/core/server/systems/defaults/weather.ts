@@ -80,6 +80,11 @@ export function updatePlayer(player: alt.Player) {
 /**
  * Disable the default weather from updating players.
  *
+ * @example
+ * ```ts
+ * Athena.systems.default.weather.disable();
+ * ```
+ *
  * @export
  */
 export function disable() {

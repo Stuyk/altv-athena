@@ -220,6 +220,10 @@ alt.on('playerDisconnect', (player: alt.Player) => {
     }
 
     const id = player.id;
+    if (!cache[id]) {
+        return;
+    }
+
     Athena.player.events.trigger('player-disconnected', player, id, cache[id]);
     unbind(id);
 });

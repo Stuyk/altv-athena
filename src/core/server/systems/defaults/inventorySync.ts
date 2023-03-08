@@ -99,6 +99,18 @@ const Internal = {
     },
 };
 
+/**
+ * Disables inventory synchronization when the inventory or toolbar is changed.
+ *
+ *
+ * @example
+ * ```ts
+ * Athena.systems.default.ammo.disable();
+ * ```
+ *
+ *
+ * @export
+ */
 export function disable() {
     enabled = false;
     alt.log(`~y~Default Inventory Sync Turned Off`);

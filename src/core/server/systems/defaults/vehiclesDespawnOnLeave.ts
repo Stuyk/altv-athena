@@ -61,6 +61,12 @@ const Internal = {
 /**
  * Disable vehicles despawning when a player leaves.
  *
+ *
+ * @example
+ * ```ts
+ * Athena.systems.default.vehiclesDespawnOnLeave.disable();
+ * ```
+ *
  * @export
  */
 export function disable() {

@@ -54,10 +54,11 @@ class InternalFunctions {
         }
 
         const didCreate = await Athena.systems.character.create(player, appearance, info, name);
-        if (!didCreate) {
-            InternalFunctions.show(player, CreatorList[player.id] ? CreatorList[player.id] : 0);
+        if (didCreate) {
             return;
         }
+
+        InternalFunctions.show(player, CreatorList[player.id] ? CreatorList[player.id] : 0);
     }
 
     static show(player: alt.Player, totalCharacters: number) {
