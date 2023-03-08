@@ -1,5 +1,5 @@
-// import * as alt from 'alt-server';
-// import * as Athena from '@AthenaServer/api/athena';
+import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 // import { command } from '@AthenaServer/decorators/commands';
 // import { PedController } from '@AthenaServer/streamers/ped';
 // import { WorldNotificationController } from '@AthenaServer/streamers/worldNotifications';
@@ -13,6 +13,28 @@
 // import { InputMenu, InputOptionType, InputResult } from '@AthenaShared/interfaces/inputMenus';
 // import { IPed } from '@AthenaShared/interfaces/iPed';
 // import { JobTrigger } from '@AthenaShared/interfaces/jobTrigger';
+
+Athena.systems.messenger.commands.register(
+    'timecycle',
+    '/timecycle [name]',
+    ['admin'],
+    async (player: alt.Player, name: string | undefined) => {
+        if (!name) {
+            return;
+        }
+
+        Athena.player.emit.setTimeCycleEffect(player, String(name));
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'cleartimecycle',
+    '/cleartimecycle [name]',
+    ['admin'],
+    async (player: alt.Player) => {
+        Athena.player.emit.clearTimeCycleEffect;
+    },
+);
 
 // class TestCommands {
 //     @command('testerrorscreen', '/testerrorscreen - Shows a temporary error screen', PERMISSIONS.ADMIN)

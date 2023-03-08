@@ -126,6 +126,8 @@ export enum SYSTEM_EVENTS {
     SET_ACTION_MENU = 'actions:Set',
     SET_VIEW_URL = 'actions:SetViewURL',
     //
+    SCREEN_TIMECYCLE_EFFECT_CLEAR = 'screen:timecycle:effect:clear',
+    SCREEN_TIMECYCLE_EFFECT = 'screen:timecycle:effect',
     SCREEN_FADE_TO_BLACK = 'screen:fade:to:black',
     SCREEN_FADE_FROM_BLACK = 'screen:fade:from:black',
     //

@@ -84,6 +84,7 @@ import './utility/screenFade';
 import './utility/screenshot';
 import './utility/shard';
 import './utility/spinner';
+import './utility/timecycleEffects';
 import './utility/missionText';
 
 // Views

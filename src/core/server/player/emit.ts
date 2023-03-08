@@ -16,6 +16,7 @@ import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline';
 import { IWheelOption } from '@AthenaShared/interfaces/wheelMenu';
 import { sha256Random } from '../utility/hash';
 import { AcceptDeclineEvent } from '@AthenaShared/interfaces/acceptDeclineEvent';
+import { RecommendedTimecycleTypes } from '@AthenaShared/enums/timecycleTypes';
 
 /**
  * Play an alarm on this player.
@@ -595,6 +596,32 @@ export function fadeScreenFromBlack(player: alt.Player, timeInMs: number) {
     player.emit(SYSTEM_EVENTS.SCREEN_FADE_TO_BLACK, timeInMs);
 }
 
+export function setTimeCycleEffect(player: alt.Player, name: RecommendedTimecycleTypes);
+export function setTimeCycleEffect(player: alt.Player, name: string);
+/**
+ * Used to apply on-screen effects to a given player.
+ *
+ * Think of like screen wobbling, drunkness, etc.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {string} name
+ * @param {number} amountInMs How long it should last. -1 for infinite.
+ */
+export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs = -1) {
+    player.emit(SYSTEM_EVENTS.SCREEN_TIMECYCLE_EFFECT, name);
+}
+
+/**
+ * Used to clear a screen effect from a player.
+ *
+ * @export
+ * @param {alt.Player} player
+ */
+export function clearTimeCycleEffect(player: alt.Player) {
+    player.emit(SYSTEM_EVENTS.SCREEN_TIMECYCLE_EFFECT_CLEAR);
+}
+
 interface EmitFunctions {
     acceptDeclineEvent: typeof acceptDeclineEvent;
     animation: typeof animation;
@@ -609,6 +636,7 @@ interface EmitFunctions {
     createProgressBar: typeof createProgressBar;
     createShard: typeof createShard;
     createSpinner: typeof createSpinner;
+    clearTimeCycleEffect: typeof clearTimeCycleEffect;
     inputMenu: typeof inputMenu;
     fadeScreenToBlack: typeof fadeScreenToBlack;
     fadeScreenFromBlack: typeof fadeScreenFromBlack;
@@ -620,6 +648,7 @@ interface EmitFunctions {
     particle: typeof particle;
     removeProgressBar: typeof removeProgressBar;
     scenario: typeof scenario;
+    setTimeCycleEffect: typeof setTimeCycleEffect;
     sound2D: typeof sound2D;
     sound3D: typeof sound3D;
     soundFrontend: typeof soundFrontend;
@@ -638,6 +667,7 @@ export function override(functionName: 'acceptDeclineEvent', callback: typeof ac
 export function override(functionName: 'animation', callback: typeof animation);
 export function override(functionName: 'clearAnimation', callback: typeof clearAnimation);
 export function override(functionName: 'clearCredits', callback: typeof clearCredits);
+export function override(functionName: 'clearTimeCycleEffect', callback: typeof clearTimeCycleEffect);
 export function override(functionName: 'createErrorScreen', callback: typeof createErrorScreen);
 export function override(functionName: 'createMissionText', callback: typeof createMissionText);
 export function override(functionName: 'createProgressBar', callback: typeof createProgressBar);
@@ -654,6 +684,7 @@ export function override(functionName: 'objectRemove', callback: typeof objectRe
 export function override(functionName: 'particle', callback: typeof particle);
 export function override(functionName: 'removeProgressBar', callback: typeof removeProgressBar);
 export function override(functionName: 'scenario', callback: typeof scenario);
+export function override(functionName: 'setTimeCycleEffect', callback: typeof setTimeCycleEffect);
 export function override(functionName: 'sound2D', callback: typeof sound2D);
 export function override(functionName: 'sound3D', callback: typeof sound3D);
 export function override(functionName: 'soundFrontend', callback: typeof soundFrontend);
