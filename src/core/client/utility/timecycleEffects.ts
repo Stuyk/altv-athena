@@ -1,4 +1,5 @@
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { RecommendedTimecycleTypes } from '@AthenaShared/enums/timecycleTypes';
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
@@ -10,7 +11,7 @@ let timeout: number;
  * @export
  * @param {string} timeCycleName
  */
-export function setTimeCycleEffect(timeCycleName: string, timeInMs: number) {
+export function setTimeCycleEffect(timeCycleName: RecommendedTimecycleTypes | string, timeInMs: number) {
     native.setTimecycleModifier(timeCycleName);
 
     if (timeInMs <= 0) {

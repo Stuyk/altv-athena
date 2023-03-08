@@ -29,10 +29,10 @@ Athena.systems.messenger.commands.register(
 
 Athena.systems.messenger.commands.register(
     'cleartimecycle',
-    '/cleartimecycle [name]',
+    '/cleartimecycle',
     ['admin'],
     async (player: alt.Player) => {
-        Athena.player.emit.clearTimeCycleEffect;
+        Athena.player.emit.clearTimeCycleEffect(player);
     },
 );
 

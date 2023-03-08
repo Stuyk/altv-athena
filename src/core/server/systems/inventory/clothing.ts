@@ -153,7 +153,7 @@ export function update(player: alt.Player) {
     }
 
     const data = Athena.document.character.get(player);
-    if (typeof data === 'undefined' || typeof data.inventory === 'undefined') {
+    if (typeof data === 'undefined') {
         return;
     }
 
@@ -197,6 +197,10 @@ export function update(player: alt.Player) {
         player.setDlcClothes(0, 8, 15, 0, 0); // undershirt
         player.setDlcClothes(0, 9, 0, 0, 0); // body armour
         player.setDlcClothes(0, 11, 91, 0, 0); // top
+    }
+
+    if (typeof data.inventory === 'undefined') {
+        data.inventory = [];
     }
 
     const inventoryBySlot = data.inventory.sort((a, b) => {
