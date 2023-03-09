@@ -7,7 +7,7 @@ import { JobAnimation } from './animation';
 import { Particle } from './particle';
 import { JobAttachable } from './iAttachable';
 
-enum ObjectiveCriteria {
+export enum ObjectiveCriteria {
     NO_VEHICLE = 1,
     NO_WEAPON = 2,
     NO_DYING = 4,
@@ -18,12 +18,12 @@ enum ObjectiveCriteria {
     VEHICLE_ENGINE_OFF = 128,
 }
 
-enum ObjectiveType {
+export enum ObjectiveType {
     WAYPOINT = 1,
     CAPTURE_POINT = 2,
 }
 
-enum ObjectiveEvents {
+export enum ObjectiveEvents {
     JOB_SYNC = 'job:Sync',
     JOB_VERIFY = 'job:Verify',
     JOB_UPDATE = 'job:Update',

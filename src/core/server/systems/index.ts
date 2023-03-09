@@ -3,6 +3,7 @@ export * as character from '@AthenaServer/systems/character';
 export * as global from '@AthenaServer/systems/global';
 export * as identifier from '@AthenaServer/systems/identifier';
 export * as inventory from '@AthenaServer/systems/inventory';
+export * as job from '@AthenaServer/systems/job/index';
 export * as jwt from '@AthenaServer/systems/jwt';
 export * as messenger from '@AthenaServer/systems/messenger';
 export * as permission from '@AthenaServer/systems/permission';
