@@ -59,3 +59,25 @@ export function isWeightExceeded(dataSets: Array<Array<StoredItem | Item>>, amou
 
     return false;
 }
+
+interface WeightFuncs {
+    getDataWeight: typeof getDataWeight;
+    getTotalWeight: typeof getTotalWeight;
+    isWeightExceeded: typeof isWeightExceeded;
+}
+
+const Overrides: Partial<WeightFuncs> = {};
+
+export function override(functionName: 'getDataWeight', callback: typeof getDataWeight);
+export function override(functionName: 'getTotalWeight', callback: typeof getTotalWeight);
+export function override(functionName: 'isWeightExceeded', callback: typeof isWeightExceeded);
+/**
+ * Used to override inventory item weight functionality
+ *
+ * @export
+ * @param {keyof WeightFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof WeightFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}

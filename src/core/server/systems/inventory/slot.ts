@@ -3,6 +3,14 @@ import { StoredItem } from '@AthenaShared/interfaces/item';
 import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
 import * as config from './config';
 
+/**
+ * Find an open slot that is available within a dataset.
+ *
+ * @export
+ * @param {(InventoryType | number)} slotSize
+ * @param {Array<StoredItem>} data
+ * @return {(number | undefined)}
+ */
 export function findOpen(slotSize: InventoryType | number, data: Array<StoredItem>): number | undefined {
     if (Overrides.findOpen) {
         return Overrides.findOpen(slotSize, data);
