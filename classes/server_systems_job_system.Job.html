@@ -19,7 +19,11 @@
 <section class="tsd-panel tsd-comment">
 <div class="tsd-comment tsd-typography"><p>Create a Job Instance</p>
 <p>A job can be specified as a series of tasks to complete with specific criteria.</p>
+<p>The complexity of a job is limited to your programming knowledge.</p>
 <p>ie. Go to this location, interact with this thing, ensure you have this item, etc.</p>
+
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-3">// Never recycle the same job instance</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-10">someJob</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-8">Job</span><span class="hl-1">();</span><br/><br/><span class="hl-3">// Never recycle objectives between job instances</span><br/><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">systems</span><span class="hl-1">.</span><span class="hl-0">job</span><span class="hl-1">.</span><span class="hl-0">objective</span><span class="hl-1">.</span><span class="hl-8">createAndAdd</span><span class="hl-1">(</span><span class="hl-0">someJob</span><span class="hl-1">, {</span><br/><span class="hl-1">    </span><span class="hl-0">description:</span><span class="hl-1"> </span><span class="hl-7">&#39;Go to a position.&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">pos:</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-0">x:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-0">y:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-0">z:</span><span class="hl-1"> </span><span class="hl-9">0</span><span class="hl-1"> - </span><span class="hl-9">1</span><span class="hl-1">, </span><span class="hl-3">// Always subtract 1 from a player position</span><br/><span class="hl-1">    },</span><br/><span class="hl-1">    </span><span class="hl-0">criteria:</span><span class="hl-1"> </span><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">systems</span><span class="hl-1">.</span><span class="hl-0">job</span><span class="hl-1">.</span><span class="hl-0">objective</span><span class="hl-1">.</span><span class="hl-8">buildCriteria</span><span class="hl-1">({</span><br/><span class="hl-1">        </span><span class="hl-0">NO_VEHICLE:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-0">NO_WEAPON:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1">,</span><br/><span class="hl-1">    }),</span><br/><span class="hl-1">    </span><span class="hl-0">range:</span><span class="hl-1"> </span><span class="hl-9">3</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">type:</span><span class="hl-1"> </span><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">systems</span><span class="hl-1">.</span><span class="hl-0">job</span><span class="hl-1">.</span><span class="hl-0">objective</span><span class="hl-1">.</span><span class="hl-8">getType</span><span class="hl-1">(</span><span class="hl-7">&#39;WAYPOINT&#39;</span><span class="hl-1">),</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-3">// Adding a player to this job instance starts it</span><br/><span class="hl-0">someJob</span><span class="hl-1">.</span><span class="hl-8">addPlayer</span><span class="hl-1">(</span><span class="hl-0">somePlayer</span><span class="hl-1">);</span>
+</code></pre>
 
 <h3>Export</h3></div></section>
 <section class="tsd-panel tsd-hierarchy">
@@ -27,7 +31,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">Job</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L28">server/systems/job/system.ts:28</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L44">server/systems/job/system.ts:44</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -67,15 +71,15 @@
 <ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="constructor.new_Job">new <wbr/>Job<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="server_systems_job_system.Job.html" class="tsd-signature-type" data-tsd-kind="Class">Job</a><a href="#constructor.new_Job" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Creates an instance of a job handler.
-Used to build a Job for usage.
-This instance should be called each time to create new job instances.</p>
+<div class="tsd-comment tsd-typography"><p>Creates an instance of a job handler.</p>
+<p>Used to build a Job for usage.</p>
+<p>This instance should be called each time to create new job instances.</p>
 
 <h3>Memberof</h3><p>Job</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="server_systems_job_system.Job.html" class="tsd-signature-type" data-tsd-kind="Class">Job</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L49">server/systems/job/system.ts:49</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L68">server/systems/job/system.ts:68</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="id" class="tsd-anchor"></a>
@@ -86,7 +90,7 @@ This instance should be called each time to create new job instances.</p>
 <h3>Memberof</h3><p>Job</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L35">server/systems/job/system.ts:35</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L51">server/systems/job/system.ts:51</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="addNextObjective" class="tsd-anchor"></a>
@@ -105,7 +109,7 @@ This instance should be called each time to create new job instances.</p>
 <h5>objectiveData: <span class="tsd-signature-type">Objective</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L298">server/systems/job/system.ts:298</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L323">server/systems/job/system.ts:323</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="addObjective" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>add<wbr/>Objective</span><a href="#addObjective" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -123,14 +127,14 @@ Use the objective interface to generate the objective information.</p>
 <h5>objectiveData: <span class="tsd-signature-type">Objective</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L71">server/systems/job/system.ts:71</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L92">server/systems/job/system.ts:92</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="addPlayer" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>add<wbr/>Player</span><a href="#addPlayer" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="addPlayer.addPlayer-1">add<wbr/>Player<span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#addPlayer.addPlayer-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Add the player to the job this job and start it.
-Ensure that this Job is initialized with new Job first.</p>
+<div class="tsd-comment tsd-typography"><p>Add the player to the job this job and start it.</p>
+<p>Ensure that this Job is initialized with new Job first.</p>
 
 <h3>Memberof</h3><p>Job</p>
 </div>
@@ -141,15 +145,15 @@ Ensure that this Job is initialized with new Job first.</p>
 <h5>player: <span class="tsd-signature-type">Player</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L57">server/systems/job/system.ts:57</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L78">server/systems/job/system.ts:78</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="addVehicle" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>add<wbr/>Vehicle</span><a href="#addVehicle" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="addVehicle.addVehicle-1">add<wbr/>Vehicle<span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span>, model<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, pos<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IVector3</span>, rot<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IVector3</span>, color1<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RGBA</span>, color2<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RGBA</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Vehicle</span><a href="#addVehicle.addVehicle-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Create a unique vehicle for this job.
-Objective eventually removes the job vehicle.
-This unique job vehicle is temporarily assinged to the player.</p>
+<div class="tsd-comment tsd-typography"><p>Create a unique vehicle for this job.</p>
+<p>Objective eventually removes the job vehicle.</p>
+<p>This unique job vehicle is temporarily assinged to the player.</p>
 <p>Returns a vehicle with a &#39;uid&#39;.</p>
 
 <h3>Memberof</h3><p>Job</p>
@@ -171,7 +175,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> color2: <span class="tsd-signature-type">RGBA</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Vehicle</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L85">server/systems/job/system.ts:85</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L108">server/systems/job/system.ts:108</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="getCurrentObjective" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Current<wbr/>Objective</span><a href="#getCurrentObjective" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -184,7 +188,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L278">server/systems/job/system.ts:278</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L303">server/systems/job/system.ts:303</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="getElapsedMilliseconds" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Elapsed<wbr/>Milliseconds</span><a href="#getElapsedMilliseconds" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -197,7 +201,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L288">server/systems/job/system.ts:288</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L313">server/systems/job/system.ts:313</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="getPlayer" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Player</span><a href="#getPlayer" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -210,7 +214,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Player</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L228">server/systems/job/system.ts:228</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L253">server/systems/job/system.ts:253</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="goToNextObjective" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>go<wbr/>To<wbr/>Next<wbr/>Objective</span><a href="#goToNextObjective" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -222,7 +226,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L196">server/systems/job/system.ts:196</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L221">server/systems/job/system.ts:221</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="loadObjectives" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>load<wbr/>Objectives</span><a href="#loadObjectives" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -239,7 +243,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 <h5>objectiveData: <span class="tsd-signature-type">Objective</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L148">server/systems/job/system.ts:148</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L173">server/systems/job/system.ts:173</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="quit" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>quit</span><a href="#quit" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -256,7 +260,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 <h5>reason: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L173">server/systems/job/system.ts:173</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L198">server/systems/job/system.ts:198</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="removeAllVehicles" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>remove<wbr/>All<wbr/>Vehicles</span><a href="#removeAllVehicles" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -268,7 +272,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L114">server/systems/job/system.ts:114</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L138">server/systems/job/system.ts:138</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="removeAttachable" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>remove<wbr/>Attachable</span><a href="#removeAttachable" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -281,7 +285,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L237">server/systems/job/system.ts:237</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L262">server/systems/job/system.ts:262</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="removeVehicle" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>remove<wbr/>Vehicle</span><a href="#removeVehicle" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -299,7 +303,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 <h5>uid: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L128">server/systems/job/system.ts:128</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L153">server/systems/job/system.ts:153</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setCompletedCallback" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Completed<wbr/>Callback</span><a href="#setCompletedCallback" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -322,7 +326,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L310">server/systems/job/system.ts:310</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L335">server/systems/job/system.ts:335</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setQuitCallback" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Quit<wbr/>Callback</span><a href="#setQuitCallback" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -352,7 +356,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L320">server/systems/job/system.ts:320</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L345">server/systems/job/system.ts:345</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="syncObjective" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>sync<wbr/>Objective</span><a href="#syncObjective" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -364,7 +368,7 @@ This unique job vehicle is temporarily assinged to the player.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/fe3265f/src/core/server/systems/job/system.ts#L251">server/systems/job/system.ts:251</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/3f6caff/src/core/server/systems/job/system.ts#L276">server/systems/job/system.ts:276</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tree">
 <div class="tree-settings">
@@ -789,6 +793,11 @@ This unique job vehicle is temporarily assinged to the player.</p>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="../functions/server_systems_job_instance.clear.html" data-id="/functions/server_systems_job_instance.clear.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>clear</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="../functions/server_systems_job_instance.get.html" data-id="/functions/server_systems_job_instance.get.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="../functions/server_systems_job_instance.set.html" data-id="/functions/server_systems_job_instance.set.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>set</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="../modules/server_systems_job_objective.html" data-id="/modules/server_systems_job_objective.html">objective.ts</a>
+<ul>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="../functions/server_systems_job_objective.buildCriteria.html" data-id="/functions/server_systems_job_objective.buildCriteria.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>buildCriteria</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="../functions/server_systems_job_objective.createAndAdd.html" data-id="/functions/server_systems_job_objective.createAndAdd.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>createAndAdd</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="../functions/server_systems_job_objective.getType.html" data-id="/functions/server_systems_job_objective.getType.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>getType</a></li></ul></li>
 <li><a class="category__link js-category-link category__link--ts" href="../modules/server_systems_job_system.html" data-id="/modules/server_systems_job_system.html">system.ts</a>
 <ul>
 <li class="tsd-kind-class tsd-parent-kind-module"><a class="category__link js-category-link" href="server_systems_job_system.Job.html" data-id="/classes/server_systems_job_system.Job.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-class)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-128-path"></rect><path d="M11.898 16.1201C11.098 16.1201 10.466 15.8961 10.002 15.4481C9.53803 15.0001 9.30603 14.3841 9.30603 13.6001V9.64012C9.30603 8.85612 9.53803 8.24012 10.002 7.79212C10.466 7.34412 11.098 7.12012 11.898 7.12012C12.682 7.12012 13.306 7.34812 13.77 7.80412C14.234 8.25212 14.466 8.86412 14.466 9.64012H13.386C13.386 9.14412 13.254 8.76412 12.99 8.50012C12.734 8.22812 12.37 8.09212 11.898 8.09212C11.426 8.09212 11.054 8.22412 10.782 8.48812C10.518 8.75212 10.386 9.13212 10.386 9.62812V13.6001C10.386 14.0961 10.518 14.4801 10.782 14.7521C11.054 15.0161 11.426 15.1481 11.898 15.1481C12.37 15.1481 12.734 15.0161 12.99 14.7521C13.254 14.4801 13.386 14.0961 13.386 13.6001H14.466C14.466 14.3761 14.234 14.9921 13.77 15.4481C13.306 15.8961 12.682 16.1201 11.898 16.1201Z" fill="var(--color-text)" id="icon-128-text"></path></svg>Job</a></li></ul></li>
@@ -797,6 +806,9 @@ This unique job vehicle is temporarily assinged to the player.</p>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="../functions/server_systems_job_triggers.tryAnimation.html" data-id="/functions/server_systems_job_triggers.tryAnimation.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>tryAnimation</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="../functions/server_systems_job_triggers.tryAttach.html" data-id="/functions/server_systems_job_triggers.tryAttach.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>tryAttach</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="../functions/server_systems_job_triggers.tryEventCall.html" data-id="/functions/server_systems_job_triggers.tryEventCall.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>tryEventCall</a></li></ul></li>
+<li><a class="category__link js-category-link category__link--ts" href="../modules/server_systems_job_utility.html" data-id="/modules/server_systems_job_utility.html">utility.ts</a>
+<ul>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="../functions/server_systems_job_utility.cloneObjective.html" data-id="/functions/server_systems_job_utility.cloneObjective.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>cloneObjective</a></li></ul></li>
 <li><a class="category__link js-category-link category__link--ts" href="../modules/server_systems_job_verify.html" data-id="/modules/server_systems_job_verify.html">verify.ts</a>
 <ul>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="../functions/server_systems_job_verify.addCriteriaCheck.html" data-id="/functions/server_systems_job_verify.addCriteriaCheck.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>addCriteriaCheck</a></li>
