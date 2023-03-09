@@ -79,7 +79,9 @@ export async function getBaseItemAsync<CustomData = {}, CustomBehavior = {}>(
 
 /**
  * Updates or inserts a new database item into the database.
+ *
  * If a verison is specified and it does not find a matching version it will add a new item.
+ *
  * If a version is not specified; it will find a non-versioned item to replace.
  *
  * @param {BaseItem} baseItem
@@ -124,6 +126,7 @@ export async function upsertAsync(baseItem: BaseItem) {
 
 /**
  * Converts an item from a player inventory, equipment, or toolbar to a full item set.
+ *
  * Also performs weight calculations.
  *
  * @template CustomData
@@ -149,8 +152,10 @@ export async function fromStoredItemAsync<CustomData = {}, CustomBehavior = {}>(
 
     return combinedItem;
 }
+
 /**
  * Converts a full item, into a storeable version of the item.
+ *
  * Only certain parts of the item will be stored.
  *
  * @template CustomData
@@ -180,6 +185,15 @@ export async function toStoredItemAsync<CustomData = {}>(
     return storedItem;
 }
 
+/**
+ * Converts a base item to a stored item asynchronously.
+ *
+ * @export
+ * @template CustomData
+ * @param {BaseItem<DefaultItemBehavior, CustomData>} baseItem
+ * @param {number} quantity
+ * @return {Promise<StoredItem<CustomData>>}
+ */
 export async function fromBaseToStoredAsync<CustomData = {}>(
     baseItem: BaseItem<DefaultItemBehavior, CustomData>,
     quantity: number,
@@ -206,7 +220,9 @@ export async function fromBaseToStoredAsync<CustomData = {}>(
 
 /**
  * Get a base item based on dbName, and version if supplied.
+ *
  * Does not wait for database of items to load first.
+ *
  * Use when usage is not at server-start.
  *
  * @template CustomData
@@ -243,7 +259,9 @@ export function getBaseItem<CustomData = {}, CustomBehavior = {}>(
 }
 /**
  * Converts an item from a player inventory, or toolbar to a full item set.
+ *
  * Also performs weight calculations.
+ *
  * Use when usage is not at server-start.
  *
  * @template CustomData
@@ -269,7 +287,9 @@ export function fromStoredItem<CustomData = {}, CustomBehavior = DefaultItemBeha
 }
 /**
  * Converts a full item, into a storeable version of the item.
+ *
  * Only certain parts of the item will be stored.
+ *
  * Use when usage is not at server-start.
  *
  * @template CustomData
@@ -294,6 +314,16 @@ export function toStoredItem<CustomData = {}>(item: Item<DefaultItemBehavior, Cu
 
     return storedItem;
 }
+
+/**
+ * Converts a base item into a stored item for reference.
+ *
+ * @export
+ * @template CustomData
+ * @param {BaseItem<DefaultItemBehavior, CustomData>} baseItem
+ * @param {number} quantity
+ * @return {*}
+ */
 export function fromBaseToStored<CustomData = {}>(
     baseItem: BaseItem<DefaultItemBehavior, CustomData>,
     quantity: number,

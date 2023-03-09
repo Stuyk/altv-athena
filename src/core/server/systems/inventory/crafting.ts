@@ -99,6 +99,10 @@ const recipes: Array<CraftRecipe> = [];
  * @param {Recipe} recipe
  */
 export function addRecipe(recipe: CraftRecipe): boolean {
+    if (Overrides.addRecipe) {
+        return Overrides.addRecipe(recipe);
+    }
+
     if (recipe.combo.length !== 2 || recipe.quantities.length !== 2) {
         alt.logWarning(`Aborted Recipe. Recipe ${recipe.uid} needs two items and two quantities given.`);
         return false;
@@ -123,6 +127,10 @@ export function addRecipe(recipe: CraftRecipe): boolean {
  * @return {(Recipe | undefined)}
  */
 export function findRecipe(combo: ItemCombo): CraftRecipe | undefined {
+    if (Overrides.findRecipe) {
+        return Overrides.findRecipe(combo);
+    }
+
     if (combo.length !== 2) {
         return undefined;
     }
@@ -168,6 +176,10 @@ export function combineItems(
     slot2: number,
     type: 'inventory' | 'toolbar' | 'custom',
 ): { dataSet: Array<StoredItem>; sound?: string } | undefined {
+    if (Overrides.combineItems) {
+        return Overrides.combineItems(dataSet, slot1, slot2, type);
+    }
+
     if (slot1 === slot2) {
         return undefined;
     }
@@ -259,4 +271,26 @@ export function combineItems(
     }
 
     return { dataSet: newData, sound: recipe.sound };
+}
+
+interface CraftingFuncs {
+    addRecipe: typeof addRecipe;
+    combineItems: typeof combineItems;
+    findRecipe: typeof findRecipe;
+}
+
+const Overrides: Partial<CraftingFuncs> = {};
+
+export function override(functionName: 'addRecipe', callback: typeof addRecipe);
+export function override(functionName: 'combineItems', callback: typeof combineItems);
+export function override(functionName: 'findRecipe', callback: typeof findRecipe);
+/**
+ * Used to override inventory crafting functionality
+ *
+ * @export
+ * @param {keyof CraftingFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof CraftingFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

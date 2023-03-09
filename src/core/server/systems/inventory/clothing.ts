@@ -300,8 +300,6 @@ export function update(player: alt.Player) {
     }
 }
 
-export function setDefaults(type: 'female', clothes: typeof femaleClothes);
-export function setDefaults(type: 'male', clothes: typeof maleClothes);
 /**
  * Used to change default clothing for either male or female.
  *
@@ -324,13 +322,17 @@ export function setDefaults(type: 'male', clothes: typeof maleClothes);
  * @param {('male' | 'female')} type
  * @param {(typeof maleClothes | typeof femaleClothes)} clothes
  */
-export function setDefaults(type: 'male' | 'female', clothes: typeof maleClothes | typeof femaleClothes) {
-    if (type === 'male') {
-        maleClothes = clothes;
+export function setDefaults(sex: 0 | 1, clothes: typeof maleClothes | typeof femaleClothes) {
+    if (Overrides.setDefaults) {
+        return Overrides.setDefaults(sex, clothes);
     }
 
-    if (type === 'female') {
+    if (sex === 0) {
         femaleClothes = clothes;
+    }
+
+    if (sex === 1) {
+        maleClothes = clothes;
     }
 }
 
