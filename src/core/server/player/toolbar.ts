@@ -100,8 +100,34 @@ export async function remove(player: alt.Player, slot: number): Promise<boolean>
     return true;
 }
 
+/**
+ * Verify that the player has at least 'x' of an item in their toolbar
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {string} baseItem
+ * @return {*}
+ */
+export async function has(player: alt.Player, dbName: string, quantity: number, version = undefined) {
+    if (Overrides.has) {
+        return Overrides.has(player, dbName, quantity, version);
+    }
+
+    const data = document.character.get(player);
+    if (typeof data === 'undefined') {
+        return false;
+    }
+
+    if (typeof data.toolbar === 'undefined') {
+        return false;
+    }
+
+    return Athena.systems.inventory.manager.hasItem(data.toolbar, dbName, quantity, version);
+}
+
 interface ToolbarFunctions {
     add: typeof add;
+    has: typeof has;
     sub: typeof sub;
     remove: typeof remove;
 }
@@ -109,8 +135,9 @@ interface ToolbarFunctions {
 const Overrides: Partial<ToolbarFunctions> = {};
 
 export function override(functionName: 'add', callback: typeof add);
-export function override(functionName: 'sub', callback: typeof sub);
+export function override(functionName: 'has', callback: typeof has);
 export function override(functionName: 'remove', callback: typeof remove);
+export function override(functionName: 'sub', callback: typeof sub);
 /**
  * Used to override any toolbar functions
  *

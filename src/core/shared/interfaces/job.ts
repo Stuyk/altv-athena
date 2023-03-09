@@ -31,6 +31,14 @@ export enum ObjectiveEvents {
 
 export interface Objective {
     /**
+     * A unique identifier that can be assigned to an objective to help identify it easily.
+     *
+     * @type {string}
+     * @memberof Objective
+     */
+    uid?: string;
+
+    /**
      * The criteria necessary to complete this Objective.
      * @type {ObjectiveCriteria}
      * @memberof Objective

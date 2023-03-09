@@ -183,10 +183,11 @@ export function criteria(player: alt.Player, objective: Objective): boolean {
     for (let criteriaCallback of criteriaAddons) {
         const didPass = criteriaCallback(player, objective);
 
-        if (objective.criteria)
+        if (objective.criteria) {
             if (!didPass) {
                 return false;
             }
+        }
     }
 
     return true;
@@ -250,17 +251,41 @@ export function type(player: alt.Player, objective: Objective): boolean {
 
 /**
  * Adds a custom check type to the global job system.
- * Criteria -> Defined as things like can't have weapons, or can't be on-foot, etc.
- * Type -> Defined as things like a capture point, or jump 5 times here... etc.
+ *
+ * * Criteria -> Defined as things like can't have weapons, or can't be on-foot, etc.
+ * * Type -> Defined as things like a capture point, or jump 5 times here... etc.
  *
  * CANNOT BE ASYNC
+ *
+ * @example
+ * ```
+ * Athena.systems.job.verify.addCustomCheck('criteria', (player: alt.Player, objective: Objective) => {
+ *     // Ignore this objective if the uid does not match.
+ *     // Force it to always pass.
+ *     if (objective.uid !== 'medkit-ambulance-check') {
+ *         return true;
+ *     }
+ *
+ *     if (!player || !player.vehicle) {
+ *         return false;
+ *     }
+ *
+ *     // Check if they are in a specific vehicle with a specific model
+ *     if (player.vehicle.model !== alt.hash('ambulance')) {
+ *         return false;
+ *     }
+ *
+ *     // This item does not exist by default in Athena
+ *     return Athena.player.inventory.has(player, 'medkit', 1);
+ * });
+ * ```
  *
  * @export
  * @param {('type' | 'criteria')} type
  * @param {(objective: Objective) => boolean} callback
  * @return {void}
  */
-export function addCriteriaCheck(
+export function addCustomCheck(
     type: 'type' | 'criteria',
     callback: (player: alt.Player, objective: Objective) => boolean,
 ) {
