@@ -14,6 +14,10 @@ const globalKey = 'accountId';
  * @memberof AccountSystemRef
  */
 export async function getAccount(key: string, value: any): Promise<Account | undefined> {
+    if (Overrides.getAccount) {
+        return await Overrides.getAccount(key, value);
+    }
+
     const accountData: Account | null = await Database.fetchData<Account>(key, value, Collections.Accounts);
 
     if (!accountData) {
@@ -40,6 +44,10 @@ export async function getAccount(key: string, value: any): Promise<Account | und
  * @memberof AccountSystemRef
  */
 export async function create(player: alt.Player, dataToAppend: { [key: string]: any }): Promise<Account> {
+    if (Overrides.create) {
+        return await Overrides.create(player, dataToAppend);
+    }
+
     await Athena.systems.global.increase(globalKey, 1, 1000);
     const nextId = await Athena.systems.global.getKey<number>(globalKey);
 

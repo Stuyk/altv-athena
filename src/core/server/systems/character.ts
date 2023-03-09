@@ -17,23 +17,29 @@ const Callbacks: { [key: string]: (player: alt.Player, ...args: any[]) => void }
 /**
  * Allows a custom character creator to be shown.
  *
- * @static
  * @param {(player: alt.Player, ...args: any[]) => void} callback
  * @memberof CharacterSystem
  */
 export function setCreatorCallback(callback: (player: alt.Player, ...args: any[]) => void) {
+    if (Overrides.setCreatorCallback) {
+        return Overrides.setCreatorCallback(callback);
+    }
+
     Callbacks.creator = callback;
 }
 
 /**
- * Invokes the custom creator to be set.
+ * Invokes the custom creator to be opened.
  *
- * @static
  * @param {alt.Player} player
  * @param {...any[]} args
  * @memberof CharacterSystem
  */
 export function invokeCreator(player: alt.Player, ...args: any[]) {
+    if (Overrides.invokeCreator) {
+        return Overrides.invokeCreator(player, ...args);
+    }
+
     if (!Callbacks.creator) {
         alt.logWarning(`No Character Creator Setup in CharacterSystem. Use CharacterSystem.setCreatorCallback`);
         return;
@@ -45,7 +51,6 @@ export function invokeCreator(player: alt.Player, ...args: any[]) {
 /**
  * Create a new character for a specific player.
  *
- * @static
  * @param {alt.Player} player
  * @param {Appearance} appearance
  * @param {CharacterInfo} info
@@ -59,6 +64,10 @@ export async function create(
     info: CharacterInfo,
     name: string,
 ): Promise<boolean> {
+    if (Overrides.create) {
+        return await Overrides.create(player, appearance, info, name);
+    }
+
     const accountData = Athena.document.account.get(player);
     if (!accountData || !accountData._id) {
         return false;
@@ -86,12 +95,17 @@ export async function create(
  *
  * After this step the player is spawned and synchronized.
  *
- * @static
+ * Always call this function last in login flow modifications.
+ *
  * @param {alt.Player} player
  * @param {Character} character
  * @memberof CharacterSystem
  */
 export async function select(player: alt.Player, character: Character) {
+    if (Overrides.select) {
+        return await Overrides.select(player, character);
+    }
+
     if (!player || !player.valid) {
         return;
     }
@@ -186,23 +200,30 @@ export async function select(player: alt.Player, character: Character) {
 /**
  * Check if a character name is taken.
  *
- * @static
  * @param {string} name
  * @return {Promise<boolean>}
  * @memberof CharacterSystem
  */
 export async function isNameTaken(name: string): Promise<boolean> {
+    if (Overrides.isNameTaken) {
+        return await Overrides.isNameTaken(name);
+    }
+
     const result = await Database.fetchData<Character>('name', name, Athena.database.collections.Characters);
     return result ? true : false;
 }
 
 /**
- * Get all characters that belong to an account.
+ * Get all characters that belong to an account by account identifier.
  *
- * @param {string} account_id player.accountData._id.toString()
+ * @param {string} account_id
  * @return {Promise<Array<Character>>}
  */
 export async function getCharacters(account_id: string): Promise<Array<Character>> {
+    if (Overrides.getCharacters) {
+        return await Overrides.getCharacters(account_id);
+    }
+
     const firstLookup = await Database.fetchAllByField<Character>(
         'account_id',
         account_id,
@@ -217,15 +238,15 @@ export async function getCharacters(account_id: string): Promise<Array<Character
 
     if (firstLookup.length >= 1) {
         for (let i = 0; i < firstLookup.length; i++) {
-            firstLookup[i]._id = firstLookup[i]._id.toString();
+            firstLookup[i]._id = String(firstLookup[i]._id);
         }
     }
 
     // This converts all legacy ObjectID `account_id` into strings.
     if (secondLookup.length >= 1) {
         for (let i = 0; i < secondLookup.length; i++) {
-            secondLookup[i]._id = secondLookup[i]._id.toString();
-            secondLookup[i].account_id = secondLookup[i].account_id.toString();
+            secondLookup[i]._id = String(secondLookup[i]._id);
+            secondLookup[i].account_id = String(secondLookup[i].account_id);
             await Database.updatePartialData(
                 secondLookup[i]._id,
                 { account_id: secondLookup[i].account_id },
@@ -235,4 +256,33 @@ export async function getCharacters(account_id: string): Promise<Array<Character
     }
 
     return [...firstLookup, ...secondLookup];
+}
+
+interface CharacterFuncs {
+    create: typeof create;
+    setCreatorCallback: typeof setCreatorCallback;
+    invokeCreator: typeof invokeCreator;
+    select: typeof select;
+    isNameTaken: typeof isNameTaken;
+    getCharacters: typeof getCharacters;
+}
+
+const Overrides: Partial<CharacterFuncs> = {};
+
+export function override(functionName: 'create', callback: typeof create);
+export function override(functionName: 'setCreatorCallback', callback: typeof setCreatorCallback);
+export function override(functionName: 'invokeCreator', callback: typeof invokeCreator);
+export function override(functionName: 'select', callback: typeof select);
+export function override(functionName: 'isNameTaken', callback: typeof isNameTaken);
+export function override(functionName: 'getCharacters', callback: typeof getCharacters);
+
+/**
+ * Used to override character creation / management internally.
+ *
+ * @export
+ * @param {keyof CharacterFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof CharacterFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }
