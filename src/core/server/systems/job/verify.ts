@@ -246,6 +246,12 @@ export function type(player: alt.Player, objective: Objective): boolean {
         }
     }
 
+    if (isFlagEnabled(objective.type, ObjectiveType.PRESS_INTERACT_TO_COMPLETE)) {
+        if (Athena.utility.vector.distance(player.pos, objective.pos) > objective.range) {
+            return false;
+        }
+    }
+
     return false;
 }
 
