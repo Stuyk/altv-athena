@@ -21,6 +21,7 @@ export enum ObjectiveCriteria {
 export enum ObjectiveType {
     WAYPOINT = 1,
     CAPTURE_POINT = 2,
+    PRESS_INTERACT_TO_COMPLETE = 4,
 }
 
 export enum ObjectiveEvents {

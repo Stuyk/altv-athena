@@ -96,78 +96,85 @@ const Internal = {
 
         return keyMappings.find((x) => x.key === key);
     },
+    getKeys(key: number): Array<KeyInfo> | undefined {
+        return keyMappings.filter((x) => x.key === key);
+    },
     keyDown(key: number) {
-        const keyInfo = Internal.getKeyInfo(key);
+        const keys = Internal.getKeys(key);
+        for (let keyInfo of keys) {
+            if (!keyInfo) {
+                continue;
+            }
 
-        if (!keyInfo) {
-            return;
+            if (keyInfo.disabled) {
+                continue;
+            }
+
+            if (typeof keyInfo.spamPreventionInMs === 'number' && keyInfo.spamPreventionInMs > 1) {
+                if (keyCooldown[keyInfo.identifier] && Date.now() < keyCooldown[keyInfo.identifier]) {
+                    continue;
+                }
+
+                keyCooldown[keyInfo.identifier] = Date.now() + keyInfo.spamPreventionInMs;
+            }
+
+            let overrideMenuCheck = false;
+            if (keyInfo.allowInSpecificPage) {
+                overrideMenuCheck = AthenaClient.webview.isPageOpen(keyInfo.allowInSpecificPage);
+            }
+
+            if (!keyInfo.allowInAnyMenu && isAnyMenuOpen() && !overrideMenuCheck) {
+                continue;
+            }
+
+            if (keyInfo.modifier && keyModifier[keyInfo.modifier] && !keyModifier[keyInfo.modifier].pressed) {
+                continue;
+            }
+
+            if (keyInfo.delayedKeyDown && keyInfo.delayedKeyDown.msToTrigger >= 1) {
+                keyDownTime[keyInfo.identifier] = Date.now() + keyInfo.delayedKeyDown.msToTrigger;
+            }
+
+            if (!keyInfo.keyDown) {
+                continue;
+            }
+
+            keyInfo.keyDown();
         }
+    },
+    keyUp(key: number) {
+        const keys = Internal.getKeys(key);
 
-        if (keyInfo.disabled) {
-            return;
-        }
-
-        if (typeof keyInfo.spamPreventionInMs === 'number' && keyInfo.spamPreventionInMs > 1) {
-            if (keyCooldown[keyInfo.identifier] && Date.now() < keyCooldown[keyInfo.identifier]) {
+        for (let keyInfo of keys) {
+            if (!keyInfo) {
                 return;
             }
 
-            keyCooldown[keyInfo.identifier] = Date.now() + keyInfo.spamPreventionInMs;
+            delete keyDownTime[keyInfo.identifier];
+
+            if (keyInfo.disabled) {
+                return;
+            }
+
+            let overrideMenuCheck = false;
+            if (keyInfo.allowInSpecificPage) {
+                overrideMenuCheck = AthenaClient.webview.isPageOpen(keyInfo.allowInSpecificPage);
+            }
+
+            if (!keyInfo.allowInAnyMenu && isAnyMenuOpen() && !overrideMenuCheck) {
+                return;
+            }
+
+            if (keyInfo.modifier && keyModifier[keyInfo.modifier] && !keyModifier[keyInfo.modifier].pressed) {
+                return;
+            }
+
+            if (!keyInfo.keyUp) {
+                return;
+            }
+
+            keyInfo.keyUp();
         }
-
-        let overrideMenuCheck = false;
-        if (keyInfo.allowInSpecificPage) {
-            overrideMenuCheck = AthenaClient.webview.isPageOpen(keyInfo.allowInSpecificPage);
-        }
-
-        if (!keyInfo.allowInAnyMenu && isAnyMenuOpen() && !overrideMenuCheck) {
-            return;
-        }
-
-        if (keyInfo.modifier && keyModifier[keyInfo.modifier] && !keyModifier[keyInfo.modifier].pressed) {
-            return;
-        }
-
-        if (keyInfo.delayedKeyDown && keyInfo.delayedKeyDown.msToTrigger >= 1) {
-            keyDownTime[keyInfo.identifier] = Date.now() + keyInfo.delayedKeyDown.msToTrigger;
-        }
-
-        if (!keyInfo.keyDown) {
-            return;
-        }
-
-        keyInfo.keyDown();
-    },
-    keyUp(key: number) {
-        const keyInfo = Internal.getKeyInfo(key);
-        if (!keyInfo) {
-            return;
-        }
-
-        delete keyDownTime[keyInfo.identifier];
-
-        if (keyInfo.disabled) {
-            return;
-        }
-
-        let overrideMenuCheck = false;
-        if (keyInfo.allowInSpecificPage) {
-            overrideMenuCheck = AthenaClient.webview.isPageOpen(keyInfo.allowInSpecificPage);
-        }
-
-        if (!keyInfo.allowInAnyMenu && isAnyMenuOpen() && !overrideMenuCheck) {
-            return;
-        }
-
-        if (keyInfo.modifier && keyModifier[keyInfo.modifier] && !keyModifier[keyInfo.modifier].pressed) {
-            return;
-        }
-
-        if (!keyInfo.keyUp) {
-            return;
-        }
-
-        keyInfo.keyUp();
     },
     keyHeld() {
         let isModifierDown = false;
