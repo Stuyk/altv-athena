@@ -8,7 +8,3 @@ export * as manager from './manager';
 export * as slot from './slot';
 export * as weight from './weight';
 export * as weapons from './weapons';
-
-import('./slot').then((res) => {
-    console.log(res);
-});
