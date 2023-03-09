@@ -5,7 +5,6 @@ import { LocaleController } from '@AthenaShared/locale/locale';
 import { Account } from '@AthenaServer/interface/iAccount';
 import { Collections } from '@AthenaServer/database/collections';
 import { DiscordUser } from '@AthenaServer/interface/iDiscordUser';
-import { AccountSystem } from '@AthenaServer/systems/account';
 import { DevModeOverride } from '@AthenaServer/systems/dev';
 import * as Athena from '@AthenaServer/api';
 
@@ -102,7 +101,7 @@ export class LoginController {
 
         // Used for DiscordToken skirt.
         if (!account) {
-            const accountData = await AccountSystem.getAccount(player, 'discord', player.discord.id);
+            const accountData = await Athena.systems.account.getAccount('discord', player.discord.id);
 
             if (!accountData) {
                 const data: { discord: string; email?: string } = { discord: player.discord.id };
@@ -111,7 +110,7 @@ export class LoginController {
                     data.email = player.discord.email;
                 }
 
-                account = await AccountSystem.create(player, data);
+                account = await Athena.systems.account.create(player, data);
                 account._id = account._id.toString();
             } else {
                 account = accountData;

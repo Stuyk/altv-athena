@@ -1,3 +1,4 @@
+export * as account from '@AthenaServer/systems/account';
 export * as character from '@AthenaServer/systems/character';
 export * as global from '@AthenaServer/systems/global';
 export * as identifier from '@AthenaServer/systems/identifier';
