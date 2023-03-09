@@ -15,6 +15,16 @@ export function cloneObjective(objectiveData: Objective): Objective {
     return objectiveClone;
 }
 
+/**
+ * Create a Job Instance
+ *
+ * A job can be specified as a series of tasks to complete with specific criteria.
+ *
+ * ie. Go to this location, interact with this thing, ensure you have this item, etc.
+ *
+ * @export
+ * @class Job
+ */
 export class Job {
     /**
      * The ID of the player.

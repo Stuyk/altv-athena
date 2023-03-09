@@ -1,14 +1,15 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { ObjectiveEvents } from '@AthenaShared/interfaces/job';
 
-export function handleJobAction(player: alt.Player, triggerName: string) {
-    alt.emit(triggerName, player);
-}
+let isVerifying: { [key: string]: boolean } = {};
 
-export function handleVerify(player: alt.Player) {
+async function invokeObjectiveCheck(player: alt.Player) {
+    if (!player || !player.valid) {
+        return;
+    }
+
     const instance = Athena.systems.job.instance.get(player);
 
     if (!instance) {
@@ -18,10 +19,22 @@ export function handleVerify(player: alt.Player) {
         return;
     }
 
-    alt.setTimeout(() => {
-        Athena.systems.job.verify.objective(instance);
-    }, 0);
+    if (isVerifying[player.id]) {
+        return;
+    }
+
+    isVerifying[player.id] = true;
+    await Athena.systems.job.verify.objective(instance);
+    isVerifying[player.id] = false;
+    delete isVerifying[player.id];
 }
 
-alt.onClient(ObjectiveEvents.JOB_VERIFY, handleVerify);
-alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
+alt.onClient(ObjectiveEvents.JOB_VERIFY, invokeObjectiveCheck);
+alt.on('playerDisconnect', (player: alt.Player) => {
+    const id = player.id;
+    if (typeof id === 'undefined' || id === null) {
+        return;
+    }
+
+    delete isVerifying[player.id];
+});
