@@ -406,7 +406,7 @@ export function override(functionName: 'fromStoredItem', callback: typeof fromSt
 export function override(functionName: 'toStoredItem', callback: typeof toStoredItem);
 export function override(functionName: 'fromBaseToStored', callback: typeof fromBaseToStored);
 /**
- * Used to override inventory item effects functionality
+ * Used to override inventory item factory functionality
  *
  * @export
  * @param {keyof FactoryFuncs} functionName

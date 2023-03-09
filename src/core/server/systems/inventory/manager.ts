@@ -36,6 +36,10 @@ export type ComplexSwapReturn = { from: Array<StoredItem>; to: Array<StoredItem>
  * @returns {StoredItem}
  */
 export function calculateItemWeight(baseItem: BaseItem, storedItem: StoredItem): StoredItem {
+    if (Overrides.calculateItemWeight) {
+        return Overrides.calculateItemWeight(baseItem, storedItem);
+    }
+
     if (typeof baseItem.weight === 'number' && storedItem.quantity !== 0) {
         const newItem = deepCloneObject<StoredItem>(storedItem);
         newItem.totalWeight = baseItem.weight * newItem.quantity;
@@ -61,6 +65,10 @@ export function modifyItemQuantity(
     amount: number,
     isRemoving: boolean = false,
 ): ItemQuantityChange {
+    if (Overrides.modifyItemQuantity) {
+        return Overrides.modifyItemQuantity(item, amount, isRemoving);
+    }
+
     amount = Math.floor(amount);
 
     // Lookup the base item based on the dbName of the item.
@@ -110,6 +118,10 @@ export function modifyItemQuantity(
  * @return {(Array<StoredItem | Item>)}
  */
 export function removeZeroQuantityItems(items: Array<StoredItem | Item>): Array<StoredItem | Item> {
+    if (Overrides.removeZeroQuantityItems) {
+        return Overrides.removeZeroQuantityItems(items);
+    }
+
     const newItemsArray = deepCloneArray<StoredItem | Item>(items);
 
     for (let i = newItemsArray.length - 1; i >= 0; i--) {
@@ -141,6 +153,10 @@ export function removeZeroQuantityItems(items: Array<StoredItem | Item>): Array<
  * @return {ItemType | undefined}
  */
 export function addQuantity(item: Item | StoredItem, amount: number): ItemQuantityChange | undefined {
+    if (Overrides.addQuantity) {
+        return Overrides.addQuantity(item, amount);
+    }
+
     return modifyItemQuantity(item, amount);
 }
 
@@ -156,6 +172,10 @@ export function addQuantity(item: Item | StoredItem, amount: number): ItemQuanti
  * @return {ItemQuantityChange | undefined}
  */
 export function subQuantity(item: Item | StoredItem, amount: number): ItemQuantityChange | undefined {
+    if (Overrides.subQuantity) {
+        return Overrides.subQuantity(item, amount);
+    }
+
     return modifyItemQuantity(item, amount, true);
 }
 
@@ -173,6 +193,10 @@ export function hasItem(
     quantity: number,
     version: number = undefined,
 ): boolean {
+    if (Overrides.hasItem) {
+        return Overrides.hasItem(dataSet, dbName, quantity, version);
+    }
+
     let count = 0;
     for (let item of dataSet) {
         if (item.dbName !== dbName) {
@@ -193,6 +217,10 @@ export function upsertData<DataType = {}>(
     item: Item<DefaultItemBehavior, DataType> | StoredItem<DataType>,
     data: DataType,
 ) {
+    if (Overrides.upsertData) {
+        return Overrides.upsertData(item, data);
+    }
+
     const newItem = deepCloneObject<Item<DefaultItemBehavior, DataType> | StoredItem<DataType>>(item);
     if (typeof newItem.data !== 'object') {
         newItem.data = {} as DataType;
@@ -204,6 +232,7 @@ export function upsertData<DataType = {}>(
 
 /**
  * Assign data to the data field.
+ *
  * Always returns a new item with the modified contents.
  *
  * @template DataType
@@ -215,8 +244,15 @@ export function setData<DataType = {}>(
     item: Item<DefaultItemBehavior, DataType> | StoredItem<DataType>,
     data: DataType,
 ) {
+    if (Overrides.setData) {
+        return Overrides.setData(item, data);
+    }
+
     const newItem = deepCloneObject<Item<DefaultItemBehavior, DataType> | StoredItem<DataType>>(item);
-    newItem.data = deepCloneObject(item);
+    if (typeof data === 'object') {
+        newItem.data = deepCloneObject(data);
+    }
+
     return newItem;
 }
 
@@ -229,12 +265,27 @@ export function setData<DataType = {}>(
  * @return {*}
  */
 export function clearData(item: Item | StoredItem) {
+    if (Overrides.clearData) {
+        return Overrides.clearData(item);
+    }
+
     const newItem = deepCloneObject<Item | StoredItem>(item);
     newItem.data = {};
     return newItem;
 }
 
+/**
+ * Convert an array of stored items into full items
+ *
+ * @export
+ * @param {Array<StoredItem<{}>>} data
+ * @return {Array<Item<DefaultItemBehavior, {}>>}
+ */
 export function convertFromStored(data: Array<StoredItem<{}>>): Array<Item<DefaultItemBehavior, {}>> {
+    if (Overrides.convertFromStored) {
+        return Overrides.convertFromStored(data);
+    }
+
     const convertedItemList: Array<Item<DefaultItemBehavior, {}>> = [];
 
     for (let i = 0; i < data.length; i++) {
@@ -260,6 +311,10 @@ export function add<CustomData = {}>(
     data: Array<StoredItem>,
     size: InventoryType | number = 256,
 ): Array<StoredItem> | undefined {
+    if (Overrides.add) {
+        return Overrides.add(item, data, size);
+    }
+
     if (item.quantity <= -1) {
         alt.logWarning(`ItemManager: Cannot add negative quantity to an item.`);
         return undefined;
@@ -355,6 +410,10 @@ export function sub<CustomData = {}>(
     item: Omit<StoredItem<CustomData>, 'slot' | 'data'>,
     data: Array<StoredItem>,
 ): Array<StoredItem> | undefined {
+    if (Overrides.sub) {
+        return Overrides.sub(item, data);
+    }
+
     if (item.quantity <= -1) {
         alt.logWarning(`ItemManager: Cannot subtract negative quantity from an item.`);
         return undefined;
@@ -414,6 +473,10 @@ export function splitAt(
     splitCount: number,
     dataSize: InventoryType | number = Athena.systems.inventory.config.get().custom.size,
 ): Array<StoredItem> | undefined {
+    if (Overrides.splitAt) {
+        return Overrides.splitAt(slot, data, splitCount, dataSize);
+    }
+
     if (splitCount <= 0) {
         return undefined;
     }
@@ -472,6 +535,10 @@ export function splitAt(
  * @return {(Array<StoredItem> | undefined)}
  */
 export function combineAt(fromSlot: number, toSlot: number, data: Array<StoredItem>): Array<StoredItem> | undefined {
+    if (Overrides.combineAt) {
+        return Overrides.combineAt(fromSlot, toSlot, data);
+    }
+
     const fromIndex = data.findIndex((x) => x.slot === fromSlot);
     const toIndex = data.findIndex((x) => x.slot === toSlot);
 
@@ -520,6 +587,10 @@ export function combineAt(fromSlot: number, toSlot: number, data: Array<StoredIt
 }
 
 export function combineAtComplex(from: ComplexSwap, to: ComplexSwap): ComplexSwapReturn | undefined {
+    if (Overrides.combineAtComplex) {
+        return Overrides.combineAtComplex(from, to);
+    }
+
     if (typeof from.size === 'string') {
         from.size = Athena.systems.inventory.config.get()[from.size].size;
     }
@@ -590,6 +661,10 @@ export function swap(
     data: Array<StoredItem>,
     dataSize: InventoryType | number = Athena.systems.inventory.config.get().custom.size,
 ): Array<StoredItem> | undefined {
+    if (Overrides.swap) {
+        return Overrides.swap(fromSlot, toSlot, data, dataSize);
+    }
+
     const startIndex = data.findIndex((x) => x.slot === fromSlot);
     const endIndex = data.findIndex((x) => x.slot === toSlot);
 
@@ -629,6 +704,10 @@ export function swap(
  * @return {(ComplexSwapReturn | undefined)}
  */
 export function swapBetween(from: ComplexSwap, to: ComplexSwap): ComplexSwapReturn | undefined {
+    if (Overrides.swapBetween) {
+        return Overrides.swapBetween(from, to);
+    }
+
     if (typeof from.size === 'string') {
         from.size = Athena.systems.inventory.config.get()[from.size].size;
     }
@@ -698,6 +777,10 @@ export function swapBetween(from: ComplexSwap, to: ComplexSwap): ComplexSwapRetu
  * @return {*}
  */
 export async function useItem(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar') {
+    if (Overrides.useItem) {
+        return Overrides.useItem(player, slot, type);
+    }
+
     if (!player || !player.valid) {
         return;
     }
@@ -747,6 +830,10 @@ export async function useItem(player: alt.Player, slot: number, type: 'inventory
  * @return {Promise<boolean>}
  */
 export async function toggleItem(player: alt.Player, slot: number, type: InventoryType): Promise<boolean> {
+    if (Overrides.toggleItem) {
+        return Overrides.toggleItem(player, slot, type);
+    }
+
     const data = Athena.document.character.get(player);
     if (typeof data === 'undefined' || typeof data[type] === 'undefined') {
         return false;
@@ -811,6 +898,10 @@ export async function toggleItem(player: alt.Player, slot: number, type: Invento
  * @return {boolean}
  */
 export function compare(firstItem: StoredItem, secondItem: StoredItem): boolean {
+    if (Overrides.compare) {
+        return Overrides.compare(firstItem, secondItem);
+    }
+
     const firstUndefined = typeof firstItem === 'undefined';
     const secUndefined = typeof secondItem === 'undefined';
 
@@ -831,4 +922,60 @@ export function compare(firstItem: StoredItem, secondItem: StoredItem): boolean 
     }
 
     return firstItem.version === secondItem.version;
+}
+
+interface ManagerFuncs {
+    add: typeof add;
+    addQuantity: typeof addQuantity;
+    calculateItemWeight: typeof calculateItemWeight;
+    clearData: typeof clearData;
+    combineAt: typeof combineAt;
+    combineAtComplex: typeof combineAtComplex;
+    compare: typeof compare;
+    convertFromStored: typeof convertFromStored;
+    hasItem: typeof hasItem;
+    modifyItemQuantity: typeof modifyItemQuantity;
+    removeZeroQuantityItems: typeof removeZeroQuantityItems;
+    setData: typeof setData;
+    splitAt: typeof splitAt;
+    sub: typeof sub;
+    subQuantity: typeof subQuantity;
+    swap: typeof swap;
+    swapBetween: typeof swapBetween;
+    toggleItem: typeof toggleItem;
+    upsertData: typeof upsertData;
+    useItem: typeof useItem;
+}
+
+const Overrides: Partial<ManagerFuncs> = {};
+
+export function override(functionName: 'add', callback: typeof add);
+export function override(functionName: 'addQuantity', callback: typeof addQuantity);
+export function override(functionName: 'calculateItemWeight', callback: typeof calculateItemWeight);
+export function override(functionName: 'clearData', callback: typeof clearData);
+export function override(functionName: 'combineAt', callback: typeof combineAt);
+export function override(functionName: 'combineAtComplex', callback: typeof combineAtComplex);
+export function override(functionName: 'compare', callback: typeof compare);
+export function override(functionName: 'convertFromStored', callback: typeof convertFromStored);
+export function override(functionName: 'hasItem', callback: typeof hasItem);
+export function override(functionName: 'modifyItemQuantity', callback: typeof modifyItemQuantity);
+export function override(functionName: 'removeZeroQuantityItems', callback: typeof removeZeroQuantityItems);
+export function override(functionName: 'setData', callback: typeof setData);
+export function override(functionName: 'splitAt', callback: typeof splitAt);
+export function override(functionName: 'sub', callback: typeof sub);
+export function override(functionName: 'subQuantity', callback: typeof subQuantity);
+export function override(functionName: 'swap', callback: typeof swap);
+export function override(functionName: 'swapBetween', callback: typeof swapBetween);
+export function override(functionName: 'toggleItem', callback: typeof toggleItem);
+export function override(functionName: 'upsertData', callback: typeof upsertData);
+export function override(functionName: 'useItem', callback: typeof useItem);
+/**
+ * Used to override inventory item manager functionality
+ *
+ * @export
+ * @param {keyof ManagerFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof ManagerFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }
