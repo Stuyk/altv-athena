@@ -4,23 +4,39 @@ import * as Athena from '@AthenaServer/api';
 import { Objective, ObjectiveEvents } from '@AthenaShared/interfaces/job';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
-export function cloneObjective(objectiveData: Objective): Objective {
-    const callbackOnStart = objectiveData.callbackOnStart;
-    const callbackOnFinish = objectiveData.callbackOnFinish;
-    const callbackOnCheck = objectiveData.callbackOnCheck;
-    const objectiveClone = deepCloneObject<Objective>(objectiveData);
-    objectiveClone.callbackOnStart = callbackOnStart;
-    objectiveClone.callbackOnFinish = callbackOnFinish;
-    objectiveClone.callbackOnCheck = callbackOnCheck;
-    return objectiveClone;
-}
-
 /**
  * Create a Job Instance
  *
  * A job can be specified as a series of tasks to complete with specific criteria.
  *
+ * The complexity of a job is limited to your programming knowledge.
+ *
  * ie. Go to this location, interact with this thing, ensure you have this item, etc.
+ *
+ * @example
+ * ```ts
+ * // Never recycle the same job instance
+ * const someJob = new Job();
+ *
+ * // Never recycle objectives between job instances
+ * Athena.systems.job.objective.createAndAdd(someJob, {
+ *     description: 'Go to a position.',
+ *     pos: {
+ *         x: 0,
+ *         y: 0,
+ *         z: 0 - 1, // Always subtract 1 from a player position
+ *     },
+ *     criteria: Athena.systems.job.objective.buildCriteria({
+ *         NO_VEHICLE: true,
+ *         NO_WEAPON: true,
+ *     }),
+ *     range: 3,
+ *     type: Athena.systems.job.objective.getType('WAYPOINT'),
+ * });
+ *
+ * // Adding a player to this job instance starts it
+ * someJob.addPlayer(somePlayer);
+ *```
  *
  * @export
  * @class Job
@@ -42,15 +58,20 @@ export class Job {
 
     /**
      * Creates an instance of a job handler.
+     *
      * Used to build a Job for usage.
+     *
      * This instance should be called each time to create new job instances.
+     *
      * @memberof Job
      */
     constructor() {}
 
     /**
      * Add the player to the job this job and start it.
+     *
      * Ensure that this Job is initialized with new Job first.
+     *
      * @param {alt.Player} player
      * @memberof Job
      */
@@ -69,13 +90,15 @@ export class Job {
      * @memberof Job
      */
     addObjective(objectiveData: Objective) {
-        const objectiveClone = cloneObjective(objectiveData);
+        const objectiveClone = Athena.systems.job.utility.cloneObjective(objectiveData);
         this.objectives.push(objectiveClone);
     }
 
     /**
      * Create a unique vehicle for this job.
+     *
      * Objective eventually removes the job vehicle.
+     *
      * This unique job vehicle is temporarily assinged to the player.
      *
      * Returns a vehicle with a 'uid'.
@@ -109,6 +132,7 @@ export class Job {
 
     /**
      * Remove all vehicles from this job.
+     *
      * @memberof Job
      */
     removeAllVehicles() {
@@ -121,6 +145,7 @@ export class Job {
 
     /**
      * Remove a vehicle by unique identifier assigned when adding a vehicle.
+     *
      * @param {string} uid
      * @return {*}
      * @memberof Job
@@ -296,7 +321,7 @@ export class Job {
      * @memberof Job
      */
     addNextObjective(objectiveData: Objective) {
-        const objectiveClone = cloneObjective(objectiveData);
+        const objectiveClone = Athena.systems.job.utility.cloneObjective(objectiveData);
         this.objectives.splice(0, 0, objectiveClone);
         this.syncObjective();
     }
