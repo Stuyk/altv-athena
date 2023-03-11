@@ -5,11 +5,11 @@ import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
 const LastTriggers: { [id: string]: JobTrigger } = {};
 
-class InternalFunctions {
-    static init() {
-        alt.onClient(VIEW_EVENTS_JOB_TRIGGER.ACCEPT, InternalFunctions.accept);
-        alt.onClient(VIEW_EVENTS_JOB_TRIGGER.CANCEL, InternalFunctions.cancel);
-    }
+const Internal = {
+    init() {
+        alt.onClient(VIEW_EVENTS_JOB_TRIGGER.ACCEPT, Internal.accept);
+        alt.onClient(VIEW_EVENTS_JOB_TRIGGER.CANCEL, Internal.cancel);
+    },
 
     /**
      * Invoke a callback or event based on what is specified in the JobTrigger data.
@@ -18,9 +18,8 @@ class InternalFunctions {
      * @param {alt.Player} player
      * @param {number?} amount
      * @return {*}
-     * @memberof InternalFunctions
      */
-    static accept(player: alt.Player, amount?: number) {
+    accept(player: alt.Player, amount?: number) {
         if (!player || !player.valid) {
             return;
         }
@@ -44,7 +43,7 @@ class InternalFunctions {
         }
 
         delete LastTriggers[player.id];
-    }
+    },
 
     /**
      * Invoke a callback or event based on what is specified in the JobTrigger data.
@@ -54,7 +53,7 @@ class InternalFunctions {
      * @return {*}
      * @memberof InternalFunctions
      */
-    static cancel(player: alt.Player) {
+    cancel(player: alt.Player) {
         if (!player || !player.valid) {
             return;
         }
@@ -74,28 +73,44 @@ class InternalFunctions {
         }
 
         delete LastTriggers[player.id];
+    },
+};
+
+/**
+ * Creates a WebView Job Window to show to the player.
+ * Will invoke a callback or an event if accepted or declined.
+ *
+ * @param {alt.Player} player
+ * @param {JobTrigger} data
+ * @return {*}
+ */
+export function create(player: alt.Player, data: JobTrigger) {
+    if (Overrides.create) {
+        return Overrides.create(player, data);
     }
+
+    if (!player || !player.valid) {
+        return;
+    }
+
+    LastTriggers[player.id] = data;
+    alt.emitClient(player, VIEW_EVENTS_JOB_TRIGGER.OPEN, deepCloneObject(data));
 }
 
-export class ServerJobTrigger {
-    /**
-     * Creates a WebView Job Window to show to the player.
-     * Will invoke a callback or an event if accepted or declined.
-     *
-     * @static
-     * @param {alt.Player} player
-     * @param {JobTrigger} data
-     * @return {*}
-     * @memberof ServerJobTrigger
-     */
-    static create(player: alt.Player, data: JobTrigger) {
-        if (!player || !player.valid) {
-            return;
-        }
-
-        LastTriggers[player.id] = data;
-        alt.emitClient(player, VIEW_EVENTS_JOB_TRIGGER.OPEN, deepCloneObject(data));
-    }
+interface JobTriggerFuncs {
+    create: typeof create;
 }
 
-InternalFunctions.init();
+const Overrides: Partial<JobTriggerFuncs> = {};
+
+export function override(functionName: 'create', callback: typeof create);
+/**
+ * Used to override job trigger functions.
+ *
+ * @export
+ * @param {keyof JobTriggerFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof JobTriggerFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}

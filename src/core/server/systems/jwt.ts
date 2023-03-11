@@ -58,6 +58,10 @@ function handleFetchRequest(player: alt.Player, token: string | null) {
  * @return {(Promise<undefined | string>)}
  */
 export async function create(account: Account): Promise<undefined | string> {
+    if (Overrides.create) {
+        return Overrides.create(account);
+    }
+
     if (!account || !account._id) {
         return undefined;
     }
@@ -79,6 +83,10 @@ export async function create(account: Account): Promise<undefined | string> {
  * @return {(Promise<string | undefined>)}
  */
 export async function verify(data: string): Promise<string | undefined> {
+    if (Overrides.verify) {
+        return Overrides.verify(data);
+    }
+
     const secret = await getSecret();
     let verifiedJWT: nJWT.Jwt;
 
@@ -93,6 +101,10 @@ export async function verify(data: string): Promise<string | undefined> {
 }
 
 export async function fetch(player: alt.Player): Promise<string | null> {
+    if (Overrides.fetch) {
+        return Overrides.fetch(player);
+    }
+
     if (!player || !player.valid) {
         return null;
     }
@@ -134,6 +146,28 @@ export async function fetch(player: alt.Player): Promise<string | null> {
     });
 
     return result;
+}
+
+interface JwtFuncs {
+    create: typeof create;
+    verify: typeof verify;
+    fetch: typeof fetch;
+}
+
+const Overrides: Partial<JwtFuncs> = {};
+
+export function override(functionName: 'create', callback: typeof create);
+export function override(functionName: 'verify', callback: typeof verify);
+export function override(functionName: 'fetch', callback: typeof fetch);
+/**
+ * Used to override jwt functions.
+ *
+ * @export
+ * @param {keyof JwtFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof JwtFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }
 
 alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_FETCH, handleFetchRequest);

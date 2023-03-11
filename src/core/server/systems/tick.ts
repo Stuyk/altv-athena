@@ -8,7 +8,18 @@ const timeBetweenPings = 4950;
 
 alt.onClient(SYSTEM_EVENTS.PLAYER_TICK, handlePing);
 
+/**
+ * Used to save the player every once in a while.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @return {Promise<void>}
+ */
 export async function onTick(player: alt.Player): Promise<void> {
+    if (Overrides.onTick) {
+        return Overrides.onTick(player);
+    }
+
     let injections: Partial<Character> = {};
 
     if (!player || !player.valid) {
@@ -34,16 +45,6 @@ export async function onTick(player: alt.Player): Promise<void> {
         injections.armour = player.armour;
     }
 
-    // const saveTickInjections = Injections.get<PlayerSaveTickCallback>(PlayerInjectionNames.PLAYER_SAVE_TICK);
-    // for (const callback of saveTickInjections) {
-    //     try {
-    //         injections = { ...injections, ...callback(player) };
-    //     } catch (err) {
-    //         console.warn(`Got Save Injection Error for Player: ${err}`);
-    //         continue;
-    //     }
-    // }
-
     if (Object.keys(injections).length <= 0) {
         return;
     }
@@ -60,6 +61,10 @@ export async function onTick(player: alt.Player): Promise<void> {
  * @return {*}
  */
 function handlePing(player: alt.Player): void {
+    if (Overrides.handlePing) {
+        return Overrides.handlePing(player);
+    }
+
     if (!player.nextPingTime) {
         player.nextPingTime = Date.now() + timeBetweenPings;
     }
@@ -83,9 +88,26 @@ function handlePing(player: alt.Player): void {
 
     // Only the driver of the vehicle should be responsible for vehicle updates.
     if (player.vehicle && player.vehicle.driver === player) {
-        // if (!player.vehicle.nextSave || Date.now() > player.vehicle.nextSave) {
-        //     player.vehicle.nextSave = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_VEHICLE_SAVES;
-        //     VehicleFuncs.update(player.vehicle);
-        // }
+        Athena.vehicle.controls.update(player.vehicle);
     }
+}
+
+interface TickFuncs {
+    onTick: typeof onTick;
+    handlePing: typeof handlePing;
+}
+
+const Overrides: Partial<TickFuncs> = {};
+
+export function override(functionName: 'onTick', callback: typeof onTick);
+export function override(functionName: 'handlePing', callback: typeof handlePing);
+/**
+ * Used to override player tick functionality
+ *
+ * @export
+ * @param {keyof TickFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof TickFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }
