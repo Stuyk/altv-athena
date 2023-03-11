@@ -813,6 +813,15 @@ export async function useItem(player: alt.Player, slot: number, type: 'inventory
         await toggleItem(player, slot, type);
     }
 
+    if (
+        baseItem.behavior &&
+        baseItem.behavior.isEquippable &&
+        !baseItem.behavior.isWeapon &&
+        !baseItem.behavior.isClothing
+    ) {
+        await toggleItem(player, slot, type);
+    }
+
     if (!baseItem.consumableEventToCall) {
         return;
     }

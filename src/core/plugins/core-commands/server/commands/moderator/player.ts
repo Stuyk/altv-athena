@@ -166,7 +166,7 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        const unbanned = Athena.controllers.admin.unbanPlayer(discordIdentifier);
+        const unbanned = Athena.controllers.admin.unbanPlayerByDiscord(discordIdentifier);
         if (unbanned) {
             const data = Athena.document.character.get(player);
             Athena.player.emit.message(player, `Unbanned ${discordIdentifier} (Discord)`);
@@ -287,3 +287,8 @@ Athena.systems.messenger.commands.register(
         }
     },
 );
+
+Athena.systems.messenger.commands.register('hasitemcheck', '/hasitemcheck', ['admin'], async (player: alt.Player) => {
+    const result = await Athena.player.inventory.has(player, 'burger', 1);
+    console.log(result);
+});
