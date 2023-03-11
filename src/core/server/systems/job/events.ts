@@ -6,6 +6,10 @@ import { ObjectiveEvents } from '@AthenaShared/interfaces/job';
 let isVerifying: { [key: string]: boolean } = {};
 
 async function invokeObjectiveCheck(player: alt.Player) {
+    if (Overrides.invokeObjectiveCheck) {
+        return Overrides.invokeObjectiveCheck(player);
+    }
+
     if (!player || !player.valid) {
         return;
     }
@@ -38,3 +42,21 @@ alt.on('playerDisconnect', (player: alt.Player) => {
 
     delete isVerifying[player.id];
 });
+
+interface JobEventFuncs {
+    invokeObjectiveCheck: typeof invokeObjectiveCheck;
+}
+
+const Overrides: Partial<JobEventFuncs> = {};
+
+export function override(functionName: 'invokeObjectiveCheck', callback: typeof invokeObjectiveCheck);
+/**
+ * Used to override job objective checking functionality
+ *
+ * @export
+ * @param {keyof JobEventFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof JobEventFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}

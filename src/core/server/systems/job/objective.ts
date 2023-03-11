@@ -79,6 +79,10 @@ export interface DefaultCriteriaOptions {
  * @returns {Objective} Returns the objective instance; does not need to be added.
  */
 export function createAndAdd(job: Job, objective: Objective): Objective {
+    if (Overrides.createAndAdd) {
+        return Overrides.createAndAdd(job, objective);
+    }
+
     const newObjective = Athena.systems.job.utility.cloneObjective(objective);
     job.addObjective(newObjective);
     return newObjective;
@@ -92,6 +96,10 @@ export function createAndAdd(job: Job, objective: Objective): Objective {
  * @return {number}
  */
 export function buildCriteria(criteria: DefaultCriteriaOptions): number {
+    if (Overrides.buildCriteria) {
+        return Overrides.buildCriteria(criteria);
+    }
+
     let flags = 0;
 
     Object.keys(criteria).forEach((key) => {
@@ -117,5 +125,31 @@ export function buildCriteria(criteria: DefaultCriteriaOptions): number {
  * @return {number}
  */
 export function getType(type: keyof typeof ObjectiveType): number {
+    if (Overrides.getType) {
+        return Overrides.getType(type);
+    }
+
     return ObjectiveType[String(type)];
+}
+
+interface JobObjectiveFuncs {
+    createAndAdd: typeof createAndAdd;
+    buildCriteria: typeof buildCriteria;
+    getType: typeof getType;
+}
+
+const Overrides: Partial<JobObjectiveFuncs> = {};
+
+export function override(functionName: 'createAndAdd', callback: typeof createAndAdd);
+export function override(functionName: 'buildCriteria', callback: typeof buildCriteria);
+export function override(functionName: 'getType', callback: typeof getType);
+/**
+ * Used to override job objective creation functionality
+ *
+ * @export
+ * @param {keyof JobObjectiveFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof JobObjectiveFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

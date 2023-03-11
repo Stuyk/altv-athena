@@ -9,6 +9,10 @@ import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
  * @return {Objective}
  */
 export function cloneObjective(objectiveData: Objective): Objective {
+    if (Overrides.cloneObjective) {
+        return Overrides.cloneObjective(objectiveData);
+    }
+
     const callbackOnStart = objectiveData.callbackOnStart;
     const callbackOnFinish = objectiveData.callbackOnFinish;
     const callbackOnCheck = objectiveData.callbackOnCheck;
@@ -17,4 +21,22 @@ export function cloneObjective(objectiveData: Objective): Objective {
     objectiveClone.callbackOnFinish = callbackOnFinish;
     objectiveClone.callbackOnCheck = callbackOnCheck;
     return objectiveClone;
+}
+
+interface JobUtilityFuncs {
+    cloneObjective: typeof cloneObjective;
+}
+
+const Overrides: Partial<JobUtilityFuncs> = {};
+
+export function override(functionName: 'cloneObjective', callback: typeof cloneObjective);
+/**
+ * Used to override job objective trigger functionality
+ *
+ * @export
+ * @param {keyof JobUtilityFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof JobUtilityFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

@@ -804,12 +804,12 @@ export async function useItem(player: alt.Player, slot: number, type: 'inventory
         return;
     }
 
-    if (baseItem.behavior && baseItem.behavior.isWeapon) {
+    if (baseItem.behavior && baseItem.behavior.isWeapon && !baseItem.behavior.isEquippable) {
         await toggleItem(player, slot, type);
         Athena.systems.inventory.weapons.update(player);
     }
 
-    if (baseItem.behavior && baseItem.behavior.isClothing) {
+    if (baseItem.behavior && baseItem.behavior.isClothing && !baseItem.behavior.isEquippable) {
         await toggleItem(player, slot, type);
     }
 

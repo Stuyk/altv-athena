@@ -16,6 +16,10 @@ const typeAddons: Array<(player: alt.Player, objective: Objective) => boolean> =
  * @return {Promise<boolean>}
  */
 export async function objective(job: Job): Promise<boolean> {
+    if (Overrides.objective) {
+        return Overrides.objective(job);
+    }
+
     const objective = job.getCurrentObjective();
     if (!objective) {
         return false;
@@ -78,6 +82,10 @@ export async function objective(job: Job): Promise<boolean> {
  * @return {boolean}
  */
 export function criteria(player: alt.Player, objective: Objective): boolean {
+    if (Overrides.criteria) {
+        return Overrides.criteria(player, objective);
+    }
+
     if (isFlagEnabled(objective.criteria, ObjectiveCriteria.NO_VEHICLE)) {
         if (player && player.vehicle) {
             return false;
@@ -202,6 +210,10 @@ export function criteria(player: alt.Player, objective: Objective): boolean {
  * @return {boolean}
  */
 export function type(player: alt.Player, objective: Objective): boolean {
+    if (Overrides.type) {
+        return Overrides.type(player, objective);
+    }
+
     for (let typeAddon of typeAddons) {
         const didPass = typeAddon(player, objective);
         if (!didPass) {
@@ -295,6 +307,10 @@ export function addCustomCheck(
     type: 'type' | 'criteria',
     callback: (player: alt.Player, objective: Objective) => boolean,
 ) {
+    if (Overrides.addCustomCheck) {
+        return Overrides.addCustomCheck(type, callback);
+    }
+
     if (type === 'type') {
         typeAddons.push(callback);
         return;
@@ -304,4 +320,28 @@ export function addCustomCheck(
         criteriaAddons.push(callback);
         return;
     }
+}
+
+interface JobVerifyFuncs {
+    addCustomCheck: typeof addCustomCheck;
+    type: typeof type;
+    criteria: typeof criteria;
+    objective: typeof objective;
+}
+
+const Overrides: Partial<JobVerifyFuncs> = {};
+
+export function override(functionName: 'addCustomCheck', callback: typeof addCustomCheck);
+export function override(functionName: 'type', callback: typeof type);
+export function override(functionName: 'criteria', callback: typeof criteria);
+export function override(functionName: 'objective', callback: typeof objective);
+/**
+ * Used to override job objective verification functionality
+ *
+ * @export
+ * @param {keyof JobVerifyFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof JobVerifyFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

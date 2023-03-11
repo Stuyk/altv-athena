@@ -13,6 +13,10 @@ import { Objective } from '@AthenaShared/interfaces/job';
  * @param {Objective} objective
  */
 export function tryEventCall(player: alt.Player, objective: Objective) {
+    if (Overrides.tryEventCall) {
+        return Overrides.tryEventCall(player, objective);
+    }
+
     if (!objective.eventCall) {
         return;
     }
@@ -35,6 +39,10 @@ export function tryEventCall(player: alt.Player, objective: Objective) {
  * @return {*}
  */
 export function tryAnimation(player: alt.Player, objective: Objective) {
+    if (Overrides.tryAnimation) {
+        return Overrides.tryAnimation(player, objective);
+    }
+
     if (!objective.animation) {
         return;
     }
@@ -72,6 +80,10 @@ export function tryAnimation(player: alt.Player, objective: Objective) {
  * @return {*}
  */
 export function tryAttach(player: alt.Player, objective: Objective) {
+    if (Overrides.tryAttach) {
+        return Overrides.tryAttach(player, objective);
+    }
+
     if (!objective.attachable) {
         return;
     }
@@ -85,4 +97,26 @@ export function tryAttach(player: alt.Player, objective: Objective) {
     };
 
     Athena.player.emit.objectAttach(player, objectToAttach, objective.attachable.duration);
+}
+
+interface JobTriggerFuncs {
+    tryEventCall: typeof tryEventCall;
+    tryAnimation: typeof tryAnimation;
+    tryAttach: typeof tryAttach;
+}
+
+const Overrides: Partial<JobTriggerFuncs> = {};
+
+export function override(functionName: 'tryEventCall', callback: typeof tryEventCall);
+export function override(functionName: 'tryAnimation', callback: typeof tryAnimation);
+export function override(functionName: 'tryAttach', callback: typeof tryAttach);
+/**
+ * Used to override job objective trigger functionality
+ *
+ * @export
+ * @param {keyof JobTriggerFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof JobTriggerFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }
