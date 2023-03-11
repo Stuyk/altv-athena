@@ -187,10 +187,20 @@ async function exampleItems() {
                 return;
             }
 
+            // This is an item reference; do not modify it directly.
             const item = Athena.systems.inventory.slot.getAt<{ health: number }>(slot, data[propertyName]);
             if (typeof item === 'undefined') {
                 return;
             }
+
+            const index = data[propertyName].findIndex((x) => x.slot === slot);
+            if (index <= -1) {
+                // Item was not found with matching slot
+                return;
+            }
+
+            // Instead you can directly apply data changes...
+            Athena.systems.inventory.manager.setData<{ health: number }>(item, { health: item.data.health + 5 });
 
             const didRemove = await Athena.player.inventory.sub(player, { dbName: item.dbName, quantity: 1 });
             if (!didRemove) {
