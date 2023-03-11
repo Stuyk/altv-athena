@@ -879,11 +879,17 @@ export async function toggleItem(player: alt.Player, slot: number, type: Invento
             }
 
             dataCopy[i].isEquipped = false;
+            Athena.player.events.trigger('player-weapon-unequipped', player, dataCopy[i].slot, type);
         }
     }
 
     dataCopy[index].isEquipped = !dataCopy[index].isEquipped ? true : false;
     await Athena.document.character.set(player, type, dataCopy);
+
+    const baseItem = Athena.systems.inventory.factory.getBaseItem(dataCopy[index].dbName, dataCopy[index].version);
+    if (baseItem && baseItem.behavior && baseItem.behavior.isWeapon && dataCopy[index].isEquipped === false) {
+        Athena.player.events.trigger('player-weapon-unequipped', player, dataCopy[index].slot, type);
+    }
 
     const eventToTrigger = dataCopy[index].isEquipped ? 'item-equipped' : 'item-unequipped';
     Athena.player.events.trigger(eventToTrigger, player, dataCopy[index].slot, type);

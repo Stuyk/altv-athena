@@ -20,6 +20,7 @@ export type AthenaPlayerEvents =
     | 'player-skin-set'
     | 'player-uniform-cleared'
     | 'player-uniform-set'
+    | 'player-weapon-unequipped'
     | 'respawned'
     | 'selected-character'
     | 'set-account-data'
@@ -239,6 +240,19 @@ export function on(
 export function on<T>(
     eventName: 'player-disconnected',
     callback: (player: alt.Player, id: number, document: Character | T) => void,
+);
+
+/**
+ * Triggers when a player unequips a weapon.
+ *
+ * @export
+ * @template T
+ * @param {'player-weapon-unequipped'} eventName
+ * @param {(player: alt.Player, slot: number, type: InventoryType) => void} callback
+ */
+export function on<T>(
+    eventName: 'player-weapon-unequipped',
+    callback: (player: alt.Player, slot: number, type: InventoryType) => void,
 );
 
 /**
