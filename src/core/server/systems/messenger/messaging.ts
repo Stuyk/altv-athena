@@ -34,6 +34,10 @@ const callbacks: Array<MessageCallback> = [];
  * @return {string}
  */
 function cleanMessage(msg: string): string {
+    if (Overrides.cleanMessage) {
+        return Overrides.cleanMessage(msg);
+    }
+
     return msg
         .replace(tagOrComment, '')
         .replace('/</g', '&lt;')
@@ -48,6 +52,10 @@ function cleanMessage(msg: string): string {
  * @param {string} msg
  */
 export function send(player: alt.Player, msg: string) {
+    if (Overrides.send) {
+        return Overrides.send(player, msg);
+    }
+
     player.emit(MESSENGER_EVENTS.TO_CLIENT.MESSAGE, msg);
 }
 
@@ -58,6 +66,10 @@ export function send(player: alt.Player, msg: string) {
  * @param {string} msg
  */
 export function sendToPlayers(players: Array<alt.Player>, msg: string) {
+    if (Overrides.sendToPlayers) {
+        return Overrides.sendToPlayers(players, msg);
+    }
+
     alt.emitClient(players, MESSENGER_EVENTS.TO_CLIENT.MESSAGE, msg);
 }
 
@@ -69,6 +81,10 @@ export function sendToPlayers(players: Array<alt.Player>, msg: string) {
  * @param {MessageCallback} callback
  */
 export function addCallback(callback: MessageCallback) {
+    if (Overrides.addCallback) {
+        return Overrides.addCallback(callback);
+    }
+
     callbacks.push(callback);
 }
 
@@ -78,6 +94,10 @@ export function addCallback(callback: MessageCallback) {
  * @param {string} msg
  */
 export function emit(player: alt.Player, msg: string) {
+    if (Overrides.emit) {
+        return Overrides.emit(player, msg);
+    }
+
     if (msg.charAt(0) === '/') {
         msg = msg.trim().slice(1);
         if (msg.length < 0) {
