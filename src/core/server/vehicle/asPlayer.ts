@@ -29,6 +29,10 @@ function sharedOwnershipChecks(player: alt.Player, vehicle: alt.Vehicle) {
  * @param {alt.Vehicle} vehicle
  */
 export function toggleLock(player: alt.Player, vehicle: alt.Vehicle) {
+    if (Overrides.toggleLock) {
+        return Overrides.toggleLock(player, vehicle);
+    }
+
     if (!vehicle) {
         vehicle = player.vehicle;
     }
@@ -53,6 +57,10 @@ export function toggleLock(player: alt.Player, vehicle: alt.Vehicle) {
  * @return {*}
  */
 export function toggleEngine(player: alt.Player, vehicle: alt.Vehicle) {
+    if (Overrides.toggleEngine) {
+        return Overrides.toggleEngine(player, vehicle);
+    }
+
     if (!vehicle) {
         vehicle = player.vehicle;
     }
@@ -74,6 +82,10 @@ export function toggleEngine(player: alt.Player, vehicle: alt.Vehicle) {
  * @param {number} door
  */
 export function toggleDoor(player: alt.Player, vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 | 5) {
+    if (Overrides.toggleDoor) {
+        return Overrides.toggleDoor(player, vehicle, door);
+    }
+
     if (!vehicle) {
         vehicle = player.vehicle;
     }
@@ -98,3 +110,25 @@ export function toggleDoor(player: alt.Player, vehicle: alt.Vehicle, door: 0 | 1
 alt.onClient(VEHICLE_EVENTS.SET_LOCK, toggleLock);
 alt.onClient(VEHICLE_EVENTS.SET_ENGINE, toggleEngine);
 alt.onClient(VEHICLE_EVENTS.SET_DOOR, toggleDoor);
+
+interface VehicleAsPlayerFuncs {
+    toggleLock: typeof toggleLock;
+    toggleDoor: typeof toggleDoor;
+    toggleEngine: typeof toggleEngine;
+}
+
+const Overrides: Partial<VehicleAsPlayerFuncs> = {};
+
+export function override(functionName: 'toggleLock', callback: typeof toggleLock);
+export function override(functionName: 'toggleDoor', callback: typeof toggleDoor);
+export function override(functionName: 'toggleEngine', callback: typeof toggleEngine);
+/**
+ * Used to override vehicle control as a player functionality
+ *
+ * @export
+ * @param {keyof VehicleAsPlayerFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof VehicleAsPlayerFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}

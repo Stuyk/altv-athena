@@ -41,6 +41,10 @@ export async function toPlayer(
     pos: alt.IVector3,
     options: AddOptions = undefined,
 ): Promise<boolean> {
+    if (Overrides.toPlayer) {
+        return Overrides.toPlayer(player, model, pos, options);
+    }
+
     const playerData = Athena.document.character.get(player);
     if (typeof playerData === 'undefined') {
         return false;
@@ -87,4 +91,22 @@ export async function toPlayer(
         console.log(err);
         return false;
     }
+}
+
+interface VehicleAddFuncs {
+    toPlayer: typeof toPlayer;
+}
+
+const Overrides: Partial<VehicleAddFuncs> = {};
+
+export function override(functionName: 'toPlayer', callback: typeof toPlayer);
+/**
+ * Used to override add owned vehicle functionality
+ *
+ * @export
+ * @param {keyof VehicleAddFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof VehicleAddFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

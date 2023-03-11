@@ -25,6 +25,10 @@ export function isOwner(
         preventWhileAttached?: boolean;
     } = {},
 ): boolean {
+    if (Overrides.isOwner) {
+        return Overrides.isOwner(player, vehicle, options);
+    }
+
     if (options.preventWhileAttached && vehicle.attached) {
         return false;
     }
@@ -67,6 +71,10 @@ export function isOwner(
  * @return {boolean}
  */
 export function hasPermission(player: alt.Player, vehicle: alt.Vehicle): boolean {
+    if (Overrides.hasPermission) {
+        return Overrides.hasPermission(player, vehicle);
+    }
+
     if (Athena.vehicle.tempVehicles.has(vehicle)) {
         return false;
     }
@@ -88,6 +96,10 @@ export function hasPermission(player: alt.Player, vehicle: alt.Vehicle): boolean
  * @return {boolean}
  */
 export function hasKeys(player: alt.Player, vehicle: alt.Vehicle): boolean {
+    if (Overrides.hasKeys) {
+        return Overrides.hasKeys(player, vehicle);
+    }
+
     if (Athena.vehicle.tempVehicles.has(vehicle)) {
         return false;
     }
@@ -113,6 +125,10 @@ export function hasKeys(player: alt.Player, vehicle: alt.Vehicle): boolean {
  * @return {(string | undefined)}
  */
 export function get(vehicle: alt.Vehicle): string | undefined {
+    if (Overrides.get) {
+        return Overrides.get(vehicle);
+    }
+
     const data = Athena.document.vehicle.get(vehicle);
     if (typeof data === 'undefined') {
         return undefined;
@@ -129,6 +145,10 @@ export function get(vehicle: alt.Vehicle): string | undefined {
  * @return {(alt.Player | undefined)}
  */
 export function getAsPlayer(vehicle: alt.Vehicle): alt.Player | undefined {
+    if (Overrides.getAsPlayer) {
+        return Overrides.getAsPlayer(vehicle);
+    }
+
     const data = Athena.document.vehicle.get(vehicle);
     if (typeof data === 'undefined') {
         return undefined;
@@ -164,6 +184,14 @@ export async function addCharacter(vehicle: alt.Vehicle, id: string): Promise<bo
  * @returns {Promise<boolean>}
  */
 export async function addCharacter(vehicle: alt.Vehicle, playerOrId: alt.Player | string): Promise<boolean> {
+    if (Overrides.addCharacter) {
+        if (playerOrId instanceof alt.Player) {
+            return await Overrides.addCharacter(vehicle, playerOrId);
+        }
+
+        return await Overrides.addCharacter(vehicle, playerOrId);
+    }
+
     const data = Athena.document.vehicle.get(vehicle);
     if (typeof data === 'undefined') {
         return false;
@@ -208,6 +236,10 @@ export async function addCharacter(vehicle: alt.Vehicle, playerOrId: alt.Player 
  * @returns {Promise<boolean>}
  */
 export async function removeCharacter(vehicle: alt.Vehicle, _id: string): Promise<boolean> {
+    if (Overrides.removeCharacter) {
+        return Overrides.removeCharacter(vehicle, _id);
+    }
+
     const data = Athena.document.vehicle.get(vehicle);
     if (typeof data === 'undefined') {
         return false;
@@ -228,4 +260,69 @@ export async function removeCharacter(vehicle: alt.Vehicle, _id: string): Promis
         { keys: data.keys },
         Athena.database.collections.Vehicles,
     );
+}
+
+/**
+ * Transfer ownership of a vehicle.
+ *
+ * Assign a vehicle to a specific character id.
+ *
+ * Automatically wipes keys on transfer.
+ *
+ * Returns true if successfully transferred.
+ *
+ * @export
+ * @param {alt.Vehicle} vehicle
+ * @param {string} _id
+ * @return {*}
+ */
+export async function transfer(vehicle: alt.Vehicle, _id: string): Promise<boolean> {
+    if (Overrides.transfer) {
+        return Overrides.transfer(vehicle, _id);
+    }
+
+    const data = Athena.document.vehicle.get(vehicle);
+    if (typeof data === 'undefined') {
+        return false;
+    }
+
+    data.owner = _id;
+    data.keys = [];
+    return await Database.updatePartialData(
+        data._id.toString(),
+        { owner: data.owner, keys: data.keys },
+        Athena.database.collections.Vehicles,
+    );
+}
+
+interface VehicleOwnershipFuncs {
+    isOwner: typeof isOwner;
+    hasPermission: typeof hasPermission;
+    hasKeys: typeof hasKeys;
+    get: typeof get;
+    getAsPlayer: typeof getAsPlayer;
+    addCharacter: typeof addCharacter;
+    removeCharacter: typeof removeCharacter;
+    transfer: typeof transfer;
+}
+
+const Overrides: Partial<VehicleOwnershipFuncs> = {};
+
+export function override(functionName: 'isOwner', callback: typeof isOwner);
+export function override(functionName: 'hasPermission', callback: typeof hasPermission);
+export function override(functionName: 'hasKeys', callback: typeof hasKeys);
+export function override(functionName: 'get', callback: typeof get);
+export function override(functionName: 'getAsPlayer', callback: typeof getAsPlayer);
+export function override(functionName: 'addCharacter', callback: typeof addCharacter);
+export function override(functionName: 'removeCharacter', callback: typeof removeCharacter);
+export function override(functionName: 'transfer', callback: typeof transfer);
+/**
+ * Used to override vehicle ownership functionality
+ *
+ * @export
+ * @param {keyof VehicleOwnershipFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof VehicleOwnershipFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }
