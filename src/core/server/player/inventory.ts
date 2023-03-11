@@ -10,6 +10,11 @@ import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
  * Automatically checks weight upon new item additions. Exceeding the weight; cancels the add.
  * Does not look into toolbar.
  *
+ * @example
+ * ```ts
+ * const didAdd = await Athena.player.inventory.add(somePlayer, { dbName: 'burger', quantity: 1, data: {} })
+ * ```
+ *
  * @param {alt.Player} player
  * @param {Omit<StoredItem, 'slot'>} item
  * @return {Promise<boolean>}
@@ -51,6 +56,11 @@ export async function add(player: alt.Player, item: Omit<StoredItem, 'slot'>): P
  * Subtract a quantity of an item from a player's inventory.
  * Does not look into toolbar.
  *
+ * @example
+ * ```ts
+ * const didRemove = await Athena.player.inventory.sub(somePlayer, { dbName: 'burger', quantity: 1 });
+ * ```
+ *
  * @param {alt.Player} player
  * @param {Omit<StoredItem, 'slot'>} item
  * @return {Promise<boolean>}
@@ -80,7 +90,13 @@ export async function sub(player: alt.Player, item: Omit<StoredItem, 'slot' | 'd
 
 /**
  * Delete an item in a specific slot in an inventory data set.
+ *
  * Does not look into toolbar.
+ *
+ * @example
+ * ```ts
+ * const didRemove = await Athena.player.inventory.remove(somePlayer, someSlot);
+ * ```
  *
  * @param {alt.Player} player
  * @param {number} slot
@@ -112,6 +128,11 @@ export async function remove(player: alt.Player, slot: number): Promise<boolean>
 /**
  * Verify that the player has at least 'x' of an item in their inventory
  *
+ * @example
+ * ```ts
+ * const hasItem = await Athena.player.inventory.has(somePlayer, 'burger', 1);
+ * ```
+ *
  * @export
  * @param {alt.Player} player
  * @param {string} baseItem
@@ -138,6 +159,13 @@ export async function has(player: alt.Player, dbName: string, quantity: number, 
  * Returns the custom item data assigned to a specific item.
  *
  * Will return undefined if the custom data is not available.
+ *
+ * Only checks the inventory.
+ *
+ * @example
+ * ```ts
+ * const someData = Athena.player.inventory.getItemData<{ myCustomStuff: string }>(somePlayer, someSlot);
+ * ```
  *
  * @export
  * @template CustomData
@@ -171,6 +199,17 @@ export function getItemData<CustomData = {}>(player: alt.Player, slot: number): 
  * Find an item at a specific slot, and changes its entire custom data section.
  *
  * Think of this like an easy to use 'setter' for item data.
+ *
+ * Only checks the inventory.
+ *
+ * @example
+ * ```ts
+ * const someData = Athena.player.inventory.getItemData<{ myCustomStuff: string }>(somePlayer, someSlot);
+ *
+ * someData.myCustomStuff = 'Hello World!';
+ *
+ * await Athena.player.inventory.modifyItemData<typeof someData>(player, someSlot, someData);
+ * ```
  *
  * @export
  * @template CustomData
