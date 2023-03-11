@@ -22,6 +22,10 @@
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Find an item at a specific slot, and changes its entire custom data section.</p>
 <p>Think of this like an easy to use &#39;setter&#39; for item data.</p>
+<p>Only checks the inventory.</p>
+
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-10">someData</span><span class="hl-1"> = </span><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">player</span><span class="hl-1">.</span><span class="hl-0">inventory</span><span class="hl-1">.</span><span class="hl-8">getItemData</span><span class="hl-1">&lt;{ </span><span class="hl-0">myCustomStuff</span><span class="hl-1">: </span><span class="hl-6">string</span><span class="hl-1"> }&gt;(</span><span class="hl-0">somePlayer</span><span class="hl-1">, </span><span class="hl-0">someSlot</span><span class="hl-1">);</span><br/><br/><span class="hl-0">someData</span><span class="hl-1">.</span><span class="hl-0">myCustomStuff</span><span class="hl-1"> = </span><span class="hl-7">&#39;Hello World!&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-0">Athena</span><span class="hl-1">.</span><span class="hl-0">player</span><span class="hl-1">.</span><span class="hl-0">inventory</span><span class="hl-1">.</span><span class="hl-8">modifyItemData</span><span class="hl-1">&lt;</span><span class="hl-5">typeof</span><span class="hl-1"> </span><span class="hl-0">someData</span><span class="hl-1">&gt;(</span><span class="hl-0">player</span><span class="hl-1">, </span><span class="hl-0">someSlot</span><span class="hl-1">, </span><span class="hl-0">someData</span><span class="hl-1">);</span>
+</code></pre>
 
 <h3>Export</h3>
 <h3>Returns</h3></div>
@@ -41,7 +45,7 @@
 <h5>customData: <span class="tsd-signature-type" data-tsd-kind="Type parameter">CustomData</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/6fd63be/src/core/server/player/inventory.ts#L182">server/player/inventory.ts:182</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/4281841/src/core/server/player/inventory.ts#L221">server/player/inventory.ts:221</a></li></ul></aside></li></ul></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tree">
 <div class="tree-settings">
@@ -337,7 +341,9 @@
 <li><a class="category__link js-category-link category__link--ts" href="../modules/server_player_toolbar.html" data-id="/modules/server_player_toolbar.html">toolbar.ts</a>
 <ul>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_player_toolbar.add.html" data-id="/functions/server_player_toolbar.add.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>add</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_player_toolbar.getItemData.html" data-id="/functions/server_player_toolbar.getItemData.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>getItemData</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_player_toolbar.has.html" data-id="/functions/server_player_toolbar.has.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>has</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_player_toolbar.modifyItemData.html" data-id="/functions/server_player_toolbar.modifyItemData.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>modifyItemData</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_player_toolbar.override.html" data-id="/functions/server_player_toolbar.override.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>override</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_player_toolbar.remove.html" data-id="/functions/server_player_toolbar.remove.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>remove</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a class="category__link js-category-link" href="server_player_toolbar.sub.html" data-id="/functions/server_player_toolbar.sub.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>sub</a></li></ul></li></ul></li>
