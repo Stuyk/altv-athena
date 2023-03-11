@@ -146,3 +146,29 @@ alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, () => {
 });
 
 export default { execute, get, getCommands, populateCommands, register };
+
+interface CommandFuncs {
+    execute: typeof execute;
+    get: typeof get;
+    getCommands: typeof getCommands;
+    populateCommands: typeof populateCommands;
+    register: typeof register;
+}
+
+const Overrides: Partial<CommandFuncs> = {};
+
+export function override(functionName: 'execute', callback: typeof execute);
+export function override(functionName: 'get', callback: typeof get);
+export function override(functionName: 'getCommands', callback: typeof getCommands);
+export function override(functionName: 'populateCommands', callback: typeof populateCommands);
+export function override(functionName: 'register', callback: typeof register);
+/**
+ * Used to override command functionality
+ *
+ * @export
+ * @param {keyof CommandFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof CommandFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}

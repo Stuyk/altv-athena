@@ -112,3 +112,29 @@ alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, () => {
 });
 
 export default { addCallback, cleanMessage, emit, send, sendToPlayers };
+
+interface MessagingFuncs {
+    addCallback: typeof addCallback;
+    cleanMessage: typeof cleanMessage;
+    emit: typeof emit;
+    send: typeof send;
+    sendToPlayers: typeof sendToPlayers;
+}
+
+const Overrides: Partial<MessagingFuncs> = {};
+
+export function override(functionName: 'addCallback', callback: typeof addCallback);
+export function override(functionName: 'cleanMessage', callback: typeof cleanMessage);
+export function override(functionName: 'emit', callback: typeof emit);
+export function override(functionName: 'send', callback: typeof send);
+export function override(functionName: 'sendToPlayers', callback: typeof sendToPlayers);
+/**
+ * Used to override messaging functionality
+ *
+ * @export
+ * @param {keyof MessagingFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof MessagingFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}
