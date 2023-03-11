@@ -9,6 +9,8 @@ export type AthenaPlayerEvents =
     | 'item-equipped'
     | 'item-unequipped'
     | 'pickup-item'
+    | 'player-account-created'
+    | 'player-character-created'
     | 'player-armour-set'
     | 'player-died'
     | 'player-disconnected'
@@ -254,6 +256,34 @@ export function on<T>(
     eventName: 'player-weapon-unequipped',
     callback: (player: alt.Player, slot: number, type: InventoryType) => void,
 );
+
+/**
+ * Called when a new account is created.
+ *
+ * This means a new account is now bound to a new player.
+ *
+ * Any additional document changes with this event will need to handled through the Athena.document.account system.
+ *
+ * @export
+ * @template T
+ * @param {'player-account-created'} eventName
+ * @param {(player: alt.Player) => void} callback
+ */
+export function on<T>(eventName: 'player-account-created', callback: (player: alt.Player) => void);
+
+/**
+ * Called when a new character is created.
+ *
+ * This means a new character is now bound to a player.
+ *
+ * Any additional document changes with this event will need to handled through the Athena.document.player system.
+ *
+ * @export
+ * @template T
+ * @param {'player-character-created'} eventName
+ * @param {(player: alt.Player) => void} callback
+ */
+export function on<T>(eventName: 'player-character-created', callback: (player: alt.Player) => void);
 
 /**
  * Trigger a callback specific to Athena Player Events.

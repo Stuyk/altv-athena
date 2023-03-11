@@ -60,7 +60,9 @@ export async function create(player: alt.Player, dataToAppend: { [key: string]: 
         ...dataToAppend,
     };
 
-    return await Database.insertData<Account>(newDocument as Account, Collections.Accounts, true);
+    const newAccount = await Database.insertData<Account>(newDocument as Account, Collections.Accounts, true);
+    Athena.player.events.trigger('set-account-data', player);
+    return newAccount;
 }
 
 interface AccountFuncs {

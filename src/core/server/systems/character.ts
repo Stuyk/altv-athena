@@ -80,13 +80,14 @@ export async function create(
     newDocument.name = name;
 
     let document = await Database.insertData<Character>(newDocument, Athena.database.collections.Characters, true);
-
     if (!document) {
         return false;
     }
 
     document._id = document._id.toString(); // Re-cast id object as string.
     select(player, document);
+
+    Athena.player.events.trigger('player-character-created', player);
     return true;
 }
 
