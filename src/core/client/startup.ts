@@ -39,8 +39,9 @@ import './streamers/textlabel';
 import './streamers/worldNotifications';
 
 // Systems Default
-import './systems/default/ammo';
-import './systems/default/toolbar';
+import './systems/defaults/ammo';
+import './systems/defaults/displayId';
+import './systems/defaults/toolbar';
 
 // Systems
 import './systems/acceptDeclineEvent';
