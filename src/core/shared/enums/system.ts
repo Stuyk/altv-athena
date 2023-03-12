@@ -42,6 +42,8 @@ export enum SYSTEM_EVENTS {
     IPL_LOAD = 'ipl:Load',
     IPL_UNLOAD = 'ipl:Unload',
     //
+    MOVE_OBJECT = 'object:move:around',
+    //
     NOCLIP_UPDATE = 'noclip:Update',
     NOCLIP_RESET = 'noclip:Reset',
     //
@@ -130,6 +132,7 @@ export enum SYSTEM_EVENTS {
     SCREEN_TIMECYCLE_EFFECT = 'screen:timecycle:effect',
     SCREEN_FADE_TO_BLACK = 'screen:fade:to:black',
     SCREEN_FADE_FROM_BLACK = 'screen:fade:from:black',
+    SHOW_SCREEN_PLAYER_ID = 'screen:player:id',
     //
     SCREENSHOT_POPULATE_DATA = 'screenshot:Populate:Data',
     SCREENSHOT_CREATE = 'screenshot:Create',
@@ -155,4 +158,6 @@ export enum SYSTEM_EVENTS {
     VOICE_JOINED = 'voice:Joined',
     //
     WEBVIEW_INFO = 'webview:Info',
+    //
+    WEATHER_CHANGE_TO = 'weather:change:to',
 }

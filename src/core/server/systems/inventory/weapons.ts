@@ -10,6 +10,10 @@ import { StoredItem, WeaponInfo } from '@AthenaShared/interfaces/item';
  * @return {*}
  */
 export function update(player: alt.Player) {
+    if (Overrides.update) {
+        return Overrides.update(player);
+    }
+
     if (!player || !player.valid) {
         return;
     }
@@ -51,4 +55,22 @@ export function update(player: alt.Player) {
         const hash = typeof component === 'string' ? alt.hash(component) : component;
         player.addWeaponComponent(item.data.hash, hash);
     }
+}
+
+interface WeaponFuncs {
+    update: typeof update;
+}
+
+const Overrides: Partial<WeaponFuncs> = {};
+
+export function override(functionName: 'update', callback: typeof update);
+/**
+ * Used to override inventory item weapon functionality
+ *
+ * @export
+ * @param {keyof WeaponFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof WeaponFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

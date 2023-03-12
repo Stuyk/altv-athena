@@ -22,6 +22,10 @@ let weightedFlow: Array<FlowInfo> = [];
  * @return {boolean}
  */
 export function add(name: string, weight: number, callback: (player: alt.Player) => void): boolean {
+    if (Overrides.add) {
+        return Overrides.add(name, weight, callback);
+    }
+
     name = name.toLowerCase();
 
     for (let i = 0; i < weightedFlow.length; i++) {
@@ -57,6 +61,10 @@ export function add(name: string, weight: number, callback: (player: alt.Player)
  * @return {boolean}
  */
 export function remove(name: string): boolean {
+    if (Overrides.remove) {
+        return Overrides.remove(name);
+    }
+
     name = name.toLowerCase();
 
     const index = weightedFlow.findIndex((x) => x.name === name);
@@ -73,6 +81,10 @@ export function remove(name: string): boolean {
  * @return {Array<FlowInfo>}
  */
 export function getWeightedFlow(): Array<FlowInfo> {
+    if (Overrides.getWeightedFlow) {
+        return Overrides.getWeightedFlow();
+    }
+
     return weightedFlow;
 }
 
@@ -83,6 +95,10 @@ export function getWeightedFlow(): Array<FlowInfo> {
  * @return {{ index: number; flow: Array<FlowInfo> }}
  */
 export function getFlow(player: alt.Player): { index: number; flow: Array<FlowInfo> } {
+    if (Overrides.getFlow) {
+        return Overrides.getFlow(player);
+    }
+
     return playerFlow[player.id];
 }
 
@@ -93,6 +109,10 @@ export function getFlow(player: alt.Player): { index: number; flow: Array<FlowIn
  * @param {alt.Player} player
  */
 export function register(player: alt.Player) {
+    if (Overrides.register) {
+        return Overrides.register(player);
+    }
+
     playerFlow[player.id] = { index: 0, flow: [...weightedFlow] };
     playerFlow[player.id].flow[0].callback(player);
 }
@@ -103,6 +123,10 @@ export function register(player: alt.Player) {
  * @param {alt.Player} player
  */
 export function unregister(player: alt.Player) {
+    if (Overrides.unregister) {
+        return Overrides.unregister(player);
+    }
+
     delete playerFlow[player.id];
 }
 
@@ -114,6 +138,10 @@ export function unregister(player: alt.Player) {
  * @param {alt.Player} player
  */
 export function next(player: alt.Player) {
+    if (Overrides.next) {
+        return Overrides.next(player);
+    }
+
     if (!playerFlow[player.id]) {
         register(player);
         return;
@@ -133,3 +161,33 @@ export function next(player: alt.Player) {
 alt.on('playerDisconnect', (player: alt.Player) => {
     delete playerFlow[player.id];
 });
+
+interface LoginFlowFuncs {
+    add: typeof add;
+    remove: typeof remove;
+    getWeightedFlow: typeof getWeightedFlow;
+    getFlow: typeof getFlow;
+    register: typeof register;
+    unregister: typeof unregister;
+    next: typeof next;
+}
+
+const Overrides: Partial<LoginFlowFuncs> = {};
+
+export function override(functionName: 'add', callback: typeof add);
+export function override(functionName: 'remove', callback: typeof remove);
+export function override(functionName: 'getWeightedFlow', callback: typeof getWeightedFlow);
+export function override(functionName: 'getFlow', callback: typeof getFlow);
+export function override(functionName: 'register', callback: typeof register);
+export function override(functionName: 'unregister', callback: typeof unregister);
+export function override(functionName: 'next', callback: typeof next);
+/**
+ * Used to override login flow functions.
+ *
+ * @export
+ * @param {keyof LoginFlowFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof LoginFlowFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}

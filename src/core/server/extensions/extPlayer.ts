@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { DiscordUser } from '../interface/iDiscordUser';
-import { InteractionShape } from './extColshape';
 import IAttachable from '../../shared/interfaces/iAttachable';
 
 declare module 'alt-server' {
@@ -47,30 +46,6 @@ declare module 'alt-server' {
          * @memberof Player
          */
         nextPlayTime: number;
-
-        /**
-         * Used to add / remove items from the toolbar.
-         * This is the last item that was used on the toolbar.
-         * @type {{ equipped: boolean; slot: number }}
-         * @memberof Player
-         */
-        lastToolbarData: { equipped: boolean; slot: number };
-
-        /**
-         * Current grid space of where the player is.
-         * It's more like an 'American Football Field' across the entire world.
-         * Each grid space is a section of the map.
-         * @type {number}
-         * @memberof Player
-         */
-        gridSpace: number;
-
-        /**
-         * Used to check if the player is currently pushing a vehicle.
-         * @type {boolean}
-         * @memberof Player
-         */
-        isPushingVehicle: boolean;
 
         /**
          * The current waypoint position on the player's map.

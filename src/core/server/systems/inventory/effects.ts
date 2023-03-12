@@ -15,6 +15,10 @@ const effects: Map<string, EffectCallback> = new Map();
  * @memberof ItemEffects
  */
 export function add(effectNameFromItem: string, callback: EffectCallback) {
+    if (Overrides.add) {
+        return Overrides.add(effectNameFromItem, callback);
+    }
+
     if (effects.has(effectNameFromItem)) {
         alt.logWarning(`Duplicate Item Effect Found for ${effectNameFromItem}. Replaced functionality.`);
     }
@@ -29,6 +33,10 @@ export function add(effectNameFromItem: string, callback: EffectCallback) {
  * @returns The value of the effect.
  */
 export function remove(effectName: string): boolean {
+    if (Overrides.remove) {
+        return Overrides.remove(effectName);
+    }
+
     return effects.delete(effectName);
 }
 
@@ -41,6 +49,10 @@ export function remove(effectName: string): boolean {
  * @returns The callback function.
  */
 export function invoke(player: alt.Player, slot: number, type: InventoryType): boolean {
+    if (Overrides.invoke) {
+        return Overrides.invoke(player, slot, type);
+    }
+
     const data = Athena.document.character.get(player);
     if (typeof data === 'undefined') {
         return false;
@@ -68,4 +80,26 @@ export function invoke(player: alt.Player, slot: number, type: InventoryType): b
 
     callback(player, item.slot, type);
     return true;
+}
+
+interface EffectFuncs {
+    add: typeof add;
+    remove: typeof remove;
+    invoke: typeof invoke;
+}
+
+const Overrides: Partial<EffectFuncs> = {};
+
+export function override(functionName: 'add', callback: typeof add);
+export function override(functionName: 'remove', callback: typeof remove);
+export function override(functionName: 'invoke', callback: typeof invoke);
+/**
+ * Used to override inventory item effects functionality
+ *
+ * @export
+ * @param {keyof EffectFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof EffectFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

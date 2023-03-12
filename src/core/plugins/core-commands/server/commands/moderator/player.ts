@@ -166,7 +166,7 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        const unbanned = Athena.controllers.admin.unbanPlayer(discordIdentifier);
+        const unbanned = Athena.controllers.admin.unbanPlayerByDiscord(discordIdentifier);
         if (unbanned) {
             const data = Athena.document.character.get(player);
             Athena.player.emit.message(player, `Unbanned ${discordIdentifier} (Discord)`);
@@ -175,78 +175,6 @@ Athena.systems.messenger.commands.register(
         }
 
         Athena.player.emit.message(player, `Could not find that account with Discord ID: ${discordIdentifier}`);
-    },
-);
-
-Athena.systems.messenger.commands.register(
-    'addperm',
-    '/addperm [id] [perm]',
-    ['admin'],
-    async (player: alt.Player, id: string | null = null, perm: string) => {
-        if (!player || !player.valid) {
-            return;
-        }
-
-        const target = Athena.systems.identifier.getPlayer(id);
-        if (!target) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
-            return;
-        }
-
-        const data = Athena.document.character.get(target);
-        await Athena.systems.permission.add('character', target, perm);
-
-        const response = `Added permission to ${data.name}, ${perm}`;
-        Athena.player.emit.message(player, response);
-        alt.logWarning(response);
-    },
-);
-
-Athena.systems.messenger.commands.register(
-    'removeperm',
-    '/removeperm [id] [perm]',
-    ['admin'],
-    async (player: alt.Player, id: string | null = null, perm: string) => {
-        if (!player || !player.valid) {
-            return;
-        }
-
-        const target = Athena.systems.identifier.getPlayer(id);
-        if (!target) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
-            return;
-        }
-
-        const data = Athena.document.character.get(target);
-        await Athena.systems.permission.remove('character', target, perm);
-
-        const response = `Removed permission from ${data.name}, ${perm}`;
-        Athena.player.emit.message(player, response);
-        alt.logWarning(response);
-    },
-);
-
-Athena.systems.messenger.commands.register(
-    'clearperms',
-    '/clearperms [id]',
-    ['admin'],
-    async (player: alt.Player, id: string | null = null, perm: string) => {
-        if (!player || !player.valid) {
-            return;
-        }
-
-        const target = Athena.systems.identifier.getPlayer(id);
-        if (!target) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
-            return;
-        }
-
-        const data = Athena.document.character.get(target);
-        await Athena.systems.permission.clear('character', target);
-
-        const response = `Cleared permissions for ${data.name}.`;
-        Athena.player.emit.message(player, response);
-        alt.logWarning(response);
     },
 );
 
@@ -287,3 +215,8 @@ Athena.systems.messenger.commands.register(
         }
     },
 );
+
+Athena.systems.messenger.commands.register('hasitemcheck', '/hasitemcheck', ['admin'], async (player: alt.Player) => {
+    const result = await Athena.player.inventory.has(player, 'burger', 1);
+    console.log(result);
+});

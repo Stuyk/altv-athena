@@ -129,18 +129,17 @@ export function remove(uid: string): boolean {
  *
  * @param {alt.Player} player
  * @param {string} uid
- * @param {boolean} isInterior Remove all objects that are interior based.
  */
-export function removeFromPlayer(player: alt.Player, uid: string, removeAllInterior = false) {
+export function removeFromPlayer(player: alt.Player, uid: string) {
     if (Overrides.removeFromPlayer) {
-        return Overrides.removeFromPlayer(player, uid, removeAllInterior);
+        return Overrides.removeFromPlayer(player, uid);
     }
 
     if (!uid) {
         throw new Error(`Did not specify a uid for object removal. ObjectController.removeFromPlayer`);
     }
 
-    alt.emitClient(player, SYSTEM_EVENTS.REMOVE_OBJECT, uid, removeAllInterior);
+    alt.emitClient(player, SYSTEM_EVENTS.REMOVE_OBJECT, uid);
 }
 
 /**
@@ -212,7 +211,7 @@ export function updatePosition(uid: string, pos: alt.IVector3, player: alt.Playe
         return true;
     }
 
-    alt.emitClient(player, SYSTEM_EVENTS.UPDATE_OBJECT, { uid, pos });
+    alt.emitClient(player, SYSTEM_EVENTS.MOVE_OBJECT, uid, pos);
     return true;
 }
 

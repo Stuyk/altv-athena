@@ -49,6 +49,10 @@ const MAX_AUDIO_AREA_DISTANCE = 25;
  * @memberof SoundSystem
  */
 export function playSound(player: alt.Player, soundInfo: CustomSoundInfo) {
+    if (Overrides.playSound) {
+        return Overrides.playSound(player, soundInfo);
+    }
+
     if (soundInfo.target) {
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, soundInfo.target, soundInfo.audioName);
         return;
@@ -67,6 +71,10 @@ export function playSound(player: alt.Player, soundInfo: CustomSoundInfo) {
  * @memberof Sound
  */
 export function playSoundInDimension(dimension: number, soundInfo: Omit<CustomSoundInfo, 'pos'>) {
+    if (Overrides.playSoundInDimension) {
+        return Overrides.playSoundInDimension(dimension, soundInfo);
+    }
+
     const players = [...alt.Player.all].filter((t) => t.dimension === dimension);
 
     if (players.length <= 0) {
@@ -90,6 +98,10 @@ export function playSoundInDimension(dimension: number, soundInfo: Omit<CustomSo
  * @memberof Sound
  */
 export function playSoundInArea(soundInfo: Required<Omit<CustomSoundInfo, 'target' | 'volume'>>) {
+    if (Overrides.playSoundInArea) {
+        return Overrides.playSoundInArea(soundInfo);
+    }
+
     const players = [...alt.Player.all].filter((t) => {
         const dist = distance2d(t.pos, soundInfo.pos);
         if (dist > MAX_AUDIO_AREA_DISTANCE) {
@@ -104,4 +116,26 @@ export function playSoundInArea(soundInfo: Required<Omit<CustomSoundInfo, 'targe
     }
 
     alt.emitClient(players, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D_POSITIONAL, soundInfo.pos, soundInfo.audioName);
+}
+
+interface SoundFuncs {
+    playSound: typeof playSound;
+    playSoundInDimension: typeof playSoundInDimension;
+    playSoundInArea: typeof playSoundInArea;
+}
+
+const Overrides: Partial<SoundFuncs> = {};
+
+export function override(functionName: 'playSound', callback: typeof playSound);
+export function override(functionName: 'playSoundInDimension', callback: typeof playSoundInDimension);
+export function override(functionName: 'playSoundInArea', callback: typeof playSoundInArea);
+/**
+ * Used to override sound trigger functions.
+ *
+ * @export
+ * @param {keyof SoundFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof SoundFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

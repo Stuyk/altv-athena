@@ -31,7 +31,7 @@ export function getClosestPlayer(pos: IVector3, ignoredIds: Array<number> = []):
             return false;
         }
 
-        if (ignoredIds.find((x) => x === player.id)) {
+        if (typeof ignoredIds.find((x) => x === player.id) !== 'undefined') {
             return false;
         }
 

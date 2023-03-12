@@ -8,8 +8,6 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-import WebViewEvents from '@ViewUtility/webViewEvents';
-import { INVENTORY_EVENTS } from '../shared/events';
 
 export const ComponentName = 'Inventory';
 export default defineComponent({
@@ -29,7 +27,7 @@ export default defineComponent({
         },
     },
     mounted() {
-        WebViewEvents.emitReady(ComponentName);
+        // Ready event is emitted inside of Grid.vue
     },
 });
 </script>

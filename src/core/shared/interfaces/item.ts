@@ -111,6 +111,8 @@ export interface DefaultItemBehavior {
     /**
      * Used to state that an item is clothing.
      *
+     * DO NOT specify isEquippable with this; leave it as false.
+     *
      * @type {boolean}
      * @memberof DefaultItemBehavior
      */
@@ -127,10 +129,22 @@ export interface DefaultItemBehavior {
     /**
      * Is this item a weapon?
      *
+     * DO NOT specify isEquippable with this; leave it as false.
+     *
      * @type {boolean}
      * @memberof DefaultItemBehavior
      */
     isWeapon?: boolean;
+
+    /**
+     * Do not specify clothing, and weapon with this.
+     *
+     * Just only specify this one if doing custom equips.
+     *
+     * @type {boolean}
+     * @memberof DefaultItemBehavior
+     */
+    isEquippable?: boolean;
 
     /**
      * Destroy this item on drop.

@@ -12,7 +12,8 @@ import * as Athena from '@AthenaServer/api';
  */
 
 const TIME_BETWEEN_UPDATES = 60000 * 5; // 5 Minutes
-const weathers: Array<WEATHER_KEY> = [
+// const TIME_BETWEEN_UPDATES = 30000; // 30s FOR TESTING
+let weathers: Array<WEATHER_KEY> = [
     'ExtraSunny',
     'ExtraSunny',
     'Clear',
@@ -73,8 +74,8 @@ export function updatePlayer(player: alt.Player) {
         return;
     }
 
-    Athena.player.emit.message(player, `Weather is now ${weathers[0]}.`);
-    player.setWeather(getWeatherFromString(weathers[0]));
+    // Athena.player.emit.message(player, `Weather is now ${weathers[0]}.`);
+    Athena.player.emit.setWeather(player, weathers[0], 30);
 }
 
 /**
@@ -96,6 +97,21 @@ export function disable() {
     }
 
     alt.log(`Default Weather System Turned Off`);
+}
+
+/**
+ * Used to override the default weather cycle.
+ *
+ * @export
+ * @param {Array<WEATHER_KEY>} weathers
+ */
+export function setWeatherCycle(newWeatherCycle: Array<WEATHER_KEY>) {
+    if (newWeatherCycle.length <= 1) {
+        alt.logWarning(`Weather cycle must have at least 1 weather type`);
+        return;
+    }
+
+    weathers = newWeatherCycle;
 }
 
 export function getCurrentWeather(asString: false): number;

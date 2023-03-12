@@ -12,6 +12,10 @@ import { VehicleSpawnInfo } from './shared';
  * @return {alt.Vehicle}
  */
 export function temporary(vehicleInfo: VehicleSpawnInfo, deleteOnLeave = false): alt.Vehicle {
+    if (Overrides.temporary) {
+        return Overrides.temporary(vehicleInfo, deleteOnLeave);
+    }
+
     const vehicle = new alt.Vehicle(vehicleInfo.model, vehicleInfo.pos, vehicleInfo.rot);
     vehicle.manualEngineControl = true;
 
@@ -35,6 +39,10 @@ export function temporary(vehicleInfo: VehicleSpawnInfo, deleteOnLeave = false):
  * @return {alt.Vehicle}
  */
 export function temporaryOwned(player: alt.Player, vehicleInfo: VehicleSpawnInfo, deleteOnLeave = false): alt.Vehicle {
+    if (Overrides.temporaryOwned) {
+        return Overrides.temporaryOwned(player, vehicleInfo, deleteOnLeave);
+    }
+
     const vehicle = new alt.Vehicle(vehicleInfo.model, vehicleInfo.pos, vehicleInfo.rot);
     vehicle.manualEngineControl = true;
 
@@ -56,6 +64,10 @@ export function temporaryOwned(player: alt.Player, vehicleInfo: VehicleSpawnInfo
  * @return {alt.Vehicle | undefined}
  */
 export function persistent(document: OwnedVehicle): alt.Vehicle | undefined {
+    if (Overrides.persistent) {
+        return Overrides.persistent(document);
+    }
+
     document._id = document._id.toString();
 
     if (Athena.document.vehicle.exists(document._id.toString())) {
@@ -80,4 +92,26 @@ export function persistent(document: OwnedVehicle): alt.Vehicle | undefined {
     Athena.document.vehicle.bind(vehicle, document);
     Athena.vehicle.events.trigger('vehicle-spawned', vehicle);
     return vehicle;
+}
+
+interface VehicleSpawnFuncs {
+    temporary: typeof temporary;
+    temporaryOwned: typeof temporaryOwned;
+    persistent: typeof persistent;
+}
+
+const Overrides: Partial<VehicleSpawnFuncs> = {};
+
+export function override(functionName: 'temporary', callback: typeof temporary);
+export function override(functionName: 'temporaryOwned', callback: typeof temporaryOwned);
+export function override(functionName: 'persistent', callback: typeof persistent);
+/**
+ * Used to override vehicle spawning functionality
+ *
+ * @export
+ * @param {keyof VehicleSpawnFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof VehicleSpawnFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

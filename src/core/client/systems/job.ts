@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import natives from 'natives';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 import JobEnums, { Objective } from '@AthenaShared/interfaces/job';
 import { isFlagEnabled } from '@AthenaShared/utility/flags';
@@ -7,11 +8,14 @@ import { distance } from '@AthenaShared/utility/vector';
 import { drawMarker } from '@AthenaClient/utility/marker';
 import { drawText3D } from '@AthenaClient/utility/text';
 import { Timer } from '@AthenaClient/utility/timers';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 
 let objective: Objective | null;
 let interval: number;
 let cooldown: number;
 let blip: alt.Blip;
+let isPressed = false;
 
 const ObjectiveController = {
     updateObjective(data: Objective | null) {
@@ -73,6 +77,16 @@ const ObjectiveController = {
 
         if (isFlagEnabled(objective.type, JobEnums.ObjectiveType.CAPTURE_POINT)) {
             if (dist <= objective.range) {
+                return true;
+            }
+        }
+
+        if (isFlagEnabled(objective.type, JobEnums.ObjectiveType.PRESS_INTERACT_TO_COMPLETE)) {
+            if (dist <= objective.range) {
+                return true;
+            }
+
+            if (isPressed) {
                 return true;
             }
         }
@@ -152,3 +166,29 @@ const ObjectiveController = {
 
 alt.onServer(JobEnums.ObjectiveEvents.JOB_SYNC, ObjectiveController.handleSync);
 alt.onServer(JobEnums.ObjectiveEvents.JOB_UPDATE, ObjectiveController.updateObjective);
+onTicksStart.add(() => {
+    AthenaClient.hotkeys.add({
+        key: KEY_BINDS.INTERACT,
+        description: 'Interact Job',
+        identifier: 'interact-hotkey-job',
+        modifier: 'shift',
+        keyDown: () => {
+            isPressed = true;
+        },
+        keyUp: () => {
+            isPressed = false;
+        },
+    });
+
+    AthenaClient.hotkeys.add({
+        key: KEY_BINDS.INTERACT_ALT,
+        description: 'Interact Job Alternative',
+        identifier: 'interact-hotkey-job-alt',
+        keyDown: () => {
+            isPressed = true;
+        },
+        keyUp: () => {
+            isPressed = false;
+        },
+    });
+});

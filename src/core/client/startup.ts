@@ -17,6 +17,7 @@ import './extensions/vehicle';
 // Menus
 import './menus/animation';
 import './menus/player';
+import './menus/object';
 import './menus/vehicle';
 
 // rmlui
@@ -39,8 +40,9 @@ import './streamers/textlabel';
 import './streamers/worldNotifications';
 
 // Systems Default
-import './systems/default/ammo';
-import './systems/default/toolbar';
+import './systems/defaults/ammo';
+import './systems/defaults/displayId';
+import './systems/defaults/toolbar';
 
 // Systems
 import './systems/acceptDeclineEvent';
@@ -86,6 +88,7 @@ import './utility/shard';
 import './utility/spinner';
 import './utility/timecycleEffects';
 import './utility/missionText';
+import './utility/weather';
 
 // Views
 import './views/actions';

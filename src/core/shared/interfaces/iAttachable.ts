@@ -1,3 +1,4 @@
+import { PedBone } from '@AthenaShared/enums/boneIds';
 import * as alt from 'alt-shared';
 
 export default interface IAttachable {
@@ -31,11 +32,17 @@ export default interface IAttachable {
 
     /**
      * Where to begin attaching the object.
+     *
      * If this is not defined it will be around center position of the player it is attached to.
+     *
+     * This is a 'Bone ID' and not a 'Bone Index'
+     *
+     * Use the PedBone enum provided in Athena for correct value
+     *
      * @type {number}
      * @memberof IAttachable
      */
-    bone: number;
+    bone: PedBone;
 
     /**
      * Do not define this. Leave it alone.

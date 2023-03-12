@@ -8,6 +8,32 @@ import { isNullOrUndefined } from '@AthenaShared/utility/undefinedCheck';
 const fModel = alt.hash('mp_f_freemode_01');
 const mModel = alt.hash(`mp_m_freemode_01`);
 
+// Do not customize. Use the function 'setDefaults'
+let femaleClothes = {
+    0: 1, // mask
+    3: 15, // torso
+    4: 14, // pants
+    5: 0, // bag
+    6: 35, // shoes
+    7: 0, // accessories
+    8: 15, // undershirt
+    9: 0, // body armour
+    11: 15, // top
+};
+
+// Do not customize. Use the function 'setDefaults'
+let maleClothes = {
+    0: 1, // mask
+    3: 15, // torso
+    5: 0, // pants
+    4: 14, // bag
+    6: 34, // shoes
+    7: 0, // accessories
+    8: 15, // undershirt
+    9: 0, // body armour
+    11: 91, // top
+};
+
 // There is a item that will exist.
 // Inside of the item's data it will contain information about how to equip an item
 // The equipped item will be sent to some form of clothing handler
@@ -15,11 +41,17 @@ const mModel = alt.hash(`mp_m_freemode_01`);
 /**
  * Used to set a uniform on a player.
  *
+ * The uniform overrides all other clothing on a multiplayer ped model.
+ *
  * @param {alt.Player} player
  * @param {Array<ClothingComponent>} components
  * @return {Promise<boolean>}
  */
 export async function setUniform(player: alt.Player, components: Array<ClothingComponent>): Promise<boolean> {
+    if (Overrides.setUniform) {
+        return await Overrides.setUniform(player, components);
+    }
+
     const data = Athena.document.character.get(player);
     if (typeof data === 'undefined') {
         return false;
@@ -38,19 +70,30 @@ export async function setUniform(player: alt.Player, components: Array<ClothingC
  * @return {Promise<void>}
  */
 export async function clearUniform(player: alt.Player): Promise<void> {
+    if (Overrides.clearUniform) {
+        return await Overrides.clearUniform(player);
+    }
+
     await Athena.document.character.set(player, 'uniform', undefined);
     Athena.player.events.trigger('player-uniform-cleared', player);
 }
 
 /**
  * Set a custom model on a player.
+ *
  * If a custom model is set; no appearance or clothing updates will be called.
+ *
+ * Uniforms are also ignored if a skin is set.
  *
  * @param {alt.Player} player
  * @param {(string | number)} model
  * @return {*}
  */
 export async function setSkin(player: alt.Player, model: string | number) {
+    if (Overrides.setSkin) {
+        return await Overrides.setSkin(player, model);
+    }
+
     const data = Athena.document.character.get(player);
     if (typeof data === 'undefined') {
         return false;
@@ -68,6 +111,10 @@ export async function setSkin(player: alt.Player, model: string | number) {
  * @param {alt.Player} player
  */
 export async function clearSkin(player: alt.Player) {
+    if (Overrides.clearSkin) {
+        return await Overrides.clearSkin(player);
+    }
+
     const data = Athena.document.character.get(player);
     await Athena.document.character.set(player, 'skin', undefined);
     Athena.player.sync.appearance(player, data.appearance as Appearance);
@@ -78,11 +125,17 @@ export async function clearSkin(player: alt.Player) {
 /**
  * Create a clothing item from DLC components.
  *
+ * If you know the relative ids for dlc clothing; this is how you generate the item or an outfit from it.
+ *
  * @param {(0 | 1)} sex
  * @param {Array<ClothingComponent>} componentList
  * @return {StoredItem<ClothingInfo>}
  */
 export function outfitFromDlc(sex: 0 | 1, componentList: Array<ClothingComponent>): StoredItem<ClothingInfo> {
+    if (Overrides.outfitFromDlc) {
+        return Overrides.outfitFromDlc(sex, componentList);
+    }
+
     const storableItem: StoredItem<ClothingInfo> = {
         dbName: 'clothing',
         quantity: 1,
@@ -99,7 +152,12 @@ export function outfitFromDlc(sex: 0 | 1, componentList: Array<ClothingComponent
 
 /**
  * Create a clothing item from the current clothes applies to a player.
+ *
  * Specify which ids you want to include in the outfit; and mark whichever as props.
+ *
+ * You should apply 'absolute' values to the player before running this function.
+ *
+ * Use the normal player.setClothes functions, and then call this function to generate an outfit from it.
  *
  * @param {alt.Player} player
  * @param {Array<{ id: number; isProp?: boolean }>} components
@@ -108,8 +166,12 @@ export function outfitFromDlc(sex: 0 | 1, componentList: Array<ClothingComponent
 export function outfitFromPlayer(
     player: alt.Player,
     components: Array<{ id: number; isProp?: boolean }>,
-    equipOnAdd = false,
+    setEquipToTrue = false,
 ): StoredItem | undefined {
+    if (Overrides.outfitFromPlayer) {
+        return Overrides.outfitFromPlayer(player, components, setEquipToTrue);
+    }
+
     if (!player || !player.valid) {
         return undefined;
     }
@@ -131,7 +193,7 @@ export function outfitFromPlayer(
         dbName: 'clothing',
         quantity: 1,
         slot: -1,
-        isEquipped: equipOnAdd,
+        isEquipped: setEquipToTrue,
         data: {
             sex: data.appearance.sex,
             components: componentList,
@@ -148,6 +210,10 @@ export function outfitFromPlayer(
  * @return {*}
  */
 export function update(player: alt.Player) {
+    if (Overrides.update) {
+        return Overrides.update(player);
+    }
+
     if (!player || !player.valid) {
         return;
     }
@@ -177,27 +243,10 @@ export function update(player: alt.Player) {
         return;
     }
 
-    if (!data.appearance.sex) {
-        player.setDlcClothes(0, 1, 0, 0, 0); // mask
-        player.setDlcClothes(0, 3, 15, 0, 0); // torso
-        player.setDlcClothes(0, 4, 14, 0, 0); // pants
-        player.setDlcClothes(0, 5, 0, 0, 0); // bag
-        player.setDlcClothes(0, 6, 35, 0, 0); // shoes
-        player.setDlcClothes(0, 7, 0, 0, 0); // accessories
-        player.setDlcClothes(0, 8, 15, 0, 0); // undershirt
-        player.setDlcClothes(0, 9, 0, 0, 0); // body armour
-        player.setDlcClothes(0, 11, 15, 0, 0); // top
-    } else {
-        player.setDlcClothes(0, 1, 0, 0, 0); // mask
-        player.setDlcClothes(0, 3, 15, 0, 0); // torso
-        player.setDlcClothes(0, 5, 0, 0, 0); // bag
-        player.setDlcClothes(0, 4, 14, 0, 0); // pants
-        player.setDlcClothes(0, 6, 34, 0, 0); // shoes
-        player.setDlcClothes(0, 7, 0, 0, 0); // accessories
-        player.setDlcClothes(0, 8, 15, 0, 0); // undershirt
-        player.setDlcClothes(0, 9, 0, 0, 0); // body armour
-        player.setDlcClothes(0, 11, 91, 0, 0); // top
-    }
+    const dataSet = data.appearance.sex === 0 ? femaleClothes : maleClothes;
+    Object.keys(dataSet).forEach((key) => {
+        player.setDlcClothes(0, parseInt(key), parseInt(dataSet[key]), 0, 0);
+    });
 
     if (typeof data.inventory === 'undefined') {
         data.inventory = [];
@@ -249,4 +298,72 @@ export function update(player: alt.Player) {
             player.setDlcClothes(component.dlc, component.id, component.drawable, component.texture, palette);
         }
     }
+}
+
+/**
+ * Used to change default clothing for either male or female.
+ *
+ * @example
+ * ```ts
+ * Athena.systems.inventory.clothing.setDefaults('female', {
+ *     0: 1, // mask
+ *     3: 15, // torso
+ *     4: 14, // pants
+ *     5: 0, // bag
+ *     6: 35, // shoes
+ *     7: 0, // accessories
+ *     8: 15, // undershirt
+ *     9: 0, // body armour
+ *     11: 15, // top
+ * });
+ * ```
+ *
+ * @export
+ * @param {('male' | 'female')} type
+ * @param {(typeof maleClothes | typeof femaleClothes)} clothes
+ */
+export function setDefaults(sex: 0 | 1, clothes: typeof maleClothes | typeof femaleClothes) {
+    if (Overrides.setDefaults) {
+        return Overrides.setDefaults(sex, clothes);
+    }
+
+    if (sex === 0) {
+        femaleClothes = clothes;
+    }
+
+    if (sex === 1) {
+        maleClothes = clothes;
+    }
+}
+
+interface ClothingFuncs {
+    setUniform: typeof setUniform;
+    clearUniform: typeof clearUniform;
+    setSkin: typeof setSkin;
+    clearSkin: typeof clearSkin;
+    outfitFromDlc: typeof outfitFromDlc;
+    outfitFromPlayer: typeof outfitFromPlayer;
+    setDefaults: typeof setDefaults;
+    update: typeof update;
+}
+
+const Overrides: Partial<ClothingFuncs> = {};
+
+export function override(functionName: 'clearSkin', callback: typeof clearSkin);
+export function override(functionName: 'clearUniform', callback: typeof clearUniform);
+export function override(functionName: 'outfitFromDlc', callback: typeof outfitFromDlc);
+export function override(functionName: 'outfitFromPlayer', callback: typeof outfitFromPlayer);
+export function override(functionName: 'setDefaults', callback: typeof setDefaults);
+export function override(functionName: 'setSkin', callback: typeof setSkin);
+export function override(functionName: 'setUniform', callback: typeof setUniform);
+export function override(functionName: 'update', callback: typeof update);
+/**
+ * Used to override inventory clothing functionality
+ *
+ * @export
+ * @param {keyof ClothingFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof ClothingFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

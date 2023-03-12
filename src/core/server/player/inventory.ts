@@ -3,11 +3,17 @@ import * as document from '@AthenaServer/document';
 import * as Athena from '@AthenaServer/api';
 
 import { StoredItem } from '@AthenaShared/interfaces/item';
+import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
 
 /**
  * Add a new stored item to a user, must specify a quantity of greater than zero.
  * Automatically checks weight upon new item additions. Exceeding the weight; cancels the add.
  * Does not look into toolbar.
+ *
+ * @example
+ * ```ts
+ * const didAdd = await Athena.player.inventory.add(somePlayer, { dbName: 'burger', quantity: 1, data: {} })
+ * ```
  *
  * @param {alt.Player} player
  * @param {Omit<StoredItem, 'slot'>} item
@@ -50,6 +56,11 @@ export async function add(player: alt.Player, item: Omit<StoredItem, 'slot'>): P
  * Subtract a quantity of an item from a player's inventory.
  * Does not look into toolbar.
  *
+ * @example
+ * ```ts
+ * const didRemove = await Athena.player.inventory.sub(somePlayer, { dbName: 'burger', quantity: 1 });
+ * ```
+ *
  * @param {alt.Player} player
  * @param {Omit<StoredItem, 'slot'>} item
  * @return {Promise<boolean>}
@@ -79,7 +90,13 @@ export async function sub(player: alt.Player, item: Omit<StoredItem, 'slot' | 'd
 
 /**
  * Delete an item in a specific slot in an inventory data set.
+ *
  * Does not look into toolbar.
+ *
+ * @example
+ * ```ts
+ * const didRemove = await Athena.player.inventory.remove(somePlayer, someSlot);
+ * ```
  *
  * @param {alt.Player} player
  * @param {number} slot
@@ -108,17 +125,145 @@ export async function remove(player: alt.Player, slot: number): Promise<boolean>
     return true;
 }
 
+/**
+ * Verify that the player has at least 'x' of an item in their inventory
+ *
+ * @example
+ * ```ts
+ * const hasItem = await Athena.player.inventory.has(somePlayer, 'burger', 1);
+ * ```
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {string} baseItem
+ * @return {*}
+ */
+export async function has(player: alt.Player, dbName: string, quantity: number, version = undefined) {
+    if (Overrides.has) {
+        return Overrides.has(player, dbName, quantity, version);
+    }
+
+    const data = document.character.get(player);
+    if (typeof data === 'undefined') {
+        return false;
+    }
+
+    if (typeof data.inventory === 'undefined') {
+        return false;
+    }
+
+    return Athena.systems.inventory.manager.hasItem(data.inventory, dbName, quantity, version);
+}
+
+/**
+ * Returns the custom item data assigned to a specific item.
+ *
+ * Will return undefined if the custom data is not available.
+ *
+ * Only checks the inventory.
+ *
+ * @example
+ * ```ts
+ * const someData = Athena.player.inventory.getItemData<{ myCustomStuff: string }>(somePlayer, someSlot);
+ * ```
+ *
+ * @export
+ * @template CustomData
+ * @param {alt.Player} player
+ * @param {number} slot
+ * @return {CustomData}
+ */
+export function getItemData<CustomData = {}>(player: alt.Player, slot: number): CustomData | undefined {
+    if (Overrides.getItemData) {
+        return Overrides.getItemData(player, slot);
+    }
+
+    const data = document.character.get(player);
+    if (typeof data === 'undefined') {
+        return undefined;
+    }
+
+    if (typeof data.inventory === 'undefined') {
+        return undefined;
+    }
+
+    const index = data.inventory.findIndex((x) => x.slot === slot);
+    if (index <= -1) {
+        return undefined;
+    }
+
+    return data.inventory[index].data ? (data.inventory[index].data as CustomData) : undefined;
+}
+
+/**
+ * Find an item at a specific slot, and changes its entire custom data section.
+ *
+ * Think of this like an easy to use 'setter' for item data.
+ *
+ * Only checks the inventory.
+ *
+ * @example
+ * ```ts
+ * const someData = Athena.player.inventory.getItemData<{ myCustomStuff: string }>(somePlayer, someSlot);
+ *
+ * someData.myCustomStuff = 'Hello World!';
+ *
+ * await Athena.player.inventory.modifyItemData<typeof someData>(player, someSlot, someData);
+ * ```
+ *
+ * @export
+ * @template CustomData
+ * @param {alt.Player} player
+ * @param {number} slot
+ * @param {CustomData} data
+ * @return {Promise<boolean>}
+ */
+export async function modifyItemData<CustomData = {}>(
+    player: alt.Player,
+    slot: number,
+    customData: CustomData,
+): Promise<boolean> {
+    if (Overrides.modifyItemData) {
+        return await Overrides.modifyItemData(player, slot, customData);
+    }
+
+    const data = document.character.get(player);
+    if (typeof data === 'undefined') {
+        return false;
+    }
+
+    if (typeof data.inventory === 'undefined') {
+        return false;
+    }
+
+    const inventoryRef = deepCloneArray<StoredItem>(data.inventory);
+    const index = inventoryRef.findIndex((x) => x.slot === slot);
+    if (index <= -1) {
+        return false;
+    }
+
+    inventoryRef[index].data = customData;
+    await document.character.set(player, 'inventory', inventoryRef);
+    return true;
+}
+
 interface InventoryFunctions {
     add: typeof add;
-    sub: typeof sub;
+    has: typeof has;
     remove: typeof remove;
+    sub: typeof sub;
+    modifyItemData: typeof modifyItemData;
+    getItemData: typeof getItemData;
 }
 
 const Overrides: Partial<InventoryFunctions> = {};
 
 export function override(functionName: 'add', callback: typeof add);
+export function override(functionName: 'has', callback: typeof has);
 export function override(functionName: 'sub', callback: typeof sub);
 export function override(functionName: 'remove', callback: typeof remove);
+export function override(functionName: 'modifyItemData', callback: typeof modifyItemData);
+export function override(functionName: 'getItemData', callback: typeof getItemData);
 /**
  * Used to override any internal inventory functions
  *

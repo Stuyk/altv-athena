@@ -17,6 +17,10 @@ const commands: { [command_name: string]: Omit<MessageCommand<alt.Player>, 'name
  * @return {*}
  */
 export function execute(player: alt.Player, commandName: string, args: Array<any>) {
+    if (Overrides.execute) {
+        return Overrides.execute(player, commandName, args);
+    }
+
     commandName = commandName.toLowerCase();
     const cmdInfo = commands[commandName];
 
@@ -40,6 +44,10 @@ export function execute(player: alt.Player, commandName: string, args: Array<any
  * @param {string} commandName
  */
 export function get(commandName: string) {
+    if (Overrides.get) {
+        return Overrides.get(commandName);
+    }
+
     commandName = commandName.toLowerCase().replaceAll('/', '');
     return commands[commandName];
 }
@@ -55,6 +63,10 @@ export function register(
     callback: CommandCallback<alt.Player>,
     isCharacterPermission = false,
 ) {
+    if (Overrides.register) {
+        return Overrides.register(name, desc, perms, callback, isCharacterPermission);
+    }
+
     name = name.toLowerCase().replaceAll('/', '');
 
     if (commands[name]) {
@@ -72,6 +84,10 @@ export function register(
  * @param {alt.Player} player
  */
 export function populateCommands(player: alt.Player) {
+    if (Overrides.populateCommands) {
+        return Overrides.populateCommands(player);
+    }
+
     const accountData = Athena.document.account.get(player);
     const characterData = Athena.document.character.get(player);
 
@@ -109,6 +125,10 @@ export function populateCommands(player: alt.Player) {
  * @return {Array<DetailedCommand>}
  */
 export function getCommands(player: alt.Player): Array<DetailedCommand> {
+    if (Overrides.getCommands) {
+        return Overrides.getCommands(player);
+    }
+
     const accountData = Athena.document.account.get(player);
     const characterData = Athena.document.character.get(player);
 
@@ -146,3 +166,29 @@ alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, () => {
 });
 
 export default { execute, get, getCommands, populateCommands, register };
+
+interface CommandFuncs {
+    execute: typeof execute;
+    get: typeof get;
+    getCommands: typeof getCommands;
+    populateCommands: typeof populateCommands;
+    register: typeof register;
+}
+
+const Overrides: Partial<CommandFuncs> = {};
+
+export function override(functionName: 'execute', callback: typeof execute);
+export function override(functionName: 'get', callback: typeof get);
+export function override(functionName: 'getCommands', callback: typeof getCommands);
+export function override(functionName: 'populateCommands', callback: typeof populateCommands);
+export function override(functionName: 'register', callback: typeof register);
+/**
+ * Used to override command functionality
+ *
+ * @export
+ * @param {keyof CommandFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof CommandFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}

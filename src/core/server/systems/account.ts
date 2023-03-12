@@ -1,166 +1,123 @@
-import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { PERMISSIONS } from '../../shared/flags/permissionFlags';
+import * as Athena from '@AthenaServer/api';
+import Database from '@stuyk/ezmongodb';
 import { Account } from '../interface/iAccount';
 import { Collections } from '../database/collections';
 
-let isDoneLoading = false;
-let id = -1;
+const globalKey = 'accountId';
+let adminAccountCreated = false;
 
-const AccountSystemRef = {
-    /**
-     * Initializes the account system and adds ids to accounts that do not have one.
-     * @static
-     * @return {void}
-     * @memberof AccountSystemRef
-     */
+const Internal = {
     async init() {
-        let accounts = await Database.fetchAllData<Account>(Collections.Accounts);
-
-        // Turn off loading after init
-        if (accounts.length <= 0) {
-            isDoneLoading = true;
-            return;
-        }
-
-        // Fetch last account and just use that as the next incremental id
-        const lastAccount = accounts[accounts.length - 1];
-        if (lastAccount.id !== undefined && lastAccount.id !== null) {
-            id = lastAccount.id;
-        }
-
-        // De-duplicate entries
-        let inUse = [];
-        for (let i = 0; i < accounts.length; i++) {
-            if (accounts[i].id === null || accounts[i].id === undefined) {
-                const nextIdentifier = AccountSystemRef.getNextIdentifier();
-                await Database.updatePartialData(
-                    accounts[i]._id.toString(),
-                    { id: nextIdentifier },
-                    Collections.Accounts,
-                );
-
-                console.log(`Account ${accounts[i]._id.toString()} | Added ID: ${nextIdentifier}`);
-                inUse.push(nextIdentifier);
-                continue;
-            }
-
-            if (inUse.findIndex((id) => id === accounts[i].id) >= 0) {
-                const nextIdentifier = AccountSystemRef.getNextIdentifier();
-                await Database.updatePartialData(
-                    accounts[i]._id.toString(),
-                    { id: nextIdentifier },
-                    Collections.Accounts,
-                );
-
-                console.log(`Account ${accounts[i]._id.toString()} De-Duplicated | Added ID: ${nextIdentifier}`);
-                inUse.push(nextIdentifier);
-                continue;
-            }
-
-            inUse.push(accounts[i].id);
-            continue;
-        }
-
-        isDoneLoading = true;
+        adminAccountCreated = await Internal.doesAtLeastOneAccountExist();
     },
     /**
-     * Wait until the `isDoneLoading` variable is set to `true` before continuing.
+     * Checks the accounts collection to see if at least one account has been created.
+     *
+     * If more than one account has been created. Assume the first connected account needs admin permission.
+     *
+     * @return {Promise<boolean>}
      */
-    async isDoneLoading(): Promise<void> {
-        return new Promise((resolve: Function) => {
-            const interval = alt.setInterval(() => {
-                if (!isDoneLoading) {
-                    return;
-                }
-
-                alt.clearInterval(interval);
-                resolve();
-            }, 100);
-        });
-    },
-
-    /**
-     * Get next identifier
-     * @static
-     * @return { number }
-     * @memberof AccountSystemRef
-     */
-    getNextIdentifier(): number {
-        id += 1;
-        return id;
-    },
-
-    /**
-     * Fetch account for a player based on key / value pair.
-     * @static
-     * @param {alt.Player} player
-     * @return {(Promise<Account | null>)}
-     * @memberof AccountSystemRef
-     */
-    async getAccount(player: alt.Player, key: string, value: any): Promise<Account | null> {
-        const accountData: Account | null = await Database.fetchData<Account>(key, value, Collections.Accounts);
-
-        if (!accountData) {
-            return null;
-        }
-
-        accountData._id = accountData._id.toString();
-
-
-        if (accountData && (accountData.id === null || accountData.id === undefined)) {
-            accountData.id = AccountSystemRef.getNextIdentifier();
-        }
-
-        return accountData;
-    },
-
-    /**
-     * Create an account with default data.
-     * @static
-     * @param {alt.Player} player
-     * @param {{[key: string]: any }} dataToAppend - Any additional data / identifiers to add to an account.
-     * @return {Promise<Account>}
-     * @memberof AccountSystemRef
-     */
-    async create(player: alt.Player, dataToAppend: { [key: string]: any }): Promise<Account> {
-        await AccountSystemRef.isDoneLoading();
-        const newDocument: Partial<Account> = {
-            ips: [player.ip],
-            hardware: [player.hwidHash, player.hwidExHash],
-            lastLogin: Date.now(),
-            permissionLevel: PERMISSIONS.NONE,
-            id: AccountSystemRef.getNextIdentifier(),
-            ...dataToAppend,
-        };
-
-        return await Database.insertData<Account>(newDocument as Account, Collections.Accounts, true);
+    async doesAtLeastOneAccountExist(): Promise<boolean> {
+        const db = await Database.getDatabaseInstance();
+        const collection = db.collection(Athena.database.collections.Accounts);
+        const count = await collection.estimatedDocumentCount();
+        return count >= 1;
     },
 };
 
 /**
- * It takes a function name and a callback, and if the function exists in the exports object, it
- * overrides it with the callback
+ * Fetch account for a player based on key / value pair.
  *
- * @param {Key} functionName - The name of the function you want to override.
- * @param callback
- * @returns The function is being returned.
+ * @param {alt.Player} player
+ * @return {(Promise<Account | undefined>)}
+ * @memberof AccountSystemRef
  */
-function override<Key extends keyof typeof AccountSystemRef>(
-    functionName: Key,
-    callback: typeof AccountSystemRef[Key],
-): void {
-    if (typeof exports[functionName] === 'undefined') {
-        alt.logError(`systems/account.ts does not provide an export named ${functionName}`);
-        return;
+export async function getAccount(key: string, value: any): Promise<Account | undefined> {
+    if (Overrides.getAccount) {
+        return await Overrides.getAccount(key, value);
     }
 
-    exports[functionName] = callback;
+    const accountData: Account | null = await Database.fetchData<Account>(key, value, Collections.Accounts);
+
+    if (!accountData) {
+        return undefined;
+    }
+
+    accountData._id = String(accountData._id);
+
+    if (accountData && (accountData.id === null || accountData.id === undefined)) {
+        await Athena.systems.global.increase(globalKey, 1, 1000);
+        const nextId = await Athena.systems.global.getKey(globalKey);
+        await Database.updatePartialData(accountData._id, { id: nextId }, Collections.Accounts);
+    }
+
+    return accountData;
 }
 
-export const AccountSystem: typeof AccountSystemRef & { override?: typeof override } = {
-    ...AccountSystemRef,
-    override,
-};
+/**
+ * Create an account with default data.
 
-AccountSystem.init();
+ * @param {alt.Player} player
+ * @param {{[key: string]: any }} dataToAppend - Any additional data / identifiers to add to an account.
+ * @return {Promise<Account>}
+ * @memberof AccountSystemRef
+ */
+export async function create(player: alt.Player, dataToAppend: { [key: string]: any }): Promise<Account> {
+    if (Overrides.create) {
+        return await Overrides.create(player, dataToAppend);
+    }
+
+    await Athena.systems.global.increase(globalKey, 1, 1000);
+    const nextId = await Athena.systems.global.getKey<number>(globalKey);
+
+    let permissions = [];
+    let wasAdminAccountCreated = false;
+    if (!adminAccountCreated) {
+        permissions.push('admin');
+        wasAdminAccountCreated = true;
+        adminAccountCreated = true;
+    }
+
+    const newDocument: Partial<Account> = {
+        ips: [player.ip],
+        hardware: [player.hwidHash, player.hwidExHash],
+        lastLogin: Date.now(),
+        permissions,
+        id: nextId,
+        ...dataToAppend,
+    };
+
+    const newAccount = await Database.insertData<Account>(newDocument as Account, Collections.Accounts, true);
+    newAccount._id = newAccount._id.toString();
+
+    if (wasAdminAccountCreated) {
+        alt.log(`~y~Account with ID ${newAccount._id} was given Admin Permissions. This only happens once.`);
+    }
+
+    Athena.player.events.trigger('set-account-data', player);
+    return newAccount;
+}
+
+interface AccountFuncs {
+    create: typeof create;
+    getAccount: typeof getAccount;
+}
+
+const Overrides: Partial<AccountFuncs> = {};
+
+export function override(functionName: 'create', callback: typeof create);
+export function override(functionName: 'getAccount', callback: typeof getAccount);
+
+/**
+ * Used to override any account system functionality
+ *
+ * @export
+ * @param {keyof AccountFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof AccountFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}
+
+Internal.init();

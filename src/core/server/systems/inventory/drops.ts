@@ -60,8 +60,16 @@ async function removeFromDatabase(id: string) {
  * @return {Promise<string>}
  */
 export async function add(item: StoredItem, pos: alt.IVector3, player: alt.Player = undefined): Promise<string> {
+    if (Overrides.add) {
+        return await Overrides.add(item, pos, player);
+    }
+
     const baseItem = Athena.systems.inventory.factory.getBaseItem(item.dbName);
     if (typeof baseItem === 'undefined') {
+        return undefined;
+    }
+
+    if (baseItem.behavior && !baseItem.behavior.canDrop) {
         return undefined;
     }
 
@@ -94,6 +102,10 @@ export async function add(item: StoredItem, pos: alt.IVector3, player: alt.Playe
  * @return {(ItemDrop | undefined)}
  */
 export function get(id: string): ItemDrop | undefined {
+    if (Overrides.get) {
+        return Overrides.get(id);
+    }
+
     return drops.find((x) => x._id === id);
 }
 /**
@@ -103,6 +115,10 @@ export function get(id: string): ItemDrop | undefined {
  * @return {(Promise<StoredItem | undefined>)}
  */
 export async function sub(id: string): Promise<StoredItem | undefined> {
+    if (Overrides.sub) {
+        return Overrides.sub(id);
+    }
+
     let itemClone: StoredItem = undefined;
 
     for (let i = drops.length - 1; i >= 0; i--) {
@@ -140,6 +156,10 @@ export async function sub(id: string): Promise<StoredItem | undefined> {
  * @return {*}
  */
 export function isItemAvailable(_id: string) {
+    if (Overrides.isItemAvailable) {
+        return Overrides.isItemAvailable(_id);
+    }
+
     return typeof markAsTaken[_id] !== 'undefined' && markAsTaken[_id] === false;
 }
 
@@ -152,6 +172,32 @@ export function isItemAvailable(_id: string) {
  */
 export function markForTaken(_id: string, value: boolean) {
     markAsTaken[_id] = value;
+}
+
+interface DropFuncs {
+    add: typeof add;
+    get: typeof get;
+    sub: typeof sub;
+    isItemAvailable: typeof isItemAvailable;
+    markForTaken: typeof markForTaken;
+}
+
+const Overrides: Partial<DropFuncs> = {};
+
+export function override(functionName: 'add', callback: typeof add);
+export function override(functionName: 'get', callback: typeof get);
+export function override(functionName: 'sub', callback: typeof sub);
+export function override(functionName: 'isItemAvailable', callback: typeof isItemAvailable);
+export function override(functionName: 'markForTaken', callback: typeof markForTaken);
+/**
+ * Used to override inventory drop item functionality
+ *
+ * @export
+ * @param {keyof DropFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof DropFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }
 
 init();

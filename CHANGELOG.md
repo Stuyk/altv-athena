@@ -296,6 +296,17 @@ Spawn Vehicles on Leave
 - Added way to disable this system
 
 Began Deprecation of src/core/athena/main.ts File
+
+Admin System
+- First account created always gets 'admin' permission by default
+- /addperm [account or character] [ingame-id] [permission] - Add permission to an account
+- /removeperm [account or character] [ingame-id] [permission] - Remove permission from an account
+- /getperms [account or character] [ingame-id] - Returns the current list of permissions for given type
+
+Display ID
+- Added default system to show ID in top-right of screen.
+- Can be disabled through Athena.systems.defaults.displayId.disable()
+- Can be customized to move position elsewhere through similar API as above
 ```
 
 
