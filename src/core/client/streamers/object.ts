@@ -4,7 +4,7 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Timer } from '@AthenaClient/utility/timers';
 import { IObject } from '@AthenaShared/interfaces/iObject';
 
-type CreatedObject = IObject & { createdObject?: alt.Object };
+export type CreatedObject = IObject & { createdObject?: alt.Object };
 
 let persistentObjects: Array<CreatedObject> = [];
 let createdObjects: Array<CreatedObject> = [];
@@ -138,6 +138,30 @@ const InternalFunctions = {
         }
     },
 };
+
+/**
+ * Used to obtain a CreatedObject instance from a generic scriptID
+ *
+ * @export
+ * @param {number} scriptId
+ * @return {CreatedObject}
+ */
+export function getObjectFromScriptID(scriptId: number): CreatedObject {
+    const persistentIndex = persistentObjects.findIndex(
+        (x) => x && x.createdObject && x.createdObject.scriptID === scriptId,
+    );
+
+    if (persistentIndex >= 0) {
+        return persistentObjects[persistentIndex];
+    }
+
+    const globalIndex = createdObjects.findIndex((x) => x && x.createdObject && x.createdObject.scriptID === scriptId);
+    if (globalIndex <= -1) {
+        return undefined;
+    }
+
+    return createdObjects[globalIndex];
+}
 
 alt.on('connectionComplete', InternalFunctions.init);
 alt.on('disconnect', InternalFunctions.stop);

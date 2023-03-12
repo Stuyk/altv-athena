@@ -13,6 +13,8 @@ import { ClientItemDrops } from '@AthenaClient/streamers/item';
 import { Interaction } from '@AthenaShared/interfaces/interaction';
 import { ClientInteraction } from './interaction';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
+import { ObjectWheelMenu } from '@AthenaClient/menus/object';
+import { getObjectFromScriptID } from '@AthenaClient/streamers/object';
 
 type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle' | 'interaction';
 type TargetInfo = { id: number; pos: alt.IVector3; type: ValidEntityTypes; dist: number; height: number };
@@ -166,32 +168,37 @@ const Internal = {
             case 'object':
                 const object = alt.Object.all.find((x) => x.scriptID === selection.id);
                 if (typeof object === 'undefined') {
-                    // wheel menu;
                     break;
                 }
 
                 const droppedItem = ClientItemDrops.getDroppedItem(object.scriptID);
-                if (typeof droppedItem === 'undefined') {
+                if (typeof droppedItem !== 'undefined') {
+                    if (alt.Player.local.vehicle) {
+                        return;
+                    }
+
+                    native.taskGoToCoordAnyMeans(
+                        alt.Player.local.scriptID,
+                        droppedItem.pos.x,
+                        droppedItem.pos.y,
+                        droppedItem.pos.z,
+                        2,
+                        0,
+                        false,
+                        786603,
+                        0,
+                    );
+
+                    alt.emitServer(SYSTEM_EVENTS.INTERACTION_PICKUP_ITEM, droppedItem._id);
                     break;
                 }
 
-                if (alt.Player.local.vehicle) {
-                    return;
+                const objectInstance = getObjectFromScriptID(selection.id);
+                if (typeof objectInstance === 'undefined') {
+                    break;
                 }
 
-                native.taskGoToCoordAnyMeans(
-                    alt.Player.local.scriptID,
-                    droppedItem.pos.x,
-                    droppedItem.pos.y,
-                    droppedItem.pos.z,
-                    2,
-                    0,
-                    false,
-                    786603,
-                    0,
-                );
-
-                alt.emitServer(SYSTEM_EVENTS.INTERACTION_PICKUP_ITEM, droppedItem._id);
+                ObjectWheelMenu.openMenu(objectInstance);
                 break;
             case 'pos':
                 break;
