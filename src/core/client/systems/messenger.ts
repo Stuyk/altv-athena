@@ -2,7 +2,6 @@ import * as alt from 'alt-client';
 
 import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
 import { MessageCommand } from '@AthenaShared/interfaces/messageCommand';
-import { AthenaClient } from '@AthenaClient/api/athena';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 export type MessageInfo = { timestamp: number; msg: string };

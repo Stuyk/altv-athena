@@ -2,6 +2,23 @@ import * as alt from 'alt-shared';
 
 export interface IObject {
     /**
+     * A unique identifier for this object.
+     * @type {string}
+     * @memberof IObject
+     */
+    uid?: string;
+
+    /**
+     * Use this parameter to help you identify what this item does on client-side.
+     *
+     * Useful for wheel menu based functionality.
+     *
+     * @type {string}
+     * @memberof IObject
+     */
+    subType?: string;
+
+    /**
      * Position of the Object in a 3D space.
      * @type {alt.IVector3}
      * @memberof IObject
@@ -28,37 +45,6 @@ export interface IObject {
      * @memberof IObject
      */
     maxDistance?: number;
-
-    /**
-     * A unique identifier for this object.
-     * @type {string}
-     * @memberof IObject
-     */
-    uid?: string;
-
-    /**
-     * Local Object ID.
-     * Do not actually fill this out.
-     * @type {number}
-     * @memberof IObject
-     */
-    local?: number;
-
-    /**
-     * Local Object Info
-     * Do not automatically fill this out.
-     * @type {boolean}
-     * @memberof IObject
-     */
-    isBeingCreated?: boolean;
-
-    /**
-     * Is this object interior only.
-     * Will only show in a matching interior dimension.
-     * @type {boolean}
-     * @memberof IObject
-     */
-    isInterior?: boolean;
 
     /**
      * Will show across all dimensions.

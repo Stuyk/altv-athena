@@ -42,6 +42,8 @@ export enum SYSTEM_EVENTS {
     IPL_LOAD = 'ipl:Load',
     IPL_UNLOAD = 'ipl:Unload',
     //
+    MOVE_OBJECT = 'object:move:around',
+    //
     NOCLIP_UPDATE = 'noclip:Update',
     NOCLIP_RESET = 'noclip:Reset',
     //

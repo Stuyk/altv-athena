@@ -17,6 +17,7 @@ import './extensions/vehicle';
 // Menus
 import './menus/animation';
 import './menus/player';
+import './menus/object';
 import './menus/vehicle';
 
 // rmlui
