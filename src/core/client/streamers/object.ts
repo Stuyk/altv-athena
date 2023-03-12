@@ -29,7 +29,25 @@ const InternalFunctions = {
             throw new Error(`Exceeded User Object Count. Ensure you are removing objects for individual players.`);
         }
 
-        persistentObjects.push(newObject);
+        const persistentIndex = persistentObjects.findIndex((x) => x.uid === newObject.uid);
+        if (persistentIndex >= 0) {
+            return;
+        }
+
+        const createdObject = new alt.Object(
+            newObject.model,
+            new alt.Vector3(newObject.pos),
+            new alt.Vector3(0, 0, 0),
+            true,
+            false,
+        );
+
+        if (newObject.noCollision) {
+            createdObject.toggleCollision(false, false);
+        }
+
+        createdObject.setPositionFrozen(true);
+        persistentObjects.push({ ...newObject, createdObject });
     },
     removeObject(uid: string) {
         const persistentIndex = persistentObjects.findIndex((x) => x.uid === uid);
