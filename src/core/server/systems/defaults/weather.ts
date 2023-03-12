@@ -74,7 +74,7 @@ export function updatePlayer(player: alt.Player) {
         return;
     }
 
-    Athena.player.emit.message(player, `Weather is now ${weathers[0]}.`);
+    // Athena.player.emit.message(player, `Weather is now ${weathers[0]}.`);
     Athena.player.emit.setWeather(player, weathers[0], 30);
 }
 
