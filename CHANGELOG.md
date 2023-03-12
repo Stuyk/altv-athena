@@ -296,6 +296,9 @@ Spawn Vehicles on Leave
 - Added way to disable this system
 
 Began Deprecation of src/core/athena/main.ts File
+
+Admin System
+- First account created always gets 'admin' permission by default
 ```
 
 

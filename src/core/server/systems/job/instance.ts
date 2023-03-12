@@ -64,6 +64,11 @@ export function clear(player: number | alt.Player) {
 
 alt.on('playerDisconnect', (player: alt.Player) => {
     const id = player.id;
+
+    if (!JobInstances[id]) {
+        return;
+    }
+
     JobInstances[id].quit('Disconnected');
     clear(id);
 });

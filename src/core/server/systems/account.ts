@@ -5,6 +5,26 @@ import { Account } from '../interface/iAccount';
 import { Collections } from '../database/collections';
 
 const globalKey = 'accountId';
+let adminAccountCreated = false;
+
+const Internal = {
+    async init() {
+        adminAccountCreated = await Internal.doesAtLeastOneAccountExist();
+    },
+    /**
+     * Checks the accounts collection to see if at least one account has been created.
+     *
+     * If more than one account has been created. Assume the first connected account needs admin permission.
+     *
+     * @return {Promise<boolean>}
+     */
+    async doesAtLeastOneAccountExist(): Promise<boolean> {
+        const db = await Database.getDatabaseInstance();
+        const collection = db.collection(Athena.database.collections.Accounts);
+        const count = await collection.estimatedDocumentCount();
+        return count >= 1;
+    },
+};
 
 /**
  * Fetch account for a player based on key / value pair.
@@ -51,16 +71,30 @@ export async function create(player: alt.Player, dataToAppend: { [key: string]: 
     await Athena.systems.global.increase(globalKey, 1, 1000);
     const nextId = await Athena.systems.global.getKey<number>(globalKey);
 
+    let permissions = [];
+    let wasAdminAccountCreated = false;
+    if (!adminAccountCreated) {
+        permissions.push('admin');
+        wasAdminAccountCreated = true;
+        adminAccountCreated = true;
+    }
+
     const newDocument: Partial<Account> = {
         ips: [player.ip],
         hardware: [player.hwidHash, player.hwidExHash],
         lastLogin: Date.now(),
-        permissions: [],
+        permissions,
         id: nextId,
         ...dataToAppend,
     };
 
     const newAccount = await Database.insertData<Account>(newDocument as Account, Collections.Accounts, true);
+    newAccount._id = newAccount._id.toString();
+
+    if (wasAdminAccountCreated) {
+        alt.log(`~y~Account with ID ${newAccount._id} was given Admin Permissions. This only happens once.`);
+    }
+
     Athena.player.events.trigger('set-account-data', player);
     return newAccount;
 }
@@ -85,3 +119,5 @@ export function override(functionName: 'getAccount', callback: typeof getAccount
 export function override(functionName: keyof AccountFuncs, callback: any): void {
     Overrides[functionName] = callback;
 }
+
+Internal.init();
