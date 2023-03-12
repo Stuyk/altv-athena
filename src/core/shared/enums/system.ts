@@ -156,4 +156,6 @@ export enum SYSTEM_EVENTS {
     VOICE_JOINED = 'voice:Joined',
     //
     WEBVIEW_INFO = 'webview:Info',
+    //
+    WEATHER_CHANGE_TO = 'weather:change:to',
 }

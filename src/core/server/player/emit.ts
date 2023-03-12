@@ -17,6 +17,7 @@ import { IWheelOption } from '@AthenaShared/interfaces/wheelMenu';
 import { sha256Random } from '../utility/hash';
 import { AcceptDeclineEvent } from '@AthenaShared/interfaces/acceptDeclineEvent';
 import { RecommendedTimecycleTypes } from '@AthenaShared/enums/timecycleTypes';
+import { WEATHER_KEY } from '@AthenaShared/utility/weather';
 
 /**
  * Play an alarm on this player.
@@ -620,6 +621,19 @@ export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs 
  */
 export function clearTimeCycleEffect(player: alt.Player) {
     player.emit(SYSTEM_EVENTS.SCREEN_TIMECYCLE_EFFECT_CLEAR);
+}
+
+/**
+ * Cleanly transition weather from current weather to a new weather type.
+ *
+ * Does not use alt:V functionality. Only uses natives.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {number} timeInSeconds
+ */
+export function setWeather(player: alt.Player, weather: WEATHER_KEY, timeInSeconds: number) {
+    player.emit(SYSTEM_EVENTS.WEATHER_CHANGE_TO, weather, timeInSeconds);
 }
 
 interface EmitFunctions {

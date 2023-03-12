@@ -87,6 +87,7 @@ import './utility/shard';
 import './utility/spinner';
 import './utility/timecycleEffects';
 import './utility/missionText';
+import './utility/weather';
 
 // Views
 import './views/actions';
