@@ -101,22 +101,24 @@ const InternalFunctions = {
 
         // Second loop pushes objects that do not exist and creates objects that have not been created
         for (let i = 0; i < newObjects.length; i++) {
-            let existingIndex = createdObjects.findIndex((x) => x.uid === createdObjects[i].uid);
+            let existingIndex = createdObjects.findIndex((x) => x.uid === newObjects[i].uid);
             if (existingIndex <= -1) {
-                createdObjects.push(createdObjects[i]);
+                createdObjects.push(newObjects[i]);
                 existingIndex = createdObjects.length - 1;
             }
 
             if (createdObjects[existingIndex].createdObject) {
                 // Used for updating the p osition if non-matching
                 const { x, y } = createdObjects[existingIndex].createdObject.pos;
-                const doesXMatch = Math.floor(x) !== Math.floor(createdObjects[existingIndex].pos.x);
-                const doesYMatch = Math.floor(y) !== Math.floor(createdObjects[existingIndex].pos.y);
+                const doesXMatch = Math.floor(x) === Math.floor(newObjects[i].pos.x);
+                const doesYMatch = Math.floor(y) === Math.floor(newObjects[i].pos.y);
+
                 if (doesXMatch && doesYMatch) {
                     continue;
                 }
 
-                createdObjects[existingIndex].createdObject.pos = new alt.Vector3(createdObjects[existingIndex].pos);
+                createdObjects[existingIndex].pos = new alt.Vector3(newObjects[i].pos);
+                createdObjects[existingIndex].createdObject.pos = new alt.Vector3(newObjects[i].pos);
                 continue;
             }
 
