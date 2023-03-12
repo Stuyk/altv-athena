@@ -6,11 +6,7 @@ import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
 import { WheelMenu } from '../views/wheelMenu';
 import { CreatedObject } from '@AthenaClient/streamers/object';
 
-type ObjectMenuInjection = (
-    modelHash: number,
-    scriptID: number,
-    options: Array<IWheelOptionExt>,
-) => Array<IWheelOptionExt>;
+type ObjectMenuInjection = (existingObject: CreatedObject, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
 const Injections: Array<ObjectMenuInjection> = [];
 const validHashes: Array<number> = [];
@@ -67,13 +63,11 @@ const ObjectWheelMenuConst = {
             return;
         }
 
-        const hash = native.getEntityModel(object.createdObject.scriptID);
-
         let options: Array<IWheelOptionExt> = [];
 
         for (const callback of Injections) {
             try {
-                options = callback(hash, object.createdObject.scriptID, options);
+                options = callback(object, options);
             } catch (err) {
                 console.warn(`Got Object Menu Injection Error: ${err}`);
                 continue;
