@@ -1,10 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { distance, vectorLerp } from '@AthenaShared/utility/vector';
-import { loadModel } from './model';
-import { sleep } from './sleep';
 
 const LerpObject = {
     /**
@@ -52,11 +51,11 @@ const LerpObject = {
      */
     async tempLerp(model: string, start: alt.IVector3, end: alt.IVector3, speed: number = 0.1) {
         const hash = alt.hash(model);
-        await loadModel(hash);
+        await AthenaClient.utility.model.load(hash);
 
         const object = native.createObjectNoOffset(hash, start.x, start.y, start.z, false, false, false);
 
-        await sleep(50);
+        await alt.Utils.wait(50);
 
         native.freezeEntityPosition(object, true);
         native.setEntityNoCollisionEntity(object, alt.Player.local.scriptID, false);

@@ -12,7 +12,7 @@ import idleAnims from './animationMenus/idleAnims';
 import leanAnims from './animationMenus/leanAnims';
 import waitAnims from './animationMenus/waitAnims';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { AthenaClient } from '@AthenaClient/api';
 
 function callback(dict: string, name: string, flags: number) {
     console.log(dict, name, flags);

@@ -1,14 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
 
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 import { PED_CONFIG_FLAG } from '@AthenaShared/flags/pedflags';
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
-import { AthenaClient } from '@AthenaClient/api/athena';
-import { EntitySelector } from './entitySelector';
 
 const Internal = {
     init() {
@@ -28,14 +26,14 @@ export const VehicleController = {
      * @memberof VehicleController
      */
     registerKeybinds() {
-        AthenaClient.hotkeys.add({
+        AthenaClient.systems.hotkeys.add({
             key: KEY_BINDS.VEHICLE_ENGINE,
             description: 'Vehicle Engine Toggle',
             identifier: 'toggle-vehicle-engine',
             keyDown: VehicleController.emitEngine,
         });
 
-        AthenaClient.hotkeys.add({
+        AthenaClient.systems.hotkeys.add({
             key: KEY_BINDS.VEHICLE_LOCK,
             description: 'Vehicle Lock Toggle',
             identifier: 'toggle-vehicle-lock',
@@ -49,7 +47,7 @@ export const VehicleController = {
      * @memberof VehicleController
      */
     emitEngine() {
-        if (isAnyMenuOpen()) {
+        if (AthenaClient.webview.isAnyMenuOpen()) {
             return;
         }
 
@@ -66,11 +64,11 @@ export const VehicleController = {
      * @memberof VehicleController
      */
     emitLock() {
-        if (isAnyMenuOpen()) {
+        if (AthenaClient.webview.isAnyMenuOpen()) {
             return;
         }
 
-        const target = EntitySelector.get.selection();
+        const target = AthenaClient.systems.entitySelector.getSelection();
         if (target) {
             if (target.type !== 'vehicle') {
                 return;

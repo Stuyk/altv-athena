@@ -1,6 +1,6 @@
-import { drawMarker } from '@AthenaClient/utility/marker';
+import { drawMarker } from '@AthenaClient/screen/marker';
 import { drawRectangle, drawRectangle2D, drawText2D, drawText3D } from '@AthenaClient/utility/text';
-import Minimap from '@AthenaClient/utility/minimap';
+import Minimap from '@AthenaClient/screen/minimap';
 import Spinner from '@AthenaClient/utility/spinner';
 import Shard from '@AthenaClient/utility/shard';
 import { Notification } from '@AthenaClient/utility/notification';

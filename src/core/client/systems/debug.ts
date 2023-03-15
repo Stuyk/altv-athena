@@ -2,11 +2,11 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import * as AthenaClient from '@AthenaClient/api';
 
 export const DebugController = {
     registerKeybinds() {
-        AthenaClient.hotkeys.add({
+        AthenaClient.systems.hotkeys.add({
             key: KEY_BINDS.DEBUG_KEY,
             description: 'Print World Info to alt:V Console',
             identifier: 'debug-info',

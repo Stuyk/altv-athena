@@ -1,11 +1,11 @@
 import * as alt from 'alt-client';
 import natives from 'natives';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { AthenaClient } from '@AthenaClient/api';
 
 import JobEnums, { Objective } from '@AthenaShared/interfaces/job';
 import { isFlagEnabled } from '@AthenaShared/utility/flags';
 import { distance } from '@AthenaShared/utility/vector';
-import { drawMarker } from '@AthenaClient/utility/marker';
+import { drawMarker } from '@AthenaClient/screen/marker';
 import { drawText3D } from '@AthenaClient/utility/text';
 import { Timer } from '@AthenaClient/utility/timers';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';

@@ -1,13 +1,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { AthenaClient } from '@AthenaClient/api';
 import { Item } from '@AthenaShared/interfaces/item';
 import { INVENTORY_EVENTS } from '../shared/events';
 import { INVENTORY_CONFIG } from '../shared/config';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 import { onInventoryUpdate } from '@AthenaClient/events/onInventoryUpdate';
-import { Page } from '@AthenaClient/systems/page';
+import { Page } from '@AthenaClient/webview/page';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 
 let page: Page;

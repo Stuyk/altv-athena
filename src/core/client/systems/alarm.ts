@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Timer } from '@AthenaClient/utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ALARM_START, startAlarm);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ALARM_STOP, stopAlarm);
@@ -22,27 +21,23 @@ export async function loadAlarm(name: string, count: number = 0): Promise<boolea
             return;
         }
 
-        const interval = Timer.createInterval(
-            () => {
-                count += 1;
+        const interval = alt.setInterval(() => {
+            count += 1;
 
-                if (native.prepareAlarm(name)) {
-                    Timer.clearInterval(interval);
-                    resolve(true);
-                    return;
-                }
+            if (native.prepareAlarm(name)) {
+                alt.clearInterval(interval);
+                resolve(true);
+                return;
+            }
 
-                if (count >= MaxLoadAttempts) {
-                    Timer.clearInterval(interval);
-                    resolve(false);
-                    return;
-                }
+            if (count >= MaxLoadAttempts) {
+                alt.clearInterval(interval);
+                resolve(false);
+                return;
+            }
 
-                native.prepareAlarm(name);
-            },
-            250,
-            'alarm.ts',
-        );
+            native.prepareAlarm(name);
+        }, 250);
     });
 }
 

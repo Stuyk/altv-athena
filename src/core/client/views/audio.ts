@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 
-import { WebViewController } from '@AthenaClient/extensions/view2';
+import { WebViewController } from '@AthenaClient/webview/view';
 import ViewModel from '@AthenaClient/models/viewModel';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { AthenaClient } from '@AthenaClient/api';
 import { handleFrontendSound } from '@AthenaClient/systems/sound';
 
 const PAGE_NAME = 'Audio';

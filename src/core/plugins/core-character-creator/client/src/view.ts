@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { WebViewController } from '@AthenaClient/extensions/view2';
+import { WebViewController } from '@AthenaClient/webview/view';
 import { CharacterSystem } from '@AthenaClient/systems/character';
-import PedEditCamera from '@AthenaClient/utility/camera';
+import PedEditCamera from '@AthenaClient/camera/pedEdit';
 import { PedCharacter } from '@AthenaClient/utility/characterPed';
 import { disableAllControls } from '@AthenaClient/utility/disableControls';
 import { sleep } from '@AthenaClient/utility/sleep';

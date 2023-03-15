@@ -4,7 +4,7 @@ import { VIEW_EVENTS_JOB_TRIGGER } from '@AthenaShared/enums/views';
 import { JobTrigger } from '@AthenaShared/interfaces/jobTrigger';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
-import { WebViewController } from '@AthenaClient/extensions/view2';
+import { WebViewController } from '@AthenaClient/webview/view';
 import ViewModel from '@AthenaClient/models/viewModel';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 

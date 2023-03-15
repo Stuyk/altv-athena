@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { AthenaClient } from '@AthenaClient/api';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { WebViewController } from '@AthenaClient/extensions/view2';
+import { WebViewController } from '@AthenaClient/webview/view';
 import { CHAT_WEBVIEW_EVENTS } from '../shared/events';
 import { MessageInfo } from '@AthenaClient/systems/messenger';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';

@@ -1,11 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { AthenaClient } from '@AthenaClient/api/athena';
-import { WebViewController } from '@AthenaClient/extensions/view2';
+import { AthenaClient } from '@AthenaClient/api';
+import { WebViewController } from '@AthenaClient/webview/view';
 import ViewModel from '@AthenaClient/models/viewModel';
 import { playPedAnimation } from '@AthenaClient/systems/animations';
 import { CharacterSystem } from '@AthenaClient/systems/character';
-import PedEditCamera from '@AthenaClient/utility/camera';
+import PedEditCamera from '@AthenaClient/camera/pedEdit';
 import { PedCharacter } from '@AthenaClient/utility/characterPed';
 import { disableAllControls } from '@AthenaClient/utility/disableControls';
 import { sleep } from '@AthenaClient/utility/sleep';

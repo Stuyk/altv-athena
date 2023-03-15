@@ -3,7 +3,7 @@ import { InputMenu, InputResult } from '@AthenaShared/interfaces/inputMenus';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { View_Events_Input_Menu } from '@AthenaShared/enums/views';
 import ViewModel from '@AthenaClient/models/viewModel';
-import { WebViewController } from '@AthenaClient/extensions/view2';
+import { WebViewController } from '@AthenaClient/webview/view';
 import { sleep } from '@AthenaClient/utility/sleep';
 
 const PAGE_NAME = 'InputBox';

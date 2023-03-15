@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Action, ActionMenu } from '@AthenaShared/interfaces/actions';
-import { WebViewController } from '@AthenaClient/extensions/view2';
+import { WebViewController } from '@AthenaClient/webview/view';
 import ViewModel from '@AthenaClient/models/viewModel';
 
 const PAGE_NAME = 'Actions';
