@@ -68,45 +68,6 @@ const PedController = {
     },
 };
 
-export const ClientPedController = {
-    /**
-     * Gets an NPC based on their scriptID if present.
-     *
-     * @static
-     * @param {number} scriptId
-     * @memberof ClientPedController
-     */
-    get(scriptId: number): IPed | undefined {
-        const keys = Object.keys(pedInfo);
-
-        for (let i = 0; i < keys.length; i++) {
-            const key = keys[i];
-            if (`${pedInfo[key]}` !== `${scriptId}`) {
-                continue;
-            }
-
-            const localPedIndex = localPeds.findIndex((x) => x.uid === key);
-            const addedPedIndex = addedPeds.findIndex((x) => x.uid === key);
-
-            if (localPedIndex <= -1 && addedPedIndex <= -1) {
-                continue;
-            }
-
-            if (localPedIndex >= 0) {
-                return localPeds[localPedIndex];
-            }
-
-            if (addedPedIndex >= 0) {
-                return addedPeds[addedPedIndex];
-            }
-
-            continue;
-        }
-
-        return undefined;
-    },
-};
-
 function handleDrawPeds() {
     if (isRemoving) {
         return;
@@ -211,6 +172,43 @@ function handleDrawPeds() {
             });
         });
     }
+}
+
+/**
+ * Gets an NPC based on their scriptID if present.
+ *
+ * @static
+ * @param {number} scriptId
+ * @memberof ClientPedController
+ */
+export function get(scriptId: number): IPed | undefined {
+    const keys = Object.keys(pedInfo);
+
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        if (`${pedInfo[key]}` !== `${scriptId}`) {
+            continue;
+        }
+
+        const localPedIndex = localPeds.findIndex((x) => x.uid === key);
+        const addedPedIndex = addedPeds.findIndex((x) => x.uid === key);
+
+        if (localPedIndex <= -1 && addedPedIndex <= -1) {
+            continue;
+        }
+
+        if (localPedIndex >= 0) {
+            return localPeds[localPedIndex];
+        }
+
+        if (addedPedIndex >= 0) {
+            return addedPeds[addedPedIndex];
+        }
+
+        continue;
+    }
+
+    return undefined;
 }
 
 /**

@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
+import * as AthenaClient from '@AthenaClient/api';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Action, ActionMenu } from '@AthenaShared/interfaces/actions';
-import { WebViewController } from '@AthenaClient/webview/view';
 import ViewModel from '@AthenaClient/models/viewModel';
 
 const PAGE_NAME = 'Actions';
@@ -19,7 +19,7 @@ class ActionsView implements ViewModel {
      * @memberof ActionsView
      */
     static async open() {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
 
         if (!hasRegistered) {
             hasRegistered = true;
@@ -33,7 +33,7 @@ class ActionsView implements ViewModel {
         view.on(`${PAGE_NAME}:Close`, ActionsView.close);
         view.on(`${PAGE_NAME}:Trigger`, ActionsView.trigger);
         view.focus();
-        WebViewController.openPages(PAGE_NAME, false, () => {
+        AthenaClient.webview.openPages(PAGE_NAME, false, () => {
             ActionsView.close(true);
         });
 
@@ -82,20 +82,20 @@ class ActionsView implements ViewModel {
     }
 
     static async ready() {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.emit(`${PAGE_NAME}:Set`, actionMenu);
         alt.Player.local.isActionMenuOpen = true;
     }
 
     static async close(skipPageClose = false) {
         actionMenu = null;
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
 
         if (!skipPageClose) {
-            WebViewController.closePages([PAGE_NAME]);
+            AthenaClient.webview.closePages([PAGE_NAME]);
         }
 
-        WebViewController.unfocus();
+        AthenaClient.webview.unfocus();
         view.off(`${PAGE_NAME}:Ready`, ActionsView.ready);
         view.off(`${PAGE_NAME}:Close`, ActionsView.close);
         view.off(`${PAGE_NAME}:Trigger`, ActionsView.trigger);
@@ -105,7 +105,7 @@ class ActionsView implements ViewModel {
     }
 
     static async keyUp(key: number) {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.emit(`${PAGE_NAME}:KeyPress`, key);
     }
 }

@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { distance } from '@AthenaShared/utility/vector';
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import * as AthenaClient from '@AthenaClient/api';
+
 import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
 import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 
-type VehicleMenuInjection = (target: alt.Vehicle, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
+export type VehicleMenuInjection = (target: alt.Vehicle, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
 const Injections: Array<VehicleMenuInjection> = [];
 
@@ -32,7 +32,7 @@ export function addInjection(callback: VehicleMenuInjection) {
  * @memberof VehicleWheelMenu
  */
 export function openInVehicleMenu(vehicle: alt.Vehicle) {
-    if (isAnyMenuOpen()) {
+    if (AthenaClient.webview.isAnyMenuOpen()) {
         return;
     }
 
@@ -73,7 +73,7 @@ export function openInVehicleMenu(vehicle: alt.Vehicle) {
 }
 
 export function open(vehicle: alt.Vehicle) {
-    if (isAnyMenuOpen()) {
+    if (AthenaClient.webview.isAnyMenuOpen()) {
         return;
     }
 
@@ -81,7 +81,7 @@ export function open(vehicle: alt.Vehicle) {
         return;
     }
 
-    const dist = distance(alt.Player.local.pos, vehicle.pos);
+    const dist = AthenaClient.utility.vector.distance(alt.Player.local.pos, vehicle.pos);
     if (dist >= 4) {
         return;
     }

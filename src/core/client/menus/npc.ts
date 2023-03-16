@@ -1,13 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { distance } from '@AthenaShared/utility/vector';
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import * as AthenaClient from '@AthenaClient/api';
+
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
 import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 import { IPed } from '@AthenaShared/interfaces/iPed';
-import { ClientPedController } from '@AthenaClient/streamers/ped';
 
-type NpcMenuInjection = (scriptID: number, ped: IPed, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
+export type NpcMenuInjection = (scriptID: number, ped: IPed, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
 const Injections: Array<NpcMenuInjection> = [];
 
@@ -33,7 +32,7 @@ export function addInjection(callback: NpcMenuInjection) {
  * @memberof NpcWheelMenu
  */
 export function open(scriptID: number): void {
-    if (isAnyMenuOpen()) {
+    if (AthenaClient.webview.isAnyMenuOpen()) {
         return;
     }
 
@@ -41,13 +40,13 @@ export function open(scriptID: number): void {
         return;
     }
 
-    const ped = ClientPedController.get(scriptID);
+    const ped = AthenaClient.streamers.ped.get(scriptID);
     if (!ped) {
         return;
     }
 
     const coords = native.getEntityCoords(scriptID, false);
-    const dist = distance(alt.Player.local.pos, coords);
+    const dist = AthenaClient.utility.vector.distance(alt.Player.local.pos, coords);
     if (dist >= 5) {
         return;
     }

@@ -5,8 +5,8 @@ import { MessageCommand } from '@AthenaShared/interfaces/messageCommand';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 export type MessageInfo = { timestamp: number; msg: string };
-type MessageCallback = (msg: string) => void;
-type HistoryCallback = (msgs: Array<MessageInfo>) => void;
+export type MessageCallback = (msg: string) => void;
+export type HistoryCallback = (msgs: Array<MessageInfo>) => void;
 
 const callbacks: Array<MessageCallback> = [];
 const historyCallbacks: Array<HistoryCallback> = [];

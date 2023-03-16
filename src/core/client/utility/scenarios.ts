@@ -9,7 +9,7 @@ alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SCENARIO, playScenario);
  * @export
  * @param {string} name The name of the scenario.
  * @param {number} duration The duration of the scenario.
- * @return {Promise<void>}  {Promise<void>}
+ * @return {Promise<void>}
  */
 export async function playScenario(name: string, duration: number): Promise<void> {
     if (alt.Player.local.meta.isDead) {

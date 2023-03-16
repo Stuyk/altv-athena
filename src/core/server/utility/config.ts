@@ -1,17 +1,16 @@
 import * as alt from 'alt-server';
 import { IConfig } from '../interface/iConfig';
 import fs from 'fs';
-import net from 'net';
 
 const DefaultServerCFGName = 'server.toml';
-const DefaultViteServer = '127.0.0.1';
 const DefaultVitePort = 3000;
 const DefaultConfigName = 'AthenaConfig.json';
+const defaultViteServer = 'localhost';
 let configCache: IConfig;
 let firstRun = true;
 let isVueDebug = false;
 
-export function get(): IConfig | undefined {
+export async function get(): Promise<IConfig | undefined> {
     // Return the cached config to prevent reading twice.
     if (configCache) {
         return configCache;
@@ -40,15 +39,8 @@ export function get(): IConfig | undefined {
     }
 
     if (file.includes('vue-athena')) {
-        try {
-            const sock = net.createConnection(DefaultVitePort, DefaultViteServer, () => {
-                alt.log(`~c~Vue Server: ~lg~http://localhost:3000`);
-                isVueDebug = true;
-                sock.destroy();
-            });
-        } catch (err) {
-            alt.logWarning(``);
-        }
+        isVueDebug = true;
+        alt.log(`~c~Vue Server: ~lg~http://${defaultViteServer}:3000`);
     }
 
     // Finish Up
@@ -69,7 +61,7 @@ export function isDevMode(): boolean {
     return configCache.USE_DEV_MODE;
 }
 export function getViteServer(): string {
-    return `http://${DefaultViteServer}:${DefaultVitePort}`;
+    return `http://${defaultViteServer}:${DefaultVitePort}`;
 }
 
 export function getVueDebugMode(): boolean {

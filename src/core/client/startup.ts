@@ -94,6 +94,10 @@ import './utility/polygonShape';
 import './utility/screenshot';
 import './utility/scenarios';
 
+// Webview
+import './webview/index';
+import './webview/page';
+
 // Views
 import './views/actions';
 import './views/audio';

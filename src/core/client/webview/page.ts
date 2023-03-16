@@ -1,8 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import * as AthenaClient from '@AthenaClient/api';
-import { GameplayCamera } from '../camera/gameplay';
-import { PauseMenu } from '../utility/pauseMenu';
 import { BaseKeyInfo } from '@AthenaClient/interface/hotkeys';
 
 type AnyCallback = ((...args: any[]) => void) | ((...args: any[]) => Promise<void>) | Function;
@@ -247,14 +245,14 @@ export class Page {
                 alt.toggleGameControls(false);
                 break;
             case 'camera':
-                GameplayCamera.disable();
+                AthenaClient.camera.gameplay.disable();
                 break;
             default:
                 break;
         }
 
         if (this.info.options.onOpen.disablePauseMenu) {
-            PauseMenu.disable();
+            AthenaClient.utility.pauseMenu.disable();
         }
 
         if (this.info.options.onOpen.hideHud) {
@@ -315,12 +313,12 @@ export class Page {
         }
 
         if (this.info.options.onClose.enablePauseMenu) {
-            PauseMenu.enable();
+            AthenaClient.utility.pauseMenu.enable();
         }
 
         if (this.info.options.onClose.enableControls) {
             alt.toggleGameControls(true);
-            GameplayCamera.enable();
+            AthenaClient.camera.gameplay.enable();
         }
 
         this.info.callbacks.onClose();

@@ -77,5 +77,3 @@ for (let filePath of filePaths) {
     fs.writeFileSync(filePath, finalFile, { encoding: 'utf-8' });
     count += 1;
 }
-
-console.log(`Updated ${count} Files with Extensions. Time to process: ${Date.now() - startTime}ms`);

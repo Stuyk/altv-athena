@@ -1,13 +1,9 @@
 import * as alt from 'alt-client';
-import natives from 'natives';
-import { AthenaClient } from '@AthenaClient/api';
+import * as natives from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
 
 import JobEnums, { Objective } from '@AthenaShared/interfaces/job';
 import { isFlagEnabled } from '@AthenaShared/utility/flags';
-import { distance } from '@AthenaShared/utility/vector';
-import { drawMarker } from '@AthenaClient/screen/marker';
-import { drawText3D } from '@AthenaClient/utility/text';
-import { Timer } from '@AthenaClient/utility/timers';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 
@@ -29,7 +25,7 @@ const ObjectiveController = {
      */
     handleSync(data: Objective | null) {
         if (interval) {
-            Timer.clearInterval(interval);
+            alt.clearInterval(interval);
             interval = null;
         }
 
@@ -61,7 +57,7 @@ const ObjectiveController = {
         }
 
         objective = { ...data };
-        interval = Timer.createInterval(ObjectiveController.verifyObjective, 0, 'job.ts');
+        interval = alt.setInterval(ObjectiveController.verifyObjective, 0);
     },
 
     getVector3Range() {
@@ -124,16 +120,21 @@ const ObjectiveController = {
             return;
         }
 
-        const dist = distance(alt.Player.local.pos, objective.pos);
+        const dist = AthenaClient.utility.vector.distance(alt.Player.local.pos, objective.pos);
 
         if (objective.marker && dist <= objective.range * 25) {
             const scale = objective.marker.scale ? objective.marker.scale : ObjectiveController.getVector3Range();
 
-            drawMarker(objective.marker.type, objective.marker.pos as alt.Vector3, scale, objective.marker.color);
+            AthenaClient.screen.marker.draw(
+                objective.marker.type,
+                objective.marker.pos as alt.Vector3,
+                scale,
+                objective.marker.color,
+            );
         }
 
         if (objective.textLabel && dist <= objective.range * 10) {
-            drawText3D(
+            AthenaClient.screen.text.drawText3D(
                 objective.textLabel.text,
                 objective.textLabel.pos as alt.Vector3,
                 0.4,
@@ -143,7 +144,12 @@ const ObjectiveController = {
 
         if (objective.captureProgress >= 1 && dist <= objective.range * 10) {
             const progressText = `${objective.captureProgress}/${objective.captureMaximum}`;
-            drawText3D(progressText, objective.pos as alt.Vector3, 0.4, new alt.RGBA(255, 255, 255, 255));
+            AthenaClient.screen.text.drawText3D(
+                progressText,
+                objective.pos as alt.Vector3,
+                0.4,
+                new alt.RGBA(255, 255, 255, 255),
+            );
         }
 
         if (cooldown && Date.now() < cooldown) {
@@ -167,7 +173,7 @@ const ObjectiveController = {
 alt.onServer(JobEnums.ObjectiveEvents.JOB_SYNC, ObjectiveController.handleSync);
 alt.onServer(JobEnums.ObjectiveEvents.JOB_UPDATE, ObjectiveController.updateObjective);
 onTicksStart.add(() => {
-    AthenaClient.hotkeys.add({
+    AthenaClient.systems.hotkeys.add({
         key: KEY_BINDS.INTERACT,
         description: 'Interact Job',
         identifier: 'interact-hotkey-job',
@@ -180,7 +186,7 @@ onTicksStart.add(() => {
         },
     });
 
-    AthenaClient.hotkeys.add({
+    AthenaClient.systems.hotkeys.add({
         key: KEY_BINDS.INTERACT_ALT,
         description: 'Interact Job Alternative',
         identifier: 'interact-hotkey-job-alt',

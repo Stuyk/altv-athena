@@ -8,8 +8,8 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Interaction } from '@AthenaShared/interfaces/interaction';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 
-type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle' | 'interaction';
-type TargetInfo = { id: number; pos: alt.IVector3; type: ValidEntityTypes; dist: number; height: number };
+export type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle' | 'interaction';
+export type TargetInfo = { id: number; pos: alt.IVector3; type: ValidEntityTypes; dist: number; height: number };
 
 let MAX_TARGETS = 50;
 let everyTick: number;

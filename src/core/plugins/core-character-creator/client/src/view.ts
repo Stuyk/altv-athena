@@ -1,11 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { WebViewController } from '@AthenaClient/webview/view';
+
+import * as AthenaClient from '@AthenaClient/api';
+
 import { CharacterSystem } from '@AthenaClient/systems/character';
-import PedEditCamera from '@AthenaClient/camera/pedEdit';
 import { PedCharacter } from '@AthenaClient/utility/characterPed';
 import { disableAllControls } from '@AthenaClient/utility/disableControls';
-import { sleep } from '@AthenaClient/utility/sleep';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { CHARACTER_CREATOR_EVENTS, CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../../shared/events';
 
@@ -39,32 +39,32 @@ class InternalFunctions {
         totalCharacters = _totalCharacters;
 
         await PedCharacter.destroy();
-        await sleep(100);
+        await alt.Utils.wait(100);
 
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.READY_SETUP_COMPLETE, InternalFunctions.handleReadyDone);
         view.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.DONE, InternalFunctions.handleDone);
         view.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.SYNC, InternalFunctions.handleSync);
         view.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.VERIFY_NAME, InternalFunctions.handleCheckName);
         view.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.DISABLE_CONTROLS, InternalFunctions.handleDisableControls);
-        WebViewController.openPages([PAGE_NAME]);
-        WebViewController.focus();
-        WebViewController.showCursor(true);
+        AthenaClient.webview.openPages([PAGE_NAME]);
+        AthenaClient.webview.focus();
+        AthenaClient.webview.showCursor(true);
 
         await PedCharacter.create(true, pos, heading);
-        await sleep(100);
+        await alt.Utils.wait(100);
         await PedCharacter.setHidden(true);
-        await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
-        await PedEditCamera.setCamParams(0.6, 50);
+        await AthenaClient.camera.pedEdit.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
+        await AthenaClient.camera.pedEdit.setCamParams(0.6, 50);
         await CharacterSystem.applyEquipment(PedCharacter.get(), null, true);
         readyInterval = alt.setInterval(InternalFunctions.waitForReady, 100);
     }
 
     static close() {
-        WebViewController.closePages([PAGE_NAME]);
-        WebViewController.unfocus();
-        WebViewController.showCursor(false);
-        PedEditCamera.destroy();
+        AthenaClient.webview.closePages([PAGE_NAME]);
+        AthenaClient.webview.unfocus();
+        AthenaClient.webview.showCursor(false);
+        AthenaClient.camera.pedEdit.destroy();
         PedCharacter.destroy();
         native.doScreenFadeOut(100);
         oldCharacterData = null;
@@ -79,7 +79,7 @@ class InternalFunctions {
     }
 
     static async waitForReady() {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.READY, noDiscard, noName);
     }
 
@@ -95,7 +95,7 @@ class InternalFunctions {
 
         await PedCharacter.setHidden(false);
 
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.SET_DATA, oldCharacterData, totalCharacters);
     }
 
@@ -104,17 +104,17 @@ class InternalFunctions {
     }
 
     static async handleNameFinish(result: boolean) {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.VERIFY_NAME, result);
     }
 
     static handleDisableControls(shouldDisableControls: boolean): void {
-        PedEditCamera.disableControls(shouldDisableControls);
+        AthenaClient.camera.pedEdit.disableControls(shouldDisableControls);
     }
 
     static async handleSync(_appearance: Appearance): Promise<void> {
         await PedCharacter.apply(_appearance, true);
-        PedEditCamera.update(PedCharacter.get());
+        AthenaClient.camera.pedEdit.update(PedCharacter.get());
     }
 }
 

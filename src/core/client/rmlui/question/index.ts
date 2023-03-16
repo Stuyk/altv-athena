@@ -5,7 +5,7 @@ import * as AthenaClient from '@AthenaClient/api';
 const ESCAPE_KEY = 27;
 const ENTER_KEY = 13;
 
-interface QuestionInfo {
+export interface QuestionInfo {
     buttons?: {
         accept: string;
         decline: string;

@@ -1,10 +1,9 @@
 import * as alt from 'alt-client';
-import { distance } from '@AthenaShared/utility/vector';
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import * as AthenaClient from '@AthenaClient/api';
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
 import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 
-type PlayerMenuInjection = (target: alt.Player, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
+export type PlayerMenuInjection = (target: alt.Player, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
 const Injections: Array<PlayerMenuInjection> = [];
 
@@ -28,7 +27,7 @@ export function addInjection(callback: PlayerMenuInjection) {
  * @memberof PlayerWheelMenu
  */
 export function open(target: alt.Player) {
-    if (isAnyMenuOpen()) {
+    if (AthenaClient.webview.isAnyMenuOpen()) {
         return;
     }
 
@@ -36,7 +35,7 @@ export function open(target: alt.Player) {
         return;
     }
 
-    const dist = distance(alt.Player.local.pos, target.pos);
+    const dist = AthenaClient.utility.vector.distance(alt.Player.local.pos, target.pos);
     if (dist >= 5) {
         return;
     }

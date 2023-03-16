@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { AthenaClient } from '../../../client/api';
+import * as AthenaClient from '../../../client/api';
 import { DISCORD_LOGIN_EVENTS } from '../shared/events';
 
 let uri: string;
@@ -25,7 +25,7 @@ class DiscordLoginView {
         // Not setting the last value to a 'close' function prevents 'ESCAPE' from being used to close it.
         alt.toggleGameControls(false);
         alt.Player.local.isMenuOpen = true;
-        AthenaClient.webview.open([DISCORD_LOGIN_EVENTS.PAGE_NAME], true);
+        AthenaClient.webview.openPages([DISCORD_LOGIN_EVENTS.PAGE_NAME], true);
         AthenaClient.webview.focus();
         AthenaClient.webview.showCursor(true);
     }
@@ -47,7 +47,7 @@ class DiscordLoginView {
      * @memberof ExampleWebView
      */
     static close() {
-        AthenaClient.webview.close([DISCORD_LOGIN_EVENTS.PAGE_NAME]);
+        AthenaClient.webview.closePages([DISCORD_LOGIN_EVENTS.PAGE_NAME]);
         AthenaClient.webview.unfocus();
         AthenaClient.webview.showCursor(false);
         alt.toggleGameControls(true);

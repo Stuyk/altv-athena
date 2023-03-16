@@ -1,37 +1,35 @@
 <template>
-    <keep-alive>
-        <div class="page">
-            <!-- Developer Menu for Local Host -->
-            <VueDevMenu
-                :pages="getAllPageNames"
-                :previousPages="pages"
-                @DevUpdatePages="devUpdatePages"
-                v-if="isDevMenu()"
-            />
-            <!-- Displays Individual Pages -->
-            <component
-                v-for="(page, index) in pages"
-                :key="index"
-                :is="page.component"
-                :id="'page-' + page.name"
-                :state="state"
-            ></component>
-            <component
-                v-for="(page, index) in overlays"
-                :key="index"
-                :is="page.component"
-                :id="'page-' + page.name"
-                :state="state"
-            ></component>
-            <component
-                v-for="(page, index) in persistent"
-                :key="index"
-                :is="page.component"
-                :id="'page-' + page.name"
-                :state="state"
-            ></component>
-        </div>
-    </keep-alive>
+    <div class="page">
+        <!-- Developer Menu for Local Host -->
+        <VueDevMenu
+            :pages="getAllPageNames"
+            :previousPages="pages"
+            @DevUpdatePages="devUpdatePages"
+            v-if="isDevMenu()"
+        />
+        <!-- Displays Individual Pages -->
+        <component
+            v-for="(page, index) in pages"
+            :key="index"
+            :is="page.component"
+            :id="'page-' + page.name"
+            :state="state"
+        />
+        <component
+            v-for="(page, index) in overlays"
+            :key="index"
+            :is="page.component"
+            :id="'page-' + page.name"
+            :state="state"
+        />
+        <component
+            v-for="(page, index) in persistent"
+            :key="index"
+            :is="page.component"
+            :id="'page-' + page.name"
+            :state="state"
+        />
+    </div>
 </template>
 
 <script lang="ts">

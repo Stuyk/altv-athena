@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
+import * as AthenaClient from '@AthenaClient/api';
+
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Marker } from '@AthenaShared/interfaces/marker';
-import { distance2d } from '@AthenaShared/utility/vector';
-import * as AthenaClient from '@AthenaClient/api';
 
 let addedMarkers: Array<Marker> = [];
 let localMarkers: Array<Marker> = [];
@@ -122,7 +122,7 @@ function handleDrawMarkers() {
             marker.maxDistance = 25;
         }
 
-        if (distance2d(alt.Player.local.pos, marker.pos) > marker.maxDistance) {
+        if (AthenaClient.utility.vector.distance2d(alt.Player.local.pos, marker.pos) > marker.maxDistance) {
             continue;
         }
 

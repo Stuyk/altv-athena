@@ -8,7 +8,7 @@ let currentCamIndex = -1;
 let cam1;
 let cam2;
 
-interface iCameraNode {
+export interface iCameraNode {
     /**
      * Position for where to create this camera.
      *

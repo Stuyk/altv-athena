@@ -3,7 +3,7 @@ import * as native from 'natives';
 
 import { drawRectangle2D, drawText2D } from './text';
 
-interface TextProperties {
+export interface TextProperties {
     paddingLeft?: number;
     paddingRight?: number;
     paddingTop?: number;
@@ -16,7 +16,7 @@ interface TextProperties {
  * Used as a utility for string length.
  * @static
  * @param {string} text
- * @return {*}  {void}
+ * @return {void}
  * @memberof ScreenText
  */
 export function addLongString(text: string): void {
@@ -46,7 +46,7 @@ export function addLongString(text: string): void {
  * @param {string} text
  * @param {number} font
  * @param {number} scale
- * @return {*}  {number}
+ * @return {number}
  * @memberof ScreenText
  */
 export function getWidth(text: string, font: number, scale: number): number {

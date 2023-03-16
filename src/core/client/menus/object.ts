@@ -1,12 +1,15 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { distance } from '../../shared/utility/vector';
-import { isAnyMenuOpen } from '../utility/menus';
+import * as AthenaClient from '@AthenaClient/api';
+
 import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
 import { WheelMenu } from '../views/wheelMenu';
 import { CreatedObject } from '@AthenaClient/streamers/object';
 
-type ObjectMenuInjection = (existingObject: CreatedObject, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
+export type ObjectMenuInjection = (
+    existingObject: CreatedObject,
+    options: Array<IWheelOptionExt>,
+) => Array<IWheelOptionExt>;
 
 const Injections: Array<ObjectMenuInjection> = [];
 
@@ -32,7 +35,7 @@ export function addInjection(callback: ObjectMenuInjection): void {
  * @memberof ObjectWheelMenu
  */
 export function open(object: CreatedObject): void {
-    if (isAnyMenuOpen()) {
+    if (AthenaClient.webview.isAnyMenuOpen()) {
         return;
     }
 
@@ -45,7 +48,7 @@ export function open(object: CreatedObject): void {
     }
 
     const coords = native.getEntityCoords(object.createdObject.scriptID, false);
-    const dist = distance(alt.Player.local.pos, coords);
+    const dist = AthenaClient.utility.vector.distance(alt.Player.local.pos, coords);
     if (dist >= 3) {
         return;
     }

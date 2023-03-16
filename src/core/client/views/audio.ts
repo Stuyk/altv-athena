@@ -1,11 +1,9 @@
 import * as alt from 'alt-client';
+import * as AthenaClient from '@AthenaClient/api';
 
-import { WebViewController } from '@AthenaClient/webview/view';
 import ViewModel from '@AthenaClient/models/viewModel';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
-import { AthenaClient } from '@AthenaClient/api';
-import { handleFrontendSound } from '@AthenaClient/systems/sound';
 
 const PAGE_NAME = 'Audio';
 let interval;
@@ -26,9 +24,9 @@ class InternalFunctions implements ViewModel {
             interval = alt.setInterval(InternalFunctions.handleQueue, 100);
         }
 
-        WebViewController.registerPersistentPage(PAGE_NAME);
+        AthenaClient.webview.registerPersistentPage(PAGE_NAME);
         AthenaClient.webview.on(WebViewEventNames.PLAY_SOUND, AudioView.play3DAudio);
-        AthenaClient.webview.on(WebViewEventNames.PLAY_SOUND_FRONTEND, handleFrontendSound);
+        AthenaClient.webview.on(WebViewEventNames.PLAY_SOUND_FRONTEND, AthenaClient.systems.sound.frontend);
     }
 
     /**
@@ -37,7 +35,7 @@ class InternalFunctions implements ViewModel {
      * @memberof InternalFunctions
      */
     static async handleQueue() {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.emit(`${PAGE_NAME}:TriggerQueue`);
     }
 
@@ -51,7 +49,7 @@ class InternalFunctions implements ViewModel {
      * @memberof InternalFunctions
      */
     static async handle3DAudio(soundName: string, pan: number, volume: number, soundInstantID?: string) {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.emit(`${PAGE_NAME}:Play`, soundName, pan, volume, -1, soundInstantID);
     }
 
@@ -65,7 +63,7 @@ class InternalFunctions implements ViewModel {
      * @memberof InternalFunctions
      */
     static async stop3DAudio(soundInstantID?: string) {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.emit(`${PAGE_NAME}:Stop`, soundInstantID);
     }
 }

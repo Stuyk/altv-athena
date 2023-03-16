@@ -5,7 +5,7 @@ import * as AthenaClient from '@AthenaClient/api';
 const ESCAPE_KEY = 27;
 const ENTER_KEY = 13;
 
-interface InputBoxInfo {
+export interface InputBoxInfo {
     /**
      * What is the question, or info you need a response for?
      * ie. 'What is your first name?'

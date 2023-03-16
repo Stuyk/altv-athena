@@ -3,10 +3,9 @@ import * as native from 'natives';
 import * as AthenaClient from '@AthenaClient/api';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { distance2d } from '@AthenaShared/utility/vector';
 import { ItemDrop } from '@AthenaShared/interfaces/item';
 
-type CreatedDrop = ItemDrop & { createdObject?: alt.Object };
+export type CreatedDrop = ItemDrop & { createdObject?: alt.Object };
 
 let maxDistance = 5;
 let defaultProp = 'prop_cs_cardbox_01';
@@ -101,7 +100,7 @@ const InternalFunctions = {
                 maxDistance = 25;
             }
 
-            const dist = distance2d(alt.Player.local.pos, items[i].pos);
+            const dist = AthenaClient.utility.vector.distance2d(alt.Player.local.pos, items[i].pos);
             if (dist > maxDistance) {
                 continue;
             }

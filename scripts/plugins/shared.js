@@ -58,8 +58,6 @@ export function moveAssetsToWebview(folderName, extensions) {
             amountCopied += 1;
         }
     }
-
-    console.log(`${folderName} - ${amountCopied} Files Available at Path (/plugins) in Webview`);
 }
 
 export function movePluginFilesToWebview(folderName, extensions, isSrc = false) {
@@ -131,6 +129,4 @@ export function movePluginFilesToWebview(folderName, extensions, isSrc = false) 
             }
         }
     }
-
-    console.log(`${folderName} - ${amountCopied} Files Added to WebView Plugins - (${extensions.join('|')})`);
 }

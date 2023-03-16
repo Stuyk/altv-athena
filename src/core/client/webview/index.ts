@@ -6,7 +6,7 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
 import { OverlayPageType } from '@AthenaShared/interfaces/webview';
 
-type AnyCallback = ((...args: any[]) => void) | ((...args: any[]) => Promise<void>) | Function;
+export type AnyCallback = ((...args: any[]) => void) | ((...args: any[]) => Promise<void>) | Function;
 
 const SkipPageOnEscape: Array<string> = [];
 const ReadyEvents: { [pageName: string]: AnyCallback } = {};

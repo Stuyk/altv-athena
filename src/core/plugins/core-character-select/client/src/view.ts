@@ -1,14 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { AthenaClient } from '@AthenaClient/api';
-import { WebViewController } from '@AthenaClient/webview/view';
+import * as AthenaClient from '@AthenaClient/api';
 import ViewModel from '@AthenaClient/models/viewModel';
-import { playPedAnimation } from '@AthenaClient/systems/animations';
+
 import { CharacterSystem } from '@AthenaClient/systems/character';
-import PedEditCamera from '@AthenaClient/camera/pedEdit';
 import { PedCharacter } from '@AthenaClient/utility/characterPed';
 import { disableAllControls } from '@AthenaClient/utility/disableControls';
-import { sleep } from '@AthenaClient/utility/sleep';
 import { SWITCHOUT_TYPES } from '@AthenaShared/enums/switchOutTypes';
 import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
@@ -29,7 +26,7 @@ let isOpen = false;
 class InternalFunctions implements ViewModel {
     static async open(_characters: Partial<Character>[]) {
         characters = _characters;
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
 
         if (isOpen) {
             view.emit(CHARACTER_SELECT_WEBVIEW_EVENTS.SET_CHARACTERS, characters);
@@ -42,9 +39,9 @@ class InternalFunctions implements ViewModel {
         view.on(CHARACTER_SELECT_WEBVIEW_EVENTS.DELETE, InternalFunctions.handleDelete);
         view.on(CHARACTER_SELECT_WEBVIEW_EVENTS.READY, InternalFunctions.ready);
 
-        WebViewController.openPages([PAGE_NAME]);
-        WebViewController.focus();
-        WebViewController.showCursor(true);
+        AthenaClient.webview.openPages([PAGE_NAME]);
+        AthenaClient.webview.focus();
+        AthenaClient.webview.showCursor(true);
 
         await PedCharacter.create(
             _characters[0].appearance.sex === 1 ? true : false,
@@ -53,24 +50,24 @@ class InternalFunctions implements ViewModel {
         );
 
         await PedCharacter.apply(_characters[0].appearance as Appearance);
-        await sleep(300);
-        await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
-        await PedEditCamera.setCamParams(0.5, 40, 100);
+        await alt.Utils.wait(300);
+        await AthenaClient.camera.pedEdit.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
+        await AthenaClient.camera.pedEdit.setCamParams(0.5, 40, 100);
 
         InternalFunctions.update(0);
 
-        await sleep(2000);
+        await alt.Utils.wait(2000);
         native.doScreenFadeIn(500);
 
         isOpen = true;
     }
 
     static async update(index: number) {
-        await sleep(100);
+        await alt.Utils.wait(100);
 
         await PedCharacter.apply(characters[index].appearance as Appearance);
-        PedEditCamera.update(PedCharacter.get());
-        await sleep(100);
+        AthenaClient.camera.pedEdit.update(PedCharacter.get());
+        await alt.Utils.wait(100);
 
         CharacterSystem.applyEquipment(PedCharacter.get(), characters[index].equipment as Array<Item>);
 
@@ -86,7 +83,7 @@ class InternalFunctions implements ViewModel {
                     return;
                 }
 
-                playPedAnimation(
+                AthenaClient.systems.animations.playPedAnimation(
                     PedCharacter.get(),
                     IDLE_ANIM_DICT,
                     IDLE_ANIM,
@@ -111,27 +108,27 @@ class InternalFunctions implements ViewModel {
             }, 100);
         });
 
-        await sleep(100);
+        await alt.Utils.wait(100);
         native.doScreenFadeIn(100);
     }
 
     static async close() {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.off(CHARACTER_SELECT_WEBVIEW_EVENTS.SELECT, InternalFunctions.select);
         view.off(CHARACTER_SELECT_WEBVIEW_EVENTS.NEW, InternalFunctions.handleNew);
         view.off(CHARACTER_SELECT_WEBVIEW_EVENTS.UPDATE, InternalFunctions.update); // Calls `creator.ts`
         view.off(CHARACTER_SELECT_WEBVIEW_EVENTS.DELETE, InternalFunctions.handleDelete);
         view.off(CHARACTER_SELECT_WEBVIEW_EVENTS.READY, InternalFunctions.ready);
 
-        WebViewController.closePages([PAGE_NAME]);
-        WebViewController.unfocus();
-        WebViewController.showCursor(false);
+        AthenaClient.webview.closePages([PAGE_NAME]);
+        AthenaClient.webview.unfocus();
+        AthenaClient.webview.showCursor(false);
 
-        await PedEditCamera.destroy();
+        await AthenaClient.camera.pedEdit.destroy();
         await PedCharacter.destroy();
 
         if (!CHARACTER_SELECT_CONFIG.SKIP_SKYCAM_IN_DEBUG_MODE && alt.debug) {
-            await AthenaClient.utility.switchToMultiSecondpart(2000, SWITCHOUT_TYPES.THREE_STEPS);
+            await AthenaClient.camera.switch.switchToMultiSecondpart(2000, SWITCHOUT_TYPES.THREE_STEPS);
         }
 
         native.freezeEntityPosition(alt.Player.local.scriptID, false);
@@ -143,7 +140,7 @@ class InternalFunctions implements ViewModel {
     }
 
     static async ready() {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.emit(CHARACTER_SELECT_WEBVIEW_EVENTS.SET_CHARACTERS, characters);
     }
 

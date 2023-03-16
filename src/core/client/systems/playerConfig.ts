@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import { PlayerConfigKeys } from '@AthenaShared/enums/playerConfigKeys';
 
-type ConfigCallback = (value: any) => void;
+export type ConfigCallback = (value: any) => void;
 
 const callbacks: { [key: string]: Array<ConfigCallback> } = {};
 

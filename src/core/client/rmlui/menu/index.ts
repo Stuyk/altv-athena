@@ -339,7 +339,7 @@ const InternalFunctions = {
  *
  * @export
  * @param {MenuInfo} info
- * @return {*}  {void}
+ * @return {void}
  */
 export function create(info: MenuInfo): void {
     if (AthenaClient.webview.isAnyMenuOpen(false)) {

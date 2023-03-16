@@ -132,7 +132,7 @@ export function getScreenAspectRatio(): number {
  * Get current screen resolution
  *
  * @export
- * @return {*}  {alt.IVector2}
+ * @return {alt.IVector2}
  */
 export function getScreenResolution(): alt.IVector2 {
     const [_, x, y] = native.getActualScreenResolution(0, 0);
@@ -144,7 +144,7 @@ export function getScreenResolution(): alt.IVector2 {
  * @static
  * @param {number} value
  * @param {boolean} [isXAxis=true]
- * @return {*}  {number}
+ * @return {number}
  * @memberof Minimap
  */
 export function convertToPercentage(value: number, isXAxis = true): number {

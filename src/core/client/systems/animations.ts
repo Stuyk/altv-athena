@@ -11,7 +11,7 @@ const MaxLoadAttempts = 25;
  * Attempts to load an animation dictionary multiple times before returning false.
  * @param {string} dict The name of the animation dictionary.
  * @param {number} [count=0] Do not modify this. Leave it as zero.
- * @return {Promise<boolean>}  {Promise<boolean>}
+ * @return {Promise<boolean>}
  */
 export async function loadAnimation(dict: string, count: number = 0): Promise<boolean> {
     return new Promise((resolve: Function): void => {
@@ -46,7 +46,7 @@ export async function loadAnimation(dict: string, count: number = 0): Promise<bo
  * @param {string} dict The dictionary of the animation.
  * @param {string} name The name of the animation.
  * @param {ANIMATION_FLAGS} [flags=ANIMATION_FLAGS.CANCELABLE] A combination of flags. ie. (ANIMATION_FLAGS.CANCELABLE | ANIMATION_FLAGS.UPPERBODY_ONLY)
- * @return {Promise<void>}  {Promise<void>}
+ * @return {Promise<void>}
  */
 export async function playAnimation(
     dict: string,

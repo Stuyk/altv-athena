@@ -3,7 +3,6 @@ import * as native from 'natives';
 import * as AthenaClient from '@AthenaClient/api';
 
 import { ATHENA_EVENTS_PLAYER_CLIENT } from '@AthenaShared/enums/athenaEvents';
-import { loadSceneAtCoords } from '@AthenaClient/utility/scene';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 let interval: number;
@@ -78,7 +77,7 @@ export async function updateWaypoint(): Promise<void> {
         let startingZPosition = 0;
 
         for (let i = 0; i < 100; i++) {
-            await loadSceneAtCoords(coords);
+            await AthenaClient.utility.scene.load(coords);
             native.requestCollisionAtCoord(coords.x, coords.y, coords.z);
             native.setFocusPosAndVel(coords.x, coords.y, startingZPosition, 0, 0, 0);
 

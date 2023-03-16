@@ -12,7 +12,7 @@ const MaxLoadAttempts = 25;
  * Attempts to load an alarm multiple times before returning false.
  * @param {string} name The name of the alarm.
  * @param {number} [count=0] Do not modify this. Leave it as zero.
- * @return {Promise<boolean>}  {Promise<boolean>}
+ * @return {Promise<boolean>}
  */
 export async function loadAlarm(name: string, count: number = 0): Promise<boolean> {
     return new Promise((resolve: Function): void => {
@@ -45,7 +45,7 @@ export async function loadAlarm(name: string, count: number = 0): Promise<boolea
  * Play an alarm for the local player.
  * @export
  * @param {string} name The name of the alarm.
- * @return {Promise<void>}  {Promise<void>}
+ * @return {Promise<void>}
  */
 export async function startAlarm(name: string): Promise<void> {
     const isPrepared = await loadAlarm(name);
@@ -68,7 +68,7 @@ export async function startAlarm(name: string): Promise<void> {
  * Stop an alarm for the local player.
  * @export
  * @param {string} name The name of the alarm.
- * @return {Promise<void>}  {Promise<void>}
+ * @return {Promise<void>}
  */
 export async function stopAlarm(name: string): Promise<void> {
     if (!native.isAlarmPlaying(name)) {
@@ -81,7 +81,7 @@ export async function stopAlarm(name: string): Promise<void> {
 /**
  * Stop all alarms for the local player.
  * @export
- * @return {Promise<void>}  {Promise<void>}
+ * @return {Promise<void>}
  */
 export async function stopAllAlarms(): Promise<void> {
     try {

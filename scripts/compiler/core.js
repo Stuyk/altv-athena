@@ -152,10 +152,7 @@ async function run() {
     const promises = filesToTranspile.map((file) => transpileFile(file));
     await Promise.all(promises);
 
-    const elapsedTime = +new Date() - startTime;
-    console.log(`Transpiled ${filesToTranspile.length} files`);
-    console.log(`Copied ${filesToCopy.length} files to resources folder`);
-    console.log(`Build completed in: ${elapsedTime}ms`);
+    console.log(`Compiled: ${filesToTranspile.length} || Copied: ${filesToCopy.length}`);
 }
 
 run();
