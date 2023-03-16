@@ -1,5 +1,5 @@
+import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Timer } from './timers';
 
 let everyTickControls: number;
 let everyTickAttacks: number;
@@ -12,24 +12,24 @@ let everyTickAttacks: number;
  */
 export function disableAllControls(value: boolean) {
     if (everyTickControls) {
-        Timer.clearInterval(everyTickControls);
+        alt.clearInterval(everyTickControls);
         everyTickControls = null;
     }
 
     if (value) {
-        everyTickControls = Timer.createInterval(handleDisablingControls, 0, 'disableControls.ts - All');
+        everyTickControls = alt.setInterval(handleDisablingControls, 0);
         return;
     }
 }
 
 export function disableAllAttacks(value: boolean) {
     if (everyTickAttacks) {
-        Timer.clearInterval(everyTickAttacks);
+        alt.clearInterval(everyTickAttacks);
         everyTickAttacks = null;
     }
 
     if (value) {
-        everyTickAttacks = Timer.createInterval(handleDisablingAttacks, 0, 'disableControls.ts - Attacks');
+        everyTickAttacks = alt.setInterval(handleDisablingAttacks, 0);
         return;
     }
 }

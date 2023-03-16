@@ -1,12 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import * as AthenaClient from '@AthenaClient/api';
 
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { VIEW_EVENTS_WHEEL_MENU } from '@AthenaShared/enums/views';
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
-import { WebViewController } from '@AthenaClient/extensions/view2';
 import ViewModel from '@AthenaClient/models/viewModel';
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 const PAGE_NAME = 'WheelMenu';
 let _label = '';
@@ -78,16 +77,16 @@ class InternalFunctions implements ViewModel {
             _interval = null;
         }
 
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.off(VIEW_EVENTS_WHEEL_MENU.READY, InternalFunctions.ready);
         view.off(VIEW_EVENTS_WHEEL_MENU.EXECUTE, InternalFunctions.execute);
 
         if (closePage) {
-            await WebViewController.closePages([PAGE_NAME], true);
+            await AthenaClient.webview.closePages([PAGE_NAME], true);
         }
 
-        WebViewController.unfocus();
-        WebViewController.showCursor(false);
+        AthenaClient.webview.unfocus();
+        AthenaClient.webview.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
 
@@ -95,7 +94,7 @@ class InternalFunctions implements ViewModel {
     }
 
     static async ready() {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.emit(VIEW_EVENTS_WHEEL_MENU.ADD_OPTIONS, _label, JSON.parse(JSON.stringify(_options)));
     }
 }
@@ -112,7 +111,7 @@ export class WheelMenu {
      * @memberof WheelMenu
      */
     static async open(label: string, options: Array<IWheelOptionExt>, setMouseToCenter = false) {
-        if (isAnyMenuOpen()) {
+        if (AthenaClient.webview.isAnyMenuOpen()) {
             return;
         }
 
@@ -127,7 +126,7 @@ export class WheelMenu {
 
         // This is where we bind our received events from the WebView to
         // the functions in our WebView.
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.on(VIEW_EVENTS_WHEEL_MENU.READY, InternalFunctions.ready);
         view.on(VIEW_EVENTS_WHEEL_MENU.EXECUTE, InternalFunctions.execute);
 
@@ -137,9 +136,9 @@ export class WheelMenu {
         }
 
         // This is where we open the page and show the cursor.
-        WebViewController.openPages(PAGE_NAME, true, InternalFunctions.close);
-        WebViewController.focus();
-        WebViewController.showCursor(true);
+        AthenaClient.webview.openPages(PAGE_NAME, true, InternalFunctions.close);
+        AthenaClient.webview.focus();
+        AthenaClient.webview.showCursor(true);
 
         // Let the rest of the script know this menu is open.
         alt.Player.local.isMenuOpen = true;

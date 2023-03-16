@@ -89,7 +89,6 @@ async function handleConfiguration() {
         configName = 'devtest';
     }
 
-    console.log(`===> Starting Configuration Build`);
     const start = Date.now();
     let promises = [];
 
@@ -102,7 +101,6 @@ async function handleConfiguration() {
     promises.push(
         runFile(npx, 'altv-config', './scripts/buildresource/resource.json', './resources/core/resource.toml'),
     );
-    console.log(`===> Finished Configuration Build (${Date.now() - start}ms)`);
     return await Promise.all(promises);
 }
 
@@ -111,17 +109,19 @@ async function handleViteDevServer() {
         lastViteServer.kill();
     }
 
-    console.log(`===> Starting Vite Server`);
     await runFile(node, './scripts/plugins/webview.js');
-    lastViteServer = spawn(npx, ['vite', './src-webviews', '--clearScreen=false', '--debug=true'], {
-        stdio: 'inherit',
-    });
+    lastViteServer = spawn(
+        npx,
+        ['vite', './src-webviews', '--clearScreen=false', '--debug=true', '--host=localhost', '--port=3000'],
+        {
+            stdio: 'inherit',
+        },
+    );
 
     lastViteServer.once('close', (code) => {
         console.log(`Vite process exited with code ${code}`);
     });
 
-    console.log(`===> Started Vite Server`);
     return await new Promise((resolve) => {
         setTimeout(resolve, 2000);
     });
@@ -132,9 +132,7 @@ function handleStreamerProcess(shouldAutoRestart = false) {
         lastStreamerProcess.kill();
     }
 
-    console.log(`===> Starting Streamer Process`);
     lastStreamerProcess = spawn(node, ['./scripts/streamer/dist/index.js'], { stdio: 'inherit' });
-
     lastStreamerProcess.once('close', (code) => {
         console.log(`Streamer process exited with code ${code}`);
         if (shouldAutoRestart) {
@@ -147,8 +145,6 @@ async function handleServerProcess(shouldAutoRestart = false) {
     if (lastServerProcess && !lastServerProcess.killed) {
         lastServerProcess.kill();
     }
-
-    console.log(`===> Starting Server Process`);
 
     if (process.platform !== 'win32') {
         await runFile('chmod', '+x', `./altv-server`);
@@ -218,13 +214,13 @@ async function refreshFileWatching() {
 }
 
 async function coreBuildProcess() {
-    console.log('===> Starting Core Build');
     const start = Date.now();
     await runFile(node, './scripts/compiler/core');
     await runFile(node, './scripts/plugins/core');
     await runFile(node, './scripts/plugins/webview');
     await runFile(node, './scripts/plugins/files');
-    console.log(`===> Finished Core Build (${Date.now() - start}ms)`);
+    await runFile(node, './scripts/transform/index');
+    console.log(`Build Time - ${Date.now() - start}ms`);
 }
 
 async function devMode(firstRun = false) {
@@ -253,7 +249,6 @@ async function runServer() {
     const isDev = passedArguments.includes('dev');
 
     //Update dependencies for all the things
-    console.log('===> Updating dependencies for plugins');
     await runFile(node, './scripts/plugins/update-dependencies');
 
     if (isDev) {

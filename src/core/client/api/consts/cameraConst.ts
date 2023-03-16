@@ -1,6 +1,6 @@
-import { GameplayCamera } from '@AthenaClient/systems/gameplayCamera';
-import PedEditCamera from '@AthenaClient/utility/camera';
-import { CinematicCam } from '@AthenaClient/utility/cinematic';
+import { GameplayCamera } from '@AthenaClient/camera/gameplay';
+import PedEditCamera from '@AthenaClient/camera/pedEdit';
+import { CinematicCam } from '@AthenaClient/camera/cinematic';
 
 export const cameraConst = {
     ped: PedEditCamera,

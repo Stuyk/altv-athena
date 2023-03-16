@@ -1,12 +1,11 @@
-import { AthenaClient } from '@AthenaClient/api/athena';
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
 
 const ESCAPE_KEY = 27;
 const ENTER_KEY = 13;
 
-interface QuestionInfo {
+export interface QuestionInfo {
     buttons?: {
         accept: string;
         decline: string;
@@ -60,9 +59,9 @@ const InternalFunctions = {
 
         acceptElement.on('click', InternalFunctions.submit);
         declineElement.on('click', () => {
-            AthenaClient.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
+            AthenaClient.systems.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
             internalCallback(false);
-            QuestionBox.cancel();
+            cancel();
         });
 
         if (info.buttons) {
@@ -86,9 +85,9 @@ const InternalFunctions = {
     },
     handleKeyUp(keycode: number) {
         if (keycode === ESCAPE_KEY) {
-            AthenaClient.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
+            AthenaClient.systems.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
             internalCallback(false);
-            QuestionBox.cancel();
+            cancel();
             return;
         }
 
@@ -99,8 +98,8 @@ const InternalFunctions = {
     },
     async submit() {
         const callbackRef = internalCallback;
-        AthenaClient.sound.frontend('SELECT', 'HUD_FREEMODE_SOUNDSET');
-        await QuestionBox.cancel();
+        AthenaClient.systems.sound.frontend('SELECT', 'HUD_FREEMODE_SOUNDSET');
+        await cancel();
 
         if (typeof callbackRef === 'function') {
             callbackRef(true);
@@ -108,58 +107,62 @@ const InternalFunctions = {
     },
 };
 
-const QuestionBoxConst = {
-    create(info: QuestionInfo): Promise<boolean> {
-        if (isAnyMenuOpen(false)) {
-            console.warn(`Input box could not be created because a menu is already open.`);
-            return undefined;
-        }
+/**
+ * Create a box that asks for a simple yes or no answer.
+ *
+ * @export
+ * @param {QuestionInfo} info
+ * @return {Promise<boolean>}
+ */
+export function create(info: QuestionInfo): Promise<boolean> {
+    if (AthenaClient.webview.isAnyMenuOpen(false)) {
+        console.warn(`Input box could not be created because a menu is already open.`);
+        return undefined;
+    }
 
-        if (typeof document === 'undefined') {
-            document = new alt.RmlDocument('/client/rmlui/question/index.rml');
-            document.show();
-        }
+    if (typeof document === 'undefined') {
+        document = new alt.RmlDocument('/client/rmlui/question/index.rml');
+        document.show();
+    }
 
-        alt.Player.local.isMenuOpen = true;
-        alt.on('keyup', InternalFunctions.handleKeyUp);
-        alt.showCursor(true);
-        alt.toggleRmlControls(true);
-        alt.toggleGameControls(false);
-        InternalFunctions.focus(info);
+    alt.Player.local.isMenuOpen = true;
+    alt.on('keyup', InternalFunctions.handleKeyUp);
+    alt.showCursor(true);
+    alt.toggleRmlControls(true);
+    alt.toggleGameControls(false);
+    InternalFunctions.focus(info);
 
-        return new Promise((resolve: MessageCallback) => {
-            internalCallback = resolve;
-        });
-    },
-    async cancel() {
-        if (typeof document !== 'undefined') {
-            document.destroy();
-            document = undefined;
-        }
+    return new Promise((resolve: MessageCallback) => {
+        internalCallback = resolve;
+    });
+}
 
-        internalCallback = undefined;
-        alt.Player.local.isMenuOpen = false;
-        alt.off('keyup', InternalFunctions.handleKeyUp);
-        alt.showCursor(false);
-        alt.toggleRmlControls(false);
-        alt.toggleGameControls(true);
-        native.triggerScreenblurFadeOut(250);
-        native.displayHud(true);
-        native.displayRadar(true);
-
-        await alt.Utils.waitFor(() => {
-            return native.isScreenblurFadeRunning() === false;
-        });
-    },
-};
-
-alt.on('disconnect', () => {
+export async function cancel() {
     if (typeof document !== 'undefined') {
         document.destroy();
-        alt.log('question | Destroyed RMLUI Document on Disconnect');
+        document = undefined;
     }
-});
 
-export const QuestionBox = {
-    ...QuestionBoxConst,
-};
+    internalCallback = undefined;
+    alt.Player.local.isMenuOpen = false;
+    alt.off('keyup', InternalFunctions.handleKeyUp);
+    alt.showCursor(false);
+    alt.toggleRmlControls(false);
+    alt.toggleGameControls(true);
+    native.triggerScreenblurFadeOut(250);
+    native.displayHud(true);
+    native.displayRadar(true);
+
+    await alt.Utils.waitFor(() => {
+        return native.isScreenblurFadeRunning() === false;
+    });
+}
+
+alt.on('disconnect', () => {
+    if (typeof document === 'undefined') {
+        return;
+    }
+
+    document.destroy();
+    alt.log('question | Destroyed RMLUI Document on Disconnect');
+});

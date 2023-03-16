@@ -1,10 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import * as AthenaClient from '@AthenaClient/api';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 import { KeyBindRestrictions, KeyInfo } from '@AthenaClient/interface/hotkeys';
-import { AthenaClient } from '@AthenaClient/api/athena';
 
 export type KeyInfoDefault = KeyInfo & { default: number };
 
@@ -123,7 +122,7 @@ const Internal = {
                 overrideMenuCheck = AthenaClient.webview.isPageOpen(keyInfo.allowInSpecificPage);
             }
 
-            if (!keyInfo.allowInAnyMenu && isAnyMenuOpen() && !overrideMenuCheck) {
+            if (!keyInfo.allowInAnyMenu && AthenaClient.webview.isAnyMenuOpen() && !overrideMenuCheck) {
                 continue;
             }
 
@@ -161,7 +160,7 @@ const Internal = {
                 overrideMenuCheck = AthenaClient.webview.isPageOpen(keyInfo.allowInSpecificPage);
             }
 
-            if (!keyInfo.allowInAnyMenu && isAnyMenuOpen() && !overrideMenuCheck) {
+            if (!keyInfo.allowInAnyMenu && AthenaClient.webview.isAnyMenuOpen() && !overrideMenuCheck) {
                 return;
             }
 
@@ -228,103 +227,102 @@ const Internal = {
     },
 };
 
-export const HotkeyRegistry = {
-    /**
-     * Add a key bind to the start listening for key presses.
-     * https://www.toptal.com/developers/keycode
-     *
-     * @param {KeyInfo} keyBind
-     */
-    add(keyBind: KeyInfo) {
-        const userDefinedHotkey = alt.LocalStorage.get(`keybind-${keyBind.key}`);
+/**
+ * Add a key bind to the start listening for key presses.
+ * https://www.toptal.com/developers/keycode
+ *
+ * @param {KeyInfo} keyBind
+ */
+export function add(keyBind: KeyInfo) {
+    const userDefinedHotkey = alt.LocalStorage.get(`keybind-${keyBind.key}`);
 
-        if (typeof userDefinedHotkey !== 'undefined') {
-            keyMappings.push({ ...keyBind, default: keyBind.key, key: userDefinedHotkey });
-            return;
-        }
+    if (typeof userDefinedHotkey !== 'undefined') {
+        keyMappings.push({ ...keyBind, default: keyBind.key, key: userDefinedHotkey });
+        return;
+    }
 
-        keyMappings.push({ ...keyBind, default: keyBind.key });
-    },
-    /**
-     * Used to check if a keybind passes certain validation metrics.
-     * Useful for show on-screen data related to a key bind.
-     * Should only be called periodically. Roughly every 500ms~1s
-     *
-     * @param {(string | number)} keyOrIdentifier
-     */
-    checkValidation(keyOrIdentifier: string | number): boolean {
-        const keyInfo = Internal.getKeyInfo(keyOrIdentifier);
-        if (typeof keyInfo === 'undefined') {
-            return false;
-        }
+    keyMappings.push({ ...keyBind, default: keyBind.key });
+}
 
-        return Internal.isValidRestrictions(keyInfo.restrictions);
-    },
-    set: {
-        /**
-         * Disble a keybind
-         *
-         * @param {(string | number)} keyOrIdentifier
-         */
-        disabled(keyOrIdentifier: string | number) {
-            Internal.setDisabled(keyOrIdentifier, true);
-        },
-        /**
-         * Enable a keybind
-         *
-         * @param {(string | number)} keyOrIdentifier
-         */
-        enabled(keyOrIdentifier: string | number) {
-            Internal.setDisabled(keyOrIdentifier, false);
-        },
-        /**
-         * Allows a key to be rebound at runtime.
-         * Once a key is rebound, it will automatically be loaded on server rejoin.
-         *
-         * @param {string} keyOrIdentifier
-         */
-        rebind(keyOrIdentifier: string | number, keyCode: number) {
-            let index: number;
-            if (typeof keyOrIdentifier === 'string') {
-                index = keyMappings.findIndex((x) => x && x.identifier === keyOrIdentifier);
-            } else {
-                index = keyMappings.findIndex((x) => x.key === keyOrIdentifier);
-            }
+/**
+ * Used to check if a keybind passes certain validation metrics.
+ * Useful for show on-screen data related to a key bind.
+ * Should only be called periodically. Roughly every 500ms~1s
+ *
+ * @param {(string | number)} keyOrIdentifier
+ */
+export function checkValidation(keyOrIdentifier: string | number): boolean {
+    const keyInfo = Internal.getKeyInfo(keyOrIdentifier);
+    if (typeof keyInfo === 'undefined') {
+        return false;
+    }
 
-            if (index <= -1) {
-                return;
-            }
+    return Internal.isValidRestrictions(keyInfo.restrictions);
+}
 
-            if (keyMappings[index].doNotAllowRebind) {
-                return;
-            }
+/**
+ * Disble a keybind
+ *
+ * @param {(string | number)} keyOrIdentifier
+ */
+export function disable(keyOrIdentifier: string | number) {
+    Internal.setDisabled(keyOrIdentifier, true);
+}
 
-            alt.LocalStorage.set(`keybind-${keyMappings[index].default}`, keyCode);
-            alt.LocalStorage.save();
+/**
+ * Enable a keybind
+ *
+ * @param {(string | number)} keyOrIdentifier
+ */
+export function enable(keyOrIdentifier: string | number) {
+    Internal.setDisabled(keyOrIdentifier, false);
+}
+/**
+ * Allows a key to be rebound at runtime.
+ * Once a key is rebound, it will automatically be loaded on server rejoin.
+ *
+ * @param {string} keyOrIdentifier
+ */
+export function rebind(keyOrIdentifier: string | number, keyCode: number) {
+    let index: number;
+    if (typeof keyOrIdentifier === 'string') {
+        index = keyMappings.findIndex((x) => x && x.identifier === keyOrIdentifier);
+    } else {
+        index = keyMappings.findIndex((x) => x.key === keyOrIdentifier);
+    }
 
-            keyMappings[index].key = keyCode;
-        },
-    },
-    get: {
-        /**
-         * Returns all hotkeys and their relevant information.
-         *
-         * @return {Array<KeyInfoDefault>}
-         */
-        hotkeys(): Array<KeyInfoDefault> {
-            return keyMappings;
-        },
-        /**
-         * Return a keybind information for a key.
-         * Returns undefined if key is not bound, or found.
-         *
-         * @param {(string | number)} keyOrIdentifier
-         * @return {*}
-         */
-        hotkey(keyOrIdentifier: string | number): KeyInfo | undefined {
-            return Internal.getKeyInfo(keyOrIdentifier);
-        },
-    },
-};
+    if (index <= -1) {
+        return;
+    }
+
+    if (keyMappings[index].doNotAllowRebind) {
+        return;
+    }
+
+    alt.LocalStorage.set(`keybind-${keyMappings[index].default}`, keyCode);
+    alt.LocalStorage.save();
+
+    keyMappings[index].key = keyCode;
+}
+
+/**
+ * Returns all hotkeys and their relevant information.
+ *
+ * @return {Array<KeyInfoDefault>}
+ */
+export function hotkeys(): Array<KeyInfoDefault> {
+    return keyMappings;
+}
+
+/**
+ * Return a keybind information for a key.
+ * Returns undefined if key is not bound, or found.
+ *
+ * @param {(string | number)} keyOrIdentifier
+ * @return {*}
+ */
+export function hotkey(keyOrIdentifier: string | number): KeyInfo | undefined {
+    return Internal.getKeyInfo(keyOrIdentifier);
+}
 
 onTicksStart.add(Internal.init);

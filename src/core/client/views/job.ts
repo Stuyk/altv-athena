@@ -1,12 +1,11 @@
 import * as alt from 'alt-client';
+import * as AthenaClient from '@AthenaClient/api';
 
 import { VIEW_EVENTS_JOB_TRIGGER } from '@AthenaShared/enums/views';
 import { JobTrigger } from '@AthenaShared/interfaces/jobTrigger';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
-import { WebViewController } from '@AthenaClient/extensions/view2';
 import ViewModel from '@AthenaClient/models/viewModel';
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 const PAGE_NAME = 'Job';
 let trigger: JobTrigger;
@@ -20,25 +19,25 @@ class InternalFunctions implements ViewModel {
     }
 
     static async open(_trigger: JobTrigger) {
-        if (isAnyMenuOpen()) {
+        if (AthenaClient.webview.isAnyMenuOpen()) {
             return;
         }
 
         // Must always be called first if you want to hide HUD.
-        await WebViewController.setOverlaysVisible(false);
+        await AthenaClient.webview.setOverlaysVisible(false);
 
         trigger = _trigger;
 
         // This is where we bind our received events from the WebView to
         // the functions in our WebView.
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
         view.on(`${PAGE_NAME}:Select`, InternalFunctions.accept);
 
         // This is where we open the page and show the cursor.
-        WebViewController.openPages(PAGE_NAME, true, InternalFunctions.close);
-        WebViewController.focus();
-        WebViewController.showCursor(true);
+        AthenaClient.webview.openPages(PAGE_NAME, true, InternalFunctions.close);
+        AthenaClient.webview.focus();
+        AthenaClient.webview.showCursor(true);
 
         // Turn off game controls, hide the hud.
         alt.toggleGameControls(false);
@@ -56,17 +55,17 @@ class InternalFunctions implements ViewModel {
     static async close(doNotCancel = false, shouldClosePage = false) {
         alt.toggleGameControls(true);
 
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
         view.off(`${PAGE_NAME}:Select`, InternalFunctions.accept);
 
-        WebViewController.unfocus();
-        WebViewController.showCursor(false);
+        AthenaClient.webview.unfocus();
+        AthenaClient.webview.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
 
         if (shouldClosePage) {
-            WebViewController.closePages([PAGE_NAME], true);
+            AthenaClient.webview.closePages([PAGE_NAME], true);
         }
 
         if (doNotCancel) {
@@ -77,7 +76,7 @@ class InternalFunctions implements ViewModel {
     }
 
     static async ready() {
-        const view = await WebViewController.get();
+        const view = await AthenaClient.webview.get();
         view.emit(`${PAGE_NAME}:Data`, trigger);
         view.emit(`${PAGE_NAME}:SetLocales`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_JOB));
     }

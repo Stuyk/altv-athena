@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Item } from '@AthenaShared/interfaces/item';
-import { AthenaClient } from '@AthenaClient/api/athena';
 
 const DELAY_TIME = 1000;
 const KeyBinds = {
@@ -49,7 +49,7 @@ const Internal = {
 
         const timeLeft = ((debounce - Date.now()) / 1000).toFixed(2);
         const offsetPos = native.getOffsetFromEntityInWorldCoords(alt.Player.local.scriptID, 0.5, 0, 0.2);
-        AthenaClient.screen.drawText3D(`${timeLeft}s`, offsetPos, 0.5, new alt.RGBA(255, 255, 255, 150));
+        AthenaClient.screen.text.drawText3D(`${timeLeft}s`, offsetPos, 0.5, new alt.RGBA(255, 255, 255, 150));
     },
     handleKeyPress(key: number) {
         if (!enabled) {
@@ -69,7 +69,7 @@ const Internal = {
                 interval = alt.setInterval(Internal.drawCooldown, 0);
             }
 
-            AthenaClient.sound.play2D('error', 0.2);
+            AthenaClient.systems.sound.play2d('error', 0.2);
             return;
         }
 

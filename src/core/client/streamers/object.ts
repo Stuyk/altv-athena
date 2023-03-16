@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Timer } from '@AthenaClient/utility/timers';
 import { IObject } from '@AthenaShared/interfaces/iObject';
 
 export type CreatedObject = IObject & { createdObject?: alt.Object };
@@ -22,45 +21,9 @@ const InternalFunctions = {
             return;
         }
 
-        Timer.clearInterval(interval);
+        alt.clearInterval(interval);
     },
-    addObject(newObject: IObject) {
-        if (persistentObjects.length >= 64) {
-            throw new Error(`Exceeded User Object Count. Ensure you are removing objects for individual players.`);
-        }
 
-        const persistentIndex = persistentObjects.findIndex((x) => x.uid === newObject.uid);
-        if (persistentIndex >= 0) {
-            return;
-        }
-
-        const createdObject = new alt.Object(
-            newObject.model,
-            new alt.Vector3(newObject.pos),
-            new alt.Vector3(0, 0, 0),
-            true,
-            false,
-        );
-
-        if (newObject.noCollision) {
-            createdObject.toggleCollision(false, false);
-        }
-
-        createdObject.setPositionFrozen(true);
-        persistentObjects.push({ ...newObject, createdObject });
-    },
-    removeObject(uid: string) {
-        const persistentIndex = persistentObjects.findIndex((x) => x.uid === uid);
-        if (persistentIndex <= -1) {
-            return;
-        }
-
-        if (persistentObjects[persistentIndex].createdObject) {
-            persistentObjects[persistentIndex].createdObject.destroy();
-        }
-
-        persistentObjects.splice(persistentIndex, 1);
-    },
     moveObject(uid: string, pos: alt.IVector3) {
         const persistentIndex = persistentObjects.findIndex((x) => x.uid === uid);
         if (persistentIndex >= 0) {
@@ -139,6 +102,45 @@ const InternalFunctions = {
     },
 };
 
+export function addObject(newObject: IObject) {
+    if (persistentObjects.length >= 64) {
+        throw new Error(`Exceeded User Object Count. Ensure you are removing objects for individual players.`);
+    }
+
+    const persistentIndex = persistentObjects.findIndex((x) => x.uid === newObject.uid);
+    if (persistentIndex >= 0) {
+        return;
+    }
+
+    const createdObject = new alt.Object(
+        newObject.model,
+        new alt.Vector3(newObject.pos),
+        new alt.Vector3(0, 0, 0),
+        true,
+        false,
+    );
+
+    if (newObject.noCollision) {
+        createdObject.toggleCollision(false, false);
+    }
+
+    createdObject.setPositionFrozen(true);
+    persistentObjects.push({ ...newObject, createdObject });
+}
+
+export function removeObject(uid: string) {
+    const persistentIndex = persistentObjects.findIndex((x) => x.uid === uid);
+    if (persistentIndex <= -1) {
+        return;
+    }
+
+    if (persistentObjects[persistentIndex].createdObject) {
+        persistentObjects[persistentIndex].createdObject.destroy();
+    }
+
+    persistentObjects.splice(persistentIndex, 1);
+}
+
 /**
  * Used to obtain a CreatedObject instance from a generic scriptID
  *
@@ -146,7 +148,7 @@ const InternalFunctions = {
  * @param {number} scriptId
  * @return {CreatedObject}
  */
-export function getObjectFromScriptID(scriptId: number): CreatedObject {
+export function getFromScriptId(scriptId: number): CreatedObject {
     const persistentIndex = persistentObjects.findIndex(
         (x) => x && x.createdObject && x.createdObject.scriptID === scriptId,
     );
@@ -166,6 +168,6 @@ export function getObjectFromScriptID(scriptId: number): CreatedObject {
 alt.on('connectionComplete', InternalFunctions.init);
 alt.on('disconnect', InternalFunctions.stop);
 alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, InternalFunctions.populate);
-alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, InternalFunctions.addObject);
-alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, InternalFunctions.removeObject);
 alt.onServer(SYSTEM_EVENTS.MOVE_OBJECT, InternalFunctions.moveObject);
+alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, addObject);
+alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, removeObject);

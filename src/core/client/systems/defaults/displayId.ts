@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import * as AthenaClient from '@AthenaClient/api';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 
@@ -10,12 +10,11 @@ function init(location: typeof screenPoint) {
     screenPoint = location;
     id = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID) as number;
     alt.everyTick(tick);
-
     alt.log(`Display ID: ${id}`);
 }
 
 function tick() {
-    AthenaClient.screen.drawText2D(`ID ${id}`, screenPoint, 0.4, new alt.RGBA(255, 255, 255, 150));
+    AthenaClient.screen.text.drawText2D(`ID ${id}`, screenPoint, 0.4, new alt.RGBA(255, 255, 255, 150));
 }
 
 alt.onServer(SYSTEM_EVENTS.SHOW_SCREEN_PLAYER_ID, init);

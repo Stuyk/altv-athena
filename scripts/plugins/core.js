@@ -82,10 +82,7 @@ function run() {
 
     writeServerImports(serverImports);
     writeClientImports(clientImports);
-
-    console.log(
-        `Enabled plugins: ${enabledPlugins.length} (${clientImports.length} client, ${serverImports.length} server)`,
-    );
+    console.log(`Plugin(s): ${enabledPlugins.length}`);
 }
 
 run();

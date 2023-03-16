@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
 
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { MessageCommand } from '@AthenaShared/interfaces/messageCommand';
 
 interface CommandInput {
@@ -198,7 +198,7 @@ const InternalFunctions = {
     },
     handleKeyUp(keycode: number) {
         if (keycode === KEY_CODES.ESCAPE_KEY) {
-            CommandInputConst.cancel();
+            cancel();
             return;
         }
 
@@ -222,7 +222,7 @@ const InternalFunctions = {
     async submit() {
         const msg = InternalFunctions.getCurrentMessage();
         const callbackRef = internalCallback;
-        await CommandInputConst.cancel();
+        await cancel();
 
         if (typeof callbackRef !== 'function') {
             return;
@@ -244,78 +244,76 @@ const InternalFunctions = {
     },
 };
 
-const CommandInputConst = {
-    create(inputInfo: CommandInput, skipMenuCheck = false): Promise<string | undefined> {
-        if (!skipMenuCheck) {
-            wasMenuCheckSkipped = false;
-            if (isAnyMenuOpen()) {
-                console.warn(`Input box could not be created because a menu is already open.`);
-                return undefined;
-            }
-        } else {
-            wasMenuCheckSkipped = true;
+export function create(inputInfo: CommandInput, skipMenuCheck = false): Promise<string | undefined> {
+    if (!skipMenuCheck) {
+        wasMenuCheckSkipped = false;
+        if (AthenaClient.webview.isAnyMenuOpen()) {
+            console.warn(`Input box could not be created because a menu is already open.`);
+            return undefined;
         }
+    } else {
+        wasMenuCheckSkipped = true;
+    }
 
-        if (typeof document === 'undefined') {
-            document = new alt.RmlDocument('/client/rmlui/commands/index.rml');
-            document.show();
-        }
+    if (typeof document === 'undefined') {
+        document = new alt.RmlDocument('/client/rmlui/commands/index.rml');
+        document.show();
+    }
 
-        alt.Player.local.isMenuOpen = true;
-        alt.on('keyup', InternalFunctions.handleKeyUp);
-        alt.showCursor(true);
-        alt.toggleRmlControls(true);
-        alt.toggleGameControls(false);
-        InternalFunctions.focus(inputInfo);
+    alt.Player.local.isMenuOpen = true;
+    alt.on('keyup', InternalFunctions.handleKeyUp);
+    alt.showCursor(true);
+    alt.toggleRmlControls(true);
+    alt.toggleGameControls(false);
+    InternalFunctions.focus(inputInfo);
 
-        isCommandInputOpen = true;
+    isCommandInputOpen = true;
 
-        return new Promise((resolve: MessageCallback) => {
-            internalCallback = resolve;
-        });
-    },
-    async cancel() {
-        if (typeof document !== 'undefined') {
-            document.destroy();
-            document = undefined;
-        }
+    return new Promise((resolve: MessageCallback) => {
+        internalCallback = resolve;
+    });
+}
 
-        internalCallback = undefined;
-        alt.off('keyup', InternalFunctions.handleKeyUp);
-        alt.showCursor(false);
-        alt.toggleRmlControls(false);
-        alt.toggleGameControls(true);
-        native.triggerScreenblurFadeOut(250);
-        native.displayHud(true);
-        native.displayRadar(true);
-
-        if (!wasMenuCheckSkipped) {
-            alt.Player.local.isMenuOpen = false;
-        }
-
-        await alt.Utils.waitFor(() => {
-            return native.isScreenblurFadeRunning() === false;
-        });
-
-        isCommandInputOpen = false;
-    },
-    /**
-     * Returns whether or not this interface is open.
-     *
-     * @return {boolean}
-     */
-    isOpen(): boolean {
-        return isCommandInputOpen;
-    },
-};
-
-alt.on('disconnect', () => {
+export async function cancel() {
     if (typeof document !== 'undefined') {
         document.destroy();
-        alt.log('input | Destroyed RMLUI Document on Disconnect');
+        document = undefined;
     }
-});
 
-export const CommandInput = {
-    ...CommandInputConst,
-};
+    internalCallback = undefined;
+    alt.off('keyup', InternalFunctions.handleKeyUp);
+    alt.showCursor(false);
+    alt.toggleRmlControls(false);
+    alt.toggleGameControls(true);
+    native.triggerScreenblurFadeOut(250);
+    native.displayHud(true);
+    native.displayRadar(true);
+
+    if (!wasMenuCheckSkipped) {
+        alt.Player.local.isMenuOpen = false;
+    }
+
+    await alt.Utils.waitFor(() => {
+        return native.isScreenblurFadeRunning() === false;
+    });
+
+    isCommandInputOpen = false;
+}
+
+/**
+ * Returns whether or not this interface is open.
+ *
+ * @return {boolean}
+ */
+export function isOpen(): boolean {
+    return isCommandInputOpen;
+}
+
+alt.on('disconnect', () => {
+    if (typeof document === 'undefined') {
+        return;
+    }
+
+    document.destroy();
+    alt.log('input | Destroyed RMLUI Document on Disconnect');
+});

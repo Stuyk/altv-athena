@@ -3,7 +3,6 @@ import * as native from 'natives';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline';
-import { sleep } from '@AthenaClient/utility/sleep';
 
 let timeline: Array<Task | TaskCallback> = [];
 let vehicle;
@@ -74,7 +73,7 @@ const TaskHelper = {
             native[nativeName](vehicle.scriptID, ...taskParams);
         }
 
-        await sleep(task.timeToWaitInMs);
+        await alt.Utils.wait(task.timeToWaitInMs);
         if (timeline.length >= 1) {
             alt.setTimeout(TaskHelper.nextTask, 0);
         } else {

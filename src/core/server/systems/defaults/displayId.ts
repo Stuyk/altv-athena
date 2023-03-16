@@ -55,6 +55,12 @@ export function disable() {
  * X as 1 = Right of Screen
  * Y as 1 = Bottom of Screen
  *
+ * @example
+ * ```ts
+ * // Place in the very center of the screen. I'm sure everyone would love it.
+ * Athena.systems.default.displayId.setLocation(0.5, 0.5);
+ * ```
+ *
  * @export
  * @param {number} x 0 - 1.0
  * @param {number} y 0 - 1.0

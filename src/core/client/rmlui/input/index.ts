@@ -1,11 +1,11 @@
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
 
 const ESCAPE_KEY = 27;
 const ENTER_KEY = 13;
 
-interface InputBoxInfo {
+export interface InputBoxInfo {
     /**
      * What is the question, or info you need a response for?
      * ie. 'What is your first name?'
@@ -69,7 +69,7 @@ const InternalFunctions = {
     },
     handleKeyUp(keycode: number) {
         if (keycode === ESCAPE_KEY) {
-            InputBoxConst.cancel();
+            cancel();
             return;
         }
 
@@ -83,7 +83,7 @@ const InternalFunctions = {
         const msg = element.getAttribute('value');
 
         const callbackRef = internalCallback;
-        await InputBoxConst.cancel();
+        await cancel();
 
         if (typeof callbackRef === 'function') {
             callbackRef(msg !== '' ? msg : undefined);
@@ -91,58 +91,67 @@ const InternalFunctions = {
     },
 };
 
-const InputBoxConst = {
-    create(inputInfo: InputBoxInfo, skipMenuCheck = false): Promise<string | undefined> {
-        if (!skipMenuCheck) {
-            wasMenuCheckSkipped = false;
-            if (isAnyMenuOpen(false)) {
-                console.warn(`Input box could not be created because a menu is already open.`);
-                return undefined;
-            }
-        } else {
-            wasMenuCheckSkipped = true;
+/**
+ * Create an input box.
+ *
+ * Retruns a string or undefined based on user input.
+ *
+ * @export
+ * @param {InputBoxInfo} inputInfo
+ * @param {boolean} [skipMenuCheck=false]
+ * @return {(Promise<string | undefined>)}
+ */
+export function create(inputInfo: InputBoxInfo, skipMenuCheck = false): Promise<string | undefined> {
+    if (!skipMenuCheck) {
+        wasMenuCheckSkipped = false;
+        if (AthenaClient.webview.isAnyMenuOpen(false)) {
+            console.warn(`Input box could not be created because a menu is already open.`);
+            return undefined;
         }
+    } else {
+        wasMenuCheckSkipped = true;
+    }
 
-        if (typeof document === 'undefined') {
-            document = new alt.RmlDocument('/client/rmlui/input/index.rml');
-            document.show();
-        }
+    if (typeof document === 'undefined') {
+        document = new alt.RmlDocument('/client/rmlui/input/index.rml');
+        document.show();
+    }
 
-        alt.Player.local.isMenuOpen = true;
-        alt.on('keyup', InternalFunctions.handleKeyUp);
-        alt.showCursor(true);
-        alt.toggleRmlControls(true);
-        alt.toggleGameControls(false);
-        InternalFunctions.focus(inputInfo);
+    alt.Player.local.isMenuOpen = true;
+    alt.on('keyup', InternalFunctions.handleKeyUp);
+    alt.showCursor(true);
+    alt.toggleRmlControls(true);
+    alt.toggleGameControls(false);
+    InternalFunctions.focus(inputInfo);
 
-        return new Promise((resolve: MessageCallback) => {
-            internalCallback = resolve;
-        });
-    },
-    async cancel() {
-        if (typeof document !== 'undefined') {
-            document.destroy();
-            document = undefined;
-        }
+    return new Promise((resolve: MessageCallback) => {
+        internalCallback = resolve;
+    });
+}
 
-        internalCallback = undefined;
-        alt.off('keyup', InternalFunctions.handleKeyUp);
-        alt.showCursor(false);
-        alt.toggleRmlControls(false);
-        alt.toggleGameControls(true);
-        native.triggerScreenblurFadeOut(250);
-        native.displayHud(true);
-        native.displayRadar(true);
+export async function cancel() {
+    if (typeof document !== 'undefined') {
+        document.destroy();
+        document = undefined;
+    }
 
-        if (!wasMenuCheckSkipped) {
-            alt.Player.local.isMenuOpen = false;
-        }
+    internalCallback = undefined;
+    alt.off('keyup', InternalFunctions.handleKeyUp);
+    alt.showCursor(false);
+    alt.toggleRmlControls(false);
+    alt.toggleGameControls(true);
+    native.triggerScreenblurFadeOut(250);
+    native.displayHud(true);
+    native.displayRadar(true);
 
-        await alt.Utils.waitFor(() => {
-            return native.isScreenblurFadeRunning() === false;
-        });
-    },
-};
+    if (!wasMenuCheckSkipped) {
+        alt.Player.local.isMenuOpen = false;
+    }
+
+    await alt.Utils.waitFor(() => {
+        return native.isScreenblurFadeRunning() === false;
+    });
+}
 
 alt.on('disconnect', () => {
     if (typeof document !== 'undefined') {
@@ -150,7 +159,3 @@ alt.on('disconnect', () => {
         alt.log('input | Destroyed RMLUI Document on Disconnect');
     }
 });
-
-export const InputBox = {
-    ...InputBoxConst,
-};

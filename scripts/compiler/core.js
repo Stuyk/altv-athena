@@ -117,7 +117,8 @@ async function transpileFile(file) {
             result.code = resolvePaths(file, result.code);
         }
 
-        fs.outputFileSync(targetPath, result.code);
+        const finalFile = `// YOU ARE EDITING COMPILED FILES. DO NOT EDIT THESE FILES \r\n` + result.code;
+        fs.outputFileSync(targetPath, finalFile);
         resolve();
     });
 }
@@ -134,7 +135,7 @@ async function run() {
 
     for (const fileOrDirectory of filesAndDirectories) {
         const fullPath = sanitizePath(path.join(resourcesFolder, fileOrDirectory)).replace(/\\/g, '/');
-        if (!fullPath.includes('core') || !fullPath.includes('webviews')) {
+        if (!fullPath.includes('core') && !fullPath.includes('webviews')) {
             continue;
         }
 
@@ -151,10 +152,7 @@ async function run() {
     const promises = filesToTranspile.map((file) => transpileFile(file));
     await Promise.all(promises);
 
-    const elapsedTime = +new Date() - startTime;
-    console.log(`Transpiled ${filesToTranspile.length} files`);
-    console.log(`Copied ${filesToCopy.length} files to resources folder`);
-    console.log(`Build completed in: ${elapsedTime}ms`);
+    console.log(`Compiled: ${filesToTranspile.length} || Copied: ${filesToCopy.length}`);
 }
 
 run();

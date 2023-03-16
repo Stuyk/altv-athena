@@ -1,66 +1,61 @@
 import * as alt from 'alt-client';
-import { distance } from '@AthenaShared/utility/vector';
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import * as AthenaClient from '@AthenaClient/api';
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
 import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 
-type PlayerMenuInjection = (target: alt.Player, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
+export type PlayerMenuInjection = (target: alt.Player, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
 const Injections: Array<PlayerMenuInjection> = [];
 
-export const PlayerWheelMenu = {
-    /**
-     * Allows the current Menu Options to be modified.
-     * Meaning, a callback that will modify existing options, or append new options to the menu.
-     * Must always return the original wheel menu options + your changes.
-     *
-     * @static
-     * @param {PlayerMenuInjection} callback
-     * @memberof PlayerWheelMenu
-     */
-    addInjection(callback: PlayerMenuInjection) {
-        Injections.push(callback);
-    },
+/**
+ * Allows the current Menu Options to be modified.
+ * Meaning, a callback that will modify existing options, or append new options to the menu.
+ * Must always return the original wheel menu options + your changes.
+ *
+ * @param {PlayerMenuInjection} callback
+ * @memberof PlayerWheelMenu
+ */
+export function addInjection(callback: PlayerMenuInjection) {
+    Injections.push(callback);
+}
 
-    /**
-     * Opens the wheel menu against a target player.
-     *
-     * @static
-     * @param {alt.Player} target
-     * @return {*}
-     * @memberof PlayerWheelMenu
-     */
-    openMenu(target: alt.Player) {
-        if (isAnyMenuOpen()) {
-            return;
+/**
+ * Opens the wheel menu against a target player.
+ *
+ * @param {alt.Player} target
+ * @return {*}
+ * @memberof PlayerWheelMenu
+ */
+export function open(target: alt.Player) {
+    if (AthenaClient.webview.isAnyMenuOpen()) {
+        return;
+    }
+
+    if (!target || !target.valid) {
+        return;
+    }
+
+    const dist = AthenaClient.utility.vector.distance(alt.Player.local.pos, target.pos);
+    if (dist >= 5) {
+        return;
+    }
+
+    let options: Array<IWheelOptionExt> = [];
+
+    // Normal Wheel Options Here...
+
+    for (const callback of Injections) {
+        try {
+            options = callback(target, options);
+        } catch (err) {
+            console.warn(`Got Player Menu Injection Error: ${err}`);
+            continue;
         }
+    }
 
-        if (!target || !target.valid) {
-            return;
-        }
+    if (options.length <= 0) {
+        return;
+    }
 
-        const dist = distance(alt.Player.local.pos, target.pos);
-        if (dist >= 5) {
-            return;
-        }
-
-        let options: Array<IWheelOptionExt> = [];
-
-        // Normal Wheel Options Here...
-
-        for (const callback of Injections) {
-            try {
-                options = callback(target, options);
-            } catch (err) {
-                console.warn(`Got Player Menu Injection Error: ${err}`);
-                continue;
-            }
-        }
-
-        if (options.length <= 0) {
-            return;
-        }
-
-        WheelMenu.open('Player', options);
-    },
-};
+    WheelMenu.open('Player', options);
+}

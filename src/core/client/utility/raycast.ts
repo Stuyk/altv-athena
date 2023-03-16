@@ -12,7 +12,7 @@ const Raycast = {
      * @param {number} flags
      * @param {number} radius
      * @param {boolean} [useShapeTest=false]
-     * @return {*}  {[number, boolean, alt.IVector3, alt.IVector3, number]}
+     * @return {[number, boolean, alt.IVector3, alt.IVector3, number]}
      * @memberof Raycast
      */
     performRaycast(
@@ -106,7 +106,7 @@ const Raycast = {
      * @param {number} [flags=-1]
      * @param {boolean} [useShapeTest=false]
      * @param {number} [radius=5]
-     * @return {*}  {{ didComplete: boolean; didHit?: boolean; position?: alt.IVector3; entityHit?: number }}
+     * @return {{ didComplete: boolean; didHit?: boolean; position?: alt.IVector3; entityHit?: number }}
      * @memberof Raycast
      */
     simpleRaycast(
@@ -143,7 +143,7 @@ const Raycast = {
      * @static
      * @param {boolean} [useShapeTest=false]
      * @param {number} [radius=5]
-     * @return {*}  {{ didComplete: boolean; didHit?: boolean; position?: alt.IVector3; entityHit?: number }}
+     * @return {{ didComplete: boolean; didHit?: boolean; position?: alt.IVector3; entityHit?: number }}
      * @memberof Raycast
      */
     simpleRaycastPlayersView(

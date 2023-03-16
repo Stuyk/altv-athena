@@ -1,6 +1,6 @@
 {
-    "entryPoints": ["./server/**/*.ts", "./shared/**/*.ts"],
-    "exclude": ["./server/api/**/*.ts"],
+    "entryPoints": ["./server/**/*.ts", "./shared/**/*.ts", "./client/**/*.ts"],
+    "exclude": ["./server/api/**/*.ts", "./server/api/**/*.ts"],
     "out": "../../docs",
     "skipErrorChecking": true,
     "tsconfig": "./custom.json",
