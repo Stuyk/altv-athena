@@ -17,35 +17,32 @@ const InternalFunctions = {
     },
 };
 
-export const PlayerConfig = {
-    /**
-     * Get a value assigned by the server.
-     *
-     * @template ReturnType
-     * @param {string} key
-     * @return {(ReturnType | undefined)}
-     */
-    get<ReturnType, CustomKeys>(key: PlayerConfigKeys | CustomKeys): ReturnType | undefined {
-        return alt.getMeta(String(key)) as ReturnType;
-    },
-    callback: {
-        /**
-         * Add a custom callback to listen for config changes.
-         *
-         * @template CustomKeys
-         * @param {(PlayerConfigKeys | CustomKeys)} key
-         * @param {ConfigCallback} callback
-         */
-        add<CustomKeys>(key: PlayerConfigKeys | CustomKeys, callback: ConfigCallback) {
-            const keyName = String(key);
+/**
+ * Get a value assigned by the server.
+ *
+ * @template ReturnType
+ * @param {string} key
+ * @return {(ReturnType | undefined)}
+ */
+export function get<ReturnType, CustomKeys>(key: PlayerConfigKeys | CustomKeys): ReturnType | undefined {
+    return alt.getMeta(String(key)) as ReturnType;
+}
 
-            if (!callbacks[keyName]) {
-                callbacks[keyName] = [];
-            }
+/**
+ * Add a custom callback to listen for config changes.
+ *
+ * @template CustomKeys
+ * @param {(PlayerConfigKeys | CustomKeys)} key
+ * @param {ConfigCallback} callback
+ */
+export function addCallback<CustomKeys>(key: PlayerConfigKeys | CustomKeys, callback: ConfigCallback) {
+    const keyName = String(key);
 
-            callbacks[keyName].push(callback);
-        },
-    },
-};
+    if (!callbacks[keyName]) {
+        callbacks[keyName] = [];
+    }
+
+    callbacks[keyName].push(callback);
+}
 
 alt.on('localMetaChange', InternalFunctions.process);

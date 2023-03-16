@@ -117,7 +117,8 @@ async function transpileFile(file) {
             result.code = resolvePaths(file, result.code);
         }
 
-        fs.outputFileSync(targetPath, result.code);
+        const finalFile = `// YOU ARE EDITING COMPILED FILES. DO NOT EDIT THESE FILES \r\n` + result.code;
+        fs.outputFileSync(targetPath, finalFile);
         resolve();
     });
 }

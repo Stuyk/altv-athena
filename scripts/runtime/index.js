@@ -224,6 +224,7 @@ async function coreBuildProcess() {
     await runFile(node, './scripts/plugins/core');
     await runFile(node, './scripts/plugins/webview');
     await runFile(node, './scripts/plugins/files');
+    await runFile(node, './scripts/transform/index');
     console.log(`===> Finished Core Build (${Date.now() - start}ms)`);
 }
 

@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { AthenaClient } from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api';
 import { Item } from '@AthenaShared/interfaces/item';
 import { INVENTORY_EVENTS } from '../shared/events';
 import { INVENTORY_CONFIG } from '../shared/config';
@@ -84,7 +84,7 @@ function getClosestPlayers() {
             continue;
         }
 
-        const dist = AthenaClient.utility.distance3D(alt.Player.local.pos, playerList[i].pos);
+        const dist = AthenaClient.utility.vector.distance(alt.Player.local.pos, playerList[i].pos);
         if (dist > INVENTORY_CONFIG.MAX_GIVE_DISTANCE) {
             continue;
         }
@@ -96,7 +96,7 @@ function getClosestPlayers() {
 }
 
 function init() {
-    page = new AthenaClient.webview.page({
+    page = new AthenaClient.webview.Page({
         name: INVENTORY_EVENTS.PAGE,
         callbacks: {
             onReady: async () => {
@@ -132,7 +132,10 @@ function init() {
                 previousHudColor = new alt.RGBA(r, g, b, a);
                 native.replaceHudColourWithRgba(117, 0, 0, 0, 0);
 
-                AthenaClient.sound.play2D(`@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_open.ogg`, 0.2);
+                AthenaClient.systems.sound.play2d(
+                    `@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_open.ogg`,
+                    0.2,
+                );
             },
             onClose: () => {
                 isOpen = false;
@@ -156,7 +159,10 @@ function init() {
                 }
 
                 alt.emitServer(INVENTORY_EVENTS.TO_SERVER.CLOSE);
-                AthenaClient.sound.play2D(`@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_close.ogg`, 0.2);
+                AthenaClient.systems.sound.play2d(
+                    `@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_close.ogg`,
+                    0.2,
+                );
             },
         },
         keybind: {
@@ -189,9 +195,9 @@ function init() {
     });
 
     onInventoryUpdate.add(onUpdate);
-    AthenaClient.config.player.callback.add('inventory-size', onInventorySizeChange);
-    AthenaClient.config.player.callback.add('inventory-weight-enabled', onInventoryWeightStateChange);
-    AthenaClient.config.player.callback.add('inventory-max-weight', onInventoryMaxWeightChange);
+    AthenaClient.systems.playerConfig.addCallback('inventory-size', onInventorySizeChange);
+    AthenaClient.systems.playerConfig.addCallback('inventory-weight-enabled', onInventoryWeightStateChange);
+    AthenaClient.systems.playerConfig.addCallback('inventory-max-weight', onInventoryMaxWeightChange);
     AthenaClient.webview.on(INVENTORY_EVENTS.FROM_WEBVIEW.GET_CLOSEST_PLAYERS, getClosestPlayers);
 
     alt.onServer(INVENTORY_EVENTS.TO_CLIENT.OPEN, () => {

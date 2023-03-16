@@ -1,4 +1,4 @@
-export * as page from './page';
+export { Page } from './page';
 import * as native from 'natives';
 import * as alt from 'alt-client';
 
@@ -387,57 +387,6 @@ export function dispose() {
 }
 
 /**
- * Binds a WebView event once and ensures it is never bound again.
- * @static
- * @param {string} eventName
- * @param {(...args: any[]) => void} listener
- * @return {*}
- * @memberof WebViewController
- */
-export async function on(eventName: string, listener: (...args: any[]) => void) {
-    const view = await get();
-    const index: number = _currentEvents.findIndex((e) => e.eventName === eventName);
-    if (index >= 0) {
-        return;
-    }
-
-    view.on(eventName, listener);
-    _currentEvents.push({ eventName, callback: listener });
-}
-
-/**
- * Unbinds events from the WebView. Mostly useless.
- * @static
- * @param {string} eventName
- * @param {(...args: any[]) => void} listener
- * @return {*}
- * @memberof WebViewController
- */
-export async function off(eventName: string, listener: (...args: any[]) => void) {
-    const view = await get();
-    view.off(eventName, listener);
-
-    const index = _currentEvents.findIndex((x) => x.eventName === eventName);
-    if (index <= -1) {
-        return;
-    }
-
-    _currentEvents.splice(index, 1);
-}
-
-/**
- * Emit an event to the WebView.
- * @static
- * @param {string} eventName
- * @param {...any[]} args
- * @memberof WebViewController
- */
-export async function emit(eventName: string, ...args: any[]) {
-    const view = await get();
-    view.emit(eventName, ...args);
-}
-
-/**
  * Used to open a page or pages.
  * Use a single page if you have closing callbacks.
  *
@@ -652,7 +601,7 @@ export function ready(pageName: string, callback: AnyCallback) {
  * @param {(...args: any[]) => void} callback
  * @memberof WebViewController
  */
-export function onInvoke<EventNames = string>(eventName: EventNames, callback: AnyCallback) {
+export function on<EventNames = string>(eventName: EventNames, callback: AnyCallback) {
     if (ClientEvents[String(eventName)]) {
         console.warn(`[Client] Duplicate Event Name (${eventName}) for Athena.webview.on (WebViewController.onInvoke)`);
 
@@ -672,7 +621,7 @@ export function onInvoke<EventNames = string>(eventName: EventNames, callback: A
  * @param {...any[]} args
  * @memberof WebViewController
  */
-export async function invoke<EventNames = string>(eventName: EventNames, ...args: any[]) {
+export async function emit<EventNames = string>(eventName: EventNames, ...args: any[]) {
     const view = await get();
     if (!view) {
         return;
