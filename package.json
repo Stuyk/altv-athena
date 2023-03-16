@@ -16,7 +16,7 @@
         "check": "tsc --noEmit -p ./tsconfig.json | node ./scripts/fileChecker/index.js",
         "fix": "node ./scripts/doctor/index.js",
         "[-] Vue WebView Deployment": "",
-        "vue-dev": "node ./scripts/plugins/webview && node ./scripts/plugins/files && npx vite ./src-webviews --clearScreen=false --port=3000",
+        "vue-dev": "node ./scripts/plugins/webview && node ./scripts/plugins/files && npx vite ./src-webviews --clearScreen=false --host=localhost --port=3000",
         "[-] Utility": "",
         "docs": "npx typedoc --options ./src/core/typedoc.json",
         "fix-natives": "node ./scripts/natives-upgrade/index.js",
