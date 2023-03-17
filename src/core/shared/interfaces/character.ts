@@ -130,7 +130,7 @@ export interface Character {
      * @type {Partial<Appearance>}
      * @memberof Character
      */
-    appearance: Partial<Appearance>;
+    appearance: Partial<Appearance> | Appearance;
 
     /**
      * Character info. Will eventually be used for ID cards.

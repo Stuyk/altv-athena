@@ -24,9 +24,23 @@ export function currencyData(player: alt.Player): void {
     }
 }
 
-export function appearance(player: alt.Player, appearance: Appearance) {
+export function appearance(player: alt.Player) {
     if (Overrides.appearance) {
-        return Overrides.appearance(player, appearance);
+        return Overrides.appearance(player);
+    }
+
+    const data = Athena.document.character.get(player);
+    if (!data) {
+        return;
+    }
+
+    const appearance = data.appearance;
+    if (!appearance) {
+        return;
+    }
+
+    if (data.skin) {
+        return;
     }
 
     if (appearance.sex === 0) {

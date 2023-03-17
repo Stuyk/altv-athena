@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Appearance } from '@AthenaShared/interfaces/appearance';
 
 export type Decorator = { overlay: string; collection: string };
 export type HairStyle = { hair: number; dlc?: string | number; color1: number; color2: number; decorator: Decorator };
@@ -43,8 +42,6 @@ export async function setHairStyle(player: alt.Player, style: HairStyle) {
     data.appearance.hairOverlay = style.decorator;
 
     await Athena.document.character.set(player, 'appearance', data.appearance);
-    Athena.player.sync.appearance(player, data.appearance as Appearance);
-    Athena.systems.inventory.clothing.update(player);
 }
 
 /**
@@ -72,8 +69,6 @@ export async function setFacialHair(player: alt.Player, choice: BaseStyle) {
     data.appearance.facialHairOpacity = choice.opacity;
 
     await Athena.document.character.set(player, 'appearance', data.appearance);
-    Athena.player.sync.appearance(player, data.appearance as Appearance);
-    Athena.systems.inventory.clothing.update(player);
 }
 
 /**
@@ -101,8 +96,6 @@ export async function setEyebrows(player: alt.Player, choice: BaseStyle) {
     data.appearance.eyebrowsOpacity = choice.opacity;
 
     await Athena.document.character.set(player, 'appearance', data.appearance);
-    Athena.player.sync.appearance(player, data.appearance as Appearance);
-    Athena.systems.inventory.clothing.update(player);
 }
 
 /**
@@ -127,8 +120,6 @@ export async function setModel(player: alt.Player, isFeminine: boolean) {
 
     data.appearance.sex = isFeminine ? 0 : 1;
     await Athena.document.character.set(player, 'appearance', data.appearance);
-    Athena.player.sync.appearance(player, data.appearance as Appearance);
-    Athena.systems.inventory.clothing.update(player);
 }
 
 /**
@@ -153,8 +144,6 @@ export async function setEyeColor(player: alt.Player, color: number) {
 
     data.appearance.eyes = color;
     await Athena.document.character.set(player, 'appearance', data.appearance);
-    Athena.player.sync.appearance(player, data.appearance as Appearance);
-    Athena.systems.inventory.clothing.update(player);
 }
 
 /**
