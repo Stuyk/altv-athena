@@ -53,7 +53,8 @@ const InternalFunctions = {
         return res.end(toJSON({ routes: Object.keys(InternalFunctions).filter((x) => x !== 'response') }));
     },
     '/players': (res: http.ServerResponse) => {
-        const players = Athena.get.players.online().map((player) => {
+        const players = Athena.getters.players.online().map((player) => {
+            const data = Athena.document.character.get(player);
             return {
                 id: player.id,
                 pos: player.pos,
@@ -62,6 +63,7 @@ const InternalFunctions = {
                 armour: player.armour,
                 hp: player.health,
                 model: player.model,
+                data,
                 ...player,
             };
         });
@@ -70,8 +72,9 @@ const InternalFunctions = {
     },
     '/vehicles': (res: http.ServerResponse) => {
         const vehicles = [...alt.Vehicle.all]
-            .filter((x) => x && x.valid && x.data && x.data._id)
+            .filter((x) => x && x.valid)
             .map((vehicle) => {
+                const data = Athena.document.vehicle.get(vehicle);
                 return {
                     id: vehicle.id,
                     pos: vehicle.pos,
@@ -80,6 +83,7 @@ const InternalFunctions = {
                     engineHealth: vehicle.engineHealth,
                     model: vehicle.model,
                     ...vehicle,
+                    data: data ? data : {},
                 };
             });
 
