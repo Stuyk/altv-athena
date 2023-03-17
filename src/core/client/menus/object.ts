@@ -3,7 +3,6 @@ import * as native from 'natives';
 import * as AthenaClient from '@AthenaClient/api';
 
 import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
-import { WheelMenu } from '../views/wheelMenu';
 import { CreatedObject } from '@AthenaClient/streamers/object';
 
 export type ObjectMenuInjection = (
@@ -71,5 +70,5 @@ export function open(object: CreatedObject): void {
         return;
     }
 
-    WheelMenu.open('Object', options);
+    AthenaClient.systems.wheelMenu.open('Object', options);
 }

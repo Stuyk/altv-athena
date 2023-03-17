@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 import * as AthenaClient from '@AthenaClient/api';
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
-import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 
 export type PlayerMenuInjection = (target: alt.Player, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
@@ -57,5 +56,5 @@ export function open(target: alt.Player) {
         return;
     }
 
-    WheelMenu.open('Player', options);
+    AthenaClient.systems.wheelMenu.open('Player', options);
 }

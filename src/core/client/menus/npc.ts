@@ -3,7 +3,6 @@ import * as native from 'natives';
 import * as AthenaClient from '@AthenaClient/api';
 
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
-import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 import { IPed } from '@AthenaShared/interfaces/iPed';
 
 export type NpcMenuInjection = (scriptID: number, ped: IPed, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
@@ -66,5 +65,5 @@ export function open(scriptID: number): void {
         return;
     }
 
-    WheelMenu.open('NPC', options);
+    AthenaClient.systems.wheelMenu.open('NPC', options);
 }

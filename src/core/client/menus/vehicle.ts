@@ -4,7 +4,6 @@ import * as AthenaClient from '@AthenaClient/api';
 
 import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
-import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 
 export type VehicleMenuInjection = (target: alt.Vehicle, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
@@ -69,7 +68,7 @@ export function openInVehicleMenu(vehicle: alt.Vehicle) {
         return;
     }
 
-    WheelMenu.open('Vehicle Options', options);
+    AthenaClient.systems.wheelMenu.open('Vehicle Options', options);
 }
 
 export function open(vehicle: alt.Vehicle) {
@@ -124,5 +123,5 @@ export function open(vehicle: alt.Vehicle) {
         return;
     }
 
-    WheelMenu.open('Vehicle Options', options);
+    AthenaClient.systems.wheelMenu.open('Vehicle Options', options);
 }
