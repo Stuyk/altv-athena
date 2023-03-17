@@ -48,6 +48,41 @@ const InternalFunctions = {
 
         createdObjects[globalIndex].createdObject.pos = new alt.Vector3(pos);
     },
+    updateObjectModel(uid: string, model: string) {
+        const persistentIndex = persistentObjects.findIndex((x) => x.uid === uid);
+        if (persistentIndex >= 0) {
+            persistentObjects[persistentIndex].model = model;
+            if (persistentObjects[persistentIndex].createdObject) {
+                persistentObjects[persistentIndex].createdObject.destroy();
+            }
+
+            const createdObject = new alt.Object(
+                model,
+                new alt.Vector3(persistentObjects[persistentIndex].pos),
+                new alt.Vector3(0, 0, 0),
+                true,
+                false,
+            );
+
+            if (persistentObjects[persistentIndex].noCollision) {
+                createdObject.toggleCollision(false, false);
+            }
+
+            createdObject.setPositionFrozen(true);
+            persistentObjects[persistentIndex].createdObject = createdObject;
+            return;
+        }
+
+        const globalIndex = createdObjects.findIndex((x) => x.uid === uid);
+        if (globalIndex <= -1) {
+            return;
+        }
+
+        createdObjects[globalIndex].model = model;
+        if (createdObjects[globalIndex].createdObject) {
+            createdObjects[globalIndex].createdObject.destroy();
+        }
+    },
     populate(newObjects: Array<IObject>) {
         // First Loop Clears Uncommon Values
         for (let i = createdObjects.length - 1; i >= 0; i--) {
@@ -57,6 +92,7 @@ const InternalFunctions = {
 
             if (createdObjects[i].createdObject) {
                 createdObjects[i].createdObject.destroy();
+                createdObjects[i].createdObject = undefined;
             }
 
             createdObjects.splice(i, 1);
@@ -71,7 +107,13 @@ const InternalFunctions = {
             }
 
             if (createdObjects[existingIndex].createdObject) {
-                // Used for updating the p osition if non-matching
+                if (createdObjects[existingIndex].model !== newObjects[i].model) {
+                    createdObjects[existingIndex].createdObject.destroy();
+                    createdObjects[existingIndex].createdObject = undefined;
+                    continue;
+                }
+
+                // Used for updating the position if non-matching
                 const { x, y } = createdObjects[existingIndex].createdObject.pos;
                 const doesXMatch = Math.floor(x) === Math.floor(newObjects[i].pos.x);
                 const doesYMatch = Math.floor(y) === Math.floor(newObjects[i].pos.y);
@@ -171,3 +213,4 @@ alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, InternalFunctions.populate);
 alt.onServer(SYSTEM_EVENTS.MOVE_OBJECT, InternalFunctions.moveObject);
 alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, addObject);
 alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, removeObject);
+alt.onServer(SYSTEM_EVENTS.UPDATE_OBJECT_MODEL, InternalFunctions.updateObjectModel);
