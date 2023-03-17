@@ -28,6 +28,11 @@ export function bind(player: alt.Player, document: Account) {
         document._id = document._id.toString();
     }
 
+    if (document.banned) {
+        player.kick(document.reason ? document.reason : 'Banned');
+        return;
+    }
+
     cache[player.id] = document;
 }
 
