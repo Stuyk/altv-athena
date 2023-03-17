@@ -191,7 +191,6 @@ export async function select(player: alt.Player, character: Character) {
         Athena.systems.inventory.weapons.update(player);
         player.frozen = false;
         player.visible = true;
-        player.hasFullySpawned = true;
 
         Athena.player.emit.fadeScreenFromBlack(player, 2000);
         Athena.player.events.trigger('selected-character', player);

@@ -40,7 +40,7 @@ const Internal = {
             return;
         }
 
-        const loggedInPlayers = [...alt.Player.all].filter((x) => x && x.valid && x.hasFullySpawned);
+        const loggedInPlayers = Athena.getters.players.online();
         if (loggedInPlayers.length <= 0) {
             return;
         }

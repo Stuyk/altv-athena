@@ -317,6 +317,11 @@ Athena.player.appearance
 - setModel
 - updateTattoos
 
+Athena.utility.restrict
+- Used to make ANY function permission restricted for a given player.
+- Easily wrap a function, or a event and restrict it.
+- Allows for notifying the user if the function is restricted.
+
 ```
 
 

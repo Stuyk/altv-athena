@@ -197,7 +197,7 @@ export function override(functionName: 'setModel', callback: typeof setModel);
 export function override(functionName: 'setEyeColor', callback: typeof setEyeColor);
 export function override(functionName: 'updateTattoos', callback: typeof updateTattoos);
 /**
- * Used to override any internal currency functions.
+ * Used to override any appearance setter functions.
  *
  * @export
  * @param {keyof AppearanceFuncs} functionName

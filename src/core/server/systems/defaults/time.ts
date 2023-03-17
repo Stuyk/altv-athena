@@ -1,6 +1,5 @@
-import * as Athena from '@AthenaServer/api';
-
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 
 /**
  * THIS IS A DEFAULT SYSTEM.
@@ -31,7 +30,7 @@ const Internal = {
         minute = time.getMinutes();
         hour = time.getHours();
 
-        const loggedInPlayers = [...alt.Player.all].filter((x) => x && x.valid && x.hasFullySpawned);
+        const loggedInPlayers = Athena.getters.players.online();
         if (loggedInPlayers.length <= 0) {
             return;
         }

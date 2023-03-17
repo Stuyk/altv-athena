@@ -119,13 +119,6 @@ export interface Character {
     wanted: number;
 
     /**
-     * Unique character specific permissions for commands.
-     * @type {(CharacterPermissions | null)}
-     * @memberof Character
-     */
-    characterPermission?: CHARACTER_PERMISSIONS | null;
-
-    /**
      * Appearance data for how this character looks.
      * @type {Partial<Appearance>}
      * @memberof Character
