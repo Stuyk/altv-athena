@@ -307,6 +307,16 @@ Display ID
 - Added default system to show ID in top-right of screen.
 - Can be disabled through Athena.systems.defaults.displayId.disable()
 - Can be customized to move position elsewhere through similar API as above
+
+Athena.player.appearance
+- These are all new utility functions to help with updating player appearance
+- setHair
+- setFacialHair
+- setEyebrows
+- setEyeColor
+- setModel
+- updateTattoos
+
 ```
 
 
