@@ -18,6 +18,10 @@ export type BaseStyle = { style: number; opacity: number; color: number };
  * @return {*}
  */
 export async function setHairStyle(player: alt.Player, style: HairStyle) {
+    if (Overrides.setHairStyle) {
+        return Overrides.setHairStyle(player, style);
+    }
+
     const data = Athena.document.character.get(player);
     if (!data || !data.appearance) {
         return;
@@ -54,6 +58,10 @@ export async function setHairStyle(player: alt.Player, style: HairStyle) {
  * @return {*}
  */
 export async function setFacialHair(player: alt.Player, choice: BaseStyle) {
+    if (Overrides.setFacialHair) {
+        return Overrides.setFacialHair(player, choice);
+    }
+
     const data = Athena.document.character.get(player);
     if (!data || !data.appearance) {
         return;
@@ -79,6 +87,10 @@ export async function setFacialHair(player: alt.Player, choice: BaseStyle) {
  * @return {*}
  */
 export async function setEyebrows(player: alt.Player, choice: BaseStyle) {
+    if (Overrides.setEyebrows) {
+        return Overrides.setEyebrows(player, choice);
+    }
+
     const data = Athena.document.character.get(player);
     if (!data || !data.appearance) {
         return;
@@ -104,6 +116,10 @@ export async function setEyebrows(player: alt.Player, choice: BaseStyle) {
  * @return {*}
  */
 export async function setModel(player: alt.Player, isFeminine: boolean) {
+    if (Overrides.setModel) {
+        return Overrides.setModel(player, isFeminine);
+    }
+
     const data = Athena.document.character.get(player);
     if (!data || !data.appearance) {
         return;
@@ -126,6 +142,10 @@ export async function setModel(player: alt.Player, isFeminine: boolean) {
  * @return {*}
  */
 export async function setEyeColor(player: alt.Player, color: number) {
+    if (Overrides.setEyeColor) {
+        return Overrides.setEyeColor(player, color);
+    }
+
     const data = Athena.document.character.get(player);
     if (!data || !data.appearance) {
         return;
@@ -146,6 +166,10 @@ export async function setEyeColor(player: alt.Player, color: number) {
  * @param {Array<{ overlay: string; collection: string }>} [decorators=undefined]
  */
 export function updateTattoos(player: alt.Player, decorators: Array<Decorator> = undefined) {
+    if (Overrides.updateTattoos) {
+        return Overrides.updateTattoos(player, decorators);
+    }
+
     if (decorators && Array.isArray(decorators)) {
         player.emit(SYSTEM_EVENTS.SET_PLAYER_DECORATIONS, decorators);
         return;
@@ -164,4 +188,32 @@ export function updateTattoos(player: alt.Player, decorators: Array<Decorator> =
     if (decoratorsToSync.length >= 1) {
         player.emit(SYSTEM_EVENTS.SET_PLAYER_DECORATIONS, decoratorsToSync);
     }
+}
+
+interface AppearanceFuncs {
+    setHairStyle: typeof setHairStyle;
+    setFacialHair: typeof setFacialHair;
+    setEyebrows: typeof setEyebrows;
+    setModel: typeof setModel;
+    setEyeColor: typeof setEyeColor;
+    updateTattoos: typeof updateTattoos;
+}
+
+const Overrides: Partial<AppearanceFuncs> = {};
+
+export function override(functionName: 'setHairStyle', callback: typeof setHairStyle);
+export function override(functionName: 'setFacialHair', callback: typeof setFacialHair);
+export function override(functionName: 'setEyebrows', callback: typeof setEyebrows);
+export function override(functionName: 'setModel', callback: typeof setModel);
+export function override(functionName: 'setEyeColor', callback: typeof setEyeColor);
+export function override(functionName: 'updateTattoos', callback: typeof updateTattoos);
+/**
+ * Used to override any internal currency functions.
+ *
+ * @export
+ * @param {keyof AppearanceFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof AppearanceFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }
