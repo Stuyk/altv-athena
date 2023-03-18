@@ -1,5 +1,7 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
+import '@AthenaServer/systems/streamer';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { TextLabel } from '../../shared/interfaces/textLabel';
 
@@ -199,7 +201,7 @@ export function addToPlayer(player: alt.Player, textLabel: TextLabel): string {
     return textLabel.uid;
 }
 
-InternalController.init();
+Athena.systems.plugins.addCallback(InternalController.init);
 
 type TextLabelFuncs = ControllerFuncs<
     typeof append,

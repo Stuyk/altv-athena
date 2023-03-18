@@ -147,6 +147,10 @@ export async function registerCallback<T>(
     callback: (player: alt.Player, streamedData: Array<T>) => void,
     range: number = 100,
 ) {
+    if (!callbacks) {
+        callbacks = {};
+    }
+
     await alt.Utils.waitFor(() => typeof callbacks !== 'undefined');
 
     callbacks[key] = callback;
@@ -184,6 +188,8 @@ export async function registerCallback<T>(
  * @memberof StreamerService
  */
 export async function updateData<T>(key: string, array: Array<T>) {
+    await alt.Utils.waitFor(() => ready, 30000);
+
     await new Promise((resolve: Function) => {
         const interval = alt.setInterval(() => {
             if (!ready) {

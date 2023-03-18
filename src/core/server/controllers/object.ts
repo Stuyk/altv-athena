@@ -1,5 +1,7 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
+import '@AthenaServer/systems/streamer';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IObject } from '../../shared/interfaces/iObject';
 import { sha256Random } from '../utility/hash';
@@ -231,7 +233,7 @@ export function updateModel(uid: string, model: string, player: alt.Player = und
     return true;
 }
 
-InternalController.init();
+Athena.systems.plugins.addCallback(InternalController.init);
 
 interface ObjectControllerFuncs
     extends ControllerFuncs<typeof append, typeof remove, typeof addToPlayer, typeof removeFromPlayer> {

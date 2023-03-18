@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { ItemDrop } from '@AthenaShared/interfaces/item';
+import '@AthenaServer/systems/streamer';
 
 const KEY = 'item-drops';
 const globalDrops: Array<ItemDrop> = [];
@@ -64,7 +65,7 @@ export function remove(id: string): boolean {
     return true;
 }
 
-InternalController.init();
+Athena.systems.plugins.addCallback(InternalController.init);
 
 type ItemDropFuncs = ControllerFuncs<typeof append, typeof remove>;
 

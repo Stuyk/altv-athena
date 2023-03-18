@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
-
 import * as Athena from '@AthenaServer/api';
+import '@AthenaServer/systems/streamer';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IPed } from '../../shared/interfaces/iPed';
 import { Animation } from '../../shared/interfaces/animation';
@@ -170,7 +171,7 @@ export function playAnimation(uid: string, animation: Animation[]) {
     alt.emitAllClients(SYSTEM_EVENTS.PLAY_ANIMATION_FOR_PED, uid, animation);
 }
 
-InternalFunctions.init();
+Athena.systems.plugins.addCallback(InternalFunctions.init);
 
 type PedControllerFuncs = ControllerFuncs<typeof append, typeof remove, typeof addToPlayer, typeof removeFromPlayer>;
 

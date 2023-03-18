@@ -1,5 +1,7 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
+import '@AthenaServer/systems/streamer';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IWorldNotification } from '../../shared/interfaces/iWorldNotification';
 
@@ -114,7 +116,7 @@ export function update(player: alt.Player, notifications: Array<IWorldNotificati
     alt.emitClient(player, SYSTEM_EVENTS.POPULATE_WORLD_NOTIFICATIONS, notifications);
 }
 
-InternalFunctions.init();
+Athena.systems.plugins.addCallback(InternalFunctions.init);
 
 type WorldNotificationFuncs = ControllerFuncs<
     typeof append,

@@ -1,5 +1,7 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
+import '@AthenaServer/systems/streamer';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Marker } from '../../shared/interfaces/marker';
 import { sha256Random } from '../utility/hash';
@@ -158,7 +160,7 @@ export function addToPlayer(player: alt.Player, marker: Marker): string {
     return marker.uid;
 }
 
-InternalController.init();
+Athena.systems.plugins.addCallback(InternalController.init);
 
 type MarkerControllerFuncs = ControllerFuncs<typeof append, typeof remove, typeof addToPlayer, typeof removeFromPlayer>;
 
