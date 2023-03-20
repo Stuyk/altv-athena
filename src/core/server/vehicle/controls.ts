@@ -121,6 +121,7 @@ export async function update(vehicle: alt.Vehicle) {
         };
     }
 
+    data.damage = Athena.vehicle.damage.get(vehicle);
     Athena.document.vehicle.setBulk(vehicle, { pos: vehicle.pos, rot: vehicle.rot, state: data.state });
 }
 

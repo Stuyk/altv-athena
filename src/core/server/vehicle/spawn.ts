@@ -89,6 +89,10 @@ export function persistent(document: OwnedVehicle): alt.Vehicle | undefined {
         Athena.vehicle.tuning.applyTuning(vehicle, document.tuning);
     }
 
+    if (document.damage) {
+        Athena.vehicle.damage.applyDamage(vehicle, document.damage);
+    }
+
     Athena.document.vehicle.bind(vehicle, document);
     Athena.vehicle.events.trigger('vehicle-spawned', vehicle);
     return vehicle;
