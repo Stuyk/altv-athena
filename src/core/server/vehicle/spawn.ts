@@ -90,7 +90,7 @@ export function persistent(document: OwnedVehicle): alt.Vehicle | undefined {
     }
 
     if (document.damage) {
-        Athena.vehicle.damage.applyDamage(vehicle, document.damage);
+        Athena.vehicle.damage.apply(vehicle, document.damage);
     }
 
     Athena.document.vehicle.bind(vehicle, document);

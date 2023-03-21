@@ -136,7 +136,7 @@ export function get(vehicle: alt.Vehicle): VehicleDamage | undefined {
  * @param {VehicleDamage} damage
  * @return {Promise<void>}
  */
-export function applyDamage(vehicle: alt.Vehicle, damage: VehicleDamage): void {
+export function apply(vehicle: alt.Vehicle, damage: VehicleDamage): void {
     if (damage.parts) {
         for (let part in damage.parts) {
             const damages = damage.parts[part];
@@ -167,4 +167,8 @@ export function applyDamage(vehicle: alt.Vehicle, damage: VehicleDamage): void {
             vehicle.setWheelHealth(w, parseInt(damage.wheels[w].damageLevel));
         }
     }
+}
+
+export function repair(vehicle: alt.Vehicle) {
+    //
 }

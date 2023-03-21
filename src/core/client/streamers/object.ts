@@ -5,17 +5,15 @@ import { IObject } from '@AthenaShared/interfaces/iObject';
 
 export type CreatedObject = IObject & { createdObject?: alt.Object };
 
-let persistentObjects: Array<CreatedObject> = [];
-let createdObjects: Array<CreatedObject> = [];
+const clientObjects: { [uid: string]: CreatedObject } = {};
+const serverObjects: { [uid: string]: CreatedObject } = {};
+
 let interval: number;
 
 /**
  * Do Not Export Internal Only
  */
 const InternalFunctions = {
-    init() {
-        createdObjects = [];
-    },
     stop() {
         if (!interval) {
             return;
@@ -23,135 +21,113 @@ const InternalFunctions = {
 
         alt.clearInterval(interval);
     },
-
     moveObject(uid: string, pos: alt.IVector3) {
-        const persistentIndex = persistentObjects.findIndex((x) => x.uid === uid);
-        if (persistentIndex >= 0) {
-            persistentObjects[persistentIndex].pos = pos;
-            if (!persistentObjects[persistentIndex].createdObject) {
-                return;
-            }
-
-            persistentObjects[persistentIndex].createdObject.pos = new alt.Vector3(pos);
+        const dataRef = serverObjects[uid] ? serverObjects : clientObjects;
+        if (!dataRef[uid]) {
             return;
         }
 
-        const globalIndex = createdObjects.findIndex((x) => x.uid === uid);
-        if (globalIndex <= -1) {
+        dataRef[uid].pos = pos;
+        if (!dataRef[uid].createdObject) {
             return;
         }
 
-        createdObjects[globalIndex].pos = pos;
-        if (!createdObjects[globalIndex].createdObject) {
-            return;
-        }
-
-        createdObjects[globalIndex].createdObject.pos = new alt.Vector3(pos);
+        dataRef[uid].createdObject.pos = new alt.Vector3(pos);
     },
     updateObjectModel(uid: string, model: string) {
-        const persistentIndex = persistentObjects.findIndex((x) => x.uid === uid);
-        if (persistentIndex >= 0) {
-            persistentObjects[persistentIndex].model = model;
-            if (persistentObjects[persistentIndex].createdObject) {
-                persistentObjects[persistentIndex].createdObject.destroy();
+        const dataRef = serverObjects[uid] ? serverObjects : clientObjects;
+        if (!dataRef[uid]) {
+            return;
+        }
+
+        dataRef[uid].model = model;
+
+        if (dataRef[uid].createdObject) {
+            dataRef[uid].createdObject.destroy();
+        }
+
+        const createdObject = new alt.Object(
+            model,
+            new alt.Vector3(dataRef[uid].pos),
+            new alt.Vector3(0, 0, 0),
+            true,
+            false,
+        );
+
+        if (dataRef[uid].noCollision) {
+            createdObject.toggleCollision(false, false);
+        }
+
+        createdObject.setPositionFrozen(true);
+        dataRef[uid].createdObject = createdObject;
+    },
+    populate(newObjects: Array<IObject>) {
+        const currentUids: string[] = [];
+
+        // Go through new objects, and create objects that may not have objects yet.
+        for (let objRef of newObjects) {
+            currentUids.push(objRef.uid);
+
+            // If uid exists, and object has been created. Move on.
+            if (serverObjects[objRef.uid] && serverObjects[objRef.uid].createdObject) {
+                // Just update object position, even if it hasn't moved.
+                serverObjects[objRef.uid].pos = objRef.pos;
+                serverObjects[objRef.uid].createdObject.pos = new alt.Vector3(objRef.pos);
+
+                if (serverObjects[objRef.uid].model === objRef.model) {
+                    continue;
+                }
+
+                serverObjects[objRef.uid].createdObject.destroy();
+                delete serverObjects[objRef.uid];
             }
 
             const createdObject = new alt.Object(
-                model,
-                new alt.Vector3(persistentObjects[persistentIndex].pos),
+                objRef.model,
+                new alt.Vector3(objRef.pos),
                 new alt.Vector3(0, 0, 0),
                 true,
                 false,
             );
 
-            if (persistentObjects[persistentIndex].noCollision) {
+            if (objRef.noCollision) {
                 createdObject.toggleCollision(false, false);
             }
 
             createdObject.setPositionFrozen(true);
-            persistentObjects[persistentIndex].createdObject = createdObject;
-            return;
+
+            serverObjects[objRef.uid] = {
+                ...objRef,
+                createdObject,
+            };
         }
 
-        const globalIndex = createdObjects.findIndex((x) => x.uid === uid);
-        if (globalIndex <= -1) {
-            return;
-        }
-
-        createdObjects[globalIndex].model = model;
-        if (createdObjects[globalIndex].createdObject) {
-            createdObjects[globalIndex].createdObject.destroy();
-        }
-    },
-    populate(newObjects: Array<IObject>) {
-        // First Loop Clears Uncommon Values
-        for (let i = createdObjects.length - 1; i >= 0; i--) {
-            if (newObjects.findIndex((x) => x.uid === createdObjects[i].uid) >= 0) {
+        // Go through all spawned objects
+        // Use the uid list above, and check if an entry exists that should not
+        // Remove all entries which are not in the current list
+        const keyList = Object.keys(serverObjects);
+        for (let key of keyList) {
+            const index = currentUids.findIndex((x) => x === key);
+            if (index >= 0) {
                 continue;
             }
 
-            if (createdObjects[i].createdObject) {
-                createdObjects[i].createdObject.destroy();
-                createdObjects[i].createdObject = undefined;
-            }
-
-            createdObjects.splice(i, 1);
-        }
-
-        // Second loop pushes objects that do not exist and creates objects that have not been created
-        for (let i = 0; i < newObjects.length; i++) {
-            let existingIndex = createdObjects.findIndex((x) => x.uid === newObjects[i].uid);
-            if (existingIndex <= -1) {
-                createdObjects.push(newObjects[i]);
-                existingIndex = createdObjects.length - 1;
-            }
-
-            if (createdObjects[existingIndex].createdObject) {
-                if (createdObjects[existingIndex].model !== newObjects[i].model) {
-                    createdObjects[existingIndex].createdObject.destroy();
-                    createdObjects[existingIndex].createdObject = undefined;
-                    continue;
-                }
-
-                // Used for updating the position if non-matching
-                const { x, y } = createdObjects[existingIndex].createdObject.pos;
-                const doesXMatch = Math.floor(x) === Math.floor(newObjects[i].pos.x);
-                const doesYMatch = Math.floor(y) === Math.floor(newObjects[i].pos.y);
-
-                if (doesXMatch && doesYMatch) {
-                    continue;
-                }
-
-                createdObjects[existingIndex].pos = new alt.Vector3(newObjects[i].pos);
-                createdObjects[existingIndex].createdObject.pos = new alt.Vector3(newObjects[i].pos);
+            if (!serverObjects[key]) {
                 continue;
             }
 
-            createdObjects[existingIndex].createdObject = new alt.Object(
-                createdObjects[existingIndex].model,
-                new alt.Vector3(createdObjects[existingIndex].pos),
-                new alt.Vector3(0, 0, 0),
-                true,
-                false,
-            );
-
-            if (createdObjects[existingIndex].noCollision) {
-                createdObjects[existingIndex].createdObject.toggleCollision(false, false);
+            if (serverObjects[key].createdObject && serverObjects[key].createdObject.valid) {
+                serverObjects[key].createdObject.destroy();
             }
 
-            createdObjects[existingIndex].createdObject.setPositionFrozen(true);
+            delete serverObjects[key];
         }
     },
 };
 
 export function addObject(newObject: IObject) {
-    if (persistentObjects.length >= 64) {
-        throw new Error(`Exceeded User Object Count. Ensure you are removing objects for individual players.`);
-    }
-
-    const persistentIndex = persistentObjects.findIndex((x) => x.uid === newObject.uid);
-    if (persistentIndex >= 0) {
-        return;
+    if (clientObjects[newObject.uid]) {
+        throw new Error(`Object with ${newObject.uid} already exists! Use a unique identifier.`);
     }
 
     const createdObject = new alt.Object(
@@ -167,20 +143,22 @@ export function addObject(newObject: IObject) {
     }
 
     createdObject.setPositionFrozen(true);
-    persistentObjects.push({ ...newObject, createdObject });
+    clientObjects[newObject.uid] = {
+        ...newObject,
+        createdObject,
+    };
 }
 
 export function removeObject(uid: string) {
-    const persistentIndex = persistentObjects.findIndex((x) => x.uid === uid);
-    if (persistentIndex <= -1) {
+    if (!clientObjects[uid]) {
         return;
     }
 
-    if (persistentObjects[persistentIndex].createdObject) {
-        persistentObjects[persistentIndex].createdObject.destroy();
+    if (clientObjects[uid].createdObject) {
+        clientObjects[uid].createdObject.destroy();
     }
 
-    persistentObjects.splice(persistentIndex, 1);
+    delete clientObjects[uid];
 }
 
 /**
@@ -190,24 +168,44 @@ export function removeObject(uid: string) {
  * @param {number} scriptId
  * @return {CreatedObject}
  */
-export function getFromScriptId(scriptId: number): CreatedObject {
-    const persistentIndex = persistentObjects.findIndex(
-        (x) => x && x.createdObject && x.createdObject.scriptID === scriptId,
-    );
+export function getFromScriptId(scriptId: number): CreatedObject | undefined {
+    const serverKeys = Object.keys(serverObjects);
+    for (let key of serverKeys) {
+        if (!serverObjects[key]) {
+            continue;
+        }
 
-    if (persistentIndex >= 0) {
-        return persistentObjects[persistentIndex];
+        if (!serverObjects[key].createdObject) {
+            continue;
+        }
+
+        if (serverObjects[key].createdObject.scriptID !== scriptId) {
+            continue;
+        }
+
+        return serverObjects[key];
     }
 
-    const globalIndex = createdObjects.findIndex((x) => x && x.createdObject && x.createdObject.scriptID === scriptId);
-    if (globalIndex <= -1) {
-        return undefined;
+    const clientKeys = Object.keys(clientObjects);
+    for (let key of clientKeys) {
+        if (!clientObjects[key]) {
+            continue;
+        }
+
+        if (!clientObjects[key].createdObject) {
+            continue;
+        }
+
+        if (clientObjects[key].createdObject.scriptID !== scriptId) {
+            continue;
+        }
+
+        return clientObjects[key];
     }
 
-    return createdObjects[globalIndex];
+    return undefined;
 }
 
-alt.on('connectionComplete', InternalFunctions.init);
 alt.on('disconnect', InternalFunctions.stop);
 alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, InternalFunctions.populate);
 alt.onServer(SYSTEM_EVENTS.MOVE_OBJECT, InternalFunctions.moveObject);
