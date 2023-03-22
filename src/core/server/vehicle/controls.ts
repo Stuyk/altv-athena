@@ -35,6 +35,10 @@ export function toggleEngine(vehicle: alt.Vehicle): boolean {
         return Overrides.toggleEngine(vehicle);
     }
 
+    if (!vehicle.engineOn && vehicle.engineHealth <= 100) {
+        return false;
+    }
+
     if (vehicle.driver) {
         vehicle.driver.emit(SYSTEM_EVENTS.VEHICLE_ENGINE, !vehicle.engineOn);
     } else {

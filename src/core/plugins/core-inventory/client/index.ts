@@ -128,9 +128,9 @@ function init() {
                 // native.setPauseMenuPedLighting(true);
                 // native.setPauseMenuPedSleepState(true);
 
-                const [_, r, g, b, a] = native.getHudColour(177);
-                previousHudColor = new alt.RGBA(r, g, b, a);
-                native.replaceHudColourWithRgba(117, 0, 0, 0, 0);
+                // const [_, r, g, b, a] = native.getHudColour(177);
+                // previousHudColor = new alt.RGBA(r, g, b, a);
+                // native.replaceHudColourWithRgba(117, 0, 0, 0, 0);
 
                 AthenaClient.systems.sound.play2d(
                     `@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_open.ogg`,

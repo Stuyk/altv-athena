@@ -56,6 +56,13 @@ function getVehiclePart(part: string): number {
     }
 }
 
+/**
+ * Returns vehicle damage for individual parts.
+ *
+ * @export
+ * @param {alt.Vehicle} vehicle
+ * @return {(VehicleDamage | undefined)}
+ */
 export function get(vehicle: alt.Vehicle): VehicleDamage | undefined {
     if (!vehicle?.valid) {
         return undefined;
@@ -130,7 +137,7 @@ export function get(vehicle: alt.Vehicle): VehicleDamage | undefined {
 }
 
 /**
- * Update vehicle damage, and push to database.
+ * Apply vehicle damage to a vehicle.
  *
  * @export
  * @param {alt.Vehicle} vehicle

@@ -73,12 +73,30 @@ export function invoke(player: alt.Player, slot: number, type: InventoryType): b
         return false;
     }
 
-    const callback = effects.get(baseItem.consumableEventToCall);
-    if (!callback || typeof callback !== 'function') {
+    if (typeof baseItem.consumableEventToCall === 'string') {
+        const callback = effects.get(baseItem.consumableEventToCall);
+        if (!callback || typeof callback !== 'function') {
+            return false;
+        }
+
+        callback(player, item.slot, type);
+        return true;
+    }
+
+    if (!Array.isArray(baseItem.consumableEventToCall)) {
         return false;
     }
 
-    callback(player, item.slot, type);
+    for (let effectName of baseItem.consumableEventToCall) {
+        const callback = effects.get(effectName);
+        if (!callback || typeof callback !== 'function') {
+            alt.logWarning(`Could not find effect with name '${effectName}' to invoke.`);
+            continue;
+        }
+
+        callback(player, item.slot, type);
+    }
+
     return true;
 }
 
