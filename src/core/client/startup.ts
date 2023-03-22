@@ -80,6 +80,7 @@ import './systems/job';
 import './systems/jwt';
 import './systems/messenger';
 import './systems/noclip';
+import './systems/notification';
 import './systems/playerConfig';
 import './systems/sound';
 import './systems/tasks';

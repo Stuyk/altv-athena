@@ -322,6 +322,10 @@ Athena.utility.restrict
 - Easily wrap a function, or a event and restrict it.
 - Allows for notifying the user if the function is restricted.
 
+Notification System
+- Default uses GTA:V notification system.
+- New overrides on client-side to turn off default behavior.
+- Can add callbacks to intercept notification messages, and do something else with it
 ```
 
 
