@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
 import { VehicleSpawnInfo } from './shared';
+import Database from '@stuyk/ezmongodb';
 
 /**
  * Spawn a temporary vehicle; it cannot be saved.
@@ -96,6 +97,22 @@ export function persistent(document: OwnedVehicle): alt.Vehicle | undefined {
     Athena.document.vehicle.bind(vehicle, document);
     Athena.vehicle.events.trigger('vehicle-spawned', vehicle);
     return vehicle;
+}
+
+/**
+ * Spawn all vehicles from the database.
+ *
+ * @export
+ */
+export async function all() {
+    const vehicles = await Database.fetchAllData<OwnedVehicle>(Athena.database.collections.Vehicles);
+    for (let vehicle of vehicles) {
+        if (typeof vehicle.garageInfo === 'undefined' || vehicle.garageInfo === null) {
+            continue;
+        }
+
+        persistent(vehicle);
+    }
 }
 
 interface VehicleSpawnFuncs {
