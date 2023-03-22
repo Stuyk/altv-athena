@@ -102,4 +102,12 @@ export interface BaseVehicle {
      * @memberof BaseVehicle
      */
     doNotDespawn?: boolean;
+
+    /**
+     * The last known timestamp when this vehicle was used.
+     *
+     * @type {number}
+     * @memberof BaseVehicle
+     */
+    lastUsed?: number;
 }
