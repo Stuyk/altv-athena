@@ -105,6 +105,10 @@ export function persistent(document: OwnedVehicle): alt.Vehicle | undefined {
  * @export
  */
 export async function all() {
+    if (Overrides.all) {
+        return Overrides.all();
+    }
+
     const vehicles = await Database.fetchAllData<OwnedVehicle>(Athena.database.collections.Vehicles);
     for (let vehicle of vehicles) {
         if (typeof vehicle.garageInfo === 'undefined' || vehicle.garageInfo === null) {
