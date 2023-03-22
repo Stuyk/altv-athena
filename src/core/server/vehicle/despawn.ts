@@ -11,6 +11,10 @@ import * as Athena from '@AthenaServer/api';
  * @export
  */
 export async function all(): Promise<void> {
+    if (Overrides.all) {
+        return await Overrides.all();
+    }
+
     const vehiclesSpawned = [...alt.Vehicle.all];
     let promises = [];
 
@@ -57,6 +61,10 @@ export async function all(): Promise<void> {
  * @return {Promise<boolean>}
  */
 export async function one(id: number): Promise<boolean> {
+    if (Overrides.one) {
+        return await Overrides.one(id);
+    }
+
     const vehicle = [...alt.Vehicle.all].find((x) => x.id === id);
     if (typeof vehicle === 'undefined') {
         return false;
@@ -90,6 +98,10 @@ export async function one(id: number): Promise<boolean> {
  * @return {*}
  */
 export async function list(ids: Array<number>): Promise<void> {
+    if (Overrides.list) {
+        return await Overrides.list(ids);
+    }
+
     const promises = [];
 
     for (let id of ids) {
@@ -97,4 +109,26 @@ export async function list(ids: Array<number>): Promise<void> {
     }
 
     await Promise.all(ids);
+}
+
+interface VehicleDespawnFuncs {
+    all: typeof all;
+    one: typeof one;
+    list: typeof list;
+}
+
+const Overrides: Partial<VehicleDespawnFuncs> = {};
+
+export function override(functionName: 'all', callback: typeof all);
+export function override(functionName: 'one', callback: typeof one);
+export function override(functionName: 'list', callback: typeof list);
+/**
+ * Used to override despawn vehicle functionality
+ *
+ * @export
+ * @param {keyof VehicleDespawnFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof VehicleDespawnFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

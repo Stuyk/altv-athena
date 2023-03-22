@@ -116,6 +116,7 @@ export async function all() {
 }
 
 interface VehicleSpawnFuncs {
+    all: typeof all;
     temporary: typeof temporary;
     temporaryOwned: typeof temporaryOwned;
     persistent: typeof persistent;
@@ -123,6 +124,7 @@ interface VehicleSpawnFuncs {
 
 const Overrides: Partial<VehicleSpawnFuncs> = {};
 
+export function override(functionName: 'all', callback: typeof all);
 export function override(functionName: 'temporary', callback: typeof temporary);
 export function override(functionName: 'temporaryOwned', callback: typeof temporaryOwned);
 export function override(functionName: 'persistent', callback: typeof persistent);
