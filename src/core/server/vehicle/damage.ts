@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 import { VehicleDamage } from '@AthenaShared/interfaces/vehicleOwned';
 
 function getDamageLevel(level: string): number {
@@ -169,6 +170,59 @@ export function apply(vehicle: alt.Vehicle, damage: VehicleDamage): void {
     }
 }
 
-export function repair(vehicle: alt.Vehicle) {
-    //
+/**
+ * Used to repair all vehicle damage, and save changes to the Database.
+ *
+ * @export
+ * @param {alt.Vehicle} vehicle
+ * @return {*}
+ */
+export async function repair(vehicle: alt.Vehicle) {
+    const damage = get(vehicle);
+
+    // Repair Cosmetic Damages
+    if (damage.parts) {
+        for (let part in damage.parts) {
+            const vehPart = getVehiclePart(part);
+            vehicle.setPartBulletHoles(vehPart, 0);
+            vehicle.setPartDamageLevel(vehPart, 0);
+        }
+    }
+
+    // Repair Windows
+    if (damage.windows) {
+        for (let part in damage.windows) {
+            const vehPart = getVehiclePart(part);
+            vehicle.setWindowDamaged(vehPart, false);
+        }
+    }
+
+    // Repair Bumpers
+    if (damage.bumpers) {
+        for (let part in damage.bumpers) {
+            const vehPart = getVehiclePart(part);
+            vehicle.setBumperDamageLevel(vehPart, 0);
+        }
+    }
+
+    // Repair Wheels
+    if (damage.wheels) {
+        for (let w = 0; w < damage.wheels.length; w++) {
+            vehicle.setWheelHealth(w, 1000);
+        }
+    }
+
+    vehicle.engineHealth = 1000;
+    vehicle.bodyHealth = 1000;
+    vehicle.repair();
+
+    const data = Athena.document.vehicle.get(vehicle);
+    if (typeof data === 'undefined') {
+        Athena.events.vehicle.trigger('vehicle-repaired', vehicle);
+        return;
+    }
+
+    const newDamage = get(vehicle);
+    await Athena.document.vehicle.set(vehicle, 'damage', newDamage);
+    Athena.events.vehicle.trigger('vehicle-repaired', vehicle);
 }
