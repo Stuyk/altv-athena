@@ -28,7 +28,7 @@ const InternalFunctions = {
         }
 
         dataRef[uid].pos = pos;
-        if (!dataRef[uid].createdObject) {
+        if (!dataRef[uid].createdObject || !dataRef[uid].createdObject.valid) {
             return;
         }
 
@@ -42,7 +42,7 @@ const InternalFunctions = {
 
         dataRef[uid].model = model;
 
-        if (dataRef[uid].createdObject) {
+        if (dataRef[uid].createdObject && dataRef[uid].createdObject.valid) {
             dataRef[uid].createdObject.destroy();
         }
 
@@ -69,7 +69,11 @@ const InternalFunctions = {
             currentUids.push(objRef.uid);
 
             // If uid exists, and object has been created. Move on.
-            if (serverObjects[objRef.uid] && serverObjects[objRef.uid].createdObject) {
+            if (
+                serverObjects[objRef.uid] &&
+                serverObjects[objRef.uid].createdObject &&
+                serverObjects[objRef.uid].createdObject.valid
+            ) {
                 // Just update object position, even if it hasn't moved.
                 serverObjects[objRef.uid].pos = objRef.pos;
                 serverObjects[objRef.uid].createdObject.pos = new alt.Vector3(objRef.pos);
