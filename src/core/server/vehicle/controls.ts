@@ -146,7 +146,7 @@ export async function update(vehicle: alt.Vehicle) {
  * @param {alt.Vehicle} vehicle
  * @return {*}
  */
-async function updateLastUsed(vehicle: alt.Vehicle) {
+export async function updateLastUsed(vehicle: alt.Vehicle): Promise<void> {
     const data = Athena.document.vehicle.get(vehicle);
     if (typeof data === 'undefined') {
         return;
