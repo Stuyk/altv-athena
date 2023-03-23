@@ -318,8 +318,8 @@ export function add<CustomData = {}>(
         return Overrides.add(item, data, size);
     }
 
-    if (item.quantity <= -1) {
-        alt.logWarning(`ItemManager: Cannot add negative quantity to an item.`);
+    if (item.quantity <= 0) {
+        alt.logWarning(`ItemManager: Cannot add negative quantity, or zero quantity to an item.`);
         return undefined;
     }
 
@@ -334,11 +334,12 @@ export function add<CustomData = {}>(
         return undefined;
     }
 
+    const actualMaxStack = baseItem.maxStack ? baseItem.maxStack : 512;
     const copyOfData = deepCloneArray<StoredItem>(data);
     let availableStackIndex = -1;
-    if (baseItem.behavior.canStack && typeof baseItem.maxStack === 'number' && baseItem.maxStack > 1) {
+    if (baseItem.behavior.canStack && actualMaxStack > 1) {
         availableStackIndex = copyOfData.findIndex(
-            (x) => x.dbName === item.dbName && x.version === item.version && x.quantity !== baseItem.maxStack,
+            (x) => x.dbName === item.dbName && x.version === item.version && x.quantity !== actualMaxStack,
         );
     }
 
@@ -346,7 +347,7 @@ export function add<CustomData = {}>(
     // - Adds unstackable items
     // - Adds an item with a max stack of 1
     // - Adds stackable items, and automatically tries to fill item quantity.
-    if (!baseItem.behavior.canStack || baseItem.maxStack === 1 || availableStackIndex === -1) {
+    if (!baseItem.behavior.canStack || actualMaxStack === 1 || availableStackIndex === -1) {
         // Ensure there is enough room to add items.
         if (data.length >= size) {
             return undefined;
@@ -364,7 +365,7 @@ export function add<CustomData = {}>(
 
         // Use quantity to subtract from max stack size or use amount left
         if (baseItem.behavior.canStack) {
-            itemClone.quantity = item.quantity < baseItem.maxStack ? item.quantity : baseItem.maxStack;
+            itemClone.quantity = item.quantity < actualMaxStack ? item.quantity : actualMaxStack;
             item.quantity -= itemClone.quantity;
         } else {
             itemClone.quantity = 1;
@@ -383,7 +384,7 @@ export function add<CustomData = {}>(
     }
 
     // If the item.quantity is less than the stack size and less than or equal to amount missing. Simply add to it.
-    const amountMissing = baseItem.maxStack - copyOfData[availableStackIndex].quantity;
+    const amountMissing = actualMaxStack - copyOfData[availableStackIndex].quantity;
     if (item.quantity <= amountMissing) {
         copyOfData[availableStackIndex].quantity += item.quantity;
         copyOfData[availableStackIndex] = calculateItemWeight(baseItem, copyOfData[availableStackIndex]);
