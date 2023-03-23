@@ -1,6 +1,10 @@
+import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
 import * as Athena from '@AthenaServer/api';
 import { StoredItem } from '@AthenaShared/interfaces/item';
+
+const openIdentifiers = [];
+const boundIdentifiers: Array<{ id: number; storage: string }> = [];
 
 function init() {
     Database.createCollection(Athena.database.collections.Storage);
@@ -74,5 +78,96 @@ export async function get<CustomData = {}>(id: string): Promise<Array<StoredItem
 
     return document.items;
 }
+
+/**
+ * Sets a storage identifier as in use.
+ *
+ * Returns true if the value was set to in-use, and didn't already exist.
+ *
+ * @export
+ * @param {string} id
+ * @return {boolean}
+ */
+export function setAsOpen(id: string): boolean {
+    const index = openIdentifiers.findIndex((x) => x === id);
+    if (index >= 0) {
+        return false;
+    }
+
+    openIdentifiers.push(id);
+    return true;
+}
+
+/**
+ * Checks if a storage identifier is currently in use.
+ *
+ * @export
+ * @param {string} id
+ * @return {*}
+ */
+export function isOpen(id: string): boolean {
+    return openIdentifiers.findIndex((x) => x === id) >= 0;
+}
+
+/**
+ * Removes the storage identifier from in-use status.
+ *
+ * Returns true if the value was successfully removed.
+ *
+ * @export
+ * @param {string} id
+ * @returns {boolean}
+ */
+export function removeAsOpen(id: string): boolean {
+    let wasRemoved = false;
+
+    for (let i = openIdentifiers.length - 1; i >= 0; i--) {
+        if (openIdentifiers[i] === id) {
+            openIdentifiers.splice(i, 1);
+            wasRemoved = true;
+            break;
+        }
+    }
+
+    for (let i = boundIdentifiers.length - 1; i >= 0; i--) {
+        if (boundIdentifiers[i].storage === id) {
+            boundIdentifiers.splice(i, 1);
+            break;
+        }
+    }
+
+    return wasRemoved;
+}
+
+/**
+ * Marks the storage instance as closed if the player disconnects.
+ *
+ * Automatically removes the player when `removeAsOpen` is called.
+ *
+ * Returns false if a player binding is already present.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {string} id
+ * @returns {boolean}
+ */
+export function closeOnDisconnect(player: alt.Player, id: string): boolean {
+    const index = boundIdentifiers.findIndex((x) => x.id === player.id);
+    if (index >= 0) {
+        return false;
+    }
+
+    boundIdentifiers.push({ id: player.id, storage: id });
+    return true;
+}
+
+alt.on('playerDisconnect', (player: alt.Player) => {
+    const index = boundIdentifiers.findIndex((x) => x.id === player.id);
+    if (index <= 0) {
+        return;
+    }
+
+    removeAsOpen(boundIdentifiers[index].storage);
+});
 
 init();
