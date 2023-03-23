@@ -35,7 +35,7 @@ export function temporary(vehicleInfo: VehicleSpawnInfo, deleteOnLeave = false):
  * Cannot be modified by the player.
  *
  * @param {alt.Player} player
- * @param {VehicleInfo} vehicleInfo
+ * @param {VehicleSpawnInfo} vehicleInfo
  * @param {boolean} deleteOnLeave
  * @return {alt.Vehicle}
  */

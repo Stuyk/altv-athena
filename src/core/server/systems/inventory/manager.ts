@@ -51,8 +51,11 @@ export function calculateItemWeight(baseItem: BaseItem, storedItem: StoredItem):
 
 /**
  * Modifies an item by adding or removing an amount.
+ *
  * The amount that did not get removed, or added is returned.
+ *
  * If the base item of the item is not found it will return undefined.
+ *
  * It will automatically re-calculate weight if the baseItem weight is present.
  *
  * @param {ItemType} item
