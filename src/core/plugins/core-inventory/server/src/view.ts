@@ -78,7 +78,7 @@ const Internal = {
 
         Internal.callbacks.close(id);
     },
-    async use(player: alt.Player, type: InventoryType, slot: number) {
+    async use(player: alt.Player, type: InventoryType, slot: number, eventToCall: string | string[] = undefined) {
         if (type === 'custom') {
             return;
         }
@@ -87,7 +87,7 @@ const Internal = {
             return;
         }
 
-        Athena.systems.inventory.manager.useItem(player, slot, type);
+        Athena.systems.inventory.manager.useItem(player, slot, type, eventToCall);
     },
     async drop(player: alt.Player, type: InventoryType, slot: number) {
         if (type === 'custom') {

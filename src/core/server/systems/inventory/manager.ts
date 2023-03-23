@@ -776,9 +776,9 @@ export function swapBetween(from: ComplexSwap, to: ComplexSwap): ComplexSwapRetu
  * @param {('inventory' | 'toolbar')} [type='toolbar']
  * @return {*}
  */
-export async function useItem(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar') {
+export async function useItem(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar', eventToCall: string|string[] = undefined) {
     if (Overrides.useItem) {
-        return Overrides.useItem(player, slot, type);
+        return Overrides.useItem(player, slot, type, eventToCall);
     }
 
     if (!player || !player.valid) {
@@ -822,11 +822,11 @@ export async function useItem(player: alt.Player, slot: number, type: 'inventory
         await toggleItem(player, slot, type);
     }
 
-    if (!baseItem.consumableEventToCall) {
+    if (!baseItem.consumableEventToCall && !eventToCall) {
         return;
     }
 
-    Athena.systems.inventory.effects.invoke(player, slot, type);
+    Athena.systems.inventory.effects.invoke(player, slot, type, eventToCall);
 }
 
 /**
