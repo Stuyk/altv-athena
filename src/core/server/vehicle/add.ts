@@ -83,11 +83,11 @@ export async function toPlayer(
         const id = await Athena.systems.global.getKey<number>('vehicleId');
         const ownedVehicle: OwnedVehicle = {
             dimension: 0,
-            keys: options.keys ? options.keys : [],
+            keys: options && options.keys ? options.keys : [],
             fuel: 100,
             model,
             owner: playerData._id,
-            permissions: options.permissions ? options.permissions : [],
+            permissions: options && options.permissions ? options.permissions : [],
             plate: Athena.utility.uid.generate().slice(0, 8),
             pos,
             rot: { x: 0, y: 0, z: 0 },
@@ -148,16 +148,16 @@ export async function toDatabase(
         const id = await Athena.systems.global.getKey<number>('vehicleId');
         const ownedVehicle: OwnedVehicle = {
             dimension: 0,
-            keys: options.keys ? options.keys : [],
+            keys: options && options.keys ? options.keys : [],
             fuel: 100,
             model,
             owner,
-            permissions: options.permissions ? options.permissions : [],
+            permissions: options && options.permissions ? options.permissions : [],
             plate: Athena.utility.uid.generate().slice(0, 8),
             pos,
             rot: { x: 0, y: 0, z: 0 },
             id,
-            doNotDespawn: options.doNotDespawn ? options.doNotDespawn : false,
+            doNotDespawn: options && options.doNotDespawn ? options.doNotDespawn : false,
         };
 
         if (typeof options !== 'undefined') {
