@@ -73,7 +73,7 @@ export function invoke(player: alt.Player, slot: number, type: InventoryType, ev
         return false;
     }
 
-    if (typeof eventToCall === 'undefined') {
+    if (typeof eventToCall === 'undefined' || eventToCall === null) {
         if (typeof baseItem.consumableEventToCall === 'string') {
             const callback = effects.get(baseItem.consumableEventToCall);
             if (!callback || typeof callback !== 'function') {
