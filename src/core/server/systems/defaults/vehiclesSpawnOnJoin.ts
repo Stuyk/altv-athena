@@ -33,6 +33,10 @@ const Internal = {
         let count = 0;
 
         for (let vehicle of vehicles) {
+            if (typeof vehicle.garageInfo === 'undefined' || vehicle.garageInfo === null) {
+                continue;
+            }
+
             const veh = Athena.vehicle.spawn.persistent(vehicle);
             if (typeof veh === 'undefined') {
                 continue;

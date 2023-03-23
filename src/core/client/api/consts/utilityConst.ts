@@ -3,8 +3,8 @@ import { loadAnimation } from '@AthenaClient/systems/animations';
 import { getClosestPlayer, getClosestVehicle } from '@AthenaClient/utility/closest';
 import { drawMissionText } from '@AthenaClient/utility/missionText';
 import { loadModel } from '@AthenaClient/utility/model';
-import { switchToMultiSecondpart } from '@AthenaClient/utility/switch';
-import { isEntityBlockingPosition } from '@AthenaClient/utility/isEntityBlocking';
+import { switchToMultiSecondpart } from '@AthenaClient/camera/switch';
+import { isEntityBlockingPosition } from '@AthenaClient/world/isEntityBlocking';
 import { UID } from '@AthenaShared/utility/uid';
 
 export const utilityConst = {

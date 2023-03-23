@@ -2,8 +2,10 @@ import * as alt from 'alt-server';
 import * as config from './config';
 import axios from 'axios';
 
-export function invoke() {
-    if (!config.get().USE_ALTV_RECONNECT) {
+export async function invoke() {
+    const someConfig = await config.get();
+
+    if (!someConfig.USE_ALTV_RECONNECT) {
         return;
     }
 

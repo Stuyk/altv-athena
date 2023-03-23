@@ -1,9 +1,8 @@
 import * as alt from 'alt-client';
+import * as AthenaClient from '@AthenaClient/api';
+
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { TextLabel } from '@AthenaShared/interfaces/textLabel';
-import { distance2d } from '@AthenaShared/utility/vector';
-import { drawText3D } from '@AthenaClient/utility/text';
-import { Timer } from '@AthenaClient/utility/timers';
 
 let labels: Array<TextLabel> = [];
 let interval: number;
@@ -22,7 +21,7 @@ const ClientTextLabelController = {
             return;
         }
 
-        Timer.clearInterval(interval);
+        alt.clearInterval(interval);
     },
 
     /**
@@ -65,7 +64,7 @@ const ClientTextLabelController = {
         }
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
+            interval = alt.setInterval(handleDrawTextlabels, 0);
         }
     },
 
@@ -81,7 +80,7 @@ const ClientTextLabelController = {
         labels = labels.filter((x) => !x.isServerWide).concat(serverLabels);
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
+            interval = alt.setInterval(handleDrawTextlabels, 0);
         }
     },
 
@@ -134,11 +133,11 @@ function handleDrawTextlabels() {
             label.maxDistance = 15;
         }
 
-        if (distance2d(alt.Player.local.pos, label.pos) > label.maxDistance) {
+        if (AthenaClient.utility.vector.distance2d(alt.Player.local.pos, label.pos) > label.maxDistance) {
             continue;
         }
 
-        drawText3D(label.text, label.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
+        AthenaClient.screen.text.drawText3D(label.text, label.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
     }
 }
 

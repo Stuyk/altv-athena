@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
+
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 import { playAnimation } from '@AthenaClient/systems/animations';
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
-import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 import commonAnims from './animationMenus/commonAnims';
 import danceAnims from './animationMenus/danceAnims';
 import emoteAnims from './animationMenus/emoteAnims';
@@ -12,7 +12,6 @@ import idleAnims from './animationMenus/idleAnims';
 import leanAnims from './animationMenus/leanAnims';
 import waitAnims from './animationMenus/waitAnims';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
-import { AthenaClient } from '@AthenaClient/api/athena';
 
 function callback(dict: string, name: string, flags: number) {
     console.log(dict, name, flags);
@@ -29,11 +28,11 @@ function handleAnimationMenu() {
         return;
     }
 
-    if (isAnyMenuOpen()) {
+    if (AthenaClient.webview.isAnyMenuOpen()) {
         return;
     }
 
-    WheelMenu.open(
+    AthenaClient.systems.wheelMenu.open(
         'Animations',
         [
             {
@@ -50,7 +49,7 @@ function handleAnimationMenu() {
             {
                 name: 'Dance',
                 callback: () => {
-                    WheelMenu.update('Dance', danceAnims(callback), true);
+                    AthenaClient.systems.wheelMenu.update('Dance', danceAnims(callback), true);
                 },
                 doNotClose: true,
                 icon: 'icon-directions_run',
@@ -58,7 +57,7 @@ function handleAnimationMenu() {
             {
                 name: 'Idle',
                 callback: () => {
-                    WheelMenu.update('Idle', idleAnims(callback));
+                    AthenaClient.systems.wheelMenu.update('Idle', idleAnims(callback));
                 },
                 doNotClose: true,
                 icon: 'icon-timer',
@@ -66,7 +65,7 @@ function handleAnimationMenu() {
             {
                 name: 'Fun',
                 callback: () => {
-                    WheelMenu.update('Fun', funAnims(callback));
+                    AthenaClient.systems.wheelMenu.update('Fun', funAnims(callback));
                 },
                 doNotClose: true,
                 icon: 'icon-celebration',
@@ -74,7 +73,7 @@ function handleAnimationMenu() {
             {
                 name: 'Wait',
                 callback: () => {
-                    WheelMenu.update('Wait', waitAnims(callback));
+                    AthenaClient.systems.wheelMenu.update('Wait', waitAnims(callback));
                 },
                 doNotClose: true,
                 icon: 'icon-stopwatch',
@@ -82,7 +81,7 @@ function handleAnimationMenu() {
             {
                 name: 'Lean',
                 callback: () => {
-                    WheelMenu.update('Lean', leanAnims(callback));
+                    AthenaClient.systems.wheelMenu.update('Lean', leanAnims(callback));
                 },
                 doNotClose: true,
                 icon: 'icon-airline-seat_recline_extra',
@@ -90,7 +89,7 @@ function handleAnimationMenu() {
             {
                 name: 'Emote',
                 callback: () => {
-                    WheelMenu.update('Emote', emoteAnims(callback));
+                    AthenaClient.systems.wheelMenu.update('Emote', emoteAnims(callback));
                 },
                 doNotClose: true,
                 icon: 'icon-emoji_people',
@@ -98,7 +97,7 @@ function handleAnimationMenu() {
             {
                 name: 'Common',
                 callback: () => {
-                    WheelMenu.update('Common', commonAnims(callback));
+                    AthenaClient.systems.wheelMenu.update('Common', commonAnims(callback));
                 },
                 doNotClose: true,
                 icon: 'icon-content_copy',
@@ -109,7 +108,7 @@ function handleAnimationMenu() {
 }
 
 function init() {
-    AthenaClient.hotkeys.add({
+    AthenaClient.systems.hotkeys.add({
         key: KEY_BINDS.ANIMATION,
         description: 'Animations',
         identifier: 'defualt-animation-menu',

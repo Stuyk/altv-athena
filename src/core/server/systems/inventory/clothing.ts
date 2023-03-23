@@ -58,7 +58,6 @@ export async function setUniform(player: alt.Player, components: Array<ClothingC
     }
 
     await Athena.document.character.set(player, 'uniform', components);
-    update(player);
     Athena.player.events.trigger('player-uniform-set', player);
     return true;
 }
@@ -100,7 +99,6 @@ export async function setSkin(player: alt.Player, model: string | number) {
     }
 
     await Athena.document.character.set(player, 'skin', typeof model === 'string' ? alt.hash(model) : model);
-    update(player);
     Athena.player.events.trigger('player-skin-set', player);
     return true;
 }
@@ -115,10 +113,7 @@ export async function clearSkin(player: alt.Player) {
         return await Overrides.clearSkin(player);
     }
 
-    const data = Athena.document.character.get(player);
     await Athena.document.character.set(player, 'skin', undefined);
-    Athena.player.sync.appearance(player, data.appearance as Appearance);
-    update(player);
     Athena.player.events.trigger('player-skin-cleared', player);
 }
 

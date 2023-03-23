@@ -1,6 +1,8 @@
 export * as add from './add';
 export * as asPlayer from './asPlayer';
 export * as controls from './controls';
+export * as damage from './damage';
+export * as despawn from './despawn';
 export * as events from './events';
 export * as get from './get';
 export * as ownership from './ownership';

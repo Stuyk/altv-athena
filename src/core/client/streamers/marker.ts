@@ -1,9 +1,8 @@
 import * as alt from 'alt-client';
+import * as AthenaClient from '@AthenaClient/api';
+
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Marker } from '@AthenaShared/interfaces/marker';
-import { distance2d } from '@AthenaShared/utility/vector';
-import { drawMarker } from '@AthenaClient/utility/marker';
-import { Timer } from '@AthenaClient/utility/timers';
 
 let addedMarkers: Array<Marker> = [];
 let localMarkers: Array<Marker> = [];
@@ -24,7 +23,7 @@ const ClientMarkerController = {
             return;
         }
 
-        Timer.clearInterval(interval);
+        alt.clearInterval(interval);
     },
 
     /**
@@ -48,7 +47,7 @@ const ClientMarkerController = {
         }
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawMarkers, 0, 'marker.ts');
+            interval = alt.setInterval(handleDrawMarkers, 0);
         }
     },
 
@@ -63,7 +62,7 @@ const ClientMarkerController = {
         addedMarkers = markers;
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawMarkers, 0, 'marker.ts');
+            interval = alt.setInterval(handleDrawMarkers, 0);
         }
     },
 
@@ -123,7 +122,7 @@ function handleDrawMarkers() {
             marker.maxDistance = 25;
         }
 
-        if (distance2d(alt.Player.local.pos, marker.pos) > marker.maxDistance) {
+        if (AthenaClient.utility.vector.distance2d(alt.Player.local.pos, marker.pos) > marker.maxDistance) {
             continue;
         }
 
@@ -131,7 +130,7 @@ function handleDrawMarkers() {
             marker.scale = new alt.Vector3(1, 1, 1);
         }
 
-        drawMarker(
+        AthenaClient.screen.marker.draw(
             marker.type,
             marker.pos,
             marker.scale,

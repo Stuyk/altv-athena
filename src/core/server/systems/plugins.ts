@@ -3,8 +3,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 // import { VehicleSystem } from './vehicle';
 
 const pluginRegistration: Array<{ name: string; callback: Function }> = [];
-const callbacks: Array<Function> = [];
-
+let callbacks: Array<Function> = [];
 let hasInitialized = false;
 
 async function loadPlugins() {
@@ -76,5 +75,9 @@ export function getPlugins(): Array<string> {
  * @param {Function} callback
  */
 export function addCallback(callback: Function) {
+    if (!callbacks) {
+        callbacks = [];
+    }
+
     callbacks.push(callback);
 }

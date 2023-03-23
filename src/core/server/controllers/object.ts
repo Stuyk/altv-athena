@@ -1,5 +1,7 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
+import '@AthenaServer/systems/streamer';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IObject } from '../../shared/interfaces/iObject';
 import { sha256Random } from '../utility/hash';
@@ -215,11 +217,28 @@ export function updatePosition(uid: string, pos: alt.IVector3, player: alt.Playe
     return true;
 }
 
-InternalController.init();
+export function updateModel(uid: string, model: string, player: alt.Player = undefined): boolean {
+    if (typeof player === 'undefined') {
+        const index = globalObjects.findIndex((x) => x.uid === uid);
+        if (index === -1) {
+            return false;
+        }
+
+        globalObjects[index].model = model;
+        InternalController.refresh();
+        return true;
+    }
+
+    alt.emitClient(player, SYSTEM_EVENTS.UPDATE_OBJECT_MODEL, uid, model);
+    return true;
+}
+
+Athena.systems.plugins.addCallback(InternalController.init);
 
 interface ObjectControllerFuncs
     extends ControllerFuncs<typeof append, typeof remove, typeof addToPlayer, typeof removeFromPlayer> {
     updatePosition: typeof updatePosition;
+    updateModel: typeof updateModel;
 }
 
 const Overrides: Partial<ObjectControllerFuncs> = {};
@@ -229,6 +248,7 @@ export function override(functionName: 'remove', callback: typeof remove);
 export function override(functionName: 'addToPlayer', callback: typeof addToPlayer);
 export function override(functionName: 'removeFromPlayer', callback: typeof removeFromPlayer);
 export function override(functionName: 'updatePosition', callback: typeof updatePosition);
+export function override(functionName: 'updateModel', callback: typeof updateModel);
 /**
  * Used to override any object streamer functionality
  *

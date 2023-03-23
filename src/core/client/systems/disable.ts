@@ -1,14 +1,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
-import { Timer } from '@AthenaClient/utility/timers';
 import { VehicleController } from './vehicle';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 let interval: number | undefined;
 
 function toggleOn() {
-    interval = Timer.createInterval(disableDefaultBehavior, 0, 'disable.ts');
+    interval = alt.setInterval(disableDefaultBehavior, 0);
 }
 
 function disableDefaultBehavior(): void {

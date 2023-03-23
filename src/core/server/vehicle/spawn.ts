@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
 import { VehicleSpawnInfo } from './shared';
+import Database from '@stuyk/ezmongodb';
 
 /**
  * Spawn a temporary vehicle; it cannot be saved.
@@ -89,12 +90,37 @@ export function persistent(document: OwnedVehicle): alt.Vehicle | undefined {
         Athena.vehicle.tuning.applyTuning(vehicle, document.tuning);
     }
 
+    if (document.damage) {
+        Athena.vehicle.damage.apply(vehicle, document.damage);
+    }
+
     Athena.document.vehicle.bind(vehicle, document);
     Athena.vehicle.events.trigger('vehicle-spawned', vehicle);
     return vehicle;
 }
 
+/**
+ * Spawn all vehicles from the database.
+ *
+ * @export
+ */
+export async function all() {
+    if (Overrides.all) {
+        return Overrides.all();
+    }
+
+    const vehicles = await Database.fetchAllData<OwnedVehicle>(Athena.database.collections.Vehicles);
+    for (let vehicle of vehicles) {
+        if (typeof vehicle.garageInfo === 'undefined' || vehicle.garageInfo === null) {
+            continue;
+        }
+
+        persistent(vehicle);
+    }
+}
+
 interface VehicleSpawnFuncs {
+    all: typeof all;
     temporary: typeof temporary;
     temporaryOwned: typeof temporaryOwned;
     persistent: typeof persistent;
@@ -102,6 +128,7 @@ interface VehicleSpawnFuncs {
 
 const Overrides: Partial<VehicleSpawnFuncs> = {};
 
+export function override(functionName: 'all', callback: typeof all);
 export function override(functionName: 'temporary', callback: typeof temporary);
 export function override(functionName: 'temporaryOwned', callback: typeof temporaryOwned);
 export function override(functionName: 'persistent', callback: typeof persistent);

@@ -10,7 +10,7 @@ import * as Athena from '@AthenaServer/api';
  * @param {alt.Vehicle} vehicle
  * @return {boolean} The new state of the lock. true = locked
  */
-export function toggleLock(vehicle: alt.Vehicle): boolean {
+export async function toggleLock(vehicle: alt.Vehicle): Promise<boolean> {
     if (Overrides.toggleLock) {
         return Overrides.toggleLock(vehicle);
     }
@@ -19,6 +19,8 @@ export function toggleLock(vehicle: alt.Vehicle): boolean {
         (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED
             ? VEHICLE_LOCK_STATE.UNLOCKED
             : VEHICLE_LOCK_STATE.LOCKED;
+
+    updateLastUsed(vehicle);
 
     return (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED;
 }
@@ -30,9 +32,13 @@ export function toggleLock(vehicle: alt.Vehicle): boolean {
  * @param {alt.Vehicle} vehicle
  * @return {boolean} The new state of the engine. true = on
  */
-export function toggleEngine(vehicle: alt.Vehicle): boolean {
+export async function toggleEngine(vehicle: alt.Vehicle): Promise<boolean> {
     if (Overrides.toggleEngine) {
         return Overrides.toggleEngine(vehicle);
+    }
+
+    if (!vehicle.engineOn && vehicle.engineHealth <= 100) {
+        return false;
     }
 
     if (vehicle.driver) {
@@ -40,6 +46,8 @@ export function toggleEngine(vehicle: alt.Vehicle): boolean {
     } else {
         vehicle.engineOn = !vehicle.engineOn;
     }
+
+    await updateLastUsed(vehicle);
 
     return vehicle.engineOn;
 }
@@ -52,7 +60,7 @@ export function toggleEngine(vehicle: alt.Vehicle): boolean {
  * @param {number} door
  * @return {boolean} The new state of the door. true = open
  */
-export function toggleDoor(vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 | 5): boolean {
+export async function toggleDoor(vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 | 5): Promise<boolean> {
     if (Overrides.toggleDoor) {
         return Overrides.toggleDoor(vehicle, door);
     }
@@ -60,6 +68,8 @@ export function toggleDoor(vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 | 5): b
     const isClosed = vehicle.getDoorState(door) === 0 ? true : false;
     const doorState = isClosed === false ? 0 : 7;
     vehicle.setDoorState(door, doorState);
+
+    updateLastUsed(vehicle);
 
     return isClosed === false;
 }
@@ -71,7 +81,7 @@ export function toggleDoor(vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 | 5): b
  * @param {alt.Vehicle} vehicle
  * @return {*}
  */
-export function isLocked(vehicle: alt.Vehicle) {
+export function isLocked(vehicle: alt.Vehicle): boolean {
     if (Overrides.isLocked) {
         return Overrides.isLocked(vehicle);
     }
@@ -121,7 +131,28 @@ export async function update(vehicle: alt.Vehicle) {
         };
     }
 
-    Athena.document.vehicle.setBulk(vehicle, { pos: vehicle.pos, rot: vehicle.rot, state: data.state });
+    data.damage = Athena.vehicle.damage.get(vehicle);
+    Athena.document.vehicle.setBulk(vehicle, {
+        pos: vehicle.pos,
+        rot: vehicle.rot,
+        state: data.state,
+        damage: data.damage,
+    });
+}
+
+/**
+ * Update the vehicle's last used value.
+ *
+ * @param {alt.Vehicle} vehicle
+ * @return {*}
+ */
+export async function updateLastUsed(vehicle: alt.Vehicle): Promise<void> {
+    const data = Athena.document.vehicle.get(vehicle);
+    if (typeof data === 'undefined') {
+        return;
+    }
+
+    await Athena.document.vehicle.set(vehicle, 'lastUsed', Date.now());
 }
 
 interface VehicleControlFuncs {

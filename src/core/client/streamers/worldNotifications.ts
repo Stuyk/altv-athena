@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
+
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { IWorldNotification } from '@AthenaShared/interfaces/iWorldNotification';
-import { distance2d } from '@AthenaShared/utility/vector';
-import { Timer } from '@AthenaClient/utility/timers';
 
 let addedNotifications: Array<IWorldNotification> = [];
 let localNotifications: Array<IWorldNotification> = [];
@@ -21,7 +21,7 @@ const ClientWorldNotificationController = {
             return;
         }
 
-        Timer.clearInterval(interval);
+        alt.clearInterval(interval);
     },
 
     append(notification: IWorldNotification) {
@@ -41,7 +41,7 @@ const ClientWorldNotificationController = {
         }
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawNotifications, 0, 'worldNotifications.ts');
+            interval = alt.setInterval(handleDrawNotifications, 0);
         }
     },
 
@@ -49,7 +49,7 @@ const ClientWorldNotificationController = {
         addedNotifications = notifications;
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawNotifications, 0, 'worldNotifications.ts');
+            interval = alt.setInterval(handleDrawNotifications, 0);
         }
     },
 
@@ -102,7 +102,7 @@ function handleDrawNotifications() {
             notification.maxDistance = 5;
         }
 
-        if (distance2d(alt.Player.local.pos, notification.pos) > notification.maxDistance) {
+        if (AthenaClient.utility.vector.distance2d(alt.Player.local.pos, notification.pos) > notification.maxDistance) {
             continue;
         }
 

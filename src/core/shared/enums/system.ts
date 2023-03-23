@@ -146,6 +146,7 @@ export enum SYSTEM_EVENTS {
     UPDATE_DOORS = 'update:Doors',
     UPDATE_TEXT_LABEL = 'update:TextLabel',
     UPDATE_OBJECT = 'update:Object',
+    UPDATE_OBJECT_MODEL = 'update:Object:Model',
     //
     VEHICLE_ENGINE = 'vehicle:Engine',
     VEHICLES_VIEW_SPAWN = 'vehicles:Spawn',

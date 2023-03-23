@@ -7,6 +7,7 @@ export type AthenaVehicleEvents =
     | 'door-closed'
     | 'doors-locked'
     | 'doors-unlocked'
+    | 'vehicle-repaired'
     | 'vehicle-spawned'
     | 'vehicle-repaired';
 
@@ -93,6 +94,16 @@ export function on(eventName: 'engine-stopped', callback: (vehicle: alt.Vehicle,
  * @param {(vehicle: alt.Vehicle, player: alt.Player) => void} callback
  */
 export function on(eventName: 'engine-started', callback: (vehicle: alt.Vehicle, player: alt.Player) => void);
+
+/**
+ * Triggered when the internal repair function is called.
+ *
+ * Does not work for vehicle.repair();
+ *
+ * @param {'vehicle-repaired'} eventName
+ * @param {(vehicle: alt.Vehicle) => void} callback
+ */
+export function on(eventName: 'vehicle-repaired', callback: (vehicle: alt.Vehicle) => void);
 
 /**
  * Trigger a callback specific to Athena Vehicle Events.

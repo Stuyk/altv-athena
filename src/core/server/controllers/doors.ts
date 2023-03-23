@@ -1,10 +1,12 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
+import '@AthenaServer/systems/streamer';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Door } from '@AthenaShared/interfaces/door';
 import { Doors } from '@AthenaShared/information/doors';
 import Database from '@stuyk/ezmongodb';
 import { Collections } from '@AthenaServer/database/collections';
-import * as Athena from '@AthenaServer/api';
 
 type DoorDocument = Door & { _id?: unknown };
 
@@ -146,7 +148,7 @@ export async function update(uid: string, isUnlocked: boolean): Promise<boolean>
     return true;
 }
 
-InternalController.init();
+Athena.systems.plugins.addCallback(InternalController.init);
 
 type DoorControllerFuncs = ControllerFuncs<typeof append, typeof remove, void, void, typeof update>;
 

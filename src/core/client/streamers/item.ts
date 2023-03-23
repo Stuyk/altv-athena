@@ -1,14 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { distance2d } from '@AthenaShared/utility/vector';
-import { Timer } from '@AthenaClient/utility/timers';
-import { drawText3D } from '@AthenaClient/utility/text';
 import { ItemDrop } from '@AthenaShared/interfaces/item';
-import { getGroundPosition } from '@AthenaClient/utility/groundPositionHelper';
 
-type CreatedDrop = ItemDrop & { createdObject?: alt.Object };
+export type CreatedDrop = ItemDrop & { createdObject?: alt.Object };
 
 let maxDistance = 5;
 let defaultProp = 'prop_cs_cardbox_01';
@@ -29,7 +26,7 @@ const InternalFunctions = {
             return;
         }
 
-        Timer.clearInterval(interval);
+        alt.clearInterval(interval);
     },
     populate(itemDrops: Array<ItemDrop>) {
         // First Loop Clears Uncommon Values
@@ -60,7 +57,7 @@ const InternalFunctions = {
             const model = items[existingIndex].model ? items[existingIndex].model : defaultProp;
             const [_, min, max] = native.getModelDimensions(alt.hash(model));
             const itemHeight = (Math.abs(min.z) + Math.abs(max.z)) / 2;
-            const modifiedPosition = getGroundPosition(items[existingIndex].pos);
+            const modifiedPosition = AthenaClient.world.position.getGroundZ(items[existingIndex].pos);
             const itemPosition = new alt.Vector3(
                 modifiedPosition.x,
                 modifiedPosition.y,
@@ -79,7 +76,7 @@ const InternalFunctions = {
         }
 
         if (!interval) {
-            interval = Timer.createInterval(InternalFunctions.handleDrawItems, 0, 'item.ts');
+            interval = alt.setInterval(InternalFunctions.handleDrawItems, 0);
         }
     },
 
@@ -103,14 +100,14 @@ const InternalFunctions = {
                 maxDistance = 25;
             }
 
-            const dist = distance2d(alt.Player.local.pos, items[i].pos);
+            const dist = AthenaClient.utility.vector.distance2d(alt.Player.local.pos, items[i].pos);
             if (dist > maxDistance) {
                 continue;
             }
 
             // Used to lower the distance checks between items.
             if (dist <= startDistance) {
-                drawText3D(
+                AthenaClient.screen.text.drawText3D(
                     `~y~${items[i].name} (x${items[i].quantity})`,
                     items[i].pos,
                     0.4,
@@ -125,44 +122,45 @@ const InternalFunctions = {
     },
 };
 
-export const ClientItemDrops = {
-    /**
-     * Return an array of items that are closest to the player.
-     *
-     * @static
-     * @return {Array<ItemDrop>}
-     * @memberof ClientItemDrops
-     */
-    getClosestItems(): Array<ItemDrop> {
-        return closestItems;
-    },
-    /**
-     * Overrides the default model for item drops.
-     * By default it is a cardboard box.
-     *
-     * @param {string} model
-     */
-    setDefaultDropModel(model: string) {
-        defaultProp = model;
-    },
-    /**
-     * Set the maximum distance a player can see item drops.
-     *
-     * @param {number} [distance=5]
-     */
-    setDefaultMaxDistance(distance = 5) {
-        maxDistance = distance;
-    },
-    /**
-     * Determine if this alt.Object is an item drop.
-     *
-     * @param {number} id
-     * @return {(CreatedDrop | undefined)}
-     */
-    getDroppedItem(id: number): CreatedDrop | undefined {
-        return closestItems.find((x) => x.createdObject && x.createdObject.scriptID === id);
-    },
-};
+/**
+ * Return an array of items that are closest to the player.
+ *
+ * @static
+ * @return {Array<ItemDrop>}
+ * @memberof ClientItemDrops
+ */
+export function getClosest(): Array<ItemDrop> {
+    return closestItems;
+}
+
+/**
+ * Overrides the default model for item drops.
+ * By default it is a cardboard box.
+ *
+ * @param {string} model
+ */
+export function setDefaultDropModel(model: string) {
+    defaultProp = model;
+}
+
+/**
+ * Set the maximum distance a player can see item drops.
+ *
+ * @param {number} [distance=5]
+ */
+export function setDefaultMaxDistance(distance = 5) {
+    maxDistance = distance;
+}
+
+/**
+ * Determine if this alt.Object is an item drop.
+ *
+ * @param {number} id
+ * @return {(CreatedDrop | undefined)}
+ */
+export function getDropped(id: number): CreatedDrop | undefined {
+    return closestItems.find((x) => x.createdObject && x.createdObject.scriptID === id);
+}
 
 alt.on('connectionComplete', InternalFunctions.init);
 alt.on('disconnect', InternalFunctions.stop);

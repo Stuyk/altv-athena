@@ -1,7 +1,5 @@
 import * as alt from 'alt-client';
-import { AthenaClient } from '@AthenaClient/api/athena';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { WebViewController } from '@AthenaClient/extensions/view2';
+import * as AthenaClient from '@AthenaClient/api';
 import { CHAT_WEBVIEW_EVENTS } from '../shared/events';
 import { MessageInfo } from '@AthenaClient/systems/messenger';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
@@ -37,7 +35,7 @@ const InternalFunctions = {
             return;
         }
 
-        AthenaClient.webview.emit(CHAT_WEBVIEW_EVENTS.SET_MESSAGES, AthenaClient.messenger.history());
+        AthenaClient.webview.emit(CHAT_WEBVIEW_EVENTS.SET_MESSAGES, AthenaClient.systems.messenger.getHistory());
     },
     /**
      * Automatically updates the WebView with latest message history.
@@ -55,16 +53,16 @@ const InternalFunctions = {
             return;
         }
 
-        const result = await AthenaClient.rmlui.commandInput.create({
+        const result = await AthenaClient.rmlui.commands.create({
             placeholder: 'Send a message or type a command...',
-            commands: AthenaClient.messenger.getCommands(),
+            commands: AthenaClient.systems.messenger.getCommands(),
         });
 
         if (typeof result === 'undefined' || result === '') {
             return;
         }
 
-        AthenaClient.messenger.send(result);
+        AthenaClient.systems.messenger.send(result);
     },
     /**
      * Initializes the chat overlay, and registers it as an overlay.
@@ -72,9 +70,9 @@ const InternalFunctions = {
      */
     open() {
         if (!hasRegistered) {
-            WebViewController.registerOverlay(PAGE_NAME, InternalFunctions.updateMessages);
-            WebViewController.ready(PAGE_NAME, InternalFunctions.updateMessages);
-            AthenaClient.messenger.registerHistoryCallback(InternalFunctions.updateMessagesListener);
+            AthenaClient.webview.registerOverlay(PAGE_NAME, InternalFunctions.updateMessages);
+            AthenaClient.webview.ready(PAGE_NAME, InternalFunctions.updateMessages);
+            AthenaClient.systems.messenger.registerHistoryCallback(InternalFunctions.updateMessagesListener);
             alt.on('keyup', InternalFunctions.handleKeyPress);
             hasRegistered = true;
         }
@@ -82,7 +80,7 @@ const InternalFunctions = {
 };
 
 onTicksStart.add(() => {
-    AthenaClient.hotkeys.add({
+    AthenaClient.systems.hotkeys.add({
         key: THE_LETTER_T,
         description: 'Open Chat Box',
         identifier: 'open-chat-box',

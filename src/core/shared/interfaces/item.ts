@@ -322,7 +322,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * @type {string}
      * @memberof BaseItem
      */
-    consumableEventToCall?: string;
+    consumableEventToCall?: string | Array<string>;
 
     /**
      * The drop model of this item when it is on the ground.

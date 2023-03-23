@@ -11,7 +11,7 @@ let config: IConfig | undefined;
 
 class Startup {
     static async begin() {
-        config = serverConfig.get();
+        config = await serverConfig.get();
         Startup.database();
         await Startup.load();
     }

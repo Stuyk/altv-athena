@@ -28,7 +28,7 @@ function sharedOwnershipChecks(player: alt.Player, vehicle: alt.Vehicle) {
  * @param {alt.Player} player
  * @param {alt.Vehicle} vehicle
  */
-export function toggleLock(player: alt.Player, vehicle: alt.Vehicle) {
+export async function toggleLock(player: alt.Player, vehicle: alt.Vehicle) {
     if (Overrides.toggleLock) {
         return Overrides.toggleLock(player, vehicle);
     }
@@ -41,7 +41,7 @@ export function toggleLock(player: alt.Player, vehicle: alt.Vehicle) {
         return;
     }
 
-    const isLocked = Athena.vehicle.controls.toggleLock(vehicle);
+    const isLocked = await Athena.vehicle.controls.toggleLock(vehicle);
     const soundName = isLocked ? 'car_unlock' : 'car_lock';
     Athena.player.emit.sound2D(player, soundName);
 
@@ -56,7 +56,7 @@ export function toggleLock(player: alt.Player, vehicle: alt.Vehicle) {
  * @param {alt.Vehicle} vehicle
  * @return {*}
  */
-export function toggleEngine(player: alt.Player, vehicle: alt.Vehicle) {
+export async function toggleEngine(player: alt.Player, vehicle: alt.Vehicle) {
     if (Overrides.toggleEngine) {
         return Overrides.toggleEngine(player, vehicle);
     }
@@ -69,7 +69,7 @@ export function toggleEngine(player: alt.Player, vehicle: alt.Vehicle) {
         return;
     }
 
-    const newState = Athena.vehicle.controls.toggleEngine(vehicle);
+    const newState = await Athena.vehicle.controls.toggleEngine(vehicle);
     const eventToEmit = newState ? 'engine-started' : 'engine-stopped';
     Athena.vehicle.events.trigger(eventToEmit, vehicle, player);
 }
@@ -81,7 +81,7 @@ export function toggleEngine(player: alt.Player, vehicle: alt.Vehicle) {
  * @param {alt.Vehicle} vehicle
  * @param {number} door
  */
-export function toggleDoor(player: alt.Player, vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 | 5) {
+export async function toggleDoor(player: alt.Player, vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 | 5) {
     if (Overrides.toggleDoor) {
         return Overrides.toggleDoor(player, vehicle, door);
     }
@@ -102,7 +102,7 @@ export function toggleDoor(player: alt.Player, vehicle: alt.Vehicle, door: 0 | 1
         return;
     }
 
-    const newState = Athena.vehicle.controls.toggleDoor(vehicle, door);
+    const newState = await Athena.vehicle.controls.toggleDoor(vehicle, door);
     const eventToEmit = newState ? 'door-opened' : 'door-closed';
     Athena.vehicle.events.trigger(eventToEmit, vehicle, door, player);
 }

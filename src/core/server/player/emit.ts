@@ -173,7 +173,7 @@ export function notification(player: alt.Player, message: string): void {
         return Overrides.notification(player, message);
     }
 
-    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_NOTIFICATION, message);
+    Athena.systems.notification.toPlayer(player, message);
 }
 
 /**

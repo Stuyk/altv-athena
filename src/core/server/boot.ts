@@ -1,5 +1,6 @@
 // Do Not Change Order
 import './imports/configs';
+import './systems/plugins';
 import './systems/streamer';
 import './api';
 import './imports/events';

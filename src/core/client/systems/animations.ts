@@ -2,7 +2,6 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
-import { Timer } from '@AthenaClient/utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, playAnimation);
 
@@ -12,7 +11,7 @@ const MaxLoadAttempts = 25;
  * Attempts to load an animation dictionary multiple times before returning false.
  * @param {string} dict The name of the animation dictionary.
  * @param {number} [count=0] Do not modify this. Leave it as zero.
- * @return {Promise<boolean>}  {Promise<boolean>}
+ * @return {Promise<boolean>}
  */
 export async function loadAnimation(dict: string, count: number = 0): Promise<boolean> {
     return new Promise((resolve: Function): void => {
@@ -21,27 +20,23 @@ export async function loadAnimation(dict: string, count: number = 0): Promise<bo
             return;
         }
 
-        const interval = Timer.createInterval(
-            () => {
-                count += 1;
+        const interval = alt.setInterval(() => {
+            count += 1;
 
-                if (native.hasAnimDictLoaded(dict)) {
-                    Timer.clearInterval(interval);
-                    resolve(true);
-                    return;
-                }
+            if (native.hasAnimDictLoaded(dict)) {
+                alt.clearInterval(interval);
+                resolve(true);
+                return;
+            }
 
-                if (count >= MaxLoadAttempts) {
-                    Timer.clearInterval(interval);
-                    resolve(false);
-                    return;
-                }
+            if (count >= MaxLoadAttempts) {
+                alt.clearInterval(interval);
+                resolve(false);
+                return;
+            }
 
-                native.requestAnimDict(dict);
-            },
-            250,
-            'animation.ts',
-        );
+            native.requestAnimDict(dict);
+        }, 250);
     });
 }
 
@@ -51,7 +46,7 @@ export async function loadAnimation(dict: string, count: number = 0): Promise<bo
  * @param {string} dict The dictionary of the animation.
  * @param {string} name The name of the animation.
  * @param {ANIMATION_FLAGS} [flags=ANIMATION_FLAGS.CANCELABLE] A combination of flags. ie. (ANIMATION_FLAGS.CANCELABLE | ANIMATION_FLAGS.UPPERBODY_ONLY)
- * @return {Promise<void>}  {Promise<void>}
+ * @return {Promise<void>}
  */
 export async function playAnimation(
     dict: string,

@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { loadModel } from './model';
+import * as AthenaClient from '@AthenaClient/api';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { CharacterSystem } from '@AthenaClient/systems/character';
 
@@ -23,7 +23,7 @@ export const PedCharacter = {
      * Create a Temporary Character Pedestrian
      * @param {boolean} isMale
      * @param {alt.IVector3} pos
-     * @param {(alt.IVector3 | number)} [rot={ x: 0, y: 0, z: 0 }]
+     * @param {(alt.IVector3 | number) = {x: 0, y: 0, z: 0}}
      * @return {Promise<void>}
      * @memberof Ped
      */
@@ -40,7 +40,7 @@ export const PedCharacter = {
 
         const model = isMale ? 'mp_m_freemode_01' : 'mp_f_freemode_01';
         const hash = alt.hash(model);
-        await loadModel(hash);
+        await AthenaClient.utility.model.load(hash);
         id = native.createPed(1, hash, _pos.x, _pos.y, _pos.z, 0, false, false);
 
         return new Promise(async (resolve: Function) => {

@@ -307,6 +307,25 @@ Display ID
 - Added default system to show ID in top-right of screen.
 - Can be disabled through Athena.systems.defaults.displayId.disable()
 - Can be customized to move position elsewhere through similar API as above
+
+Athena.player.appearance
+- These are all new utility functions to help with updating player appearance
+- setHair
+- setFacialHair
+- setEyebrows
+- setEyeColor
+- setModel
+- updateTattoos
+
+Athena.utility.restrict
+- Used to make ANY function permission restricted for a given player.
+- Easily wrap a function, or a event and restrict it.
+- Allows for notifying the user if the function is restricted.
+
+Notification System
+- Default uses GTA:V notification system.
+- New overrides on client-side to turn off default behavior.
+- Can add callbacks to intercept notification messages, and do something else with it
 ```
 
 

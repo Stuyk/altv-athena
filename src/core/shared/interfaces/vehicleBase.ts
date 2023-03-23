@@ -94,4 +94,20 @@ export interface BaseVehicle {
      * @memberof BaseVehicle
      */
     garageInfo?: number;
+
+    /**
+     * Flag this value to prevent this vehicle from ever being despawned
+     *
+     * @type {boolean}
+     * @memberof BaseVehicle
+     */
+    doNotDespawn?: boolean;
+
+    /**
+     * The last known timestamp when this vehicle was used.
+     *
+     * @type {number}
+     * @memberof BaseVehicle
+     */
+    lastUsed?: number;
 }

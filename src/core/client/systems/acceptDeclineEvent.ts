@@ -1,10 +1,9 @@
 import * as alt from 'alt-client';
+import * as AthenaClient from '@AthenaClient/api';
+
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
-import { AthenaClient } from '@AthenaClient/api/athena';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { AcceptDeclineEvent } from '@AthenaShared/interfaces/acceptDeclineEvent';
-
-const TAB_KEY = 9;
 
 let lastEvent: AcceptDeclineEvent;
 
@@ -17,7 +16,7 @@ async function handleOpen() {
         return;
     }
 
-    const result = await AthenaClient.rmlui.questionBox.create({ placeholder: lastEvent.question, blur: true });
+    const result = await AthenaClient.rmlui.question.create({ placeholder: lastEvent.question, blur: true });
     const eventToCall = result ? lastEvent.onClientEvents.accept : lastEvent.onClientEvents.decline;
     alt.emitServer(eventToCall, lastEvent.data);
     lastEvent = undefined;
@@ -28,7 +27,7 @@ function setAcceptDeclineEvent(event: AcceptDeclineEvent) {
 }
 
 function init() {
-    AthenaClient.hotkeys.add({
+    AthenaClient.systems.hotkeys.add({
         key: 38,
         description: 'Accept / Decline Event Prompt',
         identifier: 'accept-decline-event-prompt',

@@ -1,3 +1,4 @@
+export * as appearance from '@AthenaServer/player/appearance';
 export * as currency from '@AthenaServer/player/currency';
 export * as emit from '@AthenaServer/player/emit';
 export * as events from '@AthenaServer/player/events';

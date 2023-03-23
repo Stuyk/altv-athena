@@ -49,6 +49,23 @@ export function disable() {
     alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
 }
 
+/**
+ * Change the position of the on-screen id a player sees
+ *
+ * X as 1 = Right of Screen
+ * Y as 1 = Bottom of Screen
+ *
+ * @example
+ * ```ts
+ * // Place in the very center of the screen. I'm sure everyone would love it.
+ * Athena.systems.default.displayId.setLocation(0.5, 0.5);
+ * ```
+ *
+ * @export
+ * @param {number} x 0 - 1.0
+ * @param {number} y 0 - 1.0
+ * @return {*}
+ */
 export function setLocation(x: number, y: number) {
     if (x > 1 || x < 0) {
         alt.logWarning(`X value for display must be between 0 - 1.0`);

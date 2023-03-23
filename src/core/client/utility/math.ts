@@ -17,7 +17,7 @@ export function degToRad(degrees: number): number {
  * Could also be seen as rotAnglesToVector
  * @export
  * @param {alt.IVector3} rotation
- * @return {*}  {alt.Vector3}
+ * @return {alt.Vector3}
  */
 export function rotationToDirection(rotation: alt.IVector3): alt.Vector3 {
     const z = degToRad(rotation.z);
