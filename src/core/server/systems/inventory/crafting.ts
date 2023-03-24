@@ -187,6 +187,10 @@ export function combineItems(
     const item1 = Athena.systems.inventory.slot.getAt(slot1, dataSet);
     const item2 = Athena.systems.inventory.slot.getAt(slot2, dataSet);
 
+    if (!item1 || !item2) {
+        return undefined;
+    }
+
     if (item1.disableCrafting || item2.disableCrafting) {
         return undefined;
     }
