@@ -1,3 +1,4 @@
+import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
 import * as alt from 'alt-server';
 
 export type AthenaVehicleEvents =
@@ -7,6 +8,7 @@ export type AthenaVehicleEvents =
     | 'door-closed'
     | 'doors-locked'
     | 'doors-unlocked'
+    | 'vehicle-destroyed'
     | 'vehicle-repaired'
     | 'vehicle-spawned'
     | 'vehicle-repaired';
@@ -104,6 +106,19 @@ export function on(eventName: 'engine-started', callback: (vehicle: alt.Vehicle,
  * @param {(vehicle: alt.Vehicle) => void} callback
  */
 export function on(eventName: 'vehicle-repaired', callback: (vehicle: alt.Vehicle) => void);
+
+/**
+ * Triggered when a vehicle is destroyed, and despawned.
+ *
+ * This event is only fired by a default system.
+ *
+ * @param {'vehicle-destroyed'} eventName
+ * @param {(vehicle: alt.Vehicle, document: OwnedVehicle | undefined) => void} callback
+ */
+export function on(
+    eventName: 'vehicle-destroyed',
+    callback: (vehicle: alt.Vehicle, document: OwnedVehicle | undefined) => void,
+);
 
 /**
  * Trigger a callback specific to Athena Vehicle Events.

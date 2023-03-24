@@ -32,6 +32,7 @@ import '../systems/defaults/displayId';
 import '../systems/defaults/inventorySync';
 import '../systems/defaults/time';
 import '../systems/defaults/toolbar';
+import '../systems/defaults/vehiclesDespawnOnDestroy';
 import '../systems/defaults/vehiclesDespawnOnLeave';
 import '../systems/defaults/vehiclesSpawnOnJoin';
 import '../systems/defaults/weaponItems';
