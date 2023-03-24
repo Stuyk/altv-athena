@@ -1,4 +1,4 @@
-import { FUEL_TYPE, VEHICLE_CLASS, VEHICLE_TYPE } from '../enums/vehicleTypeFlags';
+import { FUEL_TYPE, VEHICLE_CLASS, VEHICLE_TYPE } from '../enums/vehicleInformationFlags';
 
 /**
  * Interface for working with / using vehicles.
@@ -11,7 +11,7 @@ export interface VehicleInfo {
      * @type {string}
      * @memberof VehicleInfo
      */
-    display: string;
+    displayName: string;
 
     /**
      * The model of the vehicle.
@@ -25,7 +25,7 @@ export interface VehicleInfo {
      * @type {string}
      * @memberof VehicleInfo
      */
-    manufacturerDisplay: string;
+    manufacturerDisplayName: string;
 
     /**
      * The manufacturer of the vehicle.

@@ -1,5 +1,5 @@
 import * as alt from 'alt-shared';
-import { VEHICLE_TYPE } from '../enums/vehicleTypeFlags';
+import { VEHICLE_TYPE } from '../enums/vehicleInformationFlags';
 
 export default interface IGarage {
     position: alt.IVector3;
