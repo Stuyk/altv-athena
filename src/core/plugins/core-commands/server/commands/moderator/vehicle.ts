@@ -52,15 +52,12 @@ Athena.systems.messenger.commands.register(
         }
 
         Athena.vehicle.damage.repair(vehicle);
-        if (!vehicle.data) {
-            return;
-        }
 
         const hash = typeof vehicle.model === 'number' ? vehicle.model : alt.hash(vehicle.model);
 
         let vehInfo = Athena.utility.hashLookup.vehicle.hash(hash);
 
-        Athena.player.emit.message(player, `${vehInfo.display} got repaired.`);
+        Athena.player.emit.message(player, `${vehInfo.displayName} got repaired.`);
     },
 );
 
