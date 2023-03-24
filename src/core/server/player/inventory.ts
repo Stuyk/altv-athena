@@ -7,7 +7,9 @@ import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
 
 /**
  * Add a new stored item to a user, must specify a quantity of greater than zero.
+ *
  * Automatically checks weight upon new item additions. Exceeding the weight; cancels the add.
+ *
  * Does not look into toolbar.
  *
  * @example
