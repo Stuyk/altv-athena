@@ -121,15 +121,19 @@ export async function upsertAsync(baseItem: BaseItem) {
         return;
     }
 
-    const itemClone = deepCloneObject<BaseItem>(baseItem);
+    const itemClone = deepCloneObject<BaseItem>(databaseItems[index]);
     delete itemClone._id;
-    if (sha256(JSON.stringify(itemClone)) === sha256(JSON.stringify(baseItem))) {
+
+    const hash1 = sha256(JSON.stringify(itemClone));
+    const hash2 = sha256(JSON.stringify(baseItem));
+
+    if (hash1 === hash2) {
         return;
     }
 
     // Update Existing Item
-    databaseItems[index] = deepCloneObject<BaseItem>(baseItem);
-    await Database.updatePartialData(baseItem._id, databaseItems[index], Athena.database.collections.Items);
+    await Database.updatePartialData(databaseItems[index]._id.toString(), baseItem, Athena.database.collections.Items);
+    databaseItems[index] = deepCloneObject<BaseItem>({ ...databaseItems[index], ...baseItem });
 }
 
 /**

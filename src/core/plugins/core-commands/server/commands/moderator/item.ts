@@ -173,7 +173,7 @@ async function exampleItems() {
         icon: 'burger',
         name: 'Burger',
         maxStack: 8,
-        weight: 1,
+        weight: 25,
         behavior: { canDrop: true, canStack: true, canTrade: true, destroyOnDrop: false, isToolbar: true },
         consumableEventToCall: 'edible',
     });
