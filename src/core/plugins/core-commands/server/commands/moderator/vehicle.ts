@@ -60,8 +60,7 @@ Athena.systems.messenger.commands.register(
 
         let vehInfo = Athena.utility.hashLookup.vehicle.hash(hash);
 
-        Athena.player.emit.message(player, `${vehInfo.DisplayName} got repaired.`);
-        Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_REPAIRED));
+        Athena.player.emit.message(player, `${vehInfo.display} got repaired.`);
     },
 );
 
