@@ -10,3 +10,4 @@ import './teleport';
 import './test';
 import './vehicle';
 import './utility';
+import './weapons';

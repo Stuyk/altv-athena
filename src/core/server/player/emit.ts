@@ -610,7 +610,7 @@ export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs:
  * @param {number} amountInMs How long it should last. -1 for infinite.
  */
 export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs = -1) {
-    player.emit(SYSTEM_EVENTS.SCREEN_TIMECYCLE_EFFECT, name);
+    player.emit(SYSTEM_EVENTS.SCREEN_TIMECYCLE_EFFECT, name, amountInMs);
 }
 
 /**

@@ -2,6 +2,57 @@ import * as alt from 'alt-server';
 
 import * as Athena from '@AthenaServer/api';
 import { StoredItem, WeaponInfo } from '@AthenaShared/interfaces/item';
+import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
+
+/**
+ * Return all weapons from a given data set.
+ *
+ * @export
+ * @param {Array<StoredItem>} dataSet
+ */
+export function get(dataSet: Array<StoredItem>): Array<StoredItem> {
+    const list = [];
+
+    for (let item of dataSet) {
+        const baseItem = Athena.systems.inventory.factory.getBaseItem(item.dbName, item.version);
+
+        if (!baseItem.behavior) {
+            continue;
+        }
+
+        if (!baseItem.behavior.isWeapon) {
+            continue;
+        }
+
+        list.push(item);
+    }
+
+    return list;
+}
+
+/**
+ * Remove all weapons from a given data set.
+ *
+ * @export
+ * @param {Array<StoredItem>} dataSet
+ * @return {Array<StoredItem>}
+ */
+export function removeAll(dataSet: Array<StoredItem>): Array<StoredItem> {
+    const clonedSet = deepCloneArray<StoredItem>(dataSet);
+    const slots = get(clonedSet).map((x) => {
+        return x.slot;
+    });
+
+    for (let i = clonedSet.length - 1; i >= 0; i--) {
+        if (slots.findIndex((x) => x === clonedSet[i].slot) <= -1) {
+            continue;
+        }
+
+        clonedSet.splice(i, 1);
+    }
+
+    return clonedSet;
+}
 
 /**
  * Looks into the item toolbar and determines what weapons to equip / unequip.

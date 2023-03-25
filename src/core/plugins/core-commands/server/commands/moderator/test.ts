@@ -23,7 +23,7 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        Athena.player.emit.setTimeCycleEffect(player, String(name));
+        Athena.player.emit.setTimeCycleEffect(player, String(name), 5000);
     },
 );
 
