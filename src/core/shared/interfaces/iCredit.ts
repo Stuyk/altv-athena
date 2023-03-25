@@ -1,5 +1,11 @@
 import { CREDIT_ALIGN } from '../enums/creditAlign';
 
+/**
+ * Used when passing custom 'credit' overlays from server to client.
+ *
+ * @export
+ * @interface ICredit
+ */
 export default interface ICredit {
     /**
      * Larger blue text to display.

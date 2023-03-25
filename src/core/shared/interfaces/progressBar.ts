@@ -1,5 +1,11 @@
 import * as alt from 'alt-shared';
 
+/**
+ * Used to create and show a progress bar. Used in server to client.
+ *
+ * @export
+ * @interface ProgressBar
+ */
 export interface ProgressBar {
     /**
      * A unique identifier to remove the progress bar early.

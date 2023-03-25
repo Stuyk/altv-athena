@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ * @export
+ * @enum {number}
+ */
 export enum HUD_COMPONENT {
     HEALTH = 'health',
     ARMOUR = 'armour',

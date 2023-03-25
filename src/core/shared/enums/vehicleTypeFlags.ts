@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ * @export
+ * @enum {number}
+ */
 export const enum VEHICLE_CLASS {
     BOAT = 'boat',
     SPEED_BOAT = 'speedboat',

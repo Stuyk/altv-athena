@@ -1,6 +1,12 @@
 import * as alt from 'alt-shared';
 import { MARKER_TYPE } from '../enums/markerTypes';
 
+/**
+ * Used to pass marker information from server to client.
+ *
+ * @export
+ * @interface Marker
+ */
 export interface Marker {
     /**
      * Position of the Object in a 3D space.

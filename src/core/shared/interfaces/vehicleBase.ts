@@ -1,5 +1,11 @@
 import * as alt from 'alt-shared';
 
+/**
+ * Used as the main describer of a stored vehicle.
+ *
+ * @export
+ * @interface BaseVehicle
+ */
 export interface BaseVehicle {
     /**
      * The vehicle identifier for the database.

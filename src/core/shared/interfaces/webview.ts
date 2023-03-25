@@ -1,3 +1,9 @@
+/**
+ * Used to describe a webview page that can be overlayed.
+ *
+ * @export
+ * @interface OverlayPageType
+ */
 export interface OverlayPageType {
     /**
      * The name of the page.

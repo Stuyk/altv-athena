@@ -1,5 +1,11 @@
 import * as alt from 'alt-shared';
 
+/**
+ * Used to pass object information from server to client.
+ *
+ * @export
+ * @interface IObject
+ */
 export interface IObject {
     /**
      * A unique identifier for this object.

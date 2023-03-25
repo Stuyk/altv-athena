@@ -2,6 +2,14 @@ import { WindowTint } from 'alt-server';
 import { IVehicleNeon } from 'alt-server';
 import * as alt from 'alt-shared';
 
+/**
+ * Wraps the alt.Vehicle properties that can be set.
+ *
+ * Used to auto-sync a vehicle from a database.
+ *
+ * @export
+ * @interface VehicleState
+ */
 export interface VehicleState {
     /**
      * Gets or sets the active radio station.

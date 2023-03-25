@@ -1,3 +1,9 @@
+/**
+ * Used to describe a wheel menu option.
+ *
+ * @export
+ * @interface IWheelOption
+ */
 export interface IWheelOption {
     /**
      * The name of this option.

@@ -1,3 +1,9 @@
+/**
+ * Used to display a 'wasted'-like screen from server to client.
+ *
+ * @export
+ * @interface IShard
+ */
 export default interface IShard {
     /**
      * How long in milliseconds this shard should last.

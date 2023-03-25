@@ -1,6 +1,12 @@
 import * as alt from 'alt-shared';
 import { BLIP_COLOR } from '../enums/blipColor';
 
+/**
+ * Used when passing a blip from server-side to client-side.
+ *
+ * @export
+ * @interface Blip
+ */
 export interface Blip {
     /**
      * The 3D position of the blip on the map.

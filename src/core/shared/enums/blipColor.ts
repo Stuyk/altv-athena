@@ -1,5 +1,7 @@
 /**
  * Colors followed by '_' are duplicates.
+ *
+ * @ignore
  * @export
  * @enum {number}
  */

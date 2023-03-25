@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ * @export
+ * @enum {number}
+ */
 export enum PLAYER_SYNCED_META {
     POSITION = 'player-position',
     PING = 'player-ping',

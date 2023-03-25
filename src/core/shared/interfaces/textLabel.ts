@@ -1,5 +1,11 @@
 import * as alt from 'alt-shared';
 
+/**
+ * Used to describe a text label. Passed from server to client.
+ *
+ * @export
+ * @interface TextLabel
+ */
 export interface TextLabel {
     /**
      * The position where to place the TextLabel in a 3D space.

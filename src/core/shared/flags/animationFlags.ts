@@ -2,6 +2,8 @@
  * Combine animation flags together to get the desired effect.
  * Example:
  * const upperBodyWaking = ANIMATION_FLAGS.UPPERBODY_ONLY | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL;
+ *
+ * @ignore
  * @export
  * @enum {number}
  */

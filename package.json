@@ -18,7 +18,7 @@
         "[-] Vue WebView Deployment": "",
         "vue-dev": "node ./scripts/plugins/webview && node ./scripts/plugins/files && npx vite ./src-webviews --clearScreen=false --host=localhost --port=3000",
         "[-] Utility": "",
-        "docs": "npx typedoc --options ./src/core/typedoc.json",
+        "docs": "npx typedoc --options ./src/core/typedoc.json && node ./scripts/documentation/index.js",
         "fix-natives": "node ./scripts/natives-upgrade/index.js",
         "test": ""
     },
@@ -46,9 +46,9 @@
         "stylus": "^0.58.1",
         "typedoc": "^0.23.25",
         "typedoc-plugin-external-resolver": "^1.0.1",
+        "typedoc-plugin-markdown": "^3.14.0",
         "typedoc-plugin-merge-modules": "^4.0.1",
         "typedoc-plugin-missing-exports": "^1.0.0",
-        "typedoc-theme-hierarchy": "^3.0.2",
         "typescript": "4.6.3",
         "vite": "^4.2.0",
         "vue": "^3.2.47"

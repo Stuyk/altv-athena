@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ * @export
+ * @enum {number}
+ */
 export enum SCREEN_EFFECTS {
     SWITCH_HUD_IN = 'SwitchHudIn',
     SWITCH_HUD_OUT = 'SwitchHudOut',

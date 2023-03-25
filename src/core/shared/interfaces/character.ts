@@ -2,9 +2,14 @@ import * as alt from 'alt-shared';
 import { DEFAULT_CONFIG } from '../../server/athena/main';
 import { Appearance } from './appearance';
 import { CharacterInfo } from './characterInfo';
-import { CHARACTER_PERMISSIONS } from '../flags/permissionFlags';
 import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
 
+/**
+ * Used as the main interface for storing character data.
+ *
+ * @export
+ * @interface Character
+ */
 export interface Character {
     [key: string]: any;
 

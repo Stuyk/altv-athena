@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ * @export
+ * @enum {number}
+ */
 export const enum PED_CONFIG_FLAG {
     CAN_PUNCH = 18,
     CAN_FLY_THROUGH_WINDSHIELD = 32,

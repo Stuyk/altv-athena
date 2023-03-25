@@ -1,6 +1,12 @@
 import { WORLD_NOTIFICATION_TYPE } from '../enums/worldNotificationTypes';
 import * as alt from 'alt-shared';
 
+/**
+ * Used to pass an in-world marker from server to client.
+ *
+ * @export
+ * @interface IWorldNotification
+ */
 export interface IWorldNotification {
     /**
      * Position of the Object in a 3D space.

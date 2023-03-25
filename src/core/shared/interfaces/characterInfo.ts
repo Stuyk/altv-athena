@@ -1,3 +1,9 @@
+/**
+ * Used for supplying general character information to the Database.
+ *
+ * @export
+ * @interface CharacterInfo
+ */
 export interface CharacterInfo {
     /**
      * A custom field for character information about gender.

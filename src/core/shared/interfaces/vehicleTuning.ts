@@ -1,5 +1,11 @@
 import IVehicleMod from './vehicleMod';
 
+/**
+ * Tuning to apply to an owned vehicle.
+ *
+ * @export
+ * @interface IVehicleTuning
+ */
 export interface IVehicleTuning {
     /**
      * Cannot exceed modkit count

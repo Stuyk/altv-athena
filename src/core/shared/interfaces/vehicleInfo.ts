@@ -2,6 +2,7 @@ import { FUEL_TYPE, VEHICLE_CLASS, VEHICLE_TYPE } from '../enums/vehicleTypeFlag
 
 /**
  * Interface for working with / using vehicles.
+ *
  * @export
  * @interface VehicleInfo
  */

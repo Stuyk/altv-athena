@@ -1,5 +1,6 @@
 /**
  * This interface is used to describe the overall Character Appearance.
+ *
  * @export
  * @interface Appearance
  */

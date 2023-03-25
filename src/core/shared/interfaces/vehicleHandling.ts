@@ -1,3 +1,9 @@
+/**
+ * A general vehicle handling interface passed from server to client.
+ *
+ * @export
+ * @interface IVehicleHandling
+ */
 export default interface IVehicleHandling {
     acceleration: number;
 
@@ -286,5 +292,5 @@ export default interface IVehicleHandling {
      * @type {number}
      * @memberof IVehicleHandling
      */
-    weaponDamageMult: number
+    weaponDamageMult: number;
 }

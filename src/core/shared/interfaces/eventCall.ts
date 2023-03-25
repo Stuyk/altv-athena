@@ -1,3 +1,9 @@
+/**
+ * Used in the job system to invoke various detached events.
+ *
+ * @export
+ * @interface EventCall
+ */
 export interface EventCall {
     /**
      * The name of the event to call.

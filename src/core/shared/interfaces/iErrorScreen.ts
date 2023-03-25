@@ -1,3 +1,9 @@
+/**
+ * Used when passing error screen information from server to client.
+ *
+ * @export
+ * @interface IErrorScreen
+ */
 export default interface IErrorScreen {
     /**
      * Large Text

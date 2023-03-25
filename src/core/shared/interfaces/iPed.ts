@@ -1,6 +1,12 @@
 import * as alt from 'alt-shared';
 import { Animation } from './animation';
 
+/**
+ * Used to pass static ped information from server to client.
+ *
+ * @export
+ * @interface IPed
+ */
 export interface IPed {
     /**
      * Position of the Ped in a 3D space.

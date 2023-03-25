@@ -1,3 +1,9 @@
+/**
+ * Used to pass action information from server-side to client-side.
+ *
+ * @export
+ * @interface Action
+ */
 export interface Action {
     /**
      * Name of the event to call.

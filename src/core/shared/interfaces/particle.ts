@@ -1,5 +1,11 @@
 import * as alt from 'alt-shared';
 
+/**
+ * Used to pass particle information from server to client.
+ *
+ * @export
+ * @interface Particle
+ */
 export interface Particle {
     /**
      * Position in a 3D space to play this effect.

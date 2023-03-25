@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ * @export
+ * @enum {number}
+ */
 export enum PedBone {
     FACIAL_facialRoot = 102,
     FB_Brow_Centre_000 = 113,

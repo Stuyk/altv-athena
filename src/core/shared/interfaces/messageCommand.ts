@@ -1,5 +1,12 @@
 export type CommandCallback<T> = (player: T, ...args: any[]) => void;
 
+/**
+ * Used to describe a command.
+ *
+ * @export
+ * @interface MessageCommand
+ * @template T
+ */
 export interface MessageCommand<T> {
     /**
      * The plain text iteration of this command.

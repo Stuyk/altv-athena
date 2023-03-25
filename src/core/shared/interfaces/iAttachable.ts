@@ -1,6 +1,12 @@
 import { PedBone } from '@AthenaShared/enums/boneIds';
 import * as alt from 'alt-shared';
 
+/**
+ * Used in the attachement system when attaching objects to a player.
+ *
+ * @export
+ * @interface IAttachable
+ */
 export default interface IAttachable {
     /**
      * The unique identifier for this attachable.

@@ -1,6 +1,12 @@
 import * as alt from 'alt-shared';
 import { ANIMATION_FLAGS } from '../flags/animationFlags';
 
+/**
+ * Used to pass animation information from server-side to client-side.
+ *
+ * @export
+ * @interface Animation
+ */
 export interface Animation {
     /**
      * The animation dictionary for the animation.

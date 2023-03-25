@@ -2,6 +2,9 @@ import * as alt from 'alt-server';
 
 /**
  * By default Interactions are supported for vehicle and player.
+ *
+ * This interface is used to pass interaction information form server to client.
+ *
  * @export
  * @interface Interaction
  */

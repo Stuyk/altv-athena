@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ * @export
+ * @enum {number}
+ */
 export enum CONTROLS {
     NEXT_CAMERA,
     LOOK_LEFT_RIGHT,

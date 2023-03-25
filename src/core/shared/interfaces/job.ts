@@ -7,6 +7,12 @@ import { JobAnimation } from './animation';
 import { Particle } from './particle';
 import { JobAttachable } from './iAttachable';
 
+/**
+ *
+ *
+ * @export
+ * @enum {number}
+ */
 export enum ObjectiveCriteria {
     NO_VEHICLE = 1,
     NO_WEAPON = 2,
@@ -18,6 +24,12 @@ export enum ObjectiveCriteria {
     VEHICLE_ENGINE_OFF = 128,
 }
 
+/**
+ *
+ *
+ * @export
+ * @enum {number}
+ */
 export enum ObjectiveType {
     WAYPOINT = 1,
     CAPTURE_POINT = 2,
@@ -30,6 +42,12 @@ export enum ObjectiveEvents {
     JOB_UPDATE = 'job:Update',
 }
 
+/**
+ * Used to pass objective information from server to client.
+ *
+ * @export
+ * @interface Objective
+ */
 export interface Objective {
     /**
      * A unique identifier that can be assigned to an objective to help identify it easily.

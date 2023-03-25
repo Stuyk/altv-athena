@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ * @export
+ * @enum {number}
+ */
 export enum SYSTEM_EVENTS {
     APPEND_BLIP = 'append:Blip',
     APPEND_MARKER = 'append:Marker',
