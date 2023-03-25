@@ -597,8 +597,8 @@ export function fadeScreenFromBlack(player: alt.Player, timeInMs: number) {
     player.emit(SYSTEM_EVENTS.SCREEN_FADE_TO_BLACK, timeInMs);
 }
 
-export function setTimeCycleEffect(player: alt.Player, name: RecommendedTimecycleTypes);
-export function setTimeCycleEffect(player: alt.Player, name: string);
+export function setTimeCycleEffect(player: alt.Player, name: RecommendedTimecycleTypes, amountInMs: number);
+export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs: number);
 /**
  * Used to apply on-screen effects to a given player.
  *
