@@ -6,3 +6,4 @@ export * as random from '@AthenaShared/utility/random';
 export * as scene from './scene';
 export * as scenarios from './scenarios';
 export * as vector from '@AthenaShared/utility/vector';
+export * as hashLookup from '@AthenaShared/utility/hashLookup';
