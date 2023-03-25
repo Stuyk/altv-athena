@@ -36,6 +36,36 @@ Athena.systems.messenger.commands.register(
     },
 );
 
+Athena.systems.messenger.commands.register(
+    'vehHash',
+    '/vehHash',
+    ['admin'],
+    async (player: alt.Player, hash: string) => {
+        let model = Athena.utility.hashLookup.vehicle.hash(parseInt(hash));
+        Athena.player.emit.message(player, model.displayName);
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'pedHash',
+    '/pedHash',
+    ['admin'],
+    async (player: alt.Player, hash: string) => {
+        let model = Athena.utility.hashLookup.ped.hash(parseInt(hash));
+        Athena.player.emit.message(player, model.name);
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'propHash',
+    '/propHash',
+    ['admin'],
+    async (player: alt.Player, hash: string) => {
+        let model = Athena.utility.hashLookup.prop.hash(parseInt(hash));
+        Athena.player.emit.message(player, model.name);
+    },
+);
+
 // class TestCommands {
 //     @command('testerrorscreen', '/testerrorscreen - Shows a temporary error screen', PERMISSIONS.ADMIN)
 //     private static testErrorScreen(player: alt.Player) {
