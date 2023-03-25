@@ -48,7 +48,7 @@ export function remove(effectName: string): boolean {
  * @param {INVENTORY_TYPE} type - INVENTORY_TYPE
  * @returns The callback function.
  */
-export function invoke(player: alt.Player, slot: number, type: InventoryType): boolean {
+export function invoke(player: alt.Player, slot: number, type: InventoryType, eventToCall: string|string[] = undefined): boolean {
     if (Overrides.invoke) {
         return Overrides.invoke(player, slot, type);
     }
@@ -73,29 +73,57 @@ export function invoke(player: alt.Player, slot: number, type: InventoryType): b
         return false;
     }
 
-    if (typeof baseItem.consumableEventToCall === 'string') {
-        const callback = effects.get(baseItem.consumableEventToCall);
-        if (!callback || typeof callback !== 'function') {
+    if (typeof eventToCall === 'undefined' || eventToCall === null) {
+        if (typeof baseItem.consumableEventToCall === 'string') {
+            const callback = effects.get(baseItem.consumableEventToCall);
+            if (!callback || typeof callback !== 'function') {
+                return false;
+            }
+    
+            callback(player, item.slot, type);
+            return true;
+        }
+    
+        if (!Array.isArray(baseItem.consumableEventToCall)) {
             return false;
         }
-
-        callback(player, item.slot, type);
-        return true;
-    }
-
-    if (!Array.isArray(baseItem.consumableEventToCall)) {
-        return false;
-    }
-
-    for (let effectName of baseItem.consumableEventToCall) {
-        const callback = effects.get(effectName);
-        if (!callback || typeof callback !== 'function') {
-            alt.logWarning(`Could not find effect with name '${effectName}' to invoke.`);
-            continue;
+    
+        for (let effectName of baseItem.consumableEventToCall) {
+            const callback = effects.get(effectName);
+            if (!callback || typeof callback !== 'function') {
+                alt.logWarning(`Could not find effect with name '${effectName}' to invoke.`);
+                continue;
+            }
+    
+            callback(player, item.slot, type);
         }
-
-        callback(player, item.slot, type);
+    } else {
+        if (typeof eventToCall === 'string') {
+            const callback = effects.get(eventToCall);
+            if (!callback || typeof callback !== 'function') {
+                return false;
+            }
+    
+            callback(player, item.slot, type);
+            return true;
+        }
+    
+        if (!Array.isArray(eventToCall)) {
+            return false;
+        }
+    
+        for (let effectName of eventToCall) {
+            const callback = effects.get(effectName);
+            if (!callback || typeof callback !== 'function') {
+                alt.logWarning(`Could not find effect with name '${effectName}' to invoke.`);
+                continue;
+            }
+    
+            callback(player, item.slot, type);
+        }
     }
+
+    
 
     return true;
 }
