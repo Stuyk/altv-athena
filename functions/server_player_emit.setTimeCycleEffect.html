@@ -18,7 +18,7 @@
 <h1>Function setTimeCycleEffect</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-<li class="tsd-signature tsd-anchor-link" id="setTimeCycleEffect">set<wbr/>Time<wbr/>Cycle<wbr/>Effect<span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RecommendedTimecycleTypes</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><a href="#setTimeCycleEffect" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="setTimeCycleEffect">set<wbr/>Time<wbr/>Cycle<wbr/>Effect<span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RecommendedTimecycleTypes</span>, amountInMs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><a href="#setTimeCycleEffect" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Used to apply on-screen effects to a given player.</p>
 <p>Think of like screen wobbling, drunkness, etc.</p>
@@ -30,11 +30,15 @@
 <li>
 <h5>player: <span class="tsd-signature-type">Player</span></h5></li>
 <li>
-<h5>name: <span class="tsd-signature-type">RecommendedTimecycleTypes</span></h5></li></ul></div>
+<h5>name: <span class="tsd-signature-type">RecommendedTimecycleTypes</span></h5></li>
+<li>
+<h5>amountInMs: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>How long it should last. -1 for infinite.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/0a4464e/src/core/server/player/emit.ts#L600">server/player/emit.ts:600</a></li></ul></aside></li>
-<li class="tsd-signature tsd-anchor-link" id="setTimeCycleEffect-1">set<wbr/>Time<wbr/>Cycle<wbr/>Effect<span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><a href="#setTimeCycleEffect-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/be87d5a/src/core/server/player/emit.ts#L600">server/player/emit.ts:600</a></li></ul></aside></li>
+<li class="tsd-signature tsd-anchor-link" id="setTimeCycleEffect-1">set<wbr/>Time<wbr/>Cycle<wbr/>Effect<span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Player</span>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, amountInMs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><a href="#setTimeCycleEffect-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Used to apply on-screen effects to a given player.</p>
 <p>Think of like screen wobbling, drunkness, etc.</p>
@@ -46,10 +50,14 @@
 <li>
 <h5>player: <span class="tsd-signature-type">Player</span></h5></li>
 <li>
-<h5>name: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>name: <span class="tsd-signature-type">string</span></h5></li>
+<li>
+<h5>amountInMs: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>How long it should last. -1 for infinite.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/0a4464e/src/core/server/player/emit.ts#L601">server/player/emit.ts:601</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/Stuyk/altv-athena/blob/be87d5a/src/core/server/player/emit.ts#L601">server/player/emit.ts:601</a></li></ul></aside></li></ul></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tree">
 <div class="tree-settings">
