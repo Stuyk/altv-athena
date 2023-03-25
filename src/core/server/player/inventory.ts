@@ -3,7 +3,7 @@ import * as document from '@AthenaServer/document';
 import * as Athena from '@AthenaServer/api';
 
 import { StoredItem } from '@AthenaShared/interfaces/item';
-import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
+import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
 /**
  * Add a new stored item to a user, must specify a quantity of greater than zero.
@@ -198,6 +198,47 @@ export function getItemData<CustomData = {}>(player: alt.Player, slot: number): 
 }
 
 /**
+ *
+ * Returns an item from a specific slot.
+ *
+ * This item is cloned, and not attached to the inventory.
+ *
+ * Never modify the item directly; this is only to get item information.
+ *
+ * @example
+ * ```ts
+ * const someData = Athena.player.inventory.getAt<{ myCustomStuff: string }>(somePlayer, someSlot);
+ * ```
+ *
+ * @export
+ * @template CustomData
+ * @param {alt.Player} player
+ * @param {number} slot
+ * @return {(StoredItem | undefined)}
+ */
+export function getAt<CustomData = {}>(player: alt.Player, slot: number): StoredItem | undefined {
+    if (Overrides.getAt) {
+        return Overrides.getAt<CustomData>(player, slot);
+    }
+
+    const data = document.character.get(player);
+    if (typeof data === 'undefined') {
+        return undefined;
+    }
+
+    if (typeof data.inventory === 'undefined') {
+        return undefined;
+    }
+
+    const item = Athena.systems.inventory.slot.getAt(slot, data.inventory);
+    if (typeof item === 'undefined') {
+        return undefined;
+    }
+
+    return deepCloneObject<StoredItem<CustomData>>(item);
+}
+
+/**
  * Find an item at a specific slot, and changes its entire custom data section.
  *
  * Think of this like an easy to use 'setter' for item data.
@@ -252,6 +293,7 @@ export async function modifyItemData<CustomData = {}>(
 interface InventoryFunctions {
     add: typeof add;
     has: typeof has;
+    getAt: typeof getAt;
     remove: typeof remove;
     sub: typeof sub;
     modifyItemData: typeof modifyItemData;
@@ -261,6 +303,7 @@ interface InventoryFunctions {
 const Overrides: Partial<InventoryFunctions> = {};
 
 export function override(functionName: 'add', callback: typeof add);
+export function override(functionName: 'getAt', callback: typeof getAt);
 export function override(functionName: 'has', callback: typeof has);
 export function override(functionName: 'sub', callback: typeof sub);
 export function override(functionName: 'remove', callback: typeof remove);
