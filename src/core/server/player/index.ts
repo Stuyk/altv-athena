@@ -7,3 +7,4 @@ export * as safe from '@AthenaServer/player/safe';
 export * as set from '@AthenaServer/player/setter';
 export * as sync from '@AthenaServer/player/sync';
 export * as toolbar from '@AthenaServer/player/toolbar';
+export * as weapons from '@AthenaServer/player/weapons';

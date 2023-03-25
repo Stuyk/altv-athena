@@ -102,7 +102,10 @@
                 </div>
             </div>
             <Context :contextTitle="context.title" :x="context.x" :y="context.y" v-if="context">
-                <div @click="contextAction('use')">Use</div>
+                <div v-if="context.hasUseEffect" @click="contextAction('use')">Use</div>
+                <template v-for="(customAction) in context.customEvents">
+                    <div @click="contextAction('use',customAction.eventToCall)">{{customAction.name}}</div>
+                </template>
                 <div @click="contextAction('split')">Split</div>
                 <div @click="contextAction('drop')">Drop</div>
                 <div @click="contextAction('give')">Give</div>
@@ -114,7 +117,7 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-import { Item } from '@AthenaShared/interfaces/item';
+import { CustomContextAction, Item } from '@AthenaShared/interfaces/item';
 import { makeDraggable } from '@ViewUtility/drag';
 import WebViewEvents from '@ViewUtility/webViewEvents';
 import { INVENTORY_EVENTS } from '../../shared/events';
@@ -149,7 +152,7 @@ export default defineComponent({
                 toolbar: 5,
                 custom: 35,
             },
-            context: undefined as { x: number; y: number; title: string; slot: number } | undefined,
+            context: undefined as { x: number; y: number; title: string; slot: number; hasUseEffect: boolean, customEvents: Array<CustomContextAction>} | undefined,
             itemSingleClick: undefined as { type: InventoryType; index: number },
             itemName: '',
             itemDescription: '',
@@ -344,14 +347,21 @@ export default defineComponent({
             }
 
             const item = this.getItem('inventory', slot);
+            
+            // Let's check, if this item can be used. This information is used to show/hide the "Use" context menu action.
+            const hasUseEffect: boolean = (typeof item.consumableEventToCall !== 'undefined' || 
+                (item.behavior && (item.behavior.isEquippable || item.behavior.isWeapon || item.behavior.isClothing)));
+
             this.context = {
                 title: item.name,
                 slot: item.slot,
                 x: e.clientX,
                 y: e.clientY,
+                hasUseEffect: hasUseEffect,
+                customEvents: item.customEventsToCall,
             };
         },
-        contextAction(type: 'use' | 'split' | 'drop' | 'give' | 'cancel') {
+        contextAction(type: 'use' | 'split' | 'drop' | 'give' | 'cancel', eventToCall: string | string[] = undefined) {
             const slot = this.context.slot;
             this.context = undefined;
 
@@ -369,7 +379,7 @@ export default defineComponent({
 
             // Send Event to do the thing it describes
             if (type === 'use') {
-                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.USE, 'inventory', slot);
+                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.USE, 'inventory', slot, eventToCall);
                 return;
             }
 

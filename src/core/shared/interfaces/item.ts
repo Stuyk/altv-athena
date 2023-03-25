@@ -165,6 +165,22 @@ export interface DefaultItemBehavior {
 }
 
 /**
+ * Interface for defining further custom context actions for items,
+ * to show up when right-clicking on the item in inventory.
+ */
+export interface CustomContextAction {
+    /**
+     * The visible name of this action.
+     */
+    name: string,
+
+    /**
+     * The events which should be triggered.
+     */
+    eventToCall: string | Array<string>
+}
+
+/**
  * Shared Item Information for Both Interfaces Below
  *
  * @interface SharedItem
@@ -323,6 +339,14 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * @memberof BaseItem
      */
     consumableEventToCall?: string | Array<string>;
+
+    /**
+     * Custom context actions in addition to the standard consumable event.
+     *
+     * @type {string}
+     * @memberof BaseItem
+     */
+    customEventsToCall?: Array<CustomContextAction>;
 
     /**
      * The drop model of this item when it is on the ground.

@@ -47,6 +47,7 @@ export async function toggleLock(player: alt.Player, vehicle: alt.Vehicle) {
 
     const eventToEmit = isLocked ? 'doors-locked' : 'doors-unlocked';
     Athena.vehicle.events.trigger(eventToEmit, vehicle, player);
+    Athena.vehicle.events.trigger('doors-lock-changed', vehicle, player);
 }
 
 /**

@@ -88,6 +88,32 @@ export async function getBaseItemAsync<CustomData = {}, CustomBehavior = {}>(
  *
  * If a version is not specified; it will find a non-versioned item to replace.
  *
+ * @example
+ * ```ts
+ * Athena.systems.inventory.factory.upsertAsync({
+ *     dbName: 'burger',
+ *     data: { health: 5 },
+ *     icon: 'burger',
+ *     name: 'Burger',
+ *     maxStack: 8,
+ *     weight: 25,
+ *     behavior: {
+ *         canDrop: true,
+ *         canStack: true,
+ *         canTrade: true,
+ *         destroyOnDrop: false,
+ *         isToolbar: true
+ *     },
+ *     consumableEventToCall: 'edible',
+ *     customEventsToCall: [
+ *          {
+ *              name: 'Desconstruct',
+ *              eventToCall: 'deconstruct-item-ingredients'
+ *          }
+ *    ]
+ * });
+ * ```
+ *
  * @param {BaseItem} baseItem
  */
 export async function upsertAsync(baseItem: BaseItem) {

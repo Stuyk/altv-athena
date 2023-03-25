@@ -7,6 +7,7 @@ export type AthenaVehicleEvents =
     | 'door-opened'
     | 'door-closed'
     | 'doors-locked'
+    | 'doors-lock-changed'
     | 'doors-unlocked'
     | 'vehicle-destroyed'
     | 'vehicle-repaired'
@@ -58,6 +59,14 @@ export function on(eventName: 'doors-unlocked', callback: (vehicle: alt.Vehicle,
  * @param {(vehicle: alt.Vehicle, player: alt.Player) => void} callback
  */
 export function on(eventName: 'doors-locked', callback: (vehicle: alt.Vehicle, player: alt.Player) => void);
+
+/**
+ * Triggered when a door locks are updated for any status.
+ *
+ * @param {'doors-locked'} eventName
+ * @param {(vehicle: alt.Vehicle, player: alt.Player) => void} callback
+ */
+export function on(eventName: 'doors-lock-changed', callback: (vehicle: alt.Vehicle, player: alt.Player) => void);
 
 /**
  * Triggered when a door is closed by a player.
