@@ -2,6 +2,7 @@ import './clothing';
 import './currency';
 import './door';
 import './interior';
+import './inventory';
 import './item';
 import './noclip';
 import './player';
