@@ -111,7 +111,7 @@ export async function all() {
 
     const vehicles = await Database.fetchAllData<OwnedVehicle>(Athena.database.collections.Vehicles);
     for (let vehicle of vehicles) {
-        if (typeof vehicle.garageInfo === 'undefined' || vehicle.garageInfo === null) {
+        if (vehicle.garageInfo) {
             continue;
         }
 
