@@ -3,7 +3,7 @@ import * as document from '@AthenaServer/document';
 import * as Athena from '@AthenaServer/api';
 
 import { StoredItem } from '@AthenaShared/interfaces/item';
-import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
+import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
 /**
  * Add a new stored item to a user, must specify a quantity of greater than zero.
@@ -218,9 +218,51 @@ export async function modifyItemData<CustomData = {}>(
     return true;
 }
 
+/**
+ *
+ * Returns an item from a specific slot.
+ *
+ * This item is cloned, and not attached to the toolbar.
+ *
+ * Never modify the item directly; this is only to get item information.
+ *
+ * @example
+ * ```ts
+ * const someData = Athena.player.toolbar.getAt<{ myCustomStuff: string }>(somePlayer, someSlot);
+ * ```
+ *
+ * @export
+ * @template CustomData
+ * @param {alt.Player} player
+ * @param {number} slot
+ * @return {(StoredItem | undefined)}
+ */
+export function getAt<CustomData = {}>(player: alt.Player, slot: number): StoredItem | undefined {
+    if (Overrides.getAt) {
+        return Overrides.getAt<CustomData>(player, slot);
+    }
+
+    const data = document.character.get(player);
+    if (typeof data === 'undefined') {
+        return undefined;
+    }
+
+    if (typeof data.toolbar === 'undefined') {
+        return undefined;
+    }
+
+    const item = Athena.systems.inventory.slot.getAt(slot, data.toolbar);
+    if (typeof item === 'undefined') {
+        return undefined;
+    }
+
+    return deepCloneObject<StoredItem<CustomData>>(item);
+}
+
 interface ToolbarFunctions {
     add: typeof add;
     has: typeof has;
+    getAt: typeof getAt;
     sub: typeof sub;
     remove: typeof remove;
     modifyItemData: typeof modifyItemData;
@@ -231,6 +273,7 @@ const Overrides: Partial<ToolbarFunctions> = {};
 
 export function override(functionName: 'add', callback: typeof add);
 export function override(functionName: 'has', callback: typeof has);
+export function override(functionName: 'getAt', callback: typeof getAt);
 export function override(functionName: 'remove', callback: typeof remove);
 export function override(functionName: 'sub', callback: typeof sub);
 export function override(functionName: 'modifyItemData', callback: typeof modifyItemData);
