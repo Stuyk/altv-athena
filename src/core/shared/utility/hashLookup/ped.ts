@@ -1,21 +1,47 @@
-import { vehicles } from '@AthenaShared/information/hash-lookup/vehicles';
-import { peds } from '@AthenaShared/information/hash-lookup/peds';
-import { textures } from '@AthenaShared/information/hash-lookup/textures';
-import { props } from '@AthenaShared/information/hash-lookup/props';
+import { pedData } from '@AthenaShared/information/peds';
+import { PedInfo } from '@AthenaShared/interfaces/iPedInfo';
 
 /**
- * Get the name corresponding to a hash.
+ * Get the PedInfo corresponding to a hash.
  *
  * @export
  * @param {number} hash
- * @return {object}
+ * @return {PedInfo}
  */
-function vehicleFromHash(hash: number): object {
-    var vehicleModel = vehicles.find((p) => p.Hash == hash);
+function hash(hash: number): PedInfo {
+    var pedModel = pedData.find((p) => p.hash == hash);
 
-    return vehicleModel;
+    return pedModel;
+}
+
+/**
+ * Get the PedInfo corresponding to a signed hash.
+ *
+ * @export
+ * @param {number} hash
+ * @return {PedInfo}
+ */
+export function signedHash(hash: number): PedInfo {
+    var pedModel = pedData.find((p) => p.signedHash == hash);
+
+    return pedModel;
+}
+
+/**
+ * Get the PedInfo corresponding to a hex hash.
+ *
+ * @export
+ * @param {number} hash
+ * @return {PedInfo}
+ */
+export function hexHash(hash: string): PedInfo {
+    var pedModel = pedData.find((p) => p.hexHash == hash);
+
+    return pedModel;
 }
 
 export default {
-    vehicleFromHash,
+    hash,
+    signedHash,
+    hexHash,
 };

@@ -1,11 +1,8 @@
 import { VehicleData } from '@AthenaShared/information/vehicles';
-import { peds } from '@AthenaShared/information/hash-lookup/peds';
-import { textures } from '@AthenaShared/information/hash-lookup/textures';
-import { props } from '@AthenaShared/information/hash-lookup/props';
 import { VehicleInfo } from '@AthenaShared/interfaces/vehicleInfo';
 
 /**
- * Get the name corresponding to a hash.
+ * Get the VehicleInfo corresponding to a hash.
  *
  * @export
  * @param {number} hash
@@ -18,7 +15,7 @@ export function hash(hash: number): VehicleInfo {
 }
 
 /**
- * Get the name corresponding to a signed hash.
+ * Get the VehicleInfo corresponding to a signed hash.
  *
  * @export
  * @param {number} hash
@@ -31,7 +28,7 @@ export function signedHash(hash: number): VehicleInfo {
 }
 
 /**
- * Get the name corresponding to a hex hash.
+ * Get the VehicleInfo corresponding to a hex hash.
  *
  * @export
  * @param {number} hash
