@@ -6,7 +6,7 @@ let everyTickAttacks: number;
 
 /**
  * Completely disabled all local player controls.
- * @export
+ *
  * @param {boolean} value
  * @return {void}
  */

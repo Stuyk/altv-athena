@@ -36,13 +36,13 @@ const Internal = {
 /**
  * Disable default id display on-screen for players.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.systems.default.displayId.disable();
  * ```
  *
  *
- * @export
+ *
  */
 export function disable() {
     enabled = false;
@@ -55,13 +55,13 @@ export function disable() {
  * X as 1 = Right of Screen
  * Y as 1 = Bottom of Screen
  *
- * @example
+ * #### Example
  * ```ts
  * // Place in the very center of the screen. I'm sure everyone would love it.
  * Athena.systems.default.displayId.setLocation(0.5, 0.5);
  * ```
  *
- * @export
+ *
  * @param {number} x 0 - 1.0
  * @param {number} y 0 - 1.0
  * @return {void}

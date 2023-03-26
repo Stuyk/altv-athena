@@ -3,7 +3,7 @@ export type CommandCallback<T> = (player: T, ...args: any[]) => void;
 /**
  * Used to describe a command.
  *
- * @export
+ *
  * @interface MessageCommand
  * @template T
  */
@@ -12,7 +12,7 @@ export interface MessageCommand<T> {
      * The plain text iteration of this command.
      *
      * @type {string}
-     * @memberof MessageCommand
+     *
      */
     name: string;
 
@@ -20,7 +20,7 @@ export interface MessageCommand<T> {
      * A description of this command.
      *
      * @type {string}
-     * @memberof MessageCommand
+     *
      */
     description: string;
 
@@ -28,7 +28,7 @@ export interface MessageCommand<T> {
      * An array of individual permission strings required to run this command.
      *
      * @type {Array<string>}
-     * @memberof MessageCommand
+     *
      */
     permissions: Array<string>;
 
@@ -36,14 +36,14 @@ export interface MessageCommand<T> {
      * Should this command use character permissions instead of account?
      *
      * @type {boolean}
-     * @memberof MessageCommand
+     *
      */
     isCharacterPermission?: boolean;
 
     /**
      * The function to call when this command is executed by a player, or internal function.
      *
-     * @memberof MessageCommand
+     *
      */
     callback: CommandCallback<T>;
 }
@@ -53,7 +53,7 @@ export interface DetailedCommand extends Omit<MessageCommand<null>, 'callback'> 
      * An array of parameters that belong to this command
      *
      * @type {Array<string>}
-     * @memberof DetailedCommand
+     *
      */
     params: Array<string>;
 }

@@ -5,7 +5,7 @@ import sjcl from 'sjcl';
  *
  * Returns a pbkdf2 key, and salt. Which can be seperated by the `$` sign.
  *
- * @example
+ * #### Example
  * ```ts
  * const result = Athena.utility.hash.hashPassword('somePassword');
  * ```
@@ -23,7 +23,7 @@ export function hashPassword(plainTextPassword: string): string {
 /**
  * Test a plain text password against a stored pbkdf2 string.
  *
- * @example
+ * #### Example
  * ```ts
  * // Actual pbkdf2Hash is just mock string
  * const doesMatch = Athena.utility.hash.testPassword('test', 'kjfdskljfsdkl$90jj0f10f21f1')

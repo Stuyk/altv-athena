@@ -12,7 +12,7 @@ const Injections: Array<PlayerMenuInjection> = [];
  * Must always return the original wheel menu options + your changes.
  *
  * @param {PlayerMenuInjection} callback
- * @memberof PlayerWheelMenu
+ *
  */
 export function addInjection(callback: PlayerMenuInjection) {
     Injections.push(callback);
@@ -23,7 +23,7 @@ export function addInjection(callback: PlayerMenuInjection) {
  *
  * @param {alt.Player} target
  * @return {void}
- * @memberof PlayerWheelMenu
+ *
  */
 export function open(target: alt.Player) {
     if (AthenaClient.webview.isAnyMenuOpen()) {

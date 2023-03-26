@@ -4,7 +4,7 @@ import * as Athena from '@AthenaServer/api';
 /**
  * Gets the closest vehicle to a position.
  *
- * @export
+ *
  * @param {alt.IVector3} pos A position in the world.
  * @return {(alt.Vehicle | undefined)}
  */
@@ -16,7 +16,7 @@ export function getClosestVehicle(pos: alt.IVector3): alt.Vehicle | undefined {
 /**
  * Gets the closest player to a position.
  *
- * @export
+ *
  * @param {alt.IVector3} pos A position in the world.
  * @return {(alt.Player | undefined)}
  */

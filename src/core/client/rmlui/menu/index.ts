@@ -337,7 +337,7 @@ const InternalFunctions = {
  * Create a menu similar to NativeUI.
  *
  *
- * @export
+ *
  * @param {MenuInfo} info
  * @return {void}
  */

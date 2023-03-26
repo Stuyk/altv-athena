@@ -6,7 +6,7 @@ import * as Athena from '@AthenaServer/api';
 /**
  * Toggles a vehicle door lock.
  *
- * @export
+ *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {boolean} The new state of the lock. true = locked
  */
@@ -28,7 +28,7 @@ export async function toggleLock(vehicle: alt.Vehicle): Promise<boolean> {
 /**
  * Toggles a vehicle engine.
  *
- * @export
+ *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {boolean} The new state of the engine. true = on
  */
@@ -55,7 +55,7 @@ export async function toggleEngine(vehicle: alt.Vehicle): Promise<boolean> {
 /**
  * Toggles a vehicle door.
  *
- * @export
+ *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {number} door
  * @return {boolean} The new state of the door. true = open
@@ -77,7 +77,7 @@ export async function toggleDoor(vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 |
 /**
  * Returns true if the vehicle is currently locked.
  *
- * @export
+ *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {void}
  */
@@ -92,7 +92,7 @@ export function isLocked(vehicle: alt.Vehicle): boolean {
 /**
  * Update the given vehicle in the database.
  *
- * @export
+ *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {void}
  */
@@ -173,7 +173,7 @@ export function override(functionName: 'isLocked', callback: typeof isLocked);
 /**
  * Used to override vehicle control functionality
  *
- * @export
+ *
  * @param {keyof VehicleControlFuncs} functionName
  * @param {*} callback
  */

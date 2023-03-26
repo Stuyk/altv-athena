@@ -4,7 +4,7 @@ import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 /**
  * Cleanly clones an objective and rebinds all callbacks.
  *
- * @export
+ *
  * @param {Objective} objectiveData
  * @return {Objective}
  */
@@ -33,7 +33,7 @@ export function override(functionName: 'cloneObjective', callback: typeof cloneO
 /**
  * Used to override job objective trigger functionality
  *
- * @export
+ *
  * @param {keyof JobUtilityFuncs} functionName
  * @param {*} callback
  */

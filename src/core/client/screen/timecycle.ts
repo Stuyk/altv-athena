@@ -9,7 +9,7 @@ let timeout: number;
 /**
  * Applies a time cycle effect to the player's screen.
  *
- * @export
+ *
  * @param {string} timeCycleName
  */
 export function setTimeCycleEffect(timeCycleName: RecommendedTimecycleTypes | string, timeInMs: number) {
@@ -30,7 +30,7 @@ export function setTimeCycleEffect(timeCycleName: RecommendedTimecycleTypes | st
 /**
  * Removes all time cycle effects on the player's screen.
  *
- * @export
+ *
  */
 export function clearTimeCycleEffect() {
     native.clearTimecycleModifier();

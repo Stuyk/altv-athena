@@ -39,7 +39,7 @@ function populate(blips: Array<Blip>) {
 /**
  * Adds a blip manually to the blip controller.
  *
- * @export
+ *
  * @param {Blip} blipData
  * @return {alt.PointBlip}
  */

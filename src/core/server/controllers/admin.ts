@@ -9,7 +9,7 @@ import * as Athena from '@AthenaServer/api';
 /**
  * Used to ban a player from the server.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.admin.banPlayer(player, 'was a bad person :(')
  * ```
@@ -40,14 +40,14 @@ export async function banPlayer(player: alt.Player, reason: string): Promise<boo
 /**
  * Used to unban a player from the server.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.admin.unbanPlayerByDiscord('202685967935471617');
  * ```
  *
  * @param {string} discord
  * @return {Promise<boolean>}
- * @memberof AdminController
+ *
  */
 export async function unbanPlayerByDiscord(discord: string): Promise<boolean> {
     if (Overrides.unbanPlayerByDiscord) {

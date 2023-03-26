@@ -43,7 +43,7 @@ export function drawText2D(
 /**
  * Draw a box at a 3D coordinate
  *
- * @export
+ *
  * @param {alt.IVector3} pos A position in the world.
  * @param {alt.IVector2} size
  * @param {alt.RGBA} color
@@ -63,7 +63,7 @@ export function drawRectangle(pos: alt.IVector3, size: alt.IVector2, color: alt.
 /**
  * Draw a box on-screen
  *
- * @export
+ *
  * @param {alt.IVector2} pos
  * @param {alt.IVector2} size
  * @param {alt.RGBA} color
@@ -101,7 +101,7 @@ export function drawText3D(text: string, pos: alt.IVector3, scale: number, color
 
 /**
  * Adds text temporarily on the screen.
- * @export
+ *
  * @param {*} identifier
  * @param {*} msg
  * @param {*} x

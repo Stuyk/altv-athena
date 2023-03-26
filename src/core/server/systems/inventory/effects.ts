@@ -12,7 +12,7 @@ const effects: Map<string, EffectCallback> = new Map();
  * @static
  * @param {string} effectName
  * @param {EffectCallback} callback
- * @memberof ItemEffects
+ *
  */
 export function add(effectNameFromItem: string, callback: EffectCallback) {
     if (Overrides.add) {
@@ -48,7 +48,12 @@ export function remove(effectName: string): boolean {
  * @param {INVENTORY_TYPE} type - INVENTORY_TYPE
  * @returns The callback function.
  */
-export function invoke(player: alt.Player, slot: number, type: InventoryType, eventToCall: string|string[] = undefined): boolean {
+export function invoke(
+    player: alt.Player,
+    slot: number,
+    type: InventoryType,
+    eventToCall: string | string[] = undefined,
+): boolean {
     if (Overrides.invoke) {
         return Overrides.invoke(player, slot, type);
     }
@@ -79,22 +84,22 @@ export function invoke(player: alt.Player, slot: number, type: InventoryType, ev
             if (!callback || typeof callback !== 'function') {
                 return false;
             }
-    
+
             callback(player, item.slot, type);
             return true;
         }
-    
+
         if (!Array.isArray(baseItem.consumableEventToCall)) {
             return false;
         }
-    
+
         for (let effectName of baseItem.consumableEventToCall) {
             const callback = effects.get(effectName);
             if (!callback || typeof callback !== 'function') {
                 alt.logWarning(`Could not find effect with name '${effectName}' to invoke.`);
                 continue;
             }
-    
+
             callback(player, item.slot, type);
         }
     } else {
@@ -103,27 +108,25 @@ export function invoke(player: alt.Player, slot: number, type: InventoryType, ev
             if (!callback || typeof callback !== 'function') {
                 return false;
             }
-    
+
             callback(player, item.slot, type);
             return true;
         }
-    
+
         if (!Array.isArray(eventToCall)) {
             return false;
         }
-    
+
         for (let effectName of eventToCall) {
             const callback = effects.get(effectName);
             if (!callback || typeof callback !== 'function') {
                 alt.logWarning(`Could not find effect with name '${effectName}' to invoke.`);
                 continue;
             }
-    
+
             callback(player, item.slot, type);
         }
     }
-
-    
 
     return true;
 }
@@ -142,7 +145,7 @@ export function override(functionName: 'invoke', callback: typeof invoke);
 /**
  * Used to override inventory item effects functionality
  *
- * @export
+ *
  * @param {keyof EffectFuncs} functionName
  * @param {*} callback
  */

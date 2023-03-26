@@ -1,7 +1,7 @@
 /**
  *
  * @ignore
- * @export
+ *
  * @enum {number}
  */
 export enum WORLD_NOTIFICATION_TYPE {

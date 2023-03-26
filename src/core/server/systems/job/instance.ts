@@ -6,7 +6,7 @@ const JobInstances: { [key: string]: Job } = {};
 /**
  * Get the current job instance for a player, or player id.
  *
- * @export
+ *
  * @param {(number | alt.Player)} player
  * @return {(Job | undefined)}
  */
@@ -25,7 +25,7 @@ export function get(player: number | alt.Player): Job | undefined {
 /**
  * Set the current job instance for a player.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {Job} newJob
  */
@@ -45,7 +45,7 @@ export function set(player: alt.Player, newJob: Job) {
 /**
  * Clear the job instance.
  *
- * @export
+ *
  * @param {(number | alt.Player)} player
  * @return {void}
  */
@@ -87,7 +87,7 @@ export function override(functionName: 'clear', callback: typeof clear);
 /**
  * Used to override job instancing functionality
  *
- * @export
+ *
  * @param {keyof JobInstanceFuncs} functionName
  * @param {*} callback
  */

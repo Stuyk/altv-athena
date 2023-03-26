@@ -16,7 +16,7 @@ export interface QuestionInfo {
      * ie. 'What is your first name?'
      *
      * @type {string}
-     * @memberof QuestionInfo
+     *
      */
     placeholder: string;
 
@@ -24,7 +24,7 @@ export interface QuestionInfo {
      * If set to true, it will blur the background while responding.
      *
      * @type {boolean}
-     * @memberof QuestionInfo
+     *
      */
     blur?: boolean;
 
@@ -32,7 +32,7 @@ export interface QuestionInfo {
      * If set to true, it will darken the background while responding.
      *
      * @type {boolean}
-     * @memberof QuestionInfo
+     *
      */
     darken?: boolean;
 
@@ -40,7 +40,7 @@ export interface QuestionInfo {
      * Hide Radar?
      *
      * @type {boolean}
-     * @memberof QuestionInfo
+     *
      */
     hideHud?: boolean;
 }
@@ -110,7 +110,7 @@ const InternalFunctions = {
 /**
  * Create a box that asks for a simple yes or no answer.
  *
- * @export
+ *
  * @param {QuestionInfo} info
  * @return {Promise<boolean>}
  */

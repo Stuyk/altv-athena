@@ -18,7 +18,7 @@ const Callbacks: { [key: string]: (player: alt.Player, ...args: any[]) => void }
  * Allows a custom character creator to be shown.
  *
  * @param {(player: alt.Player, ...args: any[]) => void} callback
- * @memberof CharacterSystem
+ *
  */
 export function setCreatorCallback(callback: (player: alt.Player, ...args: any[]) => void) {
     if (Overrides.setCreatorCallback) {
@@ -33,7 +33,7 @@ export function setCreatorCallback(callback: (player: alt.Player, ...args: any[]
  *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {...any[]} args
- * @memberof CharacterSystem
+ *
  */
 export function invokeCreator(player: alt.Player, ...args: any[]) {
     if (Overrides.invokeCreator) {
@@ -56,7 +56,7 @@ export function invokeCreator(player: alt.Player, ...args: any[]) {
  * @param {CharacterInfo} info
  * @param {string} name
  * @return {Promise<boolean>}
- * @memberof CharacterSystem
+ *
  */
 export async function create(
     player: alt.Player,
@@ -100,7 +100,7 @@ export async function create(
  *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {Character} character
- * @memberof CharacterSystem
+ *
  */
 export async function select(player: alt.Player, character: Character) {
     if (Overrides.select) {
@@ -202,7 +202,7 @@ export async function select(player: alt.Player, character: Character) {
  *
  * @param {string} name
  * @return {Promise<boolean>}
- * @memberof CharacterSystem
+ *
  */
 export async function isNameTaken(name: string): Promise<boolean> {
     if (Overrides.isNameTaken) {
@@ -279,7 +279,7 @@ export function override(functionName: 'getCharacters', callback: typeof getChar
 /**
  * Used to override character creation / management internally.
  *
- * @export
+ *
  * @param {keyof CharacterFuncs} functionName
  * @param {*} callback
  */

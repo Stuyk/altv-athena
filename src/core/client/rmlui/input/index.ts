@@ -11,7 +11,7 @@ export interface InputBoxInfo {
      * ie. 'What is your first name?'
      *
      * @type {string}
-     * @memberof InputBoxInfo
+     *
      */
     placeholder: string;
 
@@ -19,7 +19,7 @@ export interface InputBoxInfo {
      * If set to true, it will blur the background while responding.
      *
      * @type {boolean}
-     * @memberof InputBoxInfo
+     *
      */
     blur?: boolean;
 
@@ -27,7 +27,7 @@ export interface InputBoxInfo {
      * If set to true, it will darken the background while responding.
      *
      * @type {boolean}
-     * @memberof InputBoxInfo
+     *
      */
     darken?: boolean;
 
@@ -35,7 +35,7 @@ export interface InputBoxInfo {
      * Hide Radar?
      *
      * @type {boolean}
-     * @memberof InputBoxInfo
+     *
      */
     hideHud?: boolean;
 }
@@ -96,7 +96,7 @@ const InternalFunctions = {
  *
  * Retruns a string or undefined based on user input.
  *
- * @export
+ *
  * @param {InputBoxInfo} inputInfo
  * @param {boolean} [skipMenuCheck=false]
  * @return {(Promise<string | undefined>)}

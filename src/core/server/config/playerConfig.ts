@@ -6,14 +6,13 @@ import { PlayerConfigKeys } from '@AthenaShared/enums/playerConfigKeys';
  * Provides type safety for setting predictable keys.
  * Wraps up the player.setLocalMeta function.
  *
- * @example
+ * #### Example
  * ```ts
  * export type ExtendedKeys = 'hello-world' | 'wanted-level' | 'bitcoins';
  *
  * Athena.config.set<ExtendedKeys>('wanted-level', 5);
  * ```
-
- * @export
+ *
  * @template CustomKeys
  * @param {alt.Player} player An alt:V Player Entity
  * @param {(PlayerConfigKeys | CustomKeys)} key

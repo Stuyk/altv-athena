@@ -7,7 +7,7 @@ import * as Athena from '@AthenaServer/api';
  * @param {number} x
  * @param {number} y
  * @param {number} z
- * @memberof SafePrototype
+ *
  */
 export function setPosition(player: alt.Player, x: number, y: number, z: number, doNotInvokeEventCall = false): void {
     if (Overrides.setPosition) {
@@ -36,7 +36,7 @@ export function setPosition(player: alt.Player, x: number, y: number, z: number,
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} value 99-199
  * @param {boolean} exactValue
- * @memberof SafePrototype
+ *
  */
 export function addHealth(
     player: alt.Player,
@@ -70,7 +70,7 @@ export function addHealth(
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} value 99-199
  * @param {boolean} exactValue
- * @memberof SafePrototype
+ *
  */
 export function subHealth(
     player: alt.Player,
@@ -103,7 +103,7 @@ export function subHealth(
  * Safely add armour to this player.
  * @param {number} value 1-100
  * @param {boolean} exactValue
- * @memberof SafePrototype
+ *
  */
 export function addArmour(
     player: alt.Player,
@@ -136,7 +136,7 @@ export function addArmour(
  * Safely subtracts armour to this player.
  * @param {number} value 1-100
  * @param {boolean} exactValue
- * @memberof SafePrototype
+ *
  */
 export function subArmour(
     player: alt.Player,
@@ -168,7 +168,7 @@ export function subArmour(
 /**
  * Set the player's dimension safely.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} value
  * @return {void}
@@ -202,7 +202,7 @@ export function override(functionName: 'setDimension', callback: typeof setDimen
 /**
  * Used to override any internal safe setter functions
  *
- * @export
+ *
  * @param {keyof SafeFunctions} functionName
  * @param {*} callback
  */

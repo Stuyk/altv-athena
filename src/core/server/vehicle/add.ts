@@ -11,7 +11,7 @@ export interface AddOptions {
      * Such as modkits and the like
      *
      * @type {(Partial<IVehicleTuning> | IVehicleTuning | undefined)}
-     * @memberof AddOptions
+     *
      */
     tuning?: Partial<IVehicleTuning> | IVehicleTuning | undefined;
 
@@ -20,7 +20,7 @@ export interface AddOptions {
      * such as color, neon, etc.
      *
      * @type {(Partial<VehicleState> | VehicleState)}
-     * @memberof AddOptions
+     *
      */
     state?: Partial<VehicleState> | VehicleState;
 
@@ -30,7 +30,7 @@ export interface AddOptions {
      * If doing a large group, consider permissions instead.
      *
      * @type {Array<string>}
-     * @memberof AddOptions
+     *
      */
     keys?: Array<string>;
 
@@ -38,7 +38,7 @@ export interface AddOptions {
      * Permissions to append
      *
      * @type {Array<string>}
-     * @memberof AddOptions
+     *
      */
     permissions?: Array<string>;
 
@@ -46,7 +46,7 @@ export interface AddOptions {
      * Should this vehicle always persist on the server and never be allowed to despawn?
      *
      * @type {boolean}
-     * @memberof AddOptions
+     *
      */
     doNotDespawn?: boolean;
 }
@@ -55,7 +55,7 @@ export interface AddOptions {
  * Add a vehicle to a player.
  * The position specified is where the vehicle can be found.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {(string | number)} model
  * @param {alt.IVector3} pos A position in the world.
@@ -126,7 +126,7 @@ export async function toPlayer(
  * Owner can be an identifier, group, etc.
  *
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {(string | number)} model
  * @param {alt.IVector3} pos A position in the world.
@@ -199,7 +199,7 @@ export function override(functionName: 'toPlayer', callback: typeof toPlayer);
 /**
  * Used to override add owned vehicle functionality
  *
- * @export
+ *
  * @param {keyof VehicleAddFuncs} functionName
  * @param {*} callback
  */

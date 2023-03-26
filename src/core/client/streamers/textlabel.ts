@@ -48,7 +48,7 @@ const ClientTextLabelController = {
      * Add a single text label.
      * @static
      * @param {TextLabel} label
-     * @memberof MarkerController
+     *
      */
     append(label: TextLabel) {
         if (!label.uid) {
@@ -74,7 +74,7 @@ const ClientTextLabelController = {
      *
      * @static
      * @param {Array<Marker>} labels
-     * @memberof MarkerController
+     *
      */
     populate(serverLabels: Array<TextLabel>) {
         labels = labels.filter((x) => !x.isServerWide).concat(serverLabels);
@@ -89,7 +89,7 @@ const ClientTextLabelController = {
      * @static
      * @param {string} uid A unique string
      * @return {void}
-     * @memberof MarkerController
+     *
      */
     remove(uid: string) {
         isRemoving = true;

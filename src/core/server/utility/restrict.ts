@@ -4,7 +4,7 @@ import * as Athena from '@AthenaServer/api';
 /**
  * Used to build a restricted function.
  *
- * @export
+ *
  * @interface Restrictions
  */
 export interface Restrictions {
@@ -17,14 +17,14 @@ export interface Restrictions {
      * hasAll - Expects all permissions to exist on character && account
      *
      * @type {('hasOne' | 'hasAll')}
-     * @memberof Restrictions
+     *
      */
     strategy: 'hasOne' | 'hasAll';
     /**
      * What to tell the user if they are restricted
      *
      * @type {string}
-     * @memberof Restrictions
+     *
      */
     notify?: string;
 }
@@ -100,7 +100,7 @@ function verifyRestrictions(player: alt.Player, restrictions: Restrictions): boo
  * alt.onClient('something-from-a-client', doPoliceWorkRestricted);
  * ```
  *
- * @export
+ *
  * @template T
  * @param {T} handler
  * @param {Restrictions} restrictions
@@ -140,7 +140,7 @@ export function override(functionName: 'create', callback: typeof create);
 /**
  * Used to override restrict utility funcs
  *
- * @export
+ *
  * @param {keyof RestrictFuncs} functionName
  * @param {*} callback
  */

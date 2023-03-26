@@ -24,7 +24,7 @@ class InternalFunctions {
      * @static
      * @param {alt.Player} player An alt:V Player Entity
      * @param {string} reason
-     * @memberof InternalFunctions
+     *
      */
     static disconnect(player: alt.Player, reason: string) {
         const id = player.id;
@@ -39,7 +39,7 @@ class InternalFunctions {
      * @static
      * @param {alt.Player} player An alt:V Player Entity
      * @return {void}  {boolean}
-     * @memberof InternalFunctions
+     *
      */
     static isPendingSelect(player: alt.Player): boolean {
         return CharacterList[player.id] ? true : false;
@@ -51,7 +51,7 @@ class InternalFunctions {
      * @static
      * @param {Player} player
      * @param {string} id
-     * @memberof InternalFunctions
+     *
      */
     static select(player: Player, id: string): void {
         if (!InternalFunctions.isPendingSelect(player)) {
@@ -82,7 +82,7 @@ class InternalFunctions {
      * @static
      * @param {alt.Player} player An alt:V Player Entity
      * @return {void}
-     * @memberof CharacterSelectView
+     *
      */
     static async show(player: alt.Player) {
         if (!player || !player.valid) {
@@ -141,7 +141,7 @@ class InternalFunctions {
      * @param {alt.Player} player An alt:V Player Entity
      * @param {string} id
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     static async deleteCharacter(player: alt.Player, id: string) {
         if (!InternalFunctions.isPendingSelect(player)) {
@@ -158,7 +158,7 @@ class InternalFunctions {
      * @static
      * @param {alt.Player} player An alt:V Player Entity
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     static async newCharacter(player: alt.Player) {
         if (!CharacterList[player.id]) {

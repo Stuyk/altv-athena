@@ -49,7 +49,7 @@ export function init(): void {
  * This ensures that your plugin is ALWAYS loaded last.
  * @static
  * @param {Function} callback
- * @memberof PluginSystem
+ *
  */
 export function registerPlugin(name: string, callback: Function) {
     pluginRegistration.push({ name, callback });
@@ -60,7 +60,7 @@ export function registerPlugin(name: string, callback: Function) {
  *
  * @static
  * @return {Array<string>}
- * @memberof PluginSystem
+ *
  */
 export function getPlugins(): Array<string> {
     return pluginRegistration.map((x) => {

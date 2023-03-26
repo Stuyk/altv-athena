@@ -298,7 +298,7 @@ export function update(player: alt.Player) {
 /**
  * Used to change default clothing for either male or female.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.systems.inventory.clothing.setDefaults('female', {
  *     0: 1, // mask
@@ -313,7 +313,7 @@ export function update(player: alt.Player) {
  * });
  * ```
  *
- * @export
+ *
  * @param {('male' | 'female')} type
  * @param {(typeof maleClothes | typeof femaleClothes)} clothes
  */
@@ -355,7 +355,7 @@ export function override(functionName: 'update', callback: typeof update);
 /**
  * Used to override inventory clothing functionality
  *
- * @export
+ *
  * @param {keyof ClothingFuncs} functionName
  * @param {*} callback
  */

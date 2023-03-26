@@ -6,7 +6,7 @@ import * as native from 'natives';
  * @static
  * @param {boolean} [asPercent=false] Convert to percentage?
  * @return {number}
- * @memberof Minimap
+ *
  */
 export function getWidth(asPercent = false): number {
     const aspectRatio = getScreenAspectRatio();
@@ -25,7 +25,7 @@ export function getWidth(asPercent = false): number {
  * @static
  * @param {boolean} [asPercent=false] Convert to percentage?
  * @return {number}
- * @memberof Minimap
+ *
  */
 export function getHeight(asPercent = false): number {
     const resolution = getScreenResolution();
@@ -43,7 +43,7 @@ export function getHeight(asPercent = false): number {
  * @static
  * @param {boolean} [asPercent=false] Convert to percentage?
  * @return {void}
- * @memberof Minimap
+ *
  */
 export function getTopLeft(asPercent = false): alt.IVector2 {
     const resolution = getScreenResolution();
@@ -65,7 +65,7 @@ export function getTopLeft(asPercent = false): alt.IVector2 {
  * @static
  * @param {boolean} [asPercent=false]  Convert to percentage?
  * @return {void}
- * @memberof Minimap
+ *
  */
 export function getTopRight(asPercent = false): alt.IVector2 {
     const { x, y } = getTopLeft();
@@ -85,7 +85,7 @@ export function getTopRight(asPercent = false): alt.IVector2 {
  * @static
  * @param {boolean} [asPercent=false] Convert to percentage?
  * @return {void}
- * @memberof Minimap
+ *
  */
 export function getBottomLeft(asPercent = false): alt.IVector2 {
     const { x, y } = getTopLeft();
@@ -105,7 +105,7 @@ export function getBottomLeft(asPercent = false): alt.IVector2 {
  * @static
  * @param {boolean} [asPercent=false] Conver to percentage?
  * @return {void}
- * @memberof Minimap
+ *
  */
 export function getBottomRight(asPercent = false): alt.IVector2 {
     const { x, y } = getTopLeft();
@@ -131,7 +131,7 @@ export function getScreenAspectRatio(): number {
 /**
  * Get current screen resolution
  *
- * @export
+ *
  * @return {alt.IVector2}
  */
 export function getScreenResolution(): alt.IVector2 {
@@ -145,7 +145,7 @@ export function getScreenResolution(): alt.IVector2 {
  * @param {number} value
  * @param {boolean} [isXAxis=true]
  * @return {number}
- * @memberof Minimap
+ *
  */
 export function convertToPercentage(value: number, isXAxis = true): number {
     const screen = getScreenResolution();

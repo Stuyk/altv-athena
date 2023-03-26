@@ -73,12 +73,12 @@ const Internal = {
 /**
  * Disable the toolbar hotkeys / processing on server-side.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.systems.default.toolbar.disable();
  * ```
  *
- * @export
+ *
  */
 export function disable() {
     enabled = false;

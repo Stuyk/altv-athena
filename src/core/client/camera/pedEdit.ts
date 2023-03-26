@@ -21,7 +21,7 @@ let isQueueReady = false;
  * @param {number} _scriptID
  * @param {alt.IVector3} [offset=null]
  * @return {Promise<void>}
- * @memberof PedEditCamera
+ *
  */
 export async function create(_scriptID: number, offset: alt.IVector3 = null, _isLocalPlayer = false): Promise<void> {
     scriptID = _scriptID;
@@ -77,7 +77,7 @@ export async function create(_scriptID: number, offset: alt.IVector3 = null, _is
  * @static
  * @param {Vector3} offset
  * @return {void}  {Vector3}
- * @memberof PedEditCamera
+ *
  */
 export function calculateCamOffset(offset: alt.IVector3): alt.IVector3 {
     return native.getOffsetFromEntityInWorldCoords(
@@ -92,7 +92,7 @@ export function calculateCamOffset(offset: alt.IVector3): alt.IVector3 {
  * Sets up the camera with the original position and a new offset.
  * @static
  * @param {alt.IVector3} offset
- * @memberof PedEditCamera
+ *
  */
 export function setCameraOffset(offset: alt.IVector3) {
     startPosition = calculateCamOffset(offset) as alt.Vector3;
@@ -105,7 +105,7 @@ export function setCameraOffset(offset: alt.IVector3) {
  * Check if a PedEditCamera exists.
  * @static
  * @return {void}
- * @memberof PedEditCamera
+ *
  */
 export function exists() {
     return camera !== null;
@@ -114,7 +114,7 @@ export function exists() {
 /**
  * Destroy the Ped Edit Camera
  * @static
- * @memberof PedEditCamera
+ *
  */
 export async function destroy() {
     if (cameraControlsInterval !== undefined && cameraControlsInterval !== null) {
@@ -146,7 +146,7 @@ export async function destroy() {
  * Disable All Controls?
  * @static
  * @param {boolean} status
- * @memberof PedEditCamera
+ *
  */
 export function disableControls(status: boolean): void {
     controlStatus = status;
@@ -156,7 +156,7 @@ export function disableControls(status: boolean): void {
  * Set the Camera Field of View
  * @static
  * @param {*} value
- * @memberof PedEditCamera
+ *
  */
 export function setCamParams(_zpos: number = null, _fov: number = null, _easeTime: number = 500) {
     if (_zpos === null) {
@@ -219,7 +219,7 @@ export async function runQueue() {
  * Update the ScriptID for who we should use to rotate.
  * @static
  * @param {number} id
- * @memberof PedEditCamera
+ *
  */
 export function update(id: number) {
     scriptID = id;

@@ -4,12 +4,12 @@ import * as Athena from '@AthenaServer/api';
 /**
  * Get all temporary vehicles.
  *
- * @example
+ * #### Example
  * ```ts
  * const vehicles = Athena.vehicle.get.temporaryVehicles();
  * ```
  *
- * @export
+ *
  * @return {Array<alt.Vehicle>} An array of temporary vehicles.
  */
 export function temporaryVehicles(): Array<alt.Vehicle> {
@@ -21,12 +21,12 @@ export function temporaryVehicles(): Array<alt.Vehicle> {
 /**
  * Get all owned vehicles.
  *
- * @example
+ * #### Example
  * ```ts
  * const vehicles = Athena.vehicle.get.ownedVehicles();
  * ```
  *
- * @export
+ *
  * @return {Array<alt.Vehicle>} An array of owned vehicles.
  */
 export function ownedVehicles(): Array<alt.Vehicle> {
@@ -38,14 +38,14 @@ export function ownedVehicles(): Array<alt.Vehicle> {
 /**
  * Takes a player instance, or `_id` and returns all spawned & owned vehicles
  *
- * @example
+ * #### Example
  * ```ts
  * function something(player: alt.Player) {
  *     const vehicles = Athena.vehicle.get.playerOwnedVehicles(player);
  * }
  * ```
  *
- * @export
+ *
  * @param {(alt.Player | string)} player
  * @return {Array<alt.Vehicle>} An array of vehicles owned and spawned by a player.
  */

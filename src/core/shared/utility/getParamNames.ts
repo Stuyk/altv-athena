@@ -5,7 +5,7 @@ const ARGUMENT_NAMES = /([^\s,]+)/g;
  * Used to reflect names of parameters from a given function.
  * Returns an array of parameter names.
  *
- * @export
+ *
  * @param {Function} func
  * @return {Array<string>}
  */

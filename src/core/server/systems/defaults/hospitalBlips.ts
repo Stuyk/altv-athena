@@ -46,13 +46,13 @@ const Internal = {
 /**
  * Disable default hospital blips from being created
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.systems.default.hospitalBlips.disable();
  * ```
  *
  *
- * @export
+ *
  */
 export function disable() {
     enabled = false;

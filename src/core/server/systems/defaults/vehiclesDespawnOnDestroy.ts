@@ -45,12 +45,12 @@ const Internal = {
  * Disable vehicles despawning when a player leaves.
  *
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.systems.default.vehiclesDespawnOnDestroy.disable();
  * ```
  *
- * @export
+ *
  */
 export function disable() {
     enabled = false;
@@ -60,7 +60,7 @@ export function disable() {
 /**
  * Set the time before a vehicle is removed after it is destroyed.
  *
- * @export
+ *
  * @param {number} milliseconds
  */
 export function setTimeBeforeRemove(milliseconds: number) {

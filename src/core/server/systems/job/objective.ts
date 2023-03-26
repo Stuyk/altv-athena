@@ -7,7 +7,7 @@ export interface DefaultCriteriaOptions {
      * This objective cannot be completed in a vehicle.
      *
      * @type {boolean}
-     * @memberof DefaultCriteriaOptions
+     *
      */
     NO_VEHICLE?: boolean;
 
@@ -15,7 +15,7 @@ export interface DefaultCriteriaOptions {
      * This objective cannot be completed with a weapon in-hand.
      *
      * @type {boolean}
-     * @memberof DefaultCriteriaOptions
+     *
      */
     NO_WEAPON?: boolean;
 
@@ -23,7 +23,7 @@ export interface DefaultCriteriaOptions {
      * This objective cannot be completed if the player has died.
      *
      * @type {boolean}
-     * @memberof DefaultCriteriaOptions
+     *
      */
     NO_DYING?: boolean;
 
@@ -31,7 +31,7 @@ export interface DefaultCriteriaOptions {
      * This objective can only be completed in any vehicle.
      *
      * @type {boolean}
-     * @memberof DefaultCriteriaOptions
+     *
      */
     IN_VEHICLE?: boolean;
 
@@ -39,7 +39,7 @@ export interface DefaultCriteriaOptions {
      * This objective can only in a job vehicle
      *
      * @type {boolean}
-     * @memberof DefaultCriteriaOptions
+     *
      */
     IN_JOB_VEHICLE?: boolean;
 
@@ -47,7 +47,7 @@ export interface DefaultCriteriaOptions {
      * This job fails when the objective vehicle is destroyed.
      *
      * @type {boolean}
-     * @memberof DefaultCriteriaOptions
+     *
      */
     FAIL_ON_JOB_VEHICLE_DESTROY?: boolean;
 
@@ -55,7 +55,7 @@ export interface DefaultCriteriaOptions {
      * The job vehicle must be nearby to complete this objective.
      *
      * @type {boolean}
-     * @memberof DefaultCriteriaOptions
+     *
      */
     JOB_VEHICLE_NEARBY?: boolean;
 
@@ -63,7 +63,7 @@ export interface DefaultCriteriaOptions {
      * The vehicle engine must be off to complete this objective.
      *
      * @type {boolean}
-     * @memberof DefaultCriteriaOptions
+     *
      */
     VEHICLE_ENGINE_OFF?: boolean;
 }
@@ -73,7 +73,7 @@ export interface DefaultCriteriaOptions {
  *
  * Removes all deep refs.
  *
- * @export
+ *
  * @param {Job} job
  * @param {Objective} objective
  * @returns {Objective} Returns the objective instance; does not need to be added.
@@ -91,7 +91,7 @@ export function createAndAdd(job: Job, objective: Objective): Objective {
 /**
  * Builds a numerical representation of the flags used to check job criteria.
  *
- * @export
+ *
  * @param {DefaultCriteriaOptions} criteria
  * @return {number}
  */
@@ -120,7 +120,7 @@ export function buildCriteria(criteria: DefaultCriteriaOptions): number {
 /**
  * Returns the numerical representation of a default objective type.
  *
- * @export
+ *
  * @param {keyof typeof ObjectiveType} type
  * @return {number}
  */
@@ -146,7 +146,7 @@ export function override(functionName: 'getType', callback: typeof getType);
 /**
  * Used to override job objective creation functionality
  *
- * @export
+ *
  * @param {keyof JobObjectiveFuncs} functionName
  * @param {*} callback
  */

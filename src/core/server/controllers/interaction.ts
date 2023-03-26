@@ -270,7 +270,7 @@ const InternalFunctions = {
  *
  * Returns a uid or generates one if not specified.
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.interaction.append({
  *    position: { x: 0, y: 0, z: 0 },
@@ -333,7 +333,7 @@ export function append(interaction: Interaction): string {
  *
  * Removes the associated ColShape as well.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.interaction.remove(someUid);
  *
@@ -356,7 +356,7 @@ export function remove(uid: string): void {
  *
  * This includes the internal ColShapes as well.
  *
- * @example
+ * #### Example
  * ```ts
  * const interaction = Athena.controllers.interaction.get('the-uid-you-specified');
  * ```
@@ -380,7 +380,7 @@ export function get(uid: string): InteractionShape | undefined {
 /**
  * Used to obtain current interactions that are bound to a player id.
  *
- * @export
+ *
  * @return {{ [player_id: string]: InteractionShape }}
  */
 export function getBindings(): { [player_id: string]: InteractionShape } {
@@ -425,7 +425,7 @@ export function override(functionName: 'getBindings', callback: typeof getBindin
 /**
  * Used to override any interaction controller function.
  *
- * @export
+ *
  * @param {keyof InteractionControllerFuncs} functionName
  * @param {*} callback
  */
@@ -440,7 +440,7 @@ export function overrideInternal(functionName: 'enter', callback: typeof Interna
  * Used to override any internal interaction controller function.
  * Handles things such as entering colshapes, leaving, and trigger them.
  *
- * @export
+ *
  * @param {keyof InteractionControllerInternalFuncs} functionName
  * @param {*} callback
  */

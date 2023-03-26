@@ -231,7 +231,7 @@ const InternalFunctions = {
 /**
  * Add a permission to an account or character.
  *
- * @export
+ *
  * @template CustomPerms
  * @param {('character' | 'account')} type
  * @param {alt.Player} player An alt:V Player Entity
@@ -249,7 +249,7 @@ export async function add<CustomPerms = ''>(
 /**
  * Remove a permission from an account or character.
  *
- * @export
+ *
  * @template CustomPerms
  * @param {('character' | 'account')} type
  * @param {alt.Player} player An alt:V Player Entity
@@ -267,7 +267,7 @@ export async function remove<CustomPerms = ''>(
 /**
  * Clear all permissions for an account or character.
  *
- * @export
+ *
  * @param {('character' | 'account')} type
  * @param {alt.Player} player An alt:V Player Entity
  * @return {Promise<void>}
@@ -279,7 +279,7 @@ export async function clear(type: 'character' | 'account', player: alt.Player) {
 /**
  * Check if a character or account has a single permission.
  *
- * @export
+ *
  * @template CustomPerms
  * @param {('character' | 'account')} type
  * @param {alt.Player} player An alt:V Player Entity
@@ -297,7 +297,7 @@ export function has<CustomPerms = ''>(
 /**
  * Check if a character or account has a atleast one permission.
  *
- * @export
+ *
  * @template CustomPerms
  * @param {('character' | 'account')} type
  * @param {alt.Player} player An alt:V Player Entity
@@ -315,7 +315,7 @@ export function hasOne<CustomPerms = ''>(
 /**
  * Check if a character or account has all the permissions.
  *
- * @export
+ *
  * @template CustomPerms
  * @param {('character' | 'account')} type
  * @param {alt.Player} player An alt:V Player Entity
@@ -334,7 +334,7 @@ export function hasAll<CustomPerms = ''>(
  * Get all documents that have a specified permission in their permissions array.
  * Will return an empty array if no permissions are found.
  *
- * @export
+ *
  * @template CustomPerms
  * @param {('character' | 'account')} type
  * @param {(Array<DefaultPerms | CustomPerms>)} perms
@@ -366,7 +366,7 @@ export async function getAll<CustomPerms = ''>(
  * Remove specified permission from all instances of an account or character.
  * Automatically rebinds the document after updating.
  *
- * @export
+ *
  * @param {('character' | 'account')} type
  * @param {(DefaultPerms | CustomPerms)} perm
  * @param {Array<string>} ids
@@ -426,7 +426,7 @@ export function getPermissions(entity: alt.Vehicle, type: 'vehicle');
 /**
  * Get permissions for a given entity and type
  *
- * @export
+ *
  * @param {alt.Entity} entity
  * @param {('account' | 'character' | 'vehicle')} type
  * @return {Array<string>}

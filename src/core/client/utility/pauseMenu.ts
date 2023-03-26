@@ -19,7 +19,7 @@ const Internal = {
 /**
  * Disable the default GTA:V pause Menu
  *
- * @export
+ *
  * @return {void}
  */
 export function disable() {
@@ -33,7 +33,7 @@ export function disable() {
 /**
  * Enable the default GTA:V pause menu
  *
- * @export
+ *
  * @return {void}
  */
 export function enable() {

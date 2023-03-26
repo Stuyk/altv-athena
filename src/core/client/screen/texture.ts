@@ -6,7 +6,7 @@ const textureData = {};
 /**
  * Draw a texture on-screen from a GTA:V file or DLC
  *
- * @export
+ *
  * @param {string} dictionary
  * @param {string} name
  * @param {alt.IVector2} position
@@ -64,7 +64,7 @@ export function drawTexture2D(
 /**
  * Draw a texture in-world from a GTA:V file, or DLC
  *
- * @export
+ *
  * @param {string} dictionary
  * @param {string} name
  * @param {alt.Vector3} position

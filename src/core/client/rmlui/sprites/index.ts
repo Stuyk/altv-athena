@@ -9,7 +9,7 @@ export interface SpriteInfo {
      * A unique identifier for this sprite.
      *
      * @type {string}
-     * @memberof SpriteInfo
+     *
      */
     uid: string;
 
@@ -19,7 +19,7 @@ export interface SpriteInfo {
      * Otherwise paths are based on `../../../plugins/plugin-name/client/image.png`.
      *
      * @type {string}
-     * @memberof SpriteInfo
+     *
      */
     path: string;
 
@@ -27,7 +27,7 @@ export interface SpriteInfo {
      * The width of the image. Pixels.
      *
      * @type {number}
-     * @memberof SpriteInfo
+     *
      */
     width: number;
 
@@ -35,7 +35,7 @@ export interface SpriteInfo {
      * The height of the image. Pixels.
      *
      * @type {number}
-     * @memberof SpriteInfo
+     *
      */
     height: number;
 
@@ -43,14 +43,14 @@ export interface SpriteInfo {
      * A position in-world, or on-screen where to draw this image.
      *
      * @type {alt.IVector3}
-     * @memberof SpriteInfo
+     *
      */
     position: alt.IVector3;
 
     /**
      * Call this callback once, when the sprite is touched.
      *
-     * @memberof Sprite
+     *
      */
     callOnceOnTouch?: (uid: string) => void;
 }

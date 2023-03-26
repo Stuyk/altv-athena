@@ -13,7 +13,7 @@ const InternalFunctions = {
     /**
      * Initialize the PedController Streamer Service
 
-     * @memberof PedController
+     *
      */
     init() {
         Athena.systems.streamer.registerCallback(KEY, InternalFunctions.update);
@@ -26,7 +26,7 @@ const InternalFunctions = {
     /**
      * Refresh all global pedestrians.
 
-     * @memberof PedController
+     *
      */
     refresh() {
         Athena.systems.streamer.updateData(KEY, globalPeds);
@@ -40,7 +40,7 @@ const InternalFunctions = {
  *
  *  * Returns a uid or generates one if not specified.
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.staticPed.append({ model: 'g_f_importexport_01', pos: { x: 0, y: 0, z: 0} })
  *
@@ -67,7 +67,7 @@ export function append(pedData: IPed): string {
 /**
  * Remove a global pedestrian
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.staticPed.remove(someUid)
  *
@@ -96,7 +96,7 @@ export function remove(uid: string): boolean {
 /**
  * Remove a pedestrian from a player.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.staticPed.removeFromPlayer(somePlayer, someUid)
  *
@@ -124,7 +124,7 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  *
  * Returns a uid or generates one if not specified.
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.staticPed.addToPlayer(somePlayer, { model: 'g_f_importexport_01', pos: { x: 0, y: 0, z: 0} })
  *
@@ -151,7 +151,7 @@ export function addToPlayer(player: alt.Player, pedData: IPed): string {
 /**
  * Make a pedestrian play a specific animation.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.staticPed.playAnimation('the-id-you-specified', playAnimation('test', [
  *      {
@@ -163,7 +163,7 @@ export function addToPlayer(player: alt.Player, pedData: IPed): string {
  * ]);
  * ```
  *
- * @export
+ *
  * @param {string} uid A unique string
  * @param {Animation[]} animation
  */
@@ -185,7 +185,7 @@ export function override(functionName: 'removeFromPlayer', callback: typeof remo
 /**
  * Used to override any static ped streamer functionality.
  *
- * @export
+ *
  * @param {keyof PedControllerFuncs} functionName
  * @param {*} callback
  */

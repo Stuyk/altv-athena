@@ -168,7 +168,7 @@ export function removeObject(uid: string) {
 /**
  * Used to obtain a CreatedObject instance from a generic scriptID
  *
- * @export
+ *
  * @param {number} scriptId
  * @return {CreatedObject}
  */

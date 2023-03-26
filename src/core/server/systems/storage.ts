@@ -17,7 +17,7 @@ export interface StorageInstance<CustomData = {}> {
      * The date which this storage was last accessed.
      *
      * @type {number}
-     * @memberof StorageInstance
+     *
      */
     lastUsed: number;
 
@@ -25,7 +25,7 @@ export interface StorageInstance<CustomData = {}> {
      * The data stored in the database.
      *
      * @type {Array<StoredItem<CustomData>>}
-     * @memberof StorageInstance
+     *
      */
     items: Array<StoredItem<CustomData>>;
 }
@@ -35,7 +35,7 @@ export interface StorageInstance<CustomData = {}> {
  *
  * Use the ID returned to fetch the data with the other storage functions.
  *
- * @export
+ *
  * @param {Array<StoredItem>} items
  * @return {Promise<string>}
  */
@@ -52,7 +52,7 @@ export async function create(items: Array<StoredItem>): Promise<string> {
 /**
  * Stores items into a database instance by providing the storage identifier, and the modified items array.
  *
- * @export
+ *
  * @param {string} id
  * @param {Array<StoredItem>} items
  * @returns {Promise<boolean>}
@@ -64,7 +64,7 @@ export async function set(id: string, items: Array<StoredItem>): Promise<boolean
 /**
  * Fetches stored items from a storage array.
  *
- * @export
+ *
  * @template CustomData
  * @param {string} id
  * @return {Promise<Array<StoredItem<CustomData>>>}
@@ -84,7 +84,7 @@ export async function get<CustomData = {}>(id: string): Promise<Array<StoredItem
  *
  * Returns true if the value was set to in-use, and didn't already exist.
  *
- * @export
+ *
  * @param {string} id
  * @return {boolean}
  */
@@ -101,7 +101,7 @@ export function setAsOpen(id: string): boolean {
 /**
  * Checks if a storage identifier is currently in use.
  *
- * @export
+ *
  * @param {string} id
  * @return {void}
  */
@@ -114,7 +114,7 @@ export function isOpen(id: string): boolean {
  *
  * Returns true if the value was successfully removed.
  *
- * @export
+ *
  * @param {string} id
  * @returns {boolean}
  */
@@ -146,7 +146,7 @@ export function removeAsOpen(id: string): boolean {
  *
  * Returns false if a player binding is already present.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {string} id
  * @returns {boolean}

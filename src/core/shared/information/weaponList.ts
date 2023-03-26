@@ -1558,7 +1558,7 @@ const WeaponList: { [key: string]: Weapon } = {
 
 /**
  * Get a weapon hash by its string name.
- * @export
+ *
  * @param {string} name
  * @return {(number | null)}
  */

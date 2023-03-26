@@ -11,7 +11,7 @@ const typeAddons: Array<(player: alt.Player, objective: Objective) => boolean> =
 /**
  * Verifies all objective content / functionality.
  *
- * @export
+ *
  * @param {Job} job
  * @return {Promise<boolean>}
  */
@@ -76,7 +76,7 @@ export async function objective(job: Job): Promise<boolean> {
 /**
  * Verifies job criteria such as not being in a vehicle, no weapons, etc.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {Objective} objective
  * @return {boolean}
@@ -204,7 +204,7 @@ export function criteria(player: alt.Player, objective: Objective): boolean {
 /**
  * Verifies job types such as a waypoint, or capture point.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {Objective} objective
  * @return {boolean}
@@ -275,7 +275,7 @@ export function type(player: alt.Player, objective: Objective): boolean {
  *
  * CANNOT BE ASYNC
  *
- * @example
+ * #### Example
  * ```
  * Athena.systems.job.verify.addCustomCheck('criteria', (player: alt.Player, objective: Objective) => {
  *     // Ignore this objective if the uid does not match.
@@ -298,7 +298,7 @@ export function type(player: alt.Player, objective: Objective): boolean {
  * });
  * ```
  *
- * @export
+ *
  * @param {('type' | 'criteria')} type
  * @param {(objective: Objective) => boolean} callback
  * @return {void}
@@ -338,7 +338,7 @@ export function override(functionName: 'objective', callback: typeof objective);
 /**
  * Used to override job objective verification functionality
  *
- * @export
+ *
  * @param {keyof JobVerifyFuncs} functionName
  * @param {*} callback
  */

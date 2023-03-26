@@ -3,7 +3,7 @@ import * as alt from 'alt-shared';
 /**
  * Get the distance between two positions.
  *
- * @export
+ *
  * @param {alt.IVector3} vector1
  * @param {alt.IVector3} vector2
  * @return {number}
@@ -21,7 +21,7 @@ export function distance(vector1: alt.IVector3, vector2: alt.IVector3): number {
 /**
  * Get the distance between two positions. Excludes z
  *
- * @export
+ *
  * @param {alt.IVector2} vector1
  * @param {alt.IVector2} vector2
  * @return {number}
@@ -37,7 +37,7 @@ export function distance2d(vector1: alt.IVector2, vector2: alt.IVector2): number
 /**
  * Get the closest vector given an array of positions.
  *
- * @export
+ *
  * @param {alt.IVector3} pos A position in the world.
  * @param {alt.IVector3[]} arrayOfPositions
  * @return {alt.IVector3}
@@ -53,7 +53,7 @@ export function getClosestVector(pos: alt.IVector3, arrayOfPositions: alt.IVecto
 /**
  * Get the closest Vector by position.
  *
- * @export
+ *
  * @template T
  * @param {alt.IVector3} pos A position in the world.
  * @param {T[]} arrayOfPositions
@@ -70,7 +70,7 @@ export function getClosestVectorByPos<T>(pos: alt.IVector3, arrayOfPositions: T[
 
 /**
  * Gets an array of the closest types.
- * @export
+ *
  * @template T
  * @param {alt.IVector3} pos A position in the world.
  * @param {Array<{ pos: alt.IVector3; valid: boolean }>} elements
@@ -123,7 +123,7 @@ export function lerp(a: number, b: number, t: number) {
  * Finds a position between two vectors to ease into.
  * Returns a new position.
  *
- * @export
+ *
  * @param {alt.IVector3} start
  * @param {alt.IVector3} end
  * @param {number} l
@@ -164,7 +164,7 @@ export function getForwardVector(rot: alt.IVector3): alt.IVector3 {
 /**
  * SERVER ONLY
  * Return a position in front of a player based on distance.
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} distance
  * @return {alt.Vector3}
@@ -288,7 +288,7 @@ function fwdZ(x: number): number {
 /**
  * Get the closest of a specific type of object with a `pos` property.
  *
- * @export
+ *
  * @template T
  * @param {alt.IVector3} pos A position in the world.
  * @param {Array<T & { pos: alt.IVector3 }} elements

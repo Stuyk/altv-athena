@@ -126,7 +126,7 @@ export function override(functionName: 'toggleEngine', callback: typeof toggleEn
 /**
  * Used to override vehicle control as a player functionality
  *
- * @export
+ *
  * @param {keyof VehicleAsPlayerFuncs} functionName
  * @param {*} callback
  */

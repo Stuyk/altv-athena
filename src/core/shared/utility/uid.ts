@@ -4,7 +4,7 @@ export const UID = {
      *
      * @static
      * @return {string}
-     * @memberof UID
+     *
      */
     generate(): string {
         return (

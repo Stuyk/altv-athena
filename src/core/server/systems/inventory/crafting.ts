@@ -15,7 +15,7 @@ export interface CraftRecipe {
      * A unique identifier for this recipe.
      *
      * @type {string}
-     * @memberof Recipe
+     *
      */
     uid: string;
 
@@ -23,7 +23,7 @@ export interface CraftRecipe {
      * Two items that can be combined.
      *
      * @type {ItemCombo}
-     * @memberof Recipe
+     *
      */
     combo: ItemCombo;
 
@@ -31,7 +31,7 @@ export interface CraftRecipe {
      * The amount required to combine.
      *
      * @type {Quantities}
-     * @memberof Recipe
+     *
      */
     quantities: Quantities;
 
@@ -39,7 +39,7 @@ export interface CraftRecipe {
      * The crafting result.
      *
      * @type {dbName}
-     * @memberof CraftRecipe
+     *
      */
     result?: {
         /**
@@ -78,7 +78,7 @@ export interface CraftRecipe {
      * Second item overwrites matching property names.
      *
      * @type {ItemCombo}
-     * @memberof CraftRecipe
+     *
      */
     dataMigration?: ItemCombo;
 
@@ -86,7 +86,7 @@ export interface CraftRecipe {
      * The custom sound associated with this crafting recipe.
      *
      * @type {string}
-     * @memberof CraftRecipe
+     *
      */
     sound?: string;
 }
@@ -291,7 +291,7 @@ export function override(functionName: 'findRecipe', callback: typeof findRecipe
 /**
  * Used to override inventory crafting functionality
  *
- * @export
+ *
  * @param {keyof CraftingFuncs} functionName
  * @param {*} callback
  */

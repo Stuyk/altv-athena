@@ -13,7 +13,7 @@ const Raycast = {
      * @param {number} radius
      * @param {boolean} [useShapeTest=false]
      * @return {[number, boolean, alt.IVector3, alt.IVector3, number]}
-     * @memberof Raycast
+     *
      */
     performRaycast(
         start: alt.IVector3,
@@ -72,7 +72,7 @@ const Raycast = {
      * @param {boolean} [useShapeTest=false]
      * @param {number} [radius=5]
      * @return {(alt.IVector3 | null)}
-     * @memberof Raycast
+     *
      */
     positionFromCamera(flags: number = -1, useShapeTest: boolean = false, radius: number = 5): alt.IVector3 | null {
         const start = alt.getCamPos();
@@ -107,7 +107,7 @@ const Raycast = {
      * @param {boolean} [useShapeTest=false]
      * @param {number} [radius=5]
      * @return {{ didComplete: boolean; didHit?: boolean; position?: alt.IVector3; entityHit?: number }}
-     * @memberof Raycast
+     *
      */
     simpleRaycast(
         flags: number = -1,
@@ -144,7 +144,7 @@ const Raycast = {
      * @param {boolean} [useShapeTest=false]
      * @param {number} [radius=5]
      * @return {{ didComplete: boolean; didHit?: boolean; position?: alt.IVector3; entityHit?: number }}
-     * @memberof Raycast
+     *
      */
     simpleRaycastPlayersView(
         flags: number = -1,
@@ -181,7 +181,7 @@ const Raycast = {
      * @param {boolean} [useShapeTest=false]
      * @param {number} [radius=5]
      * @return {(alt.IVector3 | null)}
-     * @memberof Raycast
+     *
      */
     positionFromPlayer(flags: number = -1, useShapeTest: boolean = false, radius: number = 5): alt.IVector3 | null {
         const start = alt.Player.local.pos;
@@ -212,7 +212,7 @@ const Raycast = {
      * Credit: Alexa for quick snippet.
      * @static
      * @return {(null | alt.IVector3)}
-     * @memberof Raycast
+     *
      */
     isFacingWater(): null | alt.IVector3 {
         const headPosition = native.getPedBoneCoords(alt.Player.local.scriptID, 31086, 0, 0, 0);

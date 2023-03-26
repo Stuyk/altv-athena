@@ -76,7 +76,7 @@ export function override(functionName: 'remove', callback: typeof remove);
 /**
  * Used to override any item drop streamer functionality.
  *
- * @export
+ *
  * @param {keyof ItemDropFuncs} functionName
  * @param {*} callback
  */

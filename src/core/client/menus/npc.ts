@@ -16,7 +16,7 @@ const Injections: Array<NpcMenuInjection> = [];
  *
  * @static
  * @param {NpcMenuInjection} callback
- * @memberof NpcWheelMenu
+ *
  */
 export function addInjection(callback: NpcMenuInjection) {
     Injections.push(callback);
@@ -28,7 +28,7 @@ export function addInjection(callback: NpcMenuInjection) {
  * @static
  * @param {number} scriptID
  * @return {void}
- * @memberof NpcWheelMenu
+ *
  */
 export function open(scriptID: number): void {
     if (AthenaClient.webview.isAnyMenuOpen()) {

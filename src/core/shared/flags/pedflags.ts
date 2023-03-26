@@ -1,7 +1,7 @@
 /**
  *
  * @ignore
- * @export
+ *
  * @enum {number}
  */
 export const enum PED_CONFIG_FLAG {

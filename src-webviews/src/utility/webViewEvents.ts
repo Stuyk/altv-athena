@@ -8,7 +8,7 @@ class InternalFunctions {
      *
      * @static
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     static init() {
         if (!('alt' in window)) {
@@ -25,7 +25,7 @@ class InternalFunctions {
      * @param {string} eventName
      * @param {...any[]} args
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     static handleEmits(eventName: string, ...args: any[]) {
         if (!OnEvents[eventName]) {
@@ -43,7 +43,7 @@ export default class WebViewEvents {
      *
      * @static
      * @return {void}
-     * @memberof WebViewEvents
+     *
      */
     static emitClose() {
         if (!('alt' in window)) {
@@ -60,7 +60,7 @@ export default class WebViewEvents {
      * @static
      * @param {string} pageName
      * @return {void}
-     * @memberof WebViewEvents
+     *
      */
     static emitReady(pageName: string, ...args: any[]) {
         if (!('alt' in window)) {
@@ -79,7 +79,7 @@ export default class WebViewEvents {
      * @param {string} eventName
      * @param {...any[]} args
      * @return {void}
-     * @memberof WebViewEvents
+     *
      */
     static emitServer<EventNames = string>(eventName: EventNames, ...args: any[]): void {
         if (!('alt' in window)) {
@@ -99,7 +99,7 @@ export default class WebViewEvents {
      * @param {string} eventName
      * @param {...any[]} args
      * @return {void}
-     * @memberof WebViewEvents
+     *
      */
     static emitClient<EventNames = string>(eventName: EventNames, ...args: any[]): void {
         if (!('alt' in window)) {
@@ -117,7 +117,7 @@ export default class WebViewEvents {
      * @static
      * @param {string} eventName
      * @param {(...args: any[]) => void} callback
-     * @memberof WebViewEvents
+     *
      */
     static on<EventNames = string, Callback = (...args: any[]) => void>(eventName: EventNames, callback: Callback);
     static on(eventName: string, callback: (...args: any[]) => void) {
@@ -132,7 +132,7 @@ export default class WebViewEvents {
      * @param {number} pan
      * @param {number} volume
      * @param {string} [soundInstantID]
-     * @memberof WebViewEvents
+     *
      */
     static playSound(soundName: string, volume: number, soundInstantID?: string) {
         if (!('alt' in window)) {
@@ -149,7 +149,7 @@ export default class WebViewEvents {
      * @static
      * @param {string} audioName
      * @param {string} ref
-     * @memberof WebViewEvents
+     *
      */
     static playSoundFrontend(audioName: string, ref: string) {
         if (!('alt' in window)) {

@@ -19,7 +19,7 @@ class Startup {
     /**
      * Used to start the Database.
      * @static
-     * @memberof Startup
+     *
      */
     static database() {
         if (typeof config === 'undefined') {
@@ -49,7 +49,7 @@ class Startup {
     /**
      * Sets the current ares endpoint.
      * @static
-     * @memberof Startup
+     *
      */
     static async load() {
         if (typeof config === 'undefined') {

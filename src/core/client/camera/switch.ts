@@ -6,7 +6,7 @@ import { SWITCHOUT_TYPES } from '@AthenaShared/enums/switchOutTypes';
 /**
  * Zoom all the way out. Then zoom all the way in from the sky.
  *
- * @export
+ *
  * @param {number} timeInMs
  * @param {SWITCHOUT_TYPES} switchType
  * @return {Promise<boolean>}

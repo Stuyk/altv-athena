@@ -24,7 +24,7 @@ import { WEATHER_KEY } from '@AthenaShared/utility/weather';
  * @param {alt.Player} player An alt:V Player Entity
  * @param {string} name
  * @return {void}
- * @memberof EmitPrototype
+ *
  */
 export function startAlarm(player: alt.Player, name: string): void {
     if (Overrides.startAlarm) {
@@ -80,7 +80,7 @@ export function stopAllAlarms(player: alt.Player) {
  * @param {ANIMATION_FLAGS} flags
  * @param {number} [duration=-1]
  * @return {void}
- * @memberof EmitPrototype
+ *
  */
 export function animation(
     player: alt.Player,
@@ -133,7 +133,7 @@ export function clearAnimation(player: alt.Player) {
  * @param {string} name
  * @param {number} duration
  * @return {void}
- * @memberof EmitPrototype
+ *
  */
 export function scenario(player: alt.Player, name: string, duration: number): void {
     if (Overrides.scenario) {
@@ -152,7 +152,7 @@ export function scenario(player: alt.Player, name: string, duration: number): vo
  * Synchronize a local variable to access locally for this player.
  * @param {string} key
  * @param {*} value
- * @memberof EmitPrototype
+ *
  */
 export function meta(player: alt.Player, key: string, value: any): void {
     if (Overrides.meta) {
@@ -165,7 +165,7 @@ export function meta(player: alt.Player, key: string, value: any): void {
 /**
  * Send a notification to this player.
  * @param {string} message
- * @memberof EmitPrototype
+ *
  */
 export function notification(player: alt.Player, message: string): void {
     if (Overrides.notification) {
@@ -263,7 +263,7 @@ export function sound2D(player: alt.Player, audioName: string, volume: number = 
  * @param {string} audioName
  * @param {alt.Entity} target
  * @param {string} soundInstantID, optional unique id to play sound instant
- * @memberof EmitPrototype
+ *
  */
 export function sound3D(player: alt.Player, audioName: string, target: alt.Entity, soundInstantID?: string): void {
     if (Overrides.sound3D) {
@@ -278,7 +278,7 @@ export function sound3D(player: alt.Player, audioName: string, target: alt.Entit
  * @param {string} audioName
  * @param {alt.Entity} target
  * @param {string} soundInstantID, optional unique id to play sound instant
- * @memberof EmitPrototype
+ *
  */
 export function soundStop(player: alt.Player, soundInstantID?: string): void {
     if (Overrides.soundStop) {
@@ -292,7 +292,7 @@ export function soundStop(player: alt.Player, soundInstantID?: string): void {
  * Play a frontend sound for this player.
  * @param {string} audioName
  * @param {string} ref
- * @memberof EmitPrototype
+ *
  */
 export function soundFrontend(player: alt.Player, audioName: string, ref: string): void {
     if (Overrides.soundFrontend) {
@@ -569,7 +569,7 @@ export function acceptDeclineEvent(player: alt.Player, eventInfo: AcceptDeclineE
 /**
  * Turns the player's screen black over time.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} timeInMs
  */
@@ -580,7 +580,7 @@ export function fadeScreenToBlack(player: alt.Player, timeInMs: number) {
 /**
  * Removes the black filter over the screen over time.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} timeInMs
  */
@@ -595,7 +595,7 @@ export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs:
  *
  * Think of like screen wobbling, drunkness, etc.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {string} name
  * @param {number} amountInMs How long it should last. -1 for infinite.
@@ -607,7 +607,7 @@ export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs 
 /**
  * Used to clear a screen effect from a player.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  */
 export function clearTimeCycleEffect(player: alt.Player) {
@@ -619,7 +619,7 @@ export function clearTimeCycleEffect(player: alt.Player) {
  *
  * Does not use alt:V functionality. Only uses natives.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} timeInSeconds
  */
@@ -702,7 +702,7 @@ export function override(functionName: 'wheelMenu', callback: typeof wheelMenu);
  * Used to override any internal emit functions.
  *
  * @ignore
- * @export
+ *
  * @param {keyof EmitFunctions} functionName
  * @param {*} callback
  */

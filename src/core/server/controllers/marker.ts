@@ -12,7 +12,7 @@ const globalMarkers: Array<Marker> = [];
 const InternalController = {
     /**
      * Initialize this Marker Stream Service
-     * @memberof ServerMarkerController
+     *
      */
     init() {
         Athena.systems.streamer.registerCallback(KEY, InternalController.update);
@@ -20,7 +20,7 @@ const InternalController = {
 
     /**
      * Internal function to refresh all global markers in the streamer service.
-     * @memberof ServerMarkerController
+     *
      */
     refresh() {
         Athena.systems.streamer.updateData(KEY, globalMarkers);
@@ -30,7 +30,7 @@ const InternalController = {
      * Updates marker labels through the streamer service.
      * @param {alt.Player} player An alt:V Player Entity
      * @param {Array<Marker>} markers
-     * @memberof ServerMarkerController
+     *
      */
     update(player: alt.Player, markers: Array<Marker>) {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_MARKERS, markers);
@@ -44,7 +44,7 @@ const InternalController = {
  *
  * - [See alt:V Marker List](https://docs.altv.mp/gta/articles/references/markers.html)
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.marker.append({
  *      type: 1,
@@ -81,7 +81,7 @@ export function append(marker: Marker): string {
 /**
  * Removes a global marker from all players based on the global uid.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.marker.remove(someUid);
  *
@@ -111,7 +111,7 @@ export function remove(uid: string): boolean {
  *
  * Returns a uid or generates one if not specified.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.marker.removeFromPlayer(somePlayer, someUid);
  * ```
@@ -134,7 +134,7 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
 /**
  * Add a marker to a single local player.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.marker.addToPlayer(somePlayer, {
  *      type: 1,
@@ -173,7 +173,7 @@ export function override(functionName: 'removeFromPlayer', callback: typeof remo
 /**
  * Used to override any marker streamer functionality
  *
- * @export
+ *
  * @param {keyof MarkerControllerFuncs} functionName
  * @param {*} callback
  */

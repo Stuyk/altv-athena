@@ -72,7 +72,7 @@ export class PolygonShape extends alt.ColshapePolygon {
      * @param {number} minZ The floor level of the polygon
      * @param {number} maxZ The max height of the polygon
      * @param {Array<alt.IVector2>} vertices An array of `x, y` to determine where to draw the polygon around
-     * @memberof PolygonShape
+     *
      */
     constructor(
         minZ: number,

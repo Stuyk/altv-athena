@@ -1,7 +1,7 @@
 /**
  *
  * @ignore
- * @export
+ *
  * @enum {number}
  */
 export enum GLOBAL_SYNCED {

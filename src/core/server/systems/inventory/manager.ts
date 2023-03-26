@@ -11,7 +11,7 @@ export interface ItemQuantityChange {
      * The modified item after making qunatity modifications to it.
      *
      * @type { Item | StoredItem }
-     * @memberof ItemQuantityChange
+     *
      */
     item: Item | StoredItem;
 
@@ -19,7 +19,7 @@ export interface ItemQuantityChange {
      * The number of items that were not added to this stack.
      *
      * @type {number}
-     * @memberof ItemQuantityChange
+     *
      */
     remaining: number;
 }
@@ -280,7 +280,7 @@ export function clearData(item: Item | StoredItem) {
 /**
  * Convert an array of stored items into full items
  *
- * @export
+ *
  * @param {Array<StoredItem<{}>>} data
  * @return {Array<Item<DefaultItemBehavior, {}>>}
  */
@@ -996,7 +996,7 @@ export function override(functionName: 'useItem', callback: typeof useItem);
 /**
  * Used to override inventory item manager functionality
  *
- * @export
+ *
  * @param {keyof ManagerFuncs} functionName
  * @param {*} callback
  */

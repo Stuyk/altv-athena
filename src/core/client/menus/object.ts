@@ -19,7 +19,7 @@ const Injections: Array<ObjectMenuInjection> = [];
  *
  * @static
  * @param {ObjectMenuInjection} callback
- * @memberof ObjectWheelMenu
+ *
  */
 export function addInjection(callback: ObjectMenuInjection): void {
     Injections.push(callback);
@@ -31,7 +31,7 @@ export function addInjection(callback: ObjectMenuInjection): void {
  * @static
  * @param {CreatedObject} scriptID
  * @return {void}
- * @memberof ObjectWheelMenu
+ *
  */
 export function open(object: CreatedObject): void {
     if (AthenaClient.webview.isAnyMenuOpen()) {

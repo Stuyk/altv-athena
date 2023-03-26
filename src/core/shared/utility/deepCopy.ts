@@ -2,7 +2,7 @@
  * Used to deep clone an object and detach all references.
  * Does not work with functions.
  * This is required to prevent data from being modified in other items.
- * @export
+ *
  * @param {object} data
  * @return {void}
  */
@@ -21,7 +21,7 @@ export function deepCloneObject<T>(data: object): T {
 /**
  * Makes a complete copy of an array and all objects.
  *
- * @export
+ *
  * @template T
  * @param {(Array<object | T>)} data
  * @return {Array<T>}

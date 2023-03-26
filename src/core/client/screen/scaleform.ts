@@ -58,7 +58,7 @@ export class Scaleform {
 /**
  * Request a scaleform by name.
  *
- * @export
+ *
  * @param {string} scaleformName
  * @return {Promise<Scaleform>}
  */

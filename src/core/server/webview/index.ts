@@ -7,7 +7,7 @@ import { WebViewEventNames } from '../../shared/enums/webViewEvents';
  * @static
  * @param {string} eventName
  * @param {...any[]} args
- * @memberof ServerView
+ *
  */
 export function emit(player: alt.Player, eventName: string, ...args: any[]) {
     player.emit(WebViewEventNames.ON_SERVER, eventName, ...args);

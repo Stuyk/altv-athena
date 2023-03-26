@@ -17,7 +17,7 @@ export interface TextProperties {
  * @static
  * @param {string} text
  * @return {void}
- * @memberof ScreenText
+ *
  */
 export function addLongString(text: string): void {
     if (!text.length) {
@@ -47,7 +47,7 @@ export function addLongString(text: string): void {
  * @param {number} font
  * @param {number} scale
  * @return {number}
- * @memberof ScreenText
+ *
  */
 export function getWidth(text: string, font: number, scale: number): number {
     native.beginTextCommandGetScreenWidthOfDisplayText('CELL_EMAIL_BCON');
@@ -63,7 +63,7 @@ export function getWidth(text: string, font: number, scale: number): number {
  * @param {number} size
  * @param {number} scale
  * @return {void}
- * @memberof ScreenText
+ *
  */
 export function getHeight(scale: number, font: number): number {
     return native.getRenderedCharacterHeight(scale, font);
@@ -80,7 +80,7 @@ export function getHeight(scale: number, font: number): number {
  * @param {alt.RGBA} background
  * @param {alt.RGBA} foreground
  * @param {TextProperties} props
- * @memberof ScreenText
+ *
  */
 export function drawTextWithBackground(
     text: string,

@@ -53,7 +53,7 @@ export function override(functionName: 'invokeObjectiveCheck', callback: typeof 
 /**
  * Used to override job objective checking functionality
  *
- * @export
+ *
  * @param {keyof JobEventFuncs} functionName
  * @param {*} callback
  */

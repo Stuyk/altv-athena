@@ -46,7 +46,7 @@ export function getRandomRGBA(): alt.RGBA {
 /**
  * Shuffle an array, and return randomized order.
  *
- * @export
+ *
  * @template T
  * @param {Array<T>} array
  * @return {Array<T>}
@@ -71,7 +71,7 @@ export function shuffle<T>(array: Array<T>): Array<T> {
 /**
  * Return a random value from an array of values
  *
- * @export
+ *
  * @template T
  * @param {Array<T>} elements
  * @return {T}

@@ -30,7 +30,7 @@ function loadParticleDictionary(dictionary: string): Promise<boolean> {
 
 /**
  * Players a particle effect at a certain location.
- * @export
+ *
  * @param {Particle} data
  */
 export async function handlePlayParticle(data: Particle): Promise<void> {

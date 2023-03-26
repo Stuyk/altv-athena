@@ -74,7 +74,7 @@ export function override(functionName: 'isWeightExceeded', callback: typeof isWe
 /**
  * Used to override inventory item weight functionality
  *
- * @export
+ *
  * @param {keyof WeightFuncs} functionName
  * @param {*} callback
  */

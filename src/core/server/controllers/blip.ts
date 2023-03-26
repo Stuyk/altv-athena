@@ -15,7 +15,7 @@ const globalBlips: Array<Blip> = [];
  * - See [alt:V Blip Sprites](https://docs.altv.mp/gta/articles/references/blips.html)
  * - See [alt:V Blip Colors](https://docs.altv.mp/gta/articles/references/blips.html#colors)
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.blip.append({
  *     color: 5,
@@ -53,7 +53,7 @@ export function append(blip: Blip): string {
 /**
  * Removes a blip based on uid.
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.blip.append({
  *     color: 5,
@@ -89,7 +89,7 @@ export function remove(uid: string): boolean {
  * Remove a blip from the player.
  * Do not worry about removing blips on disconnect.
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.blip.addToPlayer(somePlayer, {
  *     color: 5,
@@ -128,7 +128,7 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  * - See [alt:V Blip Sprites](https://docs.altv.mp/gta/articles/references/blips.html)
  * - See [alt:V Blip Colors](https://docs.altv.mp/gta/articles/references/blips.html#colors)
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.blip.addToPlayer(somePlayer, {
  *     color: 5,
@@ -159,12 +159,12 @@ export function addToPlayer(player: alt.Player, blipData: Blip) {
  * Used to load all blips on client-side for a player.
  * This is already called when the gamemode starts. Not necessary to call twice.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.blip.populateGlobalBlips(somePlayer);
  * ```
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  */
 export function populateGlobalBlips(player: alt.Player) {
@@ -190,7 +190,7 @@ export function override(functionName: 'populateGlobalBlips', callback: typeof p
 /**
  * Used to override any blip controller function.
  *
- * @export
+ *
  * @param {keyof BlipControllerFuncs} functionName
  * @param {*} callback
  */

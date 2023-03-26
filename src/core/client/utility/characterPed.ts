@@ -15,7 +15,7 @@ let hidden: boolean = false;
  * Used to create a single instance of a character pedestrian.
  * Mostly used for appearance editing and such.
  * Do not use it for anything else.
- * @export
+ *
  * @class Ped
  */
 export const PedCharacter = {
@@ -25,7 +25,7 @@ export const PedCharacter = {
      * @param {alt.IVector3} pos A position in the world.
      * @param {(alt.IVector3 | number) = {x: 0, y: 0, z: 0}}
      * @return {Promise<void>}
-     * @memberof Ped
+     *
      */
     async create(
         isMale: boolean,
@@ -71,7 +71,7 @@ export const PedCharacter = {
      * @static
      * @param {Appearance} appearance
      * @param {boolean} forceSameShoes Set to true to make female / male switching equal height.
-     * @memberof PedCharacter
+     *
      */
     async apply(_appearance: Appearance, forceSameShoes = false): Promise<void> {
         if (isUpdating) {
@@ -103,7 +103,7 @@ export const PedCharacter = {
      * Get the pedestrian id.
      * @static
      * @return {number}
-     * @memberof PedCharacter
+     *
      */
     get(): number {
         if (id === undefined || id === null) {
@@ -117,7 +117,7 @@ export const PedCharacter = {
      * Hide this pedestrian
      * @static
      * @param {boolean} value
-     * @memberof PedCharacter
+     *
      */
     setHidden(value: boolean) {
         hidden = value;
@@ -135,7 +135,7 @@ export const PedCharacter = {
      * Destroy the pedestrian character.
      * Does not clear previous position or rotation.
      * @static
-     * @memberof PedCharacter
+     *
      */
     async destroy() {
         return new Promise((resolve: Function) => {

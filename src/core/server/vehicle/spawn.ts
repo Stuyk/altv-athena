@@ -102,7 +102,7 @@ export function persistent(document: OwnedVehicle): alt.Vehicle | undefined {
 /**
  * Spawn all vehicles from the database.
  *
- * @export
+ *
  */
 export async function all() {
     if (Overrides.all) {
@@ -135,7 +135,7 @@ export function override(functionName: 'persistent', callback: typeof persistent
 /**
  * Used to override vehicle spawning functionality
  *
- * @export
+ *
  * @param {keyof VehicleSpawnFuncs} functionName
  * @param {*} callback
  */

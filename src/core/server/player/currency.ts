@@ -7,7 +7,7 @@ export type DefaultCurrency = 'bank' | 'cash';
 /**
  * Add currency type to the player.
  *
- * @example
+ * #### Example
  * ```ts
  * const didAddFullAmount = Athena.player.currency.add(somePlayer, 'cash', 25);
  * ```
@@ -15,7 +15,7 @@ export type DefaultCurrency = 'bank' | 'cash';
  * @param {CurrencyTypes} type
  * @param {number} amount
  * @return {boolean}
- * @memberof Currency
+ *
  */
 export function add<CustomCurrency>(
     player: alt.Player,
@@ -56,7 +56,7 @@ export function add<CustomCurrency>(
 /**
  * Remove currency type from the player.
  *
- * @example
+ * #### Example
  * ```ts
  * const didSubFullAmount = Athena.player.currency.sub(somePlayer, 'cash', 25);
  * ```
@@ -104,7 +104,7 @@ export function sub<CustomCurrency>(
 /**
  * Replace the current currency type value with this exact value.
  *
- * @example
+ * #### Example
  * ```ts
  * const didSetFullAmount = Athena.player.currency.set(somePlayer, 'bank', 25);
  * ```
@@ -112,7 +112,7 @@ export function sub<CustomCurrency>(
  * @param {CurrencyTypes} type Type of currency we are modifying.
  * @param {number} amount The amount we want to set that type to.
  * @return {boolean}
- * @memberof CurrencyPrototype
+ *
  */
 export function set<CustomCurrency>(
     player: alt.Player,
@@ -141,7 +141,7 @@ export function set<CustomCurrency>(
  * Only subtracts 'bank' and 'cash' currency types.
  * Always takes from cash first.
  *
- * @example
+ * #### Example
  * ```ts
  * const didRemoveFullAmount = Athena.player.currency.subAllCurrencies(somePlayer, 25);
  * ```
@@ -206,7 +206,7 @@ export function override(functionName: 'subAllCurrencies', callback: typeof subA
 /**
  * Used to override any internal currency functions.
  *
- * @export
+ *
  * @param {keyof CurrencyFunctions} functionName
  * @param {*} callback
  */

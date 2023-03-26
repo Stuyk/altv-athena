@@ -7,7 +7,7 @@ import * as alt from 'alt-shared';
  *
  * Used to auto-sync a vehicle from a database.
  *
- * @export
+ *
  * @interface VehicleState
  */
 export interface VehicleState {
@@ -33,7 +33,7 @@ export interface VehicleState {
 
     /**
      * Gets or sets the custom secondary color as a RGBA type.
-     * @example
+     * #### Example
      * ```js
      * const someVehicle = new alt.Vehicle('elegy', 0, 0, 0, 0, 0, 0);
      * someVehicle.customSecondaryColor = new alt.RGBA(255, 0, 0);

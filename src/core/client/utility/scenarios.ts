@@ -6,7 +6,7 @@ alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SCENARIO, playScenario);
 
 /**
  * Play an animation for the local player.
- * @export
+ *
  * @param {string} name The name of the scenario.
  * @param {number} duration The duration of the scenario.
  * @return {Promise<void>}

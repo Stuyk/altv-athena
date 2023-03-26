@@ -24,7 +24,7 @@ export type ClothingInfo = { sex: number; components: Array<ClothingComponent> }
 /**
  * dlc information for given clothing data
  *
- * @export
+ *
  * @interface ClothingComponent
  */
 export interface ClothingComponent {
@@ -32,7 +32,7 @@ export interface ClothingComponent {
      * The component identifier
      *
      * @type {number}
-     * @memberof ClothingComponent
+     *
      */
     id: number;
 
@@ -40,7 +40,7 @@ export interface ClothingComponent {
      * The associated relative drawing id for a given dlc clothing component
      *
      * @type {number}
-     * @memberof ClothingComponent
+     *
      */
     drawable: number;
 
@@ -48,7 +48,7 @@ export interface ClothingComponent {
      *
      *
      * @type {number}
-     * @memberof ClothingComponent
+     *
      */
     texture: number;
 
@@ -56,7 +56,7 @@ export interface ClothingComponent {
      *
      *
      * @type {number}
-     * @memberof ClothingComponent
+     *
      */
     palette?: number;
 
@@ -64,7 +64,7 @@ export interface ClothingComponent {
      *
      *
      * @type {number}
-     * @memberof ClothingComponent
+     *
      */
     dlc: number;
 
@@ -72,7 +72,7 @@ export interface ClothingComponent {
      *
      *
      * @type {boolean}
-     * @memberof ClothingComponent
+     *
      */
     isProp?: boolean;
 }
@@ -80,7 +80,7 @@ export interface ClothingComponent {
 /**
  * Item behavior associated with an item
  *
- * @export
+ *
  * @interface DefaultItemBehavior
  */
 export interface DefaultItemBehavior {
@@ -88,7 +88,7 @@ export interface DefaultItemBehavior {
      * Can this item be dropped.
      *
      * @type {boolean}
-     * @memberof DefaultItemBehavior
+     *
      */
     canDrop?: boolean;
 
@@ -96,7 +96,7 @@ export interface DefaultItemBehavior {
      * Can the item be stacked
      *
      * @type {boolean}
-     * @memberof DefaultItemBehavior
+     *
      */
     canStack?: boolean;
 
@@ -104,7 +104,7 @@ export interface DefaultItemBehavior {
      * Can the item be traded
      *
      * @type {boolean}
-     * @memberof DefaultItemBehavior
+     *
      */
     canTrade?: boolean;
 
@@ -114,7 +114,7 @@ export interface DefaultItemBehavior {
      * DO NOT specify isEquippable with this; leave it as false.
      *
      * @type {boolean}
-     * @memberof DefaultItemBehavior
+     *
      */
     isClothing?: boolean;
 
@@ -122,7 +122,7 @@ export interface DefaultItemBehavior {
      * Can this item be added to the toolbar.
      *
      * @type {boolean}
-     * @memberof DefaultItemBehavior
+     *
      */
     isToolbar?: boolean;
 
@@ -132,7 +132,7 @@ export interface DefaultItemBehavior {
      * DO NOT specify isEquippable with this; leave it as false.
      *
      * @type {boolean}
-     * @memberof DefaultItemBehavior
+     *
      */
     isWeapon?: boolean;
 
@@ -142,7 +142,7 @@ export interface DefaultItemBehavior {
      * Just only specify this one if doing custom equips.
      *
      * @type {boolean}
-     * @memberof DefaultItemBehavior
+     *
      */
     isEquippable?: boolean;
 
@@ -150,7 +150,7 @@ export interface DefaultItemBehavior {
      * Destroy this item on drop.
      *
      * @type {boolean}
-     * @memberof DefaultItemBehavior
+     *
      */
     destroyOnDrop?: boolean;
 
@@ -159,7 +159,7 @@ export interface DefaultItemBehavior {
      * Allows for specifying a custom icon instead.
      *
      * @type {boolean}
-     * @memberof DefaultItemBehavior
+     *
      */
     isCustomIcon?: boolean;
 }
@@ -172,12 +172,12 @@ export interface CustomContextAction {
     /**
      * The visible name of this action.
      */
-    name: string,
+    name: string;
 
     /**
      * The events which should be triggered.
      */
-    eventToCall: string | Array<string>
+    eventToCall: string | Array<string>;
 }
 
 /**
@@ -191,7 +191,7 @@ export interface SharedItem<CustomData = {}> {
      * The matching database name for this item.
      *
      * @type {string}
-     * @memberof SharedItem
+     *
      */
     dbName: string;
 
@@ -199,7 +199,7 @@ export interface SharedItem<CustomData = {}> {
      * Any custom data assigned to this item.
      *
      * @type {CustomData}
-     * @memberof SharedItem
+     *
      */
     data: CustomData;
 
@@ -207,7 +207,7 @@ export interface SharedItem<CustomData = {}> {
      * The version of this item it is based upon.
      *
      * @type {number}
-     * @memberof SharedItem
+     *
      */
     version?: number;
 }
@@ -216,7 +216,7 @@ export interface SharedItem<CustomData = {}> {
  * The StoredItem is stored in the player in the following locations:
  * equipment, inventory, and toolbar
  *
- * @export
+ *
  * @interface StoredItem
  * @extends {SharedItem<CustomData>}
  * @template CustomData
@@ -226,7 +226,7 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
      * The amount of this item the player has.
      *
      * @type {number}
-     * @memberof StoredItem
+     *
      */
     quantity: number;
 
@@ -234,7 +234,7 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
      * Where this item should be displayed in a toolbar, equipment bar, or inventory bar.
      *
      * @type {number}
-     * @memberof StoredItem
+     *
      */
     slot: number;
 
@@ -243,7 +243,7 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
      * Equipped can mean anything in the code base; it's up to the user to define its equip usage.
      *
      * @type {boolean}
-     * @memberof StoredItem
+     *
      */
     isEquipped?: boolean;
 
@@ -251,7 +251,7 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
      * The weight calculated for this item.
      *
      * @type {number}
-     * @memberof StoredItem
+     *
      */
     totalWeight?: number;
 
@@ -259,7 +259,7 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
      * Specify an icon to override the default base item icon with.
      *
      * @type {string}
-     * @memberof StoredItem
+     *
      */
     icon?: string;
 
@@ -267,7 +267,7 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
      * Flag this item as uncraftable. Just in case it has a shared base.
      *
      * @type {boolean}
-     * @memberof StoredItem
+     *
      */
     disableCrafting?: boolean;
 }
@@ -276,7 +276,7 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
  * The BaseItem is used as a way for the main items to point towards item information.
  * This item stored in the database is used to construct front facing item information.
  *
- * @export
+ *
  * @interface BaseItem
  * @extends {SharedItem<CustomData>}
  * @template Behavior
@@ -287,7 +287,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * Database entry for item. Do not add / append.
      *
      * @type {unknown}
-     * @memberof BaseItem
+     *
      */
     _id?: unknown;
 
@@ -295,7 +295,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * The name of this item.
      *
      * @type {string}
-     * @memberof BaseItem
+     *
      */
     name: string;
 
@@ -304,7 +304,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * They are specified and created by you.
      *
      * @type {string}
-     * @memberof BaseItem
+     *
      */
     icon: string;
 
@@ -312,7 +312,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * If this value is defined it will be used as the maximum stack size for the item.
      *
      * @type {number}
-     * @memberof BaseItem
+     *
      */
     maxStack?: number;
 
@@ -320,7 +320,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * The weight of this item.
      *
      * @type {number}
-     * @memberof BaseItem
+     *
      */
     weight?: number;
 
@@ -328,7 +328,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * Behavior associated with this item.
      *
      * @type {Behavior}
-     * @memberof BaseItem
+     *
      */
     behavior?: Behavior;
 
@@ -336,7 +336,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * The event to call when this item is consumed.
      *
      * @type {string}
-     * @memberof BaseItem
+     *
      */
     consumableEventToCall?: string | Array<string>;
 
@@ -344,7 +344,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * Custom context actions in addition to the standard consumable event.
      *
      * @type {string}
-     * @memberof BaseItem
+     *
      */
     customEventsToCall?: Array<CustomContextAction>;
 
@@ -353,7 +353,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * If not defined it will default to a box of some sort.
      *
      * @type {string}
-     * @memberof BaseItem
+     *
      */
     model?: string;
 
@@ -362,7 +362,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * Stored items come with an expiration date.
      *
      * @type {number}
-     * @memberof BaseItem
+     *
      */
     msTimeout?: number;
 }

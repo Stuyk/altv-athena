@@ -13,7 +13,7 @@ const InternalController = {
     /**
      * Initialize the Object Controller Streamer
      * @static
-     * @memberof ObjectController
+     *
      */
     init() {
         Athena.systems.streamer.registerCallback(KEY, InternalController.update);
@@ -22,7 +22,7 @@ const InternalController = {
     /**
      * Internal function to refresh all global objects in the streamer service.
      * @static
-     * @memberof ObjectController
+     *
      */
     refresh() {
         Athena.systems.streamer.updateData(KEY, globalObjects);
@@ -33,7 +33,7 @@ const InternalController = {
      * @static
      * @param {alt.Player} player An alt:V Player Entity
      * @param {Array<IObject>} objects
-     * @memberof ObjectController
+     *
      */
     update(player: alt.Player, objects: Array<IObject>) {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_OBJECTS, objects);
@@ -49,7 +49,7 @@ const InternalController = {
  *
  * Returns a uid or generates one if not specified.
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.object.append({
  *      model: 'prop_pizza_oven_01',
@@ -86,14 +86,14 @@ export function append(objectData: IObject): string {
  *
  * If the object was found and removed this will return true.
  *
- * @example
+ * #### Example
  * ```ts
  * const result = Athena.controllers.object.remove(someUid);
  *
  * Athena.controllers.object.remove('the-uid-you-specified');
  * ```
  *
- * @export
+ *
  * @param {string} uid A unique string
  * @return {boolean}
  */
@@ -124,7 +124,7 @@ export function remove(uid: string): boolean {
 /**
  * Remove an object from the player that only they can see.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.object.removeFromPlayer(somePlayer, someUid);
  * ```
@@ -149,7 +149,7 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  *
  * Returns a uid or generates one if not specified.
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.object.addToPlayer(somePlayer, {
  *      model: 'prop_pizza_oven_01',
@@ -179,7 +179,7 @@ export function addToPlayer(player: alt.Player, objectData: IObject): string {
  *
  * > NOT ALL OBJECTS CAN BE MOVED DYNAMICALLY.
  *
- * @example
+ * #### Example
  *
  * ### Non-Player Object
  *
@@ -252,7 +252,7 @@ export function override(functionName: 'updateModel', callback: typeof updateMod
 /**
  * Used to override any object streamer functionality
  *
- * @export
+ *
  * @param {keyof ObjectControllerFuncs} functionName
  * @param {*} callback
  */

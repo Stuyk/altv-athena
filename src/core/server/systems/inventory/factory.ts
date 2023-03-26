@@ -88,7 +88,7 @@ export async function getBaseItemAsync<CustomData = {}, CustomBehavior = {}>(
  *
  * If a version is not specified; it will find a non-versioned item to replace.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.systems.inventory.factory.upsertAsync({
  *     dbName: 'burger',
@@ -234,7 +234,7 @@ export async function toStoredItemAsync<CustomData = {}>(
 /**
  * Converts a base item to a stored item asynchronously.
  *
- * @export
+ *
  * @template CustomData
  * @param {BaseItem<DefaultItemBehavior, CustomData>} baseItem
  * @param {number} quantity
@@ -382,7 +382,7 @@ export function toStoredItem<CustomData = {}>(item: Item<DefaultItemBehavior, Cu
 /**
  * Converts a base item into a stored item for reference.
  *
- * @export
+ *
  * @template CustomData
  * @param {BaseItem<DefaultItemBehavior, CustomData>} baseItem
  * @param {number} quantity
@@ -438,7 +438,7 @@ export function override(functionName: 'fromBaseToStored', callback: typeof from
 /**
  * Used to override inventory item factory functionality
  *
- * @export
+ *
  * @param {keyof FactoryFuncs} functionName
  * @param {*} callback
  */

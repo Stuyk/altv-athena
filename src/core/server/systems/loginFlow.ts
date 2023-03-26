@@ -184,7 +184,7 @@ export function override(functionName: 'next', callback: typeof next);
 /**
  * Used to override login flow functions.
  *
- * @export
+ *
  * @param {keyof LoginFlowFuncs} functionName
  * @param {*} callback
  */

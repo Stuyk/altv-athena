@@ -103,13 +103,13 @@ const Internal = {
  * Disables inventory synchronization when the inventory or toolbar is changed.
  *
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.systems.default.ammo.disable();
  * ```
  *
  *
- * @export
+ *
  */
 export function disable() {
     enabled = false;

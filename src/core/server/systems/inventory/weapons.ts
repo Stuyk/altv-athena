@@ -7,7 +7,7 @@ import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
 /**
  * Return all weapons from a given data set.
  *
- * @export
+ *
  * @param {Array<StoredItem>} dataSet
  */
 export function get(dataSet: Array<StoredItem>): Array<StoredItem> {
@@ -33,7 +33,7 @@ export function get(dataSet: Array<StoredItem>): Array<StoredItem> {
 /**
  * Remove all weapons from a given data set.
  *
- * @export
+ *
  * @param {Array<StoredItem>} dataSet
  * @return {Array<StoredItem>}
  */
@@ -118,7 +118,7 @@ export function override(functionName: 'update', callback: typeof update);
 /**
  * Used to override inventory item weapon functionality
  *
- * @export
+ *
  * @param {keyof WeaponFuncs} functionName
  * @param {*} callback
  */

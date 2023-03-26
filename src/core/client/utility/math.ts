@@ -3,13 +3,13 @@ import * as alt from 'alt-client';
 /**
  * It's a function that takes two vectors and returns a vector.
  *
- * @function
+ *
  * @name getCrossProduct
 
  * @param {alt.Vector3} v1
  * @param {alt.Vector3} v2
  * @returns {alt.Vector3}
- * @exports
+ * s
  */
 export function getCrossProduct(v1: alt.Vector3, v2: alt.Vector3): alt.Vector3 {
     return new alt.Vector3(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z, v1.x * v2.y - v1.y * v2.x);
@@ -18,12 +18,12 @@ export function getCrossProduct(v1: alt.Vector3, v2: alt.Vector3): alt.Vector3 {
 /**
  * It's a function that takes a vector and returns a normalized vector.
  *
- * @function
+ *
  * @name getNormalizedVector
 
  * @param {alt.Vector3} vector
  * @returns {alt.Vector3}
- * @exports
+ * s
  */
 export function getNormalizedVector(vector: alt.Vector3): alt.Vector3 {
     const mag = Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
@@ -33,12 +33,12 @@ export function getNormalizedVector(vector: alt.Vector3): alt.Vector3 {
 /**
  * Converts degrees to radians
  *
- * @function
+ *
  * @name degToRad
 
  * @param {number} degrees
  * @returns {number}
- * @exports
+ * s
  */
 export function degToRad(degrees: number): number {
     return (degrees * Math.PI) / 180;
@@ -47,7 +47,7 @@ export function degToRad(degrees: number): number {
 /**
  * Could also be seen as rotAnglesToVector
  *
- * @export
+ *
  * @param {alt.IVector3} rotation
  * @return {alt.Vector3}
  */
@@ -62,12 +62,12 @@ export function rotationToDirection(rotation: alt.IVector3): alt.Vector3 {
 /**
  * It's converting a rotation to a direction.
  *
- * @function
+ *
  * @name getDirectionFromRotation
 
  * @param {alt.IVector3} rotation
  * @returns {alt.IVector3}
- * @exports
+ * s
  */
 export function getDirectionFromRotation(rotation: alt.IVector3): alt.IVector3 {
     const z = rotation.z * (Math.PI / 180.0);
@@ -80,14 +80,14 @@ export function getDirectionFromRotation(rotation: alt.IVector3): alt.IVector3 {
 /**
  * Returns an array of alt.IVector2 in a circle
  *
- * @function
+ *
  * @name getPointsInCircle
 
  * @param {number} points
  * @param {number} radius
  * @param {alt.IVector2} center
  * @returns {Array<alt.IVector2>}
- * @exports
+ * s
  */
 export function getPointsInCircle(points: number, radius: number, center: alt.IVector2): Array<alt.IVector2> {
     const slice = (2 * Math.PI) / points;
@@ -106,7 +106,7 @@ export function getPointsInCircle(points: number, radius: number, center: alt.IV
 /**
  * Returns the average value among all numbers.
  *
- * @export
+ *
  * @param {Array<number>} data
  * @return {number}
  */

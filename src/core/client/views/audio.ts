@@ -17,7 +17,7 @@ class InternalFunctions implements ViewModel {
     /**
      * Opens the Audio Service to play '.ogg' files.
      * @static
-     * @memberof InternalFunctions
+     *
      */
     static async open() {
         if (!interval) {
@@ -32,7 +32,7 @@ class InternalFunctions implements ViewModel {
     /**
      * Called every 100ms to invoke a dequeue
      * @static
-     * @memberof InternalFunctions
+     *
      */
     static async handleQueue() {
         const view = await AthenaClient.webview.get();
@@ -46,7 +46,7 @@ class InternalFunctions implements ViewModel {
      * @param {number} pan 0 = 2D
      * @param {number} volume
      * @param {string} soundInstantID, optional unique id to play sound instant
-     * @memberof InternalFunctions
+     *
      */
     static async handle3DAudio(soundName: string, pan: number, volume: number, soundInstantID?: string) {
         const view = await AthenaClient.webview.get();
@@ -60,7 +60,7 @@ class InternalFunctions implements ViewModel {
      * @param {number} pan 0 = 2D
      * @param {number} volume
      * @param {string} soundInstantID, optional unique id to stop instant sound
-     * @memberof InternalFunctions
+     *
      */
     static async stop3DAudio(soundInstantID?: string) {
         const view = await AthenaClient.webview.get();
@@ -78,7 +78,7 @@ export class AudioView {
      * @param {number} pan
      * @param {number} volume
      * @param {string} soundInstantID, optional unique id to play sound instant
-     * @memberof AudioView
+     *
      */
     static play3DAudio(soundName: string, pan: number, volume: number, soundInstantID?: string) {
         InternalFunctions.handle3DAudio(soundName, pan, volume, soundInstantID);
@@ -91,7 +91,7 @@ export class AudioView {
      * @param {number} pan
      * @param {number} volume
      * @param {string} soundInstantID, optional unique id to stop instant sound
-     * @memberof AudioView
+     *
      */
     static stop3DAudio(soundInstantID?: string) {
         InternalFunctions.stop3DAudio(soundInstantID);

@@ -16,7 +16,7 @@ const Injections: Array<VehicleMenuInjection> = [];
  *
  * @static
  * @param {VehicleMenuInjection} callback
- * @memberof VehicleMenu
+ *
  */
 export function addInjection(callback: VehicleMenuInjection) {
     Injections.push(callback);
@@ -28,7 +28,7 @@ export function addInjection(callback: VehicleMenuInjection) {
  * @static
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {void}
- * @memberof VehicleWheelMenu
+ *
  */
 export function openInVehicleMenu(vehicle: alt.Vehicle) {
     if (AthenaClient.webview.isAnyMenuOpen()) {

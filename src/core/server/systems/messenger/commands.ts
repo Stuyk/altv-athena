@@ -120,7 +120,7 @@ export function populateCommands(player: alt.Player) {
  * Includes names of individual parameters for each callback function as well.
  * Excludes callbacks.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @return {Array<DetailedCommand>}
  */
@@ -185,7 +185,7 @@ export function override(functionName: 'register', callback: typeof register);
 /**
  * Used to override command functionality
  *
- * @export
+ *
  * @param {keyof CommandFuncs} functionName
  * @param {*} callback
  */

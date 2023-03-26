@@ -16,7 +16,7 @@ class InternalFunctions {
      *
      * @static
      * @param {alt.Player} player An alt:V Player Entity
-     * @memberof InternalFunctions
+     *
      */
     static async developerModeCallback(player: alt.Player) {
         const accounts = await Database.fetchAllData<Account>(Collections.Accounts);
@@ -40,7 +40,7 @@ export class LoginController {
      * Intialize events, and functionality first.
      *
      * @static
-     * @memberof LoginController
+     *
      */
     static init() {
         DevModeOverride.setDevAccountCallback(InternalFunctions.developerModeCallback);
@@ -52,7 +52,7 @@ export class LoginController {
      * @static
      * @param {alt.Player} player An alt:V Player Entity
      * @return {void}
-     * @memberof LoginController
+     *
      */
     static async show(player: alt.Player) {
         if (!player.discord) {
@@ -71,7 +71,7 @@ export class LoginController {
      * @param {Partial<DiscordUser>} data
      * @param {Partial<Account>} account
      * @return {Promise<void>}
-     * @memberof LoginController
+     *
      */
     static async tryLogin(player: alt.Player, account: Account = null): Promise<void> {
         if (!player.valid) {

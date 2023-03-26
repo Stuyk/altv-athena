@@ -51,7 +51,7 @@ const Internal = {
      * @static
      * @param {alt.Player} player An alt:V Player Entity
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     cancel(player: alt.Player) {
         if (!player || !player.valid) {
@@ -107,7 +107,7 @@ export function override(functionName: 'create', callback: typeof create);
 /**
  * Used to override job trigger functions.
  *
- * @export
+ *
  * @param {keyof JobTriggerFuncs} functionName
  * @param {*} callback
  */

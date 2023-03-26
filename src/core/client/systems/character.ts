@@ -11,7 +11,7 @@ export const CharacterSystem = {
      * @param {number} ped
      * @param {Appearance} appearance
      * @return {void}
-     * @memberof CharacterSystem
+     *
      */
     applyAppearance(ped: number, appearance: Appearance) {
         if (!ped || !native.doesEntityExist(ped)) {
@@ -105,7 +105,7 @@ export const CharacterSystem = {
      * @static
      * @param {number} ped
      * @param {Array<ClothingComponent>} components
-     * @memberof CharacterSystem
+     *
      */
     applyEquipment(ped: number, components: Array<Item>, isMale = false) {
         // if (!ped || !native.doesEntityExist(ped)) {

@@ -16,7 +16,7 @@ class ActionsView implements ViewModel {
      * The events are bound once to the WebView.
      * They are never bound again.
      * @static
-     * @memberof ActionsView
+     *
      */
     static async open() {
         const view = await AthenaClient.webview.get();
@@ -46,7 +46,7 @@ class ActionsView implements ViewModel {
      * @static
      * @param {(ActionMenu | null)} actionMenu
      * @return {void}
-     * @memberof ActionController
+     *
      */
     static set(_actionMenu: ActionMenu) {
         if (!_actionMenu || isDisabled) {

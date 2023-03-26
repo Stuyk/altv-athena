@@ -43,7 +43,7 @@ function init() {
  * @param {number} id
  * @param {IStream} data
  * @return {void}
- * @memberof Internal
+ *
  */
 function update(id: number, data: IStream) {
     const player = alt.Player.all.find((p) => p.id === id);
@@ -72,7 +72,7 @@ function update(id: number, data: IStream) {
  * @static
  * @param {string} message
  * @return {void}
- * @memberof Internal
+ *
  */
 function receive(message: string) {
     const msg: IStreamMessage = JSON.parse(message);
@@ -86,7 +86,7 @@ function receive(message: string) {
 /**
  * Used to call streamer updates for each player.
  * @static
- * @memberof Internal
+ *
  */
 function tick() {
     alt.Player.all.forEach((player) => {
@@ -106,7 +106,7 @@ function tick() {
  * Used to request an update for a specific player.
  * @static
  * @param {alt.Player} player An alt:V Player Entity
- * @memberof Internal
+ *
  */
 function requestUpdate(player: alt.Player) {
     const playerInfo: IStreamMessage = {
@@ -125,7 +125,7 @@ function requestUpdate(player: alt.Player) {
  * Message back from sending a ping request.
  * @static
  * @param {string} data
- * @memberof Internal
+ *
  */
 async function pong(id: number, data: string) {
     alt.log(data);
@@ -140,7 +140,7 @@ async function pong(id: number, data: string) {
  * @param {string} key A unique key for this stream data.
  * @param {(player: alt.Player, streamedData: Array<T>) => void} callback
  * @param {number} range How far away should we look from the player's position.
- * @memberof StreamerService
+ *
  */
 export async function registerCallback<T>(
     key: string,
@@ -185,7 +185,7 @@ export async function registerCallback<T>(
  * @template T
  * @param {string} key
  * @param {Array<T>} array
- * @memberof StreamerService
+ *
  */
 export async function updateData<T>(key: string, array: Array<T>) {
     await alt.Utils.waitFor(() => ready, 30000);

@@ -18,7 +18,7 @@ export function trigger(eventName: ATHENA_EVENTS_PLAYER_CLIENT, player: alt.Play
  * @static
  * @param {ATHENA_EVENTS_PLAYER} eventName
  * @param {(player: alt.Player) => void} callback
- * @memberof ClientEvents
+ *
  */
 export function on(eventName: ATHENA_EVENTS_PLAYER_CLIENT, callback: (player: alt.Player, ...args: any[]) => void) {
     clientEvents.push({ eventName, callback });

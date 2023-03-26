@@ -127,7 +127,7 @@ const InternalFunctions = {
  *
  * @static
  * @return {Array<ItemDrop>}
- * @memberof ClientItemDrops
+ *
  */
 export function getClosest(): Array<ItemDrop> {
     return closestItems;

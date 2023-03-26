@@ -10,7 +10,7 @@ let timeout: number;
 /**
  * Clear the currently drawn error screen.
  *
- * @memberof ErrorScreen
+ *
  */
 export function clear() {
     if (timeout) {
@@ -28,7 +28,7 @@ export function clear() {
  * Create an error screen that takes up the whole screen.
  *
  * @param {IErrorScreen} screen
- * @memberof ErrorScreen
+ *
  */
 export function create(screen: IErrorScreen) {
     clear();

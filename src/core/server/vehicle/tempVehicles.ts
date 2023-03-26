@@ -7,7 +7,7 @@ const deleteOnLeave: { [vehicle_id: string]: true } = {};
 /**
  * Register a vehicle as temporary
  *
- * @export
+ *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {{ owner?: number; deleteOnLeave?: boolean }} options
  */
@@ -30,7 +30,7 @@ export function add(vehicle: alt.Vehicle, options: { owner?: number; deleteOnLea
 /**
  * Removes a temporary vehicle from the tracker.
  *
- * @export
+ *
  * @param {number} id
  */
 export function remove(id: number): void {
@@ -53,7 +53,7 @@ export function remove(id: number): void {
 /**
  * Check if a vehicle is temporary by id, or vehicle instance.
  *
- * @export
+ *
  * @param {alt.Vehicle | number} vehicle
  * @return {boolean}
  */
@@ -69,7 +69,7 @@ export function has(vehicle: alt.Vehicle | number): boolean {
 /**
  * Check if player is owner of a temporary vehicle.
  *
- * @export
+ *
  * @param {alt.Vehicle} player
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return
@@ -89,7 +89,7 @@ export function isOwner(player: alt.Player, vehicle: alt.Vehicle): boolean {
 /**
  * Check if this vehicle should be removed when a player leaves the drivers seat.
  *
- * @export
+ *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {boolean}
  */
@@ -119,7 +119,7 @@ export function override(functionName: 'shouldBeDestroyed', callback: typeof sho
 /**
  * Used to override temporary vehicle functionality
  *
- * @export
+ *
  * @param {keyof VehicleTempFuncs} functionName
  * @param {*} callback
  */

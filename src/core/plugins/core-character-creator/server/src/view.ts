@@ -14,7 +14,7 @@ class InternalFunctions {
      * @static
      * @param {alt.Player} player An alt:V Player Entity
      * @param {string} name
-     * @memberof CharacterCreatorView
+     *
      */
     static verifyName(player: alt.Player, name: string) {
         const isValidName = Athena.systems.character.isNameTaken(name);
@@ -27,7 +27,7 @@ class InternalFunctions {
      * @static
      * @param {(number | null | undefined)} characterCount
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     static isInvalid(characterCount: number | null | undefined) {
         if (typeof characterCount === 'number') {

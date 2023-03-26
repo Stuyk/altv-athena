@@ -8,7 +8,7 @@ import * as Athena from '@AthenaServer/api';
 
 /**
  * Synchronize currency data like bank, cash, etc.
- * @memberof SyncPrototype
+ *
  */
 export function currencyData(player: alt.Player): void {
     if (Overrides.currencyData) {
@@ -125,7 +125,7 @@ export function appearance(player: alt.Player) {
 /**
  * Updates synced meta for the current player.
  * Basically updates data that may not be fully accessible everywhere.
- * @memberof SyncPrototype
+ *
  */
 export function syncedMeta(player: alt.Player): void {
     if (Overrides.syncedMeta) {
@@ -163,7 +163,7 @@ export function override(functionName: 'playTime', callback: typeof playTime);
 /**
  * Used to override any sync functions
  *
- * @export
+ *
  * @param {keyof SyncFunctions} functionName
  * @param {*} callback
  */

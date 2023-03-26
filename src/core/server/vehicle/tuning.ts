@@ -7,7 +7,7 @@ import { VehicleState } from '@AthenaShared/interfaces/vehicleState';
  * Applies specified properties to a vehicle in bulk.
  * These match the alt:V API, and can be pulled from a database.
  *
- * @export
+ *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {VehicleState} data
  */
@@ -24,7 +24,7 @@ export function applyState(vehicle: alt.Vehicle, state: Partial<VehicleState> | 
 /**
  * Apply tuning to the specified vehicle.
  *
- * @export
+ *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {VehicleTuning | Partial<VehicleTuning>} tuning
  */
@@ -60,7 +60,7 @@ export function override(functionName: 'applyTuning', callback: typeof applyTuni
 /**
  * Used to override vehicle tuning functionality
  *
- * @export
+ *
  * @param {keyof VehicleTuningFuncs} functionName
  * @param {*} callback
  */

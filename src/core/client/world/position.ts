@@ -13,7 +13,7 @@ const DefaultData = {
  *
  * Otherwise, returns the original Vector3.
  *
- * @export
+ *
  * @param {alt.IVector3} pos A position in the world.
  * @param {typeof DefaultData} [options=DefaultData]
  * @return {alt.IVector3}

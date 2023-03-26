@@ -151,7 +151,7 @@ export function override(functionName: 'sendToPlayers', callback: typeof sendToP
 /**
  * Used to override messaging functionality
  *
- * @export
+ *
  * @param {keyof MessagingFuncs} functionName
  * @param {*} callback
  */

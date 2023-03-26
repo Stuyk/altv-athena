@@ -4,7 +4,7 @@ import * as native from 'natives';
 /**
  * Load a model based on string or hash
  *
- * @export
+ *
  * @param {number} hash
  * @return {Promise<boolean>}
  */

@@ -12,7 +12,7 @@ class DiscordLoginView {
      * @static
      * @param {alt.Player[]} _players
      * @return {void}
-     * @memberof DiscordLoginView
+     *
      */
     static open(_uri: string) {
         // Originally fetch token was done here... may want to reconsider the quick token system.
@@ -34,7 +34,7 @@ class DiscordLoginView {
      * A ready event to send the data up to the WebView.
      *
      * @static
-     * @memberof ExampleWebView
+     *
      */
     static ready() {
         AthenaClient.webview.emit(DISCORD_LOGIN_EVENTS.TO_WEBVIEW.SET_URI, uri);
@@ -44,7 +44,7 @@ class DiscordLoginView {
      * Called when the WebView event is closed.
      *
      * @static
-     * @memberof ExampleWebView
+     *
      */
     static close() {
         AthenaClient.webview.closePages([DISCORD_LOGIN_EVENTS.PAGE_NAME]);

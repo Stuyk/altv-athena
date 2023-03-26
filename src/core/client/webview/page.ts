@@ -10,14 +10,14 @@ export interface IPage {
      * The full name of the Vue file you are trying to load.
      *
      * @type {string}
-     * @memberof IPage
+     *
      */
     name: string;
 
     /**
      * Events to call when the page is opened.
      *
-     * @memberof IPage
+     *
      */
     callbacks: {
         /**
@@ -159,7 +159,7 @@ export interface IPage {
      * Set `useSameKeyToClose` to true to force the same key to close the interface.
      *
      * @type {(BaseKeyInfo & { useSameKeyToClose?: boolean })}
-     * @memberof IPage
+     *
      */
     keybind?: BaseKeyInfo & { useSameKeyToClose?: boolean };
 }
@@ -170,7 +170,7 @@ export class Page {
     /**
      * Creates a WebView Page Controller
      * @param {IPage} page
-     * @memberof Page
+     *
      */
     constructor(page: IPage) {
         this.info = page;
@@ -204,7 +204,7 @@ export class Page {
      * Open this WebView Page
      *
      * @return {Promise<boolean>}
-     * @memberof Page
+     *
      */
     async open(): Promise<boolean> {
         if (this.info.keybind && this.info.keybind.useSameKeyToClose) {
@@ -278,7 +278,7 @@ export class Page {
      * Useful for when you want your own exit functionality for your WebView.
      *
      * @param {boolean} [isManuallyTriggered=false]
-     * @memberof Page
+     *
      */
     close(isManuallyTriggered = false) {
         const showOverlays = this.info.options.onClose.showOverlays === false ? false : true;

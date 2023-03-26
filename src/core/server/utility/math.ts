@@ -2,7 +2,7 @@
  * Takes an array of numbers and attempts to determine which number is missing given a range.
  * Returns the first missing number.
  *
- * @export
+ *
  * @param {Array<number>} arr
  * @param {number} [startIndex=0]
  * @return {number}

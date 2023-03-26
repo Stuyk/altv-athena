@@ -11,7 +11,7 @@ alt.onClient(SYSTEM_EVENTS.PLAYER_TICK, handlePing);
 /**
  * Used to save the player every once in a while.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @return {Promise<void>}
  */
@@ -104,7 +104,7 @@ export function override(functionName: 'handlePing', callback: typeof handlePing
 /**
  * Used to override player tick functionality
  *
- * @export
+ *
  * @param {keyof TickFuncs} functionName
  * @param {*} callback
  */

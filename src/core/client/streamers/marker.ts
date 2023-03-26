@@ -30,7 +30,7 @@ const ClientMarkerController = {
      * Add a single local marker.
      * @static
      * @param {Marker} marker
-     * @memberof ClientMarkerController
+     *
      */
     append(marker: Marker) {
         if (!marker.uid) {
@@ -56,7 +56,7 @@ const ClientMarkerController = {
      * separate from local markers.
      * @static
      * @param {Array<Marker>} markers
-     * @memberof ClientMarkerController
+     *
      */
     populate(markers: Array<Marker>) {
         addedMarkers = markers;
@@ -71,7 +71,7 @@ const ClientMarkerController = {
      * @static
      * @param {string} uid A unique string
      * @return {void}
-     * @memberof ClientMarkerController
+     *
      */
     remove(uid: string) {
         isRemoving = true;

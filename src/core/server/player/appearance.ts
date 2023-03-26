@@ -11,7 +11,7 @@ export type BaseStyle = { style: number; opacity: number; color: number };
  *
  * Automatically saves it to Database.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {HairStyle} style
  * @return {void}
@@ -49,7 +49,7 @@ export async function setHairStyle(player: alt.Player, style: HairStyle) {
  *
  * Automatically saves to database.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {FacialHair} style
  * @return {void}
@@ -76,7 +76,7 @@ export async function setFacialHair(player: alt.Player, choice: BaseStyle) {
  *
  * Automatically saves to the database.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {BaseStyle} choice
  * @return {void}
@@ -103,7 +103,7 @@ export async function setEyebrows(player: alt.Player, choice: BaseStyle) {
  *
  * Automatically saves to database.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {boolean} isFeminine
  * @return {void}
@@ -127,7 +127,7 @@ export async function setModel(player: alt.Player, isFeminine: boolean) {
  *
  * Automatically saves to database.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} color
  * @return {void}
@@ -150,7 +150,7 @@ export async function setEyeColor(player: alt.Player, color: number) {
  * Used to update tattoos, and a hair overlay if present.
  * Add the 'decorators' paramater to override player appearance.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {Array<{ overlay: string; collection: string }>} [decorators=undefined]
  */
@@ -199,7 +199,7 @@ export function override(functionName: 'updateTattoos', callback: typeof updateT
 /**
  * Used to override any appearance setter functions.
  *
- * @export
+ *
  * @param {keyof AppearanceFuncs} functionName
  * @param {*} callback
  */

@@ -150,7 +150,7 @@ export function override(functionName: 'getIdByStrategy', callback: typeof getId
 /**
  * Used to override identification strategy functions.
  *
- * @export
+ *
  * @param {keyof IdentifierFuncs} functionName
  * @param {*} callback
  */

@@ -4,21 +4,21 @@ import { BLIP_COLOR } from '../enums/blipColor';
 /**
  * Used when passing a blip from server-side to client-side.
  *
- * @export
+ *
  * @interface Blip
  */
 export interface Blip {
     /**
      * The 3D position of the blip on the map.
      * @type {Vector3}
-     * @memberof Blip
+     *
      */
     pos: alt.IVector3;
 
     /**
      * Set this to true if you don't want it on the map all of the time.
      * @type {boolean}
-     * @memberof Blip
+     *
      */
     shortRange: boolean;
 
@@ -27,28 +27,28 @@ export interface Blip {
      * Do not use `1` as it can have side effects.
      * https://docs.fivem.net/docs/game-references/blips/
      * @type {number}
-     * @memberof Blip
+     *
      */
     sprite: number;
 
     /**
      * The color of this
      * @type {number}
-     * @memberof Blip
+     *
      */
     color: BLIP_COLOR | number;
 
     /**
      * The text / name of this blip. Can be whatever.
      * @type {string}
-     * @memberof Blip
+     *
      */
     text: string;
 
     /**
      * The scale of this blip.
      * @type {number}
-     * @memberof Blip
+     *
      */
     scale: number;
 
@@ -62,21 +62,21 @@ export interface Blip {
      * 11 = Occupied property
      * 12+ No Text on blip or distance
      * @type {number}
-     * @memberof Blip
+     *
      */
     category?: number;
 
     /**
      * An identifier for the blip.
      * @type {string}
-     * @memberof Blip
+     *
      */
     identifier?: string;
 
     /**
      * Another identifier field for the blip.
      * @type {string}
-     * @memberof Blip
+     *
      */
     uid?: string;
 }

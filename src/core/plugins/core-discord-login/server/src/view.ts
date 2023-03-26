@@ -74,7 +74,7 @@ export class LoginView {
      * Initializes callbacks.
      *
      * @static
-     * @memberof LoginView
+     *
      */
     static init() {
         alt.on('playerDisconnect', LoginView.handleDisconnect);
@@ -87,7 +87,7 @@ export class LoginView {
      *
      * @static
      * @param {alt.Player} player An alt:V Player Entity
-     * @memberof LoginView
+     *
      */
     static async show(player: alt.Player) {
         const pid = Athena.utility.hash.sha256Random(JSON.stringify(player.ip + player.hwidHash + player.hwidExHash));
@@ -100,7 +100,7 @@ export class LoginView {
      * @static
      * @param {alt.Player} player An alt:V Player Entity
      * @return {void}
-     * @memberof LoginFunctions
+     *
      */
     static async prepare(player: alt.Player) {
         if (!player || !player.valid) {

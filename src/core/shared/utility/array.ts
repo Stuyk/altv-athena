@@ -1,7 +1,7 @@
 /**
  * Returns the elements present in A
  * but are not present in B.
- * @export
+ *
  * @template T
  * @param {Array<T>} a
  * @param {Array<T>} b

@@ -15,7 +15,7 @@ export function isChanging(): boolean {
  *
  * Call this function after using the `changeTo` function.
  *
- * @export
+ *
  */
 export function freeze() {
     isFrozen = true;
@@ -24,7 +24,7 @@ export function freeze() {
 /**
  * Unfreeze the weather function.
  *
- * @export
+ *
  */
 export function unfreeze() {
     isFrozen = false;
@@ -33,7 +33,7 @@ export function unfreeze() {
 /**
  * Change the weather gracefully.
  *
- * @export
+ *
  * @param {string} nextWeather
  * @param {number} timeInSeconds
  */

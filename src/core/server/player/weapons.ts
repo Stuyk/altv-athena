@@ -5,7 +5,7 @@ import { StoredItem } from '@AthenaShared/interfaces/item';
 /**
  * Return all weapons the player currently has in their inventory, and toolbar.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @return {{ inventory: Array<StoredItem>; toolbar: Array<StoredItem> }}
  */
@@ -35,7 +35,7 @@ export function get(player: alt.Player): { inventory: Array<StoredItem>; toolbar
  * Returns true if weapons were found and removed.
  *
  * @param {alt.Player} player An alt:V Player Entity
- * @export
+ *
  */
 export async function clear(player: alt.Player): Promise<boolean> {
     const data = Athena.document.character.get(player);

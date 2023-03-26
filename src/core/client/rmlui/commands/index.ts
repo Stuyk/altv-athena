@@ -10,7 +10,7 @@ interface CommandInput {
      * Usually something like... 'Type a chat message, or command with (/)'
      *
      * @type {string}
-     * @memberof CommandInput
+     *
      */
     placeholder: string;
 
@@ -18,7 +18,7 @@ interface CommandInput {
      * Commands to populate this Command Input with to show suggestions.
      *
      * @type {Array<Omit<MessageCommand<any>, 'callback'>>}
-     * @memberof CommandInput
+     *
      */
     commands: Array<Omit<MessageCommand<any>, 'callback'>>;
 }

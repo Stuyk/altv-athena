@@ -17,7 +17,7 @@ export function byID(id: number): alt.Vehicle | undefined {
  *
  * This only works for persistent vehicles.
  *
- * @export
+ *
  * @param {(number | string)} id
  * @return {(alt.Vehicle | undefined)}
  */

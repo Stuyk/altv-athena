@@ -32,7 +32,7 @@ export class ConsoleCommander {
      * @static
      * @param {string} cmdName
      * @param {...string[]} args
-     * @memberof ConsoleCommander
+     *
      */
     static invokeCommand(cmdName: string, ...args: string[]): void {
         handleConsoleMessage(cmdName, ...args);
@@ -45,7 +45,7 @@ export class ConsoleCommander {
      * @static
      * @param {string} cmdName
      * @param {(...args: string[]) => void} callback
-     * @memberof ConsoleCommander
+     *
      */
     static registerConsoleCommand(cmdName: string, callback: (...args: string[]) => void) {
         Commands[cmdName] = callback;
@@ -56,7 +56,7 @@ export class ConsoleCommander {
      *
      * @static
      * @return {void}
-     * @memberof ConsoleCommander
+     *
      */
     static getCommands() {
         return Object.keys(Commands);

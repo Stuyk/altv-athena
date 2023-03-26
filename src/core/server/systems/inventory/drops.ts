@@ -151,7 +151,7 @@ export async function sub(id: string): Promise<StoredItem | undefined> {
 /**
  * Check if an item is available by database id
  *
- * @export
+ *
  * @param {string} _id
  * @return {void}
  */
@@ -166,7 +166,7 @@ export function isItemAvailable(_id: string) {
 /**
  * Mark an item as being taken
  *
- * @export
+ *
  * @param {string} _id
  * @param {boolean} value
  */
@@ -192,7 +192,7 @@ export function override(functionName: 'markForTaken', callback: typeof markForT
 /**
  * Used to override inventory drop item functionality
  *
- * @export
+ *
  * @param {keyof DropFuncs} functionName
  * @param {*} callback
  */

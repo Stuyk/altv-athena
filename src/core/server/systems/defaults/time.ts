@@ -73,12 +73,12 @@ export function updatePlayer(player: alt.Player) {
 /**
  * Disable the default time synchronization on server-side.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.systems.default.time.disable();
  * ```
  *
- * @export
+ *
  */
 export function disable() {
     enabled = false;
@@ -94,7 +94,7 @@ export function disable() {
 /**
  * Get the current hour.
  *
- * @export
+ *
  * @return {number}
  */
 export function getHour(): number {
@@ -104,7 +104,7 @@ export function getHour(): number {
 /**
  * Get the current minute.
  *
- * @export
+ *
  * @return {number}
  */
 export function getMinute(): number {

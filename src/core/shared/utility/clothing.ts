@@ -9,7 +9,7 @@ export type ClothingInfo = { sex: number; components: Array<ClothingComponent> }
  * Converts clothing information to an icon name that can be used
  * componentIdentifier-dlcHash-isProp?-isNotShared?-drawableID
  *
- * @export
+ *
  * @param {Item<DefaultItemBehavior, ClothingInfo>} item
  * @return {string}
  */
@@ -35,7 +35,7 @@ export function clothingItemToIconName(item: Item<DefaultItemBehavior, ClothingI
 /**
  * Converts a clothing component to the corresponding icon name that should be used.
  *
- * @export
+ *
  * @param {number} sex
  * @param {Array<ClothingComponent>} components
  * @return {void}

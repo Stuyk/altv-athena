@@ -54,7 +54,7 @@ const InternalController = {
  *
  * All doors in the game are already added to the gamemode by default.
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.doors.append({
  *   uid: 'my-cool-door-or-whatever',
@@ -85,7 +85,7 @@ export function append(door: Door): string {
 /**
  * Remove all controls from a door.
  *
- * @example
+ * #### Example
  * ```ts
  * // uid is a variable here
  * Athena.controllers.doors.remove(uid);
@@ -114,7 +114,7 @@ export function remove(uid: string): boolean {
  *
  * Call this function to change door lock status.
  *
- * @example
+ * #### Example
  * ```ts
  * // set to true to unlock
  * Athena.controllers.doors.update('117', true);
@@ -160,7 +160,7 @@ export function override(functionName: 'update', callback: typeof update);
 /**
  * Used to override any door streamer functionaltiy
  *
- * @export
+ *
  * @param {keyof DoorControllerFuncs} functionName
  * @param {*} callback
  */

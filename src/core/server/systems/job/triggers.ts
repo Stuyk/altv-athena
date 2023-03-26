@@ -8,7 +8,7 @@ import { Objective } from '@AthenaShared/interfaces/job';
  *
  * Try calling an event. This should almost never be invoked manually.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {Objective} objective
  */
@@ -33,7 +33,7 @@ export function tryEventCall(player: alt.Player, objective: Objective) {
  *
  * This should almost never be invoked manually.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {Objective} objective
  * @return {void}
@@ -74,7 +74,7 @@ export function tryAnimation(player: alt.Player, objective: Objective) {
  *
  * This should almost never be invoked manually.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {Objective} objective
  * @return {void}
@@ -113,7 +113,7 @@ export function override(functionName: 'tryAttach', callback: typeof tryAttach);
 /**
  * Used to override job objective trigger functionality
  *
- * @export
+ *
  * @param {keyof JobTriggerFuncs} functionName
  * @param {*} callback
  */

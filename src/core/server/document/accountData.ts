@@ -224,7 +224,7 @@ export function override(functionName: 'onChange', callback: typeof onChange);
 /**
  * Used to override any account data document functionality
  *
- * @export
+ *
  * @param {keyof AccountDataDocFuncs} functionName
  * @param {*} callback
  */

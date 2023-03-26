@@ -162,7 +162,7 @@ export function override(functionName: 'fetch', callback: typeof fetch);
 /**
  * Used to override jwt functions.
  *
- * @export
+ *
  * @param {keyof JwtFuncs} functionName
  * @param {*} callback
  */

@@ -50,7 +50,7 @@ export function unbind(id: number) {
  *
  * Can also append custom objects to the generic type to obtain custom data from the database.
  *
- * @example
+ * #### Example
  * ```ts
  * interface Testing {
  *     myProperty: string;
@@ -110,7 +110,7 @@ export function getField<T = {}, ReturnType = any>(
  *
  * Automatically calls all callbacks associated with the field name.
  *
- * @example
+ * #### Example
  * ```ts
  * await Athena.document.character.set(somePlayer, 'cash', 50);
  *
@@ -212,13 +212,13 @@ export async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt
 /**
  * Invokes the callback function when a document with a specific field name has changed.
  *
- * @function
+ *
  * @name onChange
 
  * @param {keyof KnownKeys<Character & T>} fieldName
  * @param {KeyChangeCallback} callback
  * @returns {void}
- * @exports
+ * s
  */
 export function onChange<T = {}>(fieldName: keyof KnownKeys<Character & T>, callback: KeyChangeCallback) {
     if (Overrides.onChange) {
@@ -270,7 +270,7 @@ export function override(functionName: 'onChange', callback: typeof onChange);
 /**
  * Used to override any character document functionality
  *
- * @export
+ *
  * @param {keyof CharacterDocFuncs} functionName
  * @param {*} callback
  */

@@ -13,7 +13,7 @@ export interface iCameraNode {
      * Position for where to create this camera.
      *
      * @type {alt.IVector3}
-     * @memberof iCameraNode
+     *
      */
     pos: alt.IVector3;
 
@@ -22,7 +22,7 @@ export interface iCameraNode {
      * Also applies as rotation for entity attachment if applicable.
      *
      * @type {alt.IVector3}
-     * @memberof iCameraNode
+     *
      */
     rot?: alt.IVector3;
 
@@ -30,7 +30,7 @@ export interface iCameraNode {
      * Applies to entity attachment, and the offset from said entity.
      *
      * @type {alt.IVector3}
-     * @memberof iCameraNode
+     *
      */
     offset?: alt.IVector3;
 
@@ -38,7 +38,7 @@ export interface iCameraNode {
      * The FOV for the camera. Default is set to 90.
      *
      * @type {number}
-     * @memberof iCameraNode
+     *
      */
     fov: number;
 
@@ -46,7 +46,7 @@ export interface iCameraNode {
      * Time to ease between camera nodes. If only one camera node is present it does not apply.
      *
      * @type {number}
-     * @memberof iCameraNode
+     *
      */
     easeTime?: number;
 
@@ -54,7 +54,7 @@ export interface iCameraNode {
      * The entity `scriptID` to follow with the camera.
      *
      * @type {number}
-     * @memberof iCameraNode
+     *
      */
     entityToTrack?: number;
 
@@ -62,7 +62,7 @@ export interface iCameraNode {
      * A position to point that camera towards if applicable.
      *
      * @type {alt.IVector3}
-     * @memberof iCameraNode
+     *
      */
     positionToTrack?: alt.IVector3;
 
@@ -71,7 +71,7 @@ export interface iCameraNode {
      * Use `scriptID` for this.
      *
      * @type {number}
-     * @memberof iCameraNode
+     *
      */
     entityToAttachTo?: number;
 
@@ -79,7 +79,7 @@ export interface iCameraNode {
      * A vehicle bone index to attach to if `entityToAttachTo` is specified
      *
      * @type {number}
-     * @memberof iCameraNode
+     *
      */
     vehicleBone?: number;
 
@@ -87,7 +87,7 @@ export interface iCameraNode {
      * A pedestrian bone index to attach to if `entityToAttachTo` is specified
      *
      * @type {number}
-     * @memberof iCameraNode
+     *
      */
     pedBone?: number;
 
@@ -95,7 +95,7 @@ export interface iCameraNode {
      * If this is the last camera node, should we destroy the camera after easeTime?
      *
      * @type {boolean}
-     * @memberof iCameraNode
+     *
      */
     isLastNode?: boolean;
 }
@@ -105,7 +105,7 @@ const InternalFunctions = {
      * Check if the camera is currently moving between nodes.
      *
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     async isCameraUpdating() {
         return new Promise((resolve: Function) => {
@@ -265,7 +265,7 @@ const InternalFunctions = {
     /**
      * Clears current camera but does not clear nodes.
      *
-     * @memberof InternalFunctions
+     *
      */
     async clear() {
         if (cam1) {
@@ -300,7 +300,7 @@ const InternalFunctions = {
 /**
  * This function will destroy all camera instances
  *
- * @memberof CinematicCam
+ *
  */
 export async function destroy(): Promise<void> {
     return await InternalFunctions.destroy();
@@ -314,7 +314,7 @@ export async function overrideNodes(_nodes: Array<iCameraNode>) {
  * Add a camera node to the camera set.
  *
  * @param {iCameraNode} node
- * @memberof CinematicCam
+ *
  */
 export async function addNode(node: iCameraNode) {
     if (!node.pos) {
@@ -340,7 +340,7 @@ export async function addNode(node: iCameraNode) {
  *
  * @param {boolean} [removeFromArray=true]
  * @return {Promise<boolean>}
- * @memberof CinematicCam
+ *
  */
 export async function next(removeFromArray = true): Promise<boolean> {
     if (nodes.length <= 0) {
@@ -369,7 +369,7 @@ export async function next(removeFromArray = true): Promise<boolean> {
 /**
  * Play all camera nodes, but do not clear the camera nodes array.
  *
- * @memberof CinematicCam
+ *
  */
 export async function play() {
     const cameraNodes = [...nodes];

@@ -2,7 +2,7 @@ type Flags = Permissions;
 
 /**
  * Verify if a bitwise flag is enabled.
- * @export
+ *
  * @param {number} flags
  * @param {number} flagToCheck
  * @return {boolean}

@@ -8,7 +8,7 @@ import * as Athena from '@AthenaServer/api';
  *
  * Wait for this function to finish before attempting to respawn.
  *
- * @export
+ *
  */
 export async function all(): Promise<void> {
     if (Overrides.all) {
@@ -56,7 +56,7 @@ export async function all(): Promise<void> {
 /**
  * Returns true if the vehicle has been despawned / destroyed.
  *
- * @export
+ *
  * @param {number} id
  * @return {Promise<boolean>}
  */
@@ -93,7 +93,7 @@ export async function one(id: number): Promise<boolean> {
 /**
  * Despawn a list of vehicles by identifier
  *
- * @export
+ *
  * @param {Array<number>} ids
  * @return {void}
  */
@@ -125,7 +125,7 @@ export function override(functionName: 'list', callback: typeof list);
 /**
  * Used to override despawn vehicle functionality
  *
- * @export
+ *
  * @param {keyof VehicleDespawnFuncs} functionName
  * @param {*} callback
  */

@@ -4,7 +4,7 @@ export interface IStreamConfig {
     /**
      * How often the interval will update players.
      * @type {number}
-     * @memberof IStreamConfig
+     *
      */
     TimeBetweenUpdates: number;
 }

@@ -179,7 +179,7 @@ function handleDrawPeds() {
  *
  * @static
  * @param {number} scriptId
- * @memberof ClientPedController
+ *
  */
 export function get(scriptId: number): IPed | undefined {
     const keys = Object.keys(pedInfo);
@@ -214,7 +214,7 @@ export function get(scriptId: number): IPed | undefined {
 /**
  * Create a client-only static pedestrian.
  *
- * @export
+ *
  * @param {IPed} pedData
  * @return {void}
  */
@@ -241,7 +241,7 @@ export function append(pedData: IPed) {
 /**
  * Remove a client ped by uid
  *
- * @export
+ *
  * @param {string} uid A unique string
  * @return {void}
  */

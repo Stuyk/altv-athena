@@ -1,7 +1,7 @@
 /**
  * Used to describe a wheel menu option.
  *
- * @export
+ *
  * @interface IWheelOption
  */
 export interface IWheelOption {
@@ -9,7 +9,7 @@ export interface IWheelOption {
      * The name of this option.
      *
      * @type {string}
-     * @memberof IWheelOption
+     *
      */
     name: string;
     /**
@@ -18,7 +18,7 @@ export interface IWheelOption {
      * If not specified one will automatically be created.
      *
      * @type {string}
-     * @memberof IWheelOption
+     *
      */
     uid?: string;
 
@@ -28,7 +28,7 @@ export interface IWheelOption {
      * ie. `red`, `green`, `yellow`, etc.
      *
      * @type {string}
-     * @memberof IWheelOption
+     *
      */
     color?: string;
 
@@ -38,7 +38,7 @@ export interface IWheelOption {
      * ie. `icon-home`
      *
      * @type {string}
-     * @memberof IWheelOption
+     *
      */
     icon?: string;
 
@@ -46,7 +46,7 @@ export interface IWheelOption {
      * Do not close the wheel menu after executing this option.
      *
      * @type {boolean}
-     * @memberof IWheelOption
+     *
      */
     doNotClose?: boolean;
 
@@ -54,7 +54,7 @@ export interface IWheelOption {
      * From the client, call a specific server event through alt.emitServer
      *
      * @type {string}
-     * @memberof IWheelOption
+     *
      */
     emitServer?: string;
 
@@ -62,7 +62,7 @@ export interface IWheelOption {
      * From the client, emit a client event through alt.emit
      *
      * @type {string}
-     * @memberof IWheelOption
+     *
      */
     emitClient?: string;
 
@@ -70,7 +70,7 @@ export interface IWheelOption {
      * Any data that you want to pass through a callback or an event.
      *
      * @type {Array<any>}
-     * @memberof IWheelOptionExt
+     *
      */
     data?: Array<any>;
 
@@ -79,7 +79,7 @@ export interface IWheelOption {
      * Example: '/assets/icons/bullpuprifle.png'
      *
      * @type {string}
-     * @memberof IWheelOption
+     *
      */
     image?: string;
 
@@ -88,7 +88,7 @@ export interface IWheelOption {
      * Example: '/assets/icons/bullpuprifle.png'
      *
      * @type {string}
-     * @memberof IWheelOption
+     *
      */
     bgImage?: string;
 }
@@ -97,7 +97,7 @@ export interface IWheelOptionExt extends IWheelOption {
     /**
      * A callback that will only work on client-side.
      *
-     * @memberof IWheelOptionExt
+     *
      */
     callback?: (...args: any[]) => void;
 }

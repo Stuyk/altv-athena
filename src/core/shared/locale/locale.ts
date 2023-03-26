@@ -29,7 +29,7 @@ export class LocaleController {
      * The ISO-639-1 Code to Utilize for Language
      * @static
      * @param {string} [iso639='en']
-     * @memberof LocaleController
+     *
      */
     static setLanguage(iso639: string = 'en') {
         defaultLanguage = iso639;
@@ -41,7 +41,7 @@ export class LocaleController {
      * @param {string} key
      * @param {...any[]} args
      * @return {string}
-     * @memberof LocaleController
+     *
      */
     static get(key: string, ...args: any[]): string {
         if (!locales[defaultLanguage][key]) {
@@ -62,7 +62,7 @@ export class LocaleController {
      * @static
      * @param {string} key
      * @return {Object}
-     * @memberof LocaleController
+     *
      */
     static getWebviewLocale(key: string): Object {
         if (!locales[defaultLanguage][key]) {

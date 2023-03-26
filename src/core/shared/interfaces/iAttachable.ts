@@ -4,35 +4,35 @@ import * as alt from 'alt-shared';
 /**
  * Used in the attachement system when attaching objects to a player.
  *
- * @export
+ *
  * @interface IAttachable
  */
 export default interface IAttachable {
     /**
      * The unique identifier for this attachable.
      * @type {string}
-     * @memberof IAttachable
+     *
      */
     uid?: string;
 
     /**
      * The model or object of the attachable.
      * @type {string}
-     * @memberof IAttachable
+     *
      */
     model: string;
 
     /**
      * The position where the object should be attached.
      * @type {alt.IVector3}
-     * @memberof IAttachable
+     *
      */
     pos: alt.IVector3;
 
     /**
      * The rotation where the object should be attached.
      * @type {alt.IVector3}
-     * @memberof IAttachable
+     *
      */
     rot: alt.IVector3;
 
@@ -46,14 +46,14 @@ export default interface IAttachable {
      * Use the PedBone enum provided in Athena for correct value
      *
      * @type {number}
-     * @memberof IAttachable
+     *
      */
     bone: PedBone;
 
     /**
      * Do not define this. Leave it alone.
      * @type {number}
-     * @memberof IAttachable
+     *
      */
     entityID?: number;
 }
@@ -63,14 +63,14 @@ export interface JobAttachable extends IAttachable {
      * How long should this object be attached.
      * Set this to -1 for infinite.
      * @type {number}
-     * @memberof Attachable
+     *
      */
     duration?: number;
 
     /**
      * Attach the object when the objective is loaded?
      * @type {boolean}
-     * @memberof JobAttachable
+     *
      */
     atObjectiveStart?: boolean;
 }

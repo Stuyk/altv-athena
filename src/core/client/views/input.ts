@@ -86,7 +86,7 @@ export class InputView {
      * Show an input menu from client-side.
      * @static
      * @param {InputMenu} _inputMenu
-     * @memberof InputView
+     *
      */
     static setMenu(_inputMenu: InputMenu) {
         InternalFunctions.show(_inputMenu);

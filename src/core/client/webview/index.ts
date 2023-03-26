@@ -32,7 +32,7 @@ const InternalFunctions = {
      *
      * @static
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     async updatePages() {
         const view = await get();
@@ -77,7 +77,7 @@ const InternalFunctions = {
      * @param {string} eventName
      * @param {...any[]} args
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     handleClientEvent(eventName: string, ...args: any[]) {
         if (_isDisconnecting) {
@@ -98,7 +98,7 @@ const InternalFunctions = {
      * @static
      * @param {string} eventName
      * @param {...any[]} args
-     * @memberof InternalFunctions
+     *
      */
     handleServerEvent(eventName: string, ...args: any[]) {
         if (_isDisconnecting) {
@@ -115,7 +115,7 @@ const InternalFunctions = {
      * @param {string} pageName
      * @param {...any[]} args
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     handleReadyEvent(pageName: string, ...args: any[]) {
         if (!ReadyEvents[pageName]) {
@@ -133,7 +133,7 @@ const InternalFunctions = {
      * @param {string} eventName
      * @param {...any[]} args
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     async onServer(eventName: string, ...args: any[]) {
         const view = await get();
@@ -150,7 +150,7 @@ const InternalFunctions = {
      * @static
      * @param {number} key
      * @return {void}
-     * @memberof InternalFunctions
+     *
      */
     handleKeyDownEvent(key: number) {
         if (key === 27) {
@@ -162,7 +162,7 @@ const InternalFunctions = {
      * Closes all pages that are not overlay pages.
      *
      * @static
-     * @memberof InternalFunctions
+     *
      */
     async closeNonOverlayPages() {
         if (isUpdating) {
@@ -226,7 +226,7 @@ const InternalFunctions = {
  * Sets the URL to use based on current deployment.
  * @static
  * @param {string} url
- * @memberof WebViewController
+ *
  */
 export function create(url: string) {
     _defaultURL = url;
@@ -261,7 +261,7 @@ export function create(url: string) {
  * Trigger this to hide/show all overlays like Chat, HUD, etc.
  * @static
  * @param {boolean} value
- * @memberof WebViewController
+ *
  */
 export async function setOverlaysVisible(value: boolean, doNotUpdate = false) {
     for (let i = 0; i < OverlayPages.length; i++) {
@@ -291,7 +291,7 @@ export async function setOverlaysVisible(value: boolean, doNotUpdate = false) {
  * @static
  * @param {string} pageName
  * @return {void}
- * @memberof WebViewController
+ *
  */
 export function registerPersistentPage(pageName: string) {
     const index = PersistentPages.findIndex((p) => p === pageName);
@@ -309,7 +309,7 @@ export function registerPersistentPage(pageName: string) {
  * @param {string} pageName
  * @param {(isVisible: boolean) => void} callback
  * @return {void}
- * @memberof WebViewController
+ *
  */
 export function registerOverlay(pageName: string, callback: (isVisible: boolean) => void = undefined) {
     const index = OverlayPages.findIndex((p) => p.name === pageName);
@@ -328,7 +328,7 @@ export function registerOverlay(pageName: string, callback: (isVisible: boolean)
  * @static
  * @param {string} pageName
  * @param {boolean} state
- * @memberof WebViewController
+ *
  */
 export function setOverlayVisible(pageName: string, state: boolean) {
     const pageIndex = OverlayPages.findIndex((page) => page.name === pageName);
@@ -348,7 +348,7 @@ export function setOverlayVisible(pageName: string, state: boolean) {
  * Get the current WebView instance.
  * @static
  * @return {Promise<alt.WebView>}
- * @memberof WebViewController
+ *
  */
 export async function get(): Promise<alt.WebView> {
     return new Promise((resolve: Function) => {
@@ -379,7 +379,7 @@ export async function get(): Promise<alt.WebView> {
 /**
  * Destroy the WebView
  * @static
- * @memberof WebViewController
+ *
  */
 export function dispose() {
     _isDisconnecting = true;
@@ -394,7 +394,7 @@ export function dispose() {
  * @param {(Array<string> | string)} pageOrPages An array of pages, or a single page name. Case sensitive.
  * @param {() => void} [closeOnEscapeCallback=undefined] An event to call when the page is closed.
  * @return {void}
- * @memberof WebViewController
+ *
  */
 export async function openPages(
     pageOrPages: Array<string> | string,
@@ -452,7 +452,7 @@ export async function openPages(
 /**
  * Focus the WebView Instance
  * @static
- * @memberof WebViewController
+ *
  */
 export async function focus() {
     const view = await get();
@@ -462,7 +462,7 @@ export async function focus() {
 /**
  * Focus the WebView Instance
  * @static
- * @memberof WebViewController
+ *
  */
 export async function unfocus() {
     const view = await get();
@@ -473,7 +473,7 @@ export async function unfocus() {
  * Show or hide the cursor.
  * @static
  * @param {boolean} state
- * @memberof WebViewController
+ *
  */
 export async function showCursor(state: boolean) {
     if (state) {
@@ -498,7 +498,7 @@ export async function showCursor(state: boolean) {
  * @static
  * @param {Array<string>} pageNames
  * @return {void}
- * @memberof WebViewController
+ *
  */
 export async function closeOverlays(pageNames: Array<string>) {
     if (isUpdating) {
@@ -539,7 +539,7 @@ export async function closeOverlays(pageNames: Array<string>) {
  *
  * @static
  * @param {Array<string>} pageNames
- * @memberof WebViewController
+ *
  */
 export async function closePages(pageNames: Array<string>, showOverlays = false) {
     if (isUpdating) {
@@ -587,7 +587,7 @@ export async function closePages(pageNames: Array<string>, showOverlays = false)
  * @static
  * @param {string} pageName
  * @param {(...args: any[]) => void} callback
- * @memberof WebViewController
+ *
  */
 export function ready(pageName: string, callback: AnyCallback) {
     ReadyEvents[pageName] = callback;
@@ -599,7 +599,7 @@ export function ready(pageName: string, callback: AnyCallback) {
  * @static
  * @param {string} pageName
  * @param {(...args: any[]) => void} callback
- * @memberof WebViewController
+ *
  */
 export function on<EventNames = string>(eventName: EventNames, callback: AnyCallback) {
     if (ClientEvents[String(eventName)]) {
@@ -619,7 +619,7 @@ export function on<EventNames = string>(eventName: EventNames, callback: AnyCall
  * @static
  * @param {string} eventName
  * @param {...any[]} args
- * @memberof WebViewController
+ *
  */
 export async function emit<EventNames = string>(eventName: EventNames, ...args: any[]) {
     const view = await get();
@@ -667,7 +667,7 @@ export function disableEscapeKeyForPage(pageName: string) {
 /**
  * Checks if any menu is currently open
  *
- * @export
+ *
  * @return {boolean}
  */
 export function isAnyMenuOpen(excludeDead = false): boolean {

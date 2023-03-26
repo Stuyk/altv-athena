@@ -4,7 +4,7 @@
  * const upperBodyWaking = ANIMATION_FLAGS.UPPERBODY_ONLY | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL;
  *
  * @ignore
- * @export
+ *
  * @enum {number}
  */
 export enum ANIMATION_FLAGS {

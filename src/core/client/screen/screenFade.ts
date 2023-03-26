@@ -5,7 +5,7 @@ import * as native from 'natives';
 /**
  * Removes the black filter on a screen over time.
  *
- * @export
+ *
  * @param {number} timeInMs
  */
 export function fromBlack(timeInMs: number) {
@@ -15,7 +15,7 @@ export function fromBlack(timeInMs: number) {
 /**
  * Turns a screen black over time.
  *
- * @export
+ *
  * @param {number} timeInMs
  */
 export function toBlack(timeInMs: number) {

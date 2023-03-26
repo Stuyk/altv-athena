@@ -10,7 +10,7 @@ export type PartDamage = { bulletHoles?: number; damageLevel: string };
 /**
  * Used to describe vehicle damage to apply to a vehicle.
  *
- * @export
+ *
  * @interface VehicleDamage
  */
 export interface VehicleDamage {
@@ -18,7 +18,7 @@ export interface VehicleDamage {
      * What parts are damaged.
      *
      * @type {{ [part: string]: PartDamage }}
-     * @memberof VehicleDamage
+     *
      */
     parts?: { [part: string]: PartDamage };
 
@@ -26,7 +26,7 @@ export interface VehicleDamage {
      * What bumpers are damaged.
      *
      * @type {{ [part: string]: PartDamage }}
-     * @memberof VehicleDamage
+     *
      */
     bumpers?: { [part: string]: PartDamage };
 
@@ -34,7 +34,7 @@ export interface VehicleDamage {
      * What windows are damaged.
      *
      * @type {{ [part: string]: PartDamage }}
-     * @memberof VehicleDamage
+     *
      */
     windows?: { [part: string]: PartDamage };
 
@@ -42,7 +42,7 @@ export interface VehicleDamage {
      * What wheels are damaged.
      *
      * @type {Array<PartDamage>}
-     * @memberof VehicleDamage
+     *
      */
     wheels?: Array<PartDamage>;
 
@@ -50,7 +50,7 @@ export interface VehicleDamage {
      * What lights are damaged.
      *
      * @type {Array<PartDamage>}
-     * @memberof VehicleDamage
+     *
      */
     lights?: Array<PartDamage>;
 }
@@ -58,7 +58,7 @@ export interface VehicleDamage {
 /**
  * Used to describe an owned vehicle.
  *
- * @export
+ *
  * @interface OwnedVehicle
  * @extends {BaseVehicle}
  */
@@ -66,7 +66,7 @@ export interface OwnedVehicle extends BaseVehicle {
     /**
      * Vehicle Tuning Interface
      * @type {VehicleTuning}
-     * @memberof IVehicle
+     *
      */
     tuning?: Partial<VehicleTuning> | VehicleTuning | undefined;
 
@@ -74,7 +74,7 @@ export interface OwnedVehicle extends BaseVehicle {
      * Data that matches the alt.Vehicle API setters
      *
      * @type {Partial<VehicleState> | VehicleState}
-     * @memberof OwnedVehicle
+     *
      */
     state?: Partial<VehicleState> | VehicleState;
 
@@ -82,7 +82,7 @@ export interface OwnedVehicle extends BaseVehicle {
      * Damage to store / apply on a vehicle
      *
      * @type {VehicleDamage}
-     * @memberof OwnedVehicle
+     *
      */
     damage?: VehicleDamage;
 }

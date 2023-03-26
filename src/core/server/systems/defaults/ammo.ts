@@ -122,12 +122,12 @@ const Internal = {
 /**
  * Used to disable the default ammo system that comes with Athena.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.systems.default.ammo.disable();
  * ```
  *
- * @export
+ *
  */
 export function disable() {
     enabled = false;

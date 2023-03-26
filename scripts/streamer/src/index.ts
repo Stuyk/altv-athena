@@ -43,7 +43,7 @@ class StreamerServer {
     /**
      * @static
      * @param {SockJS.Connection} conn
-     * @memberof StreamerServer
+     *
      */
     static init(_conn: SockJS.Connection) {
         conn = _conn;
@@ -53,7 +53,7 @@ class StreamerServer {
     /**
      * @static
      * @param {string} message
-     * @memberof StreamerServer
+     *
      */
     static receive(message: string) {
         /** @type {{id: number, route: string, data: Object}} */
@@ -86,7 +86,7 @@ class StreamerServer {
      * @static
      * @param {number} id
      * @param {string} data
-     * @memberof StreamerServer
+     *
      */
     static ping(id: number) {
         StreamData = {};
@@ -98,7 +98,7 @@ class StreamerServer {
      * @static
      * @param {number} id
      * @param {{ locations: Array<> }} data
-     * @memberof StreamerServer
+     *
      */
     static populate(id: number, data: IStreamPopulate<any>) {
         if (!data) {
@@ -115,7 +115,7 @@ class StreamerServer {
      * @param {number} id
      * @param {{ key: string; range: number }} data
      * @return {void}
-     * @memberof StreamerServer
+     *
      */
     static updateRange(id: number, data: { key: string; range: number }) {
         if (!data) {
@@ -130,7 +130,7 @@ class StreamerServer {
      * @static
      * @param {number} id
      * @param {IStreamUpdate} data
-     * @memberof StreamerServer
+     *
      */
     static update(id: number, data: IStreamUpdate) {
         const keys = Object.keys(StreamData);

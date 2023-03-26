@@ -104,7 +104,7 @@ export async function remove(player: alt.Player, slot: number): Promise<boolean>
 /**
  * Verify that the player has at least 'x' of an item in their toolbar
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {string} baseItem
  * @return {void}
@@ -133,12 +133,12 @@ export async function has(player: alt.Player, dbName: string, quantity: number, 
  *
  * Only checks the toolbar.
  *
- * @example
+ * #### Example
  * ```ts
  * const someData = Athena.player.toolbar.getItemData<{ myCustomStuff: string }>(somePlayer, someSlot);
  * ```
  *
- * @export
+ *
  * @template CustomData
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
@@ -173,7 +173,7 @@ export function getItemData<CustomData = {}>(player: alt.Player, slot: number): 
  *
  * Only checks the toolbar.
  *
- * @example
+ * #### Example
  * ```ts
  * const someData = Athena.player.toolbar.getItemData<{ myCustomStuff: string }>(somePlayer, someSlot);
  *
@@ -182,7 +182,7 @@ export function getItemData<CustomData = {}>(player: alt.Player, slot: number): 
  * await Athena.player.toolbar.modifyItemData<typeof someData>(player, someSlot, someData);
  * ```
  *
- * @export
+ *
  * @template CustomData
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
@@ -226,12 +226,12 @@ export async function modifyItemData<CustomData = {}>(
  *
  * Never modify the item directly; this is only to get item information.
  *
- * @example
+ * #### Example
  * ```ts
  * const someData = Athena.player.toolbar.getAt<{ myCustomStuff: string }>(somePlayer, someSlot);
  * ```
  *
- * @export
+ *
  * @template CustomData
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
@@ -281,7 +281,7 @@ export function override(functionName: 'getItemData', callback: typeof getItemDa
 /**
  * Used to override any toolbar functions
  *
- * @export
+ *
  * @param {keyof ToolbarFunctions} functionName
  * @param {*} callback
  */

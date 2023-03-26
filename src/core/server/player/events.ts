@@ -38,7 +38,7 @@ const playerEvents: Array<{ eventName: string; callback: ((player: alt.Player, .
  *
  * @param {AthenaPlayerEvents} eventName
  * @param {alt.Player} player An alt:V Player Entity
- * @memberof PlayerEvents
+ *
  */
 export function trigger<CustomEvents = AthenaPlayerEvents>(
     eventName: CustomEvents,
@@ -61,7 +61,7 @@ export function trigger<CustomEvents = AthenaPlayerEvents>(
 /**
  * Called when a player item has changed from unequipped to equipped.
  *
- * @export
+ *
  * @param {'item-equipped'} eventName
  * @param {(player: alt.Player, slot: number, type: InventoryType) => void} callback
  */
@@ -73,7 +73,7 @@ export function on(
 /**
  * Called when a player item has changed to unequipped
  *
- * @export
+ *
  * @param {'item-unequipped'} eventName
  * @param {(player: alt.Player, slot: number, type: InventoryType) => void} callback
  */
@@ -85,7 +85,7 @@ export function on(
 /**
  * Called when a player has died.
  *
- * @export
+ *
  * @param {'player-died'} eventName
  * @param {(player: alt.Player) => void} callback
  */
@@ -95,7 +95,7 @@ export function on(eventName: 'player-died', callback: (player: alt.Player) => v
  * Called when a player uniform has been set.
  * Check `characterDocument.data`
  *
- * @export
+ *
  * @param {'player-uniform-set'} eventName
  * @param {(player: alt.Player) => void} callback
  */
@@ -105,7 +105,7 @@ export function on(eventName: 'player-uniform-set', callback: (player: alt.Playe
  * Called when a player uniform has been cleared.
  * Uniform is set to undefined / null
  *
- * @export
+ *
  * @param {'player-uniform-cleared'} eventName
  * @param {(player: alt.Player) => void} callback
  */
@@ -114,7 +114,7 @@ export function on(eventName: 'player-uniform-cleared', callback: (player: alt.P
 /**
  * Called when a player has their model set to non-multiplayer models.
  *
- * @export
+ *
  * @param {'player-skin-set'} eventName
  * @param {(player: alt.Player) => void} callback
  */
@@ -123,7 +123,7 @@ export function on(eventName: 'player-skin-set', callback: (player: alt.Player) 
 /**
  * Called when a player has their model cleared to a multiplayer model.
  *
- * @export
+ *
  * @param {'player-skin-cleared'} eventName
  * @param {(player: alt.Player) => void} callback
  */
@@ -133,7 +133,7 @@ export function on(eventName: 'player-skin-cleared', callback: (player: alt.Play
  * Called when the internal safe health functions are invoked.
  * This is never called when `player.health` is modified
  *
- * @export
+ *
  * @param {'player-health-set'} eventName
  * @param {(player: alt.Player, oldValue: number) => void} callback
  */
@@ -143,7 +143,7 @@ export function on(eventName: 'player-health-set', callback: (player: alt.Player
  * Called when the internal safe armour functions are invoked.
  * This is never called when `player.armour` is modified.
  *
- * @export
+ *
  * @param {'player-armour-set'} eventName
  * @param {(player: alt.Player, oldValue: number) => void} callback
  */
@@ -153,7 +153,7 @@ export function on(eventName: 'player-armour-set', callback: (player: alt.Player
  * Called when the internal safe position functions are invoked.
  * This is never called when `player.pos` is modified.
  *
- * @export
+ *
  * @param {'player-pos-set'} eventName
  * @param {(player: alt.Player, oldValue: alt.IVector3) => void} callback
  */
@@ -162,7 +162,7 @@ export function on(eventName: 'player-pos-set', callback: (player: alt.Player, o
 /**
  * Called when playtime has increased slightly.
  *
- * @export
+ *
  * @param {'increased-play-time'} eventName
  * @param {(player: alt.Player, newHours: number) => void} callback
  */
@@ -171,7 +171,7 @@ export function on(eventName: 'increased-play-time', callback: (player: alt.Play
 /**
  * Called when a player has dropped an item.
  *
- * @export
+ *
  * @param {'drop-item'} eventName
  * @param {(player: alt.Player, storedItem: StoredItem) => void} callback
  */
@@ -181,7 +181,7 @@ export function on(eventName: 'drop-item', callback: (player: alt.Player, stored
  * Called when a player picks up an item.
  * The `_id` is a reference to the item in the database; or the item in the ItemDrops system.
  *
- * @export
+ *
  * @param {'pickup-item'} eventName
  * @param {(player: alt.Player, _id: string) => void} callback
  */
@@ -190,7 +190,7 @@ export function on(eventName: 'pickup-item', callback: (player: alt.Player, _id:
 /**
  * Called when a player selects a character
  *
- * @export
+ *
  * @param {'selected-character'} eventName
  * @param {(player: alt.Player, _id: string) => void} callback
  */
@@ -199,7 +199,7 @@ export function on(eventName: 'selected-character', callback: (player: alt.Playe
 /**
  * Called when a player has been respawned by internal functions.
  *
- * @export
+ *
  * @param {'respawned'} eventName
  * @param {(player: alt.Player) => void} callback
  */
@@ -208,7 +208,7 @@ export function on(eventName: 'respawned', callback: (player: alt.Player) => voi
 /**
  * Called when a player has left a vehicle seat.
  *
- * @export
+ *
  * @param {'player-left-vehicle-seat'} eventName
  * @param {(player: alt.Player, seat: number) => void} callback
  */
@@ -220,7 +220,7 @@ export function on(
 /**
  * Called when a player enters a vehicle as a driver.
  *
- * @export
+ *
  * @param {'player-entered-vehicle-as-driver'} eventName
  * @param {(player: alt.Player, vehicle: alt.Vehicle) => void} callback
  */
@@ -234,7 +234,7 @@ export function on(
  * Formally known as a disconnect event.
  * PLAYER WILL BE UNDEFINED, DO NOT USE VARIABLE
  *
- * @export
+ *
  * @template T
  * @param {'player-disconnected'} eventName
  * @param {((player: alt.Player, id: number, document: Character | T) => void)} callback
@@ -247,7 +247,7 @@ export function on<T>(
 /**
  * Triggers when a player unequips a weapon.
  *
- * @export
+ *
  * @template T
  * @param {'player-weapon-unequipped'} eventName
  * @param {(player: alt.Player, slot: number, type: InventoryType) => void} callback
@@ -264,7 +264,7 @@ export function on<T>(
  *
  * Any additional document changes with this event will need to handled through the Athena.document.account system.
  *
- * @export
+ *
  * @template T
  * @param {'player-account-created'} eventName
  * @param {(player: alt.Player) => void} callback
@@ -278,7 +278,7 @@ export function on<T>(eventName: 'player-account-created', callback: (player: al
  *
  * Any additional document changes with this event will need to handled through the Athena.document.player system.
  *
- * @export
+ *
  * @template T
  * @param {'player-character-created'} eventName
  * @param {(player: alt.Player) => void} callback
@@ -289,7 +289,7 @@ export function on<T>(eventName: 'player-character-created', callback: (player: 
  * Trigger a callback specific to Athena Player Events.
  * @param {AthenaPlayerEvents} eventName
  * @param {(player: alt.Player) => void} callback
- * @memberof PlayerEvents
+ *
  */
 export function on<CustomEvents = AthenaPlayerEvents>(
     eventName: CustomEvents,

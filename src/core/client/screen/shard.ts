@@ -11,7 +11,7 @@ let timeout: number;
 /**
  * Used to clear the last set spinner.
  *
- * @memberof Shard
+ *
  */
 export function clear() {
     if (scaleform) {
@@ -33,7 +33,7 @@ export function clear() {
 /**
  * Create a shard, a shard is essentially the mission passed / mission failed text.
  *
- * @export
+ *
  * @param {IShard} shard
  * @return {void}
  */

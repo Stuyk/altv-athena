@@ -11,7 +11,7 @@ const globalNotifications: Array<IWorldNotification> = [];
 const InternalFunctions = {
     /**
      * Initialize this WorldNotification Stream Service
-     * @memberof WorldNotificationController
+     *
      */
     init() {
         Athena.systems.streamer.registerCallback(KEY, update);
@@ -19,7 +19,7 @@ const InternalFunctions = {
 
     /**
      * Internal function to refresh all global world notifications in the streamer service.
-     * @memberof WorldNotificationController
+     *
      */
     refresh() {
         Athena.systems.streamer.updateData(KEY, globalNotifications);
@@ -30,7 +30,7 @@ const InternalFunctions = {
  * Adds a global world notification for all players.
  * @param {IWorldNotification} notification
  * @returns {string} uid A unique string for notification
- * @memberof WorldNotificationController
+ *
  */
 export function append(notification: IWorldNotification): string {
     if (Overrides.append) {
@@ -50,7 +50,7 @@ export function append(notification: IWorldNotification): string {
  * Removes a global world notification from all players based on the global uid.
  * @param {string} uid A unique string
  * @return {boolean}
- * @memberof WorldNotificationController
+ *
  */
 export function remove(uid: string): boolean {
     if (Overrides.remove) {
@@ -136,7 +136,7 @@ export function override(functionName: 'update', callback: typeof update);
 /**
  * Used to override any in-world streamer notifications
  *
- * @export
+ *
  * @param {keyof WorldNotificationFuncs} functionName
  * @param {*} callback
  */

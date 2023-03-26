@@ -54,12 +54,12 @@ const Internal = {
 /**
  * Disable the default clothing crafting combinations.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.systems.default.clothingCrafting.disable();
  * ```
  *
- * @export
+ *
  */
 export function disable() {
     enabled = false;

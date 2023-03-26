@@ -14,7 +14,7 @@ const LerpObject = {
      * @param {alt.IVector3} to
      * @param {number} [speed=0.1]
      * @return {void}
-     * @memberof LerpObject
+     *
      */
     async lerp(id: number, to: alt.IVector3, speed = 0.1) {
         let runTimer = 0;
@@ -47,7 +47,7 @@ const LerpObject = {
      * @param {alt.IVector3} start
      * @param {alt.IVector3} end
      * @param {0.1} speed
-     * @memberof LerpObject
+     *
      */
     async tempLerp(model: string, start: alt.IVector3, end: alt.IVector3, speed: number = 0.1) {
         const hash = alt.hash(model);

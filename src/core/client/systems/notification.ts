@@ -25,7 +25,7 @@ function handler(message: string, ...args: any[]) {
 /**
  * Disable the default notification handler
  *
- * @export
+ *
  */
 export function disableDefault() {
     isDefaultEnabled = false;
@@ -36,7 +36,7 @@ export function disableDefault() {
  *
  * Good for overwriting the default notification system and handling it on your own.
  *
- * @export
+ *
  * @param {NotificationCallback} callback
  */
 export function addCallback(callback: NotificationCallback) {

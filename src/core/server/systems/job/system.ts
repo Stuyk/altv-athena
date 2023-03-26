@@ -13,7 +13,7 @@ import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
  *
  * ie. Go to this location, interact with this thing, ensure you have this item, etc.
  *
- * @example
+ * #### Example
  * ```ts
  * // Never recycle the same job instance
  * const someJob = new Job();
@@ -38,7 +38,7 @@ import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
  * someJob.addPlayer(somePlayer);
  *```
  *
- * @export
+ *
  * @class Job
  */
 export class Job {
@@ -46,7 +46,7 @@ export class Job {
      * The ID of the player.
      * @private
      * @type {number}
-     * @memberof Job
+     *
      */
     private id: number;
     private player: alt.Player;
@@ -63,7 +63,7 @@ export class Job {
      *
      * This instance should be called each time to create new job instances.
      *
-     * @memberof Job
+     *
      */
     constructor() {}
 
@@ -73,7 +73,7 @@ export class Job {
      * Ensure that this Job is initialized with new Job first.
      *
      * @param {alt.Player} player An alt:V Player Entity
-     * @memberof Job
+     *
      */
     addPlayer(player: alt.Player) {
         this.player = player;
@@ -87,7 +87,7 @@ export class Job {
      * Add an objective to this job.
      * Use the objective interface to generate the objective information.
      * @param {Objective} objectiveData
-     * @memberof Job
+     *
      */
     addObjective(objectiveData: Objective) {
         const objectiveClone = Athena.systems.job.utility.cloneObjective(objectiveData);
@@ -103,7 +103,7 @@ export class Job {
      *
      * Returns a vehicle with a 'uid'.
      *
-     * @memberof Job
+     *
      */
     addVehicle(
         player: alt.Player,
@@ -133,7 +133,7 @@ export class Job {
     /**
      * Remove all vehicles from this job.
      *
-     * @memberof Job
+     *
      */
     removeAllVehicles() {
         for (let i = 0; i < this.vehicles.length; i++) {
@@ -148,7 +148,7 @@ export class Job {
      *
      * @param {string} uid A unique string
      * @return {void}
-     * @memberof Job
+     *
      */
     removeVehicle(uid: string) {
         for (let i = this.vehicles.length - 1; i >= 0; i--) {
@@ -168,7 +168,7 @@ export class Job {
     /**
      * Appends a list of objectives into the Job Framework.
      * @param {Objective} objectiveData
-     * @memberof Job
+     *
      */
     loadObjectives(objectiveData: Array<Objective>) {
         const uniqueObjectives = [];
@@ -193,7 +193,7 @@ export class Job {
      * Call this to cleanup a job.
      *
      * @param {string} reason
-     * @memberof Job
+     *
      */
     quit(reason: string) {
         Athena.systems.job.instance.clear(this.player);
@@ -216,7 +216,7 @@ export class Job {
     /**
      * Remove the first element of the objective list and move on to the next.
      * @private
-     * @memberof JobBuilder
+     *
      */
     async goToNextObjective() {
         const returnedObjective = this.objectives.shift();
@@ -248,7 +248,7 @@ export class Job {
      * Get the current player that is utilizing this job instance.
      *
      * @return {alt.Player}
-     * @memberof Job
+     *
      */
     getPlayer(): alt.Player {
         return this.player;
@@ -257,7 +257,7 @@ export class Job {
     /**
      * Remove the current job attachable.
      * @return {void}
-     * @memberof Job
+     *
      */
     removeAttachable() {
         const objective = this.getCurrentObjective();
@@ -271,7 +271,7 @@ export class Job {
     /**
      * Emits data down to the player to start handling job information.
      * @private
-     * @memberof Job
+     *
      */
     private syncObjective() {
         const objective = this.getCurrentObjective();
@@ -298,7 +298,7 @@ export class Job {
     /**
      * Get the current objective the player is completing.
      * @return {(Objective | null)}
-     * @memberof JobBuilder
+     *
      */
     getCurrentObjective(): Objective | null {
         return this.objectives[0];
@@ -308,7 +308,7 @@ export class Job {
      * Get the time since this job has started.
      *
      * @return {number}
-     * @memberof Job
+     *
      */
     getElapsedMilliseconds(): number {
         return Date.now() - this.startTime;
@@ -318,7 +318,7 @@ export class Job {
      * Inserts an objective to the beginning of the objectives array.
      *
      * @param {Objective} objectiveData
-     * @memberof Job
+     *
      */
     addNextObjective(objectiveData: Objective) {
         const objectiveClone = Athena.systems.job.utility.cloneObjective(objectiveData);
@@ -330,7 +330,7 @@ export class Job {
      * Set the async callback that is called when a user completed a job.
      *
      * @param {(job: Job) => Promise<void>} callback
-     * @memberof Job
+     *
      */
     setCompletedCallback(callback: () => Promise<void>) {
         this.completedCallback = callback;
@@ -340,7 +340,7 @@ export class Job {
      * Set the callback that is called when a user quits a job.
      *
      * @param {(job: Job, reason: string) => void} callback
-     * @memberof Job
+     *
      */
     setQuitCallback(callback: (job: Job, reason: string) => void) {
         this.quitCallback = callback;

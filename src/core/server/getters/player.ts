@@ -248,7 +248,7 @@ export function closestOwnedVehicle(player: alt.Player): alt.Vehicle | undefined
 /**
  * Get all owned vehicles from the database for a given character.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @return {Promise<Array<OwnedVehicle>>}
  */
@@ -296,7 +296,7 @@ export async function characters(playerOrAccount: alt.Player | Account | string)
 /**
  * Determine if a player is currently dead / marked as dead.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @return {boolean}
  */
@@ -312,7 +312,7 @@ export function isDead(player: alt.Player): boolean {
 /**
  * Determine if a player is valid, and spawned as a character.
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @return {boolean}
  */

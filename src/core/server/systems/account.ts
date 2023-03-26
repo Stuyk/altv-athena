@@ -31,7 +31,7 @@ const Internal = {
  *
  * @param {alt.Player} player An alt:V Player Entity
  * @return {(Promise<Account | undefined>)}
- * @memberof AccountSystemRef
+ *
  */
 export async function getAccount(key: string, value: any): Promise<Account | undefined> {
     if (Overrides.getAccount) {
@@ -61,7 +61,7 @@ export async function getAccount(key: string, value: any): Promise<Account | und
  * @param {alt.Player} player An alt:V Player Entity
  * @param {{[key: string]: any }} dataToAppend - Any additional data / identifiers to add to an account.
  * @return {Promise<Account>}
- * @memberof AccountSystemRef
+ *
  */
 export async function create(player: alt.Player, dataToAppend: { [key: string]: any }): Promise<Account> {
     if (Overrides.create) {
@@ -112,7 +112,7 @@ export function override(functionName: 'getAccount', callback: typeof getAccount
 /**
  * Used to override any account system functionality
  *
- * @export
+ *
  * @param {keyof AccountFuncs} functionName
  * @param {*} callback
  */

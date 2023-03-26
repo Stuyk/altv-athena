@@ -32,7 +32,7 @@ export interface KeyBindRestrictions {
      * Player must be aiming a weapon of some sort to trigger this key bind.
      *
      * @type {boolean}
-     * @memberof KeyBindRestrictions
+     *
      */
     isAiming?: boolean;
 
@@ -40,7 +40,7 @@ export interface KeyBindRestrictions {
      * Player must be swimming to be able to trigger this key bind.
      *
      * @type {boolean}
-     * @memberof KeyBindRestrictions
+     *
      */
     isSwimming?: boolean;
 
@@ -57,7 +57,7 @@ export interface KeyBindRestrictions {
      * Example: `[alt.hash('w_ar_advancedrifle')]`
      *
      * @type {Array<number>}
-     * @memberof KeyBindRestrictions
+     *
      */
     weaponModels?: Array<number>;
 }
@@ -67,7 +67,7 @@ export interface KeyInfo extends BaseKeyInfo {
      * Call this function when the key is pressed down once.
      *
      * @type {Function}
-     * @memberof KeyInfo
+     *
      */
     keyDown?: Function;
 
@@ -75,7 +75,7 @@ export interface KeyInfo extends BaseKeyInfo {
      * Only triggered when `msToTrigger` is also specified for this key bind.
      *
      * @type {Function}
-     * @memberof KeyInfo
+     *
      */
     delayedKeyDown?: {
         /**
@@ -91,7 +91,7 @@ export interface KeyInfo extends BaseKeyInfo {
          * The trigger is fired instantly after the time point is exceeded.
          *
          * @type {number}
-         * @memberof KeyInfo
+         *
          */
         msToTrigger?: number;
     };
@@ -101,7 +101,7 @@ export interface KeyInfo extends BaseKeyInfo {
      * This function is only called when a key is released.
      *
      * @type {Function}
-     * @memberof KeyInfo
+     *
      */
     keyUp?: Function;
 
@@ -110,7 +110,7 @@ export interface KeyInfo extends BaseKeyInfo {
      * Equivalent to an everyTick.
      *
      * @type {Function}
-     * @memberof KeyInfo
+     *
      */
     whilePressed?: Function;
 
@@ -118,7 +118,7 @@ export interface KeyInfo extends BaseKeyInfo {
      * Set a key as disabled, preventing all function callbacks.
      *
      * @type {boolean}
-     * @memberof KeyInfo
+     *
      */
     disabled?: boolean;
 }
@@ -128,7 +128,7 @@ export interface BaseKeyInfo {
      * The primary key for this keybind.
      *
      * @type {number}
-     * @memberof KeyInfo
+     *
      */
     key: number;
 
@@ -136,7 +136,7 @@ export interface BaseKeyInfo {
      * Describe what this keybind is meant to do.
      *
      * @type {string}
-     * @memberof KeyInfo
+     *
      */
     description: string;
 
@@ -144,7 +144,7 @@ export interface BaseKeyInfo {
      * Give a keybind an identifier, like a unique id.
      *
      * @type {string}
-     * @memberof KeyInfo
+     *
      */
     identifier: string;
 
@@ -152,7 +152,7 @@ export interface BaseKeyInfo {
      * Only triggered when `msToTrigger` is also specified for this key bind.
      *
      * @type {Function}
-     * @memberof KeyInfo
+     *
      */
     delayedKeyDown?: {
         /**
@@ -161,7 +161,7 @@ export interface BaseKeyInfo {
          * The trigger is fired instantly after the time point is exceeded.
          *
          * @type {number}
-         * @memberof KeyInfo
+         *
          */
         msToTrigger?: number;
     };
@@ -171,7 +171,7 @@ export interface BaseKeyInfo {
      * This function is only called when a key is released.
      *
      * @type {Function}
-     * @memberof KeyInfo
+     *
      */
     keyUp?: Function;
 
@@ -180,7 +180,7 @@ export interface BaseKeyInfo {
      * Equivalent to an everyTick.
      *
      * @type {Function}
-     * @memberof KeyInfo
+     *
      */
     whilePressed?: Function;
 
@@ -188,7 +188,7 @@ export interface BaseKeyInfo {
      * Specify a modifier for this key to trigger
      *
      * @type {('shift' | 'ctrl' | 'alt')}
-     * @memberof KeyInfo
+     *
      */
     modifier?: 'shift' | 'ctrl' | 'alt';
 
@@ -196,7 +196,7 @@ export interface BaseKeyInfo {
      * If set to true, any page / menu will allow triggering this keybind.
      *
      * @type {boolean}
-     * @memberof KeyInfo
+     *
      */
     allowInAnyMenu?: true;
 
@@ -204,7 +204,7 @@ export interface BaseKeyInfo {
      * Allows the keybind to be ignore menu checks if in a specific page.
      *
      * @type {string}
-     * @memberof BaseKeyInfo
+     *
      */
     allowInSpecificPage?: string;
 
@@ -212,7 +212,7 @@ export interface BaseKeyInfo {
      * The amount of milliseconds before this hotkey can be pressed again.
      *
      * @type {number}
-     * @memberof BaseKeyInfo
+     *
      */
     spamPreventionInMs?: number;
 
@@ -226,7 +226,7 @@ export interface BaseKeyInfo {
      * Prevent his key from being rebound?
      *
      * @type {boolean}
-     * @memberof BaseKeyInfo
+     *
      */
     doNotAllowRebind?: boolean;
 }

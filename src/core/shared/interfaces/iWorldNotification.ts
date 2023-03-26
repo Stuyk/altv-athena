@@ -4,28 +4,28 @@ import * as alt from 'alt-shared';
 /**
  * Used to pass an in-world marker from server to client.
  *
- * @export
+ *
  * @interface IWorldNotification
  */
 export interface IWorldNotification {
     /**
      * Position of the Object in a 3D space.
      * @type {alt.IVector3}
-     * @memberof IObject
+     *
      */
     pos: alt.IVector3;
 
     /**
      * Text to display for this world notification.
      * @type {string}
-     * @memberof IWorldNotification
+     *
      */
     text: string;
 
     /**
      * The IWorldNotification Type Associated with this IWorldNotification
      * @type {number}
-     * @memberof IWorldNotification
+     *
      */
     type: WORLD_NOTIFICATION_TYPE | number;
 
@@ -33,28 +33,28 @@ export interface IWorldNotification {
      * The background color associated with this notification.
      * There are at least 30.
      * @type {number}
-     * @memberof IWorldNotification
+     *
      */
     background?: number;
 
     /**
      * The max distance to render this IWorldNotification.
      * @type {number}
-     * @memberof IWorldNotification
+     *
      */
     maxDistance?: number;
 
     /**
      * The unique identifier for this IWorldNotification.
      * @type {string}
-     * @memberof IWorldNotification
+     *
      */
     uid?: string;
 
     /**
      * The dimension to display this IWorldNotification in.
      * @type {number}
-     * @memberof IWorldNotification
+     *
      */
     dimension?: number;
 }

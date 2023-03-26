@@ -4,7 +4,7 @@
  * Use with care.
  *
  * @ignore
- * @export
+ *
  * @enum {number}
  */
 export const VEHICLE_LOCK_STATE = {
@@ -18,7 +18,7 @@ export const VEHICLE_LOCK_STATE = {
 /**
  *
  * @ignore
- * @export
+ *
  */
 export const VEHICLE_EVENTS = {
     ACTION: 'Vehicle-Action',

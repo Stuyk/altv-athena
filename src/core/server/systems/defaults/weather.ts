@@ -81,12 +81,12 @@ export function updatePlayer(player: alt.Player) {
 /**
  * Disable the default weather from updating players.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.systems.default.weather.disable();
  * ```
  *
- * @export
+ *
  */
 export function disable() {
     enabled = false;
@@ -102,7 +102,7 @@ export function disable() {
 /**
  * Used to override the default weather cycle.
  *
- * @export
+ *
  * @param {Array<WEATHER_KEY>} weathers
  */
 export function setWeatherCycle(newWeatherCycle: Array<WEATHER_KEY>) {
@@ -119,7 +119,7 @@ export function getCurrentWeather(asString: true): string;
 /**
  * Get the current weather as a string or number.
  *
- * @export
+ *
  * @param {boolean} [asString=false]
  * @return {(number | string)}
  */

@@ -9,7 +9,7 @@ export interface Meta {
      * Check if in a voice channel.
      *
      * @type {boolean}
-     * @memberof Meta
+     *
      */
     voice: boolean;
 

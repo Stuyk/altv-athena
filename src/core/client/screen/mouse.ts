@@ -4,7 +4,7 @@ import * as native from 'natives';
 /**
  * Get cursor position that is similar to GTA:V screen sizes.
  *
- * @export
+ *
  * @return {alt.IVector2}  x: 0-1.0, y: 0-1.0
  */
 export function getScaledCursorPosition(): alt.IVector2 {

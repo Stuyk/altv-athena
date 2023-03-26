@@ -42,7 +42,7 @@ export async function loadAnimation(dict: string, count: number = 0): Promise<bo
 
 /**
  * Play an animation for the local player.
- * @export
+ *
  * @param {string} dict The dictionary of the animation.
  * @param {string} name The name of the animation.
  * @param {ANIMATION_FLAGS} [flags=ANIMATION_FLAGS.CANCELABLE] A combination of flags. ie. (ANIMATION_FLAGS.CANCELABLE | ANIMATION_FLAGS.UPPERBODY_ONLY)
@@ -76,7 +76,7 @@ export async function playAnimation(
 
 /**
  * Play an animation on a Pedestrian
- * @export
+ *
  * @param {number} scriptID
  * @param {string} dict
  * @param {string} name

@@ -7,7 +7,7 @@ export interface CustomSoundInfo {
      * A custom `.ogg` file name for an audio clip.
      *
      * @type {string}
-     * @memberof CustomSoundInfo
+     *
      */
     audioName: string;
 
@@ -15,7 +15,7 @@ export interface CustomSoundInfo {
      * A positional Vector3 on where to play the sound from.
      *
      * @type {alt.IVector3}
-     * @memberof CustomSoundInfo
+     *
      */
     pos?: alt.IVector3;
 
@@ -25,7 +25,7 @@ export interface CustomSoundInfo {
      * Recommended: `0.35`.
      *
      * @type {number}
-     * @memberof CustomSoundInfo
+     *
      */
     volume?: number;
 
@@ -33,7 +33,7 @@ export interface CustomSoundInfo {
      * If you want the audio 3D specify a target to play this audio from.
      *
      * @type {alt.Entity}
-     * @memberof CustomSoundInfo
+     *
      */
     target?: alt.Entity;
 }
@@ -46,7 +46,7 @@ const MAX_AUDIO_AREA_DISTANCE = 25;
  * @static
  * @param {alt.Player} player An alt:V Player Entity
  * @param {CustomSoundInfo} soundInfo
- * @memberof SoundSystem
+ *
  */
 export function playSound(player: alt.Player, soundInfo: CustomSoundInfo) {
     if (Overrides.playSound) {
@@ -68,7 +68,7 @@ export function playSound(player: alt.Player, soundInfo: CustomSoundInfo) {
  * @static
  * @param {number} dimension
  * @param {alt.Entity} [entity=null]
- * @memberof Sound
+ *
  */
 export function playSoundInDimension(dimension: number, soundInfo: Omit<CustomSoundInfo, 'pos'>) {
     if (Overrides.playSoundInDimension) {
@@ -95,7 +95,7 @@ export function playSoundInDimension(dimension: number, soundInfo: Omit<CustomSo
  * @static
  * @param {(Required<Omit<CustomSoundInfo, 'target' | 'volume'>>)} soundInfo
  * @return {void}
- * @memberof Sound
+ *
  */
 export function playSoundInArea(soundInfo: Required<Omit<CustomSoundInfo, 'target' | 'volume'>>) {
     if (Overrides.playSoundInArea) {
@@ -132,7 +132,7 @@ export function override(functionName: 'playSoundInArea', callback: typeof playS
 /**
  * Used to override sound trigger functions.
  *
- * @export
+ *
  * @param {keyof SoundFuncs} functionName
  * @param {*} callback
  */

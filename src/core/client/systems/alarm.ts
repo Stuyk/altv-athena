@@ -43,7 +43,7 @@ export async function loadAlarm(name: string, count: number = 0): Promise<boolea
 
 /**
  * Play an alarm for the local player.
- * @export
+ *
  * @param {string} name The name of the alarm.
  * @return {Promise<void>}
  */
@@ -66,7 +66,7 @@ export async function startAlarm(name: string): Promise<void> {
 
 /**
  * Stop an alarm for the local player.
- * @export
+ *
  * @param {string} name The name of the alarm.
  * @return {Promise<void>}
  */
@@ -80,7 +80,7 @@ export async function stopAlarm(name: string): Promise<void> {
 
 /**
  * Stop all alarms for the local player.
- * @export
+ *
  * @return {Promise<void>}
  */
 export async function stopAllAlarms(): Promise<void> {

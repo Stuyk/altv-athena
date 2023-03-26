@@ -196,7 +196,7 @@ export function onChange<T = {}>(fieldName: keyof KnownKeys<OwnedVehicle & T>, c
 /**
  * Check if a vehicle document already exists and a vehicle is attached to it.
  *
- * @export
+ *
  * @param {string} _id
  * @return {boolean}
  */
@@ -237,7 +237,7 @@ export function override(functionName: 'onChange', callback: typeof onChange);
 /**
  * Used to override any vehicle document functionality
  *
- * @export
+ *
  * @param {keyof VehicleDocFuncs} functionName
  * @param {*} callback
  */

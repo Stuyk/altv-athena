@@ -15,7 +15,7 @@ const KEY = 'labels';
 const InternalController = {
     /**
      * Initialize the TextLabel Streamer Service
-     * @memberof InternalController
+     *
      */
     init() {
         Athena.systems.streamer.registerCallback(KEY, InternalController.update);
@@ -23,7 +23,7 @@ const InternalController = {
 
     /**
      * Internal function to refresh all global text labels in the streamer service.
-     * @memberof InternalController
+     *
      */
     refresh() {
         Athena.systems.streamer.updateData(KEY, globalTextLabels);
@@ -33,7 +33,7 @@ const InternalController = {
      * Updates text labels through the streamer service.
      * @param {alt.Player} player An alt:V Player Entity
      * @param {Array<TextLabel>} labels
-     * @memberof InternalController
+     *
      */
     update(player: alt.Player, labels: Array<TextLabel>) {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_TEXTLABELS, labels);
@@ -45,7 +45,7 @@ const InternalController = {
  *
  * Returns a uid or generates one if not specified.
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.textLabel.append({ text: 'Hello World!', pos: { x: 0, y: 0, z: 0 }});
  *
@@ -85,7 +85,7 @@ export function append(label: TextLabel): string {
  *
  * Specify player as the last parameter to update their instance; otherwise updates all players if uid matches.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.textLabel.update(someUid, { text: 'Hello World!' });
  *
@@ -96,7 +96,7 @@ export function append(label: TextLabel): string {
  *
  * @param {string} uid A unique string
  * @param {alt.Player} [player=undefined]
- * @memberof ServerTextLabelController
+ *
  */
 export function update(uid: string, label: Partial<TextLabel>, player: alt.Player = undefined): boolean {
     if (Overrides.update) {
@@ -123,7 +123,7 @@ export function update(uid: string, label: Partial<TextLabel>, player: alt.Playe
 /**
  * Removes a text label based on uid from the global streamer
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.textLabel.remove(someUid);
  *
@@ -151,7 +151,7 @@ export function remove(uid: string): boolean {
 /**
  * Remove a local text label from a player.
  *
- * @example
+ * #### Example
  * ```ts
  * Athena.controllers.textLabel.removeFromPlayer(somePlayer, someUid);
  *
@@ -176,7 +176,7 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
 /**
  * Add a local text label to player.
  *
- * @example
+ * #### Example
  * ```ts
  * const uid = Athena.controllers.textLabel.addToPlayer(somePlayer, { text: 'Hello World!', pos: { x: 0, y: 0, z: 0 }});
  *
@@ -221,7 +221,7 @@ export function override(functionName: 'update', callback: typeof update);
 /**
  * Used to override any text label streamer functionality
  *
- * @export
+ *
  * @param {keyof TextLabelFuncs} functionName
  * @param {*} callback
  */

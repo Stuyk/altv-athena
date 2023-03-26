@@ -23,7 +23,7 @@ export const VehicleController = {
     /**
      * Register the default vehicle keybinds.
      * @static
-     * @memberof VehicleController
+     *
      */
     registerKeybinds() {
         AthenaClient.systems.hotkeys.add({
@@ -44,7 +44,7 @@ export const VehicleController = {
     /**
      * Starts / stops the engine.
      * @static
-     * @memberof VehicleController
+     *
      */
     emitEngine() {
         if (AthenaClient.webview.isAnyMenuOpen()) {
@@ -61,7 +61,7 @@ export const VehicleController = {
     /**
      * Toggles lock from locked / unlocked.
      * @static
-     * @memberof VehicleController
+     *
      */
     emitLock() {
         if (AthenaClient.webview.isAnyMenuOpen()) {
@@ -96,7 +96,7 @@ export const VehicleController = {
     /**
      * Prevents seat shuffling and engine control.
      * @static
-     * @memberof VehicleController
+     *
      */
     enterVehicle() {
         native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.DISABLE_SEAT_SHUFFLE, true);
@@ -107,7 +107,7 @@ export const VehicleController = {
     /**
      * Warps the local player into the vehicle.
      * @static
-     * @memberof VehicleController
+     *
      */
     async setIntoVehicle(vehicle: alt.Vehicle, seat: number) {
         const isVehicleReady = await new Promise((resolve: Function) => {
@@ -142,7 +142,7 @@ export const VehicleController = {
      * Prevents a pedestrian from flying out of a vehicle window.
      * @static
      * @param {boolean} [value=true]
-     * @memberof VehicleController
+     *
      */
     enableSeatBelt(value: boolean) {
         alt.Player.local.setMeta('SEATBELT', value);

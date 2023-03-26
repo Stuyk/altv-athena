@@ -9,7 +9,7 @@ const ClientAttachableSystem = {
      * Called when an entity is in streaming range of the player.
      * @static
      * @param {alt.Entity} entity
-     * @memberof ClientAttachableSystem
+     *
      */
     create(entity: alt.Entity) {
         alt.nextTick(() => {
@@ -38,7 +38,7 @@ const ClientAttachableSystem = {
      * @param {unknown} value
      * @param {unknown} old
      * @return {void}
-     * @memberof ClientAttachableSystem
+     *
      */
     attachablesChanged(entity: alt.Entity, key: string, value: Array<IAttachable>, old: unknown) {
         if (!entity || !entity.valid) {
@@ -65,7 +65,7 @@ const ClientAttachableSystem = {
      * Called when an entity is out of the streaming range of the player.
      * @static
      * @param {alt.Entity} entity
-     * @memberof ClientAttachableSystem
+     *
      */
     async destroy(entity: alt.Entity) {
         if (!entity || !entity.valid) {
@@ -87,7 +87,7 @@ const ClientAttachableSystem = {
      * Removes old attachables from a player.
      * @static
      * @param {alt.Player} player An alt:V Player Entity
-     * @memberof ClientAttachableSystem
+     *
      */
     remove(player: alt.Player) {
         // Remove old attachables
@@ -114,7 +114,7 @@ const ClientAttachableSystem = {
      * @static
      * @param {alt.Player} player An alt:V Player Entity
      * @param {Array<IAttachable>} attachables
-     * @memberof ClientAttachableSystem
+     *
      */
     async update(player: alt.Player, attachables: Array<IAttachable>) {
         ClientAttachableSystem.remove(player);

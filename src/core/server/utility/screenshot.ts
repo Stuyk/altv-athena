@@ -18,7 +18,7 @@ export class AthenaScreenshot {
      * @static
      * @param {alt.Player} player An alt:V Player Entity
      * @return {(Promise<string | null>)}
-     * @memberof AthenaScreenshot
+     *
      */
     static async takeScreenshot(player: alt.Player): Promise<string | null> {
         alt.emitClient(player, SYSTEM_EVENTS.SCREENSHOT_CREATE);
@@ -54,7 +54,7 @@ export class AthenaScreenshot {
      * @param {string} data
      * @param {number} index
      * @param {number} lengthOfData
-     * @memberof AthenaScreenshot
+     *
      */
     static async buildData(player: alt.Player, data: string, index: number, lengthOfData: number) {
         if (!pendingScreenshots[player.id]) {

@@ -7,7 +7,7 @@ import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
 /**
  * Used as the main interface for storing character data.
  *
- * @export
+ *
  * @interface Character
  */
 export interface Character {
@@ -16,7 +16,7 @@ export interface Character {
     /**
      * The character identifier in the database.
      * @type {*}
-     * @memberof Character
+     *
      */
     _id?: any;
 
@@ -24,14 +24,14 @@ export interface Character {
      * An incremental numerical identifier that increases with each character created.
      * Does not fill gaps. Do not use as a way to save character information.
      * @type {number}
-     * @memberof Character
+     *
      */
     character_id?: number;
 
     /**
      * The account id associated with this character.
      * @type {*}
-     * @memberof Character
+     *
      */
     account_id: any;
 
@@ -40,7 +40,7 @@ export interface Character {
      * they are automatically moved into this dimension.
      *
      * @type {number}
-     * @memberof Character
+     *
      */
     dimension: number;
 
@@ -48,56 +48,56 @@ export interface Character {
      * The position that this character last logged out at.
      * This also updates every 5s or so.
      * @type {Partial<alt.IVector3>}
-     * @memberof Character
+     *
      */
     pos: Partial<alt.IVector3>;
 
     /**
      * The name of this character to display to other users.
      * @type {string}
-     * @memberof Character
+     *
      */
     name: string;
 
     /**
      * The amount of cash this character has.
      * @type {number}
-     * @memberof Character
+     *
      */
     cash: number;
 
     /**
      * The amount of cash in the bank this character has.
      * @type {number}
-     * @memberof Character
+     *
      */
     bank: number;
 
     /**
      * The amount of health the player last had.
      * @type {number} 99 - 199
-     * @memberof Character
+     *
      */
     health: number;
 
     /**
      * The amount of armour the player last had.
      * @type {number} 0 - 100
-     * @memberof Character
+     *
      */
     armour: number;
 
     /**
      * The amount of food the player has.
      * @type {number} 0 - 100
-     * @memberof Character
+     *
      */
     food: number;
 
     /**
      * The amount of water the player has.
      * @type {number}
-     * @memberof Character
+     *
      */
     water: number;
 
@@ -105,35 +105,35 @@ export interface Character {
      * Is this player dead or not.
      * Health does not dictate whether a player is alive or dead.
      * @type {boolean}
-     * @memberof Character
+     *
      */
     isDead: boolean;
 
     /**
      * Amount of hours the player has played.
      * @type {number}
-     * @memberof Character
+     *
      */
     hours: number;
 
     /**
      * Wanted stars to display.
      * @type {number} 0 - 5
-     * @memberof Character
+     *
      */
     wanted: number;
 
     /**
      * Appearance data for how this character looks.
      * @type {Partial<Appearance>}
-     * @memberof Character
+     *
      */
     appearance: Partial<Appearance> | Appearance;
 
     /**
      * Character info. Will eventually be used for ID cards.
      * @type {Partial<CharacterInfo>}
-     * @memberof Character
+     *
      */
     info: Partial<CharacterInfo>;
 
@@ -141,7 +141,7 @@ export interface Character {
      * Current player interior number. Usually bound to dimension.
      *
      * @type {(number | undefined)}
-     * @memberof Character
+     *
      */
     interior: number | undefined;
 
@@ -149,7 +149,7 @@ export interface Character {
      * Permissions for a given user.
      *
      * @type {Array<string>}
-     * @memberof Character
+     *
      */
     permissions: Array<string>;
 
@@ -157,7 +157,7 @@ export interface Character {
      * Individual item references that the player currently has on-hand.
      *
      * @type {Array<StoredItem>}
-     * @memberof Character
+     *
      */
     inventory: Array<StoredItem>;
 
@@ -165,7 +165,7 @@ export interface Character {
      * Individual item references that the player may access through the 1-4 keys
      *
      * @type {Array<StoredItem>}
-     * @memberof Character
+     *
      */
     toolbar: Array<StoredItem>;
 
@@ -174,7 +174,7 @@ export interface Character {
      * Uniforms should be used in tandem with typical inventory clothing.
      *
      * @type {Array<ClothingComponent>}
-     * @memberof Character
+     *
      */
     uniform?: Array<ClothingComponent>;
 
@@ -184,7 +184,7 @@ export interface Character {
      * This also goes for appearance as well.
      *
      * @type {(string | number)}
-     * @memberof Character
+     *
      */
     skin?: string | number;
 }

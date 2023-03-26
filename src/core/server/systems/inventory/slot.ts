@@ -6,7 +6,7 @@ import * as config from './config';
 /**
  * Find an open slot that is available within a dataset.
  *
- * @export
+ *
  * @param {(InventoryType | number)} slotSize
  * @param {Array<StoredItem>} data
  * @return {(number | undefined)}
@@ -93,7 +93,7 @@ export function override(functionName: 'getAt', callback: typeof getAt);
 /**
  * Used to override inventory item slot functionality
  *
- * @export
+ *
  * @param {keyof SlotFuncs} functionName
  * @param {*} callback
  */

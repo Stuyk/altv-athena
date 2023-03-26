@@ -12,7 +12,7 @@ import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy'
  *
  * Does not look into toolbar.
  *
- * @example
+ * #### Example
  * ```ts
  * const didAdd = await Athena.player.inventory.add(somePlayer, { dbName: 'burger', quantity: 1, data: {} })
  * ```
@@ -58,7 +58,7 @@ export async function add(player: alt.Player, item: Omit<StoredItem, 'slot'>): P
  * Subtract a quantity of an item from a player's inventory.
  * Does not look into toolbar.
  *
- * @example
+ * #### Example
  * ```ts
  * const didRemove = await Athena.player.inventory.sub(somePlayer, { dbName: 'burger', quantity: 1 });
  * ```
@@ -95,7 +95,7 @@ export async function sub(player: alt.Player, item: Omit<StoredItem, 'slot' | 'd
  *
  * Does not look into toolbar.
  *
- * @example
+ * #### Example
  * ```ts
  * const didRemove = await Athena.player.inventory.remove(somePlayer, someSlot);
  * ```
@@ -130,12 +130,12 @@ export async function remove(player: alt.Player, slot: number): Promise<boolean>
 /**
  * Verify that the player has at least 'x' of an item in their inventory
  *
- * @example
+ * #### Example
  * ```ts
  * const hasItem = await Athena.player.inventory.has(somePlayer, 'burger', 1);
  * ```
  *
- * @export
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {string} baseItem
  * @return {void}
@@ -164,12 +164,12 @@ export async function has(player: alt.Player, dbName: string, quantity: number, 
  *
  * Only checks the inventory.
  *
- * @example
+ * #### Example
  * ```ts
  * const someData = Athena.player.inventory.getItemData<{ myCustomStuff: string }>(somePlayer, someSlot);
  * ```
  *
- * @export
+ *
  * @template CustomData
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
@@ -205,12 +205,12 @@ export function getItemData<CustomData = {}>(player: alt.Player, slot: number): 
  *
  * Never modify the item directly; this is only to get item information.
  *
- * @example
+ * #### Example
  * ```ts
  * const someData = Athena.player.inventory.getAt<{ myCustomStuff: string }>(somePlayer, someSlot);
  * ```
  *
- * @export
+ *
  * @template CustomData
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
@@ -245,7 +245,7 @@ export function getAt<CustomData = {}>(player: alt.Player, slot: number): Stored
  *
  * Only checks the inventory.
  *
- * @example
+ * #### Example
  * ```ts
  * const someData = Athena.player.inventory.getItemData<{ myCustomStuff: string }>(somePlayer, someSlot);
  *
@@ -254,7 +254,7 @@ export function getAt<CustomData = {}>(player: alt.Player, slot: number): Stored
  * await Athena.player.inventory.modifyItemData<typeof someData>(player, someSlot, someData);
  * ```
  *
- * @export
+ *
  * @template CustomData
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
@@ -312,7 +312,7 @@ export function override(functionName: 'getItemData', callback: typeof getItemDa
 /**
  * Used to override any internal inventory functions
  *
- * @export
+ *
  * @param {keyof InventoryFunctions} functionName
  * @param {*} callback
  */
