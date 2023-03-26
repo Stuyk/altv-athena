@@ -4,7 +4,6 @@ import * as emit from './emit';
 import * as PlayerEvents from '@AthenaServer/player/events';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 import { ActionMenu } from '@AthenaShared/interfaces/actions';
 import { Account } from '../interface/iAccount';
 import { Collections } from '../database/collections';
@@ -21,11 +20,6 @@ import Database from '@stuyk/ezmongodb';
 export async function account(player: alt.Player, accountData: Account): Promise<void> {
     if (Overrides.account) {
         return Overrides.account(player, accountData);
-    }
-
-    if (typeof accountData.permissionLevel === 'undefined' || accountData.permissionLevel === null) {
-        accountData.permissionLevel = PERMISSIONS.NONE;
-        Database.updatePartialData(accountData._id, { permissionLevel: PERMISSIONS.NONE }, Collections.Accounts);
     }
 
     // Setup JWT Storage

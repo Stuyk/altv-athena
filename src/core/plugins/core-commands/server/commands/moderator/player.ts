@@ -2,10 +2,6 @@ import alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import Database from '@stuyk/ezmongodb';
 
-import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
-import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
-import { LocaleController } from '@AthenaShared/locale/locale';
-
 function finishSetHealth(target: alt.Player, value: number) {
     Athena.player.safe.addHealth(target, value, true);
     Athena.player.emit.message(target, `Player health was set to ${value}`);
@@ -118,8 +114,7 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        const accountData = Athena.document.account.get(target);
-        if (accountData.permissionLevel >= PERMISSIONS.ADMIN) {
+        if (Athena.systems.permission.has('account', target, 'admin')) {
             Athena.player.emit.notification(player, `This person can't be kicked.`);
             return;
         }
@@ -140,12 +135,12 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        const accountData = Athena.document.account.get(target);
-        if (accountData.permissionLevel >= PERMISSIONS.ADMIN) {
+        if (Athena.systems.permission.has('account', target, 'admin')) {
             Athena.player.emit.notification(player, `This person can't be kicked.`);
             return;
         }
 
+        const accountData = Athena.document.account.get(target);
         const data = Athena.document.character.get(target);
         Athena.player.emit.notification(player, `${data.name} was banned from the Server.`);
         target.kick(`You were banned from the Server - ${reason}`);
