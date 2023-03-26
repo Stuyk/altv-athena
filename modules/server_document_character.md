@@ -33,7 +33,7 @@ Athena.document.character.(`player`, `newValue`, `oldValue`): `void`
 
 #### Defined in
 
-[server/document/character.ts:7](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L7)
+[server/document/character.ts:7](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L7)
 
 ## Functions
 
@@ -49,6 +49,17 @@ This document is cleared on disconnected automatically.
 
 This should be the first thing you do after having a user authenticate and select a character.
 
+#### Example
+
+```ts
+import Database from '@stuyk/ezmongodb';
+
+async function doSomething(somePlayer: alt.Player, someMongoDBId: string) {
+    const someData = await Database.fetchData('_id', someMongoDBId, 'characters')
+    Athena.document.character.bind(somePlayer, someData);
+}
+```
+
 #### Parameters
 
 | Name | Type | Description |
@@ -62,7 +73,7 @@ This should be the first thing you do after having a user authenticate and selec
 
 #### Defined in
 
-[server/document/character.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L23)
+[server/document/character.ts:34](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L34)
 
 ___
 
@@ -113,7 +124,7 @@ function someFunction(player: alt.Player) {
 
 #### Defined in
 
-[server/document/character.ts:76](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L76)
+[server/document/character.ts:94](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L94)
 
 ___
 
@@ -125,6 +136,30 @@ Athena.document.character.**getField**<`T`, `ReturnType`\>(`player`, `fieldName`
 
 Get the current value of a specific field inside of the player data object.
 Can be extended to obtain any value easily.
+
+#### Example
+
+Get a default value.
+
+```ts
+const cash = Athena.document.character.getField<{}, number>(somePlayer, 'cash');
+if (typeof cash === 'undefined') {
+    return;
+}
+```
+
+Alternatively, pass a custom interface.
+
+```ts
+interface CustomData {
+    bitcoin: number
+}
+
+const bitcoins = Athena.document.character.getField<CustomData, number>(somePlayer, 'bitcoin');
+if (typeof bitcoins === 'undefined') {
+    return;
+}
+```
 
 #### Type parameters
 
@@ -146,7 +181,7 @@ Can be extended to obtain any value easily.
 
 #### Defined in
 
-[server/document/character.ts:93](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L93)
+[server/document/character.ts:135](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L135)
 
 ___
 
@@ -158,9 +193,14 @@ Athena.document.character.**onChange**<`T`\>(`fieldName`, `callback`): `any`
 
 Invokes the callback function when a document with a specific field name has changed.
 
-**`Name`**
-
-onChange
+#### Example
+```ts
+Athena.document.character.onChange('cash', (player: alt.Player, newValue: number, oldValue: number) => {
+    // Do whatever you want with it.
+    // Never, ever update the same document value twice in a row.
+    // It creates an endless loop
+})
+```
 
 #### Type parameters
 
@@ -179,11 +219,9 @@ onChange
 
 `any`
 
-s
-
 #### Defined in
 
-[server/document/character.ts:223](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L223)
+[server/document/character.ts:279](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L279)
 
 ___
 
@@ -208,7 +246,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:263](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L263)
+[server/document/character.ts:319](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L319)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -229,7 +267,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:264](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L264)
+[server/document/character.ts:320](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L320)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -250,7 +288,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:265](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L265)
+[server/document/character.ts:321](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L321)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -271,7 +309,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:266](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L266)
+[server/document/character.ts:322](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L322)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -292,7 +330,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:267](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L267)
+[server/document/character.ts:323](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L323)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -313,7 +351,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:268](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L268)
+[server/document/character.ts:324](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L324)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -334,7 +372,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:269](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L269)
+[server/document/character.ts:325](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L325)
 
 ___
 
@@ -351,9 +389,11 @@ Automatically calls all callbacks associated with the field name.
 #### Example
 ```ts
 await Athena.document.character.set(somePlayer, 'cash', 50);
+```
 
-// Alternatively
+Alternatively, pass a custom interface.
 
+```ts
 interface CustomCharacter {
      someKey: string;
 }
@@ -383,7 +423,7 @@ await Athena.document.character.set<CustomCharacter>(somePlayer, 'someKey', 'hel
 
 #### Defined in
 
-[server/document/character.ts:132](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L132)
+[server/document/character.ts:176](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L176)
 
 ___
 
@@ -394,7 +434,14 @@ Athena.document.character.**setBulk**<`T`, `Keys`\>(`player`, `fields`): `any`
 :::
 
 Sets player document values, and saves it automatically to the selected character's database.
+
 Automatically calls all callbacks associated with the field name.
+
+#### Example
+
+```ts
+await Athena.document.character.setBulk(player, { cash: 25, bank: 100 });
+```
 
 #### Type parameters
 
@@ -416,7 +463,7 @@ Automatically calls all callbacks associated with the field name.
 
 #### Defined in
 
-[server/document/character.ts:187](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L187)
+[server/document/character.ts:238](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L238)
 
 ___
 
@@ -427,6 +474,12 @@ Athena.document.character.**unbind**(`id`): `any`
 :::
 
 Unbind stored player character cache data.
+
+#### Example
+
+```ts
+Athena.document.character.unbind(1);
+```
 
 #### Parameters
 
@@ -440,4 +493,4 @@ Unbind stored player character cache data.
 
 #### Defined in
 
-[server/document/character.ts:40](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L40)
+[server/document/character.ts:58](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/document/character.ts#L58)

@@ -39,7 +39,7 @@ Database entry for item. Do not add / append.
 
 #### Defined in
 
-[shared/interfaces/item.ts:292](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L292)
+[shared/interfaces/item.ts:292](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L292)
 
 ___
 
@@ -51,7 +51,7 @@ Behavior associated with this item.
 
 #### Defined in
 
-[shared/interfaces/item.ts:333](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L333)
+[shared/interfaces/item.ts:333](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L333)
 
 ___
 
@@ -63,7 +63,7 @@ The event to call when this item is consumed.
 
 #### Defined in
 
-[shared/interfaces/item.ts:341](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L341)
+[shared/interfaces/item.ts:341](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L341)
 
 ___
 
@@ -75,7 +75,7 @@ Custom context actions in addition to the standard consumable event.
 
 #### Defined in
 
-[shared/interfaces/item.ts:349](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L349)
+[shared/interfaces/item.ts:349](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L349)
 
 ___
 
@@ -91,7 +91,7 @@ Any custom data assigned to this item.
 
 #### Defined in
 
-[shared/interfaces/item.ts:204](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L204)
+[shared/interfaces/item.ts:204](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L204)
 
 ___
 
@@ -107,7 +107,7 @@ The matching database name for this item.
 
 #### Defined in
 
-[shared/interfaces/item.ts:196](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L196)
+[shared/interfaces/item.ts:196](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L196)
 
 ___
 
@@ -120,7 +120,7 @@ They are specified and created by you.
 
 #### Defined in
 
-[shared/interfaces/item.ts:309](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L309)
+[shared/interfaces/item.ts:309](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L309)
 
 ___
 
@@ -132,7 +132,7 @@ If this value is defined it will be used as the maximum stack size for the item.
 
 #### Defined in
 
-[shared/interfaces/item.ts:317](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L317)
+[shared/interfaces/item.ts:317](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L317)
 
 ___
 
@@ -145,7 +145,7 @@ If not defined it will default to a box of some sort.
 
 #### Defined in
 
-[shared/interfaces/item.ts:358](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L358)
+[shared/interfaces/item.ts:358](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L358)
 
 ___
 
@@ -158,7 +158,7 @@ Stored items come with an expiration date.
 
 #### Defined in
 
-[shared/interfaces/item.ts:367](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L367)
+[shared/interfaces/item.ts:367](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L367)
 
 ___
 
@@ -170,7 +170,7 @@ The name of this item.
 
 #### Defined in
 
-[shared/interfaces/item.ts:300](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L300)
+[shared/interfaces/item.ts:300](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L300)
 
 ___
 
@@ -186,7 +186,7 @@ The version of this item it is based upon.
 
 #### Defined in
 
-[shared/interfaces/item.ts:212](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L212)
+[shared/interfaces/item.ts:212](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L212)
 
 ___
 
@@ -198,4 +198,4 @@ The weight of this item.
 
 #### Defined in
 
-[shared/interfaces/item.ts:325](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L325)
+[shared/interfaces/item.ts:325](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L325)

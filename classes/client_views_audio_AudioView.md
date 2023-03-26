@@ -44,7 +44,7 @@ Do not add '.ogg'.
 
 #### Defined in
 
-[client/views/audio.ts:83](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/views/audio.ts#L83)
+[client/views/audio.ts:83](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/views/audio.ts#L83)
 
 ___
 
@@ -70,4 +70,4 @@ Stop current audio
 
 #### Defined in
 
-[client/views/audio.ts:96](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/views/audio.ts#L96)
+[client/views/audio.ts:96](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/views/audio.ts#L96)

@@ -20,4 +20,4 @@ It's a simple way to create locales without hurting performance too much.
 
 #### Defined in
 
-[shared/locale/languages/en.ts:9](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/locale/languages/en.ts#L9)
+[shared/locale/languages/en.ts:9](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/locale/languages/en.ts#L9)
