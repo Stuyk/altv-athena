@@ -43,7 +43,7 @@ const uid = Athena.controllers.doors.append({
 
 #### Defined in
 
-[server/controllers/doors.ts:71](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/doors.ts#L71)
+[server/controllers/doors.ts:71](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/doors.ts#L71)
 
 ___
 
@@ -68,7 +68,7 @@ Used to override any door streamer functionaltiy
 
 #### Defined in
 
-[server/controllers/doors.ts:157](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/doors.ts#L157)
+[server/controllers/doors.ts:157](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/doors.ts#L157)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -89,7 +89,7 @@ Used to override any door streamer functionaltiy
 
 #### Defined in
 
-[server/controllers/doors.ts:158](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/doors.ts#L158)
+[server/controllers/doors.ts:158](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/doors.ts#L158)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -110,7 +110,7 @@ Used to override any door streamer functionaltiy
 
 #### Defined in
 
-[server/controllers/doors.ts:159](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/doors.ts#L159)
+[server/controllers/doors.ts:159](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/doors.ts#L159)
 
 ___
 
@@ -139,7 +139,7 @@ Athena.controllers.doors.remove(uid);
 
 #### Defined in
 
-[server/controllers/doors.ts:97](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/doors.ts#L97)
+[server/controllers/doors.ts:97](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/doors.ts#L97)
 
 ___
 
@@ -171,4 +171,4 @@ Athena.controllers.doors.update('117', true);
 
 #### Defined in
 
-[server/controllers/doors.ts:127](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/doors.ts#L127)
+[server/controllers/doors.ts:127](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/doors.ts#L127)

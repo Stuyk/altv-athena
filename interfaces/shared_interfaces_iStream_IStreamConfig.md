@@ -23,4 +23,4 @@ IStreamConfig
 
 #### Defined in
 
-[shared/interfaces/iStream.ts:9](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/iStream.ts#L9)
+[shared/interfaces/iStream.ts:9](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iStream.ts#L9)

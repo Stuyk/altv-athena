@@ -31,7 +31,7 @@ order: 0
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:5](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/effects.ts#L5)
+[server/systems/inventory/effects.ts:5](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/effects.ts#L5)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:4](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/effects.ts#L4)
+[server/systems/inventory/effects.ts:4](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/effects.ts#L4)
 
 ## Functions
 
@@ -70,7 +70,7 @@ ItemEffects
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:17](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/effects.ts#L17)
+[server/systems/inventory/effects.ts:17](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/effects.ts#L17)
 
 ___
 
@@ -97,7 +97,7 @@ The callback function.
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:51](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/effects.ts#L51)
+[server/systems/inventory/effects.ts:51](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/effects.ts#L51)
 
 ___
 
@@ -122,7 +122,7 @@ Used to override inventory item effects functionality
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:139](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/effects.ts#L139)
+[server/systems/inventory/effects.ts:139](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/effects.ts#L139)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -143,7 +143,7 @@ Used to override inventory item effects functionality
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:140](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/effects.ts#L140)
+[server/systems/inventory/effects.ts:140](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/effects.ts#L140)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -164,7 +164,7 @@ Used to override inventory item effects functionality
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:141](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/effects.ts#L141)
+[server/systems/inventory/effects.ts:141](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/effects.ts#L141)
 
 ___
 
@@ -188,4 +188,4 @@ The value of the effect.
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:35](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/effects.ts#L35)
+[server/systems/inventory/effects.ts:35](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/effects.ts#L35)

@@ -28,7 +28,7 @@ Attempts to load an animation dictionary multiple times before returning false.
 
 #### Defined in
 
-[client/systems/animations.ts:16](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/animations.ts#L16)
+[client/systems/animations.ts:16](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/animations.ts#L16)
 
 ___
 
@@ -55,7 +55,7 @@ Play an animation for the local player.
 
 #### Defined in
 
-[client/systems/animations.ts:51](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/animations.ts#L51)
+[client/systems/animations.ts:51](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/animations.ts#L51)
 
 ___
 
@@ -83,4 +83,4 @@ Play an animation on a Pedestrian
 
 #### Defined in
 
-[client/systems/animations.ts:87](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/animations.ts#L87)
+[client/systems/animations.ts:87](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/animations.ts#L87)

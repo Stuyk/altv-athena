@@ -31,7 +31,7 @@ ViewModel
 
 #### Defined in
 
-[client/models/viewModel.ts:16](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/models/viewModel.ts#L16)
+[client/models/viewModel.ts:16](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/models/viewModel.ts#L16)
 
 ___
 
@@ -49,7 +49,7 @@ ViewModel
 
 #### Defined in
 
-[client/models/viewModel.ts:8](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/models/viewModel.ts#L8)
+[client/models/viewModel.ts:8](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/models/viewModel.ts#L8)
 
 ___
 
@@ -67,4 +67,4 @@ ViewModel
 
 #### Defined in
 
-[client/models/viewModel.ts:24](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/models/viewModel.ts#L24)
+[client/models/viewModel.ts:24](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/models/viewModel.ts#L24)

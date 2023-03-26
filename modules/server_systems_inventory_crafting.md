@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:9](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L9)
+[server/systems/inventory/crafting.ts:9](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/crafting.ts#L9)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:11](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L11)
+[server/systems/inventory/crafting.ts:11](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/crafting.ts#L11)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:7](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L7)
+[server/systems/inventory/crafting.ts:7](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/crafting.ts#L7)
 
 ## Functions
 
@@ -65,7 +65,7 @@ Add a recipe in-memory. Does not store to database.
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:101](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L101)
+[server/systems/inventory/crafting.ts:101](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/crafting.ts#L101)
 
 ___
 
@@ -92,7 +92,7 @@ Returns an object with the modified dataSet, and a sound associated with the cra
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:173](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L173)
+[server/systems/inventory/crafting.ts:173](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/crafting.ts#L173)
 
 ___
 
@@ -116,7 +116,7 @@ Otherwise, returns undefined.
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:129](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L129)
+[server/systems/inventory/crafting.ts:129](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/crafting.ts#L129)
 
 ___
 
@@ -141,7 +141,7 @@ Used to override inventory crafting functionality
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:288](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L288)
+[server/systems/inventory/crafting.ts:288](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/crafting.ts#L288)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -162,7 +162,7 @@ Used to override inventory crafting functionality
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:289](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L289)
+[server/systems/inventory/crafting.ts:289](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/crafting.ts#L289)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -183,4 +183,4 @@ Used to override inventory crafting functionality
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:290](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L290)
+[server/systems/inventory/crafting.ts:290](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/crafting.ts#L290)

@@ -31,7 +31,7 @@ order: 0
 
 #### Defined in
 
-[server/document/character.ts:7](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L7)
+[server/document/character.ts:7](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L7)
 
 ## Functions
 
@@ -58,7 +58,7 @@ This should be the first thing you do after having a user authenticate and selec
 
 #### Defined in
 
-[server/document/character.ts:23](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L23)
+[server/document/character.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L23)
 
 ___
 
@@ -108,7 +108,7 @@ function someFunction(player: alt.Player) {
 
 #### Defined in
 
-[server/document/character.ts:76](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L76)
+[server/document/character.ts:76](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L76)
 
 ___
 
@@ -139,7 +139,7 @@ Can be extended to obtain any value easily.
 
 #### Defined in
 
-[server/document/character.ts:93](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L93)
+[server/document/character.ts:93](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L93)
 
 ___
 
@@ -176,7 +176,7 @@ onChange
 
 #### Defined in
 
-[server/document/character.ts:223](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L223)
+[server/document/character.ts:223](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L223)
 
 ___
 
@@ -201,7 +201,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:263](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L263)
+[server/document/character.ts:263](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L263)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -222,7 +222,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:264](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L264)
+[server/document/character.ts:264](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L264)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -243,7 +243,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:265](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L265)
+[server/document/character.ts:265](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L265)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -264,7 +264,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:266](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L266)
+[server/document/character.ts:266](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L266)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -285,7 +285,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:267](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L267)
+[server/document/character.ts:267](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L267)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -306,7 +306,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:268](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L268)
+[server/document/character.ts:268](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L268)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -327,7 +327,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:269](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L269)
+[server/document/character.ts:269](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L269)
 
 ___
 
@@ -375,7 +375,7 @@ await Athena.document.character.set<CustomCharacter>(somePlayer, 'someKey', 'hel
 
 #### Defined in
 
-[server/document/character.ts:132](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L132)
+[server/document/character.ts:132](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L132)
 
 ___
 
@@ -406,7 +406,7 @@ Automatically calls all callbacks associated with the field name.
 
 #### Defined in
 
-[server/document/character.ts:187](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L187)
+[server/document/character.ts:187](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L187)
 
 ___
 
@@ -428,4 +428,4 @@ Unbind stored player character cache data.
 
 #### Defined in
 
-[server/document/character.ts:40](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/document/character.ts#L40)
+[server/document/character.ts:40](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/document/character.ts#L40)

@@ -24,7 +24,7 @@ order: 0
 
 #### Defined in
 
-[client/utility/directionToVector.ts:7](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/directionToVector.ts#L7)
+[client/utility/directionToVector.ts:7](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/directionToVector.ts#L7)
 
 ## Properties
 
@@ -34,7 +34,7 @@ order: 0
 
 #### Defined in
 
-[client/utility/directionToVector.ts:4](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/directionToVector.ts#L4)
+[client/utility/directionToVector.ts:4](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/directionToVector.ts#L4)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[client/utility/directionToVector.ts:5](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/directionToVector.ts#L5)
+[client/utility/directionToVector.ts:5](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/directionToVector.ts#L5)
 
 ## Methods
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[client/utility/directionToVector.ts:12](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/directionToVector.ts#L12)
+[client/utility/directionToVector.ts:12](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/directionToVector.ts#L12)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[client/utility/directionToVector.ts:42](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/directionToVector.ts#L42)
+[client/utility/directionToVector.ts:42](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/directionToVector.ts#L42)
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 #### Defined in
 
-[client/utility/directionToVector.ts:33](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/directionToVector.ts#L33)
+[client/utility/directionToVector.ts:33](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/directionToVector.ts#L33)
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 #### Defined in
 
-[client/utility/directionToVector.ts:62](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/directionToVector.ts#L62)
+[client/utility/directionToVector.ts:62](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/directionToVector.ts#L62)
 
 ___
 
@@ -151,7 +151,7 @@ ___
 
 #### Defined in
 
-[client/utility/directionToVector.ts:52](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/directionToVector.ts#L52)
+[client/utility/directionToVector.ts:52](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/directionToVector.ts#L52)
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 #### Defined in
 
-[client/utility/directionToVector.ts:81](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/directionToVector.ts#L81)
+[client/utility/directionToVector.ts:81](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/directionToVector.ts#L81)
 
 ___
 
@@ -197,4 +197,4 @@ ___
 
 #### Defined in
 
-[client/utility/directionToVector.ts:72](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/directionToVector.ts#L72)
+[client/utility/directionToVector.ts:72](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/directionToVector.ts#L72)

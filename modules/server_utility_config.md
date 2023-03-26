@@ -25,7 +25,7 @@ order: 0
 
 #### Defined in
 
-[server/utility/config.ts:85](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/config.ts#L85)
+[server/utility/config.ts:85](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L85)
 
 ## Functions
 
@@ -39,7 +39,7 @@ order: 0
 
 #### Defined in
 
-[server/utility/config.ts:13](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/config.ts#L13)
+[server/utility/config.ts:13](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L13)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[server/utility/config.ts:71](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/config.ts#L71)
+[server/utility/config.ts:71](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L71)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[server/utility/config.ts:63](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/config.ts#L63)
+[server/utility/config.ts:63](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L63)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[server/utility/config.ts:67](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/config.ts#L67)
+[server/utility/config.ts:67](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L67)
 
 ___
 
@@ -97,4 +97,4 @@ Check if the current server instance is running in dev mode.
 
 #### Defined in
 
-[server/utility/config.ts:56](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/config.ts#L56)
+[server/utility/config.ts:56](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L56)

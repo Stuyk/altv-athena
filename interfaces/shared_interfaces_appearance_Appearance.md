@@ -32,7 +32,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:158](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L158)
+[shared/interfaces/appearance.ts:158](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L158)
 
 ___
 
@@ -48,7 +48,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:173](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L173)
+[shared/interfaces/appearance.ts:173](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L173)
 
 ___
 
@@ -65,7 +65,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:166](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L166)
+[shared/interfaces/appearance.ts:166](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L166)
 
 ___
 
@@ -81,7 +81,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:195](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L195)
+[shared/interfaces/appearance.ts:195](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L195)
 
 ___
 
@@ -98,7 +98,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:135](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L135)
+[shared/interfaces/appearance.ts:135](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L135)
 
 ___
 
@@ -114,7 +114,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:150](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L150)
+[shared/interfaces/appearance.ts:150](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L150)
 
 ___
 
@@ -131,7 +131,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:143](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L143)
+[shared/interfaces/appearance.ts:143](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L143)
 
 ___
 
@@ -147,7 +147,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:180](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L180)
+[shared/interfaces/appearance.ts:180](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L180)
 
 ___
 
@@ -163,7 +163,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:20](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L20)
+[shared/interfaces/appearance.ts:20](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L20)
 
 ___
 
@@ -180,7 +180,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:49](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L49)
+[shared/interfaces/appearance.ts:49](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L49)
 
 ___
 
@@ -196,7 +196,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:27](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L27)
+[shared/interfaces/appearance.ts:27](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L27)
 
 ___
 
@@ -213,7 +213,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:112](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L112)
+[shared/interfaces/appearance.ts:112](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L112)
 
 ___
 
@@ -229,7 +229,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:119](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L119)
+[shared/interfaces/appearance.ts:119](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L119)
 
 ___
 
@@ -246,7 +246,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:127](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L127)
+[shared/interfaces/appearance.ts:127](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L127)
 
 ___
 
@@ -263,7 +263,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:74](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L74)
+[shared/interfaces/appearance.ts:74](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L74)
 
 ___
 
@@ -279,7 +279,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:89](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L89)
+[shared/interfaces/appearance.ts:89](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L89)
 
 ___
 
@@ -295,7 +295,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:96](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L96)
+[shared/interfaces/appearance.ts:96](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L96)
 
 ___
 
@@ -311,7 +311,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:82](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L82)
+[shared/interfaces/appearance.ts:82](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L82)
 
 ___
 
@@ -335,7 +335,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:104](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L104)
+[shared/interfaces/appearance.ts:104](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L104)
 
 ___
 
@@ -352,7 +352,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:188](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L188)
+[shared/interfaces/appearance.ts:188](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L188)
 
 ___
 
@@ -368,7 +368,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:13](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L13)
+[shared/interfaces/appearance.ts:13](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L13)
 
 ___
 
@@ -384,7 +384,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:34](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L34)
+[shared/interfaces/appearance.ts:34](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L34)
 
 ___
 
@@ -401,7 +401,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:57](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L57)
+[shared/interfaces/appearance.ts:57](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L57)
 
 ___
 
@@ -417,7 +417,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:41](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L41)
+[shared/interfaces/appearance.ts:41](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L41)
 
 ___
 
@@ -435,4 +435,4 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:66](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L66)
+[shared/interfaces/appearance.ts:66](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/appearance.ts#L66)

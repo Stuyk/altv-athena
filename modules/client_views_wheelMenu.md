@@ -32,7 +32,7 @@ When a user clicks on an option it executes that option based on whatever events
 
 #### Defined in
 
-[client/views/wheelMenu.ts:111](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/views/wheelMenu.ts#L111)
+[client/views/wheelMenu.ts:111](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/views/wheelMenu.ts#L111)
 
 ___
 
@@ -58,4 +58,4 @@ Does not close the wheel menu but instead overwrites its current options.
 
 #### Defined in
 
-[client/views/wheelMenu.ts:161](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/views/wheelMenu.ts#L161)
+[client/views/wheelMenu.ts:161](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/views/wheelMenu.ts#L161)

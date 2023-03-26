@@ -35,7 +35,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:21](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L21)
+[shared/interfaces/character.ts:21](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L21)
 
 ___
 
@@ -51,7 +51,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:36](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L36)
+[shared/interfaces/character.ts:36](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L36)
 
 ___
 
@@ -67,7 +67,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:131](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L131)
+[shared/interfaces/character.ts:131](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L131)
 
 ___
 
@@ -83,7 +83,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:88](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L88)
+[shared/interfaces/character.ts:88](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L88)
 
 ___
 
@@ -99,7 +99,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:74](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L74)
+[shared/interfaces/character.ts:74](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L74)
 
 ___
 
@@ -115,7 +115,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:67](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L67)
+[shared/interfaces/character.ts:67](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L67)
 
 ___
 
@@ -132,7 +132,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:29](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L29)
+[shared/interfaces/character.ts:29](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L29)
 
 ___
 
@@ -149,7 +149,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:45](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L45)
+[shared/interfaces/character.ts:45](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L45)
 
 ___
 
@@ -165,7 +165,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:95](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L95)
+[shared/interfaces/character.ts:95](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L95)
 
 ___
 
@@ -181,7 +181,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:81](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L81)
+[shared/interfaces/character.ts:81](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L81)
 
 ___
 
@@ -197,7 +197,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:117](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L117)
+[shared/interfaces/character.ts:117](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L117)
 
 ___
 
@@ -213,7 +213,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:138](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L138)
+[shared/interfaces/character.ts:138](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L138)
 
 ___
 
@@ -229,7 +229,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:146](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L146)
+[shared/interfaces/character.ts:146](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L146)
 
 ___
 
@@ -245,7 +245,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:162](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L162)
+[shared/interfaces/character.ts:162](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L162)
 
 ___
 
@@ -262,7 +262,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:110](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L110)
+[shared/interfaces/character.ts:110](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L110)
 
 ___
 
@@ -278,7 +278,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:60](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L60)
+[shared/interfaces/character.ts:60](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L60)
 
 ___
 
@@ -294,7 +294,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:154](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L154)
+[shared/interfaces/character.ts:154](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L154)
 
 ___
 
@@ -311,7 +311,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:53](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L53)
+[shared/interfaces/character.ts:53](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L53)
 
 ___
 
@@ -329,7 +329,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:189](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L189)
+[shared/interfaces/character.ts:189](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L189)
 
 ___
 
@@ -345,7 +345,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:170](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L170)
+[shared/interfaces/character.ts:170](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L170)
 
 ___
 
@@ -362,7 +362,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:179](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L179)
+[shared/interfaces/character.ts:179](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L179)
 
 ___
 
@@ -378,7 +378,7 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:124](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L124)
+[shared/interfaces/character.ts:124](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L124)
 
 ___
 
@@ -394,4 +394,4 @@ Character
 
 #### Defined in
 
-[shared/interfaces/character.ts:102](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/character.ts#L102)
+[shared/interfaces/character.ts:102](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/character.ts#L102)

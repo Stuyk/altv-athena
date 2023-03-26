@@ -34,7 +34,7 @@ SafePrototype
 
 #### Defined in
 
-[server/player/safe.ts:108](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L108)
+[server/player/safe.ts:108](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L108)
 
 ___
 
@@ -63,7 +63,7 @@ SafePrototype
 
 #### Defined in
 
-[server/player/safe.ts:41](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L41)
+[server/player/safe.ts:41](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L41)
 
 ___
 
@@ -88,7 +88,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:196](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L196)
+[server/player/safe.ts:196](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L196)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -109,7 +109,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:197](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L197)
+[server/player/safe.ts:197](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L197)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -130,7 +130,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:198](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L198)
+[server/player/safe.ts:198](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L198)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -151,7 +151,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:199](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L199)
+[server/player/safe.ts:199](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L199)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -172,7 +172,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:200](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L200)
+[server/player/safe.ts:200](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L200)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -193,7 +193,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:201](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L201)
+[server/player/safe.ts:201](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L201)
 
 ___
 
@@ -218,7 +218,7 @@ Set the player's dimension safely.
 
 #### Defined in
 
-[server/player/safe.ts:176](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L176)
+[server/player/safe.ts:176](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L176)
 
 ___
 
@@ -248,7 +248,7 @@ SafePrototype
 
 #### Defined in
 
-[server/player/safe.ts:12](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L12)
+[server/player/safe.ts:12](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L12)
 
 ___
 
@@ -277,7 +277,7 @@ SafePrototype
 
 #### Defined in
 
-[server/player/safe.ts:141](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L141)
+[server/player/safe.ts:141](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L141)
 
 ___
 
@@ -306,4 +306,4 @@ SafePrototype
 
 #### Defined in
 
-[server/player/safe.ts:75](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/safe.ts#L75)
+[server/player/safe.ts:75](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/safe.ts#L75)

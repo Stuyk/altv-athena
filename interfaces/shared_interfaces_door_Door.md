@@ -23,7 +23,7 @@ Door
 
 #### Defined in
 
-[shared/interfaces/door.ts:18](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/door.ts#L18)
+[shared/interfaces/door.ts:18](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/door.ts#L18)
 
 ___
 
@@ -39,7 +39,7 @@ Door
 
 #### Defined in
 
-[shared/interfaces/door.ts:42](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/door.ts#L42)
+[shared/interfaces/door.ts:42](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/door.ts#L42)
 
 ___
 
@@ -55,7 +55,7 @@ Door
 
 #### Defined in
 
-[shared/interfaces/door.ts:34](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/door.ts#L34)
+[shared/interfaces/door.ts:34](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/door.ts#L34)
 
 ___
 
@@ -71,7 +71,7 @@ Door
 
 #### Defined in
 
-[shared/interfaces/door.ts:26](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/door.ts#L26)
+[shared/interfaces/door.ts:26](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/door.ts#L26)
 
 ___
 
@@ -87,4 +87,4 @@ Door
 
 #### Defined in
 
-[shared/interfaces/door.ts:10](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/door.ts#L10)
+[shared/interfaces/door.ts:10](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/door.ts#L10)

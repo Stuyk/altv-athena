@@ -32,7 +32,7 @@ EventCall
 
 #### Defined in
 
-[shared/interfaces/eventCall.ts:34](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/eventCall.ts#L34)
+[shared/interfaces/eventCall.ts:34](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/eventCall.ts#L34)
 
 ___
 
@@ -49,7 +49,7 @@ EventCall
 
 #### Defined in
 
-[shared/interfaces/eventCall.ts:15](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/eventCall.ts#L15)
+[shared/interfaces/eventCall.ts:15](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/eventCall.ts#L15)
 
 ___
 
@@ -69,4 +69,4 @@ EventCall
 
 #### Defined in
 
-[shared/interfaces/eventCall.ts:26](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/eventCall.ts#L26)
+[shared/interfaces/eventCall.ts:26](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/eventCall.ts#L26)

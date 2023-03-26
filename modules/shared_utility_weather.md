@@ -19,7 +19,7 @@ order: 0
 
 #### Defined in
 
-[shared/utility/weather.ts:19](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/weather.ts#L19)
+[shared/utility/weather.ts:19](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/weather.ts#L19)
 
 ## Functions
 
@@ -39,4 +39,4 @@ order: 0
 
 #### Defined in
 
-[shared/utility/weather.ts:21](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/weather.ts#L21)
+[shared/utility/weather.ts:21](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/weather.ts#L21)

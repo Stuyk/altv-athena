@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[client/rmlui/input/index.ts:132](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/input/index.ts#L132)
+[client/rmlui/input/index.ts:132](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/input/index.ts#L132)
 
 ___
 
@@ -50,4 +50,4 @@ Retruns a string or undefined based on user input.
 
 #### Defined in
 
-[client/rmlui/input/index.ts:104](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/input/index.ts#L104)
+[client/rmlui/input/index.ts:104](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/input/index.ts#L104)

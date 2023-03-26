@@ -28,7 +28,7 @@ May return undefined if the vehicle is not currently spawned.
 
 #### Defined in
 
-[server/getters/vehicle.ts:55](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/getters/vehicle.ts#L55)
+[server/getters/vehicle.ts:55](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/vehicle.ts#L55)
 
 ___
 
@@ -50,7 +50,7 @@ Get a vehicle by their alt:V ID
 
 #### Defined in
 
-[server/getters/vehicle.ts:11](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/getters/vehicle.ts#L11)
+[server/getters/vehicle.ts:11](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/vehicle.ts#L11)
 
 ___
 
@@ -76,7 +76,7 @@ This only works for persistent vehicles.
 
 #### Defined in
 
-[server/getters/vehicle.ts:24](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/getters/vehicle.ts#L24)
+[server/getters/vehicle.ts:24](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/vehicle.ts#L24)
 
 ___
 
@@ -98,7 +98,7 @@ The player closest to a player.
 
 #### Defined in
 
-[server/getters/vehicle.ts:181](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/getters/vehicle.ts#L181)
+[server/getters/vehicle.ts:181](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/vehicle.ts#L181)
 
 ___
 
@@ -120,7 +120,7 @@ The vehicle closest to a player.
 
 #### Defined in
 
-[server/getters/vehicle.ts:191](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/getters/vehicle.ts#L191)
+[server/getters/vehicle.ts:191](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/vehicle.ts#L191)
 
 ___
 
@@ -143,7 +143,7 @@ Returns a player if they are driving this vehicle.
 
 #### Defined in
 
-[server/getters/vehicle.ts:171](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/getters/vehicle.ts#L171)
+[server/getters/vehicle.ts:171](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/vehicle.ts#L171)
 
 ___
 
@@ -169,7 +169,7 @@ Works best on flat land or very close distances.
 
 #### Defined in
 
-[server/getters/vehicle.ts:99](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/getters/vehicle.ts#L99)
+[server/getters/vehicle.ts:99](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/vehicle.ts#L99)
 
 ___
 
@@ -193,7 +193,7 @@ Checks if a vehicle is within 3 distance of a position.
 
 #### Defined in
 
-[server/getters/vehicle.ts:150](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/getters/vehicle.ts#L150)
+[server/getters/vehicle.ts:150](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/vehicle.ts#L150)
 
 ___
 
@@ -216,7 +216,7 @@ Use `alt.hash` to hash a plain text model. ex: `alt.hash('infernus')`
 
 #### Defined in
 
-[server/getters/vehicle.ts:78](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/getters/vehicle.ts#L78)
+[server/getters/vehicle.ts:78](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/vehicle.ts#L78)
 
 ___
 
@@ -239,4 +239,4 @@ No specific order.
 
 #### Defined in
 
-[server/getters/vehicle.ts:160](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/getters/vehicle.ts#L160)
+[server/getters/vehicle.ts:160](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/vehicle.ts#L160)

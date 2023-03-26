@@ -24,7 +24,7 @@ order: 0
 
 #### Defined in
 
-[server/database/connection.ts:42](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/database/connection.ts#L42)
+[server/database/connection.ts:42](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/database/connection.ts#L42)
 
 ## Functions
 
@@ -38,7 +38,7 @@ order: 0
 
 #### Defined in
 
-[server/database/connection.ts:23](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/database/connection.ts#L23)
+[server/database/connection.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/database/connection.ts#L23)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-[server/database/connection.ts:27](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/database/connection.ts#L27)
+[server/database/connection.ts:27](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/database/connection.ts#L27)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 #### Defined in
 
-[server/database/connection.ts:15](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/database/connection.ts#L15)
+[server/database/connection.ts:15](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/database/connection.ts#L15)
 
 ___
 
@@ -92,4 +92,4 @@ ___
 
 #### Defined in
 
-[server/database/connection.ts:34](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/database/connection.ts#L34)
+[server/database/connection.ts:34](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/database/connection.ts#L34)

@@ -23,7 +23,7 @@ InputBoxInfo
 
 #### Defined in
 
-[client/rmlui/input/index.ts:24](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/input/index.ts#L24)
+[client/rmlui/input/index.ts:24](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/input/index.ts#L24)
 
 ___
 
@@ -39,7 +39,7 @@ InputBoxInfo
 
 #### Defined in
 
-[client/rmlui/input/index.ts:32](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/input/index.ts#L32)
+[client/rmlui/input/index.ts:32](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/input/index.ts#L32)
 
 ___
 
@@ -55,7 +55,7 @@ InputBoxInfo
 
 #### Defined in
 
-[client/rmlui/input/index.ts:40](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/input/index.ts#L40)
+[client/rmlui/input/index.ts:40](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/input/index.ts#L40)
 
 ___
 
@@ -72,4 +72,4 @@ InputBoxInfo
 
 #### Defined in
 
-[client/rmlui/input/index.ts:16](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/input/index.ts#L16)
+[client/rmlui/input/index.ts:16](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/input/index.ts#L16)

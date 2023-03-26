@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[server/athena/stream/config.ts:3](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/athena/stream/config.ts#L3)
+[server/athena/stream/config.ts:3](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/athena/stream/config.ts#L3)

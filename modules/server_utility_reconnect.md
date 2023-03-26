@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[server/utility/reconnect.ts:39](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/reconnect.ts#L39)
+[server/utility/reconnect.ts:39](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/reconnect.ts#L39)
 
 ## Functions
 
@@ -37,7 +37,7 @@ order: 0
 
 #### Defined in
 
-[server/utility/reconnect.ts:5](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/reconnect.ts#L5)
+[server/utility/reconnect.ts:5](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/reconnect.ts#L5)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[server/utility/reconnect.ts:19](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/reconnect.ts#L19)
+[server/utility/reconnect.ts:19](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/reconnect.ts#L19)
 
 ___
 
@@ -65,4 +65,4 @@ ___
 
 #### Defined in
 
-[server/utility/reconnect.ts:23](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/reconnect.ts#L23)
+[server/utility/reconnect.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/reconnect.ts#L23)

@@ -23,7 +23,7 @@ KeyBindRestrictions
 
 #### Defined in
 
-[client/interface/hotkeys.ts:37](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/interface/hotkeys.ts#L37)
+[client/interface/hotkeys.ts:37](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/interface/hotkeys.ts#L37)
 
 ___
 
@@ -35,7 +35,7 @@ Player must be out of a vehicle to use this key bind.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:7](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/interface/hotkeys.ts#L7)
+[client/interface/hotkeys.ts:7](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/interface/hotkeys.ts#L7)
 
 ___
 
@@ -51,7 +51,7 @@ KeyBindRestrictions
 
 #### Defined in
 
-[client/interface/hotkeys.ts:45](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/interface/hotkeys.ts#L45)
+[client/interface/hotkeys.ts:45](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/interface/hotkeys.ts#L45)
 
 ___
 
@@ -64,7 +64,7 @@ Accessible by anyone in the vehicle.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:15](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/interface/hotkeys.ts#L15)
+[client/interface/hotkeys.ts:15](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/interface/hotkeys.ts#L15)
 
 ___
 
@@ -76,7 +76,7 @@ Player must be the driver of the vehicle.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:29](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/interface/hotkeys.ts#L29)
+[client/interface/hotkeys.ts:29](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/interface/hotkeys.ts#L29)
 
 ___
 
@@ -88,7 +88,7 @@ Player must be in a vehicle as a passenger. Not the driver.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:22](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/interface/hotkeys.ts#L22)
+[client/interface/hotkeys.ts:22](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/interface/hotkeys.ts#L22)
 
 ___
 
@@ -101,7 +101,7 @@ Example: `[alt.hash('infernus'), alt.hash('police2')]`
 
 #### Defined in
 
-[client/interface/hotkeys.ts:53](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/interface/hotkeys.ts#L53)
+[client/interface/hotkeys.ts:53](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/interface/hotkeys.ts#L53)
 
 ___
 
@@ -118,4 +118,4 @@ KeyBindRestrictions
 
 #### Defined in
 
-[client/interface/hotkeys.ts:62](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/interface/hotkeys.ts#L62)
+[client/interface/hotkeys.ts:62](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/interface/hotkeys.ts#L62)

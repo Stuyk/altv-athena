@@ -31,7 +31,7 @@ Account
 
 #### Defined in
 
-[server/interface/iAccount.ts:14](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/interface/iAccount.ts#L14)
+[server/interface/iAccount.ts:14](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/interface/iAccount.ts#L14)
 
 ___
 
@@ -47,7 +47,7 @@ Account
 
 #### Defined in
 
-[server/interface/iAccount.ts:79](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/interface/iAccount.ts#L79)
+[server/interface/iAccount.ts:79](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/interface/iAccount.ts#L79)
 
 ___
 
@@ -63,7 +63,7 @@ Account
 
 #### Defined in
 
-[server/interface/iAccount.ts:28](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/interface/iAccount.ts#L28)
+[server/interface/iAccount.ts:28](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/interface/iAccount.ts#L28)
 
 ___
 
@@ -79,7 +79,7 @@ Account
 
 #### Defined in
 
-[server/interface/iAccount.ts:35](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/interface/iAccount.ts#L35)
+[server/interface/iAccount.ts:35](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/interface/iAccount.ts#L35)
 
 ___
 
@@ -95,7 +95,7 @@ Account
 
 #### Defined in
 
-[server/interface/iAccount.ts:49](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/interface/iAccount.ts#L49)
+[server/interface/iAccount.ts:49](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/interface/iAccount.ts#L49)
 
 ___
 
@@ -111,7 +111,7 @@ Account
 
 #### Defined in
 
-[server/interface/iAccount.ts:21](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/interface/iAccount.ts#L21)
+[server/interface/iAccount.ts:21](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/interface/iAccount.ts#L21)
 
 ___
 
@@ -127,7 +127,7 @@ Account
 
 #### Defined in
 
-[server/interface/iAccount.ts:42](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/interface/iAccount.ts#L42)
+[server/interface/iAccount.ts:42](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/interface/iAccount.ts#L42)
 
 ___
 
@@ -143,7 +143,7 @@ Account
 
 #### Defined in
 
-[server/interface/iAccount.ts:56](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/interface/iAccount.ts#L56)
+[server/interface/iAccount.ts:56](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/interface/iAccount.ts#L56)
 
 ___
 
@@ -160,7 +160,7 @@ Account
 
 #### Defined in
 
-[server/interface/iAccount.ts:64](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/interface/iAccount.ts#L64)
+[server/interface/iAccount.ts:64](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/interface/iAccount.ts#L64)
 
 ___
 
@@ -176,7 +176,7 @@ Account
 
 #### Defined in
 
-[server/interface/iAccount.ts:72](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/interface/iAccount.ts#L72)
+[server/interface/iAccount.ts:72](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/interface/iAccount.ts#L72)
 
 ___
 
@@ -192,4 +192,4 @@ Account
 
 #### Defined in
 
-[server/interface/iAccount.ts:86](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/interface/iAccount.ts#L86)
+[server/interface/iAccount.ts:86](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/interface/iAccount.ts#L86)

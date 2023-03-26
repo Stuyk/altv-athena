@@ -31,7 +31,7 @@ IVehicleTuning
 
 #### Defined in
 
-[shared/interfaces/vehicleTuning.ts:16](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/vehicleTuning.ts#L16)
+[shared/interfaces/vehicleTuning.ts:16](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleTuning.ts#L16)
 
 ___
 
@@ -47,4 +47,4 @@ IVehicleTuning
 
 #### Defined in
 
-[shared/interfaces/vehicleTuning.ts:24](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/vehicleTuning.ts#L24)
+[shared/interfaces/vehicleTuning.ts:24](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleTuning.ts#L24)

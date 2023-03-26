@@ -32,7 +32,7 @@ None
 
 #### Defined in
 
-[client/systems/sound.ts:21](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/sound.ts#L21)
+[client/systems/sound.ts:21](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/sound.ts#L21)
 
 ___
 
@@ -56,7 +56,7 @@ Handle play audio positional
 
 #### Defined in
 
-[client/systems/sound.ts:31](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/sound.ts#L31)
+[client/systems/sound.ts:31](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/sound.ts#L31)
 
 ___
 
@@ -82,7 +82,7 @@ None
 
 #### Defined in
 
-[client/systems/sound.ts:110](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/sound.ts#L110)
+[client/systems/sound.ts:110](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/sound.ts#L110)
 
 ___
 
@@ -107,7 +107,7 @@ Simply plays the audio based on your position.
 
 #### Defined in
 
-[client/systems/sound.ts:66](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/sound.ts#L66)
+[client/systems/sound.ts:66](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/sound.ts#L66)
 
 ___
 
@@ -131,4 +131,4 @@ None
 
 #### Defined in
 
-[client/systems/sound.ts:120](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/sound.ts#L120)
+[client/systems/sound.ts:120](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/sound.ts#L120)

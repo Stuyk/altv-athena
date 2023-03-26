@@ -28,7 +28,7 @@ Attempts to load an alarm multiple times before returning false.
 
 #### Defined in
 
-[client/systems/alarm.ts:17](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/alarm.ts#L17)
+[client/systems/alarm.ts:17](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/alarm.ts#L17)
 
 ___
 
@@ -52,7 +52,7 @@ Play an alarm for the local player.
 
 #### Defined in
 
-[client/systems/alarm.ts:50](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/alarm.ts#L50)
+[client/systems/alarm.ts:50](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/alarm.ts#L50)
 
 ___
 
@@ -76,7 +76,7 @@ Stop an alarm for the local player.
 
 #### Defined in
 
-[client/systems/alarm.ts:73](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/alarm.ts#L73)
+[client/systems/alarm.ts:73](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/alarm.ts#L73)
 
 ___
 
@@ -94,4 +94,4 @@ Stop all alarms for the local player.
 
 #### Defined in
 
-[client/systems/alarm.ts:86](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/alarm.ts#L86)
+[client/systems/alarm.ts:86](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/alarm.ts#L86)

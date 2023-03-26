@@ -38,7 +38,7 @@ Returns false if a player binding is already present.
 
 #### Defined in
 
-[server/systems/storage.ts:154](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/storage.ts#L154)
+[server/systems/storage.ts:154](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/storage.ts#L154)
 
 ___
 
@@ -64,7 +64,7 @@ Use the ID returned to fetch the data with the other storage functions.
 
 #### Defined in
 
-[server/systems/storage.ts:42](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/storage.ts#L42)
+[server/systems/storage.ts:42](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/storage.ts#L42)
 
 ___
 
@@ -94,7 +94,7 @@ Fetches stored items from a storage array.
 
 #### Defined in
 
-[server/systems/storage.ts:72](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/storage.ts#L72)
+[server/systems/storage.ts:72](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/storage.ts#L72)
 
 ___
 
@@ -118,7 +118,7 @@ Checks if a storage identifier is currently in use.
 
 #### Defined in
 
-[server/systems/storage.ts:108](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/storage.ts#L108)
+[server/systems/storage.ts:108](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/storage.ts#L108)
 
 ___
 
@@ -144,7 +144,7 @@ Returns true if the value was successfully removed.
 
 #### Defined in
 
-[server/systems/storage.ts:121](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/storage.ts#L121)
+[server/systems/storage.ts:121](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/storage.ts#L121)
 
 ___
 
@@ -169,7 +169,7 @@ Stores items into a database instance by providing the storage identifier, and t
 
 #### Defined in
 
-[server/systems/storage.ts:60](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/storage.ts#L60)
+[server/systems/storage.ts:60](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/storage.ts#L60)
 
 ___
 
@@ -195,4 +195,4 @@ Returns true if the value was set to in-use, and didn't already exist.
 
 #### Defined in
 
-[server/systems/storage.ts:91](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/storage.ts#L91)
+[server/systems/storage.ts:91](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/storage.ts#L91)

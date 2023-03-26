@@ -30,7 +30,7 @@ Find an open slot that is available within a dataset.
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:14](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/slot.ts#L14)
+[server/systems/inventory/slot.ts:14](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L14)
 
 ___
 
@@ -60,7 +60,7 @@ Returns undefined if an item is unavailable in a slot.
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:47](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/slot.ts#L47)
+[server/systems/inventory/slot.ts:47](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L47)
 
 ___
 
@@ -85,7 +85,7 @@ Used to override inventory item slot functionality
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:90](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/slot.ts#L90)
+[server/systems/inventory/slot.ts:90](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L90)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -106,7 +106,7 @@ Used to override inventory item slot functionality
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:91](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/slot.ts#L91)
+[server/systems/inventory/slot.ts:91](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L91)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -127,7 +127,7 @@ Used to override inventory item slot functionality
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:92](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/slot.ts#L92)
+[server/systems/inventory/slot.ts:92](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L92)
 
 ___
 
@@ -152,4 +152,4 @@ Returns undefined if the item was not found.
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:67](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/slot.ts#L67)
+[server/systems/inventory/slot.ts:67](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L67)

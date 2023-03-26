@@ -35,7 +35,7 @@ Return a random value from an array of values
 
 #### Defined in
 
-[shared/utility/random.ts:79](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/random.ts#L79)
+[shared/utility/random.ts:79](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/random.ts#L79)
 
 ___
 
@@ -57,7 +57,7 @@ Get a random color excluding alpha
 
 #### Defined in
 
-[shared/utility/random.ts:27](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/random.ts#L27)
+[shared/utility/random.ts:27](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/random.ts#L27)
 
 ___
 
@@ -73,7 +73,7 @@ Get a random color including random alpha
 
 #### Defined in
 
-[shared/utility/random.ts:38](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/random.ts#L38)
+[shared/utility/random.ts:38](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/random.ts#L38)
 
 ___
 
@@ -96,7 +96,7 @@ Get a random number between min and max (max excluded)
 
 #### Defined in
 
-[shared/utility/random.ts:9](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/random.ts#L9)
+[shared/utility/random.ts:9](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/random.ts#L9)
 
 ___
 
@@ -119,7 +119,7 @@ Get a random number between min and max (max included)
 
 #### Defined in
 
-[shared/utility/random.ts:19](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/random.ts#L19)
+[shared/utility/random.ts:19](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/random.ts#L19)
 
 ___
 
@@ -149,4 +149,4 @@ Shuffle an array, and return randomized order.
 
 #### Defined in
 
-[shared/utility/random.ts:54](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/random.ts#L54)
+[shared/utility/random.ts:54](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/random.ts#L54)

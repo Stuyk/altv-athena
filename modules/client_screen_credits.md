@@ -25,7 +25,7 @@ Shard
 
 #### Defined in
 
-[client/screen/credits.ts:18](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/credits.ts#L18)
+[client/screen/credits.ts:18](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/credits.ts#L18)
 
 ___
 
@@ -47,4 +47,4 @@ Creates on-screen text that looks like the GTA:V credits.
 
 #### Defined in
 
-[client/screen/credits.ts:41](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/credits.ts#L41)
+[client/screen/credits.ts:41](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/credits.ts#L41)

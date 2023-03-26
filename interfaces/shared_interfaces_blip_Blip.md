@@ -38,7 +38,7 @@ Blip
 
 #### Defined in
 
-[shared/interfaces/blip.ts:67](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/blip.ts#L67)
+[shared/interfaces/blip.ts:67](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/blip.ts#L67)
 
 ___
 
@@ -54,7 +54,7 @@ Blip
 
 #### Defined in
 
-[shared/interfaces/blip.ts:39](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/blip.ts#L39)
+[shared/interfaces/blip.ts:39](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/blip.ts#L39)
 
 ___
 
@@ -70,7 +70,7 @@ Blip
 
 #### Defined in
 
-[shared/interfaces/blip.ts:74](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/blip.ts#L74)
+[shared/interfaces/blip.ts:74](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/blip.ts#L74)
 
 ___
 
@@ -86,7 +86,7 @@ Blip
 
 #### Defined in
 
-[shared/interfaces/blip.ts:16](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/blip.ts#L16)
+[shared/interfaces/blip.ts:16](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/blip.ts#L16)
 
 ___
 
@@ -102,7 +102,7 @@ Blip
 
 #### Defined in
 
-[shared/interfaces/blip.ts:53](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/blip.ts#L53)
+[shared/interfaces/blip.ts:53](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/blip.ts#L53)
 
 ___
 
@@ -118,7 +118,7 @@ Blip
 
 #### Defined in
 
-[shared/interfaces/blip.ts:23](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/blip.ts#L23)
+[shared/interfaces/blip.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/blip.ts#L23)
 
 ___
 
@@ -136,7 +136,7 @@ Blip
 
 #### Defined in
 
-[shared/interfaces/blip.ts:32](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/blip.ts#L32)
+[shared/interfaces/blip.ts:32](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/blip.ts#L32)
 
 ___
 
@@ -152,7 +152,7 @@ Blip
 
 #### Defined in
 
-[shared/interfaces/blip.ts:46](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/blip.ts#L46)
+[shared/interfaces/blip.ts:46](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/blip.ts#L46)
 
 ___
 
@@ -168,4 +168,4 @@ Blip
 
 #### Defined in
 
-[shared/interfaces/blip.ts:81](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/blip.ts#L81)
+[shared/interfaces/blip.ts:81](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/blip.ts#L81)

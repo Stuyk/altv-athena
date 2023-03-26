@@ -28,7 +28,7 @@ Marks for deletion, and then removes it.
 
 #### Defined in
 
-[client/rmlui/staticText/index.ts:121](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/staticText/index.ts#L121)
+[client/rmlui/staticText/index.ts:121](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/staticText/index.ts#L121)
 
 ___
 
@@ -51,4 +51,4 @@ If the same uid is used it will simply replace the object.
 
 #### Defined in
 
-[client/rmlui/staticText/index.ts:90](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/staticText/index.ts#L90)
+[client/rmlui/staticText/index.ts:90](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/staticText/index.ts#L90)

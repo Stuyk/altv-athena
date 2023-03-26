@@ -30,7 +30,7 @@ order: 0
 
 #### Defined in
 
-[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/menus/object.ts#L8)
+[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/object.ts#L8)
 
 ## Functions
 
@@ -60,7 +60,7 @@ ObjectWheelMenu
 
 #### Defined in
 
-[client/menus/object.ts:24](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/menus/object.ts#L24)
+[client/menus/object.ts:24](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/object.ts#L24)
 
 ___
 
@@ -88,4 +88,4 @@ ObjectWheelMenu
 
 #### Defined in
 
-[client/menus/object.ts:36](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/menus/object.ts#L36)
+[client/menus/object.ts:36](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/object.ts#L36)

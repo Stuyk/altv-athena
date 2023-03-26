@@ -29,7 +29,7 @@ order: 0
 
 #### Defined in
 
-[client/systems/playerConfig.ts:4](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/playerConfig.ts#L4)
+[client/systems/playerConfig.ts:4](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/playerConfig.ts#L4)
 
 ## Functions
 
@@ -58,7 +58,7 @@ Add a custom callback to listen for config changes.
 
 #### Defined in
 
-[client/systems/playerConfig.ts:38](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/playerConfig.ts#L38)
+[client/systems/playerConfig.ts:38](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/playerConfig.ts#L38)
 
 ___
 
@@ -87,4 +87,4 @@ Get a value assigned by the server.
 
 #### Defined in
 
-[client/systems/playerConfig.ts:27](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/playerConfig.ts#L27)
+[client/systems/playerConfig.ts:27](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/playerConfig.ts#L27)

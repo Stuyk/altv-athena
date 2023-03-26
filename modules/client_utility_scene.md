@@ -25,4 +25,4 @@ order: 0
 
 #### Defined in
 
-[client/utility/scene.ts:4](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/scene.ts#L4)
+[client/utility/scene.ts:4](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/scene.ts#L4)

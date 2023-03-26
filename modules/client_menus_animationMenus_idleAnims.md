@@ -25,4 +25,4 @@ order: 0
 
 #### Defined in
 
-[client/menus/animationMenus/idleAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/menus/animationMenus/idleAnims.ts#L3)
+[client/menus/animationMenus/idleAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/animationMenus/idleAnims.ts#L3)

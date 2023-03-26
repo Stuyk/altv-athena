@@ -35,7 +35,7 @@ ConsoleCommander
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:61](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/consoleCommander.ts#L61)
+[shared/utility/consoleCommander.ts:61](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/consoleCommander.ts#L61)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:25](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/consoleCommander.ts#L25)
+[shared/utility/consoleCommander.ts:25](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/consoleCommander.ts#L25)
 
 ___
 
@@ -85,7 +85,7 @@ ConsoleCommander
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:37](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/consoleCommander.ts#L37)
+[shared/utility/consoleCommander.ts:37](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/consoleCommander.ts#L37)
 
 ___
 
@@ -115,4 +115,4 @@ ConsoleCommander
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:50](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/consoleCommander.ts#L50)
+[shared/utility/consoleCommander.ts:50](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/consoleCommander.ts#L50)

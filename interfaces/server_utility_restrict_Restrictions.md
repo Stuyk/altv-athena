@@ -31,7 +31,7 @@ Restrictions
 
 #### Defined in
 
-[server/utility/restrict.ts:29](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/restrict.ts#L29)
+[server/utility/restrict.ts:29](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/restrict.ts#L29)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[server/utility/restrict.ts:11](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/restrict.ts#L11)
+[server/utility/restrict.ts:11](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/restrict.ts#L11)
 
 ___
 
@@ -65,4 +65,4 @@ Restrictions
 
 #### Defined in
 
-[server/utility/restrict.ts:22](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/utility/restrict.ts#L22)
+[server/utility/restrict.ts:22](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/restrict.ts#L22)

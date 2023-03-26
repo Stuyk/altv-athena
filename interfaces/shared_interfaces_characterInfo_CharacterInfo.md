@@ -32,7 +32,7 @@ CharacterInfo
 
 #### Defined in
 
-[shared/interfaces/characterInfo.ts:22](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/characterInfo.ts#L22)
+[shared/interfaces/characterInfo.ts:22](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/characterInfo.ts#L22)
 
 ___
 
@@ -49,4 +49,4 @@ CharacterInfo
 
 #### Defined in
 
-[shared/interfaces/characterInfo.ts:14](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/characterInfo.ts#L14)
+[shared/interfaces/characterInfo.ts:14](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/characterInfo.ts#L14)
