@@ -11,8 +11,6 @@ order: 0
 
 Used to describe vehicle damage to apply to a vehicle.
 
-**`Export`**
-
 **`Interface`**
 
 VehicleDamage
@@ -25,17 +23,13 @@ VehicleDamage
 
 What bumpers are damaged.
 
-**`Memberof`**
-
-VehicleDamage
-
 #### Index signature
 
 ▪ [part: `string`]: [`PartDamage`](../modules/shared_interfaces_vehicleOwned.md#PartDamage)
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:31](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleOwned.ts#L31)
+[shared/interfaces/vehicleOwned.ts:31](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleOwned.ts#L31)
 
 ___
 
@@ -45,13 +39,9 @@ ___
 
 What lights are damaged.
 
-**`Memberof`**
-
-VehicleDamage
-
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:55](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleOwned.ts#L55)
+[shared/interfaces/vehicleOwned.ts:55](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleOwned.ts#L55)
 
 ___
 
@@ -61,17 +51,13 @@ ___
 
 What parts are damaged.
 
-**`Memberof`**
-
-VehicleDamage
-
 #### Index signature
 
 ▪ [part: `string`]: [`PartDamage`](../modules/shared_interfaces_vehicleOwned.md#PartDamage)
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleOwned.ts#L23)
+[shared/interfaces/vehicleOwned.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleOwned.ts#L23)
 
 ___
 
@@ -81,13 +67,9 @@ ___
 
 What wheels are damaged.
 
-**`Memberof`**
-
-VehicleDamage
-
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:47](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleOwned.ts#L47)
+[shared/interfaces/vehicleOwned.ts:47](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleOwned.ts#L47)
 
 ___
 
@@ -97,14 +79,10 @@ ___
 
 What windows are damaged.
 
-**`Memberof`**
-
-VehicleDamage
-
 #### Index signature
 
 ▪ [part: `string`]: [`PartDamage`](../modules/shared_interfaces_vehicleOwned.md#PartDamage)
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:39](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleOwned.ts#L39)
+[shared/interfaces/vehicleOwned.ts:39](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleOwned.ts#L39)

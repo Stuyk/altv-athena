@@ -12,8 +12,6 @@ order: 0
 The BaseItem is used as a way for the main items to point towards item information.
 This item stored in the database is used to construct front facing item information.
 
-**`Export`**
-
 **`Interface`**
 
 BaseItem
@@ -39,13 +37,9 @@ BaseItem
 
 Database entry for item. Do not add / append.
 
-**`Memberof`**
-
-BaseItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:292](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L292)
+[shared/interfaces/item.ts:292](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L292)
 
 ___
 
@@ -55,13 +49,9 @@ ___
 
 Behavior associated with this item.
 
-**`Memberof`**
-
-BaseItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:333](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L333)
+[shared/interfaces/item.ts:333](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L333)
 
 ___
 
@@ -71,13 +61,9 @@ ___
 
 The event to call when this item is consumed.
 
-**`Memberof`**
-
-BaseItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:341](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L341)
+[shared/interfaces/item.ts:341](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L341)
 
 ___
 
@@ -87,13 +73,9 @@ ___
 
 Custom context actions in addition to the standard consumable event.
 
-**`Memberof`**
-
-BaseItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:349](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L349)
+[shared/interfaces/item.ts:349](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L349)
 
 ___
 
@@ -103,17 +85,13 @@ ___
 
 Any custom data assigned to this item.
 
-**`Memberof`**
-
-SharedItem
-
 #### Inherited from
 
 [SharedItem](shared_interfaces_item_SharedItem.md).[data](shared_interfaces_item_SharedItem.md#data)
 
 #### Defined in
 
-[shared/interfaces/item.ts:204](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L204)
+[shared/interfaces/item.ts:204](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L204)
 
 ___
 
@@ -123,17 +101,13 @@ ___
 
 The matching database name for this item.
 
-**`Memberof`**
-
-SharedItem
-
 #### Inherited from
 
 [SharedItem](shared_interfaces_item_SharedItem.md).[dbName](shared_interfaces_item_SharedItem.md#dbName)
 
 #### Defined in
 
-[shared/interfaces/item.ts:196](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L196)
+[shared/interfaces/item.ts:196](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L196)
 
 ___
 
@@ -144,13 +118,9 @@ ___
 A client-side icon name.
 They are specified and created by you.
 
-**`Memberof`**
-
-BaseItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:309](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L309)
+[shared/interfaces/item.ts:309](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L309)
 
 ___
 
@@ -160,13 +130,9 @@ ___
 
 If this value is defined it will be used as the maximum stack size for the item.
 
-**`Memberof`**
-
-BaseItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:317](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L317)
+[shared/interfaces/item.ts:317](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L317)
 
 ___
 
@@ -177,13 +143,9 @@ ___
 The drop model of this item when it is on the ground.
 If not defined it will default to a box of some sort.
 
-**`Memberof`**
-
-BaseItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:358](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L358)
+[shared/interfaces/item.ts:358](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L358)
 
 ___
 
@@ -194,13 +156,9 @@ ___
 An expiration time in milliseconds before the item drop is cleared.
 Stored items come with an expiration date.
 
-**`Memberof`**
-
-BaseItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:367](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L367)
+[shared/interfaces/item.ts:367](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L367)
 
 ___
 
@@ -210,13 +168,9 @@ ___
 
 The name of this item.
 
-**`Memberof`**
-
-BaseItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:300](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L300)
+[shared/interfaces/item.ts:300](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L300)
 
 ___
 
@@ -226,17 +180,13 @@ ___
 
 The version of this item it is based upon.
 
-**`Memberof`**
-
-SharedItem
-
 #### Inherited from
 
 [SharedItem](shared_interfaces_item_SharedItem.md).[version](shared_interfaces_item_SharedItem.md#version)
 
 #### Defined in
 
-[shared/interfaces/item.ts:212](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L212)
+[shared/interfaces/item.ts:212](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L212)
 
 ___
 
@@ -246,10 +196,6 @@ ___
 
 The weight of this item.
 
-**`Memberof`**
-
-BaseItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:325](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L325)
+[shared/interfaces/item.ts:325](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L325)

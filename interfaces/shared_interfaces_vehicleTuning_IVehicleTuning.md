@@ -11,8 +11,6 @@ order: 0
 
 Tuning to apply to an owned vehicle.
 
-**`Export`**
-
 **`Interface`**
 
 IVehicleTuning
@@ -25,13 +23,9 @@ IVehicleTuning
 
 Cannot exceed modkit count
 
-**`Memberof`**
-
-IVehicleTuning
-
 #### Defined in
 
-[shared/interfaces/vehicleTuning.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleTuning.ts#L16)
+[shared/interfaces/vehicleTuning.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleTuning.ts#L16)
 
 ___
 
@@ -41,10 +35,6 @@ ___
 
 Mods to apply to this vehicle
 
-**`Memberof`**
-
-IVehicleTuning
-
 #### Defined in
 
-[shared/interfaces/vehicleTuning.ts:24](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleTuning.ts#L24)
+[shared/interfaces/vehicleTuning.ts:24](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleTuning.ts#L24)

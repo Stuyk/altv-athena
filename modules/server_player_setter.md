@@ -17,10 +17,6 @@ Athena.player.setter.**account**(`player`, `accountData`): `Promise`<`void`\>
 
 Set the current account data for this player.
 
-**`Memberof`**
-
-SetPrototype
-
 #### Parameters
 
 | Name | Type |
@@ -34,7 +30,7 @@ SetPrototype
 
 #### Defined in
 
-[server/player/setter.ts:20](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L20)
+[server/player/setter.ts:20](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/setter.ts#L20)
 
 ___
 
@@ -57,7 +53,7 @@ Athena.player.setter.**actionMenu**(`player`, `actionMenu`): `any`
 
 #### Defined in
 
-[server/player/setter.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L37)
+[server/player/setter.ts:37](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/setter.ts#L37)
 
 ___
 
@@ -68,8 +64,6 @@ Athena.player.setter.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any setter functions
-
-**`Export`**
 
 #### Parameters
 
@@ -84,15 +78,13 @@ Used to override any setter functions
 
 #### Defined in
 
-[server/player/setter.ts:68](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L68)
+[server/player/setter.ts:68](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/setter.ts#L68)
 
 ::: tip Usage
 Athena.player.setter.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any setter functions
-
-**`Export`**
 
 #### Parameters
 
@@ -107,15 +99,13 @@ Used to override any setter functions
 
 #### Defined in
 
-[server/player/setter.ts:69](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L69)
+[server/player/setter.ts:69](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/setter.ts#L69)
 
 ::: tip Usage
 Athena.player.setter.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any setter functions
-
-**`Export`**
 
 #### Parameters
 
@@ -130,7 +120,7 @@ Used to override any setter functions
 
 #### Defined in
 
-[server/player/setter.ts:70](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L70)
+[server/player/setter.ts:70](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/setter.ts#L70)
 
 ___
 
@@ -141,10 +131,6 @@ Athena.player.setter.**respawned**(`player`, `position`): `void`
 :::
 
 Set this player as respawned.
-
-**`Memberof`**
-
-SetPrototype
 
 #### Parameters
 
@@ -159,4 +145,4 @@ SetPrototype
 
 #### Defined in
 
-[server/player/setter.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L50)
+[server/player/setter.ts:50](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/setter.ts#L50)

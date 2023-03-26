@@ -11,8 +11,6 @@ order: 0
 
 This interface is used to describe appearance info that has colors.
 
-**`Export`**
-
 **`Interface`**
 
 ColorInfo
@@ -25,7 +23,7 @@ ColorInfo
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:206](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L206)
+[shared/interfaces/appearance.ts:206](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L206)
 
 ___
 
@@ -35,7 +33,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:207](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L207)
+[shared/interfaces/appearance.ts:207](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L207)
 
 ___
 
@@ -45,7 +43,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:204](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L204)
+[shared/interfaces/appearance.ts:204](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L204)
 
 ___
 
@@ -55,7 +53,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:208](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L208)
+[shared/interfaces/appearance.ts:208](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L208)
 
 ___
 
@@ -65,4 +63,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:205](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L205)
+[shared/interfaces/appearance.ts:205](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L205)

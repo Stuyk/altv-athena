@@ -11,8 +11,6 @@ order: 0
 
 Used to pass an in-world marker from server to client.
 
-**`Export`**
-
 **`Interface`**
 
 IWorldNotification
@@ -26,13 +24,9 @@ IWorldNotification
 The background color associated with this notification.
 There are at least 30.
 
-**`Memberof`**
-
-IWorldNotification
-
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iWorldNotification.ts#L38)
+[shared/interfaces/iWorldNotification.ts:38](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iWorldNotification.ts#L38)
 
 ___
 
@@ -42,13 +36,9 @@ ___
 
 The dimension to display this IWorldNotification in.
 
-**`Memberof`**
-
-IWorldNotification
-
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:59](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iWorldNotification.ts#L59)
+[shared/interfaces/iWorldNotification.ts:59](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iWorldNotification.ts#L59)
 
 ___
 
@@ -58,13 +48,9 @@ ___
 
 The max distance to render this IWorldNotification.
 
-**`Memberof`**
-
-IWorldNotification
-
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:45](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iWorldNotification.ts#L45)
+[shared/interfaces/iWorldNotification.ts:45](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iWorldNotification.ts#L45)
 
 ___
 
@@ -74,13 +60,9 @@ ___
 
 Position of the Object in a 3D space.
 
-**`Memberof`**
-
-IObject
-
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iWorldNotification.ts#L16)
+[shared/interfaces/iWorldNotification.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iWorldNotification.ts#L16)
 
 ___
 
@@ -90,13 +72,9 @@ ___
 
 Text to display for this world notification.
 
-**`Memberof`**
-
-IWorldNotification
-
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iWorldNotification.ts#L23)
+[shared/interfaces/iWorldNotification.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iWorldNotification.ts#L23)
 
 ___
 
@@ -106,13 +84,9 @@ ___
 
 The IWorldNotification Type Associated with this IWorldNotification
 
-**`Memberof`**
-
-IWorldNotification
-
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iWorldNotification.ts#L30)
+[shared/interfaces/iWorldNotification.ts:30](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iWorldNotification.ts#L30)
 
 ___
 
@@ -122,10 +96,6 @@ ___
 
 The unique identifier for this IWorldNotification.
 
-**`Memberof`**
-
-IWorldNotification
-
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iWorldNotification.ts#L52)
+[shared/interfaces/iWorldNotification.ts:52](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iWorldNotification.ts#L52)

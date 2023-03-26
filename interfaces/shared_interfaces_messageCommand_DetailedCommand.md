@@ -25,17 +25,13 @@ Construct a type with the properties of T except for those in type K.
 
 A description of this command.
 
-**`Memberof`**
-
-MessageCommand
-
 #### Inherited from
 
 Omit.description
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:25](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/messageCommand.ts#L25)
+[shared/interfaces/messageCommand.ts:25](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/messageCommand.ts#L25)
 
 ___
 
@@ -45,17 +41,13 @@ ___
 
 Should this command use character permissions instead of account?
 
-**`Memberof`**
-
-MessageCommand
-
 #### Inherited from
 
 Omit.isCharacterPermission
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:41](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/messageCommand.ts#L41)
+[shared/interfaces/messageCommand.ts:41](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/messageCommand.ts#L41)
 
 ___
 
@@ -65,17 +57,13 @@ ___
 
 The plain text iteration of this command.
 
-**`Memberof`**
-
-MessageCommand
-
 #### Inherited from
 
 Omit.name
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:17](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/messageCommand.ts#L17)
+[shared/interfaces/messageCommand.ts:17](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/messageCommand.ts#L17)
 
 ___
 
@@ -85,13 +73,9 @@ ___
 
 An array of parameters that belong to this command
 
-**`Memberof`**
-
-DetailedCommand
-
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:58](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/messageCommand.ts#L58)
+[shared/interfaces/messageCommand.ts:58](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/messageCommand.ts#L58)
 
 ___
 
@@ -101,14 +85,10 @@ ___
 
 An array of individual permission strings required to run this command.
 
-**`Memberof`**
-
-MessageCommand
-
 #### Inherited from
 
 Omit.permissions
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:33](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/messageCommand.ts#L33)
+[shared/interfaces/messageCommand.ts:33](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/messageCommand.ts#L33)

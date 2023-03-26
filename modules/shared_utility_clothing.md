@@ -22,7 +22,7 @@ order: 0
 
 #### Defined in
 
-[shared/utility/clothing.ts:6](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/clothing.ts#L6)
+[shared/utility/clothing.ts:6](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/clothing.ts#L6)
 
 ## Functions
 
@@ -33,8 +33,6 @@ AthenaShared.utility.clothing.**clothingComponentToIconName**(`sex`, `components
 :::
 
 Converts a clothing component to the corresponding icon name that should be used.
-
-**`Export`**
 
 #### Parameters
 
@@ -49,7 +47,7 @@ Converts a clothing component to the corresponding icon name that should be used
 
 #### Defined in
 
-[shared/utility/clothing.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/clothing.ts#L43)
+[shared/utility/clothing.ts:43](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/clothing.ts#L43)
 
 ___
 
@@ -61,8 +59,6 @@ AthenaShared.utility.clothing.**clothingItemToIconName**(`item`): `string`
 
 Converts clothing information to an icon name that can be used
 componentIdentifier-dlcHash-isProp?-isNotShared?-drawableID
-
-**`Export`**
 
 #### Parameters
 
@@ -76,4 +72,4 @@ componentIdentifier-dlcHash-isProp?-isNotShared?-drawableID
 
 #### Defined in
 
-[shared/utility/clothing.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/clothing.ts#L16)
+[shared/utility/clothing.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/clothing.ts#L16)

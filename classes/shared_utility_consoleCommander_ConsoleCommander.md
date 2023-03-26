@@ -27,17 +27,13 @@ Return a list of commands...
 
 **`Static`**
 
-**`Memberof`**
-
-ConsoleCommander
-
 #### Returns
 
 `string`[]
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:61](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/consoleCommander.ts#L61)
+[shared/utility/consoleCommander.ts:61](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/consoleCommander.ts#L61)
 
 ___
 
@@ -60,7 +56,7 @@ AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **init**(`alt`):
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:25](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/consoleCommander.ts#L25)
+[shared/utility/consoleCommander.ts:25](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/consoleCommander.ts#L25)
 
 ___
 
@@ -73,10 +69,6 @@ AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **invokeCommand*
 Allows a console command to be invoked through other means.
 
 **`Static`**
-
-**`Memberof`**
-
-ConsoleCommander
 
 #### Parameters
 
@@ -91,7 +83,7 @@ ConsoleCommander
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/consoleCommander.ts#L37)
+[shared/utility/consoleCommander.ts:37](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/consoleCommander.ts#L37)
 
 ___
 
@@ -106,10 +98,6 @@ Depends on the folder you are writing inside of.
 
 **`Static`**
 
-**`Memberof`**
-
-ConsoleCommander
-
 #### Parameters
 
 | Name | Type |
@@ -123,4 +111,4 @@ ConsoleCommander
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/consoleCommander.ts#L50)
+[shared/utility/consoleCommander.ts:50](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/consoleCommander.ts#L50)

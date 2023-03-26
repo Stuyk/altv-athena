@@ -29,7 +29,7 @@ Returns the total weight of a given data set.
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/weight.ts#L10)
+[server/systems/inventory/weight.ts:10](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/weight.ts#L10)
 
 ___
 
@@ -53,7 +53,7 @@ Get the total weight for given data sets.
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:33](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/weight.ts#L33)
+[server/systems/inventory/weight.ts:33](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/weight.ts#L33)
 
 ___
 
@@ -78,7 +78,7 @@ Determine if the weight is exceeded for a given data sets given the amount of we
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/weight.ts#L50)
+[server/systems/inventory/weight.ts:50](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/weight.ts#L50)
 
 ___
 
@@ -89,8 +89,6 @@ Athena.systems.inventory.weight.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override inventory item weight functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -105,15 +103,13 @@ Used to override inventory item weight functionality
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:71](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/weight.ts#L71)
+[server/systems/inventory/weight.ts:71](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/weight.ts#L71)
 
 ::: tip Usage
 Athena.systems.inventory.weight.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override inventory item weight functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -128,15 +124,13 @@ Used to override inventory item weight functionality
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/weight.ts#L72)
+[server/systems/inventory/weight.ts:72](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/weight.ts#L72)
 
 ::: tip Usage
 Athena.systems.inventory.weight.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override inventory item weight functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -151,4 +145,4 @@ Used to override inventory item weight functionality
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:73](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/weight.ts#L73)
+[server/systems/inventory/weight.ts:73](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/weight.ts#L73)

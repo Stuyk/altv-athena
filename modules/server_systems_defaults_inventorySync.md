@@ -17,13 +17,10 @@ Athena.systems.defaults.inventorySync.**disable**(): `void`
 
 Disables inventory synchronization when the inventory or toolbar is changed.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.systems.default.ammo.disable();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -31,4 +28,4 @@ Athena.systems.default.ammo.disable();
 
 #### Defined in
 
-[server/systems/defaults/inventorySync.ts:114](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/inventorySync.ts#L114)
+[server/systems/defaults/inventorySync.ts:114](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/inventorySync.ts#L114)

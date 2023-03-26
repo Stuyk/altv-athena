@@ -11,8 +11,6 @@ order: 0
 
 Used when prompting the user with an accept / decline event.
 
-**`Export`**
-
 **`Interface`**
 
 AcceptDeclineEvent
@@ -31,7 +29,7 @@ AcceptDeclineEvent
 
 #### Defined in
 
-[shared/interfaces/acceptDeclineEvent.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/acceptDeclineEvent.ts#L14)
+[shared/interfaces/acceptDeclineEvent.ts:14](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/acceptDeclineEvent.ts#L14)
 
 ___
 
@@ -48,7 +46,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/acceptDeclineEvent.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/acceptDeclineEvent.ts#L10)
+[shared/interfaces/acceptDeclineEvent.ts:10](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/acceptDeclineEvent.ts#L10)
 
 ___
 
@@ -58,4 +56,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/acceptDeclineEvent.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/acceptDeclineEvent.ts#L9)
+[shared/interfaces/acceptDeclineEvent.ts:9](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/acceptDeclineEvent.ts#L9)

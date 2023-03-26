@@ -23,8 +23,7 @@ Returns a uid or generates one if not specified.
 - See [alt:V Blip Sprites](https://docs.altv.mp/gta/articles/references/blips.html)
 - See [alt:V Blip Colors](https://docs.altv.mp/gta/articles/references/blips.html#colors)
 
-**`Example`**
-
+#### Example
 ```ts
 const uid = Athena.controllers.blip.addToPlayer(somePlayer, {
     color: 5,
@@ -49,7 +48,7 @@ const uid = Athena.controllers.blip.addToPlayer(somePlayer, {
 
 #### Defined in
 
-[server/controllers/blip.ts:146](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L146)
+[server/controllers/blip.ts:146](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/blip.ts#L146)
 
 ___
 
@@ -66,8 +65,7 @@ Returns a uid or generates one if not specified.
 - See [alt:V Blip Sprites](https://docs.altv.mp/gta/articles/references/blips.html)
 - See [alt:V Blip Colors](https://docs.altv.mp/gta/articles/references/blips.html#colors)
 
-**`Example`**
-
+#### Example
 ```ts
 const uid = Athena.controllers.blip.append({
     color: 5,
@@ -93,7 +91,7 @@ A uid to remove it later.
 
 #### Defined in
 
-[server/controllers/blip.ts:33](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L33)
+[server/controllers/blip.ts:33](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/blip.ts#L33)
 
 ___
 
@@ -104,8 +102,6 @@ Athena.controllers.blip.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any blip controller function.
-
-**`Export`**
 
 #### Parameters
 
@@ -120,15 +116,13 @@ Used to override any blip controller function.
 
 #### Defined in
 
-[server/controllers/blip.ts:185](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L185)
+[server/controllers/blip.ts:185](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/blip.ts#L185)
 
 ::: tip Usage
 Athena.controllers.blip.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any blip controller function.
-
-**`Export`**
 
 #### Parameters
 
@@ -143,15 +137,13 @@ Used to override any blip controller function.
 
 #### Defined in
 
-[server/controllers/blip.ts:186](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L186)
+[server/controllers/blip.ts:186](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/blip.ts#L186)
 
 ::: tip Usage
 Athena.controllers.blip.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any blip controller function.
-
-**`Export`**
 
 #### Parameters
 
@@ -166,15 +158,13 @@ Used to override any blip controller function.
 
 #### Defined in
 
-[server/controllers/blip.ts:187](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L187)
+[server/controllers/blip.ts:187](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/blip.ts#L187)
 
 ::: tip Usage
 Athena.controllers.blip.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any blip controller function.
-
-**`Export`**
 
 #### Parameters
 
@@ -189,15 +179,13 @@ Used to override any blip controller function.
 
 #### Defined in
 
-[server/controllers/blip.ts:188](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L188)
+[server/controllers/blip.ts:188](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/blip.ts#L188)
 
 ::: tip Usage
 Athena.controllers.blip.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any blip controller function.
-
-**`Export`**
 
 #### Parameters
 
@@ -212,7 +200,7 @@ Used to override any blip controller function.
 
 #### Defined in
 
-[server/controllers/blip.ts:189](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L189)
+[server/controllers/blip.ts:189](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/blip.ts#L189)
 
 ___
 
@@ -225,13 +213,10 @@ Athena.controllers.blip.**populateGlobalBlips**(`player`): `any`
 Used to load all blips on client-side for a player.
 This is already called when the gamemode starts. Not necessary to call twice.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.controllers.blip.populateGlobalBlips(somePlayer);
 ```
-
-**`Export`**
 
 #### Parameters
 
@@ -245,7 +230,7 @@ Athena.controllers.blip.populateGlobalBlips(somePlayer);
 
 #### Defined in
 
-[server/controllers/blip.ts:170](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L170)
+[server/controllers/blip.ts:170](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/blip.ts#L170)
 
 ___
 
@@ -257,8 +242,7 @@ Athena.controllers.blip.**remove**(`uid`): `boolean`
 
 Removes a blip based on uid.
 
-**`Example`**
-
+#### Example
 ```ts
 const uid = Athena.controllers.blip.append({
     color: 5,
@@ -284,7 +268,7 @@ Athena.controllers.blip.remove(uid);
 
 #### Defined in
 
-[server/controllers/blip.ts:73](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L73)
+[server/controllers/blip.ts:73](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/blip.ts#L73)
 
 ___
 
@@ -297,8 +281,7 @@ Athena.controllers.blip.**removeFromPlayer**(`player`, `uid`): `any`
 Remove a blip from the player.
 Do not worry about removing blips on disconnect.
 
-**`Example`**
-
+#### Example
 ```ts
 const uid = Athena.controllers.blip.addToPlayer(somePlayer, {
     color: 5,
@@ -325,4 +308,4 @@ Athena.controllers.blip.removeFromPlayer(somePlayer, uid);
 
 #### Defined in
 
-[server/controllers/blip.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L110)
+[server/controllers/blip.ts:110](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/blip.ts#L110)

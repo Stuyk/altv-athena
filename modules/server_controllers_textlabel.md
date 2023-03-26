@@ -21,8 +21,7 @@ Athena.controllers.textlabel.**addToPlayer**(`player`, `textLabel`): `string`
 
 Add a local text label to player.
 
-**`Example`**
-
+#### Example
 ```ts
 const uid = Athena.controllers.textLabel.addToPlayer(somePlayer, { text: 'Hello World!', pos: { x: 0, y: 0, z: 0 }});
 
@@ -44,7 +43,7 @@ uid A unique string for removal
 
 #### Defined in
 
-[server/controllers/textlabel.ts:190](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/textlabel.ts#L190)
+[server/controllers/textlabel.ts:190](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/textlabel.ts#L190)
 
 ___
 
@@ -58,8 +57,7 @@ Adds a text label to the global streamer.
 
 Returns a uid or generates one if not specified.
 
-**`Example`**
-
+#### Example
 ```ts
 const uid = Athena.controllers.textLabel.append({ text: 'Hello World!', pos: { x: 0, y: 0, z: 0 }});
 
@@ -80,7 +78,7 @@ uid A unique string for removal
 
 #### Defined in
 
-[server/controllers/textlabel.ts:58](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/textlabel.ts#L58)
+[server/controllers/textlabel.ts:58](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/textlabel.ts#L58)
 
 ___
 
@@ -91,8 +89,6 @@ Athena.controllers.textlabel.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any text label streamer functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -107,15 +103,13 @@ Used to override any text label streamer functionality
 
 #### Defined in
 
-[server/controllers/textlabel.ts:216](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/textlabel.ts#L216)
+[server/controllers/textlabel.ts:216](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/textlabel.ts#L216)
 
 ::: tip Usage
 Athena.controllers.textlabel.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any text label streamer functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -130,15 +124,13 @@ Used to override any text label streamer functionality
 
 #### Defined in
 
-[server/controllers/textlabel.ts:217](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/textlabel.ts#L217)
+[server/controllers/textlabel.ts:217](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/textlabel.ts#L217)
 
 ::: tip Usage
 Athena.controllers.textlabel.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any text label streamer functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -153,15 +145,13 @@ Used to override any text label streamer functionality
 
 #### Defined in
 
-[server/controllers/textlabel.ts:218](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/textlabel.ts#L218)
+[server/controllers/textlabel.ts:218](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/textlabel.ts#L218)
 
 ::: tip Usage
 Athena.controllers.textlabel.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any text label streamer functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -176,15 +166,13 @@ Used to override any text label streamer functionality
 
 #### Defined in
 
-[server/controllers/textlabel.ts:219](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/textlabel.ts#L219)
+[server/controllers/textlabel.ts:219](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/textlabel.ts#L219)
 
 ::: tip Usage
 Athena.controllers.textlabel.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any text label streamer functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -199,7 +187,7 @@ Used to override any text label streamer functionality
 
 #### Defined in
 
-[server/controllers/textlabel.ts:220](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/textlabel.ts#L220)
+[server/controllers/textlabel.ts:220](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/textlabel.ts#L220)
 
 ___
 
@@ -211,8 +199,7 @@ Athena.controllers.textlabel.**remove**(`uid`): `boolean`
 
 Removes a text label based on uid from the global streamer
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.controllers.textLabel.remove(someUid);
 
@@ -231,7 +218,7 @@ Athena.controllers.textLabel.remove('uid-you-specify');
 
 #### Defined in
 
-[server/controllers/textlabel.ts:136](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/textlabel.ts#L136)
+[server/controllers/textlabel.ts:136](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/textlabel.ts#L136)
 
 ___
 
@@ -243,8 +230,7 @@ Athena.controllers.textlabel.**removeFromPlayer**(`player`, `uid`): `any`
 
 Remove a local text label from a player.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.controllers.textLabel.removeFromPlayer(somePlayer, someUid);
 
@@ -264,7 +250,7 @@ Athena.controllers.textLabel.removeFromPlayer(somePlayer, 'uid-you-specify');
 
 #### Defined in
 
-[server/controllers/textlabel.ts:164](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/textlabel.ts#L164)
+[server/controllers/textlabel.ts:164](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/textlabel.ts#L164)
 
 ___
 
@@ -282,8 +268,7 @@ Try not to perfrom this updates in an everyTick, and only update text labels.
 
 Specify player as the last parameter to update their instance; otherwise updates all players if uid matches.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.controllers.textLabel.update(someUid, { text: 'Hello World!' });
 
@@ -291,10 +276,6 @@ Athena.controllers.textLabel.update('uid-you-specify', { text: 'Hello World!' })
 
 Athena.controllers.textLabel.update('uid-you-specify', { text: 'Hello World!' }, somePlayer);
 ```
-
-**`Memberof`**
-
-ServerTextLabelController
 
 #### Parameters
 
@@ -310,4 +291,4 @@ ServerTextLabelController
 
 #### Defined in
 
-[server/controllers/textlabel.ts:101](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/textlabel.ts#L101)
+[server/controllers/textlabel.ts:101](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/textlabel.ts#L101)

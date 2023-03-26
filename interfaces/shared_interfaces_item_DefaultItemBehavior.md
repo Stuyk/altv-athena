@@ -11,8 +11,6 @@ order: 0
 
 Item behavior associated with an item
 
-**`Export`**
-
 **`Interface`**
 
 DefaultItemBehavior
@@ -25,13 +23,9 @@ DefaultItemBehavior
 
 Can this item be dropped.
 
-**`Memberof`**
-
-DefaultItemBehavior
-
 #### Defined in
 
-[shared/interfaces/item.ts:93](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L93)
+[shared/interfaces/item.ts:93](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L93)
 
 ___
 
@@ -41,13 +35,9 @@ ___
 
 Can the item be stacked
 
-**`Memberof`**
-
-DefaultItemBehavior
-
 #### Defined in
 
-[shared/interfaces/item.ts:101](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L101)
+[shared/interfaces/item.ts:101](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L101)
 
 ___
 
@@ -57,13 +47,9 @@ ___
 
 Can the item be traded
 
-**`Memberof`**
-
-DefaultItemBehavior
-
 #### Defined in
 
-[shared/interfaces/item.ts:109](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L109)
+[shared/interfaces/item.ts:109](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L109)
 
 ___
 
@@ -73,13 +59,9 @@ ___
 
 Destroy this item on drop.
 
-**`Memberof`**
-
-DefaultItemBehavior
-
 #### Defined in
 
-[shared/interfaces/item.ts:155](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L155)
+[shared/interfaces/item.ts:155](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L155)
 
 ___
 
@@ -91,13 +73,9 @@ Used to state that an item is clothing.
 
 DO NOT specify isEquippable with this; leave it as false.
 
-**`Memberof`**
-
-DefaultItemBehavior
-
 #### Defined in
 
-[shared/interfaces/item.ts:119](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L119)
+[shared/interfaces/item.ts:119](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L119)
 
 ___
 
@@ -108,13 +86,9 @@ ___
 Override default icon behavior for items such as clothing.
 Allows for specifying a custom icon instead.
 
-**`Memberof`**
-
-DefaultItemBehavior
-
 #### Defined in
 
-[shared/interfaces/item.ts:164](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L164)
+[shared/interfaces/item.ts:164](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L164)
 
 ___
 
@@ -126,13 +100,9 @@ Do not specify clothing, and weapon with this.
 
 Just only specify this one if doing custom equips.
 
-**`Memberof`**
-
-DefaultItemBehavior
-
 #### Defined in
 
-[shared/interfaces/item.ts:147](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L147)
+[shared/interfaces/item.ts:147](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L147)
 
 ___
 
@@ -142,13 +112,9 @@ ___
 
 Can this item be added to the toolbar.
 
-**`Memberof`**
-
-DefaultItemBehavior
-
 #### Defined in
 
-[shared/interfaces/item.ts:127](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L127)
+[shared/interfaces/item.ts:127](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L127)
 
 ___
 
@@ -160,10 +126,6 @@ Is this item a weapon?
 
 DO NOT specify isEquippable with this; leave it as false.
 
-**`Memberof`**
-
-DefaultItemBehavior
-
 #### Defined in
 
-[shared/interfaces/item.ts:137](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L137)
+[shared/interfaces/item.ts:137](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L137)

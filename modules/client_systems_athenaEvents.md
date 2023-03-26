@@ -19,14 +19,10 @@ Sends an event to the server when the local player's waypoint is updated.
 
 **`Static`**
 
-**`Memberof`**
-
-AthenaEvents
-
 #### Returns
 
 `Promise`<`void`\>
 
 #### Defined in
 
-[client/systems/athenaEvents.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/athenaEvents.ts#L37)
+[client/systems/athenaEvents.ts:37](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/systems/athenaEvents.ts#L37)

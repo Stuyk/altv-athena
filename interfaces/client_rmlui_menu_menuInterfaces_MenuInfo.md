@@ -24,7 +24,7 @@ order: 0
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:126](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L126)
+[client/rmlui/menu/menuInterfaces.ts:126](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L126)
 
 ___
 
@@ -34,10 +34,6 @@ ___
 
 An array of available menu types to invoke.
 
-**`Memberof`**
-
-MenuInfo
-
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:148](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L148)
+[client/rmlui/menu/menuInterfaces.ts:148](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L148)

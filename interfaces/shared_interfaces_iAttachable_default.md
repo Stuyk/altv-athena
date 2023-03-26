@@ -11,8 +11,6 @@ order: 0
 
 Used in the attachement system when attaching objects to a player.
 
-**`Export`**
-
 **`Interface`**
 
 IAttachable
@@ -37,13 +35,9 @@ This is a 'Bone ID' and not a 'Bone Index'
 
 Use the PedBone enum provided in Athena for correct value
 
-**`Memberof`**
-
-IAttachable
-
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L51)
+[shared/interfaces/iAttachable.ts:51](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L51)
 
 ___
 
@@ -53,13 +47,9 @@ ___
 
 Do not define this. Leave it alone.
 
-**`Memberof`**
-
-IAttachable
-
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:58](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L58)
+[shared/interfaces/iAttachable.ts:58](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L58)
 
 ___
 
@@ -69,13 +59,9 @@ ___
 
 The model or object of the attachable.
 
-**`Memberof`**
-
-IAttachable
-
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L23)
+[shared/interfaces/iAttachable.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L23)
 
 ___
 
@@ -85,13 +71,9 @@ ___
 
 The position where the object should be attached.
 
-**`Memberof`**
-
-IAttachable
-
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L30)
+[shared/interfaces/iAttachable.ts:30](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L30)
 
 ___
 
@@ -101,13 +83,9 @@ ___
 
 The rotation where the object should be attached.
 
-**`Memberof`**
-
-IAttachable
-
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L37)
+[shared/interfaces/iAttachable.ts:37](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L37)
 
 ___
 
@@ -117,10 +95,6 @@ ___
 
 The unique identifier for this attachable.
 
-**`Memberof`**
-
-IAttachable
-
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L16)
+[shared/interfaces/iAttachable.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L16)

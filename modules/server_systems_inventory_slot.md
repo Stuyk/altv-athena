@@ -17,8 +17,6 @@ Athena.systems.inventory.slot.**findOpen**(`slotSize`, `data`): `number` \| `und
 
 Find an open slot that is available within a dataset.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -32,7 +30,7 @@ Find an open slot that is available within a dataset.
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/slot.ts#L14)
+[server/systems/inventory/slot.ts:14](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/slot.ts#L14)
 
 ___
 
@@ -64,7 +62,7 @@ Returns undefined if an item is unavailable in a slot.
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:47](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/slot.ts#L47)
+[server/systems/inventory/slot.ts:47](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/slot.ts#L47)
 
 ___
 
@@ -75,8 +73,6 @@ Athena.systems.inventory.slot.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override inventory item slot functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -91,15 +87,13 @@ Used to override inventory item slot functionality
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:90](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/slot.ts#L90)
+[server/systems/inventory/slot.ts:90](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/slot.ts#L90)
 
 ::: tip Usage
 Athena.systems.inventory.slot.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override inventory item slot functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -114,15 +108,13 @@ Used to override inventory item slot functionality
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:91](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/slot.ts#L91)
+[server/systems/inventory/slot.ts:91](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/slot.ts#L91)
 
 ::: tip Usage
 Athena.systems.inventory.slot.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override inventory item slot functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -137,7 +129,7 @@ Used to override inventory item slot functionality
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:92](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/slot.ts#L92)
+[server/systems/inventory/slot.ts:92](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/slot.ts#L92)
 
 ___
 
@@ -164,4 +156,4 @@ Returns undefined if the item was not found.
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:67](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/slot.ts#L67)
+[server/systems/inventory/slot.ts:67](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/slot.ts#L67)

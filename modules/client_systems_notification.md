@@ -15,7 +15,7 @@ order: 0
 
 #### Defined in
 
-[client/systems/notification.ts:5](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/notification.ts#L5)
+[client/systems/notification.ts:5](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/systems/notification.ts#L5)
 
 ## Functions
 
@@ -29,8 +29,6 @@ Call a function back when a notification is received.
 
 Good for overwriting the default notification system and handling it on your own.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -43,7 +41,7 @@ Good for overwriting the default notification system and handling it on your own
 
 #### Defined in
 
-[client/systems/notification.ts:42](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/notification.ts#L42)
+[client/systems/notification.ts:42](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/systems/notification.ts#L42)
 
 ___
 
@@ -55,12 +53,10 @@ AthenaClient.systems.notification.**disableDefault**(): `void`
 
 Disable the default notification handler
 
-**`Export`**
-
 #### Returns
 
 `void`
 
 #### Defined in
 
-[client/systems/notification.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/notification.ts#L30)
+[client/systems/notification.ts:30](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/systems/notification.ts#L30)

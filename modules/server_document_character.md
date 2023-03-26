@@ -33,7 +33,7 @@ Athena.document.character.(`player`, `newValue`, `oldValue`): `void`
 
 #### Defined in
 
-[server/document/character.ts:7](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L7)
+[server/document/character.ts:7](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L7)
 
 ## Functions
 
@@ -62,7 +62,7 @@ This should be the first thing you do after having a user authenticate and selec
 
 #### Defined in
 
-[server/document/character.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L23)
+[server/document/character.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L23)
 
 ___
 
@@ -76,8 +76,7 @@ Return current player data and their associated character object.
 
 Can also append custom objects to the generic type to obtain custom data from the database.
 
-**`Example`**
-
+#### Example
 ```ts
 interface Testing {
     myProperty: string;
@@ -114,7 +113,7 @@ function someFunction(player: alt.Player) {
 
 #### Defined in
 
-[server/document/character.ts:76](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L76)
+[server/document/character.ts:76](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L76)
 
 ___
 
@@ -147,7 +146,7 @@ Can be extended to obtain any value easily.
 
 #### Defined in
 
-[server/document/character.ts:93](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L93)
+[server/document/character.ts:93](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L93)
 
 ___
 
@@ -159,13 +158,9 @@ Athena.document.character.**onChange**<`T`\>(`fieldName`, `callback`): `any`
 
 Invokes the callback function when a document with a specific field name has changed.
 
-**`Function`**
-
 **`Name`**
 
 onChange
-
-**`Exports`**
 
 #### Type parameters
 
@@ -184,9 +179,11 @@ onChange
 
 `any`
 
+s
+
 #### Defined in
 
-[server/document/character.ts:223](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L223)
+[server/document/character.ts:223](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L223)
 
 ___
 
@@ -197,8 +194,6 @@ Athena.document.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any character document functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -213,15 +208,13 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:263](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L263)
+[server/document/character.ts:263](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L263)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any character document functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -236,15 +229,13 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:264](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L264)
+[server/document/character.ts:264](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L264)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any character document functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -259,15 +250,13 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:265](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L265)
+[server/document/character.ts:265](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L265)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any character document functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -282,15 +271,13 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:266](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L266)
+[server/document/character.ts:266](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L266)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any character document functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -305,15 +292,13 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:267](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L267)
+[server/document/character.ts:267](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L267)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any character document functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -328,15 +313,13 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:268](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L268)
+[server/document/character.ts:268](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L268)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any character document functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -351,7 +334,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:269](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L269)
+[server/document/character.ts:269](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L269)
 
 ___
 
@@ -365,8 +348,7 @@ Sets a player document value, and saves it automatically to the selected charact
 
 Automatically calls all callbacks associated with the field name.
 
-**`Example`**
-
+#### Example
 ```ts
 await Athena.document.character.set(somePlayer, 'cash', 50);
 
@@ -401,7 +383,7 @@ await Athena.document.character.set<CustomCharacter>(somePlayer, 'someKey', 'hel
 
 #### Defined in
 
-[server/document/character.ts:132](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L132)
+[server/document/character.ts:132](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L132)
 
 ___
 
@@ -434,7 +416,7 @@ Automatically calls all callbacks associated with the field name.
 
 #### Defined in
 
-[server/document/character.ts:187](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L187)
+[server/document/character.ts:187](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L187)
 
 ___
 
@@ -458,4 +440,4 @@ Unbind stored player character cache data.
 
 #### Defined in
 
-[server/document/character.ts:40](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/document/character.ts#L40)
+[server/document/character.ts:40](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/document/character.ts#L40)

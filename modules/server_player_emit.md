@@ -31,7 +31,7 @@ They must react by holding l-shift to open the menu.
 
 #### Defined in
 
-[server/player/emit.ts:560](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L560)
+[server/player/emit.ts:560](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L560)
 
 ___
 
@@ -42,10 +42,6 @@ Athena.player.emit.**animation**(`player`, `dictionary`, `name`, `flags`, `durat
 :::
 
 Play an animation on this player.
-
-**`Memberof`**
-
-EmitPrototype
 
 #### Parameters
 
@@ -63,7 +59,7 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:85](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L85)
+[server/player/emit.ts:85](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L85)
 
 ___
 
@@ -88,7 +84,7 @@ Does not trigger if the player is in a vehicle.
 
 #### Defined in
 
-[server/player/emit.ts:111](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L111)
+[server/player/emit.ts:111](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L111)
 
 ___
 
@@ -112,7 +108,7 @@ Clears a 'credits' display.
 
 #### Defined in
 
-[server/player/emit.ts:411](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L411)
+[server/player/emit.ts:411](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L411)
 
 ___
 
@@ -136,7 +132,7 @@ Clear a full-screen message.
 
 #### Defined in
 
-[server/player/emit.ts:360](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L360)
+[server/player/emit.ts:360](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L360)
 
 ___
 
@@ -160,7 +156,7 @@ Clear a shard.
 
 #### Defined in
 
-[server/player/emit.ts:385](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L385)
+[server/player/emit.ts:385](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L385)
 
 ___
 
@@ -185,7 +181,7 @@ No UID necessary since it can only have one spinner at a time.
 
 #### Defined in
 
-[server/player/emit.ts:335](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L335)
+[server/player/emit.ts:335](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L335)
 
 ___
 
@@ -196,8 +192,6 @@ Athena.player.emit.**clearTimeCycleEffect**(`player`): `void`
 :::
 
 Used to clear a screen effect from a player.
-
-**`Export`**
 
 #### Parameters
 
@@ -211,7 +205,7 @@ Used to clear a screen effect from a player.
 
 #### Defined in
 
-[server/player/emit.ts:613](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L613)
+[server/player/emit.ts:613](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L613)
 
 ___
 
@@ -237,7 +231,7 @@ Automatically clear(s) over-time.
 
 #### Defined in
 
-[server/player/emit.ts:399](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L399)
+[server/player/emit.ts:399](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L399)
 
 ___
 
@@ -262,7 +256,7 @@ Create a full-screen message. Cannot be cleared by the player.
 
 #### Defined in
 
-[server/player/emit.ts:348](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L348)
+[server/player/emit.ts:348](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L348)
 
 ___
 
@@ -288,7 +282,7 @@ Create a subtitle on the bottom of the screen with optional duration.
 
 #### Defined in
 
-[server/player/emit.ts:206](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L206)
+[server/player/emit.ts:206](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L206)
 
 ___
 
@@ -315,7 +309,7 @@ A unique identifier to remove the progress bar.
 
 #### Defined in
 
-[server/player/emit.ts:220](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L220)
+[server/player/emit.ts:220](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L220)
 
 ___
 
@@ -340,7 +334,7 @@ Create a full-screen shard. Similar to 'mission-passed' or 'wasted'.
 
 #### Defined in
 
-[server/player/emit.ts:373](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L373)
+[server/player/emit.ts:373](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L373)
 
 ___
 
@@ -365,7 +359,7 @@ Create a spinner in the bottom-right corner.
 
 #### Defined in
 
-[server/player/emit.ts:322](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L322)
+[server/player/emit.ts:322](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L322)
 
 ___
 
@@ -377,8 +371,6 @@ Athena.player.emit.**fadeScreenFromBlack**(`player`, `timeInMs`): `void`
 
 Removes the black filter over the screen over time.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -392,7 +384,7 @@ Removes the black filter over the screen over time.
 
 #### Defined in
 
-[server/player/emit.ts:587](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L587)
+[server/player/emit.ts:587](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L587)
 
 ___
 
@@ -404,8 +396,6 @@ Athena.player.emit.**fadeScreenToBlack**(`player`, `timeInMs`): `void`
 
 Turns the player's screen black over time.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -419,7 +409,7 @@ Turns the player's screen black over time.
 
 #### Defined in
 
-[server/player/emit.ts:576](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L576)
+[server/player/emit.ts:576](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L576)
 
 ___
 
@@ -444,7 +434,7 @@ Emit a message to a given player.
 
 #### Defined in
 
-[server/player/emit.ts:545](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L545)
+[server/player/emit.ts:545](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L545)
 
 ___
 
@@ -455,10 +445,6 @@ Athena.player.emit.**meta**(`player`, `key`, `value`): `void`
 :::
 
 Synchronize a local variable to access locally for this player.
-
-**`Memberof`**
-
-EmitPrototype
 
 #### Parameters
 
@@ -474,7 +460,7 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:157](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L157)
+[server/player/emit.ts:157](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L157)
 
 ___
 
@@ -485,10 +471,6 @@ Athena.player.emit.**notification**(`player`, `message`): `void`
 :::
 
 Send a notification to this player.
-
-**`Memberof`**
-
-EmitPrototype
 
 #### Parameters
 
@@ -503,7 +485,7 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:170](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L170)
+[server/player/emit.ts:170](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L170)
 
 ___
 
@@ -533,7 +515,7 @@ UID for attachable object
 
 #### Defined in
 
-[server/player/emit.ts:428](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L428)
+[server/player/emit.ts:428](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L428)
 
 ___
 
@@ -558,7 +540,7 @@ Remove an object from the player.
 
 #### Defined in
 
-[server/player/emit.ts:475](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L475)
+[server/player/emit.ts:475](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L475)
 
 ___
 
@@ -584,7 +566,7 @@ Play a particle effect at a specific coordinate.
 
 #### Defined in
 
-[server/player/emit.ts:183](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L183)
+[server/player/emit.ts:183](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L183)
 
 ___
 
@@ -609,7 +591,7 @@ Remove a progress bar based on its unique identifier.
 
 #### Defined in
 
-[server/player/emit.ts:238](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L238)
+[server/player/emit.ts:238](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L238)
 
 ___
 
@@ -620,10 +602,6 @@ Athena.player.emit.**scenario**(`player`, `name`, `duration`): `void`
 :::
 
 Play an animation on this player.
-
-**`Memberof`**
-
-EmitPrototype
 
 #### Parameters
 
@@ -639,7 +617,7 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:138](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L138)
+[server/player/emit.ts:138](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L138)
 
 ___
 
@@ -652,8 +630,6 @@ Athena.player.emit.**setTimeCycleEffect**(`player`, `name`, `amountInMs`): `any`
 Used to apply on-screen effects to a given player.
 
 Think of like screen wobbling, drunkness, etc.
-
-**`Export`**
 
 #### Parameters
 
@@ -669,7 +645,7 @@ Think of like screen wobbling, drunkness, etc.
 
 #### Defined in
 
-[server/player/emit.ts:591](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L591)
+[server/player/emit.ts:591](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L591)
 
 ::: tip Usage
 Athena.player.emit.**setTimeCycleEffect**(`player`, `name`, `amountInMs`): `any`
@@ -678,8 +654,6 @@ Athena.player.emit.**setTimeCycleEffect**(`player`, `name`, `amountInMs`): `any`
 Used to apply on-screen effects to a given player.
 
 Think of like screen wobbling, drunkness, etc.
-
-**`Export`**
 
 #### Parameters
 
@@ -695,7 +669,7 @@ Think of like screen wobbling, drunkness, etc.
 
 #### Defined in
 
-[server/player/emit.ts:592](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L592)
+[server/player/emit.ts:592](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L592)
 
 ___
 
@@ -708,8 +682,6 @@ Athena.player.emit.**setWeather**(`player`, `weather`, `timeInSeconds`): `void`
 Cleanly transition weather from current weather to a new weather type.
 
 Does not use alt:V functionality. Only uses natives.
-
-**`Export`**
 
 #### Parameters
 
@@ -725,7 +697,7 @@ Does not use alt:V functionality. Only uses natives.
 
 #### Defined in
 
-[server/player/emit.ts:626](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L626)
+[server/player/emit.ts:626](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L626)
 
 ___
 
@@ -752,7 +724,7 @@ Play a sound without any positional data.
 
 #### Defined in
 
-[server/player/emit.ts:253](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L253)
+[server/player/emit.ts:253](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L253)
 
 ___
 
@@ -763,10 +735,6 @@ Athena.player.emit.**sound3D**(`player`, `audioName`, `target`, `soundInstantID?
 :::
 
 Play a sound from at a target's location for this player.
-
-**`Memberof`**
-
-EmitPrototype
 
 #### Parameters
 
@@ -783,7 +751,7 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:268](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L268)
+[server/player/emit.ts:268](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L268)
 
 ___
 
@@ -794,10 +762,6 @@ Athena.player.emit.**soundFrontend**(`player`, `audioName`, `ref`): `void`
 :::
 
 Play a frontend sound for this player.
-
-**`Memberof`**
-
-EmitPrototype
 
 #### Parameters
 
@@ -813,7 +777,7 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:297](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L297)
+[server/player/emit.ts:297](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L297)
 
 ___
 
@@ -824,10 +788,6 @@ Athena.player.emit.**soundStop**(`player`, `soundInstantID?`): `void`
 :::
 
 Stop all sounds.
-
-**`Memberof`**
-
-EmitPrototype
 
 #### Parameters
 
@@ -842,7 +802,7 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:283](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L283)
+[server/player/emit.ts:283](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L283)
 
 ___
 
@@ -854,10 +814,6 @@ Athena.player.emit.**startAlarm**(`player`, `name`): `void`
 
 Play an alarm on this player.
 List of all alarms: https://github.com/DurtyFree/gta-v-data-dumps/blob/master/alarmSounds.json
-
-**`Memberof`**
-
-EmitPrototype
 
 #### Parameters
 
@@ -872,7 +828,7 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L29)
+[server/player/emit.ts:29](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L29)
 
 ___
 
@@ -897,7 +853,7 @@ Stop an alarm for this player.
 
 #### Defined in
 
-[server/player/emit.ts:48](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L48)
+[server/player/emit.ts:48](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L48)
 
 ___
 
@@ -921,7 +877,7 @@ Stop all alarms for this player.
 
 #### Defined in
 
-[server/player/emit.ts:64](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L64)
+[server/player/emit.ts:64](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L64)
 
 ___
 
@@ -946,7 +902,7 @@ Force the player to perform an uncancellable task timeline.
 
 #### Defined in
 
-[server/player/emit.ts:309](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L309)
+[server/player/emit.ts:309](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L309)
 
 ___
 
@@ -975,7 +931,7 @@ The object is only seen by this one player.
 
 #### Defined in
 
-[server/player/emit.ts:509](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L509)
+[server/player/emit.ts:509](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L509)
 
 ___
 
@@ -1002,4 +958,4 @@ Can emit events to client or server-side.
 
 #### Defined in
 
-[server/player/emit.ts:531](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L531)
+[server/player/emit.ts:531](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/player/emit.ts#L531)

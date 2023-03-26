@@ -17,13 +17,10 @@ Athena.systems.defaults.time.**disable**(): `void`
 
 Disable the default time synchronization on server-side.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.systems.default.time.disable();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -31,7 +28,7 @@ Athena.systems.default.time.disable();
 
 #### Defined in
 
-[server/systems/defaults/time.ts:83](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/time.ts#L83)
+[server/systems/defaults/time.ts:83](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/time.ts#L83)
 
 ___
 
@@ -43,15 +40,13 @@ Athena.systems.defaults.time.**getHour**(): `number`
 
 Get the current hour.
 
-**`Export`**
-
 #### Returns
 
 `number`
 
 #### Defined in
 
-[server/systems/defaults/time.ts:100](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/time.ts#L100)
+[server/systems/defaults/time.ts:100](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/time.ts#L100)
 
 ___
 
@@ -63,15 +58,13 @@ Athena.systems.defaults.time.**getMinute**(): `number`
 
 Get the current minute.
 
-**`Export`**
-
 #### Returns
 
 `number`
 
 #### Defined in
 
-[server/systems/defaults/time.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/time.ts#L110)
+[server/systems/defaults/time.ts:110](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/time.ts#L110)
 
 ___
 
@@ -95,4 +88,4 @@ Updates the player time to match the current server time.
 
 #### Defined in
 
-[server/systems/defaults/time.ts:59](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/time.ts#L59)
+[server/systems/defaults/time.ts:59](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/time.ts#L59)

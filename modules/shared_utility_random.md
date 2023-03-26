@@ -17,8 +17,6 @@ AthenaShared.utility.random.**getRandomElement**<`T`\>(`elements`): `T`
 
 Return a random value from an array of values
 
-**`Export`**
-
 #### Type parameters
 
 | Name |
@@ -37,7 +35,7 @@ Return a random value from an array of values
 
 #### Defined in
 
-[shared/utility/random.ts:79](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L79)
+[shared/utility/random.ts:79](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/random.ts#L79)
 
 ___
 
@@ -61,7 +59,7 @@ Get a random color excluding alpha
 
 #### Defined in
 
-[shared/utility/random.ts:27](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L27)
+[shared/utility/random.ts:27](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/random.ts#L27)
 
 ___
 
@@ -79,7 +77,7 @@ Get a random color including random alpha
 
 #### Defined in
 
-[shared/utility/random.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L38)
+[shared/utility/random.ts:38](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/random.ts#L38)
 
 ___
 
@@ -104,7 +102,7 @@ Get a random number between min and max (max excluded)
 
 #### Defined in
 
-[shared/utility/random.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L9)
+[shared/utility/random.ts:9](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/random.ts#L9)
 
 ___
 
@@ -129,7 +127,7 @@ Get a random number between min and max (max included)
 
 #### Defined in
 
-[shared/utility/random.ts:19](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L19)
+[shared/utility/random.ts:19](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/random.ts#L19)
 
 ___
 
@@ -140,8 +138,6 @@ AthenaShared.utility.random.**shuffle**<`T`\>(`array`): `T`[]
 :::
 
 Shuffle an array, and return randomized order.
-
-**`Export`**
 
 #### Type parameters
 
@@ -161,4 +157,4 @@ Shuffle an array, and return randomized order.
 
 #### Defined in
 
-[shared/utility/random.ts:54](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L54)
+[shared/utility/random.ts:54](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/random.ts#L54)

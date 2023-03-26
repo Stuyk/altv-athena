@@ -37,13 +37,9 @@ SharedItem
 
 Any custom data assigned to this item.
 
-**`Memberof`**
-
-SharedItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:204](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L204)
+[shared/interfaces/item.ts:204](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L204)
 
 ___
 
@@ -53,13 +49,9 @@ ___
 
 The matching database name for this item.
 
-**`Memberof`**
-
-SharedItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:196](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L196)
+[shared/interfaces/item.ts:196](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L196)
 
 ___
 
@@ -69,10 +61,6 @@ ___
 
 The version of this item it is based upon.
 
-**`Memberof`**
-
-SharedItem
-
 #### Defined in
 
-[shared/interfaces/item.ts:212](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L212)
+[shared/interfaces/item.ts:212](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L212)

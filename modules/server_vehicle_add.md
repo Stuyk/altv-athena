@@ -21,8 +21,6 @@ Athena.vehicle.add.**override**(`functionName`, `callback`): `any`
 
 Used to override add owned vehicle functionality
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -36,15 +34,13 @@ Used to override add owned vehicle functionality
 
 #### Defined in
 
-[server/vehicle/add.ts:197](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L197)
+[server/vehicle/add.ts:197](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/add.ts#L197)
 
 ::: tip Usage
 Athena.vehicle.add.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override add owned vehicle functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -59,7 +55,7 @@ Used to override add owned vehicle functionality
 
 #### Defined in
 
-[server/vehicle/add.ts:198](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L198)
+[server/vehicle/add.ts:198](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/add.ts#L198)
 
 ___
 
@@ -72,8 +68,6 @@ Athena.vehicle.add.**toDatabase**(`owner`, `model`, `pos`, `options?`): `Promise
 Add a vehicle to the database.
 
 Owner can be an identifier, group, etc.
-
-**`Export`**
 
 #### Parameters
 
@@ -90,7 +84,7 @@ Owner can be an identifier, group, etc.
 
 #### Defined in
 
-[server/vehicle/add.ts:135](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L135)
+[server/vehicle/add.ts:135](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/add.ts#L135)
 
 ___
 
@@ -102,8 +96,6 @@ Athena.vehicle.add.**toPlayer**(`player`, `model`, `pos`, `options?`): `Promise`
 
 Add a vehicle to a player.
 The position specified is where the vehicle can be found.
-
-**`Export`**
 
 #### Parameters
 
@@ -120,4 +112,4 @@ The position specified is where the vehicle can be found.
 
 #### Defined in
 
-[server/vehicle/add.ts:64](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L64)
+[server/vehicle/add.ts:64](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/add.ts#L64)

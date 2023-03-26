@@ -13,8 +13,6 @@ Used to show a spinner in the bottom right corner of the screen.
 
 Used when passing from server to client.
 
-**`Export`**
-
 **`Interface`**
 
 ISpinner
@@ -28,13 +26,9 @@ ISpinner
 How long in milliseconds this spinner should last.
 Use -1 to set forever.
 
-**`Memberof`**
-
-ISpinner
-
 #### Defined in
 
-[shared/interfaces/iSpinner.ts:18](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iSpinner.ts#L18)
+[shared/interfaces/iSpinner.ts:18](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iSpinner.ts#L18)
 
 ___
 
@@ -44,13 +38,9 @@ ___
 
 The text this spinner should have beside it.
 
-**`Memberof`**
-
-ISpinner
-
 #### Defined in
 
-[shared/interfaces/iSpinner.ts:25](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iSpinner.ts#L25)
+[shared/interfaces/iSpinner.ts:25](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iSpinner.ts#L25)
 
 ___
 
@@ -60,10 +50,6 @@ ___
 
 The type of spinner to use.
 
-**`Memberof`**
-
-ISpinner
-
 #### Defined in
 
-[shared/interfaces/iSpinner.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iSpinner.ts#L32)
+[shared/interfaces/iSpinner.ts:32](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iSpinner.ts#L32)

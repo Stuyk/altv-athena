@@ -17,8 +17,6 @@ AthenaClient.screen.mouse.**getScaledCursorPosition**(): `alt.IVector2`
 
 Get cursor position that is similar to GTA:V screen sizes.
 
-**`Export`**
-
 #### Returns
 
 `alt.IVector2`
@@ -27,4 +25,4 @@ x: 0-1.0, y: 0-1.0
 
 #### Defined in
 
-[client/screen/mouse.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/mouse.ts#L10)
+[client/screen/mouse.ts:10](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/mouse.ts#L10)

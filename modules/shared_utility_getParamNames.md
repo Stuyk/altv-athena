@@ -18,8 +18,6 @@ AthenaShared.utility.getParamNames.**getParamNames**(`func`): `string`[]
 Used to reflect names of parameters from a given function.
 Returns an array of parameter names.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -32,4 +30,4 @@ Returns an array of parameter names.
 
 #### Defined in
 
-[shared/utility/getParamNames.ts:12](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/getParamNames.ts#L12)
+[shared/utility/getParamNames.ts:12](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/getParamNames.ts#L12)

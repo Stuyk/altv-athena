@@ -23,10 +23,6 @@ Used as a utility for string length.
 
 **`Static`**
 
-**`Memberof`**
-
-ScreenText
-
 #### Parameters
 
 | Name | Type |
@@ -39,7 +35,7 @@ ScreenText
 
 #### Defined in
 
-[client/screen/screenText.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenText.ts#L22)
+[client/screen/screenText.ts:22](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/screenText.ts#L22)
 
 ___
 
@@ -52,10 +48,6 @@ AthenaClient.screen.screenText.**drawTextWithBackground**(`text`, `x`, `y`, `sca
 Draw text with a background and apply padding.
 
 **`Static`**
-
-**`Memberof`**
-
-ScreenText
 
 #### Parameters
 
@@ -76,7 +68,7 @@ ScreenText
 
 #### Defined in
 
-[client/screen/screenText.ts:85](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenText.ts#L85)
+[client/screen/screenText.ts:85](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/screenText.ts#L85)
 
 ___
 
@@ -89,10 +81,6 @@ AthenaClient.screen.screenText.**getHeight**(`scale`, `font`): `number`
 Get the height of text based on scale and font.
 
 **`Static`**
-
-**`Memberof`**
-
-ScreenText
 
 #### Parameters
 
@@ -107,7 +95,7 @@ ScreenText
 
 #### Defined in
 
-[client/screen/screenText.ts:68](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenText.ts#L68)
+[client/screen/screenText.ts:68](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/screenText.ts#L68)
 
 ___
 
@@ -120,10 +108,6 @@ AthenaClient.screen.screenText.**getWidth**(`text`, `font`, `scale`): `number`
 Get the float width of text. (0.1 - 1)
 
 **`Static`**
-
-**`Memberof`**
-
-ScreenText
 
 #### Parameters
 
@@ -139,4 +123,4 @@ ScreenText
 
 #### Defined in
 
-[client/screen/screenText.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenText.ts#L52)
+[client/screen/screenText.ts:52](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/screenText.ts#L52)

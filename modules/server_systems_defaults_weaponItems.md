@@ -18,13 +18,10 @@ Athena.systems.defaults.weaponItems.**disable**(): `void`
 Disable all weapon items from being created / used.
 Does not remove them if they already exist in the database.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.systems.default.weaponItems.disable();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -32,4 +29,4 @@ Athena.systems.default.weaponItems.disable();
 
 #### Defined in
 
-[server/systems/defaults/weaponItems.ts:58](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/weaponItems.ts#L58)
+[server/systems/defaults/weaponItems.ts:58](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/weaponItems.ts#L58)

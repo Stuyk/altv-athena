@@ -19,8 +19,6 @@ Returns a Vector3 with a modified z position if the ground position is found.
 
 Otherwise, returns the original Vector3.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Default value | Description |
@@ -37,7 +35,7 @@ Otherwise, returns the original Vector3.
 
 #### Defined in
 
-[client/world/position.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/world/position.ts#L21)
+[client/world/position.ts:21](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/world/position.ts#L21)
 
 ___
 
@@ -64,4 +62,4 @@ Should be used periodically and not in an every tick. Could be expensive.
 
 #### Defined in
 
-[client/world/position.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/world/position.ts#L43)
+[client/world/position.ts:43](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/world/position.ts#L43)

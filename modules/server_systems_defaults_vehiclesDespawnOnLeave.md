@@ -17,13 +17,10 @@ Athena.systems.defaults.vehiclesDespawnOnLeave.**disable**(): `void`
 
 Disable vehicles despawning when a player leaves.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.systems.default.vehiclesDespawnOnLeave.disable();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -31,4 +28,4 @@ Athena.systems.default.vehiclesDespawnOnLeave.disable();
 
 #### Defined in
 
-[server/systems/defaults/vehiclesDespawnOnLeave.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/vehiclesDespawnOnLeave.ts#L72)
+[server/systems/defaults/vehiclesDespawnOnLeave.ts:72](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/vehiclesDespawnOnLeave.ts#L72)

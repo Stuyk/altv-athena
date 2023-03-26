@@ -11,8 +11,6 @@ order: 0
 
 Used to create and show a progress bar. Used in server to client.
 
-**`Export`**
-
 **`Interface`**
 
 ProgressBar
@@ -25,13 +23,9 @@ ProgressBar
 
 The color of the progress bar.
 
-**`Memberof`**
-
-ProgressBar
-
 #### Defined in
 
-[shared/interfaces/progressBar.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L30)
+[shared/interfaces/progressBar.ts:30](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/progressBar.ts#L30)
 
 ___
 
@@ -41,13 +35,9 @@ ___
 
 The distance in which the progress bar can be seen.
 
-**`Memberof`**
-
-ProgressBar
-
 #### Defined in
 
-[shared/interfaces/progressBar.ts:44](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L44)
+[shared/interfaces/progressBar.ts:44](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/progressBar.ts#L44)
 
 ___
 
@@ -57,13 +47,9 @@ ___
 
 Do not set this. Leave it alone.
 
-**`Memberof`**
-
-ProgressBar
-
 #### Defined in
 
-[shared/interfaces/progressBar.ts:67](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L67)
+[shared/interfaces/progressBar.ts:67](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/progressBar.ts#L67)
 
 ___
 
@@ -73,13 +59,9 @@ ___
 
 How long this progress bar should last.
 
-**`Memberof`**
-
-ProgressBar
-
 #### Defined in
 
-[shared/interfaces/progressBar.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L37)
+[shared/interfaces/progressBar.ts:37](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/progressBar.ts#L37)
 
 ___
 
@@ -89,7 +71,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:53](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L53)
+[shared/interfaces/progressBar.ts:53](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/progressBar.ts#L53)
 
 ___
 
@@ -99,10 +81,6 @@ ___
 
 The position in a 3D space to show the progress bar.
 Only a single client will see it.
-
-**`Memberof`**
-
-ProgressBar
 
 #### Type declaration
 
@@ -114,7 +92,7 @@ ProgressBar
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L23)
+[shared/interfaces/progressBar.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/progressBar.ts#L23)
 
 ___
 
@@ -124,13 +102,9 @@ ___
 
 Do not set this. Leave it alone.
 
-**`Memberof`**
-
-ProgressBar
-
 #### Defined in
 
-[shared/interfaces/progressBar.ts:60](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L60)
+[shared/interfaces/progressBar.ts:60](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/progressBar.ts#L60)
 
 ___
 
@@ -140,13 +114,9 @@ ___
 
 The text to display on the progress bar.
 
-**`Memberof`**
-
-ProgressBar
-
 #### Defined in
 
-[shared/interfaces/progressBar.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L51)
+[shared/interfaces/progressBar.ts:51](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/progressBar.ts#L51)
 
 ___
 
@@ -156,10 +126,6 @@ ___
 
 A unique identifier to remove the progress bar early.
 
-**`Memberof`**
-
-ProgressBar
-
 #### Defined in
 
-[shared/interfaces/progressBar.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L15)
+[shared/interfaces/progressBar.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/progressBar.ts#L15)

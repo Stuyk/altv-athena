@@ -12,8 +12,6 @@ order: 0
 An infinitely scaling menu.
 Holds up to 9 options at a time
 
-**`Export`**
-
 **`Interface`**
 
 ActionMenu

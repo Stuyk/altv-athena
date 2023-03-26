@@ -17,15 +17,13 @@ AthenaClient.utility.pauseMenu.**disable**(): `void`
 
 Disable the default GTA:V pause Menu
 
-**`Export`**
-
 #### Returns
 
 `void`
 
 #### Defined in
 
-[client/utility/pauseMenu.ts:25](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/pauseMenu.ts#L25)
+[client/utility/pauseMenu.ts:25](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/utility/pauseMenu.ts#L25)
 
 ___
 
@@ -37,12 +35,10 @@ AthenaClient.utility.pauseMenu.**enable**(): `void`
 
 Enable the default GTA:V pause menu
 
-**`Export`**
-
 #### Returns
 
 `void`
 
 #### Defined in
 
-[client/utility/pauseMenu.ts:39](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/pauseMenu.ts#L39)
+[client/utility/pauseMenu.ts:39](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/utility/pauseMenu.ts#L39)

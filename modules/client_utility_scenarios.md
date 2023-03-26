@@ -17,8 +17,6 @@ AthenaClient.utility.scenarios.**playScenario**(`name`, `duration`): `Promise`<`
 
 Play an animation for the local player.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -32,4 +30,4 @@ Play an animation for the local player.
 
 #### Defined in
 
-[client/utility/scenarios.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/scenarios.ts#L14)
+[client/utility/scenarios.ts:14](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/utility/scenarios.ts#L14)

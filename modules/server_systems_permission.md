@@ -15,7 +15,7 @@ order: 0
 
 #### Defined in
 
-[server/systems/permission.ts:7](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L7)
+[server/systems/permission.ts:7](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L7)
 
 ___
 
@@ -25,7 +25,7 @@ ___
 
 #### Defined in
 
-[server/systems/permission.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L8)
+[server/systems/permission.ts:8](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L8)
 
 ## Variables
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[server/systems/permission.ts:451](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L451)
+[server/systems/permission.ts:451](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L451)
 
 ## Functions
 
@@ -59,8 +59,6 @@ Athena.systems.permission.**add**<`CustomPerms`\>(`type`, `player`, `perm`): `Pr
 :::
 
 Add a permission to an account or character.
-
-**`Export`**
 
 #### Type parameters
 
@@ -82,7 +80,7 @@ Add a permission to an account or character.
 
 #### Defined in
 
-[server/systems/permission.ts:241](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L241)
+[server/systems/permission.ts:241](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L241)
 
 ___
 
@@ -93,8 +91,6 @@ Athena.systems.permission.**clear**(`type`, `player`): `Promise`<`void`\>
 :::
 
 Clear all permissions for an account or character.
-
-**`Export`**
 
 #### Parameters
 
@@ -109,7 +105,7 @@ Clear all permissions for an account or character.
 
 #### Defined in
 
-[server/systems/permission.ts:275](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L275)
+[server/systems/permission.ts:275](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L275)
 
 ___
 
@@ -121,8 +117,6 @@ Athena.systems.permission.**getAll**<`CustomPerms`\>(`type`, `perm`): `Promise`<
 
 Get all documents that have a specified permission in their permissions array.
 Will return an empty array if no permissions are found.
-
-**`Export`**
 
 #### Type parameters
 
@@ -143,7 +137,7 @@ Will return an empty array if no permissions are found.
 
 #### Defined in
 
-[server/systems/permission.ts:342](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L342)
+[server/systems/permission.ts:342](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L342)
 
 ___
 
@@ -154,8 +148,6 @@ Athena.systems.permission.**getPermissions**(`entity`, `type`): `any`
 :::
 
 Get permissions for a given entity and type
-
-**`Export`**
 
 #### Parameters
 
@@ -170,15 +162,13 @@ Get permissions for a given entity and type
 
 #### Defined in
 
-[server/systems/permission.ts:424](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L424)
+[server/systems/permission.ts:424](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L424)
 
 ::: tip Usage
 Athena.systems.permission.**getPermissions**(`entity`, `type`): `any`
 :::
 
 Get permissions for a given entity and type
-
-**`Export`**
 
 #### Parameters
 
@@ -193,7 +183,7 @@ Get permissions for a given entity and type
 
 #### Defined in
 
-[server/systems/permission.ts:425](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L425)
+[server/systems/permission.ts:425](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L425)
 
 ___
 
@@ -204,8 +194,6 @@ Athena.systems.permission.**has**<`CustomPerms`\>(`type`, `player`, `perm`): `bo
 :::
 
 Check if a character or account has a single permission.
-
-**`Export`**
 
 #### Type parameters
 
@@ -227,7 +215,7 @@ Check if a character or account has a single permission.
 
 #### Defined in
 
-[server/systems/permission.ts:289](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L289)
+[server/systems/permission.ts:289](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L289)
 
 ___
 
@@ -239,8 +227,6 @@ Athena.systems.permission.**hasAll**<`CustomPerms`\>(`type`, `player`, `perms`):
 
 Check if a character or account has all the permissions.
 
-**`Export`**
-
 #### Type parameters
 
 | Name | Type |
@@ -261,7 +247,7 @@ Check if a character or account has all the permissions.
 
 #### Defined in
 
-[server/systems/permission.ts:325](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L325)
+[server/systems/permission.ts:325](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L325)
 
 ___
 
@@ -273,8 +259,6 @@ Athena.systems.permission.**hasOne**<`CustomPerms`\>(`type`, `player`, `perms`):
 
 Check if a character or account has a atleast one permission.
 
-**`Export`**
-
 #### Type parameters
 
 | Name | Type |
@@ -295,7 +279,7 @@ Check if a character or account has a atleast one permission.
 
 #### Defined in
 
-[server/systems/permission.ts:307](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L307)
+[server/systems/permission.ts:307](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L307)
 
 ___
 
@@ -306,8 +290,6 @@ Athena.systems.permission.**remove**<`CustomPerms`\>(`type`, `player`, `perm`): 
 :::
 
 Remove a permission from an account or character.
-
-**`Export`**
 
 #### Type parameters
 
@@ -329,7 +311,7 @@ Remove a permission from an account or character.
 
 #### Defined in
 
-[server/systems/permission.ts:259](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L259)
+[server/systems/permission.ts:259](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L259)
 
 ___
 
@@ -341,8 +323,6 @@ Athena.systems.permission.**removeAll**<`CustomPerms`\>(`type`, `perm`, `ids`): 
 
 Remove specified permission from all instances of an account or character.
 Automatically rebinds the document after updating.
-
-**`Export`**
 
 #### Type parameters
 
@@ -364,4 +344,4 @@ Automatically rebinds the document after updating.
 
 #### Defined in
 
-[server/systems/permission.ts:374](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/permission.ts#L374)
+[server/systems/permission.ts:374](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/permission.ts#L374)

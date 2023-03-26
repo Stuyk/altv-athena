@@ -24,7 +24,7 @@ order: 0
 
 #### Defined in
 
-[server/utility/hash.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/hash.ts#L66)
+[server/utility/hash.ts:66](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/hash.ts#L66)
 
 ## Functions
 
@@ -38,8 +38,7 @@ Hash a plain text password with pbkdf2 hash and salt.
 
 Returns a pbkdf2 key, and salt. Which can be seperated by the `$` sign.
 
-**`Example`**
-
+#### Example
 ```ts
 const result = Athena.utility.hash.hashPassword('somePassword');
 ```
@@ -56,7 +55,7 @@ const result = Athena.utility.hash.hashPassword('somePassword');
 
 #### Defined in
 
-[server/utility/hash.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/hash.ts#L16)
+[server/utility/hash.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/hash.ts#L16)
 
 ___
 
@@ -80,7 +79,7 @@ Hash a string of data into a persistent SHA256 hash.
 
 #### Defined in
 
-[server/utility/hash.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/hash.ts#L50)
+[server/utility/hash.ts:50](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/hash.ts#L50)
 
 ___
 
@@ -104,7 +103,7 @@ Hash a string of data into a random SHA256 hash.
 
 #### Defined in
 
-[server/utility/hash.ts:61](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/hash.ts#L61)
+[server/utility/hash.ts:61](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/hash.ts#L61)
 
 ___
 
@@ -116,8 +115,7 @@ Athena.utility.hash.**testPassword**(`plainTextPassword`, `pbkdf2Hash`): `boolea
 
 Test a plain text password against a stored pbkdf2 string.
 
-**`Example`**
-
+#### Example
 ```ts
 // Actual pbkdf2Hash is just mock string
 const doesMatch = Athena.utility.hash.testPassword('test', 'kjfdskljfsdkl$90jj0f10f21f1')
@@ -136,4 +134,4 @@ const doesMatch = Athena.utility.hash.testPassword('test', 'kjfdskljfsdkl$90jj0f
 
 #### Defined in
 
-[server/utility/hash.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/hash.ts#L36)
+[server/utility/hash.ts:36](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/hash.ts#L36)

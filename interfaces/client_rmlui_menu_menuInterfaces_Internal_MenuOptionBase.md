@@ -35,13 +35,9 @@ order: 0
 
 A callback when this menu option is changed.
 
-**`Memberof`**
-
-MenuOptionBase
-
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
+[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
 
 ___
 
@@ -51,13 +47,9 @@ ___
 
 A description of this menu option.
 
-**`Memberof`**
-
-MenuOptionBase
-
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
+[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
 
 ___
 
@@ -67,13 +59,9 @@ ___
 
 Only for Range & Selection Types
 
-**`Memberof`**
-
-MenuOptionBase
-
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
+[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
 
 ___
 
@@ -83,10 +71,6 @@ ___
 
 The title of this menu option.
 
-**`Memberof`**
-
-MenuOptionBase
-
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
+[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L10)

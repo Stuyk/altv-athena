@@ -11,8 +11,6 @@ order: 0
 
 Used in the attachement system when attaching objects to a player.
 
-**`Export`**
-
 **`Interface`**
 
 IAttachable
@@ -31,13 +29,9 @@ IAttachable
 
 Attach the object when the objective is loaded?
 
-**`Memberof`**
-
-JobAttachable
-
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:75](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L75)
+[shared/interfaces/iAttachable.ts:75](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L75)
 
 ___
 
@@ -53,17 +47,13 @@ This is a 'Bone ID' and not a 'Bone Index'
 
 Use the PedBone enum provided in Athena for correct value
 
-**`Memberof`**
-
-IAttachable
-
 #### Inherited from
 
 [default](shared_interfaces_iAttachable_default.md).[bone](shared_interfaces_iAttachable_default.md#bone)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L51)
+[shared/interfaces/iAttachable.ts:51](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L51)
 
 ___
 
@@ -74,13 +64,9 @@ ___
 How long should this object be attached.
 Set this to -1 for infinite.
 
-**`Memberof`**
-
-Attachable
-
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:68](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L68)
+[shared/interfaces/iAttachable.ts:68](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L68)
 
 ___
 
@@ -90,17 +76,13 @@ ___
 
 Do not define this. Leave it alone.
 
-**`Memberof`**
-
-IAttachable
-
 #### Inherited from
 
 [default](shared_interfaces_iAttachable_default.md).[entityID](shared_interfaces_iAttachable_default.md#entityID)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:58](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L58)
+[shared/interfaces/iAttachable.ts:58](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L58)
 
 ___
 
@@ -110,17 +92,13 @@ ___
 
 The model or object of the attachable.
 
-**`Memberof`**
-
-IAttachable
-
 #### Inherited from
 
 [default](shared_interfaces_iAttachable_default.md).[model](shared_interfaces_iAttachable_default.md#model)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L23)
+[shared/interfaces/iAttachable.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L23)
 
 ___
 
@@ -130,17 +108,13 @@ ___
 
 The position where the object should be attached.
 
-**`Memberof`**
-
-IAttachable
-
 #### Inherited from
 
 [default](shared_interfaces_iAttachable_default.md).[pos](shared_interfaces_iAttachable_default.md#pos)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L30)
+[shared/interfaces/iAttachable.ts:30](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L30)
 
 ___
 
@@ -150,17 +124,13 @@ ___
 
 The rotation where the object should be attached.
 
-**`Memberof`**
-
-IAttachable
-
 #### Inherited from
 
 [default](shared_interfaces_iAttachable_default.md).[rot](shared_interfaces_iAttachable_default.md#rot)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L37)
+[shared/interfaces/iAttachable.ts:37](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L37)
 
 ___
 
@@ -170,14 +140,10 @@ ___
 
 The unique identifier for this attachable.
 
-**`Memberof`**
-
-IAttachable
-
 #### Inherited from
 
 [default](shared_interfaces_iAttachable_default.md).[uid](shared_interfaces_iAttachable_default.md#uid)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iAttachable.ts#L16)
+[shared/interfaces/iAttachable.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iAttachable.ts#L16)

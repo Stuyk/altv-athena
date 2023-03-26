@@ -17,13 +17,10 @@ Athena.systems.defaults.toolbar.**disable**(): `void`
 
 Disable the toolbar hotkeys / processing on server-side.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.systems.default.toolbar.disable();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -31,4 +28,4 @@ Athena.systems.default.toolbar.disable();
 
 #### Defined in
 
-[server/systems/defaults/toolbar.ts:83](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/toolbar.ts#L83)
+[server/systems/defaults/toolbar.ts:83](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/toolbar.ts#L83)

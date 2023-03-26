@@ -11,8 +11,6 @@ order: 0
 
 Used to describe a text label. Passed from server to client.
 
-**`Export`**
-
 **`Interface`**
 
 TextLabel
@@ -25,13 +23,9 @@ TextLabel
 
 The dimension to show this text label in.
 
-**`Memberof`**
-
-TextLabel
-
 #### Defined in
 
-[shared/interfaces/textLabel.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L43)
+[shared/interfaces/textLabel.ts:43](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/textLabel.ts#L43)
 
 ___
 
@@ -41,13 +35,9 @@ ___
 
 Always set to true when creating a server-wide text label.
 
-**`Memberof`**
-
-TextLabel
-
 #### Defined in
 
-[shared/interfaces/textLabel.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L51)
+[shared/interfaces/textLabel.ts:51](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/textLabel.ts#L51)
 
 ___
 
@@ -57,13 +47,9 @@ ___
 
 The maximum distance this text label should render at.
 
-**`Memberof`**
-
-TextLabel
-
 #### Defined in
 
-[shared/interfaces/textLabel.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L29)
+[shared/interfaces/textLabel.ts:29](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/textLabel.ts#L29)
 
 ___
 
@@ -73,13 +59,9 @@ ___
 
 The position where to place the TextLabel in a 3D space.
 
-**`Memberof`**
-
-TextLabel
-
 #### Defined in
 
-[shared/interfaces/textLabel.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L15)
+[shared/interfaces/textLabel.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/textLabel.ts#L15)
 
 ___
 
@@ -89,13 +71,9 @@ ___
 
 The 'Text' to show on this text label.
 
-**`Memberof`**
-
-TextLabel
-
 #### Defined in
 
-[shared/interfaces/textLabel.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L22)
+[shared/interfaces/textLabel.ts:22](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/textLabel.ts#L22)
 
 ___
 
@@ -105,10 +83,6 @@ ___
 
 The unique identifier to remove this text label if necessary.
 
-**`Memberof`**
-
-TextLabel
-
 #### Defined in
 
-[shared/interfaces/textLabel.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L36)
+[shared/interfaces/textLabel.ts:36](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/textLabel.ts#L36)

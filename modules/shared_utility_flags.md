@@ -21,8 +21,6 @@ AthenaShared.utility.flags.**isFlagEnabled**(`flags`, `flagToCheck`): `boolean`
 
 Verify if a bitwise flag is enabled.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -36,4 +34,4 @@ Verify if a bitwise flag is enabled.
 
 #### Defined in
 
-[shared/utility/flags.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/flags.ts#L10)
+[shared/utility/flags.ts:10](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/flags.ts#L10)

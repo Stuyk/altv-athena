@@ -11,8 +11,6 @@ order: 0
 
 Used when passing custom 'credit' overlays from server to client.
 
-**`Export`**
-
 **`Interface`**
 
 ICredit
@@ -25,13 +23,9 @@ ICredit
 
 The alignment of the credits. Defaults to left.
 
-**`Memberof`**
-
-ICredit
-
 #### Defined in
 
-[shared/interfaces/iCredit.ts:39](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iCredit.ts#L39)
+[shared/interfaces/iCredit.ts:39](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iCredit.ts#L39)
 
 ___
 
@@ -42,11 +36,9 @@ ___
 How long should this display for in milliseconds.
 Use -1 to set forever.
 
-**`Memberof`**
-
 #### Defined in
 
-[shared/interfaces/iCredit.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iCredit.ts#L32)
+[shared/interfaces/iCredit.ts:32](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iCredit.ts#L32)
 
 ___
 
@@ -57,11 +49,9 @@ ___
 Text below the role.
 Can use GTA Colors.
 
-**`Memberof`**
-
 #### Defined in
 
-[shared/interfaces/iCredit.ts:24](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iCredit.ts#L24)
+[shared/interfaces/iCredit.ts:24](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iCredit.ts#L24)
 
 ___
 
@@ -72,8 +62,6 @@ ___
 Larger blue text to display.
 CANNOT use GTA Colors like ~r~
 
-**`Memberof`**
-
 #### Defined in
 
-[shared/interfaces/iCredit.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iCredit.ts#L16)
+[shared/interfaces/iCredit.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iCredit.ts#L16)

@@ -17,13 +17,10 @@ Athena.vehicle.get.**ownedVehicles**(): `alt.Vehicle`[]
 
 Get all owned vehicles.
 
-**`Example`**
-
+#### Example
 ```ts
 const vehicles = Athena.vehicle.get.ownedVehicles();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -33,7 +30,7 @@ An array of owned vehicles.
 
 #### Defined in
 
-[server/vehicle/get.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/get.ts#L32)
+[server/vehicle/get.ts:32](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/get.ts#L32)
 
 ___
 
@@ -45,15 +42,12 @@ Athena.vehicle.get.**playerOwnedVehicles**(`player`): `any`
 
 Takes a player instance, or `_id` and returns all spawned & owned vehicles
 
-**`Example`**
-
+#### Example
 ```ts
 function something(player: alt.Player) {
     const vehicles = Athena.vehicle.get.playerOwnedVehicles(player);
 }
 ```
-
-**`Export`**
 
 #### Parameters
 
@@ -69,7 +63,7 @@ An array of vehicles owned and spawned by a player.
 
 #### Defined in
 
-[server/vehicle/get.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/get.ts#L52)
+[server/vehicle/get.ts:52](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/get.ts#L52)
 
 ___
 
@@ -81,13 +75,10 @@ Athena.vehicle.get.**temporaryVehicles**(): `alt.Vehicle`[]
 
 Get all temporary vehicles.
 
-**`Example`**
-
+#### Example
 ```ts
 const vehicles = Athena.vehicle.get.temporaryVehicles();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -97,4 +88,4 @@ An array of temporary vehicles.
 
 #### Defined in
 
-[server/vehicle/get.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/get.ts#L15)
+[server/vehicle/get.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/get.ts#L15)

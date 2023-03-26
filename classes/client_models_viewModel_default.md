@@ -25,13 +25,9 @@ Called when the view is closed.
 
 **`Static`**
 
-**`Memberof`**
-
-ViewModel
-
 #### Defined in
 
-[client/models/viewModel.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/models/viewModel.ts#L16)
+[client/models/viewModel.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/models/viewModel.ts#L16)
 
 ___
 
@@ -43,13 +39,9 @@ Called when the view is being opened and the url is being set.
 
 **`Static`**
 
-**`Memberof`**
-
-ViewModel
-
 #### Defined in
 
-[client/models/viewModel.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/models/viewModel.ts#L8)
+[client/models/viewModel.ts:8](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/models/viewModel.ts#L8)
 
 ___
 
@@ -61,10 +53,6 @@ Called when the view has loaded and it sends an event to this function.
 
 **`Static`**
 
-**`Memberof`**
-
-ViewModel
-
 #### Defined in
 
-[client/models/viewModel.ts:24](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/models/viewModel.ts#L24)
+[client/models/viewModel.ts:24](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/models/viewModel.ts#L24)

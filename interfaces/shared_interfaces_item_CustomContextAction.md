@@ -22,7 +22,7 @@ The events which should be triggered.
 
 #### Defined in
 
-[shared/interfaces/item.ts:180](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L180)
+[shared/interfaces/item.ts:180](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L180)
 
 ___
 
@@ -34,4 +34,4 @@ The visible name of this action.
 
 #### Defined in
 
-[shared/interfaces/item.ts:175](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L175)
+[shared/interfaces/item.ts:175](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L175)

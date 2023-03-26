@@ -17,13 +17,9 @@ order: 0
 
 If set to true, it will blur the background while responding.
 
-**`Memberof`**
-
-InputBoxInfo
-
 #### Defined in
 
-[client/rmlui/input/index.ts:24](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/input/index.ts#L24)
+[client/rmlui/input/index.ts:24](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/input/index.ts#L24)
 
 ___
 
@@ -33,13 +29,9 @@ ___
 
 If set to true, it will darken the background while responding.
 
-**`Memberof`**
-
-InputBoxInfo
-
 #### Defined in
 
-[client/rmlui/input/index.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/input/index.ts#L32)
+[client/rmlui/input/index.ts:32](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/input/index.ts#L32)
 
 ___
 
@@ -49,13 +41,9 @@ ___
 
 Hide Radar?
 
-**`Memberof`**
-
-InputBoxInfo
-
 #### Defined in
 
-[client/rmlui/input/index.ts:40](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/input/index.ts#L40)
+[client/rmlui/input/index.ts:40](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/input/index.ts#L40)
 
 ___
 
@@ -66,10 +54,6 @@ ___
 What is the question, or info you need a response for?
 ie. 'What is your first name?'
 
-**`Memberof`**
-
-InputBoxInfo
-
 #### Defined in
 
-[client/rmlui/input/index.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/input/index.ts#L16)
+[client/rmlui/input/index.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/input/index.ts#L16)

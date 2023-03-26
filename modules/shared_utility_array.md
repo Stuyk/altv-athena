@@ -18,8 +18,6 @@ AthenaShared.utility.array.**findMissingElements**<`T`\>(`a`, `b`, `propertyName
 Returns the elements present in A
 but are not present in B.
 
-**`Export`**
-
 #### Type parameters
 
 | Name |
@@ -40,4 +38,4 @@ but are not present in B.
 
 #### Defined in
 
-[shared/utility/array.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/array.ts#L11)
+[shared/utility/array.ts:11](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/array.ts#L11)

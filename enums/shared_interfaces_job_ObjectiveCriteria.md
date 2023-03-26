@@ -9,8 +9,6 @@ order: 0
 
 [shared/interfaces/job](../modules/shared_interfaces_job.md).ObjectiveCriteria
 
-**`Export`**
-
 ## Enumeration Members
 
 ### FAIL\_ON\_JOB\_VEHICLE\_DESTROY
@@ -19,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[shared/interfaces/job.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L22)
+[shared/interfaces/job.ts:22](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L22)
 
 ___
 
@@ -29,7 +27,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/job.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L21)
+[shared/interfaces/job.ts:21](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L21)
 
 ___
 
@@ -39,7 +37,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/job.ts:20](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L20)
+[shared/interfaces/job.ts:20](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L20)
 
 ___
 
@@ -49,7 +47,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/job.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L23)
+[shared/interfaces/job.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L23)
 
 ___
 
@@ -59,7 +57,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/job.ts:19](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L19)
+[shared/interfaces/job.ts:19](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L19)
 
 ___
 
@@ -69,7 +67,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/job.ts:17](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L17)
+[shared/interfaces/job.ts:17](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L17)
 
 ___
 
@@ -79,7 +77,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/job.ts:18](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L18)
+[shared/interfaces/job.ts:18](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L18)
 
 ___
 
@@ -89,4 +87,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/job.ts:24](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L24)
+[shared/interfaces/job.ts:24](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L24)

@@ -17,10 +17,6 @@ Athena.systems.account.**create**(`player`, `dataToAppend`): `Promise`<[`Account
 
 Create an account with default data.
 
-**`Memberof`**
-
-AccountSystemRef
-
 #### Parameters
 
 | Name | Type | Description |
@@ -34,7 +30,7 @@ AccountSystemRef
 
 #### Defined in
 
-[server/systems/account.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/account.ts#L66)
+[server/systems/account.ts:66](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/account.ts#L66)
 
 ___
 
@@ -45,10 +41,6 @@ Athena.systems.account.**getAccount**(`key`, `value`): `Promise`<[`Account`](../
 :::
 
 Fetch account for a player based on key / value pair.
-
-**`Memberof`**
-
-AccountSystemRef
 
 #### Parameters
 
@@ -63,7 +55,7 @@ AccountSystemRef
 
 #### Defined in
 
-[server/systems/account.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/account.ts#L36)
+[server/systems/account.ts:36](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/account.ts#L36)
 
 ___
 
@@ -74,8 +66,6 @@ Athena.systems.account.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any account system functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -90,15 +80,13 @@ Used to override any account system functionality
 
 #### Defined in
 
-[server/systems/account.ts:109](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/account.ts#L109)
+[server/systems/account.ts:109](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/account.ts#L109)
 
 ::: tip Usage
 Athena.systems.account.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override any account system functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -113,4 +101,4 @@ Used to override any account system functionality
 
 #### Defined in
 
-[server/systems/account.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/account.ts#L110)
+[server/systems/account.ts:110](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/account.ts#L110)

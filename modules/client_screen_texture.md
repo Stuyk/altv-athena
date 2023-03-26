@@ -17,8 +17,6 @@ AthenaClient.screen.texture.**drawTexture**(`dictionary`, `name`, `position`, `s
 
 Draw a texture in-world from a GTA:V file, or DLC
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Default value |
@@ -34,7 +32,7 @@ Draw a texture in-world from a GTA:V file, or DLC
 
 #### Defined in
 
-[client/screen/texture.ts:74](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/texture.ts#L74)
+[client/screen/texture.ts:74](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/texture.ts#L74)
 
 ___
 
@@ -45,8 +43,6 @@ AthenaClient.screen.texture.**drawTexture2D**(`dictionary`, `name`, `position`, 
 :::
 
 Draw a texture on-screen from a GTA:V file or DLC
-
-**`Export`**
 
 #### Parameters
 
@@ -64,4 +60,4 @@ Draw a texture on-screen from a GTA:V file or DLC
 
 #### Defined in
 
-[client/screen/texture.ts:17](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/texture.ts#L17)
+[client/screen/texture.ts:17](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/texture.ts#L17)

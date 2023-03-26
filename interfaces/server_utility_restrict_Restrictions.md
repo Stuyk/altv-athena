@@ -11,8 +11,6 @@ order: 0
 
 Used to build a restricted function.
 
-**`Export`**
-
 **`Interface`**
 
 Restrictions
@@ -25,13 +23,9 @@ Restrictions
 
 What to tell the user if they are restricted
 
-**`Memberof`**
-
-Restrictions
-
 #### Defined in
 
-[server/utility/restrict.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/restrict.ts#L29)
+[server/utility/restrict.ts:29](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/restrict.ts#L29)
 
 ___
 
@@ -48,7 +42,7 @@ ___
 
 #### Defined in
 
-[server/utility/restrict.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/restrict.ts#L11)
+[server/utility/restrict.ts:11](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/restrict.ts#L11)
 
 ___
 
@@ -59,10 +53,6 @@ ___
 hasOne - Checks if character, or account has a given permission
 hasAll - Expects all permissions to exist on character && account
 
-**`Memberof`**
-
-Restrictions
-
 #### Defined in
 
-[server/utility/restrict.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/restrict.ts#L22)
+[server/utility/restrict.ts:22](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/restrict.ts#L22)

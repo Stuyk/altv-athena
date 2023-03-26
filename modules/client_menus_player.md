@@ -32,7 +32,7 @@ AthenaClient.menus.player.(`target`, `options`): [`player`](server_config.md#pla
 
 #### Defined in
 
-[client/menus/player.ts:5](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/player.ts#L5)
+[client/menus/player.ts:5](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/menus/player.ts#L5)
 
 ## Functions
 
@@ -46,10 +46,6 @@ Allows the current Menu Options to be modified.
 Meaning, a callback that will modify existing options, or append new options to the menu.
 Must always return the original wheel menu options + your changes.
 
-**`Memberof`**
-
-PlayerWheelMenu
-
 #### Parameters
 
 | Name | Type |
@@ -62,7 +58,7 @@ PlayerWheelMenu
 
 #### Defined in
 
-[client/menus/player.ts:17](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/player.ts#L17)
+[client/menus/player.ts:17](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/menus/player.ts#L17)
 
 ___
 
@@ -73,10 +69,6 @@ AthenaClient.menus.player.**open**(`target`): `void`
 :::
 
 Opens the wheel menu against a target player.
-
-**`Memberof`**
-
-PlayerWheelMenu
 
 #### Parameters
 
@@ -90,4 +82,4 @@ PlayerWheelMenu
 
 #### Defined in
 
-[client/menus/player.ts:28](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/player.ts#L28)
+[client/menus/player.ts:28](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/menus/player.ts#L28)

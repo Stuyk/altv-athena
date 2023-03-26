@@ -17,13 +17,10 @@ Athena.systems.defaults.vehiclesDespawnOnDestroy.**disable**(): `void`
 
 Disable vehicles despawning when a player leaves.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.systems.default.vehiclesDespawnOnDestroy.disable();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -31,7 +28,7 @@ Athena.systems.default.vehiclesDespawnOnDestroy.disable();
 
 #### Defined in
 
-[server/systems/defaults/vehiclesDespawnOnDestroy.ts:55](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/vehiclesDespawnOnDestroy.ts#L55)
+[server/systems/defaults/vehiclesDespawnOnDestroy.ts:55](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/vehiclesDespawnOnDestroy.ts#L55)
 
 ___
 
@@ -42,8 +39,6 @@ Athena.systems.defaults.vehiclesDespawnOnDestroy.**setTimeBeforeRemove**(`millis
 :::
 
 Set the time before a vehicle is removed after it is destroyed.
-
-**`Export`**
 
 #### Parameters
 
@@ -57,4 +52,4 @@ Set the time before a vehicle is removed after it is destroyed.
 
 #### Defined in
 
-[server/systems/defaults/vehiclesDespawnOnDestroy.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/vehiclesDespawnOnDestroy.ts#L66)
+[server/systems/defaults/vehiclesDespawnOnDestroy.ts:66](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/vehiclesDespawnOnDestroy.ts#L66)

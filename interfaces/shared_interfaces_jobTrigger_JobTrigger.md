@@ -12,8 +12,6 @@ order: 0
 A unique interface to show the player.
 Has custom header, summary, and image support.
 
-**`Export`**
-
 **`Interface`**
 
 JobTrigger
@@ -38,10 +36,6 @@ AthenaShared.interfaces.jobTrigger.JobTrigger.(`player`, `amount?`): `void`
 
 A callback if the trigger is accepted.
 
-**`Memberof`**
-
-JobTrigger
-
 ##### Parameters
 
 | Name | Type |
@@ -55,7 +49,7 @@ JobTrigger
 
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:57](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/jobTrigger.ts#L57)
+[shared/interfaces/jobTrigger.ts:57](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/jobTrigger.ts#L57)
 
 ___
 
@@ -71,10 +65,6 @@ AthenaShared.interfaces.jobTrigger.JobTrigger.(`player`): `void`
 
 A callback if the trigger is declined.
 
-**`Memberof`**
-
-JobTrigger
-
 ##### Parameters
 
 | Name | Type |
@@ -87,7 +77,7 @@ JobTrigger
 
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:64](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/jobTrigger.ts#L64)
+[shared/interfaces/jobTrigger.ts:64](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/jobTrigger.ts#L64)
 
 ___
 
@@ -98,13 +88,9 @@ ___
 Event to trigger when the player declines this job.
 Completely optional.
 
-**`Memberof`**
-
-JobTrigger
-
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/jobTrigger.ts#L50)
+[shared/interfaces/jobTrigger.ts:50](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/jobTrigger.ts#L50)
 
 ___
 
@@ -115,13 +101,9 @@ ___
 Event to trigger when it is accepted.
 Recieve this event with 'alt.on'
 
-**`Memberof`**
-
-JobTrigger
-
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:42](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/jobTrigger.ts#L42)
+[shared/interfaces/jobTrigger.ts:42](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/jobTrigger.ts#L42)
 
 ___
 
@@ -131,13 +113,9 @@ ___
 
 The header text of the job trigger.
 
-**`Memberof`**
-
-JobTrigger
-
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:20](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/jobTrigger.ts#L20)
+[shared/interfaces/jobTrigger.ts:20](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/jobTrigger.ts#L20)
 
 ___
 
@@ -147,13 +125,9 @@ ___
 
 An external https:// based image to show for your job.
 
-**`Memberof`**
-
-JobTrigger
-
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:13](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/jobTrigger.ts#L13)
+[shared/interfaces/jobTrigger.ts:13](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/jobTrigger.ts#L13)
 
 ___
 
@@ -163,13 +137,9 @@ ___
 
 Maximum amount for quantity input.
 
-**`Memberof`**
-
-JobTrigger
-
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:34](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/jobTrigger.ts#L34)
+[shared/interfaces/jobTrigger.ts:34](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/jobTrigger.ts#L34)
 
 ___
 
@@ -179,10 +149,6 @@ ___
 
 A summary describing what will be done during a job.
 
-**`Memberof`**
-
-JobTrigger
-
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:27](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/jobTrigger.ts#L27)
+[shared/interfaces/jobTrigger.ts:27](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/jobTrigger.ts#L27)

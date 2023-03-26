@@ -21,10 +21,6 @@ AthenaClient.camera.cinematic.**addNode**(`node`): `Promise`<`void`\>
 
 Add a camera node to the camera set.
 
-**`Memberof`**
-
-CinematicCam
-
 #### Parameters
 
 | Name | Type |
@@ -37,7 +33,7 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:319](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L319)
+[client/camera/cinematic.ts:319](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/camera/cinematic.ts#L319)
 
 ___
 
@@ -49,17 +45,13 @@ AthenaClient.camera.cinematic.**destroy**(): `Promise`<`void`\>
 
 This function will destroy all camera instances
 
-**`Memberof`**
-
-CinematicCam
-
 #### Returns
 
 `Promise`<`void`\>
 
 #### Defined in
 
-[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L305)
+[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/camera/cinematic.ts#L305)
 
 ___
 
@@ -74,10 +66,6 @@ Goes to the next camera.
 If `false` is passed in the function it will not remove a camera
 from the camera array. Allows for repeating camera movement over and over.
 
-**`Memberof`**
-
-CinematicCam
-
 #### Parameters
 
 | Name | Type | Default value |
@@ -90,7 +78,7 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:345](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L345)
+[client/camera/cinematic.ts:345](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/camera/cinematic.ts#L345)
 
 ___
 
@@ -112,7 +100,7 @@ AthenaClient.camera.cinematic.**overrideNodes**(`_nodes`): `Promise`<`void`\>
 
 #### Defined in
 
-[client/camera/cinematic.ts:309](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L309)
+[client/camera/cinematic.ts:309](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/camera/cinematic.ts#L309)
 
 ___
 
@@ -124,14 +112,10 @@ AthenaClient.camera.cinematic.**play**(): `Promise`<`void`\>
 
 Play all camera nodes, but do not clear the camera nodes array.
 
-**`Memberof`**
-
-CinematicCam
-
 #### Returns
 
 `Promise`<`void`\>
 
 #### Defined in
 
-[client/camera/cinematic.ts:374](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L374)
+[client/camera/cinematic.ts:374](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/camera/cinematic.ts#L374)

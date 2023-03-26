@@ -17,13 +17,10 @@ Athena.systems.defaults.ammo.**disable**(): `void`
 
 Used to disable the default ammo system that comes with Athena.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.systems.default.ammo.disable();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -31,4 +28,4 @@ Athena.systems.default.ammo.disable();
 
 #### Defined in
 
-[server/systems/defaults/ammo.ts:132](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/ammo.ts#L132)
+[server/systems/defaults/ammo.ts:132](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/ammo.ts#L132)

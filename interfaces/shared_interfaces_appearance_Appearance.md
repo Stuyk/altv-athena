@@ -11,8 +11,6 @@ order: 0
 
 This interface is used to describe the overall Character Appearance.
 
-**`Export`**
-
 **`Interface`**
 
 Appearance
@@ -26,13 +24,9 @@ Appearance
 The chest hair on a character.
 This will not show without opacity being set.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:158](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L158)
+[shared/interfaces/appearance.ts:158](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L158)
 
 ___
 
@@ -42,13 +36,9 @@ ___
 
 The colors of the chest hair.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:173](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L173)
+[shared/interfaces/appearance.ts:173](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L173)
 
 ___
 
@@ -59,13 +49,9 @@ ___
 How visible chest hair should be.
 Values 0.0 to 1.0
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:166](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L166)
+[shared/interfaces/appearance.ts:166](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L166)
 
 ___
 
@@ -75,13 +61,9 @@ ___
 
 These have to do with makeup, lipstick, etc.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:195](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L195)
+[shared/interfaces/appearance.ts:195](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L195)
 
 ___
 
@@ -92,13 +74,9 @@ ___
 The eyebrows on a character.
 This will not show without opacity being set.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:135](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L135)
+[shared/interfaces/appearance.ts:135](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L135)
 
 ___
 
@@ -108,13 +86,9 @@ ___
 
 The colors of the eyebrows.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:150](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L150)
+[shared/interfaces/appearance.ts:150](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L150)
 
 ___
 
@@ -125,13 +99,9 @@ ___
 How visible eyebrows should be.
 Values 0.0 to 1.0
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:143](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L143)
+[shared/interfaces/appearance.ts:143](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L143)
 
 ___
 
@@ -141,13 +111,9 @@ ___
 
 Eye Color
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:180](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L180)
+[shared/interfaces/appearance.ts:180](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L180)
 
 ___
 
@@ -157,13 +123,9 @@ ___
 
 Values range from 0 to 45
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:20](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L20)
+[shared/interfaces/appearance.ts:20](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L20)
 
 ___
 
@@ -174,13 +136,9 @@ ___
 The mix of the mother and father faces.
 Values range from 0.0 to 1.0
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:49](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L49)
+[shared/interfaces/appearance.ts:49](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L49)
 
 ___
 
@@ -190,13 +148,9 @@ ___
 
 Values range from 0 to 45
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:27](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L27)
+[shared/interfaces/appearance.ts:27](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L27)
 
 ___
 
@@ -207,13 +161,9 @@ ___
 The facial hair to show on the character.
 This will not show without opacity being set.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:112](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L112)
+[shared/interfaces/appearance.ts:112](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L112)
 
 ___
 
@@ -223,13 +173,9 @@ ___
 
 Facial hair color for facial hair.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:119](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L119)
+[shared/interfaces/appearance.ts:119](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L119)
 
 ___
 
@@ -240,13 +186,9 @@ ___
 How visible the facial hair should be.
 Values 0.0 to 1.0
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:127](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L127)
+[shared/interfaces/appearance.ts:127](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L127)
 
 ___
 
@@ -257,13 +199,9 @@ ___
 The hair identifier that this character will be using.
 Should be a relative id to the dlc hash.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:74](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L74)
+[shared/interfaces/appearance.ts:74](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L74)
 
 ___
 
@@ -273,13 +211,9 @@ ___
 
 The color of the hair.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:89](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L89)
+[shared/interfaces/appearance.ts:89](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L89)
 
 ___
 
@@ -289,13 +223,9 @@ ___
 
 The highlight color of the hair.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:96](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L96)
+[shared/interfaces/appearance.ts:96](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L96)
 
 ___
 
@@ -305,13 +235,9 @@ ___
 
 The dlc hash of the hair to use.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:82](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L82)
+[shared/interfaces/appearance.ts:82](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L82)
 
 ___
 
@@ -322,10 +248,6 @@ ___
 Some hair has a 'shaved look' to it and this is used to
 achieve that look.
 
-**`Memberof`**
-
-Appearance
-
 #### Type declaration
 
 | Name | Type |
@@ -335,7 +257,7 @@ Appearance
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:104](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L104)
+[shared/interfaces/appearance.ts:104](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L104)
 
 ___
 
@@ -346,13 +268,9 @@ ___
 These have to do with skin appearance more than anything.
 Blemishes, moles, etc.
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:188](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L188)
+[shared/interfaces/appearance.ts:188](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L188)
 
 ___
 
@@ -362,13 +280,9 @@ ___
 
 0 - Female, 1 - Male
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:13](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L13)
+[shared/interfaces/appearance.ts:13](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L13)
 
 ___
 
@@ -378,13 +292,9 @@ ___
 
 Values range from 0 to 45
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:34](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L34)
+[shared/interfaces/appearance.ts:34](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L34)
 
 ___
 
@@ -395,13 +305,9 @@ ___
 The mix of the mother and father faces.
 Values range from 0.0 to 1.0
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:57](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L57)
+[shared/interfaces/appearance.ts:57](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L57)
 
 ___
 
@@ -411,13 +317,9 @@ ___
 
 Values range from 0 to 45
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:41](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L41)
+[shared/interfaces/appearance.ts:41](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L41)
 
 ___
 
@@ -429,10 +331,6 @@ An array of valid face structure changes.
 Each position in the array represents a structure change.
 Values range from -1.0 to 1.0
 
-**`Memberof`**
-
-Appearance
-
 #### Defined in
 
-[shared/interfaces/appearance.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/appearance.ts#L66)
+[shared/interfaces/appearance.ts:66](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/appearance.ts#L66)

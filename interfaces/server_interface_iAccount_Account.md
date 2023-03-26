@@ -11,8 +11,6 @@ order: 0
 
 Used to store Discord Information, IPs, and User Data
 
-**`Export`**
-
 **`Interface`**
 
 Account
@@ -25,13 +23,9 @@ Account
 
 A unique MongoDB identifier to identify the accoutn in the database.
 
-**`Memberof`**
-
-Account
-
 #### Defined in
 
-[server/interface/iAccount.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iAccount.ts#L14)
+[server/interface/iAccount.ts:14](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iAccount.ts#L14)
 
 ___
 
@@ -41,13 +35,9 @@ ___
 
 Is this user banned?
 
-**`Memberof`**
-
-Account
-
 #### Defined in
 
-[server/interface/iAccount.ts:79](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iAccount.ts#L79)
+[server/interface/iAccount.ts:79](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iAccount.ts#L79)
 
 ___
 
@@ -57,13 +47,9 @@ ___
 
 Discord user ID. The one you get from developer mode.
 
-**`Memberof`**
-
-Account
-
 #### Defined in
 
-[server/interface/iAccount.ts:28](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iAccount.ts#L28)
+[server/interface/iAccount.ts:28](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iAccount.ts#L28)
 
 ___
 
@@ -73,13 +59,9 @@ ___
 
 Email bound to the discord account.
 
-**`Memberof`**
-
-Account
-
 #### Defined in
 
-[server/interface/iAccount.ts:35](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iAccount.ts#L35)
+[server/interface/iAccount.ts:35](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iAccount.ts#L35)
 
 ___
 
@@ -89,13 +71,9 @@ ___
 
 Hardware Identifiers associated with an account.
 
-**`Memberof`**
-
-Account
-
 #### Defined in
 
-[server/interface/iAccount.ts:49](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iAccount.ts#L49)
+[server/interface/iAccount.ts:49](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iAccount.ts#L49)
 
 ___
 
@@ -105,13 +83,9 @@ ___
 
 A incremented ID for individual accounts.
 
-**`Memberof`**
-
-Account
-
 #### Defined in
 
-[server/interface/iAccount.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iAccount.ts#L21)
+[server/interface/iAccount.ts:21](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iAccount.ts#L21)
 
 ___
 
@@ -121,13 +95,9 @@ ___
 
 Last 5 IPs that have logged into an account.
 
-**`Memberof`**
-
-Account
-
 #### Defined in
 
-[server/interface/iAccount.ts:42](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iAccount.ts#L42)
+[server/interface/iAccount.ts:42](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iAccount.ts#L42)
 
 ___
 
@@ -137,13 +107,9 @@ ___
 
 Time in milliseconds when they last logged in since epoch.
 
-**`Memberof`**
-
-Account
-
 #### Defined in
 
-[server/interface/iAccount.ts:56](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iAccount.ts#L56)
+[server/interface/iAccount.ts:56](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iAccount.ts#L56)
 
 ___
 
@@ -154,13 +120,9 @@ ___
 What administrative permissions does this account have.
 Default: 0
 
-**`Memberof`**
-
-Account
-
 #### Defined in
 
-[server/interface/iAccount.ts:64](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iAccount.ts#L64)
+[server/interface/iAccount.ts:64](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iAccount.ts#L64)
 
 ___
 
@@ -170,13 +132,9 @@ ___
 
 A list of permissions assigned to this account.
 
-**`Memberof`**
-
-Account
-
 #### Defined in
 
-[server/interface/iAccount.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iAccount.ts#L72)
+[server/interface/iAccount.ts:72](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iAccount.ts#L72)
 
 ___
 
@@ -186,10 +144,6 @@ ___
 
 Why are they banned?
 
-**`Memberof`**
-
-Account
-
 #### Defined in
 
-[server/interface/iAccount.ts:86](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iAccount.ts#L86)
+[server/interface/iAccount.ts:86](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iAccount.ts#L86)

@@ -11,8 +11,6 @@ order: 0
 
 Used to describe a vehicle modification, and the value it should have.
 
-**`Export`**
-
 **`Interface`**
 
 IVehicleMod
@@ -25,7 +23,7 @@ IVehicleMod
 
 #### Defined in
 
-[shared/interfaces/vehicleMod.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleMod.ts#L8)
+[shared/interfaces/vehicleMod.ts:8](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleMod.ts#L8)
 
 ___
 
@@ -35,4 +33,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleMod.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleMod.ts#L9)
+[shared/interfaces/vehicleMod.ts:9](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleMod.ts#L9)

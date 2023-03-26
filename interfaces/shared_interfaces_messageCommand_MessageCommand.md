@@ -11,8 +11,6 @@ order: 0
 
 Used to describe a command.
 
-**`Export`**
-
 **`Interface`**
 
 MessageCommand
@@ -31,13 +29,9 @@ MessageCommand
 
 The function to call when this command is executed by a player, or internal function.
 
-**`Memberof`**
-
-MessageCommand
-
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:48](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/messageCommand.ts#L48)
+[shared/interfaces/messageCommand.ts:48](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/messageCommand.ts#L48)
 
 ___
 
@@ -47,13 +41,9 @@ ___
 
 A description of this command.
 
-**`Memberof`**
-
-MessageCommand
-
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:25](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/messageCommand.ts#L25)
+[shared/interfaces/messageCommand.ts:25](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/messageCommand.ts#L25)
 
 ___
 
@@ -63,13 +53,9 @@ ___
 
 Should this command use character permissions instead of account?
 
-**`Memberof`**
-
-MessageCommand
-
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:41](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/messageCommand.ts#L41)
+[shared/interfaces/messageCommand.ts:41](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/messageCommand.ts#L41)
 
 ___
 
@@ -79,13 +65,9 @@ ___
 
 The plain text iteration of this command.
 
-**`Memberof`**
-
-MessageCommand
-
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:17](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/messageCommand.ts#L17)
+[shared/interfaces/messageCommand.ts:17](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/messageCommand.ts#L17)
 
 ___
 
@@ -95,10 +77,6 @@ ___
 
 An array of individual permission strings required to run this command.
 
-**`Memberof`**
-
-MessageCommand
-
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:33](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/messageCommand.ts#L33)
+[shared/interfaces/messageCommand.ts:33](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/messageCommand.ts#L33)

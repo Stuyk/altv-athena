@@ -17,10 +17,6 @@ order: 0
 
 How often the interval will update players.
 
-**`Memberof`**
-
-IStreamConfig
-
 #### Defined in
 
-[shared/interfaces/iStream.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iStream.ts#L9)
+[shared/interfaces/iStream.ts:9](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iStream.ts#L9)

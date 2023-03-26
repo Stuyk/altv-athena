@@ -17,8 +17,6 @@ Athena.systems.job.triggers.**override**(`functionName`, `callback`): `any`
 
 Used to override job objective trigger functionality
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -32,15 +30,13 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/triggers.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L110)
+[server/systems/job/triggers.ts:110](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/triggers.ts#L110)
 
 ::: tip Usage
 Athena.systems.job.triggers.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override job objective trigger functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -55,15 +51,13 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/triggers.ts:111](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L111)
+[server/systems/job/triggers.ts:111](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/triggers.ts#L111)
 
 ::: tip Usage
 Athena.systems.job.triggers.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override job objective trigger functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -78,7 +72,7 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/triggers.ts:112](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L112)
+[server/systems/job/triggers.ts:112](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/triggers.ts#L112)
 
 ___
 
@@ -92,8 +86,6 @@ Try playing an animation from the objective.
 
 This should almost never be invoked manually.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -107,7 +99,7 @@ This should almost never be invoked manually.
 
 #### Defined in
 
-[server/systems/job/triggers.ts:41](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L41)
+[server/systems/job/triggers.ts:41](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/triggers.ts#L41)
 
 ___
 
@@ -121,8 +113,6 @@ Try attaching an object to a player.
 
 This should almost never be invoked manually.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -136,7 +126,7 @@ This should almost never be invoked manually.
 
 #### Defined in
 
-[server/systems/job/triggers.ts:82](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L82)
+[server/systems/job/triggers.ts:82](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/triggers.ts#L82)
 
 ___
 
@@ -150,8 +140,6 @@ Calls any events attached to the current job objective that is being finished.
 
 Try calling an event. This should almost never be invoked manually.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -165,4 +153,4 @@ Try calling an event. This should almost never be invoked manually.
 
 #### Defined in
 
-[server/systems/job/triggers.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L15)
+[server/systems/job/triggers.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/triggers.ts#L15)

@@ -11,8 +11,6 @@ order: 0
 
 After completing a task it calls back to the server.
 
-**`Export`**
-
 **`Interface`**
 
 TaskCallback
@@ -25,4 +23,4 @@ TaskCallback
 
 #### Defined in
 
-[shared/interfaces/taskTimeline.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/taskTimeline.ts#L23)
+[shared/interfaces/taskTimeline.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/taskTimeline.ts#L23)

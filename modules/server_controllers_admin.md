@@ -17,8 +17,7 @@ Athena.controllers.admin.**banPlayer**(`player`, `reason`): `Promise`<`boolean`\
 
 Used to ban a player from the server.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.controllers.admin.banPlayer(player, 'was a bad person :(')
 ```
@@ -36,7 +35,7 @@ Athena.controllers.admin.banPlayer(player, 'was a bad person :(')
 
 #### Defined in
 
-[server/controllers/admin.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/admin.ts#L21)
+[server/controllers/admin.ts:21](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/admin.ts#L21)
 
 ___
 
@@ -59,7 +58,7 @@ Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[server/controllers/admin.ts:78](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/admin.ts#L78)
+[server/controllers/admin.ts:78](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/admin.ts#L78)
 
 ::: tip Usage
 Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
@@ -78,7 +77,7 @@ Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[server/controllers/admin.ts:79](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/admin.ts#L79)
+[server/controllers/admin.ts:79](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/admin.ts#L79)
 
 ___
 
@@ -90,15 +89,10 @@ Athena.controllers.admin.**unbanPlayerByDiscord**(`discord`): `Promise`<`boolean
 
 Used to unban a player from the server.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.controllers.admin.unbanPlayerByDiscord('202685967935471617');
 ```
-
-**`Memberof`**
-
-AdminController
 
 #### Parameters
 
@@ -112,4 +106,4 @@ AdminController
 
 #### Defined in
 
-[server/controllers/admin.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/admin.ts#L52)
+[server/controllers/admin.ts:52](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/controllers/admin.ts#L52)

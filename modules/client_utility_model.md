@@ -17,8 +17,6 @@ AthenaClient.utility.model.**load**(`model`): `Promise`<`boolean`\>
 
 Load a model based on string or hash
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -31,4 +29,4 @@ Load a model based on string or hash
 
 #### Defined in
 
-[client/utility/model.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/model.ts#L11)
+[client/utility/model.ts:11](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/utility/model.ts#L11)

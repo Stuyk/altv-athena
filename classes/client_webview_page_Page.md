@@ -17,10 +17,6 @@ order: 0
 
 Creates a WebView Page Controller
 
-**`Memberof`**
-
-Page
-
 #### Parameters
 
 | Name | Type |
@@ -29,7 +25,7 @@ Page
 
 #### Defined in
 
-[client/webview/page.ts:175](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/webview/page.ts#L175)
+[client/webview/page.ts:175](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/webview/page.ts#L175)
 
 ## Properties
 
@@ -39,7 +35,7 @@ Page
 
 #### Defined in
 
-[client/webview/page.ts:168](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/webview/page.ts#L168)
+[client/webview/page.ts:168](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/webview/page.ts#L168)
 
 ## Methods
 
@@ -53,10 +49,6 @@ If `isManuallyTriggered` is set to true.
 This means that the close event is not coming from the 'Escape' key bind.
 Useful for when you want your own exit functionality for your WebView.
 
-**`Memberof`**
-
-Page
-
 #### Parameters
 
 | Name | Type | Default value |
@@ -69,7 +61,7 @@ Page
 
 #### Defined in
 
-[client/webview/page.ts:283](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/webview/page.ts#L283)
+[client/webview/page.ts:283](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/webview/page.ts#L283)
 
 ___
 
@@ -81,14 +73,10 @@ AthenaClient.webview.page.Page.**open**(): `Promise`<`boolean`\>
 
 Open this WebView Page
 
-**`Memberof`**
-
-Page
-
 #### Returns
 
 `Promise`<`boolean`\>
 
 #### Defined in
 
-[client/webview/page.ts:209](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/webview/page.ts#L209)
+[client/webview/page.ts:209](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/webview/page.ts#L209)

@@ -17,8 +17,6 @@ AthenaClient.camera.switch.**switchToMultiSecondpart**(`timeInMs`, `switchType?`
 
 Zoom all the way out. Then zoom all the way in from the sky.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Default value |
@@ -32,4 +30,4 @@ Zoom all the way out. Then zoom all the way in from the sky.
 
 #### Defined in
 
-[client/camera/switch.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/switch.ts#L14)
+[client/camera/switch.ts:14](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/camera/switch.ts#L14)

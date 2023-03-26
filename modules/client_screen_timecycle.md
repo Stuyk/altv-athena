@@ -17,15 +17,13 @@ AthenaClient.screen.timecycle.**clearTimeCycleEffect**(): `void`
 
 Removes all time cycle effects on the player's screen.
 
-**`Export`**
-
 #### Returns
 
 `void`
 
 #### Defined in
 
-[client/screen/timecycle.ts:35](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/timecycle.ts#L35)
+[client/screen/timecycle.ts:35](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/timecycle.ts#L35)
 
 ___
 
@@ -36,8 +34,6 @@ AthenaClient.screen.timecycle.**setTimeCycleEffect**(`timeCycleName`, `timeInMs`
 :::
 
 Applies a time cycle effect to the player's screen.
-
-**`Export`**
 
 #### Parameters
 
@@ -52,4 +48,4 @@ Applies a time cycle effect to the player's screen.
 
 #### Defined in
 
-[client/screen/timecycle.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/timecycle.ts#L15)
+[client/screen/timecycle.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/timecycle.ts#L15)

@@ -17,13 +17,9 @@ order: 0
 
 Two items that can be combined.
 
-**`Memberof`**
-
-Recipe
-
 #### Defined in
 
-[server/systems/inventory/crafting.ts:28](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L28)
+[server/systems/inventory/crafting.ts:28](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/crafting.ts#L28)
 
 ___
 
@@ -35,13 +31,9 @@ What items to take the data from.
 ORDER MATTERS. What item is specified first will get data appended first.
 Second item overwrites matching property names.
 
-**`Memberof`**
-
-CraftRecipe
-
 #### Defined in
 
-[server/systems/inventory/crafting.ts:83](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L83)
+[server/systems/inventory/crafting.ts:83](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/crafting.ts#L83)
 
 ___
 
@@ -51,13 +43,9 @@ ___
 
 The amount required to combine.
 
-**`Memberof`**
-
-Recipe
-
 #### Defined in
 
-[server/systems/inventory/crafting.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L36)
+[server/systems/inventory/crafting.ts:36](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/crafting.ts#L36)
 
 ___
 
@@ -66,10 +54,6 @@ ___
 • `Optional` **result**: `Object`
 
 The crafting result.
-
-**`Memberof`**
-
-CraftRecipe
 
 #### Type declaration
 
@@ -82,7 +66,7 @@ CraftRecipe
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:44](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L44)
+[server/systems/inventory/crafting.ts:44](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/crafting.ts#L44)
 
 ___
 
@@ -92,13 +76,9 @@ ___
 
 The custom sound associated with this crafting recipe.
 
-**`Memberof`**
-
-CraftRecipe
-
 #### Defined in
 
-[server/systems/inventory/crafting.ts:91](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L91)
+[server/systems/inventory/crafting.ts:91](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/crafting.ts#L91)
 
 ___
 
@@ -108,10 +88,6 @@ ___
 
 A unique identifier for this recipe.
 
-**`Memberof`**
-
-Recipe
-
 #### Defined in
 
-[server/systems/inventory/crafting.ts:20](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L20)
+[server/systems/inventory/crafting.ts:20](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/crafting.ts#L20)

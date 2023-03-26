@@ -17,17 +17,13 @@ AthenaClient.screen.errorScreen.**clear**(): `void`
 
 Clear the currently drawn error screen.
 
-**`Memberof`**
-
-ErrorScreen
-
 #### Returns
 
 `void`
 
 #### Defined in
 
-[client/screen/errorScreen.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/errorScreen.ts#L15)
+[client/screen/errorScreen.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/errorScreen.ts#L15)
 
 ___
 
@@ -38,10 +34,6 @@ AthenaClient.screen.errorScreen.**create**(`screen`): `void`
 :::
 
 Create an error screen that takes up the whole screen.
-
-**`Memberof`**
-
-ErrorScreen
 
 #### Parameters
 
@@ -55,4 +47,4 @@ ErrorScreen
 
 #### Defined in
 
-[client/screen/errorScreen.ts:33](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/errorScreen.ts#L33)
+[client/screen/errorScreen.ts:33](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/errorScreen.ts#L33)

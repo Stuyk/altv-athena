@@ -23,17 +23,13 @@ order: 0
 
 A callback when this menu option is changed.
 
-**`Memberof`**
-
-MenuOptionBase
-
 #### Inherited from
 
 [MenuOptionBase](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md).[callback](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md#callback)
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
+[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
 
 ___
 
@@ -43,17 +39,13 @@ ___
 
 A description of this menu option.
 
-**`Memberof`**
-
-MenuOptionBase
-
 #### Inherited from
 
 [MenuOptionBase](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md).[description](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md#description)
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
+[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
 
 ___
 
@@ -63,17 +55,13 @@ ___
 
 Only update when 'Enter' is pressed.
 
-**`Memberof`**
-
-Selection
-
 #### Overrides
 
 [MenuOptionBase](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md).[onlyUpdateOnEnter](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md#onlyUpdateOnEnter)
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:62](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L62)
+[client/rmlui/menu/menuInterfaces.ts:62](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L62)
 
 ___
 
@@ -83,13 +71,9 @@ ___
 
 The available values for this option.
 
-**`Memberof`**
-
-Selection
-
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:46](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L46)
+[client/rmlui/menu/menuInterfaces.ts:46](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L46)
 
 ___
 
@@ -99,17 +83,13 @@ ___
 
 The title of this menu option.
 
-**`Memberof`**
-
-MenuOptionBase
-
 #### Inherited from
 
 [MenuOptionBase](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md).[title](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md#title)
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
+[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
 
 ___
 
@@ -119,7 +99,7 @@ ___
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L38)
+[client/rmlui/menu/menuInterfaces.ts:38](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L38)
 
 ___
 
@@ -129,10 +109,6 @@ ___
 
 Current index of this selection.
 
-**`Memberof`**
-
-Selection
-
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:54](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L54)
+[client/rmlui/menu/menuInterfaces.ts:54](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L54)

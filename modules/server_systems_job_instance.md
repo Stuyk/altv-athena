@@ -17,8 +17,6 @@ Athena.systems.job.instance.**clear**(`player`): `any`
 
 Clear the job instance.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -31,7 +29,7 @@ Clear the job instance.
 
 #### Defined in
 
-[server/systems/job/instance.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/instance.ts#L52)
+[server/systems/job/instance.ts:52](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/instance.ts#L52)
 
 ___
 
@@ -42,8 +40,6 @@ Athena.systems.job.instance.**get**(`player`): [`Job`](../classes/server_systems
 :::
 
 Get the current job instance for a player, or player id.
-
-**`Export`**
 
 #### Parameters
 
@@ -57,7 +53,7 @@ Get the current job instance for a player, or player id.
 
 #### Defined in
 
-[server/systems/job/instance.ts:13](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/instance.ts#L13)
+[server/systems/job/instance.ts:13](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/instance.ts#L13)
 
 ___
 
@@ -68,8 +64,6 @@ Athena.systems.job.instance.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override job instancing functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -84,15 +78,13 @@ Used to override job instancing functionality
 
 #### Defined in
 
-[server/systems/job/instance.ts:84](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/instance.ts#L84)
+[server/systems/job/instance.ts:84](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/instance.ts#L84)
 
 ::: tip Usage
 Athena.systems.job.instance.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override job instancing functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -107,15 +99,13 @@ Used to override job instancing functionality
 
 #### Defined in
 
-[server/systems/job/instance.ts:85](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/instance.ts#L85)
+[server/systems/job/instance.ts:85](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/instance.ts#L85)
 
 ::: tip Usage
 Athena.systems.job.instance.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override job instancing functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -130,7 +120,7 @@ Used to override job instancing functionality
 
 #### Defined in
 
-[server/systems/job/instance.ts:86](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/instance.ts#L86)
+[server/systems/job/instance.ts:86](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/instance.ts#L86)
 
 ___
 
@@ -141,8 +131,6 @@ Athena.systems.job.instance.**set**(`player`, `newJob`): `any`
 :::
 
 Set the current job instance for a player.
-
-**`Export`**
 
 #### Parameters
 
@@ -157,4 +145,4 @@ Set the current job instance for a player.
 
 #### Defined in
 
-[server/systems/job/instance.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/instance.ts#L32)
+[server/systems/job/instance.ts:32](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/instance.ts#L32)

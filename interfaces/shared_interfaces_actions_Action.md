@@ -11,8 +11,6 @@ order: 0
 
 Used to pass action information from server-side to client-side.
 
-**`Export`**
-
 **`Interface`**
 
 Action
@@ -25,13 +23,9 @@ Action
 
 Data to add to the menu to retrieve on option select.
 
-**`Memberof`**
-
-Action
-
 #### Defined in
 
-[shared/interfaces/actions.ts:27](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/actions.ts#L27)
+[shared/interfaces/actions.ts:27](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/actions.ts#L27)
 
 ___
 
@@ -41,13 +35,9 @@ ___
 
 Name of the event to call.
 
-**`Memberof`**
-
-Action
-
 #### Defined in
 
-[shared/interfaces/actions.ts:13](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/actions.ts#L13)
+[shared/interfaces/actions.ts:13](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/actions.ts#L13)
 
 ___
 
@@ -57,10 +47,6 @@ ___
 
 Is a server event?
 
-**`Memberof`**
-
-Action
-
 #### Defined in
 
-[shared/interfaces/actions.ts:20](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/actions.ts#L20)
+[shared/interfaces/actions.ts:20](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/actions.ts#L20)

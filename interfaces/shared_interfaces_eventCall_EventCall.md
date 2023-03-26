@@ -11,8 +11,6 @@ order: 0
 
 Used in the job system to invoke various detached events.
 
-**`Export`**
-
 **`Interface`**
 
 EventCall
@@ -26,13 +24,9 @@ EventCall
 Used to call an event right when an objective is started.
 Only useful for the job system.
 
-**`Memberof`**
-
-EventCall
-
 #### Defined in
 
-[shared/interfaces/eventCall.ts:34](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/eventCall.ts#L34)
+[shared/interfaces/eventCall.ts:34](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/eventCall.ts#L34)
 
 ___
 
@@ -43,13 +37,9 @@ ___
 The name of the event to call.
 ie. 'openTrunk'
 
-**`Memberof`**
-
-EventCall
-
 #### Defined in
 
-[shared/interfaces/eventCall.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/eventCall.ts#L15)
+[shared/interfaces/eventCall.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/eventCall.ts#L15)
 
 ___
 
@@ -63,10 +53,6 @@ Only useful for client-side.
 Use alt.on to get this event if set to false.
 Must be entirely client-side or entirely server-side if false.
 
-**`Memberof`**
-
-EventCall
-
 #### Defined in
 
-[shared/interfaces/eventCall.ts:26](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/eventCall.ts#L26)
+[shared/interfaces/eventCall.ts:26](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/eventCall.ts#L26)

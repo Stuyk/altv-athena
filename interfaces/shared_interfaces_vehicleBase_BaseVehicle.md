@@ -11,8 +11,6 @@ order: 0
 
 Used as the main describer of a stored vehicle.
 
-**`Export`**
-
 **`Interface`**
 
 BaseVehicle
@@ -32,13 +30,9 @@ BaseVehicle
 The vehicle identifier for the database.
 Also used to save to the database.
 
-**`Memberof`**
-
-IVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L16)
+[shared/interfaces/vehicleBase.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L16)
 
 ___
 
@@ -48,13 +42,9 @@ ___
 
 Used to control what dimension this vehicle should spawn in / be found in
 
-**`Memberof`**
-
-IVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:61](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L61)
+[shared/interfaces/vehicleBase.ts:61](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L61)
 
 ___
 
@@ -64,13 +54,9 @@ ___
 
 Flag this value to prevent this vehicle from ever being despawned
 
-**`Memberof`**
-
-BaseVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L110)
+[shared/interfaces/vehicleBase.ts:110](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L110)
 
 ___
 
@@ -80,13 +66,9 @@ ___
 
 The fuel level for this vehicle.
 
-**`Memberof`**
-
-BaseVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:93](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L93)
+[shared/interfaces/vehicleBase.ts:93](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L93)
 
 ___
 
@@ -97,13 +79,9 @@ ___
 Set this value to an indexable garage.
 If this value is set it means it will not be spawned when a player joins.
 
-**`Memberof`**
-
-BaseVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:102](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L102)
+[shared/interfaces/vehicleBase.ts:102](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L102)
 
 ___
 
@@ -113,13 +91,9 @@ ___
 
 The vehicle id for lookups.
 
-**`Memberof`**
-
-IVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L23)
+[shared/interfaces/vehicleBase.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L23)
 
 ___
 
@@ -129,13 +103,9 @@ ___
 
 A list of character ids that have access to this vehicle
 
-**`Memberof`**
-
-BaseVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:77](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L77)
+[shared/interfaces/vehicleBase.ts:77](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L77)
 
 ___
 
@@ -145,13 +115,9 @@ ___
 
 The last known timestamp when this vehicle was used.
 
-**`Memberof`**
-
-BaseVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:118](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L118)
+[shared/interfaces/vehicleBase.ts:118](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L118)
 
 ___
 
@@ -161,13 +127,9 @@ ___
 
 The model of this vehicle.
 
-**`Memberof`**
-
-IVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:40](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L40)
+[shared/interfaces/vehicleBase.ts:40](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L40)
 
 ___
 
@@ -179,13 +141,9 @@ The player who is the owner of this vehicle.
 Corresponds with character._id or null if it belongs to anything else
 Obviously permissions and keys should be used if no owner is set.
 
-**`Memberof`**
-
-IVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:33](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L33)
+[shared/interfaces/vehicleBase.ts:33](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L33)
 
 ___
 
@@ -195,13 +153,9 @@ ___
 
 A list of character permissions that have access to this vehicle
 
-**`Memberof`**
-
-BaseVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:85](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L85)
+[shared/interfaces/vehicleBase.ts:85](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L85)
 
 ___
 
@@ -212,13 +166,9 @@ ___
 A unique identifier for this specific vehicle.
 Usually automatically generated.
 
-**`Memberof`**
-
-IVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:69](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L69)
+[shared/interfaces/vehicleBase.ts:69](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L69)
 
 ___
 
@@ -228,13 +178,9 @@ ___
 
 The last position where this vehicle was last left.
 
-**`Memberof`**
-
-IVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:47](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L47)
+[shared/interfaces/vehicleBase.ts:47](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L47)
 
 ___
 
@@ -244,10 +190,6 @@ ___
 
 The last rotation where this vehicle was last left.
 
-**`Memberof`**
-
-IVehicle
-
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:54](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleBase.ts#L54)
+[shared/interfaces/vehicleBase.ts:54](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleBase.ts#L54)

@@ -11,8 +11,6 @@ order: 0
 
 Used to pass object information from server to client.
 
-**`Export`**
-
 **`Interface`**
 
 IObject
@@ -25,13 +23,9 @@ IObject
 
 Will show across all dimensions.
 
-**`Memberof`**
-
-IObject
-
 #### Defined in
 
-[shared/interfaces/iObject.ts:60](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iObject.ts#L60)
+[shared/interfaces/iObject.ts:60](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iObject.ts#L60)
 
 ___
 
@@ -41,13 +35,9 @@ ___
 
 The max distance this object should render at.
 
-**`Memberof`**
-
-IObject
-
 #### Defined in
 
-[shared/interfaces/iObject.ts:53](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iObject.ts#L53)
+[shared/interfaces/iObject.ts:53](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iObject.ts#L53)
 
 ___
 
@@ -57,13 +47,9 @@ ___
 
 The model name this object.
 
-**`Memberof`**
-
-IObject
-
 #### Defined in
 
-[shared/interfaces/iObject.ts:39](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iObject.ts#L39)
+[shared/interfaces/iObject.ts:39](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iObject.ts#L39)
 
 ___
 
@@ -73,13 +59,9 @@ ___
 
 Should this object have no collision?
 
-**`Memberof`**
-
-IObject
-
 #### Defined in
 
-[shared/interfaces/iObject.ts:67](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iObject.ts#L67)
+[shared/interfaces/iObject.ts:67](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iObject.ts#L67)
 
 ___
 
@@ -89,13 +71,9 @@ ___
 
 Position of the Object in a 3D space.
 
-**`Memberof`**
-
-IObject
-
 #### Defined in
 
-[shared/interfaces/iObject.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iObject.ts#L32)
+[shared/interfaces/iObject.ts:32](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iObject.ts#L32)
 
 ___
 
@@ -105,13 +83,9 @@ ___
 
 The rotation of this object.
 
-**`Memberof`**
-
-IObject
-
 #### Defined in
 
-[shared/interfaces/iObject.ts:46](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iObject.ts#L46)
+[shared/interfaces/iObject.ts:46](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iObject.ts#L46)
 
 ___
 
@@ -123,13 +97,9 @@ Use this parameter to help you identify what this item does on client-side.
 
 Useful for wheel menu based functionality.
 
-**`Memberof`**
-
-IObject
-
 #### Defined in
 
-[shared/interfaces/iObject.ts:25](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iObject.ts#L25)
+[shared/interfaces/iObject.ts:25](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iObject.ts#L25)
 
 ___
 
@@ -139,10 +109,6 @@ ___
 
 A unique identifier for this object.
 
-**`Memberof`**
-
-IObject
-
 #### Defined in
 
-[shared/interfaces/iObject.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iObject.ts#L15)
+[shared/interfaces/iObject.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iObject.ts#L15)

@@ -19,10 +19,6 @@ Convert Pixel Values to Percentages
 
 **`Static`**
 
-**`Memberof`**
-
-Minimap
-
 #### Parameters
 
 | Name | Type | Default value |
@@ -36,7 +32,7 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:150](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L150)
+[client/screen/minimap.ts:150](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/minimap.ts#L150)
 
 ___
 
@@ -50,10 +46,6 @@ Get bottom left of the MiniMap
 
 **`Static`**
 
-**`Memberof`**
-
-Minimap
-
 #### Parameters
 
 | Name | Type | Default value | Description |
@@ -66,7 +58,7 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:90](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L90)
+[client/screen/minimap.ts:90](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/minimap.ts#L90)
 
 ___
 
@@ -80,10 +72,6 @@ Get Bottom Right of MiniMap
 
 **`Static`**
 
-**`Memberof`**
-
-Minimap
-
 #### Parameters
 
 | Name | Type | Default value | Description |
@@ -96,7 +84,7 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L110)
+[client/screen/minimap.ts:110](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/minimap.ts#L110)
 
 ___
 
@@ -110,10 +98,6 @@ Get the height of the MiniMap
 
 **`Static`**
 
-**`Memberof`**
-
-Minimap
-
 #### Parameters
 
 | Name | Type | Default value | Description |
@@ -126,7 +110,7 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L30)
+[client/screen/minimap.ts:30](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/minimap.ts#L30)
 
 ___
 
@@ -142,7 +126,7 @@ AthenaClient.screen.minimap.**getSafeZoneSize**(): `number`
 
 #### Defined in
 
-[client/screen/minimap.ts:123](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L123)
+[client/screen/minimap.ts:123](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/minimap.ts#L123)
 
 ___
 
@@ -158,7 +142,7 @@ AthenaClient.screen.minimap.**getScreenAspectRatio**(): `number`
 
 #### Defined in
 
-[client/screen/minimap.ts:127](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L127)
+[client/screen/minimap.ts:127](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/minimap.ts#L127)
 
 ___
 
@@ -170,15 +154,13 @@ AthenaClient.screen.minimap.**getScreenResolution**(): `alt.IVector2`
 
 Get current screen resolution
 
-**`Export`**
-
 #### Returns
 
 `alt.IVector2`
 
 #### Defined in
 
-[client/screen/minimap.ts:137](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L137)
+[client/screen/minimap.ts:137](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/minimap.ts#L137)
 
 ___
 
@@ -192,10 +174,6 @@ Get the Top Left of the MiniMap
 
 **`Static`**
 
-**`Memberof`**
-
-Minimap
-
 #### Parameters
 
 | Name | Type | Default value | Description |
@@ -208,7 +186,7 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:48](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L48)
+[client/screen/minimap.ts:48](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/minimap.ts#L48)
 
 ___
 
@@ -222,10 +200,6 @@ Get the top right of the MiniMap
 
 **`Static`**
 
-**`Memberof`**
-
-Minimap
-
 #### Parameters
 
 | Name | Type | Default value | Description |
@@ -238,7 +212,7 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:70](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L70)
+[client/screen/minimap.ts:70](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/minimap.ts#L70)
 
 ___
 
@@ -252,10 +226,6 @@ Get the width of the MiniMap
 
 **`Static`**
 
-**`Memberof`**
-
-Minimap
-
 #### Parameters
 
 | Name | Type | Default value | Description |
@@ -268,4 +238,4 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L11)
+[client/screen/minimap.ts:11](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/minimap.ts#L11)

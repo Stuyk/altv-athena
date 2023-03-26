@@ -11,8 +11,6 @@ order: 0
 
 Interface for working with / using vehicles.
 
-**`Export`**
-
 **`Interface`**
 
 VehicleInfo
@@ -25,13 +23,9 @@ VehicleInfo
 
 The class of the vehicle; sport, utility, etc.
 
-**`Memberof`**
-
-VehicleInfo
-
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L36)
+[shared/interfaces/vehicleInfo.ts:36](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleInfo.ts#L36)
 
 ___
 
@@ -41,13 +35,9 @@ ___
 
 The display name of the vehicle.
 
-**`Memberof`**
-
-VehicleInfo
-
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L15)
+[shared/interfaces/vehicleInfo.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleInfo.ts#L15)
 
 ___
 
@@ -57,13 +47,9 @@ ___
 
 The total tanksize of the vehicle used for fuel cost calculations
 
-**`Memberof`**
-
-VehicleInfo
-
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:71](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L71)
+[shared/interfaces/vehicleInfo.ts:71](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleInfo.ts#L71)
 
 ___
 
@@ -73,13 +59,9 @@ ___
 
 The type of fuel the vehicle uses
 
-**`Memberof`**
-
-VehicleInfo
-
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:64](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L64)
+[shared/interfaces/vehicleInfo.ts:64](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleInfo.ts#L64)
 
 ___
 
@@ -89,13 +71,9 @@ ___
 
 The model of the vehicle.
 
-**`Memberof`**
-
-VehicleInfo
-
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L22)
+[shared/interfaces/vehicleInfo.ts:22](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleInfo.ts#L22)
 
 ___
 
@@ -105,13 +83,9 @@ ___
 
 The price of this vehicle if purchaseable.
 
-**`Memberof`**
-
-VehicleInfo
-
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L50)
+[shared/interfaces/vehicleInfo.ts:50](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleInfo.ts#L50)
 
 ___
 
@@ -121,13 +95,9 @@ ___
 
 The total number of available seats in a vehicle
 
-**`Memberof`**
-
-VehicleInfo
-
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:78](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L78)
+[shared/interfaces/vehicleInfo.ts:78](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleInfo.ts#L78)
 
 ___
 
@@ -137,13 +107,9 @@ ___
 
 Is this vehicle purchaseable?
 
-**`Memberof`**
-
-VehicleInfo
-
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L43)
+[shared/interfaces/vehicleInfo.ts:43](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleInfo.ts#L43)
 
 ___
 
@@ -153,13 +119,9 @@ ___
 
 How much storage this vehicle should have.
 
-**`Memberof`**
-
-VehicleInfo
-
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:57](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L57)
+[shared/interfaces/vehicleInfo.ts:57](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleInfo.ts#L57)
 
 ___
 
@@ -169,10 +131,6 @@ ___
 
 The vehicle type; vehicle, boat, plane, etc.
 
-**`Memberof`**
-
-VehicleInfo
-
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L29)
+[shared/interfaces/vehicleInfo.ts:29](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/vehicleInfo.ts#L29)

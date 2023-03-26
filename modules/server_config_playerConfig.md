@@ -21,7 +21,7 @@ order: 0
 
 #### Defined in
 
-[server/config/playerConfig.ts:26](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/config/playerConfig.ts#L26)
+[server/config/playerConfig.ts:25](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/config/playerConfig.ts#L25)
 
 ## Functions
 
@@ -35,15 +35,12 @@ Set a value to auto-sync to client.
 Provides type safety for setting predictable keys.
 Wraps up the player.setLocalMeta function.
 
-**`Example`**
-
+#### Example
 ```ts
 export type ExtendedKeys = 'hello-world' | 'wanted-level' | 'bitcoins';
 
 Athena.config.set<ExtendedKeys>('wanted-level', 5);
 ```
-
-**`Export`**
 
 #### Type parameters
 
@@ -65,4 +62,4 @@ Athena.config.set<ExtendedKeys>('wanted-level', 5);
 
 #### Defined in
 
-[server/config/playerConfig.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/config/playerConfig.ts#L22)
+[server/config/playerConfig.ts:21](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/config/playerConfig.ts#L21)

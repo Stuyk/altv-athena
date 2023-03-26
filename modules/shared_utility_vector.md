@@ -35,7 +35,7 @@ order: 0
 
 #### Defined in
 
-[shared/utility/vector.ts:315](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L315)
+[shared/utility/vector.ts:315](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L315)
 
 ## Functions
 
@@ -46,8 +46,6 @@ AthenaShared.utility.vector.**distance**(`vector1`, `vector2`): `number`
 :::
 
 Get the distance between two positions.
-
-**`Export`**
 
 #### Parameters
 
@@ -62,7 +60,7 @@ Get the distance between two positions.
 
 #### Defined in
 
-[shared/utility/vector.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L11)
+[shared/utility/vector.ts:11](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L11)
 
 ___
 
@@ -73,8 +71,6 @@ AthenaShared.utility.vector.**distance2d**(`vector1`, `vector2`): `number`
 :::
 
 Get the distance between two positions. Excludes z
-
-**`Export`**
 
 #### Parameters
 
@@ -89,7 +85,7 @@ Get the distance between two positions. Excludes z
 
 #### Defined in
 
-[shared/utility/vector.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L29)
+[shared/utility/vector.ts:29](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L29)
 
 ___
 
@@ -123,7 +119,7 @@ Get the closest server entity type. Server only.
 
 #### Defined in
 
-[shared/utility/vector.ts:208](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L208)
+[shared/utility/vector.ts:208](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L208)
 
 ___
 
@@ -134,8 +130,6 @@ AthenaShared.utility.vector.**getClosestOfType**<`T`\>(`pos`, `elements`, `lastD
 :::
 
 Get the closest of a specific type of object with a `pos` property.
-
-**`Export`**
 
 #### Type parameters
 
@@ -157,7 +151,7 @@ Get the closest of a specific type of object with a `pos` property.
 
 #### Defined in
 
-[shared/utility/vector.ts:297](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L297)
+[shared/utility/vector.ts:297](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L297)
 
 ___
 
@@ -168,8 +162,6 @@ AthenaShared.utility.vector.**getClosestTypes**<`T`\>(`pos`, `elements`, `maxDis
 :::
 
 Gets an array of the closest types.
-
-**`Export`**
 
 #### Type parameters
 
@@ -193,7 +185,7 @@ Gets an array of the closest types.
 
 #### Defined in
 
-[shared/utility/vector.ts:80](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L80)
+[shared/utility/vector.ts:80](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L80)
 
 ___
 
@@ -204,8 +196,6 @@ AthenaShared.utility.vector.**getClosestVector**(`pos`, `arrayOfPositions`): `IV
 :::
 
 Get the closest vector given an array of positions.
-
-**`Export`**
 
 #### Parameters
 
@@ -220,7 +210,7 @@ Get the closest vector given an array of positions.
 
 #### Defined in
 
-[shared/utility/vector.ts:45](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L45)
+[shared/utility/vector.ts:45](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L45)
 
 ___
 
@@ -231,8 +221,6 @@ AthenaShared.utility.vector.**getClosestVectorByPos**<`T`\>(`pos`, `arrayOfPosit
 :::
 
 Get the closest Vector by position.
-
-**`Export`**
 
 #### Type parameters
 
@@ -254,7 +242,7 @@ Get the closest Vector by position.
 
 #### Defined in
 
-[shared/utility/vector.ts:63](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L63)
+[shared/utility/vector.ts:63](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L63)
 
 ___
 
@@ -279,7 +267,7 @@ Gets the direction the player is facing.
 
 #### Defined in
 
-[shared/utility/vector.ts:156](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L156)
+[shared/utility/vector.ts:156](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L156)
 
 ___
 
@@ -291,8 +279,6 @@ AthenaShared.utility.vector.**getVectorInFrontOfPlayer**(`entity`, `distance`): 
 
 SERVER ONLY
 Return a position in front of a player based on distance.
-
-**`Export`**
 
 #### Parameters
 
@@ -309,7 +295,7 @@ Return a position in front of a player based on distance.
 
 #### Defined in
 
-[shared/utility/vector.ts:172](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L172)
+[shared/utility/vector.ts:172](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L172)
 
 ___
 
@@ -335,7 +321,7 @@ Determine if a vector is between vectors.
 
 #### Defined in
 
-[shared/utility/vector.ts:193](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L193)
+[shared/utility/vector.ts:193](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L193)
 
 ___
 
@@ -359,7 +345,7 @@ AthenaShared.utility.vector.**lerp**(`a`, `b`, `t`): `number`
 
 #### Defined in
 
-[shared/utility/vector.ts:118](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L118)
+[shared/utility/vector.ts:118](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L118)
 
 ___
 
@@ -371,8 +357,6 @@ AthenaShared.utility.vector.**vectorLerp**(`start`, `end`, `l`, `clamp`): `alt.I
 
 Finds a position between two vectors to ease into.
 Returns a new position.
-
-**`Export`**
 
 #### Parameters
 
@@ -389,4 +373,4 @@ Returns a new position.
 
 #### Defined in
 
-[shared/utility/vector.ts:133](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/vector.ts#L133)
+[shared/utility/vector.ts:133](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/vector.ts#L133)

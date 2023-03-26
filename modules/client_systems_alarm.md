@@ -30,7 +30,7 @@ Attempts to load an alarm multiple times before returning false.
 
 #### Defined in
 
-[client/systems/alarm.ts:17](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/alarm.ts#L17)
+[client/systems/alarm.ts:17](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/systems/alarm.ts#L17)
 
 ___
 
@@ -42,8 +42,6 @@ AthenaClient.systems.alarm.**startAlarm**(`name`): `Promise`<`void`\>
 
 Play an alarm for the local player.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -56,7 +54,7 @@ Play an alarm for the local player.
 
 #### Defined in
 
-[client/systems/alarm.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/alarm.ts#L50)
+[client/systems/alarm.ts:50](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/systems/alarm.ts#L50)
 
 ___
 
@@ -68,8 +66,6 @@ AthenaClient.systems.alarm.**stopAlarm**(`name`): `Promise`<`void`\>
 
 Stop an alarm for the local player.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -82,7 +78,7 @@ Stop an alarm for the local player.
 
 #### Defined in
 
-[client/systems/alarm.ts:73](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/alarm.ts#L73)
+[client/systems/alarm.ts:73](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/systems/alarm.ts#L73)
 
 ___
 
@@ -94,12 +90,10 @@ AthenaClient.systems.alarm.**stopAllAlarms**(): `Promise`<`void`\>
 
 Stop all alarms for the local player.
 
-**`Export`**
-
 #### Returns
 
 `Promise`<`void`\>
 
 #### Defined in
 
-[client/systems/alarm.ts:86](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/alarm.ts#L86)
+[client/systems/alarm.ts:86](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/systems/alarm.ts#L86)

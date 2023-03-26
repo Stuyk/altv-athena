@@ -41,8 +41,6 @@ const doPoliceWorkRestricted = Athena.utility.restrict.create(doPoliceWork, {
 alt.onClient('something-from-a-client', doPoliceWorkRestricted);
 ```
 
-**`Export`**
-
 #### Type parameters
 
 | Name | Type |
@@ -62,7 +60,7 @@ alt.onClient('something-from-a-client', doPoliceWorkRestricted);
 
 #### Defined in
 
-[server/utility/restrict.ts:109](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/restrict.ts#L109)
+[server/utility/restrict.ts:109](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/restrict.ts#L109)
 
 ___
 
@@ -73,8 +71,6 @@ Athena.utility.restrict.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override restrict utility funcs
-
-**`Export`**
 
 #### Parameters
 
@@ -89,4 +85,4 @@ Used to override restrict utility funcs
 
 #### Defined in
 
-[server/utility/restrict.ts:139](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/restrict.ts#L139)
+[server/utility/restrict.ts:139](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/restrict.ts#L139)

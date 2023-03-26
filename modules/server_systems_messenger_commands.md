@@ -25,7 +25,7 @@ order: 0
 
 #### Defined in
 
-[server/systems/messenger/commands.ts:168](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/commands.ts#L168)
+[server/systems/messenger/commands.ts:168](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/messenger/commands.ts#L168)
 
 ## Functions
 
@@ -51,7 +51,7 @@ Used to execute a command by name.
 
 #### Defined in
 
-[server/systems/messenger/commands.ts:19](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/commands.ts#L19)
+[server/systems/messenger/commands.ts:19](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/messenger/commands.ts#L19)
 
 ___
 
@@ -75,7 +75,7 @@ Get command information by command name.
 
 #### Defined in
 
-[server/systems/messenger/commands.ts:46](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/commands.ts#L46)
+[server/systems/messenger/commands.ts:46](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/messenger/commands.ts#L46)
 
 ___
 
@@ -89,8 +89,6 @@ Get all commands the player has access to.
 Includes names of individual parameters for each callback function as well.
 Excludes callbacks.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -103,7 +101,7 @@ Excludes callbacks.
 
 #### Defined in
 
-[server/systems/messenger/commands.ts:127](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/commands.ts#L127)
+[server/systems/messenger/commands.ts:127](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/messenger/commands.ts#L127)
 
 ___
 
@@ -114,8 +112,6 @@ Athena.systems.messenger.commands.**override**(`functionName`, `callback`): `any
 :::
 
 Used to override command functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -130,15 +126,13 @@ Used to override command functionality
 
 #### Defined in
 
-[server/systems/messenger/commands.ts:180](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/commands.ts#L180)
+[server/systems/messenger/commands.ts:180](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/messenger/commands.ts#L180)
 
 ::: tip Usage
 Athena.systems.messenger.commands.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override command functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -153,15 +147,13 @@ Used to override command functionality
 
 #### Defined in
 
-[server/systems/messenger/commands.ts:181](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/commands.ts#L181)
+[server/systems/messenger/commands.ts:181](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/messenger/commands.ts#L181)
 
 ::: tip Usage
 Athena.systems.messenger.commands.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override command functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -176,15 +168,13 @@ Used to override command functionality
 
 #### Defined in
 
-[server/systems/messenger/commands.ts:182](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/commands.ts#L182)
+[server/systems/messenger/commands.ts:182](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/messenger/commands.ts#L182)
 
 ::: tip Usage
 Athena.systems.messenger.commands.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override command functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -199,15 +189,13 @@ Used to override command functionality
 
 #### Defined in
 
-[server/systems/messenger/commands.ts:183](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/commands.ts#L183)
+[server/systems/messenger/commands.ts:183](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/messenger/commands.ts#L183)
 
 ::: tip Usage
 Athena.systems.messenger.commands.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override command functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -222,7 +210,7 @@ Used to override command functionality
 
 #### Defined in
 
-[server/systems/messenger/commands.ts:184](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/commands.ts#L184)
+[server/systems/messenger/commands.ts:184](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/messenger/commands.ts#L184)
 
 ___
 
@@ -246,7 +234,7 @@ Get all commands that are associated with a player's current permission level.
 
 #### Defined in
 
-[server/systems/messenger/commands.ts:86](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/commands.ts#L86)
+[server/systems/messenger/commands.ts:86](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/messenger/commands.ts#L86)
 
 ___
 
@@ -274,4 +262,4 @@ Register a new command that can be called.
 
 #### Defined in
 
-[server/systems/messenger/commands.ts:59](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/commands.ts#L59)
+[server/systems/messenger/commands.ts:59](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/messenger/commands.ts#L59)

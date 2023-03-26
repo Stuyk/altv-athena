@@ -17,13 +17,9 @@ AthenaClient.utility.math.**degToRad**(`degrees`): `number`
 
 Converts degrees to radians
 
-**`Function`**
-
 **`Name`**
 
 degToRad
-
-**`Exports`**
 
 #### Parameters
 
@@ -35,9 +31,11 @@ degToRad
 
 `number`
 
+s
+
 #### Defined in
 
-[client/utility/math.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L43)
+[client/utility/math.ts:43](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/utility/math.ts#L43)
 
 ___
 
@@ -48,8 +46,6 @@ AthenaClient.utility.math.**getAverage**(`data`): `number`
 :::
 
 Returns the average value among all numbers.
-
-**`Export`**
 
 #### Parameters
 
@@ -63,7 +59,7 @@ Returns the average value among all numbers.
 
 #### Defined in
 
-[client/utility/math.ts:113](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L113)
+[client/utility/math.ts:113](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/utility/math.ts#L113)
 
 ___
 
@@ -75,13 +71,9 @@ AthenaClient.utility.math.**getCrossProduct**(`v1`, `v2`): `alt.Vector3`
 
 It's a function that takes two vectors and returns a vector.
 
-**`Function`**
-
 **`Name`**
 
 getCrossProduct
-
-**`Exports`**
 
 #### Parameters
 
@@ -94,9 +86,11 @@ getCrossProduct
 
 `alt.Vector3`
 
+s
+
 #### Defined in
 
-[client/utility/math.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L14)
+[client/utility/math.ts:14](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/utility/math.ts#L14)
 
 ___
 
@@ -108,13 +102,9 @@ AthenaClient.utility.math.**getDirectionFromRotation**(`rotation`): `alt.IVector
 
 It's converting a rotation to a direction.
 
-**`Function`**
-
 **`Name`**
 
 getDirectionFromRotation
-
-**`Exports`**
 
 #### Parameters
 
@@ -126,9 +116,11 @@ getDirectionFromRotation
 
 `alt.IVector3`
 
+s
+
 #### Defined in
 
-[client/utility/math.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L72)
+[client/utility/math.ts:72](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/utility/math.ts#L72)
 
 ___
 
@@ -140,13 +132,9 @@ AthenaClient.utility.math.**getNormalizedVector**(`vector`): `alt.Vector3`
 
 It's a function that takes a vector and returns a normalized vector.
 
-**`Function`**
-
 **`Name`**
 
 getNormalizedVector
-
-**`Exports`**
 
 #### Parameters
 
@@ -158,9 +146,11 @@ getNormalizedVector
 
 `alt.Vector3`
 
+s
+
 #### Defined in
 
-[client/utility/math.ts:28](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L28)
+[client/utility/math.ts:28](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/utility/math.ts#L28)
 
 ___
 
@@ -172,13 +162,9 @@ AthenaClient.utility.math.**getPointsInCircle**(`points`, `radius`, `center`): `
 
 Returns an array of alt.IVector2 in a circle
 
-**`Function`**
-
 **`Name`**
 
 getPointsInCircle
-
-**`Exports`**
 
 #### Parameters
 
@@ -192,9 +178,11 @@ getPointsInCircle
 
 `alt.IVector2`[]
 
+s
+
 #### Defined in
 
-[client/utility/math.ts:92](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L92)
+[client/utility/math.ts:92](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/utility/math.ts#L92)
 
 ___
 
@@ -205,8 +193,6 @@ AthenaClient.utility.math.**rotationToDirection**(`rotation`): `alt.Vector3`
 :::
 
 Could also be seen as rotAnglesToVector
-
-**`Export`**
 
 #### Parameters
 
@@ -220,4 +206,4 @@ Could also be seen as rotAnglesToVector
 
 #### Defined in
 
-[client/utility/math.ts:54](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L54)
+[client/utility/math.ts:54](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/utility/math.ts#L54)

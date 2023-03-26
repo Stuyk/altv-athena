@@ -17,13 +17,10 @@ Athena.systems.defaults.clothingCrafting.**disable**(): `void`
 
 Disable the default clothing crafting combinations.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.systems.default.clothingCrafting.disable();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -31,4 +28,4 @@ Athena.systems.default.clothingCrafting.disable();
 
 #### Defined in
 
-[server/systems/defaults/clothingCrafting.ts:64](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/clothingCrafting.ts#L64)
+[server/systems/defaults/clothingCrafting.ts:64](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/clothingCrafting.ts#L64)

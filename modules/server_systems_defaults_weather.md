@@ -17,13 +17,10 @@ Athena.systems.defaults.weather.**disable**(): `void`
 
 Disable the default weather from updating players.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.systems.default.weather.disable();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -31,7 +28,7 @@ Athena.systems.default.weather.disable();
 
 #### Defined in
 
-[server/systems/defaults/weather.ts:91](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/weather.ts#L91)
+[server/systems/defaults/weather.ts:91](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/weather.ts#L91)
 
 ___
 
@@ -42,8 +39,6 @@ Athena.systems.defaults.weather.**getCurrentWeather**(`asString`): `number`
 :::
 
 Get the current weather as a string or number.
-
-**`Export`**
 
 #### Parameters
 
@@ -57,15 +52,13 @@ Get the current weather as a string or number.
 
 #### Defined in
 
-[server/systems/defaults/weather.ts:117](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/weather.ts#L117)
+[server/systems/defaults/weather.ts:117](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/weather.ts#L117)
 
 ::: tip Usage
 Athena.systems.defaults.weather.**getCurrentWeather**(`asString`): `string`
 :::
 
 Get the current weather as a string or number.
-
-**`Export`**
 
 #### Parameters
 
@@ -79,7 +72,7 @@ Get the current weather as a string or number.
 
 #### Defined in
 
-[server/systems/defaults/weather.ts:118](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/weather.ts#L118)
+[server/systems/defaults/weather.ts:118](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/weather.ts#L118)
 
 ___
 
@@ -90,8 +83,6 @@ Athena.systems.defaults.weather.**setWeatherCycle**(`newWeatherCycle`): `void`
 :::
 
 Used to override the default weather cycle.
-
-**`Export`**
 
 #### Parameters
 
@@ -105,7 +96,7 @@ Used to override the default weather cycle.
 
 #### Defined in
 
-[server/systems/defaults/weather.ts:108](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/weather.ts#L108)
+[server/systems/defaults/weather.ts:108](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/weather.ts#L108)
 
 ___
 
@@ -129,4 +120,4 @@ Updates the player weather to match current weather system.
 
 #### Defined in
 
-[server/systems/defaults/weather.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/weather.ts#L72)
+[server/systems/defaults/weather.ts:72](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/weather.ts#L72)

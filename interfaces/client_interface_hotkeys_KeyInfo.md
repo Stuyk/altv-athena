@@ -23,17 +23,13 @@ order: 0
 
 If set to true, any page / menu will allow triggering this keybind.
 
-**`Memberof`**
-
-KeyInfo
-
 #### Inherited from
 
 [BaseKeyInfo](client_interface_hotkeys_BaseKeyInfo.md).[allowInAnyMenu](client_interface_hotkeys_BaseKeyInfo.md#allowInAnyMenu)
 
 #### Defined in
 
-[client/interface/hotkeys.ts:201](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L201)
+[client/interface/hotkeys.ts:201](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L201)
 
 ___
 
@@ -43,17 +39,13 @@ ___
 
 Allows the keybind to be ignore menu checks if in a specific page.
 
-**`Memberof`**
-
-BaseKeyInfo
-
 #### Inherited from
 
 [BaseKeyInfo](client_interface_hotkeys_BaseKeyInfo.md).[allowInSpecificPage](client_interface_hotkeys_BaseKeyInfo.md#allowInSpecificPage)
 
 #### Defined in
 
-[client/interface/hotkeys.ts:209](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L209)
+[client/interface/hotkeys.ts:209](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L209)
 
 ___
 
@@ -63,16 +55,12 @@ ___
 
 Only triggered when `msToTrigger` is also specified for this key bind.
 
-**`Memberof`**
-
-KeyInfo
-
 #### Type declaration
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `callback` | `Function` | Function to call after the criteria is met. |
-| `msToTrigger?` | `number` | Milliseconds needed to trigger this keybind. Used for triggering if the key is held long enough. The trigger is fired instantly after the time point is exceeded. **`Memberof`** KeyInfo |
+| `msToTrigger?` | `number` | Milliseconds needed to trigger this keybind. Used for triggering if the key is held long enough. The trigger is fired instantly after the time point is exceeded. |
 
 #### Overrides
 
@@ -80,7 +68,7 @@ KeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:80](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L80)
+[client/interface/hotkeys.ts:80](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L80)
 
 ___
 
@@ -90,17 +78,13 @@ ___
 
 Describe what this keybind is meant to do.
 
-**`Memberof`**
-
-KeyInfo
-
 #### Inherited from
 
 [BaseKeyInfo](client_interface_hotkeys_BaseKeyInfo.md).[description](client_interface_hotkeys_BaseKeyInfo.md#description)
 
 #### Defined in
 
-[client/interface/hotkeys.ts:141](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L141)
+[client/interface/hotkeys.ts:141](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L141)
 
 ___
 
@@ -110,13 +94,9 @@ ___
 
 Set a key as disabled, preventing all function callbacks.
 
-**`Memberof`**
-
-KeyInfo
-
 #### Defined in
 
-[client/interface/hotkeys.ts:123](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L123)
+[client/interface/hotkeys.ts:123](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L123)
 
 ___
 
@@ -126,17 +106,13 @@ ___
 
 Prevent his key from being rebound?
 
-**`Memberof`**
-
-BaseKeyInfo
-
 #### Inherited from
 
 [BaseKeyInfo](client_interface_hotkeys_BaseKeyInfo.md).[doNotAllowRebind](client_interface_hotkeys_BaseKeyInfo.md#doNotAllowRebind)
 
 #### Defined in
 
-[client/interface/hotkeys.ts:231](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L231)
+[client/interface/hotkeys.ts:231](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L231)
 
 ___
 
@@ -146,17 +122,13 @@ ___
 
 Give a keybind an identifier, like a unique id.
 
-**`Memberof`**
-
-KeyInfo
-
 #### Inherited from
 
 [BaseKeyInfo](client_interface_hotkeys_BaseKeyInfo.md).[identifier](client_interface_hotkeys_BaseKeyInfo.md#identifier)
 
 #### Defined in
 
-[client/interface/hotkeys.ts:149](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L149)
+[client/interface/hotkeys.ts:149](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L149)
 
 ___
 
@@ -166,17 +138,13 @@ ___
 
 The primary key for this keybind.
 
-**`Memberof`**
-
-KeyInfo
-
 #### Inherited from
 
 [BaseKeyInfo](client_interface_hotkeys_BaseKeyInfo.md).[key](client_interface_hotkeys_BaseKeyInfo.md#key)
 
 #### Defined in
 
-[client/interface/hotkeys.ts:133](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L133)
+[client/interface/hotkeys.ts:133](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L133)
 
 ___
 
@@ -186,13 +154,9 @@ ___
 
 Call this function when the key is pressed down once.
 
-**`Memberof`**
-
-KeyInfo
-
 #### Defined in
 
-[client/interface/hotkeys.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L72)
+[client/interface/hotkeys.ts:72](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L72)
 
 ___
 
@@ -203,17 +167,13 @@ ___
 Call this function when the key is let go.
 This function is only called when a key is released.
 
-**`Memberof`**
-
-KeyInfo
-
 #### Overrides
 
 [BaseKeyInfo](client_interface_hotkeys_BaseKeyInfo.md).[keyUp](client_interface_hotkeys_BaseKeyInfo.md#keyUp)
 
 #### Defined in
 
-[client/interface/hotkeys.ts:106](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L106)
+[client/interface/hotkeys.ts:106](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L106)
 
 ___
 
@@ -223,17 +183,13 @@ ___
 
 Specify a modifier for this key to trigger
 
-**`Memberof`**
-
-KeyInfo
-
 #### Inherited from
 
 [BaseKeyInfo](client_interface_hotkeys_BaseKeyInfo.md).[modifier](client_interface_hotkeys_BaseKeyInfo.md#modifier)
 
 #### Defined in
 
-[client/interface/hotkeys.ts:193](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L193)
+[client/interface/hotkeys.ts:193](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L193)
 
 ___
 
@@ -250,7 +206,7 @@ These are all optional. By default key binds work regardless of setting these va
 
 #### Defined in
 
-[client/interface/hotkeys.ts:223](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L223)
+[client/interface/hotkeys.ts:223](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L223)
 
 ___
 
@@ -260,17 +216,13 @@ ___
 
 The amount of milliseconds before this hotkey can be pressed again.
 
-**`Memberof`**
-
-BaseKeyInfo
-
 #### Inherited from
 
 [BaseKeyInfo](client_interface_hotkeys_BaseKeyInfo.md).[spamPreventionInMs](client_interface_hotkeys_BaseKeyInfo.md#spamPreventionInMs)
 
 #### Defined in
 
-[client/interface/hotkeys.ts:217](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L217)
+[client/interface/hotkeys.ts:217](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L217)
 
 ___
 
@@ -281,14 +233,10 @@ ___
 Call this function on repeat while this key is held down.
 Equivalent to an everyTick.
 
-**`Memberof`**
-
-KeyInfo
-
 #### Overrides
 
 [BaseKeyInfo](client_interface_hotkeys_BaseKeyInfo.md).[whilePressed](client_interface_hotkeys_BaseKeyInfo.md#whilePressed)
 
 #### Defined in
 
-[client/interface/hotkeys.ts:115](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L115)
+[client/interface/hotkeys.ts:115](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/interface/hotkeys.ts#L115)

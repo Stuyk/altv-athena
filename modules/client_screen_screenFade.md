@@ -17,8 +17,6 @@ AthenaClient.screen.screenFade.**fromBlack**(`timeInMs`): `void`
 
 Removes the black filter on a screen over time.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -31,7 +29,7 @@ Removes the black filter on a screen over time.
 
 #### Defined in
 
-[client/screen/screenFade.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenFade.ts#L11)
+[client/screen/screenFade.ts:11](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/screenFade.ts#L11)
 
 ___
 
@@ -43,8 +41,6 @@ AthenaClient.screen.screenFade.**toBlack**(`timeInMs`): `void`
 
 Turns a screen black over time.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -57,4 +53,4 @@ Turns a screen black over time.
 
 #### Defined in
 
-[client/screen/screenFade.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenFade.ts#L21)
+[client/screen/screenFade.ts:21](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/screen/screenFade.ts#L21)

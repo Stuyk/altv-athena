@@ -17,13 +17,9 @@ order: 0
 
 Commands to populate this Command Input with to show suggestions.
 
-**`Memberof`**
-
-CommandInput
-
 #### Defined in
 
-[client/rmlui/commands/index.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/commands/index.ts#L23)
+[client/rmlui/commands/index.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/commands/index.ts#L23)
 
 ___
 
@@ -34,10 +30,6 @@ ___
 What is this command input asking for?
 Usually something like... 'Type a chat message, or command with (/)'
 
-**`Memberof`**
-
-CommandInput
-
 #### Defined in
 
-[client/rmlui/commands/index.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/commands/index.ts#L15)
+[client/rmlui/commands/index.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/commands/index.ts#L15)

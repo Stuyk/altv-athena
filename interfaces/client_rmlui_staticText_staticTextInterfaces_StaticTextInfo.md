@@ -17,13 +17,9 @@ order: 0
 
 Maximum distance for viewing text.
 
-**`Memberof`**
-
-StaticText
-
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L34)
+[client/rmlui/staticText/staticTextInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L34)
 
 ___
 
@@ -33,13 +29,9 @@ ___
 
 The position on where to display this text.
 
-**`Memberof`**
-
-StaticText
-
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L26)
+[client/rmlui/staticText/staticTextInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L26)
 
 ___
 
@@ -49,13 +41,9 @@ ___
 
 The name to display on-screen.
 
-**`Memberof`**
-
-StaticText
-
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L18)
+[client/rmlui/staticText/staticTextInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L18)
 
 ___
 
@@ -65,10 +53,6 @@ ___
 
 The unique identifier for this drawable.
 
-**`Memberof`**
-
-StaticText
-
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L10)
+[client/rmlui/staticText/staticTextInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L10)

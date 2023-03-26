@@ -17,13 +17,9 @@ order: 0
 
 A custom `.ogg` file name for an audio clip.
 
-**`Memberof`**
-
-CustomSoundInfo
-
 #### Defined in
 
-[server/systems/sound.ts:12](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/sound.ts#L12)
+[server/systems/sound.ts:12](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/sound.ts#L12)
 
 ___
 
@@ -33,13 +29,9 @@ ___
 
 A positional Vector3 on where to play the sound from.
 
-**`Memberof`**
-
-CustomSoundInfo
-
 #### Defined in
 
-[server/systems/sound.ts:20](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/sound.ts#L20)
+[server/systems/sound.ts:20](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/sound.ts#L20)
 
 ___
 
@@ -49,13 +41,9 @@ ___
 
 If you want the audio 3D specify a target to play this audio from.
 
-**`Memberof`**
-
-CustomSoundInfo
-
 #### Defined in
 
-[server/systems/sound.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/sound.ts#L38)
+[server/systems/sound.ts:38](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/sound.ts#L38)
 
 ___
 
@@ -67,10 +55,6 @@ The volume between `0.0` - `1.0`.
 
 Recommended: `0.35`.
 
-**`Memberof`**
-
-CustomSoundInfo
-
 #### Defined in
 
-[server/systems/sound.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/sound.ts#L30)
+[server/systems/sound.ts:30](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/sound.ts#L30)

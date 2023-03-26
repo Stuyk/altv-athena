@@ -17,13 +17,9 @@ order: 0
 
 A description of this doors location.
 
-**`Memberof`**
-
-Door
-
 #### Defined in
 
-[shared/interfaces/door.ts:18](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/door.ts#L18)
+[shared/interfaces/door.ts:18](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/door.ts#L18)
 
 ___
 
@@ -33,13 +29,9 @@ ___
 
 Should this door be locked?
 
-**`Memberof`**
-
-Door
-
 #### Defined in
 
-[shared/interfaces/door.ts:42](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/door.ts#L42)
+[shared/interfaces/door.ts:42](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/door.ts#L42)
 
 ___
 
@@ -49,13 +41,9 @@ ___
 
 The door hash of the door.
 
-**`Memberof`**
-
-Door
-
 #### Defined in
 
-[shared/interfaces/door.ts:34](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/door.ts#L34)
+[shared/interfaces/door.ts:34](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/door.ts#L34)
 
 ___
 
@@ -65,13 +53,9 @@ ___
 
 Current position of the door.
 
-**`Memberof`**
-
-Door
-
 #### Defined in
 
-[shared/interfaces/door.ts:26](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/door.ts#L26)
+[shared/interfaces/door.ts:26](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/door.ts#L26)
 
 ___
 
@@ -81,10 +65,6 @@ ___
 
 Unique identifier for this door.
 
-**`Memberof`**
-
-Door
-
 #### Defined in
 
-[shared/interfaces/door.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/door.ts#L10)
+[shared/interfaces/door.ts:10](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/door.ts#L10)

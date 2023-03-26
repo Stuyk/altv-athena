@@ -11,8 +11,6 @@ order: 0
 
 The interface associated with a Discord User.
 
-**`Export`**
-
 **`Interface`**
 
 DiscordUser
@@ -25,7 +23,7 @@ DiscordUser
 
 #### Defined in
 
-[server/interface/iDiscordUser.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iDiscordUser.ts#L9)
+[server/interface/iDiscordUser.ts:9](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iDiscordUser.ts#L9)
 
 ___
 
@@ -35,7 +33,7 @@ ___
 
 #### Defined in
 
-[server/interface/iDiscordUser.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iDiscordUser.ts#L11)
+[server/interface/iDiscordUser.ts:11](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iDiscordUser.ts#L11)
 
 ___
 
@@ -45,7 +43,7 @@ ___
 
 #### Defined in
 
-[server/interface/iDiscordUser.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iDiscordUser.ts#L10)
+[server/interface/iDiscordUser.ts:10](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iDiscordUser.ts#L10)
 
 ___
 
@@ -55,7 +53,7 @@ ___
 
 #### Defined in
 
-[server/interface/iDiscordUser.ts:13](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iDiscordUser.ts#L13)
+[server/interface/iDiscordUser.ts:13](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iDiscordUser.ts#L13)
 
 ___
 
@@ -65,7 +63,7 @@ ___
 
 #### Defined in
 
-[server/interface/iDiscordUser.ts:7](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iDiscordUser.ts#L7)
+[server/interface/iDiscordUser.ts:7](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iDiscordUser.ts#L7)
 
 ___
 
@@ -75,7 +73,7 @@ ___
 
 #### Defined in
 
-[server/interface/iDiscordUser.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iDiscordUser.ts#L14)
+[server/interface/iDiscordUser.ts:14](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iDiscordUser.ts#L14)
 
 ___
 
@@ -85,7 +83,7 @@ ___
 
 #### Defined in
 
-[server/interface/iDiscordUser.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iDiscordUser.ts#L15)
+[server/interface/iDiscordUser.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iDiscordUser.ts#L15)
 
 ___
 
@@ -95,7 +93,7 @@ ___
 
 #### Defined in
 
-[server/interface/iDiscordUser.ts:12](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iDiscordUser.ts#L12)
+[server/interface/iDiscordUser.ts:12](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iDiscordUser.ts#L12)
 
 ___
 
@@ -105,4 +103,4 @@ ___
 
 #### Defined in
 
-[server/interface/iDiscordUser.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/interface/iDiscordUser.ts#L8)
+[server/interface/iDiscordUser.ts:8](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/interface/iDiscordUser.ts#L8)

@@ -22,7 +22,7 @@ order: 0
 
 #### Defined in
 
-[server/utility/closest.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/closest.ts#L43)
+[server/utility/closest.ts:43](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/closest.ts#L43)
 
 ## Functions
 
@@ -33,8 +33,6 @@ Athena.utility.closest.**getClosestPlayer**(`pos`, `ignoredIds?`): `alt.Player` 
 :::
 
 Gets the closest player to a position.
-
-**`Export`**
 
 #### Parameters
 
@@ -49,7 +47,7 @@ Gets the closest player to a position.
 
 #### Defined in
 
-[server/utility/closest.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/closest.ts#L23)
+[server/utility/closest.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/closest.ts#L23)
 
 ___
 
@@ -60,8 +58,6 @@ Athena.utility.closest.**getClosestVehicle**(`pos`): `alt.Vehicle` \| `undefined
 :::
 
 Gets the closest vehicle to a position.
-
-**`Export`**
 
 #### Parameters
 
@@ -75,4 +71,4 @@ Gets the closest vehicle to a position.
 
 #### Defined in
 
-[server/utility/closest.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/closest.ts#L11)
+[server/utility/closest.ts:11](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/closest.ts#L11)

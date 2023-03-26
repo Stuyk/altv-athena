@@ -25,8 +25,6 @@ Automatically removes the player when `removeAsOpen` is called.
 
 Returns false if a player binding is already present.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -40,7 +38,7 @@ Returns false if a player binding is already present.
 
 #### Defined in
 
-[server/systems/storage.ts:154](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L154)
+[server/systems/storage.ts:154](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/storage.ts#L154)
 
 ___
 
@@ -54,8 +52,6 @@ Creates a new storage, and returns the '_id' of the storage from the database.
 
 Use the ID returned to fetch the data with the other storage functions.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -68,7 +64,7 @@ Use the ID returned to fetch the data with the other storage functions.
 
 #### Defined in
 
-[server/systems/storage.ts:42](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L42)
+[server/systems/storage.ts:42](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/storage.ts#L42)
 
 ___
 
@@ -79,8 +75,6 @@ Athena.systems.storage.**get**<`CustomData`\>(`id`): `Promise`<[`player`](server
 :::
 
 Fetches stored items from a storage array.
-
-**`Export`**
 
 #### Type parameters
 
@@ -100,7 +94,7 @@ Fetches stored items from a storage array.
 
 #### Defined in
 
-[server/systems/storage.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L72)
+[server/systems/storage.ts:72](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/storage.ts#L72)
 
 ___
 
@@ -111,8 +105,6 @@ Athena.systems.storage.**isOpen**(`id`): `boolean`
 :::
 
 Checks if a storage identifier is currently in use.
-
-**`Export`**
 
 #### Parameters
 
@@ -126,7 +118,7 @@ Checks if a storage identifier is currently in use.
 
 #### Defined in
 
-[server/systems/storage.ts:108](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L108)
+[server/systems/storage.ts:108](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/storage.ts#L108)
 
 ___
 
@@ -140,8 +132,6 @@ Removes the storage identifier from in-use status.
 
 Returns true if the value was successfully removed.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -154,7 +144,7 @@ Returns true if the value was successfully removed.
 
 #### Defined in
 
-[server/systems/storage.ts:121](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L121)
+[server/systems/storage.ts:121](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/storage.ts#L121)
 
 ___
 
@@ -165,8 +155,6 @@ Athena.systems.storage.**set**(`id`, `items`): `Promise`<`boolean`\>
 :::
 
 Stores items into a database instance by providing the storage identifier, and the modified items array.
-
-**`Export`**
 
 #### Parameters
 
@@ -181,7 +169,7 @@ Stores items into a database instance by providing the storage identifier, and t
 
 #### Defined in
 
-[server/systems/storage.ts:60](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L60)
+[server/systems/storage.ts:60](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/storage.ts#L60)
 
 ___
 
@@ -195,8 +183,6 @@ Sets a storage identifier as in use.
 
 Returns true if the value was set to in-use, and didn't already exist.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -209,4 +195,4 @@ Returns true if the value was set to in-use, and didn't already exist.
 
 #### Defined in
 
-[server/systems/storage.ts:91](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L91)
+[server/systems/storage.ts:91](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/storage.ts#L91)

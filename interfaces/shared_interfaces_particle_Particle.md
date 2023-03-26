@@ -11,8 +11,6 @@ order: 0
 
 Used to pass particle information from server to client.
 
-**`Export`**
-
 **`Interface`**
 
 Particle
@@ -25,13 +23,9 @@ Particle
 
 Time before the particle effect starts playing.
 
-**`Memberof`**
-
-Particle
-
 #### Defined in
 
-[shared/interfaces/particle.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L50)
+[shared/interfaces/particle.ts:50](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/particle.ts#L50)
 
 ___
 
@@ -41,13 +35,9 @@ ___
 
 Core particle name.
 
-**`Memberof`**
-
-Particle
-
 #### Defined in
 
-[shared/interfaces/particle.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L22)
+[shared/interfaces/particle.ts:22](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/particle.ts#L22)
 
 ___
 
@@ -57,13 +47,9 @@ ___
 
 How long to play this particle effect for.
 
-**`Memberof`**
-
-Particle
-
 #### Defined in
 
-[shared/interfaces/particle.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L36)
+[shared/interfaces/particle.ts:36](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/particle.ts#L36)
 
 ___
 
@@ -73,13 +59,9 @@ ___
 
 The name inside of the dictionary for the particle.
 
-**`Memberof`**
-
-Particle
-
 #### Defined in
 
-[shared/interfaces/particle.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L29)
+[shared/interfaces/particle.ts:29](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/particle.ts#L29)
 
 ___
 
@@ -89,13 +71,9 @@ ___
 
 Position in a 3D space to play this effect.
 
-**`Memberof`**
-
-Particle
-
 #### Defined in
 
-[shared/interfaces/particle.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L15)
+[shared/interfaces/particle.ts:15](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/particle.ts#L15)
 
 ___
 
@@ -105,10 +83,6 @@ ___
 
 Size of the particle effect.
 
-**`Memberof`**
-
-Particle
-
 #### Defined in
 
-[shared/interfaces/particle.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L43)
+[shared/interfaces/particle.ts:43](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/particle.ts#L43)

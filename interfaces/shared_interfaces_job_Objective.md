@@ -11,8 +11,6 @@ order: 0
 
 Used to pass objective information from server to client.
 
-**`Export`**
-
 **`Interface`**
 
 Objective
@@ -25,13 +23,9 @@ Objective
 
 An animation to associate with this objective.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:143](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L143)
+[shared/interfaces/job.ts:143](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L143)
 
 ___
 
@@ -41,13 +35,9 @@ ___
 
 An object to associate with this objective.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:150](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L150)
+[shared/interfaces/job.ts:150](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L150)
 
 ___
 
@@ -57,13 +47,9 @@ ___
 
 A local blip to associate with this objective.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:136](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L136)
+[shared/interfaces/job.ts:136](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L136)
 
 ___
 
@@ -77,10 +63,6 @@ ___
 AthenaShared.interfaces.job.Objective.(`player`): `Promise`<`boolean`\>
 :::
 
-**`Memberof`**
-
-Objective
-
 ##### Parameters
 
 | Name | Type |
@@ -93,7 +75,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:195](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L195)
+[shared/interfaces/job.ts:195](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L195)
 
 ___
 
@@ -109,10 +91,6 @@ AthenaShared.interfaces.job.Objective.(`player`): `void`
 
 Server-side callback when objective is completed.
 
-**`Memberof`**
-
-Objective
-
 ##### Parameters
 
 | Name | Type |
@@ -125,7 +103,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:201](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L201)
+[shared/interfaces/job.ts:201](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L201)
 
 ___
 
@@ -141,10 +119,6 @@ AthenaShared.interfaces.job.Objective.(`player`): `void`
 
 Server-side callback when objective is started.
 
-**`Memberof`**
-
-Objective
-
 ##### Parameters
 
 | Name | Type |
@@ -157,7 +131,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:189](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L189)
+[shared/interfaces/job.ts:189](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L189)
 
 ___
 
@@ -167,13 +141,9 @@ ___
 
 An optional internal tracker for how much progress needs to be done to complete it.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:108](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L108)
+[shared/interfaces/job.ts:108](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L108)
 
 ___
 
@@ -183,13 +153,9 @@ ___
 
 An optional internal tracker for how far this objective is along.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:101](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L101)
+[shared/interfaces/job.ts:101](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L101)
 
 ___
 
@@ -199,13 +165,9 @@ ___
 
 The criteria necessary to complete this Objective.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:65](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L65)
+[shared/interfaces/job.ts:65](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L65)
 
 ___
 
@@ -216,17 +178,13 @@ ___
 Data to put on this objective.
 Do not add callbacks.
 
-**`Memberof`**
-
-Objective
-
 #### Index signature
 
 ▪ [key: `string`]: `any`
 
 #### Defined in
 
-[shared/interfaces/job.ts:183](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L183)
+[shared/interfaces/job.ts:183](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L183)
 
 ___
 
@@ -236,13 +194,9 @@ ___
 
 A description of what to do to complete this objective.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:94](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L94)
+[shared/interfaces/job.ts:94](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L94)
 
 ___
 
@@ -253,13 +207,9 @@ ___
 An event that can be triggered when the objective is started, completed, etc.
 Useful for adding custom functionality to an objective.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:158](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L158)
+[shared/interfaces/job.ts:158](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L158)
 
 ___
 
@@ -269,13 +219,9 @@ ___
 
 A local marker to associate with this objective.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:122](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L122)
+[shared/interfaces/job.ts:122](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L122)
 
 ___
 
@@ -285,13 +231,9 @@ ___
 
 The time between captures. This should be left alone.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:115](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L115)
+[shared/interfaces/job.ts:115](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L115)
 
 ___
 
@@ -301,13 +243,9 @@ ___
 
 Turns off all other objective checks, and only does the `callbackOnCheck` callback provided.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:174](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L174)
+[shared/interfaces/job.ts:174](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L174)
 
 ___
 
@@ -318,13 +256,9 @@ ___
 Particles to show in the area of the objective.
 Useful to add some 'flavor' to your objective.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:166](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L166)
+[shared/interfaces/job.ts:166](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L166)
 
 ___
 
@@ -334,13 +268,9 @@ ___
 
 The 3D Position of this objective.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:79](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L79)
+[shared/interfaces/job.ts:79](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L79)
 
 ___
 
@@ -351,13 +281,9 @@ ___
 The range which this objective can be completed in.
 Usually set to around 2.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:87](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L87)
+[shared/interfaces/job.ts:87](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L87)
 
 ___
 
@@ -367,13 +293,9 @@ ___
 
 A local text label to associate with this objective.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:129](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L129)
+[shared/interfaces/job.ts:129](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L129)
 
 ___
 
@@ -383,13 +305,9 @@ ___
 
 An objective type that is unique to this objective.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L72)
+[shared/interfaces/job.ts:72](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L72)
 
 ___
 
@@ -399,10 +317,6 @@ ___
 
 A unique identifier that can be assigned to an objective to help identify it easily.
 
-**`Memberof`**
-
-Objective
-
 #### Defined in
 
-[shared/interfaces/job.ts:58](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/job.ts#L58)
+[shared/interfaces/job.ts:58](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/job.ts#L58)

@@ -11,8 +11,6 @@ order: 0
 
 Used to describe a webview page that can be overlayed.
 
-**`Export`**
-
 **`Interface`**
 
 OverlayPageType
@@ -31,10 +29,6 @@ AthenaShared.interfaces.webview.OverlayPageType.(`isVisible`): `void`
 
 Callback to re-toggle page visibility.
 
-**`Memberof`**
-
-OverlayPageType
-
 ##### Parameters
 
 | Name | Type |
@@ -47,7 +41,7 @@ OverlayPageType
 
 #### Defined in
 
-[shared/interfaces/webview.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/webview.ts#L29)
+[shared/interfaces/webview.ts:29](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/webview.ts#L29)
 
 ___
 
@@ -57,13 +51,9 @@ ___
 
 Is this overlay hidden?
 
-**`Memberof`**
-
-OverlayPageType
-
 #### Defined in
 
-[shared/interfaces/webview.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/webview.ts#L22)
+[shared/interfaces/webview.ts:22](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/webview.ts#L22)
 
 ___
 
@@ -73,10 +63,6 @@ ___
 
 The name of the page.
 
-**`Memberof`**
-
-PageType
-
 #### Defined in
 
-[shared/interfaces/webview.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/webview.ts#L14)
+[shared/interfaces/webview.ts:14](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/webview.ts#L14)

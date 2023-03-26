@@ -17,13 +17,10 @@ Athena.systems.defaults.vehiclesSpawnOnJoin.**disable**(): `void`
 
 Disable vehicles spawning when a player joins.
 
-**`Example`**
-
+#### Example
 ```ts
 Athena.systems.default.vehiclesSpawnOnJoin.disable();
 ```
-
-**`Export`**
 
 #### Returns
 
@@ -31,4 +28,4 @@ Athena.systems.default.vehiclesSpawnOnJoin.disable();
 
 #### Defined in
 
-[server/systems/defaults/vehiclesSpawnOnJoin.ts:63](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/vehiclesSpawnOnJoin.ts#L63)
+[server/systems/defaults/vehiclesSpawnOnJoin.ts:63](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/defaults/vehiclesSpawnOnJoin.ts#L63)

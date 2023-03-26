@@ -11,8 +11,6 @@ order: 0
 
 dlc information for given clothing data
 
-**`Export`**
-
 **`Interface`**
 
 ClothingComponent
@@ -23,13 +21,9 @@ ClothingComponent
 
 • **dlc**: `number`
 
-**`Memberof`**
-
-ClothingComponent
-
 #### Defined in
 
-[shared/interfaces/item.ts:69](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L69)
+[shared/interfaces/item.ts:69](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L69)
 
 ___
 
@@ -39,13 +33,9 @@ ___
 
 The associated relative drawing id for a given dlc clothing component
 
-**`Memberof`**
-
-ClothingComponent
-
 #### Defined in
 
-[shared/interfaces/item.ts:45](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L45)
+[shared/interfaces/item.ts:45](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L45)
 
 ___
 
@@ -55,13 +45,9 @@ ___
 
 The component identifier
 
-**`Memberof`**
-
-ClothingComponent
-
 #### Defined in
 
-[shared/interfaces/item.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L37)
+[shared/interfaces/item.ts:37](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L37)
 
 ___
 
@@ -69,13 +55,9 @@ ___
 
 • `Optional` **isProp**: `boolean`
 
-**`Memberof`**
-
-ClothingComponent
-
 #### Defined in
 
-[shared/interfaces/item.ts:77](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L77)
+[shared/interfaces/item.ts:77](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L77)
 
 ___
 
@@ -83,13 +65,9 @@ ___
 
 • `Optional` **palette**: `number`
 
-**`Memberof`**
-
-ClothingComponent
-
 #### Defined in
 
-[shared/interfaces/item.ts:61](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L61)
+[shared/interfaces/item.ts:61](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L61)
 
 ___
 
@@ -97,10 +75,6 @@ ___
 
 • **texture**: `number`
 
-**`Memberof`**
-
-ClothingComponent
-
 #### Defined in
 
-[shared/interfaces/item.ts:53](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/item.ts#L53)
+[shared/interfaces/item.ts:53](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/item.ts#L53)

@@ -17,13 +17,9 @@ order: 0
 
 Should this vehicle always persist on the server and never be allowed to despawn?
 
-**`Memberof`**
-
-AddOptions
-
 #### Defined in
 
-[server/vehicle/add.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L51)
+[server/vehicle/add.ts:51](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/add.ts#L51)
 
 ___
 
@@ -35,13 +31,9 @@ An array of character ids to add to the vehicle.
 
 If doing a large group, consider permissions instead.
 
-**`Memberof`**
-
-AddOptions
-
 #### Defined in
 
-[server/vehicle/add.ts:35](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L35)
+[server/vehicle/add.ts:35](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/add.ts#L35)
 
 ___
 
@@ -51,13 +43,9 @@ ___
 
 Permissions to append
 
-**`Memberof`**
-
-AddOptions
-
 #### Defined in
 
-[server/vehicle/add.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L43)
+[server/vehicle/add.ts:43](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/add.ts#L43)
 
 ___
 
@@ -68,13 +56,9 @@ ___
 Vehicle state
 such as color, neon, etc.
 
-**`Memberof`**
-
-AddOptions
-
 #### Defined in
 
-[server/vehicle/add.ts:25](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L25)
+[server/vehicle/add.ts:25](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/add.ts#L25)
 
 ___
 
@@ -85,10 +69,6 @@ ___
 Vehicle Tuning Interface
 Such as modkits and the like
 
-**`Memberof`**
-
-AddOptions
-
 #### Defined in
 
-[server/vehicle/add.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L16)
+[server/vehicle/add.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/add.ts#L16)

@@ -27,10 +27,6 @@ Turns a buffer into a string.
 
 **`Static`**
 
-**`Memberof`**
-
-AthenaBuffer
-
 #### Parameters
 
 | Name | Type |
@@ -43,7 +39,7 @@ AthenaBuffer
 
 #### Defined in
 
-[shared/utility/buffer.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/buffer.ts#L23)
+[shared/utility/buffer.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/buffer.ts#L23)
 
 ___
 
@@ -58,10 +54,6 @@ Splits huge strings into a larger array.
 
 **`Static`**
 
-**`Memberof`**
-
-AthenaBuffer
-
 #### Parameters
 
 | Name | Type | Default value |
@@ -75,4 +67,4 @@ AthenaBuffer
 
 #### Defined in
 
-[shared/utility/buffer.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/buffer.ts#L11)
+[shared/utility/buffer.ts:11](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/utility/buffer.ts#L11)

@@ -17,8 +17,6 @@ Athena.systems.inventory.weapons.**get**(`dataSet`): [`player`](server_config.md
 
 Return all weapons from a given data set.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -31,7 +29,7 @@ Return all weapons from a given data set.
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:13](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/weapons.ts#L13)
+[server/systems/inventory/weapons.ts:13](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/weapons.ts#L13)
 
 ___
 
@@ -42,8 +40,6 @@ Athena.systems.inventory.weapons.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override inventory item weapon functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -58,7 +54,7 @@ Used to override inventory item weapon functionality
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:117](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/weapons.ts#L117)
+[server/systems/inventory/weapons.ts:117](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/weapons.ts#L117)
 
 ___
 
@@ -69,8 +65,6 @@ Athena.systems.inventory.weapons.**removeAll**(`dataSet`): [`player`](server_con
 :::
 
 Remove all weapons from a given data set.
-
-**`Export`**
 
 #### Parameters
 
@@ -84,7 +78,7 @@ Remove all weapons from a given data set.
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:40](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/weapons.ts#L40)
+[server/systems/inventory/weapons.ts:40](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/weapons.ts#L40)
 
 ___
 
@@ -108,4 +102,4 @@ Looks into the item toolbar and determines what weapons to equip / unequip.
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:63](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/weapons.ts#L63)
+[server/systems/inventory/weapons.ts:63](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/inventory/weapons.ts#L63)

@@ -23,17 +23,13 @@ order: 0
 
 A callback when this menu option is changed.
 
-**`Memberof`**
-
-MenuOptionBase
-
 #### Inherited from
 
 [MenuOptionBase](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md).[callback](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md#callback)
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
+[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
 
 ___
 
@@ -43,17 +39,13 @@ ___
 
 A description of this menu option.
 
-**`Memberof`**
-
-MenuOptionBase
-
 #### Inherited from
 
 [MenuOptionBase](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md).[description](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md#description)
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
+[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
 
 ___
 
@@ -63,13 +55,9 @@ ___
 
 Number to increment by
 
-**`Memberof`**
-
-Range
-
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L110)
+[client/rmlui/menu/menuInterfaces.ts:110](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L110)
 
 ___
 
@@ -79,13 +67,9 @@ ___
 
 Maximum Value
 
-**`Memberof`**
-
-Range
-
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:102](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L102)
+[client/rmlui/menu/menuInterfaces.ts:102](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L102)
 
 ___
 
@@ -95,13 +79,9 @@ ___
 
 Minimum Value
 
-**`Memberof`**
-
-Range
-
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:94](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L94)
+[client/rmlui/menu/menuInterfaces.ts:94](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L94)
 
 ___
 
@@ -111,17 +91,13 @@ ___
 
 Only update when 'Enter' is pressed.
 
-**`Memberof`**
-
-Selection
-
 #### Overrides
 
 [MenuOptionBase](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md).[onlyUpdateOnEnter](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md#onlyUpdateOnEnter)
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:118](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L118)
+[client/rmlui/menu/menuInterfaces.ts:118](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L118)
 
 ___
 
@@ -131,17 +107,13 @@ ___
 
 The title of this menu option.
 
-**`Memberof`**
-
-MenuOptionBase
-
 #### Inherited from
 
 [MenuOptionBase](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md).[title](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md#title)
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
+[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
 
 ___
 
@@ -151,7 +123,7 @@ ___
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:78](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L78)
+[client/rmlui/menu/menuInterfaces.ts:78](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L78)
 
 ___
 
@@ -161,10 +133,6 @@ ___
 
 The starting value of the range.
 
-**`Memberof`**
-
-Range
-
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:86](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu/menuInterfaces.ts#L86)
+[client/rmlui/menu/menuInterfaces.ts:86](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/menu/menuInterfaces.ts#L86)

@@ -11,8 +11,6 @@ order: 0
 
 Used when passing error screen information from server to client.
 
-**`Export`**
-
 **`Interface`**
 
 IErrorScreen
@@ -26,11 +24,9 @@ IErrorScreen
 How long should this display for in milliseconds.
 Use -1 to set forever.
 
-**`Memberof`**
-
 #### Defined in
 
-[shared/interfaces/iErrorScreen.ts:35](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iErrorScreen.ts#L35)
+[shared/interfaces/iErrorScreen.ts:35](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iErrorScreen.ts#L35)
 
 ___
 
@@ -40,11 +36,9 @@ ___
 
 Text below title.
 
-**`Memberof`**
-
 #### Defined in
 
-[shared/interfaces/iErrorScreen.ts:20](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iErrorScreen.ts#L20)
+[shared/interfaces/iErrorScreen.ts:20](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iErrorScreen.ts#L20)
 
 ___
 
@@ -54,11 +48,9 @@ ___
 
 Text below other text option.
 
-**`Memberof`**
-
 #### Defined in
 
-[shared/interfaces/iErrorScreen.ts:27](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iErrorScreen.ts#L27)
+[shared/interfaces/iErrorScreen.ts:27](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iErrorScreen.ts#L27)
 
 ___
 
@@ -68,8 +60,6 @@ ___
 
 Large Text
 
-**`Memberof`**
-
 #### Defined in
 
-[shared/interfaces/iErrorScreen.ts:13](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iErrorScreen.ts#L13)
+[shared/interfaces/iErrorScreen.ts:13](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iErrorScreen.ts#L13)

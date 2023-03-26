@@ -11,8 +11,6 @@ order: 0
 
 Used as the main interface for storing character data.
 
-**`Export`**
-
 **`Interface`**
 
 Character
@@ -29,13 +27,9 @@ Character
 
 The character identifier in the database.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L21)
+[shared/interfaces/character.ts:21](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L21)
 
 ___
 
@@ -45,13 +39,9 @@ ___
 
 The account id associated with this character.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L36)
+[shared/interfaces/character.ts:36](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L36)
 
 ___
 
@@ -61,13 +51,9 @@ ___
 
 Appearance data for how this character looks.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:131](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L131)
+[shared/interfaces/character.ts:131](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L131)
 
 ___
 
@@ -77,13 +63,9 @@ ___
 
 The amount of armour the player last had.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:88](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L88)
+[shared/interfaces/character.ts:88](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L88)
 
 ___
 
@@ -93,13 +75,9 @@ ___
 
 The amount of cash in the bank this character has.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:74](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L74)
+[shared/interfaces/character.ts:74](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L74)
 
 ___
 
@@ -109,13 +87,9 @@ ___
 
 The amount of cash this character has.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:67](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L67)
+[shared/interfaces/character.ts:67](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L67)
 
 ___
 
@@ -126,13 +100,9 @@ ___
 An incremental numerical identifier that increases with each character created.
 Does not fill gaps. Do not use as a way to save character information.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L29)
+[shared/interfaces/character.ts:29](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L29)
 
 ___
 
@@ -143,13 +113,9 @@ ___
 The current dimension of the player. When they spawn
 they are automatically moved into this dimension.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:45](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L45)
+[shared/interfaces/character.ts:45](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L45)
 
 ___
 
@@ -159,13 +125,9 @@ ___
 
 The amount of food the player has.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:95](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L95)
+[shared/interfaces/character.ts:95](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L95)
 
 ___
 
@@ -175,13 +137,9 @@ ___
 
 The amount of health the player last had.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:81](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L81)
+[shared/interfaces/character.ts:81](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L81)
 
 ___
 
@@ -191,13 +149,9 @@ ___
 
 Amount of hours the player has played.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:117](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L117)
+[shared/interfaces/character.ts:117](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L117)
 
 ___
 
@@ -207,13 +161,9 @@ ___
 
 Character info. Will eventually be used for ID cards.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:138](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L138)
+[shared/interfaces/character.ts:138](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L138)
 
 ___
 
@@ -223,13 +173,9 @@ ___
 
 Current player interior number. Usually bound to dimension.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:146](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L146)
+[shared/interfaces/character.ts:146](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L146)
 
 ___
 
@@ -239,13 +185,9 @@ ___
 
 Individual item references that the player currently has on-hand.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:162](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L162)
+[shared/interfaces/character.ts:162](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L162)
 
 ___
 
@@ -256,13 +198,9 @@ ___
 Is this player dead or not.
 Health does not dictate whether a player is alive or dead.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L110)
+[shared/interfaces/character.ts:110](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L110)
 
 ___
 
@@ -272,13 +210,9 @@ ___
 
 The name of this character to display to other users.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:60](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L60)
+[shared/interfaces/character.ts:60](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L60)
 
 ___
 
@@ -288,13 +222,9 @@ ___
 
 Permissions for a given user.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:154](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L154)
+[shared/interfaces/character.ts:154](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L154)
 
 ___
 
@@ -305,13 +235,9 @@ ___
 The position that this character last logged out at.
 This also updates every 5s or so.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:53](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L53)
+[shared/interfaces/character.ts:53](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L53)
 
 ___
 
@@ -323,13 +249,9 @@ A custom model that can be applied to the player.
 If this is set; the clothing items will never be applied.
 This also goes for appearance as well.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:189](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L189)
+[shared/interfaces/character.ts:189](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L189)
 
 ___
 
@@ -339,13 +261,9 @@ ___
 
 Individual item references that the player may access through the 1-4 keys
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:170](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L170)
+[shared/interfaces/character.ts:170](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L170)
 
 ___
 
@@ -356,13 +274,9 @@ ___
 Clothes that will be applied to the player last.
 Uniforms should be used in tandem with typical inventory clothing.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:179](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L179)
+[shared/interfaces/character.ts:179](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L179)
 
 ___
 
@@ -372,13 +286,9 @@ ___
 
 Wanted stars to display.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:124](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L124)
+[shared/interfaces/character.ts:124](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L124)
 
 ___
 
@@ -388,10 +298,6 @@ ___
 
 The amount of water the player has.
 
-**`Memberof`**
-
-Character
-
 #### Defined in
 
-[shared/interfaces/character.ts:102](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/character.ts#L102)
+[shared/interfaces/character.ts:102](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/character.ts#L102)

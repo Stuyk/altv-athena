@@ -27,10 +27,6 @@ Builds data from a screenshot event.
 
 **`Static`**
 
-**`Memberof`**
-
-AthenaScreenshot
-
 #### Parameters
 
 | Name | Type | Description |
@@ -46,7 +42,7 @@ AthenaScreenshot
 
 #### Defined in
 
-[server/utility/screenshot.ts:59](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/screenshot.ts#L59)
+[server/utility/screenshot.ts:59](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/screenshot.ts#L59)
 
 ___
 
@@ -61,10 +57,6 @@ If the data becomes corrupted or does not retrieve in time it will return null.
 
 **`Static`**
 
-**`Memberof`**
-
-AthenaScreenshot
-
 #### Parameters
 
 | Name | Type | Description |
@@ -77,4 +69,4 @@ AthenaScreenshot
 
 #### Defined in
 
-[server/utility/screenshot.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/screenshot.ts#L23)
+[server/utility/screenshot.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/utility/screenshot.ts#L23)

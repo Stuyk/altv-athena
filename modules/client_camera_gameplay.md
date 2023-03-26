@@ -17,15 +17,13 @@ AthenaClient.camera.gameplay.**disable**(): `void`
 
 Disable the gameplay camera from moving
 
-**`Export`**
-
 #### Returns
 
 `void`
 
 #### Defined in
 
-[client/camera/gameplay.ts:24](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/gameplay.ts#L24)
+[client/camera/gameplay.ts:24](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/camera/gameplay.ts#L24)
 
 ___
 
@@ -37,12 +35,10 @@ AthenaClient.camera.gameplay.**enable**(): `void`
 
 Enable the gameplay camera
 
-**`Export`**
-
 #### Returns
 
 `void`
 
 #### Defined in
 
-[client/camera/gameplay.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/gameplay.ts#L38)
+[client/camera/gameplay.ts:38](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/camera/gameplay.ts#L38)

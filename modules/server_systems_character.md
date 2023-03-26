@@ -17,10 +17,6 @@ Athena.systems.character.**create**(`player`, `appearance`, `info`, `name`): `Pr
 
 Create a new character for a specific player.
 
-**`Memberof`**
-
-CharacterSystem
-
 #### Parameters
 
 | Name | Type | Description |
@@ -36,7 +32,7 @@ CharacterSystem
 
 #### Defined in
 
-[server/systems/character.ts:61](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L61)
+[server/systems/character.ts:61](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L61)
 
 ___
 
@@ -60,7 +56,7 @@ Get all characters that belong to an account by account identifier.
 
 #### Defined in
 
-[server/systems/character.ts:222](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L222)
+[server/systems/character.ts:222](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L222)
 
 ___
 
@@ -71,10 +67,6 @@ Athena.systems.character.**invokeCreator**(`player`, `...args`): `any`
 :::
 
 Invokes the custom creator to be opened.
-
-**`Memberof`**
-
-CharacterSystem
 
 #### Parameters
 
@@ -89,7 +81,7 @@ CharacterSystem
 
 #### Defined in
 
-[server/systems/character.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L38)
+[server/systems/character.ts:38](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L38)
 
 ___
 
@@ -100,10 +92,6 @@ Athena.systems.character.**isNameTaken**(`name`): `Promise`<`boolean`\>
 :::
 
 Check if a character name is taken.
-
-**`Memberof`**
-
-CharacterSystem
 
 #### Parameters
 
@@ -117,7 +105,7 @@ CharacterSystem
 
 #### Defined in
 
-[server/systems/character.ts:207](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L207)
+[server/systems/character.ts:207](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L207)
 
 ___
 
@@ -128,8 +116,6 @@ Athena.systems.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override character creation / management internally.
-
-**`Export`**
 
 #### Parameters
 
@@ -144,15 +130,13 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:272](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L272)
+[server/systems/character.ts:272](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L272)
 
 ::: tip Usage
 Athena.systems.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override character creation / management internally.
-
-**`Export`**
 
 #### Parameters
 
@@ -167,15 +151,13 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:273](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L273)
+[server/systems/character.ts:273](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L273)
 
 ::: tip Usage
 Athena.systems.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override character creation / management internally.
-
-**`Export`**
 
 #### Parameters
 
@@ -190,15 +172,13 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:274](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L274)
+[server/systems/character.ts:274](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L274)
 
 ::: tip Usage
 Athena.systems.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override character creation / management internally.
-
-**`Export`**
 
 #### Parameters
 
@@ -213,15 +193,13 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:275](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L275)
+[server/systems/character.ts:275](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L275)
 
 ::: tip Usage
 Athena.systems.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override character creation / management internally.
-
-**`Export`**
 
 #### Parameters
 
@@ -236,15 +214,13 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:276](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L276)
+[server/systems/character.ts:276](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L276)
 
 ::: tip Usage
 Athena.systems.character.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override character creation / management internally.
-
-**`Export`**
 
 #### Parameters
 
@@ -259,7 +235,7 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:277](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L277)
+[server/systems/character.ts:277](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L277)
 
 ___
 
@@ -275,10 +251,6 @@ After this step the player is spawned and synchronized.
 
 Always call this function last in login flow modifications.
 
-**`Memberof`**
-
-CharacterSystem
-
 #### Parameters
 
 | Name | Type | Description |
@@ -292,7 +264,7 @@ CharacterSystem
 
 #### Defined in
 
-[server/systems/character.ts:105](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L105)
+[server/systems/character.ts:105](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L105)
 
 ___
 
@@ -303,10 +275,6 @@ Athena.systems.character.**setCreatorCallback**(`callback`): `any`
 :::
 
 Allows a custom character creator to be shown.
-
-**`Memberof`**
-
-CharacterSystem
 
 #### Parameters
 
@@ -320,4 +288,4 @@ CharacterSystem
 
 #### Defined in
 
-[server/systems/character.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/character.ts#L23)
+[server/systems/character.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/character.ts#L23)

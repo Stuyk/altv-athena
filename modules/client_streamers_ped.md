@@ -17,8 +17,6 @@ AthenaClient.streamers.ped.**append**(`pedData`): `void`
 
 Create a client-only static pedestrian.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -31,7 +29,7 @@ Create a client-only static pedestrian.
 
 #### Defined in
 
-[client/streamers/ped.ts:221](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/streamers/ped.ts#L221)
+[client/streamers/ped.ts:221](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/streamers/ped.ts#L221)
 
 ___
 
@@ -45,10 +43,6 @@ Gets an NPC based on their scriptID if present.
 
 **`Static`**
 
-**`Memberof`**
-
-ClientPedController
-
 #### Parameters
 
 | Name | Type |
@@ -61,7 +55,7 @@ ClientPedController
 
 #### Defined in
 
-[client/streamers/ped.ts:184](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/streamers/ped.ts#L184)
+[client/streamers/ped.ts:184](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/streamers/ped.ts#L184)
 
 ___
 
@@ -72,8 +66,6 @@ AthenaClient.streamers.ped.**remove**(`uid`): `void`
 :::
 
 Remove a client ped by uid
-
-**`Export`**
 
 #### Parameters
 
@@ -87,4 +79,4 @@ Remove a client ped by uid
 
 #### Defined in
 
-[client/streamers/ped.ts:248](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/streamers/ped.ts#L248)
+[client/streamers/ped.ts:248](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/streamers/ped.ts#L248)

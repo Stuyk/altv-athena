@@ -17,8 +17,6 @@ Athena.systems.job.utility.**cloneObjective**(`objectiveData`): [`player`](serve
 
 Cleanly clones an objective and rebinds all callbacks.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type |
@@ -31,7 +29,7 @@ Cleanly clones an objective and rebinds all callbacks.
 
 #### Defined in
 
-[server/systems/job/utility.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/utility.ts#L11)
+[server/systems/job/utility.ts:11](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/utility.ts#L11)
 
 ___
 
@@ -42,8 +40,6 @@ Athena.systems.job.utility.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override job objective trigger functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -58,4 +54,4 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/utility.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/utility.ts#L32)
+[server/systems/job/utility.ts:32](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/job/utility.ts#L32)

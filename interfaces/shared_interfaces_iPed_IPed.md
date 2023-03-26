@@ -11,8 +11,6 @@ order: 0
 
 Used to pass static ped information from server to client.
 
-**`Export`**
-
 **`Interface`**
 
 IPed
@@ -25,13 +23,9 @@ IPed
 
 A list of random animations to play on this pedestrian.
 
-**`Memberof`**
-
-IPed
-
 #### Defined in
 
-[shared/interfaces/iPed.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L51)
+[shared/interfaces/iPed.ts:51](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iPed.ts#L51)
 
 ___
 
@@ -41,13 +35,9 @@ ___
 
 Will show across all dimensions.
 
-**`Memberof`**
-
-IPed
-
 #### Defined in
 
-[shared/interfaces/iPed.ts:81](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L81)
+[shared/interfaces/iPed.ts:81](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iPed.ts#L81)
 
 ___
 
@@ -57,13 +47,9 @@ ___
 
 The rotation of this Ped. 0 - 360
 
-**`Memberof`**
-
-IPed
-
 #### Defined in
 
-[shared/interfaces/iPed.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L30)
+[shared/interfaces/iPed.ts:30](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iPed.ts#L30)
 
 ___
 
@@ -74,13 +60,9 @@ ___
 Local Ped Info
 Do not automatically fill this out.
 
-**`Memberof`**
-
-IPed
-
 #### Defined in
 
-[shared/interfaces/iPed.ts:74](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L74)
+[shared/interfaces/iPed.ts:74](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iPed.ts#L74)
 
 ___
 
@@ -91,13 +73,9 @@ ___
 Local Ped ID.
 Do not actually fill this out.
 
-**`Memberof`**
-
-IPed
-
 #### Defined in
 
-[shared/interfaces/iPed.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L66)
+[shared/interfaces/iPed.ts:66](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iPed.ts#L66)
 
 ___
 
@@ -107,13 +85,9 @@ ___
 
 The max distance this Ped should render at.
 
-**`Memberof`**
-
-IPed
-
 #### Defined in
 
-[shared/interfaces/iPed.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L37)
+[shared/interfaces/iPed.ts:37](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iPed.ts#L37)
 
 ___
 
@@ -123,13 +97,9 @@ ___
 
 The model name this Ped.
 
-**`Memberof`**
-
-IPed
-
 #### Defined in
 
-[shared/interfaces/iPed.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L23)
+[shared/interfaces/iPed.ts:23](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iPed.ts#L23)
 
 ___
 
@@ -139,13 +109,9 @@ ___
 
 Position of the Ped in a 3D space.
 
-**`Memberof`**
-
-IPed
-
 #### Defined in
 
-[shared/interfaces/iPed.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L16)
+[shared/interfaces/iPed.ts:16](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iPed.ts#L16)
 
 ___
 
@@ -155,13 +121,9 @@ ___
 
 Should the appearance of this ped be randomized when spawned?
 
-**`Memberof`**
-
-IPed
-
 #### Defined in
 
-[shared/interfaces/iPed.ts:58](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L58)
+[shared/interfaces/iPed.ts:58](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iPed.ts#L58)
 
 ___
 
@@ -171,10 +133,6 @@ ___
 
 A unique identifier for this Ped.
 
-**`Memberof`**
-
-IPed
-
 #### Defined in
 
-[shared/interfaces/iPed.ts:44](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L44)
+[shared/interfaces/iPed.ts:44](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iPed.ts#L44)

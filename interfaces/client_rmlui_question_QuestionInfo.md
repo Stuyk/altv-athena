@@ -17,13 +17,9 @@ order: 0
 
 If set to true, it will blur the background while responding.
 
-**`Memberof`**
-
-QuestionInfo
-
 #### Defined in
 
-[client/rmlui/question/index.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/question/index.ts#L29)
+[client/rmlui/question/index.ts:29](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/question/index.ts#L29)
 
 ___
 
@@ -40,7 +36,7 @@ ___
 
 #### Defined in
 
-[client/rmlui/question/index.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/question/index.ts#L9)
+[client/rmlui/question/index.ts:9](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/question/index.ts#L9)
 
 ___
 
@@ -50,13 +46,9 @@ ___
 
 If set to true, it will darken the background while responding.
 
-**`Memberof`**
-
-QuestionInfo
-
 #### Defined in
 
-[client/rmlui/question/index.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/question/index.ts#L37)
+[client/rmlui/question/index.ts:37](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/question/index.ts#L37)
 
 ___
 
@@ -66,13 +58,9 @@ ___
 
 Hide Radar?
 
-**`Memberof`**
-
-QuestionInfo
-
 #### Defined in
 
-[client/rmlui/question/index.ts:45](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/question/index.ts#L45)
+[client/rmlui/question/index.ts:45](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/question/index.ts#L45)
 
 ___
 
@@ -83,10 +71,6 @@ ___
 What is the question, or info you need a response for?
 ie. 'What is your first name?'
 
-**`Memberof`**
-
-QuestionInfo
-
 #### Defined in
 
-[client/rmlui/question/index.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/question/index.ts#L21)
+[client/rmlui/question/index.ts:21](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/rmlui/question/index.ts#L21)

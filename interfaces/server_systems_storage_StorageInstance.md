@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[server/systems/storage.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L14)
+[server/systems/storage.ts:14](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/storage.ts#L14)
 
 ___
 
@@ -33,13 +33,9 @@ ___
 
 The data stored in the database.
 
-**`Memberof`**
-
-StorageInstance
-
 #### Defined in
 
-[server/systems/storage.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L30)
+[server/systems/storage.ts:30](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/storage.ts#L30)
 
 ___
 
@@ -49,10 +45,6 @@ ___
 
 The date which this storage was last accessed.
 
-**`Memberof`**
-
-StorageInstance
-
 #### Defined in
 
-[server/systems/storage.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L22)
+[server/systems/storage.ts:22](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/storage.ts#L22)

@@ -20,10 +20,6 @@ When the key is updated with data it will come back through the callback.
 
 **`Static`**
 
-**`Memberof`**
-
-StreamerService
-
 #### Type parameters
 
 | Name |
@@ -44,7 +40,7 @@ StreamerService
 
 #### Defined in
 
-[server/systems/streamer.ts:145](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/streamer.ts#L145)
+[server/systems/streamer.ts:145](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/streamer.ts#L145)
 
 ___
 
@@ -57,10 +53,6 @@ Athena.systems.streamer.**updateData**<`T`\>(`key`, `array`): `Promise`<`void`\>
 Populates Stream Data for External Process
 
 **`Static`**
-
-**`Memberof`**
-
-StreamerService
 
 #### Type parameters
 
@@ -81,4 +73,4 @@ StreamerService
 
 #### Defined in
 
-[server/systems/streamer.ts:190](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/streamer.ts#L190)
+[server/systems/streamer.ts:190](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/systems/streamer.ts#L190)

@@ -17,8 +17,6 @@ Athena.vehicle.damage.**apply**(`vehicle`, `damage`): `void`
 
 Apply vehicle damage to a vehicle.
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -32,7 +30,7 @@ Apply vehicle damage to a vehicle.
 
 #### Defined in
 
-[server/vehicle/damage.ts:147](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/damage.ts#L147)
+[server/vehicle/damage.ts:147](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/damage.ts#L147)
 
 ___
 
@@ -43,8 +41,6 @@ Athena.vehicle.damage.**get**(`vehicle`): [`player`](server_config.md#player) \|
 :::
 
 Returns vehicle damage for individual parts.
-
-**`Export`**
 
 #### Parameters
 
@@ -58,7 +54,7 @@ Returns vehicle damage for individual parts.
 
 #### Defined in
 
-[server/vehicle/damage.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/damage.ts#L66)
+[server/vehicle/damage.ts:66](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/damage.ts#L66)
 
 ___
 
@@ -69,8 +65,6 @@ Athena.vehicle.damage.**repair**(`vehicle`): `Promise`<`void`\>
 :::
 
 Used to repair all vehicle damage, and save changes to the Database.
-
-**`Export`**
 
 #### Parameters
 
@@ -84,4 +78,4 @@ Used to repair all vehicle damage, and save changes to the Database.
 
 #### Defined in
 
-[server/vehicle/damage.ts:187](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/damage.ts#L187)
+[server/vehicle/damage.ts:187](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/damage.ts#L187)

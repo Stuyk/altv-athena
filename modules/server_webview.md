@@ -31,7 +31,7 @@ If pages are specified it only closes those specific pages.
 
 #### Defined in
 
-[server/webview/index.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/webview/index.ts#L22)
+[server/webview/index.ts:22](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/webview/index.ts#L22)
 
 ___
 
@@ -44,10 +44,6 @@ Athena.webview.**emit**(`player`, `eventName`, `...args`): `void`
 Emits an event directly to the client's WebView.
 
 **`Static`**
-
-**`Memberof`**
-
-ServerView
 
 #### Parameters
 
@@ -63,4 +59,4 @@ ServerView
 
 #### Defined in
 
-[server/webview/index.ts:12](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/webview/index.ts#L12)
+[server/webview/index.ts:12](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/webview/index.ts#L12)

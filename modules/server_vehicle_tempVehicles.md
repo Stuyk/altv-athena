@@ -17,8 +17,6 @@ Athena.vehicle.tempVehicles.**add**(`vehicle`, `options`): `any`
 
 Register a vehicle as temporary
 
-**`Export`**
-
 #### Parameters
 
 | Name | Type | Description |
@@ -34,7 +32,7 @@ Register a vehicle as temporary
 
 #### Defined in
 
-[server/vehicle/tempVehicles.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/tempVehicles.ts#L14)
+[server/vehicle/tempVehicles.ts:14](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/tempVehicles.ts#L14)
 
 ___
 
@@ -45,8 +43,6 @@ Athena.vehicle.tempVehicles.**has**(`vehicle`): `boolean`
 :::
 
 Check if a vehicle is temporary by id, or vehicle instance.
-
-**`Export`**
 
 #### Parameters
 
@@ -60,7 +56,7 @@ Check if a vehicle is temporary by id, or vehicle instance.
 
 #### Defined in
 
-[server/vehicle/tempVehicles.ts:60](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/tempVehicles.ts#L60)
+[server/vehicle/tempVehicles.ts:60](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/tempVehicles.ts#L60)
 
 ___
 
@@ -71,8 +67,6 @@ Athena.vehicle.tempVehicles.**isOwner**(`player`, `vehicle`): `boolean`
 :::
 
 Check if player is owner of a temporary vehicle.
-
-**`Export`**
 
 #### Parameters
 
@@ -87,7 +81,7 @@ Check if player is owner of a temporary vehicle.
 
 #### Defined in
 
-[server/vehicle/tempVehicles.ts:77](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/tempVehicles.ts#L77)
+[server/vehicle/tempVehicles.ts:77](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/tempVehicles.ts#L77)
 
 ___
 
@@ -98,8 +92,6 @@ Athena.vehicle.tempVehicles.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override temporary vehicle functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -114,15 +106,13 @@ Used to override temporary vehicle functionality
 
 #### Defined in
 
-[server/vehicle/tempVehicles.ts:114](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/tempVehicles.ts#L114)
+[server/vehicle/tempVehicles.ts:114](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/tempVehicles.ts#L114)
 
 ::: tip Usage
 Athena.vehicle.tempVehicles.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override temporary vehicle functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -137,15 +127,13 @@ Used to override temporary vehicle functionality
 
 #### Defined in
 
-[server/vehicle/tempVehicles.ts:115](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/tempVehicles.ts#L115)
+[server/vehicle/tempVehicles.ts:115](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/tempVehicles.ts#L115)
 
 ::: tip Usage
 Athena.vehicle.tempVehicles.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override temporary vehicle functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -160,15 +148,13 @@ Used to override temporary vehicle functionality
 
 #### Defined in
 
-[server/vehicle/tempVehicles.ts:116](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/tempVehicles.ts#L116)
+[server/vehicle/tempVehicles.ts:116](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/tempVehicles.ts#L116)
 
 ::: tip Usage
 Athena.vehicle.tempVehicles.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override temporary vehicle functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -183,15 +169,13 @@ Used to override temporary vehicle functionality
 
 #### Defined in
 
-[server/vehicle/tempVehicles.ts:117](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/tempVehicles.ts#L117)
+[server/vehicle/tempVehicles.ts:117](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/tempVehicles.ts#L117)
 
 ::: tip Usage
 Athena.vehicle.tempVehicles.**override**(`functionName`, `callback`): `any`
 :::
 
 Used to override temporary vehicle functionality
-
-**`Export`**
 
 #### Parameters
 
@@ -206,7 +190,7 @@ Used to override temporary vehicle functionality
 
 #### Defined in
 
-[server/vehicle/tempVehicles.ts:118](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/tempVehicles.ts#L118)
+[server/vehicle/tempVehicles.ts:118](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/tempVehicles.ts#L118)
 
 ___
 
@@ -217,8 +201,6 @@ Athena.vehicle.tempVehicles.**remove**(`id`): `void`
 :::
 
 Removes a temporary vehicle from the tracker.
-
-**`Export`**
 
 #### Parameters
 
@@ -232,7 +214,7 @@ Removes a temporary vehicle from the tracker.
 
 #### Defined in
 
-[server/vehicle/tempVehicles.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/tempVehicles.ts#L36)
+[server/vehicle/tempVehicles.ts:36](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/tempVehicles.ts#L36)
 
 ___
 
@@ -243,8 +225,6 @@ Athena.vehicle.tempVehicles.**shouldBeDestroyed**(`vehicle`): `boolean`
 :::
 
 Check if this vehicle should be removed when a player leaves the drivers seat.
-
-**`Export`**
 
 #### Parameters
 
@@ -258,4 +238,4 @@ Check if this vehicle should be removed when a player leaves the drivers seat.
 
 #### Defined in
 
-[server/vehicle/tempVehicles.ts:96](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/tempVehicles.ts#L96)
+[server/vehicle/tempVehicles.ts:96](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/server/vehicle/tempVehicles.ts#L96)

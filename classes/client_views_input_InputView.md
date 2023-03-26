@@ -27,10 +27,6 @@ Show an input menu from client-side.
 
 **`Static`**
 
-**`Memberof`**
-
-InputView
-
 #### Parameters
 
 | Name | Type |
@@ -43,4 +39,4 @@ InputView
 
 #### Defined in
 
-[client/views/input.ts:91](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/views/input.ts#L91)
+[client/views/input.ts:91](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/client/views/input.ts#L91)

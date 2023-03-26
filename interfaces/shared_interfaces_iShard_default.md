@@ -11,8 +11,6 @@ order: 0
 
 Used to display a 'wasted'-like screen from server to client.
 
-**`Export`**
-
 **`Interface`**
 
 IShard
@@ -26,13 +24,9 @@ IShard
 How long in milliseconds this shard should last.
 Use -1 to set forever.
 
-**`Memberof`**
-
-IShard
-
 #### Defined in
 
-[shared/interfaces/iShard.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iShard.ts#L14)
+[shared/interfaces/iShard.ts:14](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iShard.ts#L14)
 
 ___
 
@@ -42,13 +36,9 @@ ___
 
 The text below the title. Optional.
 
-**`Memberof`**
-
-ISpinner
-
 #### Defined in
 
-[shared/interfaces/iShard.ts:28](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iShard.ts#L28)
+[shared/interfaces/iShard.ts:28](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iShard.ts#L28)
 
 ___
 
@@ -58,10 +48,6 @@ ___
 
 The large text to display.
 
-**`Memberof`**
-
-IShard
-
 #### Defined in
 
-[shared/interfaces/iShard.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iShard.ts#L21)
+[shared/interfaces/iShard.ts:21](https://github.com/Stuyk/altv-athena/blob/cdad41b/src/core/shared/interfaces/iShard.ts#L21)
