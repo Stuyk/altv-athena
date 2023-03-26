@@ -3,7 +3,7 @@ on:
 jobs:
     # Build job
     build:
-      if: github.actor == 'stuyk'
+        if: github.actor == 'stuyk'
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
