@@ -22,7 +22,7 @@ export function toAll(message: string, ...args: any[]) {
  * Emit a notification to a single client.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} message
  * @param {...any[]} args
  */

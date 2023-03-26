@@ -31,7 +31,7 @@ const InternalController = {
 
     /**
      * Updates text labels through the streamer service.
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {Array<TextLabel>} labels
      * @memberof InternalController
      */
@@ -53,7 +53,7 @@ const InternalController = {
  * ```
  *
  * @param {TextLabel} label
- * @returns {string} uid for removal
+ * @returns {string} uid A unique string for removal
  */
 export function append(label: TextLabel): string {
     if (Overrides.append) {
@@ -94,7 +94,7 @@ export function append(label: TextLabel): string {
  * Athena.controllers.textLabel.update('uid-you-specify', { text: 'Hello World!' }, somePlayer);
  * ```
  *
- * @param {string} uid
+ * @param {string} uid A unique string
  * @param {alt.Player} [player=undefined]
  * @memberof ServerTextLabelController
  */
@@ -130,7 +130,7 @@ export function update(uid: string, label: Partial<TextLabel>, player: alt.Playe
  * Athena.controllers.textLabel.remove('uid-you-specify');
  * ```
  *
- * @param {string} uid
+ * @param {string} uid A unique string
  * @return {boolean}
  */
 export function remove(uid: string): boolean {
@@ -158,8 +158,8 @@ export function remove(uid: string): boolean {
  * Athena.controllers.textLabel.removeFromPlayer(somePlayer, 'uid-you-specify');
  * ```
  *
- * @param {alt.Player} player
- * @param {string} uid
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {string} uid A unique string
  */
 export function removeFromPlayer(player: alt.Player, uid: string) {
     if (Overrides.removeFromPlayer) {
@@ -183,9 +183,9 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  * Athena.controllers.textLabel.addToPlayer(somePlayer, { uid: 'uid-you-specify', text: 'Hello World!', pos: { x: 0, y: 0, z: 0 }});
  * ```
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {TextLabel} textLabel
- * @returns {string} uid for removal
+ * @returns {string} uid A unique string for removal
  */
 export function addToPlayer(player: alt.Player, textLabel: TextLabel): string {
     if (Overrides.addToPlayer) {

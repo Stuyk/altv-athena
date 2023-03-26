@@ -12,7 +12,7 @@ const InternalFunctions = {
      * Add a permission to a player based on default permissions, or a custom permission.
      *
      * @template CustomPerms
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {(DefaultPerms | CustomPerms)} perm
      */
     async add<CustomPerms = ''>(
@@ -48,7 +48,7 @@ const InternalFunctions = {
      * Remove a permission from a player based on default permissions, or a custom permission.
      *
      * @template CustomPerms
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {(DefaultPerms | CustomPerms)} perm
      */
     async remove<CustomPerms = ''>(
@@ -83,8 +83,8 @@ const InternalFunctions = {
     /**
      * Clear all permissions from a player's account.
      *
-     * @param {alt.Player} player
-     * @return {*}
+     * @param {alt.Player} player An alt:V Player Entity
+     * @return {void}
      */
     async clear(player: alt.Player, dataName: SupportedDocuments) {
         if (typeof Athena.document[dataName] === 'undefined') {
@@ -104,7 +104,7 @@ const InternalFunctions = {
      * Check if a player has a permission.
      *
      * @template CustomPerms
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {(DefaultPerms | CustomPerms)} perm
      * @return {boolean}
      */
@@ -134,7 +134,7 @@ const InternalFunctions = {
      * Check if a player has at least one permission given an Array of permissions.
      *
      * @template CustomPerms
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {(Array<DefaultPerms | CustomPerms>)} perm
      * @return {boolean}
      */
@@ -182,7 +182,7 @@ const InternalFunctions = {
      * Check if a player has all permissions in an array..
      *
      * @template CustomPerms
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {(Array<DefaultPerms | CustomPerms>)} perms
      * @return {boolean}
      */
@@ -234,7 +234,7 @@ const InternalFunctions = {
  * @export
  * @template CustomPerms
  * @param {('character' | 'account')} type
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(DefaultPerms | CustomPerms)} perm
  * @return {Promise<boolean>}
  */
@@ -252,7 +252,7 @@ export async function add<CustomPerms = ''>(
  * @export
  * @template CustomPerms
  * @param {('character' | 'account')} type
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(DefaultPerms | CustomPerms)} perm
  * @return {Promise<boolean>}
  */
@@ -269,7 +269,7 @@ export async function remove<CustomPerms = ''>(
  *
  * @export
  * @param {('character' | 'account')} type
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {Promise<void>}
  */
 export async function clear(type: 'character' | 'account', player: alt.Player) {
@@ -282,7 +282,7 @@ export async function clear(type: 'character' | 'account', player: alt.Player) {
  * @export
  * @template CustomPerms
  * @param {('character' | 'account')} type
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(DefaultPerms | CustomPerms)} perm
  * @return {boolean}
  */
@@ -300,7 +300,7 @@ export function has<CustomPerms = ''>(
  * @export
  * @template CustomPerms
  * @param {('character' | 'account')} type
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(Array<DefaultPerms | CustomPerms>)} perms
  * @return {boolean}
  */
@@ -318,7 +318,7 @@ export function hasOne<CustomPerms = ''>(
  * @export
  * @template CustomPerms
  * @param {('character' | 'account')} type
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(Array<DefaultPerms | CustomPerms>)} perms
  * @return {boolean}
  */

@@ -25,8 +25,8 @@ function sharedOwnershipChecks(player: alt.Player, vehicle: alt.Vehicle) {
 /**
  * Toggles a vehicle lock as if a player toggled it.
  *
- * @param {alt.Player} player
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  */
 export async function toggleLock(player: alt.Player, vehicle: alt.Vehicle) {
     if (Overrides.toggleLock) {
@@ -53,9 +53,9 @@ export async function toggleLock(player: alt.Player, vehicle: alt.Vehicle) {
 /**
  * Toggles an engine lock as if a player toggled it.
  *
- * @param {alt.Player} player
- * @param {alt.Vehicle} vehicle
- * @return {*}
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
+ * @return {void}
  */
 export async function toggleEngine(player: alt.Player, vehicle: alt.Vehicle) {
     if (Overrides.toggleEngine) {
@@ -78,8 +78,8 @@ export async function toggleEngine(player: alt.Player, vehicle: alt.Vehicle) {
 /**
  * Toggles a door lock as if a player toggled it.
  *
- * @param {alt.Player} player
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {number} door
  */
 export async function toggleDoor(player: alt.Player, vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 | 5) {

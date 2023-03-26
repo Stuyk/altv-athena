@@ -38,7 +38,7 @@ export function distance2d(vector1: alt.IVector2, vector2: alt.IVector2): number
  * Get the closest vector given an array of positions.
  *
  * @export
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @param {alt.IVector3[]} arrayOfPositions
  * @return {alt.IVector3}
  */
@@ -55,7 +55,7 @@ export function getClosestVector(pos: alt.IVector3, arrayOfPositions: alt.IVecto
  *
  * @export
  * @template T
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @param {T[]} arrayOfPositions
  * @param {string} [posVariable='pos']
  * @return {T}
@@ -72,7 +72,7 @@ export function getClosestVectorByPos<T>(pos: alt.IVector3, arrayOfPositions: T[
  * Gets an array of the closest types.
  * @export
  * @template T
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @param {Array<{ pos: alt.IVector3; valid: boolean }>} elements
  * @param {number} maxDistance
  * @return {Array<T>}
@@ -165,7 +165,7 @@ export function getForwardVector(rot: alt.IVector3): alt.IVector3 {
  * SERVER ONLY
  * Return a position in front of a player based on distance.
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} distance
  * @return {alt.Vector3}
  */
@@ -185,7 +185,7 @@ export function getVectorInFrontOfPlayer(
 
 /**
  * Determine if a vector is between vectors.
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @param {alt.IVector3} vector1
  * @param {alt.IVector3} vector2
  * @returns {boolean}
@@ -290,7 +290,7 @@ function fwdZ(x: number): number {
  *
  * @export
  * @template T
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @param {Array<T & { pos: alt.IVector3 }} elements
  * @param {number} lastDistance
  */

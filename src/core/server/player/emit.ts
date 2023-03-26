@@ -22,7 +22,7 @@ import { WEATHER_KEY } from '@AthenaShared/utility/weather';
 /**
  * Play an alarm on this player.
  * List of all alarms: https://github.com/DurtyFree/gta-v-data-dumps/blob/master/alarmSounds.json
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} name
  * @return {void}
  * @memberof EmitPrototype
@@ -43,7 +43,7 @@ export function startAlarm(player: alt.Player, name: string): void {
 
 /**
  * Stop an alarm for this player.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} name
  */
 export function stopAlarm(player: alt.Player, name: string) {
@@ -60,7 +60,7 @@ export function stopAlarm(player: alt.Player, name: string) {
 
 /**
  * Stop all alarms for this player.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function stopAllAlarms(player: alt.Player) {
     if (Overrides.stopAllAlarms) {
@@ -107,7 +107,7 @@ export function animation(
  * Used to clear an animation or a task.
  * Does not trigger if the player is in a vehicle.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function clearAnimation(player: alt.Player) {
     if (Overrides.clearAnimation) {
@@ -133,7 +133,7 @@ export function clearAnimation(player: alt.Player) {
  * Play an animation on this player.
  * @param {string} name
  * @param {number} duration
- * @return {*}
+ * @return {void}
  * @memberof EmitPrototype
  */
 export function scenario(player: alt.Player, name: string, duration: number): void {
@@ -200,7 +200,7 @@ export function particle(player: alt.Player, particle: Particle, emitToNearbyPla
 
 /**
  * Create a subtitle on the bottom of the screen with optional duration.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} text
  * @param {number} duration
  */
@@ -214,7 +214,7 @@ export function createMissionText(player: alt.Player, text: string, duration?: n
 
 /**
  * Create a progress bar that eventually ends itself.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {ProgressBar} progressbar
  * @returns {string} A unique identifier to remove the progress bar.
  */
@@ -233,8 +233,8 @@ export function createProgressBar(player: alt.Player, progressbar: ProgressBar):
 
 /**
  * Remove a progress bar based on its unique identifier.
- * @param {alt.Player} player
- * @param {string} uid
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {string} uid A unique string
  */
 export function removeProgressBar(player: alt.Player, uid: string) {
     if (Overrides.removeProgressBar) {
@@ -246,7 +246,7 @@ export function removeProgressBar(player: alt.Player, uid: string) {
 
 /**
  * Play a sound without any positional data.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} audioName
  * @param {number} [volume=0.35]
  * @param {string} soundInstantID, optional unique id to play sound instant
@@ -325,7 +325,7 @@ export function inputMenu(player: alt.Player, inputMenu: InputMenu) {
 
 /**
  * Create a spinner in the bottom-right corner.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {ISpinner} spinner
  */
 export function createSpinner(player: alt.Player, spinner: ISpinner) {
@@ -339,7 +339,7 @@ export function createSpinner(player: alt.Player, spinner: ISpinner) {
 /**
  * Clear a spinner in the bottom-right corner.
  * No UID necessary since it can only have one spinner at a time.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function clearSpinner(player: alt.Player) {
     if (Overrides.clearSpinner) {
@@ -351,7 +351,7 @@ export function clearSpinner(player: alt.Player) {
 
 /**
  * Create a full-screen message. Cannot be cleared by the player.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {IErrorScreen} screen
  */
 export function createErrorScreen(player: alt.Player, screen: IErrorScreen) {
@@ -364,7 +364,7 @@ export function createErrorScreen(player: alt.Player, screen: IErrorScreen) {
 
 /**
  * Clear a full-screen message.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function clearErrorScreen(player: alt.Player) {
     if (Overrides.clearErrorScreen) {
@@ -376,7 +376,7 @@ export function clearErrorScreen(player: alt.Player) {
 
 /**
  * Create a full-screen shard. Similar to 'mission-passed' or 'wasted'.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {IErrorScreen} screen
  */
 export function createShard(player: alt.Player, shard: IShard) {
@@ -389,7 +389,7 @@ export function createShard(player: alt.Player, shard: IShard) {
 
 /**
  * Clear a shard.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function clearShard(player: alt.Player) {
     if (Overrides.clearShard) {
@@ -402,7 +402,7 @@ export function clearShard(player: alt.Player) {
 /**
  * Create a 'credits' text aligned to a certain side of the screen.
  * Automatically clear(s) over-time.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {IErrorScreen} screen
  */
 export function createCredits(player: alt.Player, credits: ICredit) {
@@ -415,7 +415,7 @@ export function createCredits(player: alt.Player, credits: ICredit) {
 
 /**
  * Clears a 'credits' display.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function clearCredits(player: alt.Player) {
     if (Overrides.clearCredits) {
@@ -429,7 +429,7 @@ export function clearCredits(player: alt.Player) {
  * Attach an object to a player.
  * Automatically synchronized and handled client-side.
  * Last parameter is when to remove the object. Automatically set to infinite.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {IAttachable} attachable
  * @param {number} removeAfterMilliseconds
  * @return {string} UID for attachable object
@@ -477,9 +477,9 @@ export function objectAttach(player: alt.Player, attachable: IAttachable, remove
 
 /**
  * Remove an object from the player.
- * @param {alt.Player} player
- * @param {string} uid
- * @return {*}
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {string} uid A unique string
+ * @return {void}
  */
 export function objectRemove(player: alt.Player, uid: string) {
     if (Overrides.objectRemove) {
@@ -509,7 +509,7 @@ export function objectRemove(player: alt.Player, uid: string) {
  * Allows a temporary object to be created and moved.
  * The object is only seen by this one player.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} model
  * @param {alt.IVector3} start
  * @param {alt.IVector3} end
@@ -533,7 +533,7 @@ export function tempObjectLerp(
  * Create a wheel menu and emit  it to the player.
  * Can emit events to client or server-side.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} label
  * @param {Array<IWheelItem>} wheelItems
  */
@@ -548,7 +548,7 @@ export function wheelMenu(player: alt.Player, label: string, wheelItems: Array<I
 /**
  * Emit a message to a given player.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} msg
  */
 export function message(player: alt.Player, msg: string) {
@@ -563,7 +563,7 @@ export function message(player: alt.Player, msg: string) {
  * Prompt the user to accept / decline something.
  * They must react by holding l-shift to open the menu.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {AcceptDeclineEvent} eventInfo
  */
 export function acceptDeclineEvent(player: alt.Player, eventInfo: AcceptDeclineEvent) {
@@ -579,7 +579,7 @@ export function acceptDeclineEvent(player: alt.Player, eventInfo: AcceptDeclineE
  * Turns the player's screen black over time.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} timeInMs
  */
 export function fadeScreenToBlack(player: alt.Player, timeInMs: number) {
@@ -590,7 +590,7 @@ export function fadeScreenToBlack(player: alt.Player, timeInMs: number) {
  * Removes the black filter over the screen over time.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} timeInMs
  */
 export function fadeScreenFromBlack(player: alt.Player, timeInMs: number) {
@@ -605,7 +605,7 @@ export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs:
  * Think of like screen wobbling, drunkness, etc.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} name
  * @param {number} amountInMs How long it should last. -1 for infinite.
  */
@@ -617,7 +617,7 @@ export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs 
  * Used to clear a screen effect from a player.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function clearTimeCycleEffect(player: alt.Player) {
     player.emit(SYSTEM_EVENTS.SCREEN_TIMECYCLE_EFFECT_CLEAR);
@@ -629,7 +629,7 @@ export function clearTimeCycleEffect(player: alt.Player) {
  * Does not use alt:V functionality. Only uses natives.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} timeInSeconds
  */
 export function setWeather(player: alt.Player, weather: WEATHER_KEY, timeInSeconds: number) {

@@ -106,7 +106,7 @@ class InternalFunctions implements ViewModel {
  * @static
  * @param {string} label
  * @param {Array<IWheelOptionExt>} options
- * @return {*}
+ * @return {void}
  */
 export async function open(label: string, options: Array<IWheelOptionExt>, setMouseToCenter = false) {
     if (AthenaClient.webview.isAnyMenuOpen()) {

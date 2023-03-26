@@ -241,7 +241,7 @@ export function upsertData<DataType = {}>(
  * @template DataType
  * @param {(Item<DefaultItemBehavior, DataType> | StoredItem<DataType>)} item
  * @param {DataType} data
- * @return {*}
+ * @return {void}
  */
 export function setData<DataType = {}>(
     item: Item<DefaultItemBehavior, DataType> | StoredItem<DataType>,
@@ -265,7 +265,7 @@ export function setData<DataType = {}>(
  * Always returns a new item with the modified contents.
  *
  * @param {(Item | StoredItem)} item
- * @return {*}
+ * @return {void}
  */
 export function clearData(item: Item | StoredItem) {
     if (Overrides.clearData) {
@@ -775,12 +775,17 @@ export function swapBetween(from: ComplexSwap, to: ComplexSwap): ComplexSwapRetu
 /**
  * Invokes an item use effect
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
  * @param {('inventory' | 'toolbar')} [type='toolbar']
- * @return {*}
+ * @return {void}
  */
-export async function useItem(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar', eventToCall: string|string[] = undefined) {
+export async function useItem(
+    player: alt.Player,
+    slot: number,
+    type: 'inventory' | 'toolbar' = 'toolbar',
+    eventToCall: string | string[] = undefined,
+) {
     if (Overrides.useItem) {
         return Overrides.useItem(player, slot, type, eventToCall);
     }
@@ -838,7 +843,7 @@ export async function useItem(player: alt.Player, slot: number, type: 'inventory
  * If the boolean is undefined; it will change to true.
  * Automatically saves.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
  * @return {Promise<boolean>}
  */

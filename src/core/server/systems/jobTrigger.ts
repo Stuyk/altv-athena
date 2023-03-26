@@ -15,9 +15,9 @@ const Internal = {
      * Invoke a callback or event based on what is specified in the JobTrigger data.
      *
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {number?} amount
-     * @return {*}
+     * @return {void}
      */
     accept(player: alt.Player, amount?: number) {
         if (!player || !player.valid) {
@@ -49,8 +49,8 @@ const Internal = {
      * Invoke a callback or event based on what is specified in the JobTrigger data.
      *
      * @static
-     * @param {alt.Player} player
-     * @return {*}
+     * @param {alt.Player} player An alt:V Player Entity
+     * @return {void}
      * @memberof InternalFunctions
      */
     cancel(player: alt.Player) {
@@ -80,9 +80,9 @@ const Internal = {
  * Creates a WebView Job Window to show to the player.
  * Will invoke a callback or an event if accepted or declined.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {JobTrigger} data
- * @return {*}
+ * @return {void}
  */
 export function create(player: alt.Player, data: JobTrigger) {
     if (Overrides.create) {

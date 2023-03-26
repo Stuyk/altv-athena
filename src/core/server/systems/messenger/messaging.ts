@@ -48,7 +48,7 @@ function cleanMessage(msg: string): string {
 /**
  * Send a message to an individual player.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} msg
  */
 export function send(player: alt.Player, msg: string) {

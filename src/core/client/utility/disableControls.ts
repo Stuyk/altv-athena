@@ -8,7 +8,7 @@ let everyTickAttacks: number;
  * Completely disabled all local player controls.
  * @export
  * @param {boolean} value
- * @return {*}
+ * @return {void}
  */
 export function disableAllControls(value: boolean) {
     if (everyTickControls) {

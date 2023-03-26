@@ -72,7 +72,7 @@ export class Job {
      *
      * Ensure that this Job is initialized with new Job first.
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @memberof Job
      */
     addPlayer(player: alt.Player) {
@@ -146,8 +146,8 @@ export class Job {
     /**
      * Remove a vehicle by unique identifier assigned when adding a vehicle.
      *
-     * @param {string} uid
-     * @return {*}
+     * @param {string} uid A unique string
+     * @return {void}
      * @memberof Job
      */
     removeVehicle(uid: string) {
@@ -256,7 +256,7 @@ export class Job {
 
     /**
      * Remove the current job attachable.
-     * @return {*}
+     * @return {void}
      * @memberof Job
      */
     removeAttachable() {

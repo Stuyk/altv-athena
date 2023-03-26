@@ -10,7 +10,7 @@ export const CharacterSystem = {
      * @static
      * @param {number} ped
      * @param {Appearance} appearance
-     * @return {*}
+     * @return {void}
      * @memberof CharacterSystem
      */
     applyAppearance(ped: number, appearance: Appearance) {

@@ -43,7 +43,7 @@ let maleClothes = {
  *
  * The uniform overrides all other clothing on a multiplayer ped model.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Array<ClothingComponent>} components
  * @return {Promise<boolean>}
  */
@@ -65,7 +65,7 @@ export async function setUniform(player: alt.Player, components: Array<ClothingC
 /**
  * Used to clear a uniform on a player.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {Promise<void>}
  */
 export async function clearUniform(player: alt.Player): Promise<void> {
@@ -84,9 +84,9 @@ export async function clearUniform(player: alt.Player): Promise<void> {
  *
  * Uniforms are also ignored if a skin is set.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(string | number)} model
- * @return {*}
+ * @return {void}
  */
 export async function setSkin(player: alt.Player, model: string | number) {
     if (Overrides.setSkin) {
@@ -106,7 +106,7 @@ export async function setSkin(player: alt.Player, model: string | number) {
 /**
  * Clears a custom model on a player.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export async function clearSkin(player: alt.Player) {
     if (Overrides.clearSkin) {
@@ -154,7 +154,7 @@ export function outfitFromDlc(sex: 0 | 1, componentList: Array<ClothingComponent
  *
  * Use the normal player.setClothes functions, and then call this function to generate an outfit from it.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Array<{ id: number; isProp?: boolean }>} components
  * @return {(StoredItem | undefined)}
  */
@@ -201,8 +201,8 @@ export function outfitFromPlayer(
 /**
  * Loop through all isEquipped items; and synchronize appearance.
  *
- * @param {alt.Player} player
- * @return {*}
+ * @param {alt.Player} player An alt:V Player Entity
+ * @return {void}
  */
 export function update(player: alt.Player) {
     if (Overrides.update) {

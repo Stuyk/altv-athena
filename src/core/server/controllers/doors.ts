@@ -91,7 +91,7 @@ export function append(door: Door): string {
  * Athena.controllers.doors.remove(uid);
  * ```
  *
- * @param {string} uid
+ * @param {string} uid A unique string
  * @return {boolean}
  */
 export function remove(uid: string): boolean {
@@ -120,7 +120,7 @@ export function remove(uid: string): boolean {
  * Athena.controllers.doors.update('117', true);
  * ```
  *
- * @param {string} uid
+ * @param {string} uid A unique string
  * @param {boolean} isUnlocked
  * @return {boolean}
  */

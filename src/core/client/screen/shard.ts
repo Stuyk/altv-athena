@@ -35,7 +35,7 @@ export function clear() {
  *
  * @export
  * @param {IShard} shard
- * @return {*}
+ * @return {void}
  */
 export async function create(shard: IShard) {
     await clear();

@@ -42,7 +42,7 @@ function init() {
  * @static
  * @param {number} id
  * @param {IStream} data
- * @return {*}
+ * @return {void}
  * @memberof Internal
  */
 function update(id: number, data: IStream) {
@@ -71,7 +71,7 @@ function update(id: number, data: IStream) {
  * Parse Data from the WebSocket Server
  * @static
  * @param {string} message
- * @return {*}
+ * @return {void}
  * @memberof Internal
  */
 function receive(message: string) {
@@ -105,7 +105,7 @@ function tick() {
 /**
  * Used to request an update for a specific player.
  * @static
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @memberof Internal
  */
 function requestUpdate(player: alt.Player) {

@@ -44,7 +44,7 @@ const MAX_AUDIO_AREA_DISTANCE = 25;
  * Play a single sound for a player.
  *
  * @static
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {CustomSoundInfo} soundInfo
  * @memberof SoundSystem
  */
@@ -94,7 +94,7 @@ export function playSoundInDimension(dimension: number, soundInfo: Omit<CustomSo
  *
  * @static
  * @param {(Required<Omit<CustomSoundInfo, 'target' | 'volume'>>)} soundInfo
- * @return {*}
+ * @return {void}
  * @memberof Sound
  */
 export function playSoundInArea(soundInfo: Required<Omit<CustomSoundInfo, 'target' | 'volume'>>) {

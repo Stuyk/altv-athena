@@ -10,8 +10,8 @@ import Database from '@stuyk/ezmongodb';
  * Options can be specified to check if a passenger has keys and so on and so forth.
  *
  * @export
- * @param {alt.Player} player
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {{ includePermissions?: boolean; includeKeys?: boolean; includeAdminOverride?: boolean; preventWhileAttached?: boolean; }}
  * @return {boolean}
  */
@@ -66,8 +66,8 @@ export function isOwner(
  * Checks if a player's character has a matching permission for a vehicle.
  *
  * @export
- * @param {alt.Player} player
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {boolean}
  */
 export function hasPermission(player: alt.Player, vehicle: alt.Vehicle): boolean {
@@ -91,8 +91,8 @@ export function hasPermission(player: alt.Player, vehicle: alt.Vehicle): boolean
  * Checks if a player's character has a matching permission for a vehicle.
  *
  * @export
- * @param {alt.Player} player
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {boolean}
  */
 export function hasKeys(player: alt.Player, vehicle: alt.Vehicle): boolean {
@@ -121,7 +121,7 @@ export function hasKeys(player: alt.Player, vehicle: alt.Vehicle): boolean {
  * Return the owner of a vehicle's database identifier
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {(string | undefined)}
  */
 export function get(vehicle: alt.Vehicle): string | undefined {
@@ -141,7 +141,7 @@ export function get(vehicle: alt.Vehicle): string | undefined {
  * Return the owner of a vehicle based on player
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {(alt.Player | undefined)}
  */
 export function getAsPlayer(vehicle: alt.Vehicle): alt.Player | undefined {
@@ -161,8 +161,8 @@ export function getAsPlayer(vehicle: alt.Vehicle): alt.Player | undefined {
  * Add a character to the owned vehicle
  *
  * @export
- * @param {alt.Vehicle} vehicle
- * @param {alt.Player} player
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
+ * @param {alt.Player} player An alt:V Player Entity
  * @returns {Promise<boolean>}
  */
 export async function addCharacter(vehicle: alt.Vehicle, player: alt.Player): Promise<boolean>;
@@ -170,7 +170,7 @@ export async function addCharacter(vehicle: alt.Vehicle, player: alt.Player): Pr
  * Add a character to the owned vehicle
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {string} id
  * @returns {Promise<boolean>}
  */
@@ -179,7 +179,7 @@ export async function addCharacter(vehicle: alt.Vehicle, id: string): Promise<bo
  * Add a character or player to the owned vehicle
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {(alt.Player | string)} playerOrId
  * @returns {Promise<boolean>}
  */
@@ -231,7 +231,7 @@ export async function addCharacter(vehicle: alt.Vehicle, playerOrId: alt.Player 
  * Remove a character from the owned vehicle keys.
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {(alt.Player | string)} playerOrId
  * @returns {Promise<boolean>}
  */
@@ -272,9 +272,9 @@ export async function removeCharacter(vehicle: alt.Vehicle, _id: string): Promis
  * Returns true if successfully transferred.
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {string} _id
- * @return {*}
+ * @return {void}
  */
 export async function transfer(vehicle: alt.Vehicle, _id: string): Promise<boolean> {
     if (Overrides.transfer) {

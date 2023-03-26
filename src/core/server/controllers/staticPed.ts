@@ -48,7 +48,7 @@ const InternalFunctions = {
  * ```
  *
  * @param {IPed} pedData
- * @return {string} uid for the ped
+ * @return {string} uid A unique string for the ped
  */
 export function append(pedData: IPed): string {
     if (Overrides.append) {
@@ -74,7 +74,7 @@ export function append(pedData: IPed): string {
  * Athena.controllers.staticPed.remove('the-id-you-specified');
  * ```
  *
- * @param {string} uid
+ * @param {string} uid A unique string
  * @return {boolean}
  */
 export function remove(uid: string): boolean {
@@ -104,8 +104,8 @@ export function remove(uid: string): boolean {
  * ```
  *
  *
- * @param {alt.Player} player
- * @param {string} uid
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {string} uid A unique string
  */
 export function removeFromPlayer(player: alt.Player, uid: string) {
     if (Overrides.removeFromPlayer) {
@@ -131,7 +131,7 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  * Athena.controllers.staticPed.addToPlayer(somePlayer, { uid: 'the-id-you-specified', model: 'g_f_importexport_01', pos: { x: 0, y: 0, z: 0} })
  * ```
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {IPed} pedData
  * @return {string}
  */
@@ -164,7 +164,7 @@ export function addToPlayer(player: alt.Player, pedData: IPed): string {
  * ```
  *
  * @export
- * @param {string} uid
+ * @param {string} uid A unique string
  * @param {Animation[]} animation
  */
 export function playAnimation(uid: string, animation: Animation[]) {

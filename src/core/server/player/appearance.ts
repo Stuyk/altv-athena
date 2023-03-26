@@ -12,9 +12,9 @@ export type BaseStyle = { style: number; opacity: number; color: number };
  * Automatically saves it to Database.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {HairStyle} style
- * @return {*}
+ * @return {void}
  */
 export async function setHairStyle(player: alt.Player, style: HairStyle) {
     if (Overrides.setHairStyle) {
@@ -50,9 +50,9 @@ export async function setHairStyle(player: alt.Player, style: HairStyle) {
  * Automatically saves to database.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {FacialHair} style
- * @return {*}
+ * @return {void}
  */
 export async function setFacialHair(player: alt.Player, choice: BaseStyle) {
     if (Overrides.setFacialHair) {
@@ -77,9 +77,9 @@ export async function setFacialHair(player: alt.Player, choice: BaseStyle) {
  * Automatically saves to the database.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {BaseStyle} choice
- * @return {*}
+ * @return {void}
  */
 export async function setEyebrows(player: alt.Player, choice: BaseStyle) {
     if (Overrides.setEyebrows) {
@@ -104,9 +104,9 @@ export async function setEyebrows(player: alt.Player, choice: BaseStyle) {
  * Automatically saves to database.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {boolean} isFeminine
- * @return {*}
+ * @return {void}
  */
 export async function setModel(player: alt.Player, isFeminine: boolean) {
     if (Overrides.setModel) {
@@ -128,9 +128,9 @@ export async function setModel(player: alt.Player, isFeminine: boolean) {
  * Automatically saves to database.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} color
- * @return {*}
+ * @return {void}
  */
 export async function setEyeColor(player: alt.Player, color: number) {
     if (Overrides.setEyeColor) {
@@ -151,7 +151,7 @@ export async function setEyeColor(player: alt.Player, color: number) {
  * Add the 'decorators' paramater to override player appearance.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Array<{ overlay: string; collection: string }>} [decorators=undefined]
  */
 export function updateTattoos(player: alt.Player, decorators: Array<Decorator> = undefined) {

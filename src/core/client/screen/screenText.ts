@@ -62,7 +62,7 @@ export function getWidth(text: string, font: number, scale: number): number {
  * @static
  * @param {number} size
  * @param {number} scale
- * @return {*}
+ * @return {void}
  * @memberof ScreenText
  */
 export function getHeight(scale: number, font: number): number {

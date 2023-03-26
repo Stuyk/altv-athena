@@ -30,7 +30,7 @@ const Internal = {
     /**
      * Enable default toolbar functionality with an event call down to the system.
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      */
     processPlayer(player: alt.Player) {
         player.emit(SYSTEM_EVENTS.PLAYER_TOOLBAR_ENABLE);
@@ -39,7 +39,7 @@ const Internal = {
      * Invokes a use item effect.
      * Should always be called when using an item.
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {number} slot
      */
     invoke(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar') {
@@ -48,8 +48,8 @@ const Internal = {
     /**
      * Unequip all weapons on respawn.
      *
-     * @param {alt.Player} player
-     * @return {*}
+     * @param {alt.Player} player An alt:V Player Entity
+     * @return {void}
      */
     unequipAllWeapons(player: alt.Player) {
         if (!player || !player.valid) {

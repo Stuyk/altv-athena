@@ -77,7 +77,7 @@ export async function objective(job: Job): Promise<boolean> {
  * Verifies job criteria such as not being in a vehicle, no weapons, etc.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Objective} objective
  * @return {boolean}
  */
@@ -205,7 +205,7 @@ export function criteria(player: alt.Player, objective: Objective): boolean {
  * Verifies job types such as a waypoint, or capture point.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Objective} objective
  * @return {boolean}
  */

@@ -19,7 +19,7 @@ const Internal = {
  * Disable the gameplay camera from moving
  *
  * @export
- * @return {*}
+ * @return {void}
  */
 export function disable() {
     if (typeof interval !== 'undefined') {
@@ -33,7 +33,7 @@ export function disable() {
  * Enable the gameplay camera
  *
  * @export
- * @return {*}
+ * @return {void}
  */
 export function enable() {
     if (typeof interval === 'undefined') {

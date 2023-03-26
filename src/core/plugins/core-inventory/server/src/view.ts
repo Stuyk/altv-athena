@@ -129,11 +129,11 @@ const Internal = {
     /**
      * Using the split interface; the result will try to push this.
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {InventoryType} type
      * @param {number} slot
      * @param {number} amount
-     * @return {*}
+     * @return {void}
      */
     async split(player: alt.Player, type: InventoryType, slot: number, amount: number) {
         if (type === 'custom') {
@@ -163,9 +163,9 @@ const Internal = {
     /**
      * Attempt to combine two items by left-clicking both of them in an inventory.
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {DualSlotInfo} info
-     * @return {*}
+     * @return {void}
      */
     async combine(player: alt.Player, info: DualSlotInfo) {
         if (info.startType !== 'inventory' || info.endType !== 'inventory') {
@@ -214,9 +214,9 @@ const Internal = {
     /**
      * Swaps items between slots. Handles the 'dragging' action.
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {DualSlotInfo} info
-     * @return {*}
+     * @return {void}
      */
     async swap(player: alt.Player, info: DualSlotInfo) {
         if (!player || !player.valid) {
@@ -331,9 +331,9 @@ const Internal = {
     /**
      * Unequip an item from a toolbar. Usually provoked by right-clicking in a toolbar.
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {number} slot
-     * @return {*}
+     * @return {void}
      */
     async unequip(player: alt.Player, slot: number) {
         if (!player || !player.valid) {
@@ -378,11 +378,11 @@ const Internal = {
     /**
      * Creates a 'give' request that the target player must accept to recieve an item.
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {InventoryType} type
      * @param {number} slot
      * @param {number} idOfTarget
-     * @return {*}
+     * @return {void}
      */
     async give(player: alt.Player, type: InventoryType, slot: number, idOfTarget: number) {
         if (type !== 'inventory') {
@@ -531,7 +531,7 @@ const Internal = {
     /**
      * Handles the item pickup event when an item is registered for pickup.
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {string} _id
      */
     async pickupItem(player: alt.Player, _id: string) {
@@ -619,7 +619,7 @@ export const InventoryView = {
         /**
          * Force open an inventory.
          *
-         * @param {alt.Player} player
+         * @param {alt.Player} player An alt:V Player Entity
          */
         open(player: alt.Player) {
             player.emit(INVENTORY_EVENTS.TO_CLIENT.OPEN);
@@ -627,7 +627,7 @@ export const InventoryView = {
         /**
          * Force close the inventory if it is open.
          *
-         * @param {alt.Player} player
+         * @param {alt.Player} player An alt:V Player Entity
          */
         close(player: alt.Player) {
             player.emit(INVENTORY_EVENTS.TO_CLIENT.CLOSE);
@@ -639,8 +639,8 @@ export const InventoryView = {
          * The array of items will be returned through a callback.
          * Utilize the callback system to obtain the modified storage data.
          *
-         * @param {alt.Player} player
-         * @param {string} uid
+         * @param {alt.Player} player An alt:V Player Entity
+         * @param {string} uid A unique string
          * @param {Array<StoredItem>} items
          */
         async open(
@@ -672,7 +672,7 @@ export const InventoryView = {
         /**
          * Updates a storage session with new data.
          *
-         * @param {alt.Player} player
+         * @param {alt.Player} player An alt:V Player Entity
          * @param {Array<StoredItem>} items
          */
         resync(player: alt.Player) {
@@ -686,9 +686,9 @@ export const InventoryView = {
         /**
          * Returns true if a player is using the matching session uid.
          *
-         * @param {alt.Player} player
-         * @param {string} uid
-         * @return {*}
+         * @param {alt.Player} player An alt:V Player Entity
+         * @param {string} uid A unique string
+         * @return {void}
          */
         isUsingSession(player: alt.Player, uid: string) {
             return openStorageSessions[player.id] === uid;
@@ -696,8 +696,8 @@ export const InventoryView = {
         /**
          * Returns true if the session with a specific uid is in use.
          *
-         * @param {string} uid
-         * @return {*}
+         * @param {string} uid A unique string
+         * @return {void}
          */
         isSessionInUse(uid: string) {
             return Object.values(openStorageSessions).includes(uid);

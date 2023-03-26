@@ -38,7 +38,7 @@ export function clothingItemToIconName(item: Item<DefaultItemBehavior, ClothingI
  * @export
  * @param {number} sex
  * @param {Array<ClothingComponent>} components
- * @return {*}
+ * @return {void}
  */
 export function clothingComponentToIconName(sex: number, components: Array<ClothingComponent>) {
     const component = components[0];

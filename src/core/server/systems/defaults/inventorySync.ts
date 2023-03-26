@@ -20,7 +20,7 @@ const Internal = {
      * This synchronizes the inventory when the player selects their character.
      * Can be fetched on client-side with getLocalMeta
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      */
     sync(player: alt.Player, isCharacterSelect = true) {
         if (!enabled) {
@@ -60,7 +60,7 @@ const Internal = {
     /**
      * Automatically synchronizes the inventory for a player when data is changed.
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {Array<StoredItem>} newValue
      */
     syncInventory(player: alt.Player) {
@@ -73,7 +73,7 @@ const Internal = {
     /**
      * Automatically synchronizes the toolbar for a player when data is changed.
      *
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {Array<StoredItem>} newValue
      */
     syncToolbar(player: alt.Player) {

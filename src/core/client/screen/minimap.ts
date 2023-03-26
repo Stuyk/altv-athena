@@ -42,7 +42,7 @@ export function getHeight(asPercent = false): number {
  * Get the Top Left of the MiniMap
  * @static
  * @param {boolean} [asPercent=false] Convert to percentage?
- * @return {*}
+ * @return {void}
  * @memberof Minimap
  */
 export function getTopLeft(asPercent = false): alt.IVector2 {
@@ -64,7 +64,7 @@ export function getTopLeft(asPercent = false): alt.IVector2 {
  * Get the top right of the MiniMap
  * @static
  * @param {boolean} [asPercent=false]  Convert to percentage?
- * @return {*}
+ * @return {void}
  * @memberof Minimap
  */
 export function getTopRight(asPercent = false): alt.IVector2 {
@@ -84,7 +84,7 @@ export function getTopRight(asPercent = false): alt.IVector2 {
  * Get bottom left of the MiniMap
  * @static
  * @param {boolean} [asPercent=false] Convert to percentage?
- * @return {*}
+ * @return {void}
  * @memberof Minimap
  */
 export function getBottomLeft(asPercent = false): alt.IVector2 {
@@ -104,7 +104,7 @@ export function getBottomLeft(asPercent = false): alt.IVector2 {
  * Get Bottom Right of MiniMap
  * @static
  * @param {boolean} [asPercent=false] Conver to percentage?
- * @return {*}
+ * @return {void}
  * @memberof Minimap
  */
 export function getBottomRight(asPercent = false): alt.IVector2 {

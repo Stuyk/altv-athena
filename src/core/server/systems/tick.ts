@@ -12,7 +12,7 @@ alt.onClient(SYSTEM_EVENTS.PLAYER_TICK, handlePing);
  * Used to save the player every once in a while.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {Promise<void>}
  */
 export async function onTick(player: alt.Player): Promise<void> {
@@ -57,8 +57,8 @@ export async function onTick(player: alt.Player): Promise<void> {
  * This tick event is then used to process specific player events.
  * This varies from player revival, coordinate processing, etc.
  * Helps push the load onto the server, rather than the player.
- * @param {alt.Player} player
- * @return {*}
+ * @param {alt.Player} player An alt:V Player Entity
+ * @return {void}
  */
 function handlePing(player: alt.Player): void {
     if (Overrides.handlePing) {

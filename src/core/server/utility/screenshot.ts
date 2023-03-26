@@ -16,7 +16,7 @@ export class AthenaScreenshot {
      * If the data becomes corrupted or does not retrieve in time it will return null.
      *
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @return {(Promise<string | null>)}
      * @memberof AthenaScreenshot
      */
@@ -50,7 +50,7 @@ export class AthenaScreenshot {
     /**
      * Builds data from a screenshot event.
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {string} data
      * @param {number} index
      * @param {number} lengthOfData

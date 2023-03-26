@@ -34,7 +34,7 @@ export function setIdentificationStrategy(_strategy: IdentifierStrategy) {
 /**
  * Automatically sets the player identification by strategy to the synced meta.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function setPlayerIdentifier(player: alt.Player) {
     if (Overrides.setPlayerIdentifier) {
@@ -102,7 +102,7 @@ export function getPlayer(id: number | string): alt.Player {
 /**
  * Returns the current numerical identifier based on current strategy.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {number}
  */
 export function getIdByStrategy(player: alt.Player): number {

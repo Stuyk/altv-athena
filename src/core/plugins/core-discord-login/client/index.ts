@@ -11,7 +11,7 @@ class DiscordLoginView {
      *
      * @static
      * @param {alt.Player[]} _players
-     * @return {*}
+     * @return {void}
      * @memberof DiscordLoginView
      */
     static open(_uri: string) {

@@ -87,8 +87,8 @@ const ClientTextLabelController = {
     /**
      * Remove a marker from being drawn.
      * @static
-     * @param {string} uid
-     * @return {*}
+     * @param {string} uid A unique string
+     * @return {void}
      * @memberof MarkerController
      */
     remove(uid: string) {

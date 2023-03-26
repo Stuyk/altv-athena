@@ -4,7 +4,7 @@
  * This is required to prevent data from being modified in other items.
  * @export
  * @param {object} data
- * @return {*}
+ * @return {void}
  */
 export function deepCloneObject<T>(data: object): T {
     const result = JSON.parse(JSON.stringify(data));

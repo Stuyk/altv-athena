@@ -386,7 +386,7 @@ export function toStoredItem<CustomData = {}>(item: Item<DefaultItemBehavior, Cu
  * @template CustomData
  * @param {BaseItem<DefaultItemBehavior, CustomData>} baseItem
  * @param {number} quantity
- * @return {*}
+ * @return {void}
  */
 export function fromBaseToStored<CustomData = {}>(
     baseItem: BaseItem<DefaultItemBehavior, CustomData>,

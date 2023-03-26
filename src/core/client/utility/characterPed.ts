@@ -22,7 +22,7 @@ export const PedCharacter = {
     /**
      * Create a Temporary Character Pedestrian
      * @param {boolean} isMale
-     * @param {alt.IVector3} pos
+     * @param {alt.IVector3} pos A position in the world.
      * @param {(alt.IVector3 | number) = {x: 0, y: 0, z: 0}}
      * @return {Promise<void>}
      * @memberof Ped

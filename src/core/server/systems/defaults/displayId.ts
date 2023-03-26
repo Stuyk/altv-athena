@@ -64,7 +64,7 @@ export function disable() {
  * @export
  * @param {number} x 0 - 1.0
  * @param {number} y 0 - 1.0
- * @return {*}
+ * @return {void}
  */
 export function setLocation(x: number, y: number) {
     if (x > 1 || x < 0) {

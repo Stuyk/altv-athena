@@ -31,7 +31,7 @@ export function setCreatorCallback(callback: (player: alt.Player, ...args: any[]
 /**
  * Invokes the custom creator to be opened.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {...any[]} args
  * @memberof CharacterSystem
  */
@@ -51,7 +51,7 @@ export function invokeCreator(player: alt.Player, ...args: any[]) {
 /**
  * Create a new character for a specific player.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Appearance} appearance
  * @param {CharacterInfo} info
  * @param {string} name
@@ -98,7 +98,7 @@ export async function create(
  *
  * Always call this function last in login flow modifications.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Character} character
  * @memberof CharacterSystem
  */

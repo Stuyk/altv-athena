@@ -216,7 +216,7 @@ export function get(scriptId: number): IPed | undefined {
  *
  * @export
  * @param {IPed} pedData
- * @return {*}
+ * @return {void}
  */
 export function append(pedData: IPed) {
     if (!pedData.uid) {
@@ -242,8 +242,8 @@ export function append(pedData: IPed) {
  * Remove a client ped by uid
  *
  * @export
- * @param {string} uid
- * @return {*}
+ * @param {string} uid A unique string
+ * @return {void}
  */
 export function remove(uid: string) {
     isRemoving = true;

@@ -95,7 +95,7 @@ export async function one(id: number): Promise<boolean> {
  *
  * @export
  * @param {Array<number>} ids
- * @return {*}
+ * @return {void}
  */
 export async function list(ids: Array<number>): Promise<void> {
     if (Overrides.list) {

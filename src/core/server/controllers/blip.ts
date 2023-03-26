@@ -67,7 +67,7 @@ export function append(blip: Blip): string {
  * Athena.controllers.blip.remove(uid);
  * ```
  *
- * @param {string} uid
+ * @param {string} uid A unique string
  * @return {boolean}
  */
 export function remove(uid: string): boolean {
@@ -104,8 +104,8 @@ export function remove(uid: string): boolean {
  * ```
  *
  *
- * @param {alt.Player} player
- * @param {string} uid
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {string} uid A unique string
  */
 export function removeFromPlayer(player: alt.Player, uid: string) {
     if (Overrides.removeFromPlayer) {
@@ -140,7 +140,7 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  * });
  * ```
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Blip} blipData
  */
 export function addToPlayer(player: alt.Player, blipData: Blip) {
@@ -165,7 +165,7 @@ export function addToPlayer(player: alt.Player, blipData: Blip) {
  * ```
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function populateGlobalBlips(player: alt.Player) {
     if (Overrides.populateGlobalBlips) {

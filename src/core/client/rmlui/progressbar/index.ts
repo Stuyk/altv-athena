@@ -221,8 +221,8 @@ const ProgressBarConst = {
     /**
      * Remove a progress bar early.
      *
-     * @param {string} uid
-     * @return {*}
+     * @param {string} uid A unique string
+     * @return {void}
      */
     remove(uid: string) {
         const index = InternalFunctions.getIndexOfElement(uid);

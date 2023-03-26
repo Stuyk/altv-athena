@@ -27,7 +27,7 @@ const Internal = {
 /**
  * Invoke an interaction
  *
- * @return {*}
+ * @return {void}
  */
 export function invoke() {
     if (typeof interactionTemporary === 'string') {

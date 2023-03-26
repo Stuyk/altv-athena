@@ -12,7 +12,7 @@ class InternalFunctions {
      * Verifies if a name is available during the Character Creation process.
      *
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {string} name
      * @memberof CharacterCreatorView
      */
@@ -26,7 +26,7 @@ class InternalFunctions {
      *
      * @static
      * @param {(number | null | undefined)} characterCount
-     * @return {*}
+     * @return {void}
      * @memberof InternalFunctions
      */
     static isInvalid(characterCount: number | null | undefined) {

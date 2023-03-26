@@ -37,7 +37,7 @@ const ClientAttachableSystem = {
      * @param {string} key
      * @param {unknown} value
      * @param {unknown} old
-     * @return {*}
+     * @return {void}
      * @memberof ClientAttachableSystem
      */
     attachablesChanged(entity: alt.Entity, key: string, value: Array<IAttachable>, old: unknown) {
@@ -86,7 +86,7 @@ const ClientAttachableSystem = {
     /**
      * Removes old attachables from a player.
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @memberof ClientAttachableSystem
      */
     remove(player: alt.Player) {
@@ -112,7 +112,7 @@ const ClientAttachableSystem = {
     /**
      * Updates current attachables for a player.
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {Array<IAttachable>} attachables
      * @memberof ClientAttachableSystem
      */

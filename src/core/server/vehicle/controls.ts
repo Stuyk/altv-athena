@@ -7,7 +7,7 @@ import * as Athena from '@AthenaServer/api';
  * Toggles a vehicle door lock.
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {boolean} The new state of the lock. true = locked
  */
 export async function toggleLock(vehicle: alt.Vehicle): Promise<boolean> {
@@ -29,7 +29,7 @@ export async function toggleLock(vehicle: alt.Vehicle): Promise<boolean> {
  * Toggles a vehicle engine.
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {boolean} The new state of the engine. true = on
  */
 export async function toggleEngine(vehicle: alt.Vehicle): Promise<boolean> {
@@ -56,7 +56,7 @@ export async function toggleEngine(vehicle: alt.Vehicle): Promise<boolean> {
  * Toggles a vehicle door.
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {number} door
  * @return {boolean} The new state of the door. true = open
  */
@@ -78,8 +78,8 @@ export async function toggleDoor(vehicle: alt.Vehicle, door: 0 | 1 | 2 | 3 | 4 |
  * Returns true if the vehicle is currently locked.
  *
  * @export
- * @param {alt.Vehicle} vehicle
- * @return {*}
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
+ * @return {void}
  */
 export function isLocked(vehicle: alt.Vehicle): boolean {
     if (Overrides.isLocked) {
@@ -93,8 +93,8 @@ export function isLocked(vehicle: alt.Vehicle): boolean {
  * Update the given vehicle in the database.
  *
  * @export
- * @param {alt.Vehicle} vehicle
- * @return {*}
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
+ * @return {void}
  */
 export async function update(vehicle: alt.Vehicle) {
     if (Overrides.update) {
@@ -143,8 +143,8 @@ export async function update(vehicle: alt.Vehicle) {
 /**
  * Update the vehicle's last used value.
  *
- * @param {alt.Vehicle} vehicle
- * @return {*}
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
+ * @return {void}
  */
 export async function updateLastUsed(vehicle: alt.Vehicle): Promise<void> {
     const data = Athena.document.vehicle.get(vehicle);

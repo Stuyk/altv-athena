@@ -69,8 +69,8 @@ const ClientMarkerController = {
     /**
      * Remove a local marker from being drawn.
      * @static
-     * @param {string} uid
-     * @return {*}
+     * @param {string} uid A unique string
+     * @return {void}
      * @memberof ClientMarkerController
      */
     remove(uid: string) {

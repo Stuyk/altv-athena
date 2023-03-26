@@ -47,7 +47,7 @@ export function append(itemDrop: ItemDrop): string {
 /**
  * Removes an item drop in-world.
  *
- * @param {string} uid
+ * @param {string} uid A unique string
  * @return {boolean}
  */
 export function remove(id: string): boolean {

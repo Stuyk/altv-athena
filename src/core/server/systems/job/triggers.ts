@@ -9,7 +9,7 @@ import { Objective } from '@AthenaShared/interfaces/job';
  * Try calling an event. This should almost never be invoked manually.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Objective} objective
  */
 export function tryEventCall(player: alt.Player, objective: Objective) {
@@ -34,9 +34,9 @@ export function tryEventCall(player: alt.Player, objective: Objective) {
  * This should almost never be invoked manually.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Objective} objective
- * @return {*}
+ * @return {void}
  */
 export function tryAnimation(player: alt.Player, objective: Objective) {
     if (Overrides.tryAnimation) {
@@ -75,9 +75,9 @@ export function tryAnimation(player: alt.Player, objective: Objective) {
  * This should almost never be invoked manually.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Objective} objective
- * @return {*}
+ * @return {void}
  */
 export function tryAttach(player: alt.Player, objective: Objective) {
     if (Overrides.tryAttach) {

@@ -31,7 +31,7 @@ function init(): void {
 /**
  * Sends an event to the server when the local player's waypoint is updated.
  * @static
- * @return {*}
+ * @return {void}
  * @memberof AthenaEvents
  */
 export async function updateWaypoint(): Promise<void> {

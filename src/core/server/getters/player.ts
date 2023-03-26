@@ -115,7 +115,7 @@ export function byID(id: number): alt.Player | undefined {
  * It will keep subtract distance until it finds a player near the player that is in the ColShape.
  * Works best on flat land or very close distances.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} [startDistance=2]
  * @return {(alt.Player | undefined)}
  */
@@ -167,8 +167,8 @@ export async function inFrontOf(player: alt.Player, startDistance = 6): Promise<
 /**
  * Checks if a player is within 3 distance of a position.
  *
- * @param {alt.Player} player
- * @param {alt.IVector3} pos
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {alt.IVector3} pos A position in the world.
  */
 export function isNearPosition(player: alt.Player, pos: alt.IVector3, dist = 3): boolean {
     return Athena.utility.vector.distance(player.pos, pos) <= dist;
@@ -177,7 +177,7 @@ export function isNearPosition(player: alt.Player, pos: alt.IVector3, dist = 3):
  * Get the current waypoint marked on a player's map.
  * Will return undefined it is not currently set.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {(alt.IVector3 | undefined)}
  */
 export function waypoint(player: alt.Player): alt.IVector3 | undefined {
@@ -187,7 +187,7 @@ export function waypoint(player: alt.Player): alt.IVector3 | undefined {
 /**
  * The player closest to a player.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {(alt.Player | undefined)}
  */
 export function closestToPlayer(player: alt.Player): alt.Player | undefined {
@@ -197,7 +197,7 @@ export function closestToPlayer(player: alt.Player): alt.Player | undefined {
 /**
  * The player closest to a vehicle.
  *
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {(alt.Player | undefined)}
  */
 export function closestToVehicle(vehicle: alt.Vehicle): alt.Player | undefined {
@@ -209,7 +209,7 @@ export function closestToVehicle(vehicle: alt.Vehicle): alt.Player | undefined {
  * Counts any owned vehicles from other players that have supplied an injection for ownership.
  * Ignores vehicles with keyless for start.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {(alt.Vehicle | undefined)}
  */
 export function closestOwnedVehicle(player: alt.Player): alt.Vehicle | undefined {
@@ -249,7 +249,7 @@ export function closestOwnedVehicle(player: alt.Player): alt.Vehicle | undefined
  * Get all owned vehicles from the database for a given character.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {Promise<Array<OwnedVehicle>>}
  */
 export async function ownedVehicleDocuments(player: alt.Player): Promise<Array<OwnedVehicle>> {
@@ -265,7 +265,7 @@ export async function ownedVehicleDocuments(player: alt.Player): Promise<Array<O
  * Returns all characters that belong to a player.
  * Requires account info, player, or account id string.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {Promise<Array<CharacterData>>}
  */
 export async function characters(playerOrAccount: alt.Player | Account | string): Promise<Array<Character>> {
@@ -297,7 +297,7 @@ export async function characters(playerOrAccount: alt.Player | Account | string)
  * Determine if a player is currently dead / marked as dead.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {boolean}
  */
 export function isDead(player: alt.Player): boolean {
@@ -313,7 +313,7 @@ export function isDead(player: alt.Player): boolean {
  * Determine if a player is valid, and spawned as a character.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {boolean}
  */
 export function isValid(player: alt.Player): boolean {

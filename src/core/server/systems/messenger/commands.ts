@@ -11,10 +11,10 @@ const commands: { [command_name: string]: Omit<MessageCommand<alt.Player>, 'name
 /**
  * Used to execute a command by name.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} commandName
  * @param {Array<any>} args
- * @return {*}
+ * @return {void}
  */
 export function execute(player: alt.Player, commandName: string, args: Array<any>) {
     if (Overrides.execute) {
@@ -81,7 +81,7 @@ export function register(
 /**
  * Get all commands that are associated with a player's current permission level.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function populateCommands(player: alt.Player) {
     if (Overrides.populateCommands) {
@@ -121,7 +121,7 @@ export function populateCommands(player: alt.Player) {
  * Excludes callbacks.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {Array<DetailedCommand>}
  */
 export function getCommands(player: alt.Player): Array<DetailedCommand> {

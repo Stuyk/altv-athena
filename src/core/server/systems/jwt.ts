@@ -44,7 +44,7 @@ async function getSecret(): Promise<string> {
 /**
  * Writes the token to memory for usage.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(string | null)} token
  */
 function handleFetchRequest(player: alt.Player, token: string | null) {

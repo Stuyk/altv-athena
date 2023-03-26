@@ -31,7 +31,7 @@ const InternalController = {
     /**
      * Updates objects through the streamer service.
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {Array<IObject>} objects
      * @memberof ObjectController
      */
@@ -65,7 +65,7 @@ const InternalController = {
  * ```
  *
  * @param {IObject} objectData
- * @return {string} uid for object
+ * @return {string} uid A unique string for object
  */
 export function append(objectData: IObject): string {
     if (Overrides.append) {
@@ -94,7 +94,7 @@ export function append(objectData: IObject): string {
  * ```
  *
  * @export
- * @param {string} uid
+ * @param {string} uid A unique string
  * @return {boolean}
  */
 export function remove(uid: string): boolean {
@@ -129,8 +129,8 @@ export function remove(uid: string): boolean {
  * Athena.controllers.object.removeFromPlayer(somePlayer, someUid);
  * ```
  *
- * @param {alt.Player} player
- * @param {string} uid
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {string} uid A unique string
  */
 export function removeFromPlayer(player: alt.Player, uid: string) {
     if (Overrides.removeFromPlayer) {
@@ -157,9 +157,9 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  * });
  * ```
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {IObject} objectData
- * @returns {string} uid for object
+ * @returns {string} uid A unique string for object
  */
 export function addToPlayer(player: alt.Player, objectData: IObject): string {
     if (Overrides.addToPlayer) {
@@ -193,8 +193,8 @@ export function addToPlayer(player: alt.Player, objectData: IObject): string {
  * Athena.controllers.object.updatePosition(someUid, { x: 0, y: 0, z: 0}, somePlayer);
  * ```
  *
- * @param {string} uid
- * @param {alt.IVector3} pos
+ * @param {string} uid A unique string
+ * @param {alt.IVector3} pos A position in the world.
  * @param {alt.Player} [player=undefined]
  */
 export function updatePosition(uid: string, pos: alt.IVector3, player: alt.Player = undefined): boolean {

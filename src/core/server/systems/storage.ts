@@ -103,7 +103,7 @@ export function setAsOpen(id: string): boolean {
  *
  * @export
  * @param {string} id
- * @return {*}
+ * @return {void}
  */
 export function isOpen(id: string): boolean {
     return openIdentifiers.findIndex((x) => x === id) >= 0;
@@ -147,7 +147,7 @@ export function removeAsOpen(id: string): boolean {
  * Returns false if a player binding is already present.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} id
  * @returns {boolean}
  */

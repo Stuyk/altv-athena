@@ -29,7 +29,7 @@ const Internal = {
 /**
  * Fetch account for a player based on key / value pair.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {(Promise<Account | undefined>)}
  * @memberof AccountSystemRef
  */
@@ -58,7 +58,7 @@ export async function getAccount(key: string, value: any): Promise<Account | und
 /**
  * Create an account with default data.
 
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {{[key: string]: any }} dataToAppend - Any additional data / identifiers to add to an account.
  * @return {Promise<Account>}
  * @memberof AccountSystemRef

@@ -67,7 +67,7 @@ const Internal = {
 /**
  * Updates the player weather to match current weather system.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function updatePlayer(player: alt.Player) {
     if (!enabled) {

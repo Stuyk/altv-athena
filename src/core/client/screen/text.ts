@@ -44,10 +44,10 @@ export function drawText2D(
  * Draw a box at a 3D coordinate
  *
  * @export
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @param {alt.IVector2} size
  * @param {alt.RGBA} color
- * @return {*}
+ * @return {void}
  */
 export function drawRectangle(pos: alt.IVector3, size: alt.IVector2, color: alt.RGBA) {
     const [isOnScreen, x, y] = native.getScreenCoordFromWorldCoord(pos.x, pos.y, pos.z, 0, 0);
@@ -141,7 +141,7 @@ export function addTemporaryText(identifier, msg, x, y, scale, r, g, b, a, ms) {
 /**
  * Stop drawing temporary text based on the name.
  * @param {*} identifier
- * @return {*}
+ * @return {void}
  */
 function removeText(identifier: string): void {
     const index = temporaryText.findIndex((data) => data.identifier === identifier);

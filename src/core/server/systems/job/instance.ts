@@ -26,7 +26,7 @@ export function get(player: number | alt.Player): Job | undefined {
  * Set the current job instance for a player.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Job} newJob
  */
 export function set(player: alt.Player, newJob: Job) {
@@ -47,7 +47,7 @@ export function set(player: alt.Player, newJob: Job) {
  *
  * @export
  * @param {(number | alt.Player)} player
- * @return {*}
+ * @return {void}
  */
 export function clear(player: number | alt.Player) {
     if (Overrides.clear) {

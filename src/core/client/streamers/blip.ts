@@ -62,7 +62,7 @@ export function append(blipData: Blip): alt.PointBlip {
 
 /**
  * Remove a blip from the list of added blips.
- * @param {string} uid - The unique identifier of the blip.
+ * @param {string} uid A unique string - The unique identifier of the blip.
  * @returns The blip object.
  */
 export function remove(uid: string) {

@@ -11,7 +11,7 @@ const files = glob.sync(join(docsPath, '/**/*.md'));
  *
  * @param {string} somePath
  * @param {Array<string>} args
- * @return {*}
+ * @return {void}
  */
 function join(somePath, ...args) {
     return path.join(somePath, ...args).replace(/\\/gm, '/');

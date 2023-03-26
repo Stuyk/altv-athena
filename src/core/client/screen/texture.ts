@@ -12,7 +12,7 @@ const textureData = {};
  * @param {alt.IVector2} position
  * @param {number} [scale=1]
  * @param {number} [opacity=255]
- * @return {*}
+ * @return {void}
  */
 export function drawTexture2D(
     dictionary: string,
@@ -69,7 +69,7 @@ export function drawTexture2D(
  * @param {string} name
  * @param {alt.Vector3} position
  * @param {number} [scale=1]
- * @return {*}
+ * @return {void}
  */
 export function drawTexture(dictionary: string, name: string, position: alt.Vector3, scale: number = 1) {
     if (!native.hasStreamedTextureDictLoaded(dictionary)) {

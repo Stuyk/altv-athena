@@ -158,7 +158,7 @@ const InternalFunctions = {
 /**
  * Create an in-world 3D menu with maximum options.
  *
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @param {Array<OptionFor3DMenu>} options
  * @param {number} maxDistance
  * @return {void}

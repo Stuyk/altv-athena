@@ -60,7 +60,7 @@ function getVehiclePart(part: string): number {
  * Returns vehicle damage for individual parts.
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {(VehicleDamage | undefined)}
  */
 export function get(vehicle: alt.Vehicle): VehicleDamage | undefined {
@@ -140,7 +140,7 @@ export function get(vehicle: alt.Vehicle): VehicleDamage | undefined {
  * Apply vehicle damage to a vehicle.
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {VehicleDamage} damage
  * @return {Promise<void>}
  */
@@ -181,8 +181,8 @@ export function apply(vehicle: alt.Vehicle, damage: VehicleDamage): void {
  * Used to repair all vehicle damage, and save changes to the Database.
  *
  * @export
- * @param {alt.Vehicle} vehicle
- * @return {*}
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
+ * @return {void}
  */
 export async function repair(vehicle: alt.Vehicle) {
     const damage = get(vehicle);

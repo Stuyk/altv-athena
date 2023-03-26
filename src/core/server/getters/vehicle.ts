@@ -92,7 +92,7 @@ export function isValidModel(model: number): boolean {
  * It will keep subtract distance until it finds a vehicle near the player that is in the ColShape.
  * Works best on flat land or very close distances.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} [startDistance=2]
  * @return {(alt.Vehicle | undefined)}
  */
@@ -144,8 +144,8 @@ export async function inFrontOf(entity: alt.Entity, startDistance = 6): Promise<
 /**
  * Checks if a vehicle is within 3 distance of a position.
  *
- * @param {alt.Vehicle} vehicle
- * @param {alt.IVector3} pos
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
+ * @param {alt.IVector3} pos A position in the world.
  */
 export function isNearPosition(vehicle: alt.Vehicle, pos: alt.IVector3, dist = 3): boolean {
     return Athena.utility.vector.distance(vehicle.pos, pos) <= dist;
@@ -154,7 +154,7 @@ export function isNearPosition(vehicle: alt.Vehicle, pos: alt.IVector3, dist = 3
  * Returns all passengers and the driver.
  * No specific order.
  *
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {alt.Player[]}
  */
 export function passengers(vehicle: alt.Vehicle): alt.Player[] {
@@ -165,7 +165,7 @@ export function passengers(vehicle: alt.Vehicle): alt.Player[] {
  * Just wraps the `vehicle.driver` lookup.
  * Returns a player if they are driving this vehicle.
  *
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {(alt.Player | undefined)}
  */
 export function driver(vehicle: alt.Vehicle): alt.Player | undefined {
@@ -175,7 +175,7 @@ export function driver(vehicle: alt.Vehicle): alt.Player | undefined {
 /**
  * The player closest to a player.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {(alt.Player | undefined)}
  */
 export function closestToPlayer(player: alt.Player): alt.Player | undefined {
@@ -185,7 +185,7 @@ export function closestToPlayer(player: alt.Player): alt.Player | undefined {
 /**
  * The vehicle closest to a player.
  *
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {(alt.Player | undefined)}
  */
 export function closestToVehicle(player: alt.Player): alt.Vehicle | undefined {

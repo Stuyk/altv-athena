@@ -56,9 +56,9 @@ export interface AddOptions {
  * The position specified is where the vehicle can be found.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(string | number)} model
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @return {Promise<boolean>}
  */
 export async function toPlayer(
@@ -127,9 +127,9 @@ export async function toPlayer(
  *
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(string | number)} model
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @return {Promise<boolean>}
  */
 export async function toDatabase(

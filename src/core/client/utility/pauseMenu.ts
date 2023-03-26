@@ -20,7 +20,7 @@ const Internal = {
  * Disable the default GTA:V pause Menu
  *
  * @export
- * @return {*}
+ * @return {void}
  */
 export function disable() {
     if (typeof interval !== 'undefined') {
@@ -34,7 +34,7 @@ export function disable() {
  * Enable the default GTA:V pause menu
  *
  * @export
- * @return {*}
+ * @return {void}
  */
 export function enable() {
     if (typeof interval === 'undefined') {

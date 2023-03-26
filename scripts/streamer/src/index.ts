@@ -114,7 +114,7 @@ class StreamerServer {
      * @static
      * @param {number} id
      * @param {{ key: string; range: number }} data
-     * @return {*}
+     * @return {void}
      * @memberof StreamerServer
      */
     static updateRange(id: number, data: { key: string; range: number }) {

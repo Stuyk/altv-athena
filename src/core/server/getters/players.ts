@@ -40,7 +40,7 @@ export function onlineWithWeapons(): alt.Player[] {
  * Creates an array of players who are closest to a position.
  * Array is automatically sorted into ascending order.
  *
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @param {number} range
  * @return {Array<{ player: alt.Player; dist: number }>}
  */
@@ -73,7 +73,7 @@ export function inRangeWithDistance(pos: alt.IVector3, range: number): Array<{ p
 /**
  * Gets all players around a specific position.
  *
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @param {number} range
  * @return {alt.Player[]}
  */
@@ -184,7 +184,7 @@ export function drivingSpecificModel(model: string | number): alt.Player[] {
  * Returns all passengers and the driver.
  * No specific order.
  *
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {alt.Player[]}
  */
 export function inVehicle(vehicle: alt.Vehicle): alt.Player[] {

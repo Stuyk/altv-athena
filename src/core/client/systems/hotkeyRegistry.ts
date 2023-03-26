@@ -319,7 +319,7 @@ export function hotkeys(): Array<KeyInfoDefault> {
  * Returns undefined if key is not bound, or found.
  *
  * @param {(string | number)} keyOrIdentifier
- * @return {*}
+ * @return {void}
  */
 export function hotkey(keyOrIdentifier: string | number): KeyInfo | undefined {
     return Internal.getKeyInfo(keyOrIdentifier);

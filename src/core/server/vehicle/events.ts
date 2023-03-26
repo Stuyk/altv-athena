@@ -20,7 +20,7 @@ const vehicleEvents: Array<{ eventName: string; callback: Function }> = [];
  * Usually called by internal functions. Can be used to manually trigger an Athena Event though.
 
  * @param {AthenaVehicleEvents} eventName
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  */
 export function trigger<CustomEvents = AthenaVehicleEvents>(
     eventName: CustomEvents,

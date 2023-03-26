@@ -28,7 +28,7 @@ const InternalFunctions = {
 
     /**
      * Remove all interactions with the given uid.
-     * @param {string} uid - The unique identifier for the interaction.
+     * @param {string} uid A unique string - The unique identifier for the interaction.
      */
     remove(uid: string): void {
         for (let i = interactions.length - 1; i >= 0; i--) {
@@ -195,7 +195,7 @@ const InternalFunctions = {
 
     /**
      * `trigger` is called when a player interacts with an Interaction Point.
-     * @param {alt.Player} player - The player who triggered the interaction.
+     * @param {alt.Player} player An alt:V Player Entity
      */
     trigger(player: alt.Player): void {
         if (InternalOverrides.trigger) {
@@ -340,7 +340,7 @@ export function append(interaction: Interaction): string {
  * Athena.controllers.interaction.remove('the-uid-you-specified');
  * ```
  *
- * @param {string} uid - The unique identifier of the interaction to remove.
+ * @param {string} uid A unique string - The unique identifier of the interaction to remove.
  * @returns None
  */
 export function remove(uid: string): void {
@@ -361,7 +361,7 @@ export function remove(uid: string): void {
  * const interaction = Athena.controllers.interaction.get('the-uid-you-specified');
  * ```
  *
- * @param {string} uid - The unique identifier of the interaction.
+ * @param {string} uid A unique string - The unique identifier of the interaction.
  * @returns The InteractionShape object.
  */
 export function get(uid: string): InteractionShape | undefined {

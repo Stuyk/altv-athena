@@ -8,7 +8,7 @@ import ConfigUtil from '../utility/config';
 /**
  * Called when a player connects to the server.
  * This is a client-side invoke to ensure they're fully loaded before starting.
- * @param  {alt.Player} player
+ * @param  {alt.Player} player An alt:V Player Entity
  */
 async function handlePlayerConnect(player: alt.Player): Promise<void> {
     const config = ConfigUtil.get();

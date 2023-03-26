@@ -9,7 +9,7 @@ const Commands: ConsoleCommand = {};
  *
  * @param {string} cmdName
  * @param {...string[]} args
- * @return {*}
+ * @return {void}
  */
 function handleConsoleMessage(cmdName: string, ...args: string[]): void {
     const cmdNameclean = cmdName.replace(/^\s+|\s+$/g, '');
@@ -55,7 +55,7 @@ export class ConsoleCommander {
      * Return a list of commands...
      *
      * @static
-     * @return {*}
+     * @return {void}
      * @memberof ConsoleCommander
      */
     static getCommands() {

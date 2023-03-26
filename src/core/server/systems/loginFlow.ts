@@ -91,7 +91,7 @@ export function getWeightedFlow(): Array<FlowInfo> {
 /**
  * Return the flow that a player is currently utilizing.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {{ index: number; flow: Array<FlowInfo> }}
  */
 export function getFlow(player: alt.Player): { index: number; flow: Array<FlowInfo> } {
@@ -106,7 +106,7 @@ export function getFlow(player: alt.Player): { index: number; flow: Array<FlowIn
  * Registers a player to start a login flow.
  * Invokes the first callable function in the weighted flow.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function register(player: alt.Player) {
     if (Overrides.register) {
@@ -120,7 +120,7 @@ export function register(player: alt.Player) {
 /**
  * Unregister player flow information.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function unregister(player: alt.Player) {
     if (Overrides.unregister) {
@@ -135,7 +135,7 @@ export function unregister(player: alt.Player) {
  * If the array index exceeds the total amount of available registered flows.
  * It will spawn the player.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function next(player: alt.Player) {
     if (Overrides.next) {

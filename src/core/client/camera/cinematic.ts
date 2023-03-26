@@ -104,7 +104,7 @@ const InternalFunctions = {
     /**
      * Check if the camera is currently moving between nodes.
      *
-     * @return {*}
+     * @return {void}
      * @memberof InternalFunctions
      */
     async isCameraUpdating() {
@@ -123,7 +123,7 @@ const InternalFunctions = {
 
     /**
      * Create a camera at the given position
-     * @param {alt.IVector3} pos - The position of the camera.
+     * @param {iCameraNode} node
      */
     async next(node: iCameraNode): Promise<void> {
         if (!node) {

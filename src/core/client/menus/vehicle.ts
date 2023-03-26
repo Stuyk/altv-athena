@@ -26,8 +26,8 @@ export function addInjection(callback: VehicleMenuInjection) {
  * Open an in-vehicle menu option and add injections relevant to in-vehicle.
  *
  * @static
- * @param {alt.Vehicle} vehicle
- * @return {*}
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
+ * @return {void}
  * @memberof VehicleWheelMenu
  */
 export function openInVehicleMenu(vehicle: alt.Vehicle) {

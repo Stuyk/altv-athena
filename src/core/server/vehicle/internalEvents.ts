@@ -4,8 +4,8 @@ import * as Athena from '@AthenaServer/api';
 /**
  * Called when a player has sat down in a seat in a vehicle.
  *
- * @param {alt.Player} player
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {number} seat
  */
 function enter(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
@@ -17,8 +17,8 @@ function enter(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
 /**
  * Called when a player has opened the door and is sliding into a seat.
  *
- * @param {alt.Player} player
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {number} seat
  */
 function entering(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
@@ -28,10 +28,10 @@ function entering(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
 /**
  * Called when a player has left the vehicle.
  *
- * @param {alt.Player} player
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {number} seat
- * @return {*}
+ * @return {void}
  */
 function leave(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
     if (seat === Athena.vehicle.shared.SEAT.DRIVER) {
@@ -63,7 +63,7 @@ function leave(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
 /**
  * Called when a vehicle is destroyed by physial means.
  *
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  */
 function destroyed(vehicle: alt.Vehicle) {
     if (!Athena.vehicle.tempVehicles.has(vehicle)) {

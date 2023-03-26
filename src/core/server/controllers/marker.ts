@@ -28,7 +28,7 @@ const InternalController = {
 
     /**
      * Updates marker labels through the streamer service.
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {Array<Marker>} markers
      * @memberof ServerMarkerController
      */
@@ -62,7 +62,7 @@ const InternalController = {
  * ```
  *
  * @param {Marker} marker
- * @returns {string} uid for marker
+ * @returns {string} uid A unique string for marker
  */
 export function append(marker: Marker): string {
     if (Overrides.append) {
@@ -88,7 +88,7 @@ export function append(marker: Marker): string {
  * Athena.controllers.marker.remove('the-uid-you-specified');
  * ```
  *
- * @param {string} uid
+ * @param {string} uid A unique string
  * @return {boolean}
  */
 export function remove(uid: string): boolean {
@@ -116,8 +116,8 @@ export function remove(uid: string): boolean {
  * Athena.controllers.marker.removeFromPlayer(somePlayer, someUid);
  * ```
  *
- * @param {alt.Player} player
- * @param {string} uid
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {string} uid A unique string
  */
 export function removeFromPlayer(player: alt.Player, uid: string) {
     if (Overrides.removeFromPlayer) {
@@ -143,9 +143,9 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  * });
  * ```
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Marker} marker
- * @returns {string} uid for marker
+ * @returns {string} uid A unique string for marker
  */
 export function addToPlayer(player: alt.Player, marker: Marker): string {
     if (Overrides.addToPlayer) {

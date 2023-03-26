@@ -81,7 +81,7 @@ export function create(progressBar: ProgressBar) {
 
 /**
  * `removeBar` removes a bar from the `bars` array.
- * @param {string} uid - The unique identifier of the bar.
+ * @param {string} uid A unique string - The unique identifier of the bar.
  * @returns The function that is being returned is the function that is being called.
  */
 export function remove(uid: string) {

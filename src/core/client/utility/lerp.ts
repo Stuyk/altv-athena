@@ -13,7 +13,7 @@ const LerpObject = {
      * @param {number} id
      * @param {alt.IVector3} to
      * @param {number} [speed=0.1]
-     * @return {*}
+     * @return {void}
      * @memberof LerpObject
      */
     async lerp(id: number, to: alt.IVector3, speed = 0.1) {

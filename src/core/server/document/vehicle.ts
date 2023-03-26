@@ -27,7 +27,7 @@ export function unbind(id: number) {
 /**
  * Used to bind a vehicle document to a vehicle entity
  *
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {OwnedVehicle} document
  */
 export function bind(vehicle: alt.Vehicle, document: OwnedVehicle) {
@@ -46,7 +46,7 @@ export function bind(vehicle: alt.Vehicle, document: OwnedVehicle) {
  * Get a vehicle document attached to a vehicle
  *
  * @template T
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {(T | undefined)}
  */
 export function get<T = OwnedVehicle>(vehicle: alt.Vehicle): T | undefined {
@@ -62,7 +62,7 @@ export function get<T = OwnedVehicle>(vehicle: alt.Vehicle): T | undefined {
  *
  * @template T
  * @template ReturnType
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {(keyof KnownKeys<OwnedVehicle & T>)} fieldName
  * @return {(ReturnType | undefined)}
  */
@@ -86,11 +86,11 @@ export function getField<T = {}, ReturnType = any>(
  *
  * @template T
  * @template Keys
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {Keys} fieldName
  * @param {*} value
  * @param {boolean} [skipCallbacks=false]
- * @return {*}
+ * @return {void}
  */
 export async function set<T = {}, Keys = keyof KnownKeys<OwnedVehicle & T>>(
     vehicle: alt.Vehicle,
@@ -144,7 +144,7 @@ export async function set<T = {}, Keys = keyof KnownKeys<OwnedVehicle & T>>(
  *
  * @template T
  * @template Keys
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {Keys} fields
  */
 export async function setBulk<T = {}, Keys = Partial<OwnedVehicle & T>>(vehicle: alt.Vehicle, fields: Keys) {

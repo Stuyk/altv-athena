@@ -37,7 +37,7 @@ const playerEvents: Array<{ eventName: string; callback: ((player: alt.Player, .
  * Usually called by internal functions. Can be used to manually trigger an Athena Event though.
  *
  * @param {AthenaPlayerEvents} eventName
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @memberof PlayerEvents
  */
 export function trigger<CustomEvents = AthenaPlayerEvents>(

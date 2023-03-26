@@ -86,7 +86,7 @@ export class LoginView {
      * Opens the WebView, and passes a Discord URL for the user to open.
      *
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @memberof LoginView
      */
     static async show(player: alt.Player) {
@@ -98,8 +98,8 @@ export class LoginView {
     /**
      * Show the Login Screen to the Client
      * @static
-     * @param {alt.Player} player
-     * @return {*}
+     * @param {alt.Player} player An alt:V Player Entity
+     * @return {void}
      * @memberof LoginFunctions
      */
     static async prepare(player: alt.Player) {

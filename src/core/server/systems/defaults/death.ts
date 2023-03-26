@@ -24,7 +24,7 @@ const Internal = {
     /**
      * Returns the closest hospital position.
      *
-     * @param {alt.IVector3} pos
+     * @param {alt.IVector3} pos A position in the world.
      * @return {alt.IVector3}
      */
     getClosestHospital(pos: alt.IVector3): alt.IVector3 {
@@ -40,7 +40,7 @@ const Internal = {
      * Respawns the player, and resets their death data.
      *
      * @param {alt.Player} victim
-     * @return {*}
+     * @return {void}
      */
     respawn(victim: alt.Player) {
         if (!enabled) {
@@ -70,7 +70,7 @@ const Internal = {
      * Respawns the player after 5 seconds in their same position.
      *
      * @param {alt.Player} victim
-     * @return {*}
+     * @return {void}
      */
     handleDefaultDeath(victim: alt.Player) {
         if (!enabled) {

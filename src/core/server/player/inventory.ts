@@ -17,7 +17,7 @@ import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy'
  * const didAdd = await Athena.player.inventory.add(somePlayer, { dbName: 'burger', quantity: 1, data: {} })
  * ```
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Omit<StoredItem, 'slot'>} item
  * @return {Promise<boolean>}
  */
@@ -63,7 +63,7 @@ export async function add(player: alt.Player, item: Omit<StoredItem, 'slot'>): P
  * const didRemove = await Athena.player.inventory.sub(somePlayer, { dbName: 'burger', quantity: 1 });
  * ```
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Omit<StoredItem, 'slot'>} item
  * @return {Promise<boolean>}
  */
@@ -100,7 +100,7 @@ export async function sub(player: alt.Player, item: Omit<StoredItem, 'slot' | 'd
  * const didRemove = await Athena.player.inventory.remove(somePlayer, someSlot);
  * ```
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
  * @return {Promise<boolean>}
  */
@@ -136,9 +136,9 @@ export async function remove(player: alt.Player, slot: number): Promise<boolean>
  * ```
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} baseItem
- * @return {*}
+ * @return {void}
  */
 export async function has(player: alt.Player, dbName: string, quantity: number, version = undefined) {
     if (Overrides.has) {
@@ -171,7 +171,7 @@ export async function has(player: alt.Player, dbName: string, quantity: number, 
  *
  * @export
  * @template CustomData
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
  * @return {CustomData}
  */
@@ -212,7 +212,7 @@ export function getItemData<CustomData = {}>(player: alt.Player, slot: number): 
  *
  * @export
  * @template CustomData
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
  * @return {(StoredItem | undefined)}
  */
@@ -256,7 +256,7 @@ export function getAt<CustomData = {}>(player: alt.Player, slot: number): Stored
  *
  * @export
  * @template CustomData
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} slot
  * @param {CustomData} data
  * @return {Promise<boolean>}

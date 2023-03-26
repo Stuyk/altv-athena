@@ -36,7 +36,7 @@ export function clear() {
  * Creates on-screen text that looks like the GTA:V credits.
  *
  * @param {ICredit} credit
- * @return {*}
+ * @return {void}
  */
 export async function create(credit: ICredit) {
     clear();

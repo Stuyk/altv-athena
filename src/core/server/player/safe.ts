@@ -33,7 +33,7 @@ export function setPosition(player: alt.Player, x: number, y: number, z: number,
 }
 /**
  * Safely add health to this player.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} value 99-199
  * @param {boolean} exactValue
  * @memberof SafePrototype
@@ -67,7 +67,7 @@ export function addHealth(
 
 /**
  * Safely subtract health to this player.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} value 99-199
  * @param {boolean} exactValue
  * @memberof SafePrototype
@@ -169,9 +169,9 @@ export function subArmour(
  * Set the player's dimension safely.
  *
  * @export
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} value
- * @return {*}
+ * @return {void}
  */
 export function setDimension(player: alt.Player, value: number) {
     if (Overrides.setDimension) {

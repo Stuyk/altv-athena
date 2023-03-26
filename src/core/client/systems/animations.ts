@@ -82,7 +82,7 @@ export async function playAnimation(
  * @param {string} name
  * @param {ANIMATION_FLAGS} [flags=ANIMATION_FLAGS.CANCELABLE]
  * @param {number} [duration=-1]
- * @return {*}
+ * @return {void}
  */
 export async function playPedAnimation(
     scriptID: number,

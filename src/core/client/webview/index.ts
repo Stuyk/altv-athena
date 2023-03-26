@@ -31,7 +31,7 @@ const InternalFunctions = {
      * Gets all current pages and updates the WebView process.
      *
      * @static
-     * @return {*}
+     * @return {void}
      * @memberof InternalFunctions
      */
     async updatePages() {
@@ -76,7 +76,7 @@ const InternalFunctions = {
      * @static
      * @param {string} eventName
      * @param {...any[]} args
-     * @return {*}
+     * @return {void}
      * @memberof InternalFunctions
      */
     handleClientEvent(eventName: string, ...args: any[]) {
@@ -114,7 +114,7 @@ const InternalFunctions = {
      * @static
      * @param {string} pageName
      * @param {...any[]} args
-     * @return {*}
+     * @return {void}
      * @memberof InternalFunctions
      */
     handleReadyEvent(pageName: string, ...args: any[]) {
@@ -132,7 +132,7 @@ const InternalFunctions = {
      * @static
      * @param {string} eventName
      * @param {...any[]} args
-     * @return {*}
+     * @return {void}
      * @memberof InternalFunctions
      */
     async onServer(eventName: string, ...args: any[]) {
@@ -149,7 +149,7 @@ const InternalFunctions = {
      *
      * @static
      * @param {number} key
-     * @return {*}
+     * @return {void}
      * @memberof InternalFunctions
      */
     handleKeyDownEvent(key: number) {
@@ -290,7 +290,7 @@ export async function setOverlaysVisible(value: boolean, doNotUpdate = false) {
  *
  * @static
  * @param {string} pageName
- * @return {*}
+ * @return {void}
  * @memberof WebViewController
  */
 export function registerPersistentPage(pageName: string) {
@@ -308,7 +308,7 @@ export function registerPersistentPage(pageName: string) {
  * @static
  * @param {string} pageName
  * @param {(isVisible: boolean) => void} callback
- * @return {*}
+ * @return {void}
  * @memberof WebViewController
  */
 export function registerOverlay(pageName: string, callback: (isVisible: boolean) => void = undefined) {
@@ -393,7 +393,7 @@ export function dispose() {
  * @static
  * @param {(Array<string> | string)} pageOrPages An array of pages, or a single page name. Case sensitive.
  * @param {() => void} [closeOnEscapeCallback=undefined] An event to call when the page is closed.
- * @return {*}
+ * @return {void}
  * @memberof WebViewController
  */
 export async function openPages(
@@ -497,7 +497,7 @@ export async function showCursor(state: boolean) {
  *
  * @static
  * @param {Array<string>} pageNames
- * @return {*}
+ * @return {void}
  * @memberof WebViewController
  */
 export async function closeOverlays(pageNames: Array<string>) {
@@ -643,7 +643,7 @@ export function isPageOpen(pageName: string): boolean {
 /**
  * Returns whether or not all pages are done closing / opening
  *
- * @return {*}
+ * @return {void}
  */
 export function isDoneUpdating() {
     return isUpdating === false;
@@ -653,7 +653,7 @@ export function isDoneUpdating() {
  * Register a page to ignore escape key presence.
  *
  * @param {string} pageName
- * @return {*}
+ * @return {void}
  */
 export function disableEscapeKeyForPage(pageName: string) {
     const index = SkipPageOnEscape.findIndex((x) => x === pageName);

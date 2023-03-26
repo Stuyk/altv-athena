@@ -4,8 +4,8 @@ import * as Athena from '@AthenaServer/api';
 /**
  * Synchronizes all changes when data.appearance is set on a character.
  *
- * @param {alt.Player} player
- * @return {*}
+ * @param {alt.Player} player An alt:V Player Entity
+ * @return {void}
  */
 function handleUpdate(player: alt.Player) {
     const data = Athena.document.character.get(player);

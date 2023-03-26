@@ -1,15 +1,14 @@
 import * as alt from 'alt-server';
-import { IVector3 } from 'alt-shared';
 import * as Athena from '@AthenaServer/api';
 
 /**
  * Gets the closest vehicle to a position.
  *
  * @export
- * @param {IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @return {(alt.Vehicle | undefined)}
  */
-export function getClosestVehicle(pos: IVector3): alt.Vehicle | undefined {
+export function getClosestVehicle(pos: alt.IVector3): alt.Vehicle | undefined {
     const vehicles = [...alt.Vehicle.all].filter((p) => p && p.valid);
     return Athena.utility.vector.getClosestOfType<alt.Vehicle>(pos, vehicles);
 }
@@ -18,10 +17,10 @@ export function getClosestVehicle(pos: IVector3): alt.Vehicle | undefined {
  * Gets the closest player to a position.
  *
  * @export
- * @param {IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @return {(alt.Player | undefined)}
  */
-export function getClosestPlayer(pos: IVector3, ignoredIds: Array<number> = []): alt.Player | undefined {
+export function getClosestPlayer(pos: alt.IVector3, ignoredIds: Array<number> = []): alt.Player | undefined {
     const players = [...alt.Player.all].filter((player) => {
         if (!player || !player.valid) {
             return false;

@@ -8,7 +8,7 @@ const deleteOnLeave: { [vehicle_id: string]: true } = {};
  * Register a vehicle as temporary
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {{ owner?: number; deleteOnLeave?: boolean }} options
  */
 export function add(vehicle: alt.Vehicle, options: { owner?: number; deleteOnLeave?: boolean }) {
@@ -71,7 +71,7 @@ export function has(vehicle: alt.Vehicle | number): boolean {
  *
  * @export
  * @param {alt.Vehicle} player
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return
  */
 export function isOwner(player: alt.Player, vehicle: alt.Vehicle): boolean {
@@ -90,7 +90,7 @@ export function isOwner(player: alt.Player, vehicle: alt.Vehicle): boolean {
  * Check if this vehicle should be removed when a player leaves the drivers seat.
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @return {boolean}
  */
 export function shouldBeDestroyed(vehicle: alt.Vehicle): boolean {

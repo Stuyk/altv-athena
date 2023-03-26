@@ -16,7 +16,7 @@ const DEBUG_MODE = false; // Use this to see what state is being set.
  * This document is cleared on disconnected automatically.
  * This should be the first thing you do after having a user authenticate.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Account} document
  */
 export function bind(player: alt.Player, document: Account) {
@@ -53,7 +53,7 @@ export function unbind(id: number) {
  * Return current player data and their associated account object.
  *
  * @template T
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {T = Character}
  */
 export function get<T = Account>(player: alt.Player): T | undefined {
@@ -69,9 +69,9 @@ export function get<T = Account>(player: alt.Player): T | undefined {
  * Can be extended to obtain any value easily.
  *
  * @template T
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(keyof KnownKeys<Account & T>)} fieldName
- * @return {*}
+ * @return {void}
  */
 export function getField<T = {}, ReturnType = any>(
     player: alt.Player,
@@ -93,7 +93,7 @@ export function getField<T = {}, ReturnType = any>(
  * Automatically calls all callbacks associated with the field name.
  *
  * @template T
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(keyof KnownKeys<Character & T>)} fieldName
  * @param {*} value
  * @return {void}
@@ -143,7 +143,7 @@ export async function set<T = {}, Keys = keyof KnownKeys<Account & T>>(
  * Automatically calls all callbacks associated with the field name.
  *
  * @template T
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(Partial<Account & T>)} fields
  * @returns {void}
  */

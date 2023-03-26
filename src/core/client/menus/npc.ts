@@ -27,7 +27,7 @@ export function addInjection(callback: NpcMenuInjection) {
  *
  * @static
  * @param {number} scriptID
- * @return {*}
+ * @return {void}
  * @memberof NpcWheelMenu
  */
 export function open(scriptID: number): void {

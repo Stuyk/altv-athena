@@ -34,7 +34,7 @@ export function temporary(vehicleInfo: VehicleSpawnInfo, deleteOnLeave = false):
  * Spawn a temporary vehicle; owned by the player.
  * Cannot be modified by the player.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {VehicleSpawnInfo} vehicleInfo
  * @param {boolean} deleteOnLeave
  * @return {alt.Vehicle}

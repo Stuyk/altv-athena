@@ -15,7 +15,7 @@ const InternalFunctions = {
      * This means the key presses should still work, when not in-focus.
      *
      * @param {number} keyCode
-     * @return {*}
+     * @return {void}
      */
     handleKeyPress(keyCode: number) {
         if (AthenaClient.webview.isAnyMenuOpen()) {
@@ -28,7 +28,7 @@ const InternalFunctions = {
      * Fetches and pushes message history, when the chat is opened and turned visible.
      *
      * @param {boolean} [value=true]
-     * @return {*}
+     * @return {void}
      */
     updateMessages(value: boolean = true) {
         if (!value) {

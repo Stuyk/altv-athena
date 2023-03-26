@@ -54,7 +54,7 @@ const Internal = {
  * Updates the player time to match the current server time.
  *
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  */
 export function updatePlayer(player: alt.Player) {
     if (!enabled) {

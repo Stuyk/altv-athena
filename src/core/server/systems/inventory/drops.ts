@@ -56,7 +56,7 @@ async function removeFromDatabase(id: string) {
  * Add a dropped item.
  *
  * @param {StoredItem} item
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @return {Promise<string>}
  */
 export async function add(item: StoredItem, pos: alt.IVector3, player: alt.Player = undefined): Promise<string> {
@@ -153,7 +153,7 @@ export async function sub(id: string): Promise<StoredItem | undefined> {
  *
  * @export
  * @param {string} _id
- * @return {*}
+ * @return {void}
  */
 export function isItemAvailable(_id: string) {
     if (Overrides.isItemAvailable) {

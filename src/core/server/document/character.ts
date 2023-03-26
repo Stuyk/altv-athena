@@ -17,7 +17,7 @@ const DEBUG_MODE = false; // Use this to see what state is being set.
  *
  * This should be the first thing you do after having a user authenticate and select a character.
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Character} document
  */
 export function bind(player: alt.Player, document: Character) {
@@ -70,7 +70,7 @@ export function unbind(id: number) {
  * ```
  *
  * @template T
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @return {T = Character}
  */
 export function get<T = Character>(player: alt.Player): T | undefined {
@@ -86,9 +86,9 @@ export function get<T = Character>(player: alt.Player): T | undefined {
  * Can be extended to obtain any value easily.
  *
  * @template T
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(keyof KnownKeys<Character & T>)} fieldName
- * @return {*}
+ * @return {void}
  */
 export function getField<T = {}, ReturnType = any>(
     player: alt.Player,
@@ -124,7 +124,7 @@ export function getField<T = {}, ReturnType = any>(
  * ```
  *
  * @template T
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(keyof KnownKeys<Character & T>)} fieldName
  * @param {any} value
  * @return {void}
@@ -180,7 +180,7 @@ export async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(
  * Automatically calls all callbacks associated with the field name.
  *
  * @template T
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(Partial<Character & T>)} fields
  * @returns {void}
  */
@@ -210,11 +210,15 @@ export async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt
 }
 
 /**
- * Listen for individual player document changes.
+ * Invokes the callback function when a document with a specific field name has changed.
  *
- * @param {string} fieldName
+ * @function
+ * @name onChange
+
+ * @param {keyof KnownKeys<Character & T>} fieldName
  * @param {KeyChangeCallback} callback
- * @return {void}
+ * @returns {void}
+ * @exports
  */
 export function onChange<T = {}>(fieldName: keyof KnownKeys<Character & T>, callback: KeyChangeCallback) {
     if (Overrides.onChange) {

@@ -3,7 +3,7 @@ import * as alt from 'alt-server';
 /**
  * Check if a world position is free of vehicles.
  *
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @param {string} type
  * @return {Promise<boolean>}
  */

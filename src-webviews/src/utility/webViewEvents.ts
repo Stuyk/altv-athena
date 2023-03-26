@@ -7,7 +7,7 @@ class InternalFunctions {
      * Initializes `alt.on` forwarders.
      *
      * @static
-     * @return {*}
+     * @return {void}
      * @memberof InternalFunctions
      */
     static init() {
@@ -24,7 +24,7 @@ class InternalFunctions {
      * @static
      * @param {string} eventName
      * @param {...any[]} args
-     * @return {*}
+     * @return {void}
      * @memberof InternalFunctions
      */
     static handleEmits(eventName: string, ...args: any[]) {
@@ -42,7 +42,7 @@ export default class WebViewEvents {
      * Closes the WebView page.
      *
      * @static
-     * @return {*}
+     * @return {void}
      * @memberof WebViewEvents
      */
     static emitClose() {
@@ -59,7 +59,7 @@ export default class WebViewEvents {
      *
      * @static
      * @param {string} pageName
-     * @return {*}
+     * @return {void}
      * @memberof WebViewEvents
      */
     static emitReady(pageName: string, ...args: any[]) {

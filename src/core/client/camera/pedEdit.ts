@@ -76,7 +76,7 @@ export async function create(_scriptID: number, offset: alt.IVector3 = null, _is
  * Calculates a camera offset.
  * @static
  * @param {Vector3} offset
- * @return {*}  {Vector3}
+ * @return {void}  {Vector3}
  * @memberof PedEditCamera
  */
 export function calculateCamOffset(offset: alt.IVector3): alt.IVector3 {
@@ -104,7 +104,7 @@ export function setCameraOffset(offset: alt.IVector3) {
 /**
  * Check if a PedEditCamera exists.
  * @static
- * @return {*}
+ * @return {void}
  * @memberof PedEditCamera
  */
 export function exists() {

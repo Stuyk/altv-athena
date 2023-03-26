@@ -82,7 +82,7 @@ const InternalFunctions = {
     /**
      * Get the index of the image we want to modify.
      *
-     * @param {string} uid
+     * @param {string} uid A unique string
      * @return {number}
      */
     getIndexOfElement(uid: string): number {
@@ -91,7 +91,7 @@ const InternalFunctions = {
     /**
      * Create the rml element if it does not exist.
      *
-     * @param {string} uid
+     * @param {string} uid A unique string
      */
     createElement(uid: string) {
         const index = InternalFunctions.getIndexOfElement(uid);
@@ -111,7 +111,7 @@ const InternalFunctions = {
     /**
      * Remove the rml element if it exists.
      *
-     * @param {string} uid
+     * @param {string} uid A unique string
      */
     removeElement(uid: string) {
         const index = InternalFunctions.getIndexOfElement(uid);
@@ -241,7 +241,7 @@ export function create(sprite: SpriteInfo) {
 /**
  * Remove a sprite by `uid` and stop it from updating entirely.
  *
- * @param {string} uid
+ * @param {string} uid A unique string
  */
 export function remove(uid: string) {
     const index = InternalFunctions.getIndexOfElement(uid);
@@ -257,7 +257,7 @@ export function remove(uid: string) {
  * Use this to update position of the sprite dynamically.
  * Requires the `uid` specified to update it.
  *
- * @param {string} uid
+ * @param {string} uid A unique string
  * @param {Partial<Sprite>} sprite
  */
 export function update(uid: string, sprite: Partial<SpriteInfo>) {

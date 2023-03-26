@@ -30,7 +30,7 @@ export function addInjection(callback: ObjectMenuInjection): void {
  *
  * @static
  * @param {CreatedObject} scriptID
- * @return {*}
+ * @return {void}
  * @memberof ObjectWheelMenu
  */
 export function open(object: CreatedObject): void {

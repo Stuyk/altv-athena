@@ -146,7 +146,7 @@ export function set<CustomCurrency>(
  * const didRemoveFullAmount = Athena.player.currency.subAllCurrencies(somePlayer, 25);
  * ```
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {number} amount
  * @return {boolean}
  */

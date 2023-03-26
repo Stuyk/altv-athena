@@ -57,8 +57,8 @@ export function removeAll(dataSet: Array<StoredItem>): Array<StoredItem> {
 /**
  * Looks into the item toolbar and determines what weapons to equip / unequip.
  *
- * @param {alt.Player} player
- * @return {*}
+ * @param {alt.Player} player An alt:V Player Entity
+ * @return {void}
  */
 export function update(player: alt.Player) {
     if (Overrides.update) {

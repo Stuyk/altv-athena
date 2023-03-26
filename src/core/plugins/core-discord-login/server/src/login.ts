@@ -15,7 +15,7 @@ class InternalFunctions {
      * It automatically sets your account to the first account it finds.
      *
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @memberof InternalFunctions
      */
     static async developerModeCallback(player: alt.Player) {
@@ -50,8 +50,8 @@ export class LoginController {
      * Handles login from login webview.
      * Called through Agenda System.
      * @static
-     * @param {alt.Player} player
-     * @return {*}
+     * @param {alt.Player} player An alt:V Player Entity
+     * @return {void}
      * @memberof LoginController
      */
     static async show(player: alt.Player) {
@@ -67,7 +67,7 @@ export class LoginController {
      * Called when the player is attemping to login to their account.
      * At this stage we already have all the Discord Information or a Discord ID.
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {Partial<DiscordUser>} data
      * @param {Partial<Account>} account
      * @return {Promise<void>}

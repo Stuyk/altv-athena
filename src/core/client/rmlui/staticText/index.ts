@@ -82,7 +82,7 @@ const InternalFunctions = {
  * Create in-world static text.
  * If the same uid is used it will simply replace the object.
  *
- * @param {alt.IVector3} pos
+ * @param {alt.IVector3} pos A position in the world.
  * @param {Array<OptionFor3DMenu>} options
  * @param {number} maxDistance
  * @return {void}
@@ -116,7 +116,7 @@ export function upsert(drawable: StaticTextInfo): void {
  * Remove static text based on uid.
  * Marks for deletion, and then removes it.
  *
- * @param {string} uid
+ * @param {string} uid A unique string
  */
 export function remove(uid: string) {
     if (!drawables.has(uid)) {

@@ -45,7 +45,7 @@ class ActionsView implements ViewModel {
      * Set to null to force-clear the menu.
      * @static
      * @param {(ActionMenu | null)} actionMenu
-     * @return {*}
+     * @return {void}
      * @memberof ActionController
      */
     static set(_actionMenu: ActionMenu) {

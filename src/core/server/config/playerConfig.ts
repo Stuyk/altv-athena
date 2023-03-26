@@ -15,7 +15,7 @@ import { PlayerConfigKeys } from '@AthenaShared/enums/playerConfigKeys';
 
  * @export
  * @template CustomKeys
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {(PlayerConfigKeys | CustomKeys)} key
  * @param {*} value
  */

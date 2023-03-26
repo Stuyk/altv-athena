@@ -8,7 +8,7 @@ import { VehicleState } from '@AthenaShared/interfaces/vehicleState';
  * These match the alt:V API, and can be pulled from a database.
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {VehicleState} data
  */
 export function applyState(vehicle: alt.Vehicle, state: Partial<VehicleState> | VehicleState) {
@@ -25,7 +25,7 @@ export function applyState(vehicle: alt.Vehicle, state: Partial<VehicleState> | 
  * Apply tuning to the specified vehicle.
  *
  * @export
- * @param {alt.Vehicle} vehicle
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {VehicleTuning | Partial<VehicleTuning>} tuning
  */
 export function applyTuning(vehicle: alt.Vehicle, tuning: VehicleTuning | Partial<VehicleTuning>) {

@@ -29,7 +29,7 @@ const InternalFunctions = {
 /**
  * Adds a global world notification for all players.
  * @param {IWorldNotification} notification
- * @returns {string} uid for notification
+ * @returns {string} uid A unique string for notification
  * @memberof WorldNotificationController
  */
 export function append(notification: IWorldNotification): string {
@@ -48,7 +48,7 @@ export function append(notification: IWorldNotification): string {
 
 /**
  * Removes a global world notification from all players based on the global uid.
- * @param {string} uid
+ * @param {string} uid A unique string
  * @return {boolean}
  * @memberof WorldNotificationController
  */
@@ -69,8 +69,8 @@ export function remove(uid: string): boolean {
 
 /**
  * Remove a world notification from a single local player.
- * @param {alt.Player} player
- * @param {string} uid
+ * @param {alt.Player} player An alt:V Player Entity
+ * @param {string} uid A unique string
  */
 export function removeFromPlayer(player: alt.Player, uid: string) {
     if (Overrides.removeFromPlayer) {
@@ -86,9 +86,9 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
 
 /**
  * Add a world notification to a single local player.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {IWorldNotification} notification
- * @returns {string} uid for notification
+ * @returns {string} uid A unique string for notification
  */
 export function addToPlayer(player: alt.Player, notification: IWorldNotification): string {
     if (Overrides.addToPlayer) {
@@ -105,7 +105,7 @@ export function addToPlayer(player: alt.Player, notification: IWorldNotification
 
 /**
  * Updates world notifications through the streamer service.
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {Array<IWorldNotification>} notifications
  */
 export function update(player: alt.Player, notifications: Array<IWorldNotification>) {

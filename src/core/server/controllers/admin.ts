@@ -14,7 +14,7 @@ import * as Athena from '@AthenaServer/api';
  * Athena.controllers.admin.banPlayer(player, 'was a bad person :(')
  * ```
  *
- * @param {alt.Player} player
+ * @param {alt.Player} player An alt:V Player Entity
  * @param {string} reason
  * @return {Promise<boolean>}
  */

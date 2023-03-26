@@ -22,7 +22,7 @@ export function addInjection(callback: PlayerMenuInjection) {
  * Opens the wheel menu against a target player.
  *
  * @param {alt.Player} target
- * @return {*}
+ * @return {void}
  * @memberof PlayerWheelMenu
  */
 export function open(target: alt.Player) {

@@ -22,7 +22,7 @@ class InternalFunctions {
      * Remove the player's characters when they disconnect.
      *
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {string} reason
      * @memberof InternalFunctions
      */
@@ -37,8 +37,8 @@ class InternalFunctions {
      * Is the player currently pending a character selection...
      *
      * @static
-     * @param {alt.Player} player
-     * @return {*}  {boolean}
+     * @param {alt.Player} player An alt:V Player Entity
+     * @return {void}  {boolean}
      * @memberof InternalFunctions
      */
     static isPendingSelect(player: alt.Player): boolean {
@@ -80,8 +80,8 @@ class InternalFunctions {
     /**
      * Called when a player needs to go to character select.
      * @static
-     * @param {alt.Player} player
-     * @return {*}
+     * @param {alt.Player} player An alt:V Player Entity
+     * @return {void}
      * @memberof CharacterSelectView
      */
     static async show(player: alt.Player) {
@@ -138,9 +138,9 @@ class InternalFunctions {
      * Delete a character by an identifier and then update character list.
      *
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {string} id
-     * @return {*}
+     * @return {void}
      * @memberof InternalFunctions
      */
     static async deleteCharacter(player: alt.Player, id: string) {
@@ -156,8 +156,8 @@ class InternalFunctions {
      * Create a new character which will be automatically chosen upon completion.
      *
      * @static
-     * @param {alt.Player} player
-     * @return {*}
+     * @param {alt.Player} player An alt:V Player Entity
+     * @return {void}
      * @memberof InternalFunctions
      */
     static async newCharacter(player: alt.Player) {
