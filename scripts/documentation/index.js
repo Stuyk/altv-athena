@@ -43,6 +43,10 @@ function getApiPath(somePath) {
         apiPath = apiPath.replace(/\//gm, '.').replace('shared.', 'AthenaShared.');
     }
 
+    if (apiPath.includes('..')) {
+        apiPath = apiPath.replace(/\.\./gm, '.');
+    }
+
     return apiPath;
 }
 
@@ -51,12 +55,13 @@ for (let file of files) {
         continue;
     }
 
-    if (file.includes('internal')) {
-        continue;
-    }
-
     const apiPath = getApiPath(file);
     const rows = fs.readFileSync(file).toString().split('\n');
+    if (rows.length <= 3) {
+        console.log(`Deleting Dead File: ${file}`);
+        fs.rmSync(file);
+        continue;
+    }
 
     // Remove first row, since the title sucks
     rows.shift();
