@@ -26,3 +26,4 @@ jobs:
                   workflow: deploy.yml
                   repo: stuyk/athena-docs-latest
                   token: ${{ secrets.DOCS_PAT }}
+                  ref: 'main'
