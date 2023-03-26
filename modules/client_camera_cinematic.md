@@ -35,7 +35,7 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:319](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/camera/cinematic.ts#L319)
+[client/camera/cinematic.ts:319](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/camera/cinematic.ts#L319)
 
 ___
 
@@ -55,7 +55,7 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/camera/cinematic.ts#L305)
+[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/camera/cinematic.ts#L305)
 
 ___
 
@@ -84,7 +84,7 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:345](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/camera/cinematic.ts#L345)
+[client/camera/cinematic.ts:345](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/camera/cinematic.ts#L345)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[client/camera/cinematic.ts:309](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/camera/cinematic.ts#L309)
+[client/camera/cinematic.ts:309](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/camera/cinematic.ts#L309)
 
 ___
 
@@ -124,4 +124,4 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:374](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/camera/cinematic.ts#L374)
+[client/camera/cinematic.ts:374](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/camera/cinematic.ts#L374)

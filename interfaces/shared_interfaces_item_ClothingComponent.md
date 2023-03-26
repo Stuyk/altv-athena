@@ -29,7 +29,7 @@ ClothingComponent
 
 #### Defined in
 
-[shared/interfaces/item.ts:69](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/item.ts#L69)
+[shared/interfaces/item.ts:69](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/item.ts#L69)
 
 ___
 
@@ -45,7 +45,7 @@ ClothingComponent
 
 #### Defined in
 
-[shared/interfaces/item.ts:45](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/item.ts#L45)
+[shared/interfaces/item.ts:45](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/item.ts#L45)
 
 ___
 
@@ -61,7 +61,7 @@ ClothingComponent
 
 #### Defined in
 
-[shared/interfaces/item.ts:37](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/item.ts#L37)
+[shared/interfaces/item.ts:37](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/item.ts#L37)
 
 ___
 
@@ -75,7 +75,7 @@ ClothingComponent
 
 #### Defined in
 
-[shared/interfaces/item.ts:77](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/item.ts#L77)
+[shared/interfaces/item.ts:77](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/item.ts#L77)
 
 ___
 
@@ -89,7 +89,7 @@ ClothingComponent
 
 #### Defined in
 
-[shared/interfaces/item.ts:61](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/item.ts#L61)
+[shared/interfaces/item.ts:61](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/item.ts#L61)
 
 ___
 
@@ -103,4 +103,4 @@ ClothingComponent
 
 #### Defined in
 
-[shared/interfaces/item.ts:53](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/item.ts#L53)
+[shared/interfaces/item.ts:53](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/item.ts#L53)

@@ -30,7 +30,7 @@ Change the weather gracefully.
 
 #### Defined in
 
-[client/world/weather.ts:40](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/world/weather.ts#L40)
+[client/world/weather.ts:40](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/world/weather.ts#L40)
 
 ___
 
@@ -50,7 +50,7 @@ Call this function after using the `changeTo` function.
 
 #### Defined in
 
-[client/world/weather.ts:20](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/world/weather.ts#L20)
+[client/world/weather.ts:20](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/world/weather.ts#L20)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[client/world/weather.ts:9](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/world/weather.ts#L9)
+[client/world/weather.ts:9](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/world/weather.ts#L9)
 
 ___
 
@@ -82,4 +82,4 @@ Unfreeze the weather function.
 
 #### Defined in
 
-[client/world/weather.ts:29](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/world/weather.ts#L29)
+[client/world/weather.ts:29](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/world/weather.ts#L29)

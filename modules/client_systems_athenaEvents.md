@@ -27,4 +27,4 @@ AthenaEvents
 
 #### Defined in
 
-[client/systems/athenaEvents.ts:37](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/systems/athenaEvents.ts#L37)
+[client/systems/athenaEvents.ts:37](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/systems/athenaEvents.ts#L37)

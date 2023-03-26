@@ -37,7 +37,7 @@ MessageCommand
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:48](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/messageCommand.ts#L48)
+[shared/interfaces/messageCommand.ts:48](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/messageCommand.ts#L48)
 
 ___
 
@@ -53,7 +53,7 @@ MessageCommand
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:25](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/messageCommand.ts#L25)
+[shared/interfaces/messageCommand.ts:25](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/messageCommand.ts#L25)
 
 ___
 
@@ -69,7 +69,7 @@ MessageCommand
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:41](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/messageCommand.ts#L41)
+[shared/interfaces/messageCommand.ts:41](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/messageCommand.ts#L41)
 
 ___
 
@@ -85,7 +85,7 @@ MessageCommand
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:17](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/messageCommand.ts#L17)
+[shared/interfaces/messageCommand.ts:17](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/messageCommand.ts#L17)
 
 ___
 
@@ -101,4 +101,4 @@ MessageCommand
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:33](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/messageCommand.ts#L33)
+[shared/interfaces/messageCommand.ts:33](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/messageCommand.ts#L33)

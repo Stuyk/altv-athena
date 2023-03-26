@@ -25,7 +25,7 @@ ColorInfo
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:206](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/appearance.ts#L206)
+[shared/interfaces/appearance.ts:206](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L206)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:207](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/appearance.ts#L207)
+[shared/interfaces/appearance.ts:207](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L207)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:204](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/appearance.ts#L204)
+[shared/interfaces/appearance.ts:204](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L204)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:208](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/appearance.ts#L208)
+[shared/interfaces/appearance.ts:208](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L208)
 
 ___
 
@@ -65,4 +65,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:205](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/appearance.ts#L205)
+[shared/interfaces/appearance.ts:205](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/appearance.ts#L205)

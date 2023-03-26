@@ -41,7 +41,7 @@ MenuOptionBase
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
+[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
 
 ___
 
@@ -57,7 +57,7 @@ MenuOptionBase
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
+[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
 
 ___
 
@@ -73,7 +73,7 @@ MenuOptionBase
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
+[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
 
 ___
 
@@ -89,4 +89,4 @@ MenuOptionBase
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
+[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/menu/menuInterfaces.ts#L10)

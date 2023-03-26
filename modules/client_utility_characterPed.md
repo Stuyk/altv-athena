@@ -32,4 +32,4 @@ Do not use it for anything else.
 
 #### Defined in
 
-[client/utility/characterPed.ts:21](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/utility/characterPed.ts#L21)
+[client/utility/characterPed.ts:21](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/utility/characterPed.ts#L21)

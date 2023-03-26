@@ -23,7 +23,7 @@ QuestionInfo
 
 #### Defined in
 
-[client/rmlui/question/index.ts:29](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/question/index.ts#L29)
+[client/rmlui/question/index.ts:29](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/question/index.ts#L29)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[client/rmlui/question/index.ts:9](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/question/index.ts#L9)
+[client/rmlui/question/index.ts:9](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/question/index.ts#L9)
 
 ___
 
@@ -56,7 +56,7 @@ QuestionInfo
 
 #### Defined in
 
-[client/rmlui/question/index.ts:37](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/question/index.ts#L37)
+[client/rmlui/question/index.ts:37](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/question/index.ts#L37)
 
 ___
 
@@ -72,7 +72,7 @@ QuestionInfo
 
 #### Defined in
 
-[client/rmlui/question/index.ts:45](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/question/index.ts#L45)
+[client/rmlui/question/index.ts:45](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/question/index.ts#L45)
 
 ___
 
@@ -89,4 +89,4 @@ QuestionInfo
 
 #### Defined in
 
-[client/rmlui/question/index.ts:21](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/question/index.ts#L21)
+[client/rmlui/question/index.ts:21](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/question/index.ts#L21)

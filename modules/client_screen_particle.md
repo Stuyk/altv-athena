@@ -29,4 +29,4 @@ Players a particle effect at a certain location.
 
 #### Defined in
 
-[client/screen/particle.ts:36](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/screen/particle.ts#L36)
+[client/screen/particle.ts:36](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/particle.ts#L36)

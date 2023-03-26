@@ -33,7 +33,7 @@ Draw a marker in an every tick.
 
 #### Defined in
 
-[client/screen/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/screen/marker.ts#L16)
+[client/screen/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/marker.ts#L16)
 
 ___
 
@@ -58,4 +58,4 @@ ___
 
 #### Defined in
 
-[client/screen/marker.ts:53](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/screen/marker.ts#L53)
+[client/screen/marker.ts:53](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/marker.ts#L53)

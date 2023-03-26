@@ -29,4 +29,4 @@ Athena.systems.default.ammo.disable();
 
 #### Defined in
 
-[server/systems/defaults/inventorySync.ts:114](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/defaults/inventorySync.ts#L114)
+[server/systems/defaults/inventorySync.ts:114](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/defaults/inventorySync.ts#L114)

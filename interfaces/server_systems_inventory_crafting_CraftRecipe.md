@@ -23,7 +23,7 @@ Recipe
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:28](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/inventory/crafting.ts#L28)
+[server/systems/inventory/crafting.ts:28](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L28)
 
 ___
 
@@ -41,7 +41,7 @@ CraftRecipe
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:83](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/inventory/crafting.ts#L83)
+[server/systems/inventory/crafting.ts:83](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L83)
 
 ___
 
@@ -57,7 +57,7 @@ Recipe
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:36](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/inventory/crafting.ts#L36)
+[server/systems/inventory/crafting.ts:36](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L36)
 
 ___
 
@@ -82,7 +82,7 @@ CraftRecipe
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:44](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/inventory/crafting.ts#L44)
+[server/systems/inventory/crafting.ts:44](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L44)
 
 ___
 
@@ -98,7 +98,7 @@ CraftRecipe
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:91](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/inventory/crafting.ts#L91)
+[server/systems/inventory/crafting.ts:91](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L91)
 
 ___
 
@@ -114,4 +114,4 @@ Recipe
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:20](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/inventory/crafting.ts#L20)
+[server/systems/inventory/crafting.ts:20](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/inventory/crafting.ts#L20)

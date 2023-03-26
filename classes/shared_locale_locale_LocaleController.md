@@ -42,7 +42,7 @@ LocaleController
 
 #### Defined in
 
-[shared/locale/locale.ts:46](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/locale/locale.ts#L46)
+[shared/locale/locale.ts:46](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/locale/locale.ts#L46)
 
 ___
 
@@ -70,7 +70,7 @@ LocaleController
 
 #### Defined in
 
-[shared/locale/locale.ts:67](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/locale/locale.ts#L67)
+[shared/locale/locale.ts:67](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/locale/locale.ts#L67)
 
 ___
 
@@ -98,4 +98,4 @@ LocaleController
 
 #### Defined in
 
-[shared/locale/locale.ts:34](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/locale/locale.ts#L34)
+[shared/locale/locale.ts:34](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/locale/locale.ts#L34)

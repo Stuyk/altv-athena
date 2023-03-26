@@ -29,7 +29,7 @@ Used to save the player every once in a while.
 
 #### Defined in
 
-[server/systems/tick.ts:18](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/tick.ts#L18)
+[server/systems/tick.ts:18](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/tick.ts#L18)
 
 ___
 
@@ -54,7 +54,7 @@ Used to override player tick functionality
 
 #### Defined in
 
-[server/systems/tick.ts:102](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/tick.ts#L102)
+[server/systems/tick.ts:102](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/tick.ts#L102)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -75,4 +75,4 @@ Used to override player tick functionality
 
 #### Defined in
 
-[server/systems/tick.ts:103](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/tick.ts#L103)
+[server/systems/tick.ts:103](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/tick.ts#L103)

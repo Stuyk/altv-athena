@@ -37,7 +37,7 @@ Animation
 
 #### Defined in
 
-[shared/interfaces/animation.ts:16](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/animation.ts#L16)
+[shared/interfaces/animation.ts:16](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/animation.ts#L16)
 
 ___
 
@@ -54,7 +54,7 @@ Animation
 
 #### Defined in
 
-[shared/interfaces/animation.ts:39](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/animation.ts#L39)
+[shared/interfaces/animation.ts:39](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/animation.ts#L39)
 
 ___
 
@@ -71,7 +71,7 @@ Animation
 
 #### Defined in
 
-[shared/interfaces/animation.ts:31](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/animation.ts#L31)
+[shared/interfaces/animation.ts:31](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/animation.ts#L31)
 
 ___
 
@@ -87,4 +87,4 @@ Animation
 
 #### Defined in
 
-[shared/interfaces/animation.ts:23](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/animation.ts#L23)
+[shared/interfaces/animation.ts:23](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/animation.ts#L23)

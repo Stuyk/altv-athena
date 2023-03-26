@@ -30,7 +30,7 @@ Add a character to the owned vehicle
 
 #### Defined in
 
-[server/vehicle/ownership.ts:168](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L168)
+[server/vehicle/ownership.ts:168](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L168)
 
 ▸ **addCharacter**(`vehicle`, `id`): `Promise`<`boolean`\>
 
@@ -51,7 +51,7 @@ Add a character to the owned vehicle
 
 #### Defined in
 
-[server/vehicle/ownership.ts:177](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L177)
+[server/vehicle/ownership.ts:177](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L177)
 
 ___
 
@@ -75,7 +75,7 @@ Return the owner of a vehicle's database identifier
 
 #### Defined in
 
-[server/vehicle/ownership.ts:127](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L127)
+[server/vehicle/ownership.ts:127](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L127)
 
 ___
 
@@ -99,7 +99,7 @@ Return the owner of a vehicle based on player
 
 #### Defined in
 
-[server/vehicle/ownership.ts:147](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L147)
+[server/vehicle/ownership.ts:147](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L147)
 
 ___
 
@@ -124,7 +124,7 @@ Checks if a player's character has a matching permission for a vehicle.
 
 #### Defined in
 
-[server/vehicle/ownership.ts:98](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L98)
+[server/vehicle/ownership.ts:98](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L98)
 
 ___
 
@@ -149,7 +149,7 @@ Checks if a player's character has a matching permission for a vehicle.
 
 #### Defined in
 
-[server/vehicle/ownership.ts:73](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L73)
+[server/vehicle/ownership.ts:73](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L73)
 
 ___
 
@@ -183,7 +183,7 @@ Options can be specified to check if a passenger has keys and so on and so forth
 
 #### Defined in
 
-[server/vehicle/ownership.ts:18](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L18)
+[server/vehicle/ownership.ts:18](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L18)
 
 ___
 
@@ -208,7 +208,7 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:311](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L311)
+[server/vehicle/ownership.ts:311](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L311)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -229,7 +229,7 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:312](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L312)
+[server/vehicle/ownership.ts:312](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L312)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -250,7 +250,7 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:313](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L313)
+[server/vehicle/ownership.ts:313](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L313)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -271,7 +271,7 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:314](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L314)
+[server/vehicle/ownership.ts:314](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L314)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -292,7 +292,7 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:315](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L315)
+[server/vehicle/ownership.ts:315](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L315)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -313,7 +313,7 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:316](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L316)
+[server/vehicle/ownership.ts:316](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L316)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -334,7 +334,7 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:317](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L317)
+[server/vehicle/ownership.ts:317](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L317)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -355,7 +355,7 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:318](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L318)
+[server/vehicle/ownership.ts:318](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L318)
 
 ___
 
@@ -380,7 +380,7 @@ Remove a character from the owned vehicle keys.
 
 #### Defined in
 
-[server/vehicle/ownership.ts:238](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L238)
+[server/vehicle/ownership.ts:238](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L238)
 
 ___
 
@@ -411,4 +411,4 @@ Returns true if successfully transferred.
 
 #### Defined in
 
-[server/vehicle/ownership.ts:279](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/vehicle/ownership.ts#L279)
+[server/vehicle/ownership.ts:279](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/vehicle/ownership.ts#L279)

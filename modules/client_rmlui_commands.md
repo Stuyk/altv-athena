@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:277](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/commands/index.ts#L277)
+[client/rmlui/commands/index.ts:277](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/commands/index.ts#L277)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:247](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/commands/index.ts#L247)
+[client/rmlui/commands/index.ts:247](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/commands/index.ts#L247)
 
 ___
 
@@ -60,4 +60,4 @@ Returns whether or not this interface is open.
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:308](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/commands/index.ts#L308)
+[client/rmlui/commands/index.ts:308](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/commands/index.ts#L308)

@@ -34,7 +34,7 @@ Athena.controllers.admin.banPlayer(player, 'was a bad person :(')
 
 #### Defined in
 
-[server/controllers/admin.ts:21](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/admin.ts#L21)
+[server/controllers/admin.ts:21](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/admin.ts#L21)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[server/controllers/admin.ts:78](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/admin.ts#L78)
+[server/controllers/admin.ts:78](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/admin.ts#L78)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[server/controllers/admin.ts:79](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/admin.ts#L79)
+[server/controllers/admin.ts:79](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/admin.ts#L79)
 
 ___
 
@@ -104,4 +104,4 @@ AdminController
 
 #### Defined in
 
-[server/controllers/admin.ts:52](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/admin.ts#L52)
+[server/controllers/admin.ts:52](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/admin.ts#L52)

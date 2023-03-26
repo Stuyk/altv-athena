@@ -42,7 +42,7 @@ IWheelOption
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:93](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/wheelMenu.ts#L93)
+[shared/interfaces/wheelMenu.ts:93](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/wheelMenu.ts#L93)
 
 ___
 
@@ -72,7 +72,7 @@ IWheelOptionExt
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:102](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/wheelMenu.ts#L102)
+[shared/interfaces/wheelMenu.ts:102](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/wheelMenu.ts#L102)
 
 ___
 
@@ -94,7 +94,7 @@ IWheelOption
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:33](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/wheelMenu.ts#L33)
+[shared/interfaces/wheelMenu.ts:33](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/wheelMenu.ts#L33)
 
 ___
 
@@ -114,7 +114,7 @@ IWheelOptionExt
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:75](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/wheelMenu.ts#L75)
+[shared/interfaces/wheelMenu.ts:75](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/wheelMenu.ts#L75)
 
 ___
 
@@ -134,7 +134,7 @@ IWheelOption
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:51](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/wheelMenu.ts#L51)
+[shared/interfaces/wheelMenu.ts:51](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/wheelMenu.ts#L51)
 
 ___
 
@@ -154,7 +154,7 @@ IWheelOption
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:67](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/wheelMenu.ts#L67)
+[shared/interfaces/wheelMenu.ts:67](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/wheelMenu.ts#L67)
 
 ___
 
@@ -174,7 +174,7 @@ IWheelOption
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:59](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/wheelMenu.ts#L59)
+[shared/interfaces/wheelMenu.ts:59](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/wheelMenu.ts#L59)
 
 ___
 
@@ -196,7 +196,7 @@ IWheelOption
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:43](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/wheelMenu.ts#L43)
+[shared/interfaces/wheelMenu.ts:43](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/wheelMenu.ts#L43)
 
 ___
 
@@ -217,7 +217,7 @@ IWheelOption
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:84](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/wheelMenu.ts#L84)
+[shared/interfaces/wheelMenu.ts:84](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/wheelMenu.ts#L84)
 
 ___
 
@@ -237,7 +237,7 @@ IWheelOption
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:14](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/wheelMenu.ts#L14)
+[shared/interfaces/wheelMenu.ts:14](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/wheelMenu.ts#L14)
 
 ___
 
@@ -259,4 +259,4 @@ IWheelOption
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:23](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/wheelMenu.ts#L23)
+[shared/interfaces/wheelMenu.ts:23](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/wheelMenu.ts#L23)

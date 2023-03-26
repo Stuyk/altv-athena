@@ -35,7 +35,7 @@ alt.ColshapeSphere.constructor
 
 #### Defined in
 
-[server/extensions/extColshape.ts:38](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/extensions/extColshape.ts#L38)
+[server/extensions/extColshape.ts:38](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/extensions/extColshape.ts#L38)
 
 ## Properties
 
@@ -45,7 +45,7 @@ alt.ColshapeSphere.constructor
 
 #### Defined in
 
-[server/extensions/extColshape.ts:36](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/extensions/extColshape.ts#L36)
+[server/extensions/extColshape.ts:36](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/extensions/extColshape.ts#L36)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:35](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/extensions/extColshape.ts#L35)
+[server/extensions/extColshape.ts:35](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/extensions/extColshape.ts#L35)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:34](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/extensions/extColshape.ts#L34)
+[server/extensions/extColshape.ts:34](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/extensions/extColshape.ts#L34)
 
 ## Methods
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:47](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/extensions/extColshape.ts#L47)
+[server/extensions/extColshape.ts:47](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/extensions/extColshape.ts#L47)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:51](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/extensions/extColshape.ts#L51)
+[server/extensions/extColshape.ts:51](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/extensions/extColshape.ts#L51)
 
 ___
 
@@ -118,4 +118,4 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:43](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/extensions/extColshape.ts#L43)
+[server/extensions/extColshape.ts:43](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/extensions/extColshape.ts#L43)

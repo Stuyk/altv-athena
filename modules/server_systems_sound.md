@@ -34,7 +34,7 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:129](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/sound.ts#L129)
+[server/systems/sound.ts:129](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/sound.ts#L129)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -55,7 +55,7 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:130](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/sound.ts#L130)
+[server/systems/sound.ts:130](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/sound.ts#L130)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -76,7 +76,7 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:131](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/sound.ts#L131)
+[server/systems/sound.ts:131](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/sound.ts#L131)
 
 ___
 
@@ -105,7 +105,7 @@ SoundSystem
 
 #### Defined in
 
-[server/systems/sound.ts:51](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/sound.ts#L51)
+[server/systems/sound.ts:51](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/sound.ts#L51)
 
 ___
 
@@ -133,7 +133,7 @@ Sound
 
 #### Defined in
 
-[server/systems/sound.ts:100](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/sound.ts#L100)
+[server/systems/sound.ts:100](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/sound.ts#L100)
 
 ___
 
@@ -163,4 +163,4 @@ Sound
 
 #### Defined in
 
-[server/systems/sound.ts:73](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/sound.ts#L73)
+[server/systems/sound.ts:73](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/sound.ts#L73)

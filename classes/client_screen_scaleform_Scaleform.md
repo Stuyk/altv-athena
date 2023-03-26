@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[client/screen/scaleform.ts:7](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/screen/scaleform.ts#L7)
+[client/screen/scaleform.ts:7](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/scaleform.ts#L7)
 
 ## Properties
 
@@ -33,7 +33,7 @@ order: 0
 
 #### Defined in
 
-[client/screen/scaleform.ts:5](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/screen/scaleform.ts#L5)
+[client/screen/scaleform.ts:5](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/scaleform.ts#L5)
 
 ## Methods
 
@@ -47,7 +47,7 @@ order: 0
 
 #### Defined in
 
-[client/screen/scaleform.ts:48](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/screen/scaleform.ts#L48)
+[client/screen/scaleform.ts:48](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/scaleform.ts#L48)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-[client/screen/scaleform.ts:11](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/screen/scaleform.ts#L11)
+[client/screen/scaleform.ts:11](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/scaleform.ts#L11)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-[client/screen/scaleform.ts:15](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/screen/scaleform.ts#L15)
+[client/screen/scaleform.ts:15](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/scaleform.ts#L15)
 
 ___
 
@@ -105,4 +105,4 @@ ___
 
 #### Defined in
 
-[client/screen/scaleform.ts:53](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/screen/scaleform.ts#L53)
+[client/screen/scaleform.ts:53](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/scaleform.ts#L53)

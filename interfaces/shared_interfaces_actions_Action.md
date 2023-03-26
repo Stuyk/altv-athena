@@ -31,7 +31,7 @@ Action
 
 #### Defined in
 
-[shared/interfaces/actions.ts:27](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/actions.ts#L27)
+[shared/interfaces/actions.ts:27](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/actions.ts#L27)
 
 ___
 
@@ -47,7 +47,7 @@ Action
 
 #### Defined in
 
-[shared/interfaces/actions.ts:13](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/actions.ts#L13)
+[shared/interfaces/actions.ts:13](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/actions.ts#L13)
 
 ___
 
@@ -63,4 +63,4 @@ Action
 
 #### Defined in
 
-[shared/interfaces/actions.ts:20](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/actions.ts#L20)
+[shared/interfaces/actions.ts:20](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/actions.ts#L20)

@@ -34,7 +34,7 @@ ClientEvents
 
 #### Defined in
 
-[server/events/clientEvents.ts:23](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/events/clientEvents.ts#L23)
+[server/events/clientEvents.ts:23](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/events/clientEvents.ts#L23)
 
 ___
 
@@ -56,4 +56,4 @@ ___
 
 #### Defined in
 
-[server/events/clientEvents.ts:6](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/events/clientEvents.ts#L6)
+[server/events/clientEvents.ts:6](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/events/clientEvents.ts#L6)

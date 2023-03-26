@@ -30,7 +30,7 @@ IPage
 
 #### Defined in
 
-[client/webview/page.ts:22](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/page.ts#L22)
+[client/webview/page.ts:22](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/page.ts#L22)
 
 ___
 
@@ -47,7 +47,7 @@ IPage
 
 #### Defined in
 
-[client/webview/page.ts:164](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/page.ts#L164)
+[client/webview/page.ts:164](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/page.ts#L164)
 
 ___
 
@@ -63,7 +63,7 @@ IPage
 
 #### Defined in
 
-[client/webview/page.ts:15](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/page.ts#L15)
+[client/webview/page.ts:15](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/page.ts#L15)
 
 ___
 
@@ -97,4 +97,4 @@ ___
 
 #### Defined in
 
-[client/webview/page.ts:34](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/page.ts#L34)
+[client/webview/page.ts:34](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/page.ts#L34)

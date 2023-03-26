@@ -25,7 +25,7 @@ Shard
 
 #### Defined in
 
-[client/screen/shard.ts:16](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/screen/shard.ts#L16)
+[client/screen/shard.ts:16](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/shard.ts#L16)
 
 ___
 
@@ -49,4 +49,4 @@ Create a shard, a shard is essentially the mission passed / mission failed text.
 
 #### Defined in
 
-[client/screen/shard.ts:40](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/screen/shard.ts#L40)
+[client/screen/shard.ts:40](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/screen/shard.ts#L40)

@@ -29,7 +29,7 @@ Toolbar only.
 
 #### Defined in
 
-[server/player/toolbar.ts:16](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L16)
+[server/player/toolbar.ts:16](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L16)
 
 ___
 
@@ -70,7 +70,7 @@ const someData = Athena.player.toolbar.getAt<{ myCustomStuff: string }>(somePlay
 
 #### Defined in
 
-[server/player/toolbar.ts:240](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L240)
+[server/player/toolbar.ts:240](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L240)
 
 ___
 
@@ -111,7 +111,7 @@ const someData = Athena.player.toolbar.getItemData<{ myCustomStuff: string }>(so
 
 #### Defined in
 
-[server/player/toolbar.ts:147](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L147)
+[server/player/toolbar.ts:147](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L147)
 
 ___
 
@@ -138,7 +138,7 @@ Verify that the player has at least 'x' of an item in their toolbar
 
 #### Defined in
 
-[server/player/toolbar.ts:112](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L112)
+[server/player/toolbar.ts:112](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L112)
 
 ___
 
@@ -184,7 +184,7 @@ await Athena.player.toolbar.modifyItemData<typeof someData>(player, someSlot, so
 
 #### Defined in
 
-[server/player/toolbar.ts:192](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L192)
+[server/player/toolbar.ts:192](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L192)
 
 ___
 
@@ -209,7 +209,7 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:274](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L274)
+[server/player/toolbar.ts:274](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L274)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -230,7 +230,7 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:275](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L275)
+[server/player/toolbar.ts:275](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L275)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -251,7 +251,7 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:276](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L276)
+[server/player/toolbar.ts:276](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L276)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -272,7 +272,7 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:277](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L277)
+[server/player/toolbar.ts:277](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L277)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -293,7 +293,7 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:278](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L278)
+[server/player/toolbar.ts:278](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L278)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -314,7 +314,7 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:279](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L279)
+[server/player/toolbar.ts:279](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L279)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -335,7 +335,7 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:280](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L280)
+[server/player/toolbar.ts:280](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L280)
 
 ___
 
@@ -358,7 +358,7 @@ Delete an item in a specific slot in an toolbar data set.
 
 #### Defined in
 
-[server/player/toolbar.ts:81](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L81)
+[server/player/toolbar.ts:81](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L81)
 
 ___
 
@@ -382,4 +382,4 @@ Toolbar only.
 
 #### Defined in
 
-[server/player/toolbar.ts:51](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/player/toolbar.ts#L51)
+[server/player/toolbar.ts:51](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/player/toolbar.ts#L51)

@@ -15,7 +15,7 @@ order: 0
 
 #### Defined in
 
-[server/systems/identifier.ts:5](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/identifier.ts#L5)
+[server/systems/identifier.ts:5](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/identifier.ts#L5)
 
 ## Functions
 
@@ -37,7 +37,7 @@ Returns the current numerical identifier based on current strategy.
 
 #### Defined in
 
-[server/systems/identifier.ts:108](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/identifier.ts#L108)
+[server/systems/identifier.ts:108](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/identifier.ts#L108)
 
 ___
 
@@ -59,7 +59,7 @@ Returns the player by the currently set identification strategy.
 
 #### Defined in
 
-[server/systems/identifier.ts:62](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/identifier.ts#L62)
+[server/systems/identifier.ts:62](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/identifier.ts#L62)
 
 ___
 
@@ -84,7 +84,7 @@ Used to override identification strategy functions.
 
 #### Defined in
 
-[server/systems/identifier.ts:145](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/identifier.ts#L145)
+[server/systems/identifier.ts:145](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/identifier.ts#L145)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -105,7 +105,7 @@ Used to override identification strategy functions.
 
 #### Defined in
 
-[server/systems/identifier.ts:146](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/identifier.ts#L146)
+[server/systems/identifier.ts:146](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/identifier.ts#L146)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -126,7 +126,7 @@ Used to override identification strategy functions.
 
 #### Defined in
 
-[server/systems/identifier.ts:147](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/identifier.ts#L147)
+[server/systems/identifier.ts:147](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/identifier.ts#L147)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -147,7 +147,7 @@ Used to override identification strategy functions.
 
 #### Defined in
 
-[server/systems/identifier.ts:148](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/identifier.ts#L148)
+[server/systems/identifier.ts:148](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/identifier.ts#L148)
 
 ___
 
@@ -173,7 +173,7 @@ DO NOT CHANGE THIS AFTER SERVER STARTUP.
 
 #### Defined in
 
-[server/systems/identifier.ts:26](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/identifier.ts#L26)
+[server/systems/identifier.ts:26](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/identifier.ts#L26)
 
 ___
 
@@ -195,4 +195,4 @@ Automatically sets the player identification by strategy to the synced meta.
 
 #### Defined in
 
-[server/systems/identifier.ts:39](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/identifier.ts#L39)
+[server/systems/identifier.ts:39](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/identifier.ts#L39)

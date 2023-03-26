@@ -21,7 +21,7 @@ Re-exports [Page](../classes/client_webview_page_Page.md)
 
 #### Defined in
 
-[client/webview/index.ts:9](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L9)
+[client/webview/index.ts:9](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L9)
 
 ## Functions
 
@@ -49,7 +49,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:503](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L503)
+[client/webview/index.ts:503](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L503)
 
 ___
 
@@ -78,7 +78,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:544](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L544)
+[client/webview/index.ts:544](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L544)
 
 ___
 
@@ -106,7 +106,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:231](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L231)
+[client/webview/index.ts:231](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L231)
 
 ___
 
@@ -128,7 +128,7 @@ Register a page to ignore escape key presence.
 
 #### Defined in
 
-[client/webview/index.ts:658](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L658)
+[client/webview/index.ts:658](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L658)
 
 ___
 
@@ -150,7 +150,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:384](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L384)
+[client/webview/index.ts:384](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L384)
 
 ___
 
@@ -186,7 +186,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:624](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L624)
+[client/webview/index.ts:624](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L624)
 
 ___
 
@@ -208,7 +208,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:457](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L457)
+[client/webview/index.ts:457](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L457)
 
 ___
 
@@ -230,7 +230,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:353](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L353)
+[client/webview/index.ts:353](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L353)
 
 ___
 
@@ -254,7 +254,7 @@ Checks if any menu is currently open
 
 #### Defined in
 
-[client/webview/index.ts:673](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L673)
+[client/webview/index.ts:673](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L673)
 
 ___
 
@@ -270,7 +270,7 @@ Returns whether or not all pages are done closing / opening
 
 #### Defined in
 
-[client/webview/index.ts:648](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L648)
+[client/webview/index.ts:648](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L648)
 
 ___
 
@@ -292,7 +292,7 @@ Returns if a page is currently open.
 
 #### Defined in
 
-[client/webview/index.ts:639](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L639)
+[client/webview/index.ts:639](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L639)
 
 ___
 
@@ -327,7 +327,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:604](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L604)
+[client/webview/index.ts:604](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L604)
 
 ___
 
@@ -358,7 +358,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:399](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L399)
+[client/webview/index.ts:399](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L399)
 
 ___
 
@@ -387,7 +387,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:592](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L592)
+[client/webview/index.ts:592](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L592)
 
 ___
 
@@ -416,7 +416,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:314](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L314)
+[client/webview/index.ts:314](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L314)
 
 ___
 
@@ -444,7 +444,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:296](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L296)
+[client/webview/index.ts:296](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L296)
 
 ___
 
@@ -473,7 +473,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:333](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L333)
+[client/webview/index.ts:333](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L333)
 
 ___
 
@@ -502,7 +502,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:266](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L266)
+[client/webview/index.ts:266](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L266)
 
 ___
 
@@ -530,7 +530,7 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:478](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L478)
+[client/webview/index.ts:478](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L478)
 
 ___
 
@@ -552,4 +552,4 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:467](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/webview/index.ts#L467)
+[client/webview/index.ts:467](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/webview/index.ts#L467)

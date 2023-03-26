@@ -23,7 +23,7 @@ Disable the gameplay camera from moving
 
 #### Defined in
 
-[client/camera/gameplay.ts:24](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/camera/gameplay.ts#L24)
+[client/camera/gameplay.ts:24](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/camera/gameplay.ts#L24)
 
 ___
 
@@ -41,4 +41,4 @@ Enable the gameplay camera
 
 #### Defined in
 
-[client/camera/gameplay.ts:38](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/camera/gameplay.ts#L38)
+[client/camera/gameplay.ts:38](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/camera/gameplay.ts#L38)

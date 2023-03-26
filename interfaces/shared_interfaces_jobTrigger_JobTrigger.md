@@ -53,7 +53,7 @@ JobTrigger
 
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:57](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/jobTrigger.ts#L57)
+[shared/interfaces/jobTrigger.ts:57](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/jobTrigger.ts#L57)
 
 ___
 
@@ -83,7 +83,7 @@ JobTrigger
 
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:64](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/jobTrigger.ts#L64)
+[shared/interfaces/jobTrigger.ts:64](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/jobTrigger.ts#L64)
 
 ___
 
@@ -100,7 +100,7 @@ JobTrigger
 
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:50](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/jobTrigger.ts#L50)
+[shared/interfaces/jobTrigger.ts:50](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/jobTrigger.ts#L50)
 
 ___
 
@@ -117,7 +117,7 @@ JobTrigger
 
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:42](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/jobTrigger.ts#L42)
+[shared/interfaces/jobTrigger.ts:42](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/jobTrigger.ts#L42)
 
 ___
 
@@ -133,7 +133,7 @@ JobTrigger
 
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:20](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/jobTrigger.ts#L20)
+[shared/interfaces/jobTrigger.ts:20](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/jobTrigger.ts#L20)
 
 ___
 
@@ -149,7 +149,7 @@ JobTrigger
 
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:13](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/jobTrigger.ts#L13)
+[shared/interfaces/jobTrigger.ts:13](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/jobTrigger.ts#L13)
 
 ___
 
@@ -165,7 +165,7 @@ JobTrigger
 
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:34](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/jobTrigger.ts#L34)
+[shared/interfaces/jobTrigger.ts:34](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/jobTrigger.ts#L34)
 
 ___
 
@@ -181,4 +181,4 @@ JobTrigger
 
 #### Defined in
 
-[shared/interfaces/jobTrigger.ts:27](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/jobTrigger.ts#L27)
+[shared/interfaces/jobTrigger.ts:27](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/jobTrigger.ts#L27)

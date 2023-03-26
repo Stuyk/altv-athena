@@ -29,7 +29,7 @@ Athena.systems.default.time.disable();
 
 #### Defined in
 
-[server/systems/defaults/time.ts:83](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/defaults/time.ts#L83)
+[server/systems/defaults/time.ts:83](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/defaults/time.ts#L83)
 
 ___
 
@@ -47,7 +47,7 @@ Get the current hour.
 
 #### Defined in
 
-[server/systems/defaults/time.ts:100](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/defaults/time.ts#L100)
+[server/systems/defaults/time.ts:100](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/defaults/time.ts#L100)
 
 ___
 
@@ -65,7 +65,7 @@ Get the current minute.
 
 #### Defined in
 
-[server/systems/defaults/time.ts:110](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/defaults/time.ts#L110)
+[server/systems/defaults/time.ts:110](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/defaults/time.ts#L110)
 
 ___
 
@@ -87,4 +87,4 @@ Updates the player time to match the current server time.
 
 #### Defined in
 
-[server/systems/defaults/time.ts:59](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/defaults/time.ts#L59)
+[server/systems/defaults/time.ts:59](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/systems/defaults/time.ts#L59)

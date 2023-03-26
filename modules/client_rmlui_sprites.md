@@ -31,7 +31,7 @@ Create a sprite. Create a JavaScript object to start building the sprite.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:222](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/sprites/index.ts#L222)
+[client/rmlui/sprites/index.ts:222](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/sprites/index.ts#L222)
 
 ___
 
@@ -53,7 +53,7 @@ Remove a sprite by `uid` and stop it from updating entirely.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:246](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/sprites/index.ts#L246)
+[client/rmlui/sprites/index.ts:246](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/sprites/index.ts#L246)
 
 ___
 
@@ -78,4 +78,4 @@ Requires the `uid` specified to update it.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:263](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/rmlui/sprites/index.ts#L263)
+[client/rmlui/sprites/index.ts:263](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/rmlui/sprites/index.ts#L263)

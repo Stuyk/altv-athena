@@ -32,7 +32,7 @@ IWorldNotification
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:38](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/iWorldNotification.ts#L38)
+[shared/interfaces/iWorldNotification.ts:38](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/iWorldNotification.ts#L38)
 
 ___
 
@@ -48,7 +48,7 @@ IWorldNotification
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:59](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/iWorldNotification.ts#L59)
+[shared/interfaces/iWorldNotification.ts:59](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/iWorldNotification.ts#L59)
 
 ___
 
@@ -64,7 +64,7 @@ IWorldNotification
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:45](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/iWorldNotification.ts#L45)
+[shared/interfaces/iWorldNotification.ts:45](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/iWorldNotification.ts#L45)
 
 ___
 
@@ -80,7 +80,7 @@ IObject
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:16](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/iWorldNotification.ts#L16)
+[shared/interfaces/iWorldNotification.ts:16](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/iWorldNotification.ts#L16)
 
 ___
 
@@ -96,7 +96,7 @@ IWorldNotification
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:23](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/iWorldNotification.ts#L23)
+[shared/interfaces/iWorldNotification.ts:23](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/iWorldNotification.ts#L23)
 
 ___
 
@@ -112,7 +112,7 @@ IWorldNotification
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:30](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/iWorldNotification.ts#L30)
+[shared/interfaces/iWorldNotification.ts:30](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/iWorldNotification.ts#L30)
 
 ___
 
@@ -128,4 +128,4 @@ IWorldNotification
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:52](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/iWorldNotification.ts#L52)
+[shared/interfaces/iWorldNotification.ts:52](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/interfaces/iWorldNotification.ts#L52)

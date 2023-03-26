@@ -30,7 +30,7 @@ order: 0
 
 #### Defined in
 
-[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/menus/vehicle.ts#L8)
+[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/menus/vehicle.ts#L8)
 
 ## Functions
 
@@ -60,7 +60,7 @@ VehicleMenu
 
 #### Defined in
 
-[client/menus/vehicle.ts:21](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/menus/vehicle.ts#L21)
+[client/menus/vehicle.ts:21](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/menus/vehicle.ts#L21)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[client/menus/vehicle.ts:74](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/menus/vehicle.ts#L74)
+[client/menus/vehicle.ts:74](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/menus/vehicle.ts#L74)
 
 ___
 
@@ -108,4 +108,4 @@ VehicleWheelMenu
 
 #### Defined in
 
-[client/menus/vehicle.ts:33](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/menus/vehicle.ts#L33)
+[client/menus/vehicle.ts:33](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/client/menus/vehicle.ts#L33)

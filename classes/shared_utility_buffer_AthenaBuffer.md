@@ -41,7 +41,7 @@ AthenaBuffer
 
 #### Defined in
 
-[shared/utility/buffer.ts:23](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/utility/buffer.ts#L23)
+[shared/utility/buffer.ts:23](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/buffer.ts#L23)
 
 ___
 
@@ -71,4 +71,4 @@ AthenaBuffer
 
 #### Defined in
 
-[shared/utility/buffer.ts:11](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/utility/buffer.ts#L11)
+[shared/utility/buffer.ts:11](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/shared/utility/buffer.ts#L11)

@@ -64,7 +64,7 @@ A string representing the uid of the interaction.
 
 #### Defined in
 
-[server/controllers/interaction.ts:298](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/interaction.ts#L298)
+[server/controllers/interaction.ts:298](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/interaction.ts#L298)
 
 ___
 
@@ -96,7 +96,7 @@ The InteractionShape object.
 
 #### Defined in
 
-[server/controllers/interaction.ts:367](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/interaction.ts#L367)
+[server/controllers/interaction.ts:367](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/interaction.ts#L367)
 
 ___
 
@@ -114,7 +114,7 @@ Used to obtain current interactions that are bound to a player id.
 
 #### Defined in
 
-[server/controllers/interaction.ts:386](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/interaction.ts#L386)
+[server/controllers/interaction.ts:386](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/interaction.ts#L386)
 
 ___
 
@@ -139,7 +139,7 @@ Used to override any interaction controller function.
 
 #### Defined in
 
-[server/controllers/interaction.ts:421](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/interaction.ts#L421)
+[server/controllers/interaction.ts:421](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/interaction.ts#L421)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -160,7 +160,7 @@ Used to override any interaction controller function.
 
 #### Defined in
 
-[server/controllers/interaction.ts:422](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/interaction.ts#L422)
+[server/controllers/interaction.ts:422](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/interaction.ts#L422)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -181,7 +181,7 @@ Used to override any interaction controller function.
 
 #### Defined in
 
-[server/controllers/interaction.ts:423](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/interaction.ts#L423)
+[server/controllers/interaction.ts:423](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/interaction.ts#L423)
 
 ▸ **override**(`functionName`, `callback`): `any`
 
@@ -202,7 +202,7 @@ Used to override any interaction controller function.
 
 #### Defined in
 
-[server/controllers/interaction.ts:424](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/interaction.ts#L424)
+[server/controllers/interaction.ts:424](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/interaction.ts#L424)
 
 ___
 
@@ -228,7 +228,7 @@ Handles things such as entering colshapes, leaving, and trigger them.
 
 #### Defined in
 
-[server/controllers/interaction.ts:436](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/interaction.ts#L436)
+[server/controllers/interaction.ts:436](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/interaction.ts#L436)
 
 ▸ **overrideInternal**(`functionName`, `callback`): `any`
 
@@ -250,7 +250,7 @@ Handles things such as entering colshapes, leaving, and trigger them.
 
 #### Defined in
 
-[server/controllers/interaction.ts:437](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/interaction.ts#L437)
+[server/controllers/interaction.ts:437](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/interaction.ts#L437)
 
 ▸ **overrideInternal**(`functionName`, `callback`): `any`
 
@@ -272,7 +272,7 @@ Handles things such as entering colshapes, leaving, and trigger them.
 
 #### Defined in
 
-[server/controllers/interaction.ts:438](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/interaction.ts#L438)
+[server/controllers/interaction.ts:438](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/interaction.ts#L438)
 
 ___
 
@@ -306,4 +306,4 @@ None
 
 #### Defined in
 
-[server/controllers/interaction.ts:346](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/controllers/interaction.ts#L346)
+[server/controllers/interaction.ts:346](https://github.com/Stuyk/altv-athena/blob/9c488f0/src/core/server/controllers/interaction.ts#L346)
