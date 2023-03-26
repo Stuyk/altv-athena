@@ -17,6 +17,17 @@ const DEBUG_MODE = false; // Use this to see what state is being set.
  *
  * This should be the first thing you do after having a user authenticate and select a character.
  *
+ * #### Example
+ *
+ * ```ts
+ * import Database from '@stuyk/ezmongodb';
+ *
+ * async function doSomething(somePlayer: alt.Player, someMongoDBId: string) {
+ *     const someData = await Database.fetchData('_id', someMongoDBId, 'characters')
+ *     Athena.document.character.bind(somePlayer, someData);
+ * }
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {Character} document
  */
@@ -34,6 +45,13 @@ export function bind(player: alt.Player, document: Character) {
 
 /**
  * Unbind stored player character cache data.
+ *
+ * #### Example
+ *
+ * ```ts
+ * Athena.document.character.unbind(1);
+ * ```
+ *
  *
  * @param {number} id
  */
@@ -85,6 +103,30 @@ export function get<T = Character>(player: alt.Player): T | undefined {
  * Get the current value of a specific field inside of the player data object.
  * Can be extended to obtain any value easily.
  *
+ * #### Example
+ *
+ * Get a default value.
+ *
+ * ```ts
+ * const cash = Athena.document.character.getField<{}, number>(somePlayer, 'cash');
+ * if (typeof cash === 'undefined') {
+ *     return;
+ * }
+ * ```
+ *
+ * Alternatively, pass a custom interface.
+ *
+ * ```ts
+ * interface CustomData {
+ *     bitcoin: number
+ * }
+ *
+ * const bitcoins = Athena.document.character.getField<CustomData, number>(somePlayer, 'bitcoin');
+ * if (typeof bitcoins === 'undefined') {
+ *     return;
+ * }
+ * ```
+ *
  * @template T
  * @param {alt.Player} player An alt:V Player Entity
  * @param {(keyof KnownKeys<Character & T>)} fieldName
@@ -113,9 +155,11 @@ export function getField<T = {}, ReturnType = any>(
  * #### Example
  * ```ts
  * await Athena.document.character.set(somePlayer, 'cash', 50);
+ * ```
  *
- * // Alternatively
+ * Alternatively, pass a custom interface.
  *
+ * ```ts
  * interface CustomCharacter {
  *      someKey: string;
  * }
@@ -177,7 +221,14 @@ export async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(
 
 /**
  * Sets player document values, and saves it automatically to the selected character's database.
+ *
  * Automatically calls all callbacks associated with the field name.
+ *
+ * #### Example
+ *
+ * ```ts
+ * await Athena.document.character.setBulk(player, { cash: 25, bank: 100 });
+ * ```
  *
  * @template T
  * @param {alt.Player} player An alt:V Player Entity
@@ -212,13 +263,18 @@ export async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt
 /**
  * Invokes the callback function when a document with a specific field name has changed.
  *
+ * #### Example
+ * ```ts
+ * Athena.document.character.onChange('cash', (player: alt.Player, newValue: number, oldValue: number) => {
+ *     // Do whatever you want with it.
+ *     // Never, ever update the same document value twice in a row.
+ *     // It creates an endless loop
+ * })
+ * ```
  *
- * @name onChange
-
  * @param {keyof KnownKeys<Character & T>} fieldName
  * @param {KeyChangeCallback} callback
  * @returns {void}
- * s
  */
 export function onChange<T = {}>(fieldName: keyof KnownKeys<Character & T>, callback: KeyChangeCallback) {
     if (Overrides.onChange) {

@@ -164,6 +164,13 @@ export function meta(player: alt.Player, key: string, value: any): void {
 
 /**
  * Send a notification to this player.
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.notification(somePlayer, '~y~Hello There~');
+ * ```
+ *
+ * @param {alt.Player} player
  * @param {string} message
  *
  */
@@ -177,6 +184,8 @@ export function notification(player: alt.Player, message: string): void {
 
 /**
  * Play a particle effect at a specific coordinate.
+ *
+ * @param {alt.Player} player
  * @param {Particle} particle
  * @param {boolean} [emitToNearbyPlayers=false]
  */
@@ -213,6 +222,17 @@ export function createMissionText(player: alt.Player, text: string, duration?: n
 
 /**
  * Create a progress bar that eventually ends itself.
+ *
+ * #### Example
+ * ```ts
+ * const someUid = Athena.player.emit.createProgressBar(somePlayer, {
+ *      color: new alt.RGBA(255, 0, 0, 200),
+ *      distance: 10,
+ *      milliseconds: 30000,
+ *      position: new alt.Vector3(somePlayer.pos.x, somePlayer.pos.y, somePlayer.pos.z)
+ * });
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {ProgressBar} progressbar
  * @returns {string} A unique identifier to remove the progress bar.
@@ -232,6 +252,19 @@ export function createProgressBar(player: alt.Player, progressbar: ProgressBar):
 
 /**
  * Remove a progress bar based on its unique identifier.
+ *
+ * #### Example
+ * ```ts
+ * const someUid = Athena.player.emit.createProgressBar(somePlayer, {
+ *      color: new alt.RGBA(255, 0, 0, 200),
+ *      distance: 10,
+ *      milliseconds: 30000,
+ *      position: new alt.Vector3(somePlayer.pos.x, somePlayer.pos.y, somePlayer.pos.z)
+ * });
+ *
+ * Athena.player.emit.removeProgressBar(somePlayer, someUid);
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {string} uid A unique string
  */
@@ -244,7 +277,13 @@ export function removeProgressBar(player: alt.Player, uid: string) {
 }
 
 /**
- * Play a sound without any positional data.
+ * Play a custom sound without any positional data.
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.sound3D(somePlayer, 'error.ogg');
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {string} audioName
  * @param {number} [volume=0.35]
@@ -260,6 +299,12 @@ export function sound2D(player: alt.Player, audioName: string, volume: number = 
 
 /**
  * Play a sound from at a target's location for this player.
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.sound3D(somePlayer, 'car_lock.ogg', someVehicle);
+ * ```
+ *
  * @param {string} audioName
  * @param {alt.Entity} target
  * @param {string} soundInstantID, optional unique id to play sound instant
@@ -274,7 +319,15 @@ export function sound3D(player: alt.Player, audioName: string, target: alt.Entit
 }
 
 /**
- * Stop all sounds.
+ * Stop all custom sounds that may be playing.
+ *
+ * This does not stop frontend sounds.
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.soundStop(somePlayer);
+ * ```
+ *
  * @param {string} audioName
  * @param {alt.Entity} target
  * @param {string} soundInstantID, optional unique id to play sound instant
@@ -290,6 +343,14 @@ export function soundStop(player: alt.Player, soundInstantID?: string): void {
 
 /**
  * Play a frontend sound for this player.
+ *
+ * [Frontend Audio List](https://github.com/DurtyFree/gta-v-data-dumps/blob/master/soundNames.json)
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.soundFrontend(somePlayer, 'HUD_FRONTEND_DEFAULT_SOUNDSET', 'BACK');
+ * ```
+ *
  * @param {string} audioName
  * @param {string} ref
  *
@@ -316,6 +377,12 @@ export function taskTimeline(player: alt.Player, tasks: Array<Task | TaskCallbac
 
 /**
  * Create a spinner in the bottom-right corner.
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.createSpinner(somePlayer, { text: 'Doing Something With Spinners', duration: 5000, type: 4 })
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {ISpinner} spinner
  */
@@ -329,7 +396,14 @@ export function createSpinner(player: alt.Player, spinner: ISpinner) {
 
 /**
  * Clear a spinner in the bottom-right corner.
+ *
  * No UID necessary since it can only have one spinner at a time.
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.clearSpinner(somePlayer);
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  */
 export function clearSpinner(player: alt.Player) {
@@ -342,6 +416,12 @@ export function clearSpinner(player: alt.Player) {
 
 /**
  * Create a full-screen message. Cannot be cleared by the player.
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.createErrorScreen(somePlayer, { title: 'Oh No!', text: 'Something Happened', text2: 'Maybe a suggestion', duration: 5000})
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {IErrorScreen} screen
  */
@@ -355,6 +435,12 @@ export function createErrorScreen(player: alt.Player, screen: IErrorScreen) {
 
 /**
  * Clear a full-screen message.
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.clearErrorScreen(somePlayer)
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  */
 export function clearErrorScreen(player: alt.Player) {
@@ -367,6 +453,12 @@ export function clearErrorScreen(player: alt.Player) {
 
 /**
  * Create a full-screen shard. Similar to 'mission-passed' or 'wasted'.
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.createShard(somePlayer, { title: 'Big Text', text: 'Small Text', duration: 5000 })
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {IErrorScreen} screen
  */
@@ -380,6 +472,12 @@ export function createShard(player: alt.Player, shard: IShard) {
 
 /**
  * Clear a shard.
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.clearShard(somePlayer);
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  */
 export function clearShard(player: alt.Player) {
@@ -392,9 +490,16 @@ export function clearShard(player: alt.Player) {
 
 /**
  * Create a 'credits' text aligned to a certain side of the screen.
+ *
  * Automatically clear(s) over-time.
+ *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.createCredits(somePlayer, { name: 'Big Text', role: 'Small Text', duration: 2000 });
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
- * @param {IErrorScreen} screen
+ * @param {ICredit} screen
  */
 export function createCredits(player: alt.Player, credits: ICredit) {
     if (Overrides.createCredits) {
@@ -406,6 +511,12 @@ export function createCredits(player: alt.Player, credits: ICredit) {
 
 /**
  * Clears a 'credits' display.
+ *
+ * #### Example
+ * ```ts
+ * const uidFromAttachment = Athena.player.emit.clearCredits(somePlayer);
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  */
 export function clearCredits(player: alt.Player) {
@@ -418,8 +529,21 @@ export function clearCredits(player: alt.Player) {
 
 /**
  * Attach an object to a player.
+ *
  * Automatically synchronized and handled client-side.
+ *
  * Last parameter is when to remove the object. Automatically set to infinite.
+ *
+ * #### Example
+ * ```ts
+ * const uidFromAttachment = Athena.player.emit.objectAttach(somePlayer, {
+ *      model: 'prop_box_ammo01a',
+ *      bone: 127,
+ *      pos: { x: 0, y: 0, z: 0},
+ *      rot: { x: 0, y: 0, z: 0 }
+ * });
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {IAttachable} attachable
  * @param {number} removeAfterMilliseconds
@@ -467,7 +591,20 @@ export function objectAttach(player: alt.Player, attachable: IAttachable, remove
 }
 
 /**
- * Remove an object from the player.
+ * Remove an attachment object from the player.
+ *
+ * #### Example
+ * ```ts
+ * const uidFromAttachment = Athena.player.emit.objectAttach(somePlayer, {
+ *      model: 'prop_box_ammo01a',
+ *      bone: 127,
+ *      pos: { x: 0, y: 0, z: 0},
+ *      rot: { x: 0, y: 0, z: 0 }
+ * });
+ *
+ * Athena.player.emit.objectRemove(somePlayer, uidFromAttachment);
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {string} uid A unique string
  * @return {void}
@@ -539,6 +676,11 @@ export function wheelMenu(player: alt.Player, label: string, wheelItems: Array<I
 /**
  * Emit a message to a given player.
  *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.message(somePlayer, '{FF0000} Hello there! This text is Red :)');
+ * ```
+ *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {string} msg
  */
@@ -552,7 +694,29 @@ export function message(player: alt.Player, msg: string) {
 
 /**
  * Prompt the user to accept / decline something.
- * They must react by holding l-shift to open the menu.
+ *
+ * They must react by holding up arrow to open the menu.
+ *
+ * #### Example
+ *
+ * ```ts
+ * function doSomething(player: alt.Player) {
+ *     Athena.player.emit.acceptDeclineEvent(somePlayer, {
+ *         question: 'Would you like to teleport to the beach?',
+ *         onClientEvents: {
+ *             accept: 'from-client-event-doSomething',
+ *             decline: 'from-client-event-doNothing',
+ *         },
+ *     });
+ * }
+ *
+ * alt.onClient('from-client-event-doSomething', (player: alt.Player) => {
+ *     //
+ * });
+ * alt.onClient('from-client-event-doNothing', (player: alt.Player) => {
+ *     //
+ * });
+ * ```
  *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {AcceptDeclineEvent} eventInfo
@@ -569,6 +733,10 @@ export function acceptDeclineEvent(player: alt.Player, eventInfo: AcceptDeclineE
 /**
  * Turns the player's screen black over time.
  *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.fadeScreenToBlack(somePlayer, 5000);
+ * ```
  *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} timeInMs
@@ -580,6 +748,10 @@ export function fadeScreenToBlack(player: alt.Player, timeInMs: number) {
 /**
  * Removes the black filter over the screen over time.
  *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.fadeScreenFromBlack(somePlayer, 5000);
+ * ```
  *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} timeInMs
@@ -595,6 +767,10 @@ export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs:
  *
  * Think of like screen wobbling, drunkness, etc.
  *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.setTimeCycleEffect(somePlayer, 'REDMIST', 30000);
+ * ```
  *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {string} name
@@ -607,6 +783,10 @@ export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs 
 /**
  * Used to clear a screen effect from a player.
  *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.clearTimeCycleEffect(somePlayer);
+ * ```
  *
  * @param {alt.Player} player An alt:V Player Entity
  */
@@ -619,6 +799,10 @@ export function clearTimeCycleEffect(player: alt.Player) {
  *
  * Does not use alt:V functionality. Only uses natives.
  *
+ * #### Example
+ * ```ts
+ * Athena.player.emit.setWeather(somePlayer, 'Thunder', 30);
+ * ```
  *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {number} timeInSeconds
