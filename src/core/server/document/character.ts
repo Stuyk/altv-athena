@@ -12,7 +12,9 @@ const DEBUG_MODE = false; // Use this to see what state is being set.
 
 /**
  * Binds a player identifier to a Character document.
+ *
  * This document is cleared on disconnected automatically.
+ *
  * This should be the first thing you do after having a user authenticate and select a character.
  *
  * @param {alt.Player} player
@@ -105,7 +107,21 @@ export function getField<T = {}, ReturnType = any>(
 
 /**
  * Sets a player document value, and saves it automatically to the selected character's database.
+ *
  * Automatically calls all callbacks associated with the field name.
+ *
+ * @example
+ * ```ts
+ * await Athena.document.character.set(somePlayer, 'cash', 50);
+ *
+ * // Alternatively
+ *
+ * interface CustomCharacter {
+ *      someKey: string;
+ * }
+ *
+ * await Athena.document.character.set<CustomCharacter>(somePlayer, 'someKey', 'hello world');
+ * ```
  *
  * @template T
  * @param {alt.Player} player

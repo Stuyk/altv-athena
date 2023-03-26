@@ -11,6 +11,40 @@ import * as players from './players';
 export function byID(id: number): alt.Vehicle | undefined {
     return alt.Vehicle.all.find((x) => x.id === id);
 }
+
+/**
+ * Return a spawned vehicle by is incremental data id.
+ *
+ * This only works for persistent vehicles.
+ *
+ * @export
+ * @param {(number | string)} id
+ * @return {(alt.Vehicle | undefined)}
+ */
+export function byIncrementalDatabaseID(id: number | string): alt.Vehicle | undefined {
+    if (typeof id === 'string') {
+        id = parseInt(id);
+    }
+
+    if (isNaN(id)) {
+        return undefined;
+    }
+
+    return alt.Vehicle.all.find((x) => {
+        const data = Athena.document.vehicle.get(x);
+
+        if (typeof data === 'undefined') {
+            return false;
+        }
+
+        if (data.id !== id) {
+            return false;
+        }
+
+        return true;
+    });
+}
+
 /**
  * Get a vehicle based on their database _id
  * May return undefined if the vehicle is not currently spawned.

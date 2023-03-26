@@ -91,7 +91,7 @@ export async function increase(key: string, increaseByValue = 1, startValue = 0)
     await isReady();
 
     const document = await Database.fetchData<IGlobal>('_id', uid, CollectionName);
-    if (!document[key]) {
+    if (typeof document[key] === 'undefined') {
         document[key] = startValue;
     } else {
         if (typeof document[key] !== 'number') {

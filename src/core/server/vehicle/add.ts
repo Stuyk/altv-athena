@@ -81,6 +81,7 @@ export async function toPlayer(
 
         await Athena.systems.global.increase('vehicleId');
         const id = await Athena.systems.global.getKey<number>('vehicleId');
+
         const ownedVehicle: OwnedVehicle = {
             dimension: 0,
             keys: options && options.keys ? options.keys : [],
@@ -146,6 +147,7 @@ export async function toDatabase(
 
         await Athena.systems.global.increase('vehicleId');
         const id = await Athena.systems.global.getKey<number>('vehicleId');
+
         const ownedVehicle: OwnedVehicle = {
             dimension: 0,
             keys: options && options.keys ? options.keys : [],
