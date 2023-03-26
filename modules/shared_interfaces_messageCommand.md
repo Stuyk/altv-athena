@@ -26,7 +26,9 @@ order: 0
 
 #### Type declaration
 
-▸ (`player`, `...args`): `void`
+::: Tip
+AthenaShared.interfaces.messageCommand.(`player`, `...args`): `void`
+:::
 
 ##### Parameters
 
@@ -41,4 +43,4 @@ order: 0
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:1](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/messageCommand.ts#L1)
+[shared/interfaces/messageCommand.ts:1](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/messageCommand.ts#L1)

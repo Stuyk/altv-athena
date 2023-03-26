@@ -11,7 +11,9 @@ order: 0
 
 ### findOpen
 
-▸ **findOpen**(`slotSize`, `data`): `number` \| `undefined`
+::: Tip
+Athena.systems.inventory.slot.**findOpen**(`slotSize`, `data`): `number` \| `undefined`
+:::
 
 Find an open slot that is available within a dataset.
 
@@ -30,13 +32,15 @@ Find an open slot that is available within a dataset.
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:14](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L14)
+[server/systems/inventory/slot.ts:14](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/slot.ts#L14)
 
 ___
 
 ### getAt
 
-▸ **getAt**<`CustomData`\>(`slot`, `data`): [`player`](server_config.md#player)<`CustomData`\> \| `undefined`
+::: Tip
+Athena.systems.inventory.slot.**getAt**<`CustomData`\>(`slot`, `data`): [`player`](server_config.md#player)<`CustomData`\> \| `undefined`
+:::
 
 Get an item at a specific slot.
 Returns undefined if an item is unavailable in a slot.
@@ -60,13 +64,15 @@ Returns undefined if an item is unavailable in a slot.
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:47](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L47)
+[server/systems/inventory/slot.ts:47](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/slot.ts#L47)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.inventory.slot.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override inventory item slot functionality
 
@@ -85,9 +91,11 @@ Used to override inventory item slot functionality
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:90](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L90)
+[server/systems/inventory/slot.ts:90](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/slot.ts#L90)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.inventory.slot.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override inventory item slot functionality
 
@@ -106,9 +114,11 @@ Used to override inventory item slot functionality
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:91](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L91)
+[server/systems/inventory/slot.ts:91](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/slot.ts#L91)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.inventory.slot.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override inventory item slot functionality
 
@@ -127,13 +137,15 @@ Used to override inventory item slot functionality
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:92](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L92)
+[server/systems/inventory/slot.ts:92](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/slot.ts#L92)
 
 ___
 
 ### removeAt
 
-▸ **removeAt**(`slot`, `data`): [`player`](server_config.md#player)[] \| `undefined`
+::: Tip
+Athena.systems.inventory.slot.**removeAt**(`slot`, `data`): [`player`](server_config.md#player)[] \| `undefined`
+:::
 
 Remove a specific item from a specific slot.
 
@@ -152,4 +164,4 @@ Returns undefined if the item was not found.
 
 #### Defined in
 
-[server/systems/inventory/slot.ts:67](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/slot.ts#L67)
+[server/systems/inventory/slot.ts:67](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/slot.ts#L67)

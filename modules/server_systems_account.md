@@ -11,7 +11,9 @@ order: 0
 
 ### create
 
-▸ **create**(`player`, `dataToAppend`): `Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md)\>
+::: Tip
+Athena.systems.account.**create**(`player`, `dataToAppend`): `Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md)\>
+:::
 
 Create an account with default data.
 
@@ -32,13 +34,15 @@ AccountSystemRef
 
 #### Defined in
 
-[server/systems/account.ts:66](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/account.ts#L66)
+[server/systems/account.ts:66](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/account.ts#L66)
 
 ___
 
 ### getAccount
 
-▸ **getAccount**(`key`, `value`): `Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md) \| `undefined`\>
+::: Tip
+Athena.systems.account.**getAccount**(`key`, `value`): `Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md) \| `undefined`\>
+:::
 
 Fetch account for a player based on key / value pair.
 
@@ -59,13 +63,15 @@ AccountSystemRef
 
 #### Defined in
 
-[server/systems/account.ts:36](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/account.ts#L36)
+[server/systems/account.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/account.ts#L36)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.account.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any account system functionality
 
@@ -84,9 +90,11 @@ Used to override any account system functionality
 
 #### Defined in
 
-[server/systems/account.ts:109](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/account.ts#L109)
+[server/systems/account.ts:109](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/account.ts#L109)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.account.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any account system functionality
 
@@ -105,4 +113,4 @@ Used to override any account system functionality
 
 #### Defined in
 
-[server/systems/account.ts:110](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/account.ts#L110)
+[server/systems/account.ts:110](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/account.ts#L110)

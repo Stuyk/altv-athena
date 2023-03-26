@@ -11,7 +11,9 @@ order: 0
 
 ### default
 
-▸ **default**(`callback`): { `callback`: (...`args`: `any`[]) => `void` ; `data`: `any`[] ; `name`: `string` = 'CPR' }[]
+::: Tip
+AthenaClient.menus.animationMenus.commonAnims.**default**(`callback`): { `callback`: (...`args`: `any`[]) => `void` ; `data`: `any`[] ; `name`: `string` = 'CPR' }[]
+:::
 
 #### Parameters
 
@@ -25,4 +27,4 @@ order: 0
 
 #### Defined in
 
-[client/menus/animationMenus/commonAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/animationMenus/commonAnims.ts#L3)
+[client/menus/animationMenus/commonAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/animationMenus/commonAnims.ts#L3)

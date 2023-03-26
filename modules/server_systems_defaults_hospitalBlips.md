@@ -11,7 +11,9 @@ order: 0
 
 ### disable
 
-▸ **disable**(): `void`
+::: Tip
+Athena.systems.defaults.hospitalBlips.**disable**(): `void`
+:::
 
 Disable default hospital blips from being created
 
@@ -29,4 +31,4 @@ Athena.systems.default.hospitalBlips.disable();
 
 #### Defined in
 
-[server/systems/defaults/hospitalBlips.ts:57](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/defaults/hospitalBlips.ts#L57)
+[server/systems/defaults/hospitalBlips.ts:57](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/defaults/hospitalBlips.ts#L57)

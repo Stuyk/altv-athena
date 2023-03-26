@@ -35,13 +35,15 @@ order: 0
 
 #### Defined in
 
-[shared/utility/vector.ts:315](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L315)
+[shared/utility/vector.ts:315](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L315)
 
 ## Functions
 
 ### distance
 
-▸ **distance**(`vector1`, `vector2`): `number`
+::: Tip
+AthenaShared.utility.vector.**distance**(`vector1`, `vector2`): `number`
+:::
 
 Get the distance between two positions.
 
@@ -60,13 +62,15 @@ Get the distance between two positions.
 
 #### Defined in
 
-[shared/utility/vector.ts:11](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L11)
+[shared/utility/vector.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L11)
 
 ___
 
 ### distance2d
 
-▸ **distance2d**(`vector1`, `vector2`): `number`
+::: Tip
+AthenaShared.utility.vector.**distance2d**(`vector1`, `vector2`): `number`
+:::
 
 Get the distance between two positions. Excludes z
 
@@ -85,13 +89,15 @@ Get the distance between two positions. Excludes z
 
 #### Defined in
 
-[shared/utility/vector.ts:29](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L29)
+[shared/utility/vector.ts:29](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L29)
 
 ___
 
 ### getClosestEntity
 
-▸ **getClosestEntity**<`T`\>(`playerPosition`, `rot`, `entities`, `dist`, `checkBackwards?`): `T` \| ``null``
+::: Tip
+AthenaShared.utility.vector.**getClosestEntity**<`T`\>(`playerPosition`, `rot`, `entities`, `dist`, `checkBackwards?`): `T` \| ``null``
+:::
 
 Get the closest server entity type. Server only.
 
@@ -117,13 +123,15 @@ Get the closest server entity type. Server only.
 
 #### Defined in
 
-[shared/utility/vector.ts:208](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L208)
+[shared/utility/vector.ts:208](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L208)
 
 ___
 
 ### getClosestOfType
 
-▸ **getClosestOfType**<`T`\>(`pos`, `elements`, `lastDistance?`): `T` \| `undefined`
+::: Tip
+AthenaShared.utility.vector.**getClosestOfType**<`T`\>(`pos`, `elements`, `lastDistance?`): `T` \| `undefined`
+:::
 
 Get the closest of a specific type of object with a `pos` property.
 
@@ -149,13 +157,15 @@ Get the closest of a specific type of object with a `pos` property.
 
 #### Defined in
 
-[shared/utility/vector.ts:297](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L297)
+[shared/utility/vector.ts:297](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L297)
 
 ___
 
 ### getClosestTypes
 
-▸ **getClosestTypes**<`T`\>(`pos`, `elements`, `maxDistance`, `mustHaveProperties?`, `positionName?`): `T`[]
+::: Tip
+AthenaShared.utility.vector.**getClosestTypes**<`T`\>(`pos`, `elements`, `maxDistance`, `mustHaveProperties?`, `positionName?`): `T`[]
+:::
 
 Gets an array of the closest types.
 
@@ -183,13 +193,15 @@ Gets an array of the closest types.
 
 #### Defined in
 
-[shared/utility/vector.ts:80](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L80)
+[shared/utility/vector.ts:80](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L80)
 
 ___
 
 ### getClosestVector
 
-▸ **getClosestVector**(`pos`, `arrayOfPositions`): `IVector3`
+::: Tip
+AthenaShared.utility.vector.**getClosestVector**(`pos`, `arrayOfPositions`): `IVector3`
+:::
 
 Get the closest vector given an array of positions.
 
@@ -208,13 +220,15 @@ Get the closest vector given an array of positions.
 
 #### Defined in
 
-[shared/utility/vector.ts:45](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L45)
+[shared/utility/vector.ts:45](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L45)
 
 ___
 
 ### getClosestVectorByPos
 
-▸ **getClosestVectorByPos**<`T`\>(`pos`, `arrayOfPositions`, `posVariable?`): `T`
+::: Tip
+AthenaShared.utility.vector.**getClosestVectorByPos**<`T`\>(`pos`, `arrayOfPositions`, `posVariable?`): `T`
+:::
 
 Get the closest Vector by position.
 
@@ -240,13 +254,15 @@ Get the closest Vector by position.
 
 #### Defined in
 
-[shared/utility/vector.ts:63](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L63)
+[shared/utility/vector.ts:63](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L63)
 
 ___
 
 ### getForwardVector
 
-▸ **getForwardVector**(`rot`): `alt.IVector3`
+::: Tip
+AthenaShared.utility.vector.**getForwardVector**(`rot`): `alt.IVector3`
+:::
 
 SERVER ONLY
 Gets the direction the player is facing.
@@ -263,13 +279,15 @@ Gets the direction the player is facing.
 
 #### Defined in
 
-[shared/utility/vector.ts:156](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L156)
+[shared/utility/vector.ts:156](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L156)
 
 ___
 
 ### getVectorInFrontOfPlayer
 
-▸ **getVectorInFrontOfPlayer**(`entity`, `distance`): `alt.Vector3`
+::: Tip
+AthenaShared.utility.vector.**getVectorInFrontOfPlayer**(`entity`, `distance`): `alt.Vector3`
+:::
 
 SERVER ONLY
 Return a position in front of a player based on distance.
@@ -291,13 +309,15 @@ Return a position in front of a player based on distance.
 
 #### Defined in
 
-[shared/utility/vector.ts:172](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L172)
+[shared/utility/vector.ts:172](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L172)
 
 ___
 
 ### isBetweenVectors
 
-▸ **isBetweenVectors**(`pos`, `vector1`, `vector2`): `boolean`
+::: Tip
+AthenaShared.utility.vector.**isBetweenVectors**(`pos`, `vector1`, `vector2`): `boolean`
+:::
 
 Determine if a vector is between vectors.
 
@@ -315,13 +335,15 @@ Determine if a vector is between vectors.
 
 #### Defined in
 
-[shared/utility/vector.ts:193](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L193)
+[shared/utility/vector.ts:193](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L193)
 
 ___
 
 ### lerp
 
-▸ **lerp**(`a`, `b`, `t`): `number`
+::: Tip
+AthenaShared.utility.vector.**lerp**(`a`, `b`, `t`): `number`
+:::
 
 #### Parameters
 
@@ -337,13 +359,15 @@ ___
 
 #### Defined in
 
-[shared/utility/vector.ts:118](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L118)
+[shared/utility/vector.ts:118](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L118)
 
 ___
 
 ### vectorLerp
 
-▸ **vectorLerp**(`start`, `end`, `l`, `clamp`): `alt.IVector3`
+::: Tip
+AthenaShared.utility.vector.**vectorLerp**(`start`, `end`, `l`, `clamp`): `alt.IVector3`
+:::
 
 Finds a position between two vectors to ease into.
 Returns a new position.
@@ -365,4 +389,4 @@ Returns a new position.
 
 #### Defined in
 
-[shared/utility/vector.ts:133](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/vector.ts#L133)
+[shared/utility/vector.ts:133](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/vector.ts#L133)

@@ -25,7 +25,9 @@ order: 0
 
 ### Object
 
-▸ **Object**(): `any`
+::: Tip
+Athena.systems.inventory.crafting.Internal.**Object**(): `any`
+:::
 
 Provides functionality common to all JavaScript objects.
 
@@ -37,7 +39,9 @@ Provides functionality common to all JavaScript objects.
 
 ../../node_modules/typescript/lib/lib.es5.d.ts:156
 
-▸ **Object**(`value`): `any`
+::: Tip
+Athena.systems.inventory.crafting.Internal.**Object**(`value`): `any`
+:::
 
 Provides functionality common to all JavaScript objects.
 

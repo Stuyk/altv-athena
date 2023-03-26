@@ -11,7 +11,9 @@ order: 0
 
 ### disable
 
-▸ **disable**(): `void`
+::: Tip
+Athena.systems.defaults.displayId.**disable**(): `void`
+:::
 
 Disable default id display on-screen for players.
 
@@ -29,13 +31,15 @@ Athena.systems.default.displayId.disable();
 
 #### Defined in
 
-[server/systems/defaults/displayId.ts:47](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/defaults/displayId.ts#L47)
+[server/systems/defaults/displayId.ts:47](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/defaults/displayId.ts#L47)
 
 ___
 
 ### setLocation
 
-▸ **setLocation**(`x`, `y`): `void`
+::: Tip
+Athena.systems.defaults.displayId.**setLocation**(`x`, `y`): `void`
+:::
 
 Change the position of the on-screen id a player sees
 
@@ -64,4 +68,4 @@ Athena.systems.default.displayId.setLocation(0.5, 0.5);
 
 #### Defined in
 
-[server/systems/defaults/displayId.ts:69](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/defaults/displayId.ts#L69)
+[server/systems/defaults/displayId.ts:69](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/defaults/displayId.ts#L69)

@@ -15,7 +15,9 @@ order: 0
 
 #### Type declaration
 
-▸ (`target`, `options`): [`player`](server_config.md#player)[]
+::: Tip
+AthenaClient.menus.player.(`target`, `options`): [`player`](server_config.md#player)[]
+:::
 
 ##### Parameters
 
@@ -30,13 +32,15 @@ order: 0
 
 #### Defined in
 
-[client/menus/player.ts:5](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/player.ts#L5)
+[client/menus/player.ts:5](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/player.ts#L5)
 
 ## Functions
 
 ### addInjection
 
-▸ **addInjection**(`callback`): `void`
+::: Tip
+AthenaClient.menus.player.**addInjection**(`callback`): `void`
+:::
 
 Allows the current Menu Options to be modified.
 Meaning, a callback that will modify existing options, or append new options to the menu.
@@ -58,13 +62,15 @@ PlayerWheelMenu
 
 #### Defined in
 
-[client/menus/player.ts:17](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/player.ts#L17)
+[client/menus/player.ts:17](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/player.ts#L17)
 
 ___
 
 ### open
 
-▸ **open**(`target`): `void`
+::: Tip
+AthenaClient.menus.player.**open**(`target`): `void`
+:::
 
 Opens the wheel menu against a target player.
 
@@ -84,4 +90,4 @@ PlayerWheelMenu
 
 #### Defined in
 
-[client/menus/player.ts:28](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/player.ts#L28)
+[client/menus/player.ts:28](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/player.ts#L28)

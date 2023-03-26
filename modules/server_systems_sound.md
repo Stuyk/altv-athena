@@ -15,7 +15,9 @@ order: 0
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.sound.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override sound trigger functions.
 
@@ -34,9 +36,11 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:129](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/sound.ts#L129)
+[server/systems/sound.ts:129](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L129)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.sound.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override sound trigger functions.
 
@@ -55,9 +59,11 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:130](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/sound.ts#L130)
+[server/systems/sound.ts:130](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L130)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.sound.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override sound trigger functions.
 
@@ -76,13 +82,15 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:131](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/sound.ts#L131)
+[server/systems/sound.ts:131](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L131)
 
 ___
 
 ### playSound
 
-▸ **playSound**(`player`, `soundInfo`): `any`
+::: Tip
+Athena.systems.sound.**playSound**(`player`, `soundInfo`): `any`
+:::
 
 Play a single sound for a player.
 
@@ -105,13 +113,15 @@ SoundSystem
 
 #### Defined in
 
-[server/systems/sound.ts:51](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/sound.ts#L51)
+[server/systems/sound.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L51)
 
 ___
 
 ### playSoundInArea
 
-▸ **playSoundInArea**(`soundInfo`): `any`
+::: Tip
+Athena.systems.sound.**playSoundInArea**(`soundInfo`): `any`
+:::
 
 Play a custom sound in a 3D position for all players in the area.
 
@@ -133,13 +143,15 @@ Sound
 
 #### Defined in
 
-[server/systems/sound.ts:100](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/sound.ts#L100)
+[server/systems/sound.ts:100](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L100)
 
 ___
 
 ### playSoundInDimension
 
-▸ **playSoundInDimension**(`dimension`, `soundInfo`): `any`
+::: Tip
+Athena.systems.sound.**playSoundInDimension**(`dimension`, `soundInfo`): `any`
+:::
 
 Play a custom non-frontend sound in a dimension.
 Specify an entity to make the sound play from that specific entity.
@@ -163,4 +175,4 @@ Sound
 
 #### Defined in
 
-[server/systems/sound.ts:73](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/sound.ts#L73)
+[server/systems/sound.ts:73](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L73)

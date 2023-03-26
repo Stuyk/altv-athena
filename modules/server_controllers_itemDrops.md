@@ -11,7 +11,9 @@ order: 0
 
 ### append
 
-▸ **append**(`itemDrop`): `string`
+::: Tip
+Athena.controllers.itemDrops.**append**(`itemDrop`): `string`
+:::
 
 Append item drop information to the server.
 
@@ -33,13 +35,15 @@ Returns a uid or generates one if not specified.
 
 #### Defined in
 
-[server/controllers/itemDrops.ts:37](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/itemDrops.ts#L37)
+[server/controllers/itemDrops.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/itemDrops.ts#L37)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.itemDrops.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any item drop streamer functionality.
 
@@ -58,9 +62,11 @@ Used to override any item drop streamer functionality.
 
 #### Defined in
 
-[server/controllers/itemDrops.ts:74](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/itemDrops.ts#L74)
+[server/controllers/itemDrops.ts:74](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/itemDrops.ts#L74)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.itemDrops.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any item drop streamer functionality.
 
@@ -79,13 +85,15 @@ Used to override any item drop streamer functionality.
 
 #### Defined in
 
-[server/controllers/itemDrops.ts:75](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/itemDrops.ts#L75)
+[server/controllers/itemDrops.ts:75](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/itemDrops.ts#L75)
 
 ___
 
 ### remove
 
-▸ **remove**(`id`): `boolean`
+::: Tip
+Athena.controllers.itemDrops.**remove**(`id`): `boolean`
+:::
 
 Removes an item drop in-world.
 
@@ -101,4 +109,4 @@ Removes an item drop in-world.
 
 #### Defined in
 
-[server/controllers/itemDrops.ts:53](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/itemDrops.ts#L53)
+[server/controllers/itemDrops.ts:53](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/itemDrops.ts#L53)

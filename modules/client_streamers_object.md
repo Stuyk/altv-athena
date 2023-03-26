@@ -15,13 +15,15 @@ order: 0
 
 #### Defined in
 
-[client/streamers/object.ts:6](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/streamers/object.ts#L6)
+[client/streamers/object.ts:6](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/object.ts#L6)
 
 ## Functions
 
 ### addObject
 
-▸ **addObject**(`newObject`): `void`
+::: Tip
+AthenaClient.streamers.object.**addObject**(`newObject`): `void`
+:::
 
 #### Parameters
 
@@ -35,13 +37,15 @@ order: 0
 
 #### Defined in
 
-[client/streamers/object.ts:132](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/streamers/object.ts#L132)
+[client/streamers/object.ts:132](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/object.ts#L132)
 
 ___
 
 ### getFromScriptId
 
-▸ **getFromScriptId**(`scriptId`): [`CreatedObject`](client_streamers_object.md#CreatedObject) \| `undefined`
+::: Tip
+AthenaClient.streamers.object.**getFromScriptId**(`scriptId`): [`CreatedObject`](client_streamers_object.md#CreatedObject) \| `undefined`
+:::
 
 Used to obtain a CreatedObject instance from a generic scriptID
 
@@ -59,13 +63,15 @@ Used to obtain a CreatedObject instance from a generic scriptID
 
 #### Defined in
 
-[client/streamers/object.ts:175](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/streamers/object.ts#L175)
+[client/streamers/object.ts:175](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/object.ts#L175)
 
 ___
 
 ### removeObject
 
-▸ **removeObject**(`uid`): `void`
+::: Tip
+AthenaClient.streamers.object.**removeObject**(`uid`): `void`
+:::
 
 #### Parameters
 
@@ -79,4 +85,4 @@ ___
 
 #### Defined in
 
-[client/streamers/object.ts:156](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/streamers/object.ts#L156)
+[client/streamers/object.ts:156](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/object.ts#L156)

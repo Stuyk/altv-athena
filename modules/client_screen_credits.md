@@ -11,7 +11,9 @@ order: 0
 
 ### clear
 
-▸ **clear**(): `void`
+::: Tip
+AthenaClient.screen.credits.**clear**(): `void`
+:::
 
 Used to clear the last set spinner.
 
@@ -25,13 +27,15 @@ Shard
 
 #### Defined in
 
-[client/screen/credits.ts:18](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/credits.ts#L18)
+[client/screen/credits.ts:18](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/credits.ts#L18)
 
 ___
 
 ### create
 
-▸ **create**(`credit`): `Promise`<`void`\>
+::: Tip
+AthenaClient.screen.credits.**create**(`credit`): `Promise`<`void`\>
+:::
 
 Creates on-screen text that looks like the GTA:V credits.
 
@@ -47,4 +51,4 @@ Creates on-screen text that looks like the GTA:V credits.
 
 #### Defined in
 
-[client/screen/credits.ts:41](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/credits.ts#L41)
+[client/screen/credits.ts:41](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/credits.ts#L41)

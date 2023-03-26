@@ -29,7 +29,7 @@ Page
 
 #### Defined in
 
-[client/webview/page.ts:175](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/page.ts#L175)
+[client/webview/page.ts:175](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/page.ts#L175)
 
 ## Properties
 
@@ -39,13 +39,15 @@ Page
 
 #### Defined in
 
-[client/webview/page.ts:168](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/page.ts#L168)
+[client/webview/page.ts:168](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/page.ts#L168)
 
 ## Methods
 
 ### close
 
-▸ **close**(`isManuallyTriggered?`): `void`
+::: Tip
+AthenaClient.webview.page.Page.**close**(`isManuallyTriggered?`): `void`
+:::
 
 If `isManuallyTriggered` is set to true.
 This means that the close event is not coming from the 'Escape' key bind.
@@ -67,13 +69,15 @@ Page
 
 #### Defined in
 
-[client/webview/page.ts:283](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/page.ts#L283)
+[client/webview/page.ts:283](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/page.ts#L283)
 
 ___
 
 ### open
 
-▸ **open**(): `Promise`<`boolean`\>
+::: Tip
+AthenaClient.webview.page.Page.**open**(): `Promise`<`boolean`\>
+:::
 
 Open this WebView Page
 
@@ -87,4 +91,4 @@ Page
 
 #### Defined in
 
-[client/webview/page.ts:209](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/page.ts#L209)
+[client/webview/page.ts:209](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/page.ts#L209)

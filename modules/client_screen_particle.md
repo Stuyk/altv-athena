@@ -11,7 +11,9 @@ order: 0
 
 ### handlePlayParticle
 
-▸ **handlePlayParticle**(`data`): `Promise`<`void`\>
+::: Tip
+AthenaClient.screen.particle.**handlePlayParticle**(`data`): `Promise`<`void`\>
+:::
 
 Players a particle effect at a certain location.
 
@@ -29,4 +31,4 @@ Players a particle effect at a certain location.
 
 #### Defined in
 
-[client/screen/particle.ts:36](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/particle.ts#L36)
+[client/screen/particle.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/particle.ts#L36)

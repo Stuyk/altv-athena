@@ -19,7 +19,9 @@ order: 0
 
 ### play3DAudio
 
-▸ `Static` **play3DAudio**(`soundName`, `pan`, `volume`, `soundInstantID?`): `void`
+::: Tip
+AthenaClient.views.audio.AudioView.`Static` **play3DAudio**(`soundName`, `pan`, `volume`, `soundInstantID?`): `void`
+:::
 
 Play an audio from the WebView.
 Requires a specific name for a file.
@@ -46,13 +48,15 @@ AudioView
 
 #### Defined in
 
-[client/views/audio.ts:83](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/views/audio.ts#L83)
+[client/views/audio.ts:83](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/views/audio.ts#L83)
 
 ___
 
 ### stop3DAudio
 
-▸ `Static` **stop3DAudio**(`soundInstantID?`): `void`
+::: Tip
+AthenaClient.views.audio.AudioView.`Static` **stop3DAudio**(`soundInstantID?`): `void`
+:::
 
 Stop current audio
 
@@ -74,4 +78,4 @@ AudioView
 
 #### Defined in
 
-[client/views/audio.ts:96](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/views/audio.ts#L96)
+[client/views/audio.ts:96](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/views/audio.ts#L96)

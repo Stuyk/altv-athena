@@ -15,7 +15,9 @@ order: 0
 
 ### buildCriteria
 
-▸ **buildCriteria**(`criteria`): `number`
+::: Tip
+Athena.systems.job.objective.**buildCriteria**(`criteria`): `number`
+:::
 
 Builds a numerical representation of the flags used to check job criteria.
 
@@ -33,13 +35,15 @@ Builds a numerical representation of the flags used to check job criteria.
 
 #### Defined in
 
-[server/systems/job/objective.ts:98](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L98)
+[server/systems/job/objective.ts:98](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L98)
 
 ___
 
 ### createAndAdd
 
-▸ **createAndAdd**(`job`, `objective`): [`player`](server_config.md#player)
+::: Tip
+Athena.systems.job.objective.**createAndAdd**(`job`, `objective`): [`player`](server_config.md#player)
+:::
 
 Cleanly creates an objective to add to a job.
 
@@ -62,13 +66,15 @@ Returns the objective instance; does not need to be added.
 
 #### Defined in
 
-[server/systems/job/objective.ts:81](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L81)
+[server/systems/job/objective.ts:81](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L81)
 
 ___
 
 ### getType
 
-▸ **getType**(`type`): `number`
+::: Tip
+Athena.systems.job.objective.**getType**(`type`): `number`
+:::
 
 Returns the numerical representation of a default objective type.
 
@@ -86,13 +92,15 @@ Returns the numerical representation of a default objective type.
 
 #### Defined in
 
-[server/systems/job/objective.ts:127](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L127)
+[server/systems/job/objective.ts:127](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L127)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.job.objective.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override job objective creation functionality
 
@@ -111,9 +119,11 @@ Used to override job objective creation functionality
 
 #### Defined in
 
-[server/systems/job/objective.ts:143](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L143)
+[server/systems/job/objective.ts:143](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L143)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.job.objective.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override job objective creation functionality
 
@@ -132,9 +142,11 @@ Used to override job objective creation functionality
 
 #### Defined in
 
-[server/systems/job/objective.ts:144](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L144)
+[server/systems/job/objective.ts:144](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L144)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.job.objective.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override job objective creation functionality
 
@@ -153,4 +165,4 @@ Used to override job objective creation functionality
 
 #### Defined in
 
-[server/systems/job/objective.ts:145](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L145)
+[server/systems/job/objective.ts:145](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L145)

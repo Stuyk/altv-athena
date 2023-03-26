@@ -11,7 +11,9 @@ order: 0
 
 ### clear
 
-▸ **clear**(): `void`
+::: Tip
+AthenaClient.screen.errorScreen.**clear**(): `void`
+:::
 
 Clear the currently drawn error screen.
 
@@ -25,13 +27,15 @@ ErrorScreen
 
 #### Defined in
 
-[client/screen/errorScreen.ts:15](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/errorScreen.ts#L15)
+[client/screen/errorScreen.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/errorScreen.ts#L15)
 
 ___
 
 ### create
 
-▸ **create**(`screen`): `void`
+::: Tip
+AthenaClient.screen.errorScreen.**create**(`screen`): `void`
+:::
 
 Create an error screen that takes up the whole screen.
 
@@ -51,4 +55,4 @@ ErrorScreen
 
 #### Defined in
 
-[client/screen/errorScreen.ts:33](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/errorScreen.ts#L33)
+[client/screen/errorScreen.ts:33](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/errorScreen.ts#L33)

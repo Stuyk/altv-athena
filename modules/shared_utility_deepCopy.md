@@ -11,7 +11,9 @@ order: 0
 
 ### deepCloneArray
 
-▸ **deepCloneArray**<`T`\>(`data`): `T`[]
+::: Tip
+AthenaShared.utility.deepCopy.**deepCloneArray**<`T`\>(`data`): `T`[]
+:::
 
 Makes a complete copy of an array and all objects.
 
@@ -35,13 +37,15 @@ Makes a complete copy of an array and all objects.
 
 #### Defined in
 
-[shared/utility/deepCopy.ts:29](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/deepCopy.ts#L29)
+[shared/utility/deepCopy.ts:29](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/deepCopy.ts#L29)
 
 ___
 
 ### deepCloneObject
 
-▸ **deepCloneObject**<`T`\>(`data`): `T`
+::: Tip
+AthenaShared.utility.deepCopy.**deepCloneObject**<`T`\>(`data`): `T`
+:::
 
 Used to deep clone an object and detach all references.
 Does not work with functions.
@@ -67,4 +71,4 @@ This is required to prevent data from being modified in other items.
 
 #### Defined in
 
-[shared/utility/deepCopy.ts:9](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/deepCopy.ts#L9)
+[shared/utility/deepCopy.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/deepCopy.ts#L9)

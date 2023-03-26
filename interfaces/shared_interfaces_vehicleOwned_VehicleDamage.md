@@ -35,7 +35,7 @@ VehicleDamage
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:31](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleOwned.ts#L31)
+[shared/interfaces/vehicleOwned.ts:31](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleOwned.ts#L31)
 
 ___
 
@@ -51,7 +51,7 @@ VehicleDamage
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:55](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleOwned.ts#L55)
+[shared/interfaces/vehicleOwned.ts:55](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleOwned.ts#L55)
 
 ___
 
@@ -71,7 +71,7 @@ VehicleDamage
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleOwned.ts#L23)
+[shared/interfaces/vehicleOwned.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleOwned.ts#L23)
 
 ___
 
@@ -87,7 +87,7 @@ VehicleDamage
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:47](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleOwned.ts#L47)
+[shared/interfaces/vehicleOwned.ts:47](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleOwned.ts#L47)
 
 ___
 
@@ -107,4 +107,4 @@ VehicleDamage
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:39](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleOwned.ts#L39)
+[shared/interfaces/vehicleOwned.ts:39](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleOwned.ts#L39)

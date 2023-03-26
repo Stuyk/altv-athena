@@ -15,7 +15,9 @@ order: 0
 
 #### Type declaration
 
-▸ (`inventory`, `toolbar`, `totalWeight`): `void`
+::: Tip
+AthenaClient.events.onInventoryUpdate.Internal.(`inventory`, `toolbar`, `totalWeight`): `void`
+:::
 
 ##### Parameters
 
@@ -31,4 +33,4 @@ order: 0
 
 #### Defined in
 
-[client/events/onInventoryUpdate.ts:5](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/events/onInventoryUpdate.ts#L5)
+[client/events/onInventoryUpdate.ts:5](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/events/onInventoryUpdate.ts#L5)

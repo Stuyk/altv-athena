@@ -11,7 +11,9 @@ order: 0
 
 ### drawTexture
 
-▸ **drawTexture**(`dictionary`, `name`, `position`, `scale?`): `void`
+::: Tip
+AthenaClient.screen.texture.**drawTexture**(`dictionary`, `name`, `position`, `scale?`): `void`
+:::
 
 Draw a texture in-world from a GTA:V file, or DLC
 
@@ -32,13 +34,15 @@ Draw a texture in-world from a GTA:V file, or DLC
 
 #### Defined in
 
-[client/screen/texture.ts:74](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/texture.ts#L74)
+[client/screen/texture.ts:74](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/texture.ts#L74)
 
 ___
 
 ### drawTexture2D
 
-▸ **drawTexture2D**(`dictionary`, `name`, `position`, `scale?`, `opacity?`): `void`
+::: Tip
+AthenaClient.screen.texture.**drawTexture2D**(`dictionary`, `name`, `position`, `scale?`, `opacity?`): `void`
+:::
 
 Draw a texture on-screen from a GTA:V file or DLC
 
@@ -60,4 +64,4 @@ Draw a texture on-screen from a GTA:V file or DLC
 
 #### Defined in
 
-[client/screen/texture.ts:17](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/texture.ts#L17)
+[client/screen/texture.ts:17](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/texture.ts#L17)

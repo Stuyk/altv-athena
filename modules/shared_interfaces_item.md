@@ -33,7 +33,7 @@ Default Clothing Information
 
 #### Defined in
 
-[shared/interfaces/item.ts:22](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/item.ts#L22)
+[shared/interfaces/item.ts:22](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/item.ts#L22)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/item.ts:370](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/item.ts#L370)
+[shared/interfaces/item.ts:370](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/item.ts#L370)
 
 ___
 
@@ -62,7 +62,7 @@ An Item Drop that is represented on server s ide and client side.
 
 #### Defined in
 
-[shared/interfaces/item.ts:11](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/item.ts#L11)
+[shared/interfaces/item.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/item.ts#L11)
 
 ___
 
@@ -82,4 +82,4 @@ Default Weapon Data Information
 
 #### Defined in
 
-[shared/interfaces/item.ts:6](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/item.ts#L6)
+[shared/interfaces/item.ts:6](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/item.ts#L6)

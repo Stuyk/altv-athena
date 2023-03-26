@@ -11,7 +11,9 @@ order: 0
 
 ### isNullOrUndefined
 
-▸ **isNullOrUndefined**(`value`): `boolean`
+::: Tip
+AthenaShared.utility.undefinedCheck.**isNullOrUndefined**(`value`): `boolean`
+:::
 
 #### Parameters
 
@@ -25,4 +27,4 @@ order: 0
 
 #### Defined in
 
-[shared/utility/undefinedCheck.ts:1](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/undefinedCheck.ts#L1)
+[shared/utility/undefinedCheck.ts:1](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/undefinedCheck.ts#L1)

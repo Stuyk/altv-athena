@@ -23,7 +23,7 @@ StaticText
 
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L34)
+[client/rmlui/staticText/staticTextInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L34)
 
 ___
 
@@ -39,7 +39,7 @@ StaticText
 
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L26)
+[client/rmlui/staticText/staticTextInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L26)
 
 ___
 
@@ -55,7 +55,7 @@ StaticText
 
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L18)
+[client/rmlui/staticText/staticTextInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L18)
 
 ___
 
@@ -71,4 +71,4 @@ StaticText
 
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L10)
+[client/rmlui/staticText/staticTextInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L10)

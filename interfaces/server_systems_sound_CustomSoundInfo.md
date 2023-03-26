@@ -23,7 +23,7 @@ CustomSoundInfo
 
 #### Defined in
 
-[server/systems/sound.ts:12](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/sound.ts#L12)
+[server/systems/sound.ts:12](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L12)
 
 ___
 
@@ -39,7 +39,7 @@ CustomSoundInfo
 
 #### Defined in
 
-[server/systems/sound.ts:20](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/sound.ts#L20)
+[server/systems/sound.ts:20](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L20)
 
 ___
 
@@ -55,7 +55,7 @@ CustomSoundInfo
 
 #### Defined in
 
-[server/systems/sound.ts:38](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/sound.ts#L38)
+[server/systems/sound.ts:38](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L38)
 
 ___
 
@@ -73,4 +73,4 @@ CustomSoundInfo
 
 #### Defined in
 
-[server/systems/sound.ts:30](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/sound.ts#L30)
+[server/systems/sound.ts:30](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L30)

@@ -11,7 +11,9 @@ order: 0
 
 ### addCharacter
 
-▸ **addCharacter**(`vehicle`, `player`): `Promise`<`boolean`\>
+::: Tip
+Athena.vehicle.ownership.**addCharacter**(`vehicle`, `player`): `Promise`<`boolean`\>
+:::
 
 Add a character to the owned vehicle
 
@@ -30,9 +32,11 @@ Add a character to the owned vehicle
 
 #### Defined in
 
-[server/vehicle/ownership.ts:168](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L168)
+[server/vehicle/ownership.ts:168](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L168)
 
-▸ **addCharacter**(`vehicle`, `id`): `Promise`<`boolean`\>
+::: Tip
+Athena.vehicle.ownership.**addCharacter**(`vehicle`, `id`): `Promise`<`boolean`\>
+:::
 
 Add a character to the owned vehicle
 
@@ -51,13 +55,15 @@ Add a character to the owned vehicle
 
 #### Defined in
 
-[server/vehicle/ownership.ts:177](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L177)
+[server/vehicle/ownership.ts:177](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L177)
 
 ___
 
 ### get
 
-▸ **get**(`vehicle`): `string` \| `undefined`
+::: Tip
+Athena.vehicle.ownership.**get**(`vehicle`): `string` \| `undefined`
+:::
 
 Return the owner of a vehicle's database identifier
 
@@ -75,13 +81,15 @@ Return the owner of a vehicle's database identifier
 
 #### Defined in
 
-[server/vehicle/ownership.ts:127](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L127)
+[server/vehicle/ownership.ts:127](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L127)
 
 ___
 
 ### getAsPlayer
 
-▸ **getAsPlayer**(`vehicle`): `alt.Player` \| `undefined`
+::: Tip
+Athena.vehicle.ownership.**getAsPlayer**(`vehicle`): `alt.Player` \| `undefined`
+:::
 
 Return the owner of a vehicle based on player
 
@@ -99,13 +107,15 @@ Return the owner of a vehicle based on player
 
 #### Defined in
 
-[server/vehicle/ownership.ts:147](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L147)
+[server/vehicle/ownership.ts:147](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L147)
 
 ___
 
 ### hasKeys
 
-▸ **hasKeys**(`player`, `vehicle`): `boolean`
+::: Tip
+Athena.vehicle.ownership.**hasKeys**(`player`, `vehicle`): `boolean`
+:::
 
 Checks if a player's character has a matching permission for a vehicle.
 
@@ -124,13 +134,15 @@ Checks if a player's character has a matching permission for a vehicle.
 
 #### Defined in
 
-[server/vehicle/ownership.ts:98](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L98)
+[server/vehicle/ownership.ts:98](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L98)
 
 ___
 
 ### hasPermission
 
-▸ **hasPermission**(`player`, `vehicle`): `boolean`
+::: Tip
+Athena.vehicle.ownership.**hasPermission**(`player`, `vehicle`): `boolean`
+:::
 
 Checks if a player's character has a matching permission for a vehicle.
 
@@ -149,13 +161,15 @@ Checks if a player's character has a matching permission for a vehicle.
 
 #### Defined in
 
-[server/vehicle/ownership.ts:73](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L73)
+[server/vehicle/ownership.ts:73](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L73)
 
 ___
 
 ### isOwner
 
-▸ **isOwner**(`player`, `vehicle`, `options?`): `boolean`
+::: Tip
+Athena.vehicle.ownership.**isOwner**(`player`, `vehicle`, `options?`): `boolean`
+:::
 
 A catch all handler for vehicle ownership.
 
@@ -183,13 +197,15 @@ Options can be specified to check if a passenger has keys and so on and so forth
 
 #### Defined in
 
-[server/vehicle/ownership.ts:18](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L18)
+[server/vehicle/ownership.ts:18](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L18)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.ownership.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle ownership functionality
 
@@ -208,9 +224,11 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:311](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L311)
+[server/vehicle/ownership.ts:311](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L311)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.ownership.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle ownership functionality
 
@@ -229,9 +247,11 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:312](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L312)
+[server/vehicle/ownership.ts:312](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L312)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.ownership.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle ownership functionality
 
@@ -250,9 +270,11 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:313](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L313)
+[server/vehicle/ownership.ts:313](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L313)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.ownership.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle ownership functionality
 
@@ -271,9 +293,11 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:314](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L314)
+[server/vehicle/ownership.ts:314](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L314)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.ownership.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle ownership functionality
 
@@ -292,9 +316,11 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:315](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L315)
+[server/vehicle/ownership.ts:315](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L315)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.ownership.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle ownership functionality
 
@@ -313,9 +339,11 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:316](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L316)
+[server/vehicle/ownership.ts:316](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L316)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.ownership.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle ownership functionality
 
@@ -334,9 +362,11 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:317](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L317)
+[server/vehicle/ownership.ts:317](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L317)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.ownership.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle ownership functionality
 
@@ -355,13 +385,15 @@ Used to override vehicle ownership functionality
 
 #### Defined in
 
-[server/vehicle/ownership.ts:318](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L318)
+[server/vehicle/ownership.ts:318](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L318)
 
 ___
 
 ### removeCharacter
 
-▸ **removeCharacter**(`vehicle`, `_id`): `Promise`<`boolean`\>
+::: Tip
+Athena.vehicle.ownership.**removeCharacter**(`vehicle`, `_id`): `Promise`<`boolean`\>
+:::
 
 Remove a character from the owned vehicle keys.
 
@@ -380,13 +412,15 @@ Remove a character from the owned vehicle keys.
 
 #### Defined in
 
-[server/vehicle/ownership.ts:238](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L238)
+[server/vehicle/ownership.ts:238](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L238)
 
 ___
 
 ### transfer
 
-▸ **transfer**(`vehicle`, `_id`): `Promise`<`boolean`\>
+::: Tip
+Athena.vehicle.ownership.**transfer**(`vehicle`, `_id`): `Promise`<`boolean`\>
+:::
 
 Transfer ownership of a vehicle.
 
@@ -411,4 +445,4 @@ Returns true if successfully transferred.
 
 #### Defined in
 
-[server/vehicle/ownership.ts:279](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/ownership.ts#L279)
+[server/vehicle/ownership.ts:279](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/ownership.ts#L279)

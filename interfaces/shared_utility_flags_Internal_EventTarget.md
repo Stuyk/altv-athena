@@ -15,7 +15,9 @@ EventTarget is a DOM interface implemented by objects that can receive events an
 
 ### addEventListener
 
-▸ **addEventListener**(`type`, `callback`, `options?`): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.EventTarget.**addEventListener**(`type`, `callback`, `options?`): `void`
+:::
 
 Appends an event listener for events whose type attribute value is type. The callback argument sets the callback that will be invoked when the event is dispatched.
 
@@ -51,7 +53,9 @@ ___
 
 ### dispatchEvent
 
-▸ **dispatchEvent**(`event`): `boolean`
+::: Tip
+AthenaShared.utility.flags.Internal.EventTarget.**dispatchEvent**(`event`): `boolean`
+:::
 
 Dispatches a synthetic event event to target and returns true if either event's cancelable attribute value is false or its preventDefault() method was not invoked, and false otherwise.
 
@@ -73,7 +77,9 @@ ___
 
 ### removeEventListener
 
-▸ **removeEventListener**(`type`, `callback`, `options?`): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.EventTarget.**removeEventListener**(`type`, `callback`, `options?`): `void`
+:::
 
 Removes the event listener in target's event listener list with the same type, callback, and options.
 

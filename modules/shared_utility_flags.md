@@ -15,7 +15,9 @@ order: 0
 
 ### isFlagEnabled
 
-▸ **isFlagEnabled**(`flags`, `flagToCheck`): `boolean`
+::: Tip
+AthenaShared.utility.flags.**isFlagEnabled**(`flags`, `flagToCheck`): `boolean`
+:::
 
 Verify if a bitwise flag is enabled.
 
@@ -34,4 +36,4 @@ Verify if a bitwise flag is enabled.
 
 #### Defined in
 
-[shared/utility/flags.ts:10](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/flags.ts#L10)
+[shared/utility/flags.ts:10](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/flags.ts#L10)

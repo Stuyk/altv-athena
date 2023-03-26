@@ -25,13 +25,15 @@ order: 0
 
 #### Defined in
 
-[server/utility/config.ts:85](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L85)
+[server/utility/config.ts:85](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L85)
 
 ## Functions
 
 ### get
 
-▸ **get**(): `Promise`<[`IConfig`](../interfaces/server_interface_iConfig_IConfig.md) \| `undefined`\>
+::: Tip
+Athena.utility.config.**get**(): `Promise`<[`IConfig`](../interfaces/server_interface_iConfig_IConfig.md) \| `undefined`\>
+:::
 
 #### Returns
 
@@ -39,13 +41,15 @@ order: 0
 
 #### Defined in
 
-[server/utility/config.ts:13](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L13)
+[server/utility/config.ts:13](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L13)
 
 ___
 
 ### getAthenaVersion
 
-▸ **getAthenaVersion**(): `string`
+::: Tip
+Athena.utility.config.**getAthenaVersion**(): `string`
+:::
 
 #### Returns
 
@@ -53,13 +57,15 @@ ___
 
 #### Defined in
 
-[server/utility/config.ts:71](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L71)
+[server/utility/config.ts:71](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L71)
 
 ___
 
 ### getViteServer
 
-▸ **getViteServer**(): `string`
+::: Tip
+Athena.utility.config.**getViteServer**(): `string`
+:::
 
 #### Returns
 
@@ -67,13 +73,15 @@ ___
 
 #### Defined in
 
-[server/utility/config.ts:63](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L63)
+[server/utility/config.ts:63](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L63)
 
 ___
 
 ### getVueDebugMode
 
-▸ **getVueDebugMode**(): `boolean`
+::: Tip
+Athena.utility.config.**getVueDebugMode**(): `boolean`
+:::
 
 #### Returns
 
@@ -81,13 +89,15 @@ ___
 
 #### Defined in
 
-[server/utility/config.ts:67](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L67)
+[server/utility/config.ts:67](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L67)
 
 ___
 
 ### isDevMode
 
-▸ **isDevMode**(): `boolean`
+::: Tip
+Athena.utility.config.**isDevMode**(): `boolean`
+:::
 
 Check if the current server instance is running in dev mode.
 
@@ -97,4 +107,4 @@ Check if the current server instance is running in dev mode.
 
 #### Defined in
 
-[server/utility/config.ts:56](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/config.ts#L56)
+[server/utility/config.ts:56](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L56)

@@ -11,7 +11,9 @@ order: 0
 
 ### addTemporaryText
 
-▸ **addTemporaryText**(`identifier`, `msg`, `x`, `y`, `scale`, `r`, `g`, `b`, `a`, `ms`): `void`
+::: Tip
+AthenaClient.screen.text.**addTemporaryText**(`identifier`, `msg`, `x`, `y`, `scale`, `r`, `g`, `b`, `a`, `ms`): `void`
+:::
 
 Adds text temporarily on the screen.
 
@@ -38,13 +40,15 @@ Adds text temporarily on the screen.
 
 #### Defined in
 
-[client/screen/text.ts:116](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/text.ts#L116)
+[client/screen/text.ts:116](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/text.ts#L116)
 
 ___
 
 ### drawRectangle
 
-▸ **drawRectangle**(`pos`, `size`, `color`): `void`
+::: Tip
+AthenaClient.screen.text.**drawRectangle**(`pos`, `size`, `color`): `void`
+:::
 
 Draw a box at a 3D coordinate
 
@@ -64,13 +68,15 @@ Draw a box at a 3D coordinate
 
 #### Defined in
 
-[client/screen/text.ts:52](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/text.ts#L52)
+[client/screen/text.ts:52](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/text.ts#L52)
 
 ___
 
 ### drawRectangle2D
 
-▸ **drawRectangle2D**(`pos`, `size`, `color`): `void`
+::: Tip
+AthenaClient.screen.text.**drawRectangle2D**(`pos`, `size`, `color`): `void`
+:::
 
 Draw a box on-screen
 
@@ -90,13 +96,15 @@ Draw a box on-screen
 
 #### Defined in
 
-[client/screen/text.ts:71](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/text.ts#L71)
+[client/screen/text.ts:71](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/text.ts#L71)
 
 ___
 
 ### drawText2D
 
-▸ **drawText2D**(`text`, `pos`, `scale`, `color`, `alignment?`, `padding?`): `void`
+::: Tip
+AthenaClient.screen.text.**drawText2D**(`text`, `pos`, `scale`, `color`, `alignment?`, `padding?`): `void`
+:::
 
 Draw text on your screen in a 2D position with an every tick.
 
@@ -117,13 +125,15 @@ Draw text on your screen in a 2D position with an every tick.
 
 #### Defined in
 
-[client/screen/text.ts:15](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/text.ts#L15)
+[client/screen/text.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/text.ts#L15)
 
 ___
 
 ### drawText3D
 
-▸ **drawText3D**(`text`, `pos`, `scale`, `color`): `void`
+::: Tip
+AthenaClient.screen.text.**drawText3D**(`text`, `pos`, `scale`, `color`): `void`
+:::
 
 Draw stable text in a 3D position with an every tick.
 
@@ -142,4 +152,4 @@ Draw stable text in a 3D position with an every tick.
 
 #### Defined in
 
-[client/screen/text.ts:83](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/text.ts#L83)
+[client/screen/text.ts:83](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/text.ts#L83)

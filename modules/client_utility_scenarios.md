@@ -11,7 +11,9 @@ order: 0
 
 ### playScenario
 
-▸ **playScenario**(`name`, `duration`): `Promise`<`void`\>
+::: Tip
+AthenaClient.utility.scenarios.**playScenario**(`name`, `duration`): `Promise`<`void`\>
+:::
 
 Play an animation for the local player.
 
@@ -30,4 +32,4 @@ Play an animation for the local player.
 
 #### Defined in
 
-[client/utility/scenarios.ts:14](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/scenarios.ts#L14)
+[client/utility/scenarios.ts:14](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/scenarios.ts#L14)

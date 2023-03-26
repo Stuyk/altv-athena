@@ -23,7 +23,7 @@ ItemQuantityChange
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:16](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/manager.ts#L16)
+[server/systems/inventory/manager.ts:16](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L16)
 
 ___
 
@@ -39,4 +39,4 @@ ItemQuantityChange
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:24](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/inventory/manager.ts#L24)
+[server/systems/inventory/manager.ts:24](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L24)

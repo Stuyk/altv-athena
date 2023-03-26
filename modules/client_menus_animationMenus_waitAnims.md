@@ -11,7 +11,9 @@ order: 0
 
 ### default
 
-▸ **default**(`callback`): { `callback`: (...`args`: `any`[]) => `void` ; `data`: `any`[] ; `name`: `string` = 'Wait 1' }[]
+::: Tip
+AthenaClient.menus.animationMenus.waitAnims.**default**(`callback`): { `callback`: (...`args`: `any`[]) => `void` ; `data`: `any`[] ; `name`: `string` = 'Wait 1' }[]
+:::
 
 #### Parameters
 
@@ -25,4 +27,4 @@ order: 0
 
 #### Defined in
 
-[client/menus/animationMenus/waitAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/animationMenus/waitAnims.ts#L3)
+[client/menus/animationMenus/waitAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/animationMenus/waitAnims.ts#L3)

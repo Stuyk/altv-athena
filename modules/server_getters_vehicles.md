@@ -11,7 +11,9 @@ order: 0
 
 ### inRange
 
-▸ **inRange**(`pos`, `range`): `alt.Vehicle`[]
+::: Tip
+Athena.getters.vehicles.**inRange**(`pos`, `range`): `alt.Vehicle`[]
+:::
 
 Get all vehicles in range of a position
 
@@ -28,4 +30,4 @@ Get all vehicles in range of a position
 
 #### Defined in
 
-[server/getters/vehicles.ts:11](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/vehicles.ts#L11)
+[server/getters/vehicles.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/vehicles.ts#L11)

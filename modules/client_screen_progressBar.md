@@ -11,7 +11,9 @@ order: 0
 
 ### clear
 
-▸ **clear**(): `void`
+::: Tip
+AthenaClient.screen.progressBar.**clear**(): `void`
+:::
 
 Clear the progress bar if there are no more bars to show.
 
@@ -23,13 +25,15 @@ None
 
 #### Defined in
 
-[client/screen/progressBar.ts:105](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/progressBar.ts#L105)
+[client/screen/progressBar.ts:105](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/progressBar.ts#L105)
 
 ___
 
 ### create
 
-▸ **create**(`progressBar`): `void`
+::: Tip
+AthenaClient.screen.progressBar.**create**(`progressBar`): `void`
+:::
 
 Create a new progress bar.
 
@@ -47,13 +51,15 @@ None
 
 #### Defined in
 
-[client/screen/progressBar.ts:64](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/progressBar.ts#L64)
+[client/screen/progressBar.ts:64](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/progressBar.ts#L64)
 
 ___
 
 ### remove
 
-▸ **remove**(`uid`): `void`
+::: Tip
+AthenaClient.screen.progressBar.**remove**(`uid`): `void`
+:::
 
 `removeBar` removes a bar from the `bars` array.
 
@@ -71,4 +77,4 @@ The function that is being returned is the function that is being called.
 
 #### Defined in
 
-[client/screen/progressBar.ts:87](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/progressBar.ts#L87)
+[client/screen/progressBar.ts:87](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/progressBar.ts#L87)

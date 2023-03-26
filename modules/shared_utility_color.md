@@ -11,7 +11,9 @@ order: 0
 
 ### rgbaToHexAlpha
 
-▸ **rgbaToHexAlpha**(`color`): `string`
+::: Tip
+AthenaShared.utility.color.**rgbaToHexAlpha**(`color`): `string`
+:::
 
 #### Parameters
 
@@ -25,4 +27,4 @@ order: 0
 
 #### Defined in
 
-[shared/utility/color.ts:3](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/color.ts#L3)
+[shared/utility/color.ts:3](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/color.ts#L3)

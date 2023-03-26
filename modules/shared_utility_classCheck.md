@@ -15,7 +15,9 @@ order: 0
 
 ### default
 
-▸ **default**(`funcOrClass`): `boolean`
+::: Tip
+AthenaShared.utility.classCheck.**default**(`funcOrClass`): `boolean`
+:::
 
 #### Parameters
 
@@ -29,4 +31,4 @@ order: 0
 
 #### Defined in
 
-[shared/utility/classCheck.ts:1](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/classCheck.ts#L1)
+[shared/utility/classCheck.ts:1](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/classCheck.ts#L1)

@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[server/player/appearance.ts:7](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L7)
+[server/player/appearance.ts:7](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L7)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[server/player/appearance.ts:5](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L5)
+[server/player/appearance.ts:5](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L5)
 
 ___
 
@@ -60,13 +60,15 @@ ___
 
 #### Defined in
 
-[server/player/appearance.ts:6](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L6)
+[server/player/appearance.ts:6](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L6)
 
 ## Functions
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.player.appearance.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any appearance setter functions.
 
@@ -85,9 +87,11 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:193](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L193)
+[server/player/appearance.ts:193](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L193)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.player.appearance.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any appearance setter functions.
 
@@ -106,9 +110,11 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:194](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L194)
+[server/player/appearance.ts:194](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L194)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.player.appearance.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any appearance setter functions.
 
@@ -127,9 +133,11 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:195](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L195)
+[server/player/appearance.ts:195](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L195)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.player.appearance.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any appearance setter functions.
 
@@ -148,9 +156,11 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:196](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L196)
+[server/player/appearance.ts:196](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L196)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.player.appearance.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any appearance setter functions.
 
@@ -169,9 +179,11 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:197](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L197)
+[server/player/appearance.ts:197](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L197)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.player.appearance.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any appearance setter functions.
 
@@ -190,13 +202,15 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:198](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L198)
+[server/player/appearance.ts:198](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L198)
 
 ___
 
 ### setEyeColor
 
-▸ **setEyeColor**(`player`, `color`): `any`
+::: Tip
+Athena.player.appearance.**setEyeColor**(`player`, `color`): `any`
+:::
 
 Set an eye color on a player.
 
@@ -217,13 +231,15 @@ Automatically saves to database.
 
 #### Defined in
 
-[server/player/appearance.ts:135](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L135)
+[server/player/appearance.ts:135](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L135)
 
 ___
 
 ### setEyebrows
 
-▸ **setEyebrows**(`player`, `choice`): `any`
+::: Tip
+Athena.player.appearance.**setEyebrows**(`player`, `choice`): `any`
+:::
 
 Update eyebrow style for a player.
 
@@ -244,13 +260,15 @@ Automatically saves to the database.
 
 #### Defined in
 
-[server/player/appearance.ts:84](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L84)
+[server/player/appearance.ts:84](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L84)
 
 ___
 
 ### setFacialHair
 
-▸ **setFacialHair**(`player`, `choice`): `any`
+::: Tip
+Athena.player.appearance.**setFacialHair**(`player`, `choice`): `any`
+:::
 
 Apply facial hair style to a player.
 
@@ -271,13 +289,15 @@ Automatically saves to database.
 
 #### Defined in
 
-[server/player/appearance.ts:57](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L57)
+[server/player/appearance.ts:57](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L57)
 
 ___
 
 ### setHairStyle
 
-▸ **setHairStyle**(`player`, `style`): `any`
+::: Tip
+Athena.player.appearance.**setHairStyle**(`player`, `style`): `any`
+:::
 
 Set a player's hairstyle.
 
@@ -298,13 +318,15 @@ Automatically saves it to Database.
 
 #### Defined in
 
-[server/player/appearance.ts:19](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L19)
+[server/player/appearance.ts:19](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L19)
 
 ___
 
 ### setModel
 
-▸ **setModel**(`player`, `isFeminine`): `any`
+::: Tip
+Athena.player.appearance.**setModel**(`player`, `isFeminine`): `any`
+:::
 
 Change the base model of the player to either a masculine base, or feminine base.
 
@@ -325,13 +347,15 @@ Automatically saves to database.
 
 #### Defined in
 
-[server/player/appearance.ts:111](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L111)
+[server/player/appearance.ts:111](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L111)
 
 ___
 
 ### updateTattoos
 
-▸ **updateTattoos**(`player`, `decorators?`): `any`
+::: Tip
+Athena.player.appearance.**updateTattoos**(`player`, `decorators?`): `any`
+:::
 
 Used to update tattoos, and a hair overlay if present.
 Add the 'decorators' paramater to override player appearance.
@@ -351,4 +375,4 @@ Add the 'decorators' paramater to override player appearance.
 
 #### Defined in
 
-[server/player/appearance.ts:157](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/appearance.ts#L157)
+[server/player/appearance.ts:157](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/appearance.ts#L157)

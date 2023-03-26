@@ -33,7 +33,7 @@ MenuOptionBase
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
+[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
 
 ___
 
@@ -53,7 +53,7 @@ MenuOptionBase
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
+[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
 
 ___
 
@@ -73,7 +73,7 @@ Selection
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:62](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/menuInterfaces.ts#L62)
+[client/rmlui/menu/menuInterfaces.ts:62](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/menuInterfaces.ts#L62)
 
 ___
 
@@ -89,7 +89,7 @@ Selection
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:46](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/menuInterfaces.ts#L46)
+[client/rmlui/menu/menuInterfaces.ts:46](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/menuInterfaces.ts#L46)
 
 ___
 
@@ -109,7 +109,7 @@ MenuOptionBase
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
+[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:38](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/menuInterfaces.ts#L38)
+[client/rmlui/menu/menuInterfaces.ts:38](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/menuInterfaces.ts#L38)
 
 ___
 
@@ -135,4 +135,4 @@ Selection
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:54](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/menuInterfaces.ts#L54)
+[client/rmlui/menu/menuInterfaces.ts:54](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/menuInterfaces.ts#L54)

@@ -19,7 +19,9 @@ order: 0
 
 ### buildData
 
-▸ `Static` **buildData**(`player`, `data`, `index`, `lengthOfData`): `Promise`<`void`\>
+::: Tip
+Athena.utility.screenshot.AthenaScreenshot.`Static` **buildData**(`player`, `data`, `index`, `lengthOfData`): `Promise`<`void`\>
+:::
 
 Builds data from a screenshot event.
 
@@ -44,13 +46,15 @@ AthenaScreenshot
 
 #### Defined in
 
-[server/utility/screenshot.ts:59](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/screenshot.ts#L59)
+[server/utility/screenshot.ts:59](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/screenshot.ts#L59)
 
 ___
 
 ### takeScreenshot
 
-▸ `Static` **takeScreenshot**(`player`): `Promise`<`string`\>
+::: Tip
+Athena.utility.screenshot.AthenaScreenshot.`Static` **takeScreenshot**(`player`): `Promise`<`string`\>
+:::
 
 Take a screenshot of the player screen.
 If the data becomes corrupted or does not retrieve in time it will return null.
@@ -73,4 +77,4 @@ AthenaScreenshot
 
 #### Defined in
 
-[server/utility/screenshot.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/screenshot.ts#L23)
+[server/utility/screenshot.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/screenshot.ts#L23)

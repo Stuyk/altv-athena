@@ -11,7 +11,9 @@ order: 0
 
 ### registerCallback
 
-▸ **registerCallback**<`T`\>(`key`, `callback`, `range?`): `Promise`<`void`\>
+::: Tip
+Athena.systems.streamer.**registerCallback**<`T`\>(`key`, `callback`, `range?`): `Promise`<`void`\>
+:::
 
 Register a custom callback function.
 When the key is updated with data it will come back through the callback.
@@ -42,13 +44,15 @@ StreamerService
 
 #### Defined in
 
-[server/systems/streamer.ts:145](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/streamer.ts#L145)
+[server/systems/streamer.ts:145](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/streamer.ts#L145)
 
 ___
 
 ### updateData
 
-▸ **updateData**<`T`\>(`key`, `array`): `Promise`<`void`\>
+::: Tip
+Athena.systems.streamer.**updateData**<`T`\>(`key`, `array`): `Promise`<`void`\>
+:::
 
 Populates Stream Data for External Process
 
@@ -77,4 +81,4 @@ StreamerService
 
 #### Defined in
 
-[server/systems/streamer.ts:190](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/streamer.ts#L190)
+[server/systems/streamer.ts:190](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/streamer.ts#L190)

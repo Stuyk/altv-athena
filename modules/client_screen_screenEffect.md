@@ -11,7 +11,9 @@ order: 0
 
 ### isEffectActive
 
-▸ **isEffectActive**(`screenEffect`): `any`
+::: Tip
+AthenaClient.screen.screenEffect.**isEffectActive**(`screenEffect`): `any`
+:::
 
 Check whether the specific screen effect is running.
 
@@ -29,13 +31,15 @@ true if the screen effect is active; otherwise false
 
 #### Defined in
 
-[client/screen/screenEffect.ts:9](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/screenEffect.ts#L9)
+[client/screen/screenEffect.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenEffect.ts#L9)
 
 ___
 
 ### startEffect
 
-▸ **startEffect**(`screenEffect`, `duration?`, `looped?`): `void`
+::: Tip
+AthenaClient.screen.screenEffect.**startEffect**(`screenEffect`, `duration?`, `looped?`): `void`
+:::
 
 Starts applying the specified effect to the screen.
 
@@ -53,13 +57,15 @@ Starts applying the specified effect to the screen.
 
 #### Defined in
 
-[client/screen/screenEffect.ts:19](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/screenEffect.ts#L19)
+[client/screen/screenEffect.ts:19](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenEffect.ts#L19)
 
 ___
 
 ### stopAllEffects
 
-▸ **stopAllEffects**(): `void`
+::: Tip
+AthenaClient.screen.screenEffect.**stopAllEffects**(): `void`
+:::
 
 Stops all currently running effects.
 
@@ -69,13 +75,15 @@ Stops all currently running effects.
 
 #### Defined in
 
-[client/screen/screenEffect.ts:34](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/screenEffect.ts#L34)
+[client/screen/screenEffect.ts:34](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenEffect.ts#L34)
 
 ___
 
 ### stopEffect
 
-▸ **stopEffect**(`screenEffect`): `void`
+::: Tip
+AthenaClient.screen.screenEffect.**stopEffect**(`screenEffect`): `void`
+:::
 
 Stops applying the specified effect to the screen.
 
@@ -91,4 +99,4 @@ Stops applying the specified effect to the screen.
 
 #### Defined in
 
-[client/screen/screenEffect.ts:27](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/screenEffect.ts#L27)
+[client/screen/screenEffect.ts:27](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenEffect.ts#L27)

@@ -15,7 +15,9 @@ order: 0
 
 ### decrease
 
-▸ **decrease**(`key`, `decreaseByValue?`, `startValue?`): `Promise`<`boolean`\>
+::: Tip
+Athena.systems.global.**decrease**(`key`, `decreaseByValue?`, `startValue?`): `Promise`<`boolean`\>
+:::
 
 Decrease the value of a key in the document by a given value
 
@@ -33,13 +35,15 @@ Decrease the value of a key in the document by a given value
 
 #### Defined in
 
-[server/systems/global.ts:113](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/global.ts#L113)
+[server/systems/global.ts:113](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L113)
 
 ___
 
 ### get
 
-▸ **get**<`IGlobal`\>(): `Promise`<`IGlobal`\>
+::: Tip
+Athena.systems.global.**get**<`IGlobal`\>(): `Promise`<`IGlobal`\>
+:::
 
 It fetches the singleton document from the database.
 
@@ -57,13 +61,15 @@ A promise of an IGlobal object.
 
 #### Defined in
 
-[server/systems/global.ts:80](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/global.ts#L80)
+[server/systems/global.ts:80](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L80)
 
 ___
 
 ### getKey
 
-▸ **getKey**<`T`\>(`key`): `Promise`<`T`\>
+::: Tip
+Athena.systems.global.**getKey**<`T`\>(`key`): `Promise`<`T`\>
+:::
 
 `get` returns the value of the specified key from the specified document
 
@@ -87,13 +93,15 @@ The value of the key.
 
 #### Defined in
 
-[server/systems/global.ts:70](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/global.ts#L70)
+[server/systems/global.ts:70](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L70)
 
 ___
 
 ### increase
 
-▸ **increase**(`key`, `increaseByValue?`, `startValue?`): `Promise`<`boolean`\>
+::: Tip
+Athena.systems.global.**increase**(`key`, `increaseByValue?`, `startValue?`): `Promise`<`boolean`\>
+:::
 
 Increase the value of a key in a document by a given value
 
@@ -111,13 +119,15 @@ Increase the value of a key in a document by a given value
 
 #### Defined in
 
-[server/systems/global.ts:90](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/global.ts#L90)
+[server/systems/global.ts:90](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L90)
 
 ___
 
 ### isReady
 
-▸ **isReady**(): `Promise`<`boolean`\>
+::: Tip
+Athena.systems.global.**isReady**(): `Promise`<`boolean`\>
+:::
 
 Checks if the Global document is ready for handling requests.
 
@@ -130,13 +140,15 @@ defined.
 
 #### Defined in
 
-[server/systems/global.ts:37](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/global.ts#L37)
+[server/systems/global.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L37)
 
 ___
 
 ### setKey
 
-▸ **setKey**<`T`\>(`key`, `value`): `Promise`<`void`\>
+::: Tip
+Athena.systems.global.**setKey**<`T`\>(`key`, `value`): `Promise`<`void`\>
+:::
 
 It sets and overrides the value of the key in the database.
 
@@ -159,4 +171,4 @@ It sets and overrides the value of the key in the database.
 
 #### Defined in
 
-[server/systems/global.ts:60](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/global.ts#L60)
+[server/systems/global.ts:60](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L60)

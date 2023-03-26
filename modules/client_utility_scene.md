@@ -11,7 +11,9 @@ order: 0
 
 ### load
 
-▸ **load**(`pos`): `Promise`<`boolean`\>
+::: Tip
+AthenaClient.utility.scene.**load**(`pos`): `Promise`<`boolean`\>
+:::
 
 #### Parameters
 
@@ -25,4 +27,4 @@ order: 0
 
 #### Defined in
 
-[client/utility/scene.ts:4](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/scene.ts#L4)
+[client/utility/scene.ts:4](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/scene.ts#L4)

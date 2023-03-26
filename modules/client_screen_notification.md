@@ -11,7 +11,9 @@ order: 0
 
 ### create
 
-▸ **create**(`text`): `void`
+::: Tip
+AthenaClient.screen.notification.**create**(`text`): `void`
+:::
 
 Create a simple GTA:V Notification.
 
@@ -29,4 +31,4 @@ Create a simple GTA:V Notification.
 
 #### Defined in
 
-[client/screen/notification.ts:9](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/notification.ts#L9)
+[client/screen/notification.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/notification.ts#L9)

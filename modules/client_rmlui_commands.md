@@ -15,7 +15,9 @@ order: 0
 
 ### cancel
 
-▸ **cancel**(): `Promise`<`void`\>
+::: Tip
+AthenaClient.rmlui.commands.**cancel**(): `Promise`<`void`\>
+:::
 
 #### Returns
 
@@ -23,13 +25,15 @@ order: 0
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:277](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/commands/index.ts#L277)
+[client/rmlui/commands/index.ts:277](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/commands/index.ts#L277)
 
 ___
 
 ### create
 
-▸ **create**(`inputInfo`, `skipMenuCheck?`): `Promise`<`string` \| `undefined`\>
+::: Tip
+AthenaClient.rmlui.commands.**create**(`inputInfo`, `skipMenuCheck?`): `Promise`<`string` \| `undefined`\>
+:::
 
 #### Parameters
 
@@ -44,13 +48,15 @@ ___
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:247](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/commands/index.ts#L247)
+[client/rmlui/commands/index.ts:247](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/commands/index.ts#L247)
 
 ___
 
 ### isOpen
 
-▸ **isOpen**(): `boolean`
+::: Tip
+AthenaClient.rmlui.commands.**isOpen**(): `boolean`
+:::
 
 Returns whether or not this interface is open.
 
@@ -60,4 +66,4 @@ Returns whether or not this interface is open.
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:308](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/commands/index.ts#L308)
+[client/rmlui/commands/index.ts:308](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/commands/index.ts#L308)

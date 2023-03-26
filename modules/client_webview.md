@@ -21,13 +21,15 @@ Re-exports [Page](../classes/client_webview_page_Page.md)
 
 #### Defined in
 
-[client/webview/index.ts:9](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L9)
+[client/webview/index.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L9)
 
 ## Functions
 
 ### closeOverlays
 
-▸ **closeOverlays**(`pageNames`): `Promise`<`void`\>
+::: Tip
+AthenaClient.webview.**closeOverlays**(`pageNames`): `Promise`<`void`\>
+:::
 
 Closes an overlay page or pages.
 
@@ -49,13 +51,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:503](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L503)
+[client/webview/index.ts:503](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L503)
 
 ___
 
 ### closePages
 
-▸ **closePages**(`pageNames`, `showOverlays?`): `Promise`<`void`\>
+::: Tip
+AthenaClient.webview.**closePages**(`pageNames`, `showOverlays?`): `Promise`<`void`\>
+:::
 
 Close a group of pages that may or may not be open.
 
@@ -78,13 +82,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:544](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L544)
+[client/webview/index.ts:544](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L544)
 
 ___
 
 ### create
 
-▸ **create**(`url`): `void`
+::: Tip
+AthenaClient.webview.**create**(`url`): `void`
+:::
 
 Sets the URL to use based on current deployment.
 
@@ -106,13 +112,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:231](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L231)
+[client/webview/index.ts:231](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L231)
 
 ___
 
 ### disableEscapeKeyForPage
 
-▸ **disableEscapeKeyForPage**(`pageName`): `void`
+::: Tip
+AthenaClient.webview.**disableEscapeKeyForPage**(`pageName`): `void`
+:::
 
 Register a page to ignore escape key presence.
 
@@ -128,13 +136,15 @@ Register a page to ignore escape key presence.
 
 #### Defined in
 
-[client/webview/index.ts:658](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L658)
+[client/webview/index.ts:658](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L658)
 
 ___
 
 ### dispose
 
-▸ **dispose**(): `void`
+::: Tip
+AthenaClient.webview.**dispose**(): `void`
+:::
 
 Destroy the WebView
 
@@ -150,13 +160,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:384](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L384)
+[client/webview/index.ts:384](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L384)
 
 ___
 
 ### emit
 
-▸ **emit**<`EventNames`\>(`eventName`, `...args`): `Promise`<`void`\>
+::: Tip
+AthenaClient.webview.**emit**<`EventNames`\>(`eventName`, `...args`): `Promise`<`void`\>
+:::
 
 Emit through the WebViewEvents Helper
 Ensures that there is a callback event on the other side.
@@ -186,13 +198,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:624](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L624)
+[client/webview/index.ts:624](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L624)
 
 ___
 
 ### focus
 
-▸ **focus**(): `Promise`<`void`\>
+::: Tip
+AthenaClient.webview.**focus**(): `Promise`<`void`\>
+:::
 
 Focus the WebView Instance
 
@@ -208,13 +222,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:457](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L457)
+[client/webview/index.ts:457](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L457)
 
 ___
 
 ### get
 
-▸ **get**(): `Promise`<`alt.WebView`\>
+::: Tip
+AthenaClient.webview.**get**(): `Promise`<`alt.WebView`\>
+:::
 
 Get the current WebView instance.
 
@@ -230,13 +246,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:353](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L353)
+[client/webview/index.ts:353](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L353)
 
 ___
 
 ### isAnyMenuOpen
 
-▸ **isAnyMenuOpen**(`excludeDead?`): `boolean`
+::: Tip
+AthenaClient.webview.**isAnyMenuOpen**(`excludeDead?`): `boolean`
+:::
 
 Checks if any menu is currently open
 
@@ -254,13 +272,15 @@ Checks if any menu is currently open
 
 #### Defined in
 
-[client/webview/index.ts:673](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L673)
+[client/webview/index.ts:673](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L673)
 
 ___
 
 ### isDoneUpdating
 
-▸ **isDoneUpdating**(): `boolean`
+::: Tip
+AthenaClient.webview.**isDoneUpdating**(): `boolean`
+:::
 
 Returns whether or not all pages are done closing / opening
 
@@ -270,13 +290,15 @@ Returns whether or not all pages are done closing / opening
 
 #### Defined in
 
-[client/webview/index.ts:648](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L648)
+[client/webview/index.ts:648](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L648)
 
 ___
 
 ### isPageOpen
 
-▸ **isPageOpen**(`pageName`): `boolean`
+::: Tip
+AthenaClient.webview.**isPageOpen**(`pageName`): `boolean`
+:::
 
 Returns if a page is currently open.
 
@@ -292,13 +314,15 @@ Returns if a page is currently open.
 
 #### Defined in
 
-[client/webview/index.ts:639](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L639)
+[client/webview/index.ts:639](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L639)
 
 ___
 
 ### on
 
-▸ **on**<`EventNames`\>(`eventName`, `callback`): `void`
+::: Tip
+AthenaClient.webview.**on**<`EventNames`\>(`eventName`, `callback`): `void`
+:::
 
 Registers an event to call when a component is loaded.
 
@@ -327,13 +351,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:604](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L604)
+[client/webview/index.ts:604](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L604)
 
 ___
 
 ### openPages
 
-▸ **openPages**(`pageOrPages`, `hideOverlays?`, `closeOnEscapeCallback?`): `Promise`<`void`\>
+::: Tip
+AthenaClient.webview.**openPages**(`pageOrPages`, `hideOverlays?`, `closeOnEscapeCallback?`): `Promise`<`void`\>
+:::
 
 Used to open a page or pages.
 Use a single page if you have closing callbacks.
@@ -358,13 +384,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:399](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L399)
+[client/webview/index.ts:399](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L399)
 
 ___
 
 ### ready
 
-▸ **ready**(`pageName`, `callback`): `void`
+::: Tip
+AthenaClient.webview.**ready**(`pageName`, `callback`): `void`
+:::
 
 Registers an event to call when a component is loaded.
 
@@ -387,13 +415,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:592](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L592)
+[client/webview/index.ts:592](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L592)
 
 ___
 
 ### registerOverlay
 
-▸ **registerOverlay**(`pageName`, `callback?`): `void`
+::: Tip
+AthenaClient.webview.**registerOverlay**(`pageName`, `callback?`): `void`
+:::
 
 Register a Page Overlay such as HUD elements.
 
@@ -416,13 +446,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:314](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L314)
+[client/webview/index.ts:314](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L314)
 
 ___
 
 ### registerPersistentPage
 
-▸ **registerPersistentPage**(`pageName`): `void`
+::: Tip
+AthenaClient.webview.**registerPersistentPage**(`pageName`): `void`
+:::
 
 Registers a page that never, ever closes. Ever.
 
@@ -444,13 +476,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:296](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L296)
+[client/webview/index.ts:296](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L296)
 
 ___
 
 ### setOverlayVisible
 
-▸ **setOverlayVisible**(`pageName`, `state`): `void`
+::: Tip
+AthenaClient.webview.**setOverlayVisible**(`pageName`, `state`): `void`
+:::
 
 Trigger this to hide/show a specific overlay
 
@@ -473,13 +507,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:333](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L333)
+[client/webview/index.ts:333](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L333)
 
 ___
 
 ### setOverlaysVisible
 
-▸ **setOverlaysVisible**(`value`, `doNotUpdate?`): `Promise`<`void`\>
+::: Tip
+AthenaClient.webview.**setOverlaysVisible**(`value`, `doNotUpdate?`): `Promise`<`void`\>
+:::
 
 Trigger this to hide/show all overlays like Chat, HUD, etc.
 
@@ -502,13 +538,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:266](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L266)
+[client/webview/index.ts:266](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L266)
 
 ___
 
 ### showCursor
 
-▸ **showCursor**(`state`): `Promise`<`void`\>
+::: Tip
+AthenaClient.webview.**showCursor**(`state`): `Promise`<`void`\>
+:::
 
 Show or hide the cursor.
 
@@ -530,13 +568,15 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:478](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L478)
+[client/webview/index.ts:478](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L478)
 
 ___
 
 ### unfocus
 
-▸ **unfocus**(): `Promise`<`void`\>
+::: Tip
+AthenaClient.webview.**unfocus**(): `Promise`<`void`\>
+:::
 
 Focus the WebView Instance
 
@@ -552,4 +592,4 @@ WebViewController
 
 #### Defined in
 
-[client/webview/index.ts:467](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/webview/index.ts#L467)
+[client/webview/index.ts:467](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/index.ts#L467)

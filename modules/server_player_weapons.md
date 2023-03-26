@@ -11,7 +11,9 @@ order: 0
 
 ### clear
 
-▸ **clear**(`player`): `Promise`<`boolean`\>
+::: Tip
+Athena.player.weapons.**clear**(`player`): `Promise`<`boolean`\>
+:::
 
 Clear all weapons from a player's inventory.
 
@@ -31,13 +33,15 @@ Returns true if weapons were found and removed.
 
 #### Defined in
 
-[server/player/weapons.ts:40](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/weapons.ts#L40)
+[server/player/weapons.ts:40](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/weapons.ts#L40)
 
 ___
 
 ### get
 
-▸ **get**(`player`): `Object`
+::: Tip
+Athena.player.weapons.**get**(`player`): `Object`
+:::
 
 Return all weapons the player currently has in their inventory, and toolbar.
 
@@ -60,4 +64,4 @@ Return all weapons the player currently has in their inventory, and toolbar.
 
 #### Defined in
 
-[server/player/weapons.ts:12](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/player/weapons.ts#L12)
+[server/player/weapons.ts:12](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/weapons.ts#L12)

@@ -15,7 +15,9 @@ order: 0
 
 ### requestScaleForm
 
-▸ **requestScaleForm**(`scaleformName`): `Promise`<[`Scaleform`](../classes/client_screen_scaleform_Scaleform.md)\>
+::: Tip
+AthenaClient.screen.scaleform.**requestScaleForm**(`scaleformName`): `Promise`<[`Scaleform`](../classes/client_screen_scaleform_Scaleform.md)\>
+:::
 
 Request a scaleform by name.
 
@@ -33,4 +35,4 @@ Request a scaleform by name.
 
 #### Defined in
 
-[client/screen/scaleform.ts:65](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/scaleform.ts#L65)
+[client/screen/scaleform.ts:65](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/scaleform.ts#L65)

@@ -209,7 +209,9 @@ Returns the type of event, e.g. "click", "hashchange", or "submit".
 
 ### composedPath
 
-▸ **composedPath**(): [`EventTarget`](../modules/shared_utility_flags_Internal.md#EventTarget)[]
+::: Tip
+AthenaShared.utility.flags.Internal.Event.**composedPath**(): [`EventTarget`](../modules/shared_utility_flags_Internal.md#EventTarget)[]
+:::
 
 Returns the invocation target objects of event's path (objects on which listeners will be invoked), except for any nodes in shadow trees of which the shadow root's mode is "closed" that are not reachable from event's currentTarget.
 
@@ -225,7 +227,9 @@ ___
 
 ### initEvent
 
-▸ **initEvent**(`type`, `bubbles?`, `cancelable?`): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.Event.**initEvent**(`type`, `bubbles?`, `cancelable?`): `void`
+:::
 
 **`Deprecated`**
 
@@ -249,7 +253,9 @@ ___
 
 ### preventDefault
 
-▸ **preventDefault**(): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.Event.**preventDefault**(): `void`
+:::
 
 If invoked when the cancelable attribute value is true, and while executing a listener for the event with passive set to false, signals to the operation that caused event to be dispatched that it needs to be canceled.
 
@@ -265,7 +271,9 @@ ___
 
 ### stopImmediatePropagation
 
-▸ **stopImmediatePropagation**(): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.Event.**stopImmediatePropagation**(): `void`
+:::
 
 Invoking this method prevents event from reaching any registered event listeners after the current one finishes running and, when dispatched in a tree, also prevents event from reaching any other objects.
 
@@ -281,7 +289,9 @@ ___
 
 ### stopPropagation
 
-▸ **stopPropagation**(): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.Event.**stopPropagation**(): `void`
+:::
 
 When dispatched in a tree, invoking this method prevents event from reaching any objects other than the current object.
 

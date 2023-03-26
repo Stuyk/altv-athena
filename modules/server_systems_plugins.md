@@ -11,7 +11,9 @@ order: 0
 
 ### addCallback
 
-▸ **addCallback**(`callback`): `void`
+::: Tip
+Athena.systems.plugins.**addCallback**(`callback`): `void`
+:::
 
 After plugins are finished loading; call these callbacks.
 Useful for using 'Athena API' at the top level of a document.
@@ -28,13 +30,15 @@ Useful for using 'Athena API' at the top level of a document.
 
 #### Defined in
 
-[server/systems/plugins.ts:77](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/plugins.ts#L77)
+[server/systems/plugins.ts:77](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/plugins.ts#L77)
 
 ___
 
 ### getPlugins
 
-▸ **getPlugins**(): `string`[]
+::: Tip
+Athena.systems.plugins.**getPlugins**(): `string`[]
+:::
 
 Returns a list of all plugin names that are currently being loaded.
 
@@ -50,13 +54,15 @@ PluginSystem
 
 #### Defined in
 
-[server/systems/plugins.ts:65](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/plugins.ts#L65)
+[server/systems/plugins.ts:65](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/plugins.ts#L65)
 
 ___
 
 ### init
 
-▸ **init**(): `void`
+::: Tip
+Athena.systems.plugins.**init**(): `void`
+:::
 
 Loads all plugins.
 
@@ -66,13 +72,15 @@ Loads all plugins.
 
 #### Defined in
 
-[server/systems/plugins.ts:38](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/plugins.ts#L38)
+[server/systems/plugins.ts:38](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/plugins.ts#L38)
 
 ___
 
 ### registerPlugin
 
-▸ **registerPlugin**(`name`, `callback`): `void`
+::: Tip
+Athena.systems.plugins.**registerPlugin**(`name`, `callback`): `void`
+:::
 
 Register a callback for a plugin to begin its initialization period.
 This ensures that your plugin is ALWAYS loaded last.
@@ -96,4 +104,4 @@ PluginSystem
 
 #### Defined in
 
-[server/systems/plugins.ts:54](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/plugins.ts#L54)
+[server/systems/plugins.ts:54](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/plugins.ts#L54)

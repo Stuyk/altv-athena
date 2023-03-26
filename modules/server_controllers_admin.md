@@ -11,7 +11,9 @@ order: 0
 
 ### banPlayer
 
-▸ **banPlayer**(`player`, `reason`): `Promise`<`boolean`\>
+::: Tip
+Athena.controllers.admin.**banPlayer**(`player`, `reason`): `Promise`<`boolean`\>
+:::
 
 Used to ban a player from the server.
 
@@ -34,13 +36,15 @@ Athena.controllers.admin.banPlayer(player, 'was a bad person :(')
 
 #### Defined in
 
-[server/controllers/admin.ts:21](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/admin.ts#L21)
+[server/controllers/admin.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/admin.ts#L21)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
+:::
 
 #### Parameters
 
@@ -55,9 +59,11 @@ ___
 
 #### Defined in
 
-[server/controllers/admin.ts:78](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/admin.ts#L78)
+[server/controllers/admin.ts:78](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/admin.ts#L78)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
+:::
 
 #### Parameters
 
@@ -72,13 +78,15 @@ ___
 
 #### Defined in
 
-[server/controllers/admin.ts:79](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/admin.ts#L79)
+[server/controllers/admin.ts:79](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/admin.ts#L79)
 
 ___
 
 ### unbanPlayerByDiscord
 
-▸ **unbanPlayerByDiscord**(`discord`): `Promise`<`boolean`\>
+::: Tip
+Athena.controllers.admin.**unbanPlayerByDiscord**(`discord`): `Promise`<`boolean`\>
+:::
 
 Used to unban a player from the server.
 
@@ -104,4 +112,4 @@ AdminController
 
 #### Defined in
 
-[server/controllers/admin.ts:52](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/admin.ts#L52)
+[server/controllers/admin.ts:52](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/admin.ts#L52)

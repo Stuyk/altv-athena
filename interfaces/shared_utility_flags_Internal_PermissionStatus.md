@@ -23,7 +23,9 @@ order: 0
 
 #### Type declaration
 
-▸ (`this`, `ev`): `any`
+::: Tip
+AthenaShared.utility.flags.Internal.PermissionStatus.(`this`, `ev`): `any`
+:::
 
 ##### Parameters
 
@@ -54,7 +56,9 @@ ___
 
 ### addEventListener
 
-▸ **addEventListener**<`K`\>(`type`, `listener`, `options?`): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.PermissionStatus.**addEventListener**<`K`\>(`type`, `listener`, `options?`): `void`
+:::
 
 #### Type parameters
 
@@ -82,7 +86,9 @@ EventTarget.addEventListener
 
 ../../node_modules/typescript/lib/lib.dom.d.ts:10525
 
-▸ **addEventListener**(`type`, `listener`, `options?`): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.PermissionStatus.**addEventListener**(`type`, `listener`, `options?`): `void`
+:::
 
 #### Parameters
 
@@ -108,7 +114,9 @@ ___
 
 ### dispatchEvent
 
-▸ **dispatchEvent**(`event`): `boolean`
+::: Tip
+AthenaShared.utility.flags.Internal.PermissionStatus.**dispatchEvent**(`event`): `boolean`
+:::
 
 Dispatches a synthetic event event to target and returns true if either event's cancelable attribute value is false or its preventDefault() method was not invoked, and false otherwise.
 
@@ -134,7 +142,9 @@ ___
 
 ### removeEventListener
 
-▸ **removeEventListener**<`K`\>(`type`, `listener`, `options?`): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.PermissionStatus.**removeEventListener**<`K`\>(`type`, `listener`, `options?`): `void`
+:::
 
 #### Type parameters
 
@@ -162,7 +172,9 @@ EventTarget.removeEventListener
 
 ../../node_modules/typescript/lib/lib.dom.d.ts:10527
 
-▸ **removeEventListener**(`type`, `listener`, `options?`): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.PermissionStatus.**removeEventListener**(`type`, `listener`, `options?`): `void`
+:::
 
 #### Parameters
 

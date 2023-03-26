@@ -24,7 +24,7 @@ order: 0
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:126](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/menuInterfaces.ts#L126)
+[client/rmlui/menu/menuInterfaces.ts:126](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/menuInterfaces.ts#L126)
 
 ___
 
@@ -40,4 +40,4 @@ MenuInfo
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:148](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/menuInterfaces.ts#L148)
+[client/rmlui/menu/menuInterfaces.ts:148](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/menuInterfaces.ts#L148)

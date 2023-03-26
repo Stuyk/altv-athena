@@ -19,7 +19,9 @@ order: 0
 
 ### getCommands
 
-▸ `Static` **getCommands**(): `string`[]
+::: Tip
+AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **getCommands**(): `string`[]
+:::
 
 Return a list of commands...
 
@@ -35,13 +37,15 @@ ConsoleCommander
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:61](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/consoleCommander.ts#L61)
+[shared/utility/consoleCommander.ts:61](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/consoleCommander.ts#L61)
 
 ___
 
 ### init
 
-▸ `Static` **init**(`alt`): `void`
+::: Tip
+AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **init**(`alt`): `void`
+:::
 
 #### Parameters
 
@@ -56,13 +60,15 @@ ___
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:25](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/consoleCommander.ts#L25)
+[shared/utility/consoleCommander.ts:25](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/consoleCommander.ts#L25)
 
 ___
 
 ### invokeCommand
 
-▸ `Static` **invokeCommand**(`cmdName`, `...args`): `void`
+::: Tip
+AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **invokeCommand**(`cmdName`, `...args`): `void`
+:::
 
 Allows a console command to be invoked through other means.
 
@@ -85,13 +91,15 @@ ConsoleCommander
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:37](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/consoleCommander.ts#L37)
+[shared/utility/consoleCommander.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/consoleCommander.ts#L37)
 
 ___
 
 ### registerConsoleCommand
 
-▸ `Static` **registerConsoleCommand**(`cmdName`, `callback`): `void`
+::: Tip
+AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **registerConsoleCommand**(`cmdName`, `callback`): `void`
+:::
 
 Register a Server-Side or Client-Side Console Command
 Depends on the folder you are writing inside of.
@@ -115,4 +123,4 @@ ConsoleCommander
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:50](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/consoleCommander.ts#L50)
+[shared/utility/consoleCommander.ts:50](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/consoleCommander.ts#L50)

@@ -11,7 +11,9 @@ order: 0
 
 ### frontend
 
-▸ **frontend**(`audioName`, `ref`): `void`
+::: Tip
+AthenaClient.systems.sound.**frontend**(`audioName`, `ref`): `void`
+:::
 
 Play a sound in the frontend.
 
@@ -32,13 +34,15 @@ None
 
 #### Defined in
 
-[client/systems/sound.ts:21](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/sound.ts#L21)
+[client/systems/sound.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/sound.ts#L21)
 
 ___
 
 ### handlePlayAudioPositional
 
-▸ **handlePlayAudioPositional**(`pos`, `soundName`, `soundInstantID?`): `void`
+::: Tip
+AthenaClient.systems.sound.**handlePlayAudioPositional**(`pos`, `soundName`, `soundInstantID?`): `void`
+:::
 
 Handle play audio positional
 
@@ -56,13 +60,15 @@ Handle play audio positional
 
 #### Defined in
 
-[client/systems/sound.ts:31](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/sound.ts#L31)
+[client/systems/sound.ts:31](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/sound.ts#L31)
 
 ___
 
 ### play2d
 
-▸ **play2d**(`soundName`, `volume?`, `soundInstantID?`): `void`
+::: Tip
+AthenaClient.systems.sound.**play2d**(`soundName`, `volume?`, `soundInstantID?`): `void`
+:::
 
 Play a 2D sound.
 
@@ -82,13 +88,15 @@ None
 
 #### Defined in
 
-[client/systems/sound.ts:110](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/sound.ts#L110)
+[client/systems/sound.ts:110](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/sound.ts#L110)
 
 ___
 
 ### play3d
 
-▸ **play3d**(`entity`, `soundName`, `soundInstantID?`): `void`
+::: Tip
+AthenaClient.systems.sound.**play3d**(`entity`, `soundName`, `soundInstantID?`): `void`
+:::
 
 Really basic 3D audio. Does not update after first play.
 Simply plays the audio based on your position.
@@ -107,13 +115,15 @@ Simply plays the audio based on your position.
 
 #### Defined in
 
-[client/systems/sound.ts:66](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/sound.ts#L66)
+[client/systems/sound.ts:66](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/sound.ts#L66)
 
 ___
 
 ### stopAudio
 
-▸ **stopAudio**(`soundInstantID?`): `void`
+::: Tip
+AthenaClient.systems.sound.**stopAudio**(`soundInstantID?`): `void`
+:::
 
 Stop audio.
 
@@ -131,4 +141,4 @@ None
 
 #### Defined in
 
-[client/systems/sound.ts:120](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/sound.ts#L120)
+[client/systems/sound.ts:120](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/sound.ts#L120)

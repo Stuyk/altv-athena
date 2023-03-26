@@ -37,7 +37,7 @@ JobAttachable
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:75](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iAttachable.ts#L75)
+[shared/interfaces/iAttachable.ts:75](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iAttachable.ts#L75)
 
 ___
 
@@ -63,7 +63,7 @@ IAttachable
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:51](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iAttachable.ts#L51)
+[shared/interfaces/iAttachable.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iAttachable.ts#L51)
 
 ___
 
@@ -80,7 +80,7 @@ Attachable
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:68](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iAttachable.ts#L68)
+[shared/interfaces/iAttachable.ts:68](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iAttachable.ts#L68)
 
 ___
 
@@ -100,7 +100,7 @@ IAttachable
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:58](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iAttachable.ts#L58)
+[shared/interfaces/iAttachable.ts:58](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iAttachable.ts#L58)
 
 ___
 
@@ -120,7 +120,7 @@ IAttachable
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iAttachable.ts#L23)
+[shared/interfaces/iAttachable.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iAttachable.ts#L23)
 
 ___
 
@@ -140,7 +140,7 @@ IAttachable
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:30](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iAttachable.ts#L30)
+[shared/interfaces/iAttachable.ts:30](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iAttachable.ts#L30)
 
 ___
 
@@ -160,7 +160,7 @@ IAttachable
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:37](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iAttachable.ts#L37)
+[shared/interfaces/iAttachable.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iAttachable.ts#L37)
 
 ___
 
@@ -180,4 +180,4 @@ IAttachable
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:16](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iAttachable.ts#L16)
+[shared/interfaces/iAttachable.ts:16](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iAttachable.ts#L16)

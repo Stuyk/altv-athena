@@ -11,7 +11,9 @@ order: 0
 
 ### updateWaypoint
 
-▸ **updateWaypoint**(): `Promise`<`void`\>
+::: Tip
+AthenaClient.systems.athenaEvents.**updateWaypoint**(): `Promise`<`void`\>
+:::
 
 Sends an event to the server when the local player's waypoint is updated.
 
@@ -27,4 +29,4 @@ AthenaEvents
 
 #### Defined in
 
-[client/systems/athenaEvents.ts:37](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/athenaEvents.ts#L37)
+[client/systems/athenaEvents.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/athenaEvents.ts#L37)

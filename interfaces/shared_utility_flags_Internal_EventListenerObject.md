@@ -13,7 +13,9 @@ order: 0
 
 ### handleEvent
 
-▸ **handleEvent**(`object`): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.EventListenerObject.**handleEvent**(`object`): `void`
+:::
 
 #### Parameters
 

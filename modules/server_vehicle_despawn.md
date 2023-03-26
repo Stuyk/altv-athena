@@ -11,7 +11,9 @@ order: 0
 
 ### all
 
-▸ **all**(): `Promise`<`void`\>
+::: Tip
+Athena.vehicle.despawn.**all**(): `Promise`<`void`\>
+:::
 
 Despawns all vehicles, except for vehicles flagged to prevent despawning.
 
@@ -27,13 +29,15 @@ Wait for this function to finish before attempting to respawn.
 
 #### Defined in
 
-[server/vehicle/despawn.ts:13](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/despawn.ts#L13)
+[server/vehicle/despawn.ts:13](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/despawn.ts#L13)
 
 ___
 
 ### list
 
-▸ **list**(`ids`): `Promise`<`void`\>
+::: Tip
+Athena.vehicle.despawn.**list**(`ids`): `Promise`<`void`\>
+:::
 
 Despawn a list of vehicles by identifier
 
@@ -51,13 +55,15 @@ Despawn a list of vehicles by identifier
 
 #### Defined in
 
-[server/vehicle/despawn.ts:100](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/despawn.ts#L100)
+[server/vehicle/despawn.ts:100](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/despawn.ts#L100)
 
 ___
 
 ### one
 
-▸ **one**(`id`): `Promise`<`boolean`\>
+::: Tip
+Athena.vehicle.despawn.**one**(`id`): `Promise`<`boolean`\>
+:::
 
 Returns true if the vehicle has been despawned / destroyed.
 
@@ -75,13 +81,15 @@ Returns true if the vehicle has been despawned / destroyed.
 
 #### Defined in
 
-[server/vehicle/despawn.ts:63](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/despawn.ts#L63)
+[server/vehicle/despawn.ts:63](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/despawn.ts#L63)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.despawn.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override despawn vehicle functionality
 
@@ -100,9 +108,11 @@ Used to override despawn vehicle functionality
 
 #### Defined in
 
-[server/vehicle/despawn.ts:122](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/despawn.ts#L122)
+[server/vehicle/despawn.ts:122](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/despawn.ts#L122)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.despawn.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override despawn vehicle functionality
 
@@ -121,9 +131,11 @@ Used to override despawn vehicle functionality
 
 #### Defined in
 
-[server/vehicle/despawn.ts:123](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/despawn.ts#L123)
+[server/vehicle/despawn.ts:123](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/despawn.ts#L123)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.despawn.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override despawn vehicle functionality
 
@@ -142,4 +154,4 @@ Used to override despawn vehicle functionality
 
 #### Defined in
 
-[server/vehicle/despawn.ts:124](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/despawn.ts#L124)
+[server/vehicle/despawn.ts:124](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/despawn.ts#L124)

@@ -15,7 +15,9 @@ order: 0
 
 #### Type declaration
 
-▸ <`TFunction`\>(`target`): `TFunction` \| `void`
+::: Tip
+AthenaShared.utility.classCheck.Internal.<`TFunction`\>(`target`): `TFunction` \| `void`
+:::
 
 ##### Type parameters
 

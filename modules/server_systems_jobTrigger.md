@@ -11,7 +11,9 @@ order: 0
 
 ### create
 
-▸ **create**(`player`, `data`): `any`
+::: Tip
+Athena.systems.jobTrigger.**create**(`player`, `data`): `any`
+:::
 
 Creates a WebView Job Window to show to the player.
 Will invoke a callback or an event if accepted or declined.
@@ -29,13 +31,15 @@ Will invoke a callback or an event if accepted or declined.
 
 #### Defined in
 
-[server/systems/jobTrigger.ts:87](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/jobTrigger.ts#L87)
+[server/systems/jobTrigger.ts:87](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jobTrigger.ts#L87)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.jobTrigger.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override job trigger functions.
 
@@ -54,4 +58,4 @@ Used to override job trigger functions.
 
 #### Defined in
 
-[server/systems/jobTrigger.ts:106](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/jobTrigger.ts#L106)
+[server/systems/jobTrigger.ts:106](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jobTrigger.ts#L106)

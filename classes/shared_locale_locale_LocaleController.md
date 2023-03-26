@@ -19,7 +19,9 @@ order: 0
 
 ### get
 
-▸ `Static` **get**(`key`, `...args`): `string`
+::: Tip
+AthenaShared.locale.locale.LocaleController.`Static` **get**(`key`, `...args`): `string`
+:::
 
 Get a locale based on its key value.
 
@@ -42,13 +44,15 @@ LocaleController
 
 #### Defined in
 
-[shared/locale/locale.ts:46](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/locale/locale.ts#L46)
+[shared/locale/locale.ts:46](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/locale/locale.ts#L46)
 
 ___
 
 ### getWebviewLocale
 
-▸ `Static` **getWebviewLocale**(`key`): [`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object)
+::: Tip
+AthenaShared.locale.locale.LocaleController.`Static` **getWebviewLocale**(`key`): [`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object)
+:::
 
 Returns an object of strings with labels for WebViews.
 
@@ -70,13 +74,15 @@ LocaleController
 
 #### Defined in
 
-[shared/locale/locale.ts:67](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/locale/locale.ts#L67)
+[shared/locale/locale.ts:67](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/locale/locale.ts#L67)
 
 ___
 
 ### setLanguage
 
-▸ `Static` **setLanguage**(`iso639?`): `void`
+::: Tip
+AthenaShared.locale.locale.LocaleController.`Static` **setLanguage**(`iso639?`): `void`
+:::
 
 The ISO-639-1 Code to Utilize for Language
 
@@ -98,4 +104,4 @@ LocaleController
 
 #### Defined in
 
-[shared/locale/locale.ts:34](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/locale/locale.ts#L34)
+[shared/locale/locale.ts:34](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/locale/locale.ts#L34)

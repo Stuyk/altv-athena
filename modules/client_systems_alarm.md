@@ -11,7 +11,9 @@ order: 0
 
 ### loadAlarm
 
-▸ **loadAlarm**(`name`, `count?`): `Promise`<`boolean`\>
+::: Tip
+AthenaClient.systems.alarm.**loadAlarm**(`name`, `count?`): `Promise`<`boolean`\>
+:::
 
 Attempts to load an alarm multiple times before returning false.
 
@@ -28,13 +30,15 @@ Attempts to load an alarm multiple times before returning false.
 
 #### Defined in
 
-[client/systems/alarm.ts:17](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/alarm.ts#L17)
+[client/systems/alarm.ts:17](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/alarm.ts#L17)
 
 ___
 
 ### startAlarm
 
-▸ **startAlarm**(`name`): `Promise`<`void`\>
+::: Tip
+AthenaClient.systems.alarm.**startAlarm**(`name`): `Promise`<`void`\>
+:::
 
 Play an alarm for the local player.
 
@@ -52,13 +56,15 @@ Play an alarm for the local player.
 
 #### Defined in
 
-[client/systems/alarm.ts:50](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/alarm.ts#L50)
+[client/systems/alarm.ts:50](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/alarm.ts#L50)
 
 ___
 
 ### stopAlarm
 
-▸ **stopAlarm**(`name`): `Promise`<`void`\>
+::: Tip
+AthenaClient.systems.alarm.**stopAlarm**(`name`): `Promise`<`void`\>
+:::
 
 Stop an alarm for the local player.
 
@@ -76,13 +82,15 @@ Stop an alarm for the local player.
 
 #### Defined in
 
-[client/systems/alarm.ts:73](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/alarm.ts#L73)
+[client/systems/alarm.ts:73](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/alarm.ts#L73)
 
 ___
 
 ### stopAllAlarms
 
-▸ **stopAllAlarms**(): `Promise`<`void`\>
+::: Tip
+AthenaClient.systems.alarm.**stopAllAlarms**(): `Promise`<`void`\>
+:::
 
 Stop all alarms for the local player.
 
@@ -94,4 +102,4 @@ Stop all alarms for the local player.
 
 #### Defined in
 
-[client/systems/alarm.ts:86](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/alarm.ts#L86)
+[client/systems/alarm.ts:86](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/alarm.ts#L86)

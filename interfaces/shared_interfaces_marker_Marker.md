@@ -31,7 +31,7 @@ Marker
 
 #### Defined in
 
-[shared/interfaces/marker.ts:65](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/marker.ts#L65)
+[shared/interfaces/marker.ts:65](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/marker.ts#L65)
 
 ___
 
@@ -47,7 +47,7 @@ Marker
 
 #### Defined in
 
-[shared/interfaces/marker.ts:30](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/marker.ts#L30)
+[shared/interfaces/marker.ts:30](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/marker.ts#L30)
 
 ___
 
@@ -63,7 +63,7 @@ Marker
 
 #### Defined in
 
-[shared/interfaces/marker.ts:58](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/marker.ts#L58)
+[shared/interfaces/marker.ts:58](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/marker.ts#L58)
 
 ___
 
@@ -79,7 +79,7 @@ Marker
 
 #### Defined in
 
-[shared/interfaces/marker.ts:72](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/marker.ts#L72)
+[shared/interfaces/marker.ts:72](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/marker.ts#L72)
 
 ___
 
@@ -95,7 +95,7 @@ Marker
 
 #### Defined in
 
-[shared/interfaces/marker.ts:44](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/marker.ts#L44)
+[shared/interfaces/marker.ts:44](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/marker.ts#L44)
 
 ___
 
@@ -111,7 +111,7 @@ IObject
 
 #### Defined in
 
-[shared/interfaces/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/marker.ts#L16)
+[shared/interfaces/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/marker.ts#L16)
 
 ___
 
@@ -127,7 +127,7 @@ Marker
 
 #### Defined in
 
-[shared/interfaces/marker.ts:79](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/marker.ts#L79)
+[shared/interfaces/marker.ts:79](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/marker.ts#L79)
 
 ___
 
@@ -143,7 +143,7 @@ Marker
 
 #### Defined in
 
-[shared/interfaces/marker.ts:37](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/marker.ts#L37)
+[shared/interfaces/marker.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/marker.ts#L37)
 
 ___
 
@@ -159,7 +159,7 @@ Marker
 
 #### Defined in
 
-[shared/interfaces/marker.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/marker.ts#L23)
+[shared/interfaces/marker.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/marker.ts#L23)
 
 ___
 
@@ -175,4 +175,4 @@ Marker
 
 #### Defined in
 
-[shared/interfaces/marker.ts:51](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/marker.ts#L51)
+[shared/interfaces/marker.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/marker.ts#L51)

@@ -24,13 +24,15 @@ order: 0
 
 #### Defined in
 
-[server/database/connection.ts:42](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/database/connection.ts#L42)
+[server/database/connection.ts:42](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/database/connection.ts#L42)
 
 ## Functions
 
 ### getCollections
 
-▸ **getCollections**(): `string`[]
+::: Tip
+Athena.database.connection.**getCollections**(): `string`[]
+:::
 
 #### Returns
 
@@ -38,13 +40,15 @@ order: 0
 
 #### Defined in
 
-[server/database/connection.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/database/connection.ts#L23)
+[server/database/connection.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/database/connection.ts#L23)
 
 ___
 
 ### getName
 
-▸ **getName**(`config`): `string`
+::: Tip
+Athena.database.connection.**getName**(`config`): `string`
+:::
 
 #### Parameters
 
@@ -58,13 +62,15 @@ ___
 
 #### Defined in
 
-[server/database/connection.ts:27](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/database/connection.ts#L27)
+[server/database/connection.ts:27](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/database/connection.ts#L27)
 
 ___
 
 ### getURL
 
-▸ **getURL**(`config`): `string`
+::: Tip
+Athena.database.connection.**getURL**(`config`): `string`
+:::
 
 #### Parameters
 
@@ -78,13 +84,15 @@ ___
 
 #### Defined in
 
-[server/database/connection.ts:15](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/database/connection.ts#L15)
+[server/database/connection.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/database/connection.ts#L15)
 
 ___
 
 ### throwConnectionError
 
-▸ **throwConnectionError**(): `void`
+::: Tip
+Athena.database.connection.**throwConnectionError**(): `void`
+:::
 
 #### Returns
 
@@ -92,4 +100,4 @@ ___
 
 #### Defined in
 
-[server/database/connection.ts:34](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/database/connection.ts#L34)
+[server/database/connection.ts:34](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/database/connection.ts#L34)

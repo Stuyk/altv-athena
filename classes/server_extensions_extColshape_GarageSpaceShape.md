@@ -35,7 +35,7 @@ alt.ColshapeSphere.constructor
 
 #### Defined in
 
-[server/extensions/extColshape.ts:38](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/extensions/extColshape.ts#L38)
+[server/extensions/extColshape.ts:38](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/extensions/extColshape.ts#L38)
 
 ## Properties
 
@@ -45,7 +45,7 @@ alt.ColshapeSphere.constructor
 
 #### Defined in
 
-[server/extensions/extColshape.ts:36](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/extensions/extColshape.ts#L36)
+[server/extensions/extColshape.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/extensions/extColshape.ts#L36)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:35](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/extensions/extColshape.ts#L35)
+[server/extensions/extColshape.ts:35](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/extensions/extColshape.ts#L35)
 
 ___
 
@@ -65,13 +65,15 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:34](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/extensions/extColshape.ts#L34)
+[server/extensions/extColshape.ts:34](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/extensions/extColshape.ts#L34)
 
 ## Methods
 
 ### getPositionAndRotation
 
-▸ **getPositionAndRotation**(): `Object`
+::: Tip
+Athena.extensions.extColshape.GarageSpaceShape.**getPositionAndRotation**(): `Object`
+:::
 
 #### Returns
 
@@ -84,13 +86,15 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:47](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/extensions/extColshape.ts#L47)
+[server/extensions/extColshape.ts:47](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/extensions/extColshape.ts#L47)
 
 ___
 
 ### getSpaceStatus
 
-▸ **getSpaceStatus**(): `boolean`
+::: Tip
+Athena.extensions.extColshape.GarageSpaceShape.**getSpaceStatus**(): `boolean`
+:::
 
 #### Returns
 
@@ -98,13 +102,15 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:51](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/extensions/extColshape.ts#L51)
+[server/extensions/extColshape.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/extensions/extColshape.ts#L51)
 
 ___
 
 ### setSpaceStatus
 
-▸ **setSpaceStatus**(`value`): `void`
+::: Tip
+Athena.extensions.extColshape.GarageSpaceShape.**setSpaceStatus**(`value`): `void`
+:::
 
 #### Parameters
 
@@ -118,4 +124,4 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:43](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/extensions/extColshape.ts#L43)
+[server/extensions/extColshape.ts:43](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/extensions/extColshape.ts#L43)

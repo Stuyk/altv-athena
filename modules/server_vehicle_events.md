@@ -15,13 +15,15 @@ order: 0
 
 #### Defined in
 
-[server/vehicle/events.ts:4](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L4)
+[server/vehicle/events.ts:4](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L4)
 
 ## Functions
 
 ### on
 
-▸ **on**(`eventName`, `callback`): `any`
+::: Tip
+Athena.vehicle.events.**on**(`eventName`, `callback`): `any`
+:::
 
 Triggered when a vehicle has been spawned / created.
 
@@ -38,9 +40,11 @@ Triggered when a vehicle has been spawned / created.
 
 #### Defined in
 
-[server/vehicle/events.ts:45](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L45)
+[server/vehicle/events.ts:45](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L45)
 
-▸ **on**(`eventName`, `callback`): `any`
+::: Tip
+Athena.vehicle.events.**on**(`eventName`, `callback`): `any`
+:::
 
 Triggered when a doors are unlocked by a player.
 
@@ -57,9 +61,11 @@ Triggered when a doors are unlocked by a player.
 
 #### Defined in
 
-[server/vehicle/events.ts:53](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L53)
+[server/vehicle/events.ts:53](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L53)
 
-▸ **on**(`eventName`, `callback`): `any`
+::: Tip
+Athena.vehicle.events.**on**(`eventName`, `callback`): `any`
+:::
 
 Triggered when a doors are locked by a player.
 
@@ -76,9 +82,11 @@ Triggered when a doors are locked by a player.
 
 #### Defined in
 
-[server/vehicle/events.ts:61](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L61)
+[server/vehicle/events.ts:61](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L61)
 
-▸ **on**(`eventName`, `callback`): `any`
+::: Tip
+Athena.vehicle.events.**on**(`eventName`, `callback`): `any`
+:::
 
 Triggered when a door locks are updated for any status.
 
@@ -95,9 +103,11 @@ Triggered when a door locks are updated for any status.
 
 #### Defined in
 
-[server/vehicle/events.ts:69](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L69)
+[server/vehicle/events.ts:69](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L69)
 
-▸ **on**(`eventName`, `callback`): `any`
+::: Tip
+Athena.vehicle.events.**on**(`eventName`, `callback`): `any`
+:::
 
 Triggered when a door is closed by a player.
 
@@ -114,9 +124,11 @@ Triggered when a door is closed by a player.
 
 #### Defined in
 
-[server/vehicle/events.ts:77](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L77)
+[server/vehicle/events.ts:77](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L77)
 
-▸ **on**(`eventName`, `callback`): `any`
+::: Tip
+Athena.vehicle.events.**on**(`eventName`, `callback`): `any`
+:::
 
 Triggered when a door is opened by a player.
 
@@ -133,9 +145,11 @@ Triggered when a door is opened by a player.
 
 #### Defined in
 
-[server/vehicle/events.ts:88](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L88)
+[server/vehicle/events.ts:88](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L88)
 
-▸ **on**(`eventName`, `callback`): `any`
+::: Tip
+Athena.vehicle.events.**on**(`eventName`, `callback`): `any`
+:::
 
 Triggered when the engine is stopped by a player.
 
@@ -152,9 +166,11 @@ Triggered when the engine is stopped by a player.
 
 #### Defined in
 
-[server/vehicle/events.ts:99](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L99)
+[server/vehicle/events.ts:99](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L99)
 
-▸ **on**(`eventName`, `callback`): `any`
+::: Tip
+Athena.vehicle.events.**on**(`eventName`, `callback`): `any`
+:::
 
 Triggered when the engine is started by a player.
 
@@ -171,9 +187,11 @@ Triggered when the engine is started by a player.
 
 #### Defined in
 
-[server/vehicle/events.ts:107](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L107)
+[server/vehicle/events.ts:107](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L107)
 
-▸ **on**(`eventName`, `callback`): `any`
+::: Tip
+Athena.vehicle.events.**on**(`eventName`, `callback`): `any`
+:::
 
 Triggered when the internal repair function is called.
 
@@ -192,9 +210,11 @@ Does not work for vehicle.repair();
 
 #### Defined in
 
-[server/vehicle/events.ts:117](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L117)
+[server/vehicle/events.ts:117](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L117)
 
-▸ **on**(`eventName`, `callback`): `any`
+::: Tip
+Athena.vehicle.events.**on**(`eventName`, `callback`): `any`
+:::
 
 Triggered when a vehicle is destroyed, and despawned.
 
@@ -213,13 +233,15 @@ This event is only fired by a default system.
 
 #### Defined in
 
-[server/vehicle/events.ts:127](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L127)
+[server/vehicle/events.ts:127](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L127)
 
 ___
 
 ### trigger
 
-▸ **trigger**<`CustomEvents`\>(`eventName`, `vehicle`, `...args`): `void`
+::: Tip
+Athena.vehicle.events.**trigger**<`CustomEvents`\>(`eventName`, `vehicle`, `...args`): `void`
+:::
 
 Usually called by internal functions. Can be used to manually trigger an Athena Event though.
 
@@ -243,4 +265,4 @@ Usually called by internal functions. Can be used to manually trigger an Athena 
 
 #### Defined in
 
-[server/vehicle/events.ts:25](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/events.ts#L25)
+[server/vehicle/events.ts:25](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/events.ts#L25)

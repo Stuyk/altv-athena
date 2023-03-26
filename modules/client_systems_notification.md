@@ -15,13 +15,15 @@ order: 0
 
 #### Defined in
 
-[client/systems/notification.ts:5](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/notification.ts#L5)
+[client/systems/notification.ts:5](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/notification.ts#L5)
 
 ## Functions
 
 ### addCallback
 
-▸ **addCallback**(`callback`): `void`
+::: Tip
+AthenaClient.systems.notification.**addCallback**(`callback`): `void`
+:::
 
 Call a function back when a notification is received.
 
@@ -41,13 +43,15 @@ Good for overwriting the default notification system and handling it on your own
 
 #### Defined in
 
-[client/systems/notification.ts:42](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/notification.ts#L42)
+[client/systems/notification.ts:42](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/notification.ts#L42)
 
 ___
 
 ### disableDefault
 
-▸ **disableDefault**(): `void`
+::: Tip
+AthenaClient.systems.notification.**disableDefault**(): `void`
+:::
 
 Disable the default notification handler
 
@@ -59,4 +63,4 @@ Disable the default notification handler
 
 #### Defined in
 
-[client/systems/notification.ts:30](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/notification.ts#L30)
+[client/systems/notification.ts:30](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/notification.ts#L30)

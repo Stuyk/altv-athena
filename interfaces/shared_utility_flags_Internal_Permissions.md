@@ -13,7 +13,9 @@ order: 0
 
 ### query
 
-▸ **query**(`permissionDesc`): `Promise`<[`PermissionStatus`](../modules/shared_utility_flags_Internal.md#PermissionStatus)\>
+::: Tip
+AthenaShared.utility.flags.Internal.Permissions.**query**(`permissionDesc`): `Promise`<[`PermissionStatus`](../modules/shared_utility_flags_Internal.md#PermissionStatus)\>
+:::
 
 #### Parameters
 

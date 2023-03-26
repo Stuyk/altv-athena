@@ -25,7 +25,9 @@ The initial value of Object.prototype.constructor is the standard built-in Objec
 
 ### hasOwnProperty
 
-▸ **hasOwnProperty**(`v`): `boolean`
+::: Tip
+Athena.systems.inventory.crafting.Internal.Object.**hasOwnProperty**(`v`): `boolean`
+:::
 
 Determines whether an object has a property with the specified name.
 
@@ -47,7 +49,9 @@ ___
 
 ### isPrototypeOf
 
-▸ **isPrototypeOf**(`v`): `boolean`
+::: Tip
+Athena.systems.inventory.crafting.Internal.Object.**isPrototypeOf**(`v`): `boolean`
+:::
 
 Determines whether an object exists in another object's prototype chain.
 
@@ -69,7 +73,9 @@ ___
 
 ### propertyIsEnumerable
 
-▸ **propertyIsEnumerable**(`v`): `boolean`
+::: Tip
+Athena.systems.inventory.crafting.Internal.Object.**propertyIsEnumerable**(`v`): `boolean`
+:::
 
 Determines whether a specified property is enumerable.
 
@@ -91,7 +97,9 @@ ___
 
 ### toLocaleString
 
-▸ **toLocaleString**(): `string`
+::: Tip
+Athena.systems.inventory.crafting.Internal.Object.**toLocaleString**(): `string`
+:::
 
 Returns a date converted to a string using the current locale.
 
@@ -107,7 +115,9 @@ ___
 
 ### toString
 
-▸ **toString**(): `string`
+::: Tip
+Athena.systems.inventory.crafting.Internal.Object.**toString**(): `string`
+:::
 
 Returns a string representation of an object.
 
@@ -123,7 +133,9 @@ ___
 
 ### valueOf
 
-▸ **valueOf**(): [`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object)
+::: Tip
+Athena.systems.inventory.crafting.Internal.Object.**valueOf**(): [`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object)
+:::
 
 Returns the primitive value of the specified object.
 

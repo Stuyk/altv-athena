@@ -11,7 +11,9 @@ order: 0
 
 ### create
 
-▸ **create**(`account`): `Promise`<`undefined` \| `string`\>
+::: Tip
+Athena.systems.jwt.**create**(`account`): `Promise`<`undefined` \| `string`\>
+:::
 
 Creates a JWT token with basic account id inside of it.
 
@@ -27,13 +29,15 @@ Creates a JWT token with basic account id inside of it.
 
 #### Defined in
 
-[server/systems/jwt.ts:60](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/jwt.ts#L60)
+[server/systems/jwt.ts:60](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L60)
 
 ___
 
 ### fetch
 
-▸ **fetch**(`player`): `Promise`<`string` \| ``null``\>
+::: Tip
+Athena.systems.jwt.**fetch**(`player`): `Promise`<`string` \| ``null``\>
+:::
 
 #### Parameters
 
@@ -47,13 +51,15 @@ ___
 
 #### Defined in
 
-[server/systems/jwt.ts:103](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/jwt.ts#L103)
+[server/systems/jwt.ts:103](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L103)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.jwt.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override jwt functions.
 
@@ -72,9 +78,11 @@ Used to override jwt functions.
 
 #### Defined in
 
-[server/systems/jwt.ts:159](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/jwt.ts#L159)
+[server/systems/jwt.ts:159](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L159)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.jwt.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override jwt functions.
 
@@ -93,9 +101,11 @@ Used to override jwt functions.
 
 #### Defined in
 
-[server/systems/jwt.ts:160](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/jwt.ts#L160)
+[server/systems/jwt.ts:160](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L160)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.jwt.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override jwt functions.
 
@@ -114,13 +124,15 @@ Used to override jwt functions.
 
 #### Defined in
 
-[server/systems/jwt.ts:161](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/jwt.ts#L161)
+[server/systems/jwt.ts:161](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L161)
 
 ___
 
 ### verify
 
-▸ **verify**(`data`): `Promise`<`string` \| `undefined`\>
+::: Tip
+Athena.systems.jwt.**verify**(`data`): `Promise`<`string` \| `undefined`\>
+:::
 
 Verifies a compact JWT string is valid.
 
@@ -136,4 +148,4 @@ Verifies a compact JWT string is valid.
 
 #### Defined in
 
-[server/systems/jwt.ts:85](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/jwt.ts#L85)
+[server/systems/jwt.ts:85](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L85)

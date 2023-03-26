@@ -31,7 +31,7 @@ IObject
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:60](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iObject.ts#L60)
+[shared/interfaces/iObject.ts:60](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iObject.ts#L60)
 
 ___
 
@@ -47,7 +47,7 @@ IObject
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:53](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iObject.ts#L53)
+[shared/interfaces/iObject.ts:53](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iObject.ts#L53)
 
 ___
 
@@ -63,7 +63,7 @@ IObject
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:39](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iObject.ts#L39)
+[shared/interfaces/iObject.ts:39](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iObject.ts#L39)
 
 ___
 
@@ -79,7 +79,7 @@ IObject
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:67](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iObject.ts#L67)
+[shared/interfaces/iObject.ts:67](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iObject.ts#L67)
 
 ___
 
@@ -95,7 +95,7 @@ IObject
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:32](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iObject.ts#L32)
+[shared/interfaces/iObject.ts:32](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iObject.ts#L32)
 
 ___
 
@@ -111,7 +111,7 @@ IObject
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:46](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iObject.ts#L46)
+[shared/interfaces/iObject.ts:46](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iObject.ts#L46)
 
 ___
 
@@ -129,7 +129,7 @@ IObject
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:25](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iObject.ts#L25)
+[shared/interfaces/iObject.ts:25](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iObject.ts#L25)
 
 ___
 
@@ -145,4 +145,4 @@ IObject
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:15](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/iObject.ts#L15)
+[shared/interfaces/iObject.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iObject.ts#L15)

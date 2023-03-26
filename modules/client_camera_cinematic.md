@@ -15,7 +15,9 @@ order: 0
 
 ### addNode
 
-▸ **addNode**(`node`): `Promise`<`void`\>
+::: Tip
+AthenaClient.camera.cinematic.**addNode**(`node`): `Promise`<`void`\>
+:::
 
 Add a camera node to the camera set.
 
@@ -35,13 +37,15 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:319](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/camera/cinematic.ts#L319)
+[client/camera/cinematic.ts:319](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L319)
 
 ___
 
 ### destroy
 
-▸ **destroy**(): `Promise`<`void`\>
+::: Tip
+AthenaClient.camera.cinematic.**destroy**(): `Promise`<`void`\>
+:::
 
 This function will destroy all camera instances
 
@@ -55,13 +59,15 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/camera/cinematic.ts#L305)
+[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L305)
 
 ___
 
 ### next
 
-▸ **next**(`removeFromArray?`): `Promise`<`boolean`\>
+::: Tip
+AthenaClient.camera.cinematic.**next**(`removeFromArray?`): `Promise`<`boolean`\>
+:::
 
 Goes to the next camera.
 
@@ -84,13 +90,15 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:345](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/camera/cinematic.ts#L345)
+[client/camera/cinematic.ts:345](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L345)
 
 ___
 
 ### overrideNodes
 
-▸ **overrideNodes**(`_nodes`): `Promise`<`void`\>
+::: Tip
+AthenaClient.camera.cinematic.**overrideNodes**(`_nodes`): `Promise`<`void`\>
+:::
 
 #### Parameters
 
@@ -104,13 +112,15 @@ ___
 
 #### Defined in
 
-[client/camera/cinematic.ts:309](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/camera/cinematic.ts#L309)
+[client/camera/cinematic.ts:309](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L309)
 
 ___
 
 ### play
 
-▸ **play**(): `Promise`<`void`\>
+::: Tip
+AthenaClient.camera.cinematic.**play**(): `Promise`<`void`\>
+:::
 
 Play all camera nodes, but do not clear the camera nodes array.
 
@@ -124,4 +134,4 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:374](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/camera/cinematic.ts#L374)
+[client/camera/cinematic.ts:374](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L374)

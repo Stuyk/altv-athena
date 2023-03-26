@@ -11,7 +11,9 @@ order: 0
 
 ### isLocked
 
-▸ **isLocked**(`vehicle`): `boolean`
+::: Tip
+Athena.vehicle.controls.**isLocked**(`vehicle`): `boolean`
+:::
 
 Returns true if the vehicle is currently locked.
 
@@ -29,13 +31,15 @@ Returns true if the vehicle is currently locked.
 
 #### Defined in
 
-[server/vehicle/controls.ts:84](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/controls.ts#L84)
+[server/vehicle/controls.ts:84](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/controls.ts#L84)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.controls.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle control functionality
 
@@ -54,9 +58,11 @@ Used to override vehicle control functionality
 
 #### Defined in
 
-[server/vehicle/controls.ts:168](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/controls.ts#L168)
+[server/vehicle/controls.ts:168](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/controls.ts#L168)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.controls.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle control functionality
 
@@ -75,9 +81,11 @@ Used to override vehicle control functionality
 
 #### Defined in
 
-[server/vehicle/controls.ts:169](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/controls.ts#L169)
+[server/vehicle/controls.ts:169](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/controls.ts#L169)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.controls.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle control functionality
 
@@ -96,9 +104,11 @@ Used to override vehicle control functionality
 
 #### Defined in
 
-[server/vehicle/controls.ts:170](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/controls.ts#L170)
+[server/vehicle/controls.ts:170](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/controls.ts#L170)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.controls.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle control functionality
 
@@ -117,9 +127,11 @@ Used to override vehicle control functionality
 
 #### Defined in
 
-[server/vehicle/controls.ts:171](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/controls.ts#L171)
+[server/vehicle/controls.ts:171](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/controls.ts#L171)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.controls.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override vehicle control functionality
 
@@ -138,13 +150,15 @@ Used to override vehicle control functionality
 
 #### Defined in
 
-[server/vehicle/controls.ts:172](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/controls.ts#L172)
+[server/vehicle/controls.ts:172](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/controls.ts#L172)
 
 ___
 
 ### toggleDoor
 
-▸ **toggleDoor**(`vehicle`, `door`): `Promise`<`boolean`\>
+::: Tip
+Athena.vehicle.controls.**toggleDoor**(`vehicle`, `door`): `Promise`<`boolean`\>
+:::
 
 Toggles a vehicle door.
 
@@ -165,13 +179,15 @@ The new state of the door. true = open
 
 #### Defined in
 
-[server/vehicle/controls.ts:63](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/controls.ts#L63)
+[server/vehicle/controls.ts:63](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/controls.ts#L63)
 
 ___
 
 ### toggleEngine
 
-▸ **toggleEngine**(`vehicle`): `Promise`<`boolean`\>
+::: Tip
+Athena.vehicle.controls.**toggleEngine**(`vehicle`): `Promise`<`boolean`\>
+:::
 
 Toggles a vehicle engine.
 
@@ -191,13 +207,15 @@ The new state of the engine. true = on
 
 #### Defined in
 
-[server/vehicle/controls.ts:35](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/controls.ts#L35)
+[server/vehicle/controls.ts:35](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/controls.ts#L35)
 
 ___
 
 ### toggleLock
 
-▸ **toggleLock**(`vehicle`): `Promise`<`boolean`\>
+::: Tip
+Athena.vehicle.controls.**toggleLock**(`vehicle`): `Promise`<`boolean`\>
+:::
 
 Toggles a vehicle door lock.
 
@@ -217,13 +235,15 @@ The new state of the lock. true = locked
 
 #### Defined in
 
-[server/vehicle/controls.ts:13](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/controls.ts#L13)
+[server/vehicle/controls.ts:13](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/controls.ts#L13)
 
 ___
 
 ### update
 
-▸ **update**(`vehicle`): `any`
+::: Tip
+Athena.vehicle.controls.**update**(`vehicle`): `any`
+:::
 
 Update the given vehicle in the database.
 
@@ -241,13 +261,15 @@ Update the given vehicle in the database.
 
 #### Defined in
 
-[server/vehicle/controls.ts:99](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/controls.ts#L99)
+[server/vehicle/controls.ts:99](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/controls.ts#L99)
 
 ___
 
 ### updateLastUsed
 
-▸ **updateLastUsed**(`vehicle`): `Promise`<`void`\>
+::: Tip
+Athena.vehicle.controls.**updateLastUsed**(`vehicle`): `Promise`<`void`\>
+:::
 
 Update the vehicle's last used value.
 
@@ -263,4 +285,4 @@ Update the vehicle's last used value.
 
 #### Defined in
 
-[server/vehicle/controls.ts:149](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/controls.ts#L149)
+[server/vehicle/controls.ts:149](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/controls.ts#L149)

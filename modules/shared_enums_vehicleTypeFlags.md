@@ -16,7 +16,9 @@ order: 0
 
 ### isVehicleType
 
-▸ **isVehicleType**(`type`, `vehicleType`): `boolean`
+::: Tip
+AthenaShared.enums.vehicleTypeFlags.**isVehicleType**(`type`, `vehicleType`): `boolean`
+:::
 
 #### Parameters
 
@@ -31,4 +33,4 @@ order: 0
 
 #### Defined in
 
-[shared/enums/vehicleTypeFlags.ts:42](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/enums/vehicleTypeFlags.ts#L42)
+[shared/enums/vehicleTypeFlags.ts:42](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/enums/vehicleTypeFlags.ts#L42)

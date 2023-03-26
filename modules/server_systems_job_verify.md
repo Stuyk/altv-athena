@@ -11,7 +11,9 @@ order: 0
 
 ### addCustomCheck
 
-▸ **addCustomCheck**(`type`, `callback`): `any`
+::: Tip
+Athena.systems.job.verify.**addCustomCheck**(`type`, `callback`): `any`
+:::
 
 Adds a custom check type to the global job system.
 
@@ -59,13 +61,15 @@ Athena.systems.job.verify.addCustomCheck('criteria', (player: alt.Player, object
 
 #### Defined in
 
-[server/systems/job/verify.ts:306](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/verify.ts#L306)
+[server/systems/job/verify.ts:306](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/verify.ts#L306)
 
 ___
 
 ### criteria
 
-▸ **criteria**(`player`, `objective`): `boolean`
+::: Tip
+Athena.systems.job.verify.**criteria**(`player`, `objective`): `boolean`
+:::
 
 Verifies job criteria such as not being in a vehicle, no weapons, etc.
 
@@ -84,13 +88,15 @@ Verifies job criteria such as not being in a vehicle, no weapons, etc.
 
 #### Defined in
 
-[server/systems/job/verify.ts:84](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/verify.ts#L84)
+[server/systems/job/verify.ts:84](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/verify.ts#L84)
 
 ___
 
 ### objective
 
-▸ **objective**(`job`): `Promise`<`boolean`\>
+::: Tip
+Athena.systems.job.verify.**objective**(`job`): `Promise`<`boolean`\>
+:::
 
 Verifies all objective content / functionality.
 
@@ -108,13 +114,15 @@ Verifies all objective content / functionality.
 
 #### Defined in
 
-[server/systems/job/verify.ts:18](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/verify.ts#L18)
+[server/systems/job/verify.ts:18](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/verify.ts#L18)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.job.verify.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override job objective verification functionality
 
@@ -133,9 +141,11 @@ Used to override job objective verification functionality
 
 #### Defined in
 
-[server/systems/job/verify.ts:334](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/verify.ts#L334)
+[server/systems/job/verify.ts:334](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/verify.ts#L334)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.job.verify.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override job objective verification functionality
 
@@ -154,9 +164,11 @@ Used to override job objective verification functionality
 
 #### Defined in
 
-[server/systems/job/verify.ts:335](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/verify.ts#L335)
+[server/systems/job/verify.ts:335](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/verify.ts#L335)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.job.verify.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override job objective verification functionality
 
@@ -175,9 +187,11 @@ Used to override job objective verification functionality
 
 #### Defined in
 
-[server/systems/job/verify.ts:336](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/verify.ts#L336)
+[server/systems/job/verify.ts:336](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/verify.ts#L336)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.systems.job.verify.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override job objective verification functionality
 
@@ -196,13 +210,15 @@ Used to override job objective verification functionality
 
 #### Defined in
 
-[server/systems/job/verify.ts:337](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/verify.ts#L337)
+[server/systems/job/verify.ts:337](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/verify.ts#L337)
 
 ___
 
 ### type
 
-▸ **type**(`player`, `objective`): `boolean`
+::: Tip
+Athena.systems.job.verify.**type**(`player`, `objective`): `boolean`
+:::
 
 Verifies job types such as a waypoint, or capture point.
 
@@ -221,4 +237,4 @@ Verifies job types such as a waypoint, or capture point.
 
 #### Defined in
 
-[server/systems/job/verify.ts:212](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/verify.ts#L212)
+[server/systems/job/verify.ts:212](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/verify.ts#L212)

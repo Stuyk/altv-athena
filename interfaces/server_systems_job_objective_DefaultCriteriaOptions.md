@@ -23,7 +23,7 @@ DefaultCriteriaOptions
 
 #### Defined in
 
-[server/systems/job/objective.ts:52](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L52)
+[server/systems/job/objective.ts:52](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L52)
 
 ___
 
@@ -39,7 +39,7 @@ DefaultCriteriaOptions
 
 #### Defined in
 
-[server/systems/job/objective.ts:44](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L44)
+[server/systems/job/objective.ts:44](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L44)
 
 ___
 
@@ -55,7 +55,7 @@ DefaultCriteriaOptions
 
 #### Defined in
 
-[server/systems/job/objective.ts:36](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L36)
+[server/systems/job/objective.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L36)
 
 ___
 
@@ -71,7 +71,7 @@ DefaultCriteriaOptions
 
 #### Defined in
 
-[server/systems/job/objective.ts:60](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L60)
+[server/systems/job/objective.ts:60](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L60)
 
 ___
 
@@ -87,7 +87,7 @@ DefaultCriteriaOptions
 
 #### Defined in
 
-[server/systems/job/objective.ts:28](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L28)
+[server/systems/job/objective.ts:28](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L28)
 
 ___
 
@@ -103,7 +103,7 @@ DefaultCriteriaOptions
 
 #### Defined in
 
-[server/systems/job/objective.ts:12](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L12)
+[server/systems/job/objective.ts:12](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L12)
 
 ___
 
@@ -119,7 +119,7 @@ DefaultCriteriaOptions
 
 #### Defined in
 
-[server/systems/job/objective.ts:20](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L20)
+[server/systems/job/objective.ts:20](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L20)
 
 ___
 
@@ -135,4 +135,4 @@ DefaultCriteriaOptions
 
 #### Defined in
 
-[server/systems/job/objective.ts:68](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/job/objective.ts#L68)
+[server/systems/job/objective.ts:68](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/objective.ts#L68)

@@ -11,7 +11,9 @@ order: 0
 
 ### disable
 
-▸ **disable**(): `void`
+::: Tip
+AthenaClient.camera.gameplay.**disable**(): `void`
+:::
 
 Disable the gameplay camera from moving
 
@@ -23,13 +25,15 @@ Disable the gameplay camera from moving
 
 #### Defined in
 
-[client/camera/gameplay.ts:24](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/camera/gameplay.ts#L24)
+[client/camera/gameplay.ts:24](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/gameplay.ts#L24)
 
 ___
 
 ### enable
 
-▸ **enable**(): `void`
+::: Tip
+AthenaClient.camera.gameplay.**enable**(): `void`
+:::
 
 Enable the gameplay camera
 
@@ -41,4 +45,4 @@ Enable the gameplay camera
 
 #### Defined in
 
-[client/camera/gameplay.ts:38](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/camera/gameplay.ts#L38)
+[client/camera/gameplay.ts:38](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/gameplay.ts#L38)

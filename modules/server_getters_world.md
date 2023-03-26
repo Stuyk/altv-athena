@@ -11,7 +11,9 @@ order: 0
 
 ### isInOceanWater
 
-▸ **isInOceanWater**(`entity`): `boolean`
+::: Tip
+Athena.getters.world.**isInOceanWater**(`entity`): `boolean`
+:::
 
 Used to check if an entity is in ocean water.
 Uses a simple 'z' positional check and dimension check.
@@ -28,13 +30,15 @@ Uses a simple 'z' positional check and dimension check.
 
 #### Defined in
 
-[server/getters/world.ts:40](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/world.ts#L40)
+[server/getters/world.ts:40](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/world.ts#L40)
 
 ___
 
 ### positionIsClear
 
-▸ **positionIsClear**(`pos`, `lookFor`): `Promise`<`boolean`\>
+::: Tip
+Athena.getters.world.**positionIsClear**(`pos`, `lookFor`): `Promise`<`boolean`\>
+:::
 
 Check if a world position is free of vehicles.
 
@@ -51,4 +55,4 @@ Check if a world position is free of vehicles.
 
 #### Defined in
 
-[server/getters/world.ts:10](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/getters/world.ts#L10)
+[server/getters/world.ts:10](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/world.ts#L10)

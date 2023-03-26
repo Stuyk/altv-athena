@@ -19,7 +19,9 @@ order: 0
 
 ### login
 
-▸ `Static` **login**(`player`): `Promise`<`void`\>
+::: Tip
+Athena.systems.dev.DevModeOverride.`Static` **login**(`player`): `Promise`<`void`\>
+:::
 
 Overrides the default login and uses a single account for all users.
 This acts a way to login to multiple accounts under multiple instances of GTA:V.
@@ -40,13 +42,15 @@ None
 
 #### Defined in
 
-[server/systems/dev.ts:20](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/dev.ts#L20)
+[server/systems/dev.ts:20](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/dev.ts#L20)
 
 ___
 
 ### setDevAccountCallback
 
-▸ `Static` **setDevAccountCallback**(`cb`): `void`
+::: Tip
+Athena.systems.dev.DevModeOverride.`Static` **setDevAccountCallback**(`cb`): `void`
+:::
 
 #### Parameters
 
@@ -60,4 +64,4 @@ ___
 
 #### Defined in
 
-[server/systems/dev.ts:7](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/dev.ts#L7)
+[server/systems/dev.ts:7](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/dev.ts#L7)

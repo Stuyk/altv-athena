@@ -11,7 +11,9 @@ order: 0
 
 ### on
 
-▸ **on**(`eventName`, `callback`): `void`
+::: Tip
+Athena.events.clientEvents.**on**(`eventName`, `callback`): `void`
+:::
 
 Trigger a callback specific to Athena Player Events.
 
@@ -34,13 +36,15 @@ ClientEvents
 
 #### Defined in
 
-[server/events/clientEvents.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/events/clientEvents.ts#L23)
+[server/events/clientEvents.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/events/clientEvents.ts#L23)
 
 ___
 
 ### trigger
 
-▸ **trigger**(`eventName`, `player`, `...args`): `void`
+::: Tip
+Athena.events.clientEvents.**trigger**(`eventName`, `player`, `...args`): `void`
+:::
 
 #### Parameters
 
@@ -56,4 +60,4 @@ ___
 
 #### Defined in
 
-[server/events/clientEvents.ts:6](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/events/clientEvents.ts#L6)
+[server/events/clientEvents.ts:6](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/events/clientEvents.ts#L6)

@@ -11,7 +11,9 @@ order: 0
 
 ### getGroundZ
 
-▸ **getGroundZ**(`pos`, `options?`): `alt.IVector3`
+::: Tip
+AthenaClient.world.position.**getGroundZ**(`pos`, `options?`): `alt.IVector3`
+:::
 
 Returns a Vector3 with a modified z position if the ground position is found.
 
@@ -35,13 +37,15 @@ Otherwise, returns the original Vector3.
 
 #### Defined in
 
-[client/world/position.ts:21](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/world/position.ts#L21)
+[client/world/position.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/world/position.ts#L21)
 
 ___
 
 ### isEntityBlockingPosition
 
-▸ **isEntityBlockingPosition**(`pos`, `range?`, `maxDistance?`): `boolean`
+::: Tip
+AthenaClient.world.position.**isEntityBlockingPosition**(`pos`, `range?`, `maxDistance?`): `boolean`
+:::
 
 Check if an entity is in front of the position the camera is looking at.
 Should be used periodically and not in an every tick. Could be expensive.
@@ -60,4 +64,4 @@ Should be used periodically and not in an every tick. Could be expensive.
 
 #### Defined in
 
-[client/world/position.ts:43](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/world/position.ts#L43)
+[client/world/position.ts:43](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/world/position.ts#L43)

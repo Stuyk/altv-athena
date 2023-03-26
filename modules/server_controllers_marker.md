@@ -11,7 +11,9 @@ order: 0
 
 ### addToPlayer
 
-▸ **addToPlayer**(`player`, `marker`): `string`
+::: Tip
+Athena.controllers.marker.**addToPlayer**(`player`, `marker`): `string`
+:::
 
 Add a marker to a single local player.
 
@@ -40,13 +42,15 @@ uid A unique string for marker
 
 #### Defined in
 
-[server/controllers/marker.ts:150](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/marker.ts#L150)
+[server/controllers/marker.ts:150](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/marker.ts#L150)
 
 ___
 
 ### append
 
-▸ **append**(`marker`): `string`
+::: Tip
+Athena.controllers.marker.**append**(`marker`): `string`
+:::
 
 Adds a global marker for all players.
 
@@ -86,13 +90,15 @@ uid A unique string for marker
 
 #### Defined in
 
-[server/controllers/marker.ts:67](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/marker.ts#L67)
+[server/controllers/marker.ts:67](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/marker.ts#L67)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.marker.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any marker streamer functionality
 
@@ -111,9 +117,11 @@ Used to override any marker streamer functionality
 
 #### Defined in
 
-[server/controllers/marker.ts:169](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/marker.ts#L169)
+[server/controllers/marker.ts:169](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/marker.ts#L169)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.marker.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any marker streamer functionality
 
@@ -132,9 +140,11 @@ Used to override any marker streamer functionality
 
 #### Defined in
 
-[server/controllers/marker.ts:170](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/marker.ts#L170)
+[server/controllers/marker.ts:170](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/marker.ts#L170)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.marker.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any marker streamer functionality
 
@@ -153,9 +163,11 @@ Used to override any marker streamer functionality
 
 #### Defined in
 
-[server/controllers/marker.ts:171](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/marker.ts#L171)
+[server/controllers/marker.ts:171](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/marker.ts#L171)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.marker.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any marker streamer functionality
 
@@ -174,13 +186,15 @@ Used to override any marker streamer functionality
 
 #### Defined in
 
-[server/controllers/marker.ts:172](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/marker.ts#L172)
+[server/controllers/marker.ts:172](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/marker.ts#L172)
 
 ___
 
 ### remove
 
-▸ **remove**(`uid`): `boolean`
+::: Tip
+Athena.controllers.marker.**remove**(`uid`): `boolean`
+:::
 
 Removes a global marker from all players based on the global uid.
 
@@ -204,13 +218,15 @@ Athena.controllers.marker.remove('the-uid-you-specified');
 
 #### Defined in
 
-[server/controllers/marker.ts:94](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/marker.ts#L94)
+[server/controllers/marker.ts:94](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/marker.ts#L94)
 
 ___
 
 ### removeFromPlayer
 
-▸ **removeFromPlayer**(`player`, `uid`): `any`
+::: Tip
+Athena.controllers.marker.**removeFromPlayer**(`player`, `uid`): `any`
+:::
 
 Remove a marker from a single local player.
 
@@ -235,4 +251,4 @@ Athena.controllers.marker.removeFromPlayer(somePlayer, someUid);
 
 #### Defined in
 
-[server/controllers/marker.ts:122](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/marker.ts#L122)
+[server/controllers/marker.ts:122](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/marker.ts#L122)

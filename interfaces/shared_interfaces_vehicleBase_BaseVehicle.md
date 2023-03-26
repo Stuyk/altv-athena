@@ -38,7 +38,7 @@ IVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:16](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L16)
+[shared/interfaces/vehicleBase.ts:16](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L16)
 
 ___
 
@@ -54,7 +54,7 @@ IVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:61](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L61)
+[shared/interfaces/vehicleBase.ts:61](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L61)
 
 ___
 
@@ -70,7 +70,7 @@ BaseVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:110](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L110)
+[shared/interfaces/vehicleBase.ts:110](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L110)
 
 ___
 
@@ -86,7 +86,7 @@ BaseVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:93](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L93)
+[shared/interfaces/vehicleBase.ts:93](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L93)
 
 ___
 
@@ -103,7 +103,7 @@ BaseVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:102](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L102)
+[shared/interfaces/vehicleBase.ts:102](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L102)
 
 ___
 
@@ -119,7 +119,7 @@ IVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L23)
+[shared/interfaces/vehicleBase.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L23)
 
 ___
 
@@ -135,7 +135,7 @@ BaseVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:77](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L77)
+[shared/interfaces/vehicleBase.ts:77](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L77)
 
 ___
 
@@ -151,7 +151,7 @@ BaseVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:118](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L118)
+[shared/interfaces/vehicleBase.ts:118](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L118)
 
 ___
 
@@ -167,7 +167,7 @@ IVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:40](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L40)
+[shared/interfaces/vehicleBase.ts:40](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L40)
 
 ___
 
@@ -185,7 +185,7 @@ IVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:33](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L33)
+[shared/interfaces/vehicleBase.ts:33](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L33)
 
 ___
 
@@ -201,7 +201,7 @@ BaseVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:85](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L85)
+[shared/interfaces/vehicleBase.ts:85](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L85)
 
 ___
 
@@ -218,7 +218,7 @@ IVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:69](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L69)
+[shared/interfaces/vehicleBase.ts:69](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L69)
 
 ___
 
@@ -234,7 +234,7 @@ IVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:47](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L47)
+[shared/interfaces/vehicleBase.ts:47](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L47)
 
 ___
 
@@ -250,4 +250,4 @@ IVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:54](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/vehicleBase.ts#L54)
+[shared/interfaces/vehicleBase.ts:54](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleBase.ts#L54)

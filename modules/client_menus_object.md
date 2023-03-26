@@ -15,7 +15,9 @@ order: 0
 
 #### Type declaration
 
-▸ (`existingObject`, `options`): [`IWheelOptionExt`](../interfaces/shared_interfaces_wheelMenu_IWheelOptionExt.md)[]
+::: Tip
+AthenaClient.menus.object.(`existingObject`, `options`): [`IWheelOptionExt`](../interfaces/shared_interfaces_wheelMenu_IWheelOptionExt.md)[]
+:::
 
 ##### Parameters
 
@@ -30,13 +32,15 @@ order: 0
 
 #### Defined in
 
-[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/object.ts#L8)
+[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/object.ts#L8)
 
 ## Functions
 
 ### addInjection
 
-▸ **addInjection**(`callback`): `void`
+::: Tip
+AthenaClient.menus.object.**addInjection**(`callback`): `void`
+:::
 
 Allows the current Menu Options to be modified.
 Meaning, a callback that will modify existing options, or append new options to the menu.
@@ -60,13 +64,15 @@ ObjectWheelMenu
 
 #### Defined in
 
-[client/menus/object.ts:24](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/object.ts#L24)
+[client/menus/object.ts:24](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/object.ts#L24)
 
 ___
 
 ### open
 
-▸ **open**(`object`): `void`
+::: Tip
+AthenaClient.menus.object.**open**(`object`): `void`
+:::
 
 Opens the wheel menu against a target object created with the server-side object api
 
@@ -88,4 +94,4 @@ ObjectWheelMenu
 
 #### Defined in
 
-[client/menus/object.ts:36](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/object.ts#L36)
+[client/menus/object.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/object.ts#L36)

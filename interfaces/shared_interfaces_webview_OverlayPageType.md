@@ -25,7 +25,9 @@ OverlayPageType
 
 #### Type declaration
 
-▸ (`isVisible`): `void`
+::: Tip
+AthenaShared.interfaces.webview.OverlayPageType.(`isVisible`): `void`
+:::
 
 Callback to re-toggle page visibility.
 
@@ -45,7 +47,7 @@ OverlayPageType
 
 #### Defined in
 
-[shared/interfaces/webview.ts:29](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/webview.ts#L29)
+[shared/interfaces/webview.ts:29](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/webview.ts#L29)
 
 ___
 
@@ -61,7 +63,7 @@ OverlayPageType
 
 #### Defined in
 
-[shared/interfaces/webview.ts:22](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/webview.ts#L22)
+[shared/interfaces/webview.ts:22](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/webview.ts#L22)
 
 ___
 
@@ -77,4 +79,4 @@ PageType
 
 #### Defined in
 
-[shared/interfaces/webview.ts:14](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/webview.ts#L14)
+[shared/interfaces/webview.ts:14](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/webview.ts#L14)

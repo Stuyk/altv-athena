@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[client/screen/scaleform.ts:7](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/scaleform.ts#L7)
+[client/screen/scaleform.ts:7](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/scaleform.ts#L7)
 
 ## Properties
 
@@ -33,13 +33,15 @@ order: 0
 
 #### Defined in
 
-[client/screen/scaleform.ts:5](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/scaleform.ts#L5)
+[client/screen/scaleform.ts:5](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/scaleform.ts#L5)
 
 ## Methods
 
 ### destroy
 
-▸ **destroy**(): `void`
+::: Tip
+AthenaClient.screen.scaleform.Scaleform.**destroy**(): `void`
+:::
 
 #### Returns
 
@@ -47,13 +49,15 @@ order: 0
 
 #### Defined in
 
-[client/screen/scaleform.ts:48](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/scaleform.ts#L48)
+[client/screen/scaleform.ts:48](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/scaleform.ts#L48)
 
 ___
 
 ### hasLoaded
 
-▸ **hasLoaded**(): `boolean`
+::: Tip
+AthenaClient.screen.scaleform.Scaleform.**hasLoaded**(): `boolean`
+:::
 
 #### Returns
 
@@ -61,13 +65,15 @@ ___
 
 #### Defined in
 
-[client/screen/scaleform.ts:11](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/scaleform.ts#L11)
+[client/screen/scaleform.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/scaleform.ts#L11)
 
 ___
 
 ### passFunction
 
-▸ **passFunction**(`functionName`, `...args`): `any`
+::: Tip
+AthenaClient.screen.scaleform.Scaleform.**passFunction**(`functionName`, `...args`): `any`
+:::
 
 #### Parameters
 
@@ -82,13 +88,15 @@ ___
 
 #### Defined in
 
-[client/screen/scaleform.ts:15](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/scaleform.ts#L15)
+[client/screen/scaleform.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/scaleform.ts#L15)
 
 ___
 
 ### render
 
-▸ **render**(`x`, `y`, `width`, `height`): `void`
+::: Tip
+AthenaClient.screen.scaleform.Scaleform.**render**(`x`, `y`, `width`, `height`): `void`
+:::
 
 #### Parameters
 
@@ -105,4 +113,4 @@ ___
 
 #### Defined in
 
-[client/screen/scaleform.ts:53](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/scaleform.ts#L53)
+[client/screen/scaleform.ts:53](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/scaleform.ts#L53)

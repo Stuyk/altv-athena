@@ -11,7 +11,9 @@ order: 0
 
 ### disableAllAttacks
 
-▸ **disableAllAttacks**(`value`): `void`
+::: Tip
+AthenaClient.utility.disableControls.**disableAllAttacks**(`value`): `void`
+:::
 
 #### Parameters
 
@@ -25,13 +27,15 @@ order: 0
 
 #### Defined in
 
-[client/utility/disableControls.ts:25](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/disableControls.ts#L25)
+[client/utility/disableControls.ts:25](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/disableControls.ts#L25)
 
 ___
 
 ### disableAllControls
 
-▸ **disableAllControls**(`value`): `void`
+::: Tip
+AthenaClient.utility.disableControls.**disableAllControls**(`value`): `void`
+:::
 
 Completely disabled all local player controls.
 
@@ -49,13 +53,15 @@ Completely disabled all local player controls.
 
 #### Defined in
 
-[client/utility/disableControls.ts:13](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/disableControls.ts#L13)
+[client/utility/disableControls.ts:13](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/disableControls.ts#L13)
 
 ___
 
 ### handleDisablingAttacks
 
-▸ **handleDisablingAttacks**(): `void`
+::: Tip
+AthenaClient.utility.disableControls.**handleDisablingAttacks**(): `void`
+:::
 
 #### Returns
 
@@ -63,4 +69,4 @@ ___
 
 #### Defined in
 
-[client/utility/disableControls.ts:37](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/utility/disableControls.ts#L37)
+[client/utility/disableControls.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/disableControls.ts#L37)

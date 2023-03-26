@@ -15,7 +15,9 @@ order: 0
 
 #### Type declaration
 
-▸ (`target`, `options`): [`player`](server_config.md#player)[]
+::: Tip
+AthenaClient.menus.vehicle.(`target`, `options`): [`player`](server_config.md#player)[]
+:::
 
 ##### Parameters
 
@@ -30,13 +32,15 @@ order: 0
 
 #### Defined in
 
-[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/vehicle.ts#L8)
+[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/vehicle.ts#L8)
 
 ## Functions
 
 ### addInjection
 
-▸ **addInjection**(`callback`): `void`
+::: Tip
+AthenaClient.menus.vehicle.**addInjection**(`callback`): `void`
+:::
 
 Create a vehicle wheel menu injection.
 Meaning, a callback that will modify existing options, or append new options to the menu.
@@ -60,13 +64,15 @@ VehicleMenu
 
 #### Defined in
 
-[client/menus/vehicle.ts:21](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/vehicle.ts#L21)
+[client/menus/vehicle.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/vehicle.ts#L21)
 
 ___
 
 ### open
 
-▸ **open**(`vehicle`): `void`
+::: Tip
+AthenaClient.menus.vehicle.**open**(`vehicle`): `void`
+:::
 
 #### Parameters
 
@@ -80,13 +86,15 @@ ___
 
 #### Defined in
 
-[client/menus/vehicle.ts:74](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/vehicle.ts#L74)
+[client/menus/vehicle.ts:74](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/vehicle.ts#L74)
 
 ___
 
 ### openInVehicleMenu
 
-▸ **openInVehicleMenu**(`vehicle`): `void`
+::: Tip
+AthenaClient.menus.vehicle.**openInVehicleMenu**(`vehicle`): `void`
+:::
 
 Open an in-vehicle menu option and add injections relevant to in-vehicle.
 
@@ -108,4 +116,4 @@ VehicleWheelMenu
 
 #### Defined in
 
-[client/menus/vehicle.ts:33](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/menus/vehicle.ts#L33)
+[client/menus/vehicle.ts:33](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/vehicle.ts#L33)

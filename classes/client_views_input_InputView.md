@@ -19,7 +19,9 @@ order: 0
 
 ### setMenu
 
-▸ `Static` **setMenu**(`_inputMenu`): `void`
+::: Tip
+AthenaClient.views.input.InputView.`Static` **setMenu**(`_inputMenu`): `void`
+:::
 
 Show an input menu from client-side.
 
@@ -41,4 +43,4 @@ InputView
 
 #### Defined in
 
-[client/views/input.ts:91](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/views/input.ts#L91)
+[client/views/input.ts:91](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/views/input.ts#L91)

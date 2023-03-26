@@ -31,7 +31,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:143](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L143)
+[shared/interfaces/job.ts:143](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L143)
 
 ___
 
@@ -47,7 +47,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:150](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L150)
+[shared/interfaces/job.ts:150](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L150)
 
 ___
 
@@ -63,7 +63,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:136](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L136)
+[shared/interfaces/job.ts:136](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L136)
 
 ___
 
@@ -73,7 +73,9 @@ ___
 
 #### Type declaration
 
-▸ (`player`): `Promise`<`boolean`\>
+::: Tip
+AthenaShared.interfaces.job.Objective.(`player`): `Promise`<`boolean`\>
+:::
 
 **`Memberof`**
 
@@ -91,7 +93,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:195](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L195)
+[shared/interfaces/job.ts:195](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L195)
 
 ___
 
@@ -101,7 +103,9 @@ ___
 
 #### Type declaration
 
-▸ (`player`): `void`
+::: Tip
+AthenaShared.interfaces.job.Objective.(`player`): `void`
+:::
 
 Server-side callback when objective is completed.
 
@@ -121,7 +125,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:201](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L201)
+[shared/interfaces/job.ts:201](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L201)
 
 ___
 
@@ -131,7 +135,9 @@ ___
 
 #### Type declaration
 
-▸ (`player`): `void`
+::: Tip
+AthenaShared.interfaces.job.Objective.(`player`): `void`
+:::
 
 Server-side callback when objective is started.
 
@@ -151,7 +157,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:189](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L189)
+[shared/interfaces/job.ts:189](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L189)
 
 ___
 
@@ -167,7 +173,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:108](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L108)
+[shared/interfaces/job.ts:108](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L108)
 
 ___
 
@@ -183,7 +189,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:101](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L101)
+[shared/interfaces/job.ts:101](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L101)
 
 ___
 
@@ -199,7 +205,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:65](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L65)
+[shared/interfaces/job.ts:65](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L65)
 
 ___
 
@@ -220,7 +226,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:183](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L183)
+[shared/interfaces/job.ts:183](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L183)
 
 ___
 
@@ -236,7 +242,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:94](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L94)
+[shared/interfaces/job.ts:94](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L94)
 
 ___
 
@@ -253,7 +259,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:158](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L158)
+[shared/interfaces/job.ts:158](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L158)
 
 ___
 
@@ -269,7 +275,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:122](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L122)
+[shared/interfaces/job.ts:122](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L122)
 
 ___
 
@@ -285,7 +291,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:115](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L115)
+[shared/interfaces/job.ts:115](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L115)
 
 ___
 
@@ -301,7 +307,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:174](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L174)
+[shared/interfaces/job.ts:174](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L174)
 
 ___
 
@@ -318,7 +324,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:166](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L166)
+[shared/interfaces/job.ts:166](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L166)
 
 ___
 
@@ -334,7 +340,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:79](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L79)
+[shared/interfaces/job.ts:79](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L79)
 
 ___
 
@@ -351,7 +357,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:87](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L87)
+[shared/interfaces/job.ts:87](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L87)
 
 ___
 
@@ -367,7 +373,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:129](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L129)
+[shared/interfaces/job.ts:129](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L129)
 
 ___
 
@@ -383,7 +389,7 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:72](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L72)
+[shared/interfaces/job.ts:72](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L72)
 
 ___
 
@@ -399,4 +405,4 @@ Objective
 
 #### Defined in
 
-[shared/interfaces/job.ts:58](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/interfaces/job.ts#L58)
+[shared/interfaces/job.ts:58](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/job.ts#L58)

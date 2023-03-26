@@ -15,7 +15,9 @@ order: 0
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.add.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override add owned vehicle functionality
 
@@ -34,9 +36,11 @@ Used to override add owned vehicle functionality
 
 #### Defined in
 
-[server/vehicle/add.ts:197](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/add.ts#L197)
+[server/vehicle/add.ts:197](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/add.ts#L197)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.vehicle.add.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override add owned vehicle functionality
 
@@ -55,13 +59,15 @@ Used to override add owned vehicle functionality
 
 #### Defined in
 
-[server/vehicle/add.ts:198](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/add.ts#L198)
+[server/vehicle/add.ts:198](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/add.ts#L198)
 
 ___
 
 ### toDatabase
 
-▸ **toDatabase**(`owner`, `model`, `pos`, `options?`): `Promise`<`boolean`\>
+::: Tip
+Athena.vehicle.add.**toDatabase**(`owner`, `model`, `pos`, `options?`): `Promise`<`boolean`\>
+:::
 
 Add a vehicle to the database.
 
@@ -84,13 +90,15 @@ Owner can be an identifier, group, etc.
 
 #### Defined in
 
-[server/vehicle/add.ts:135](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/add.ts#L135)
+[server/vehicle/add.ts:135](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/add.ts#L135)
 
 ___
 
 ### toPlayer
 
-▸ **toPlayer**(`player`, `model`, `pos`, `options?`): `Promise`<`boolean`\>
+::: Tip
+Athena.vehicle.add.**toPlayer**(`player`, `model`, `pos`, `options?`): `Promise`<`boolean`\>
+:::
 
 Add a vehicle to a player.
 The position specified is where the vehicle can be found.
@@ -112,4 +120,4 @@ The position specified is where the vehicle can be found.
 
 #### Defined in
 
-[server/vehicle/add.ts:64](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/vehicle/add.ts#L64)
+[server/vehicle/add.ts:64](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/add.ts#L64)

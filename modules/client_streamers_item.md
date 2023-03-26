@@ -15,13 +15,15 @@ order: 0
 
 #### Defined in
 
-[client/streamers/item.ts:8](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/streamers/item.ts#L8)
+[client/streamers/item.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/item.ts#L8)
 
 ## Functions
 
 ### getClosest
 
-▸ **getClosest**(): [`player`](server_config.md#player)[]
+::: Tip
+AthenaClient.streamers.item.**getClosest**(): [`player`](server_config.md#player)[]
+:::
 
 Return an array of items that are closest to the player.
 
@@ -37,13 +39,15 @@ ClientItemDrops
 
 #### Defined in
 
-[client/streamers/item.ts:132](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/streamers/item.ts#L132)
+[client/streamers/item.ts:132](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/item.ts#L132)
 
 ___
 
 ### getDropped
 
-▸ **getDropped**(`id`): [`CreatedDrop`](client_streamers_item.md#CreatedDrop) \| `undefined`
+::: Tip
+AthenaClient.streamers.item.**getDropped**(`id`): [`CreatedDrop`](client_streamers_item.md#CreatedDrop) \| `undefined`
+:::
 
 Determine if this alt.Object is an item drop.
 
@@ -59,13 +63,15 @@ Determine if this alt.Object is an item drop.
 
 #### Defined in
 
-[client/streamers/item.ts:161](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/streamers/item.ts#L161)
+[client/streamers/item.ts:161](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/item.ts#L161)
 
 ___
 
 ### setDefaultDropModel
 
-▸ **setDefaultDropModel**(`model`): `void`
+::: Tip
+AthenaClient.streamers.item.**setDefaultDropModel**(`model`): `void`
+:::
 
 Overrides the default model for item drops.
 By default it is a cardboard box.
@@ -82,13 +88,15 @@ By default it is a cardboard box.
 
 #### Defined in
 
-[client/streamers/item.ts:142](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/streamers/item.ts#L142)
+[client/streamers/item.ts:142](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/item.ts#L142)
 
 ___
 
 ### setDefaultMaxDistance
 
-▸ **setDefaultMaxDistance**(`distance?`): `void`
+::: Tip
+AthenaClient.streamers.item.**setDefaultMaxDistance**(`distance?`): `void`
+:::
 
 Set the maximum distance a player can see item drops.
 
@@ -104,4 +112,4 @@ Set the maximum distance a player can see item drops.
 
 #### Defined in
 
-[client/streamers/item.ts:151](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/streamers/item.ts#L151)
+[client/streamers/item.ts:151](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/item.ts#L151)

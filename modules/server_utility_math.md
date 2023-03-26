@@ -21,13 +21,15 @@ order: 0
 
 #### Defined in
 
-[server/utility/math.ts:25](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/math.ts#L25)
+[server/utility/math.ts:25](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/math.ts#L25)
 
 ## Functions
 
 ### getMissingNumber
 
-▸ **getMissingNumber**(`arr`, `startIndex?`): `number`
+::: Tip
+Athena.utility.math.**getMissingNumber**(`arr`, `startIndex?`): `number`
+:::
 
 Takes an array of numbers and attempts to determine which number is missing given a range.
 Returns the first missing number.
@@ -47,4 +49,4 @@ Returns the first missing number.
 
 #### Defined in
 
-[server/utility/math.ts:10](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/utility/math.ts#L10)
+[server/utility/math.ts:10](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/math.ts#L10)

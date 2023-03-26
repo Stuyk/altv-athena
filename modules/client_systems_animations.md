@@ -11,7 +11,9 @@ order: 0
 
 ### loadAnimation
 
-▸ **loadAnimation**(`dict`, `count?`): `Promise`<`boolean`\>
+::: Tip
+AthenaClient.systems.animations.**loadAnimation**(`dict`, `count?`): `Promise`<`boolean`\>
+:::
 
 Attempts to load an animation dictionary multiple times before returning false.
 
@@ -28,13 +30,15 @@ Attempts to load an animation dictionary multiple times before returning false.
 
 #### Defined in
 
-[client/systems/animations.ts:16](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/animations.ts#L16)
+[client/systems/animations.ts:16](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/animations.ts#L16)
 
 ___
 
 ### playAnimation
 
-▸ **playAnimation**(`dict`, `name`, `flags?`, `duration?`): `Promise`<`void`\>
+::: Tip
+AthenaClient.systems.animations.**playAnimation**(`dict`, `name`, `flags?`, `duration?`): `Promise`<`void`\>
+:::
 
 Play an animation for the local player.
 
@@ -55,13 +59,15 @@ Play an animation for the local player.
 
 #### Defined in
 
-[client/systems/animations.ts:51](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/animations.ts#L51)
+[client/systems/animations.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/animations.ts#L51)
 
 ___
 
 ### playPedAnimation
 
-▸ **playPedAnimation**(`scriptID`, `dict`, `name`, `flags?`, `duration?`): `Promise`<`void`\>
+::: Tip
+AthenaClient.systems.animations.**playPedAnimation**(`scriptID`, `dict`, `name`, `flags?`, `duration?`): `Promise`<`void`\>
+:::
 
 Play an animation on a Pedestrian
 
@@ -83,4 +89,4 @@ Play an animation on a Pedestrian
 
 #### Defined in
 
-[client/systems/animations.ts:87](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/systems/animations.ts#L87)
+[client/systems/animations.ts:87](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/animations.ts#L87)

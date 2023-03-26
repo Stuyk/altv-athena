@@ -11,7 +11,9 @@ order: 0
 
 ### addToPlayer
 
-▸ **addToPlayer**(`player`, `objectData`): `string`
+::: Tip
+Athena.controllers.object.**addToPlayer**(`player`, `objectData`): `string`
+:::
 
 Add an object to the player that only they can see.
 
@@ -41,13 +43,15 @@ uid A unique string for object
 
 #### Defined in
 
-[server/controllers/object.ts:164](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L164)
+[server/controllers/object.ts:164](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L164)
 
 ___
 
 ### append
 
-▸ **append**(`objectData`): `string`
+::: Tip
+Athena.controllers.object.**append**(`objectData`): `string`
+:::
 
 Add an object to the global world.
 
@@ -87,13 +91,15 @@ uid A unique string for object
 
 #### Defined in
 
-[server/controllers/object.ts:70](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L70)
+[server/controllers/object.ts:70](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L70)
 
 ___
 
 ### override
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.object.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any object streamer functionality
 
@@ -112,9 +118,11 @@ Used to override any object streamer functionality
 
 #### Defined in
 
-[server/controllers/object.ts:246](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L246)
+[server/controllers/object.ts:246](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L246)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.object.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any object streamer functionality
 
@@ -133,9 +141,11 @@ Used to override any object streamer functionality
 
 #### Defined in
 
-[server/controllers/object.ts:247](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L247)
+[server/controllers/object.ts:247](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L247)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.object.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any object streamer functionality
 
@@ -154,9 +164,11 @@ Used to override any object streamer functionality
 
 #### Defined in
 
-[server/controllers/object.ts:248](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L248)
+[server/controllers/object.ts:248](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L248)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.object.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any object streamer functionality
 
@@ -175,9 +187,11 @@ Used to override any object streamer functionality
 
 #### Defined in
 
-[server/controllers/object.ts:249](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L249)
+[server/controllers/object.ts:249](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L249)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.object.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any object streamer functionality
 
@@ -196,9 +210,11 @@ Used to override any object streamer functionality
 
 #### Defined in
 
-[server/controllers/object.ts:250](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L250)
+[server/controllers/object.ts:250](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L250)
 
-▸ **override**(`functionName`, `callback`): `any`
+::: Tip
+Athena.controllers.object.**override**(`functionName`, `callback`): `any`
+:::
 
 Used to override any object streamer functionality
 
@@ -217,13 +233,15 @@ Used to override any object streamer functionality
 
 #### Defined in
 
-[server/controllers/object.ts:251](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L251)
+[server/controllers/object.ts:251](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L251)
 
 ___
 
 ### remove
 
-▸ **remove**(`uid`): `boolean`
+::: Tip
+Athena.controllers.object.**remove**(`uid`): `boolean`
+:::
 
 Removes an object from the global world.
 
@@ -251,13 +269,15 @@ Athena.controllers.object.remove('the-uid-you-specified');
 
 #### Defined in
 
-[server/controllers/object.ts:100](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L100)
+[server/controllers/object.ts:100](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L100)
 
 ___
 
 ### removeFromPlayer
 
-▸ **removeFromPlayer**(`player`, `uid`): `any`
+::: Tip
+Athena.controllers.object.**removeFromPlayer**(`player`, `uid`): `any`
+:::
 
 Remove an object from the player that only they can see.
 
@@ -280,13 +300,15 @@ Athena.controllers.object.removeFromPlayer(somePlayer, someUid);
 
 #### Defined in
 
-[server/controllers/object.ts:135](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L135)
+[server/controllers/object.ts:135](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L135)
 
 ___
 
 ### updateModel
 
-▸ **updateModel**(`uid`, `model`, `player?`): `boolean`
+::: Tip
+Athena.controllers.object.**updateModel**(`uid`, `model`, `player?`): `boolean`
+:::
 
 #### Parameters
 
@@ -302,13 +324,15 @@ ___
 
 #### Defined in
 
-[server/controllers/object.ts:220](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L220)
+[server/controllers/object.ts:220](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L220)
 
 ___
 
 ### updatePosition
 
-▸ **updatePosition**(`uid`, `pos`, `player?`): `boolean`
+::: Tip
+Athena.controllers.object.**updatePosition**(`uid`, `pos`, `player?`): `boolean`
+:::
 
 Updates the position for an object.
 
@@ -342,4 +366,4 @@ Athena.controllers.object.updatePosition(someUid, { x: 0, y: 0, z: 0}, somePlaye
 
 #### Defined in
 
-[server/controllers/object.ts:200](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/controllers/object.ts#L200)
+[server/controllers/object.ts:200](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/object.ts#L200)

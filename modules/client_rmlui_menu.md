@@ -11,7 +11,9 @@ order: 0
 
 ### close
 
-▸ **close**(): `Promise`<`void`\>
+::: Tip
+AthenaClient.rmlui.menu.**close**(): `Promise`<`void`\>
+:::
 
 Call this function to close the menu.
 Make sure to wait for it to close before opening a new menu.
@@ -22,13 +24,15 @@ Make sure to wait for it to close before opening a new menu.
 
 #### Defined in
 
-[client/rmlui/menu/index.ts:373](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/index.ts#L373)
+[client/rmlui/menu/index.ts:373](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/index.ts#L373)
 
 ___
 
 ### create
 
-▸ **create**(`info`): `void`
+::: Tip
+AthenaClient.rmlui.menu.**create**(`info`): `void`
+:::
 
 Create a menu similar to NativeUI.
 
@@ -46,13 +50,15 @@ Create a menu similar to NativeUI.
 
 #### Defined in
 
-[client/rmlui/menu/index.ts:344](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/index.ts#L344)
+[client/rmlui/menu/index.ts:344](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/index.ts#L344)
 
 ___
 
 ### createOption
 
-▸ **createOption**<`T`\>(`menuTemplate`): `T`
+::: Tip
+AthenaClient.rmlui.menu.**createOption**<`T`\>(`menuTemplate`): `T`
+:::
 
 Build a menu option, and return the result.
 Used like: `createOption<Range>({ ... })`;
@@ -75,4 +81,4 @@ Used like: `createOption<Range>({ ... })`;
 
 #### Defined in
 
-[client/rmlui/menu/index.ts:386](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/rmlui/menu/index.ts#L386)
+[client/rmlui/menu/index.ts:386](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu/index.ts#L386)

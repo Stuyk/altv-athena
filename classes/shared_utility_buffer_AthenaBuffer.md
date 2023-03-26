@@ -19,7 +19,9 @@ order: 0
 
 ### fromBuffer
 
-▸ `Static` **fromBuffer**(`data`): `string`
+::: Tip
+AthenaShared.utility.buffer.AthenaBuffer.`Static` **fromBuffer**(`data`): `string`
+:::
 
 Turns a buffer into a string.
 
@@ -41,13 +43,15 @@ AthenaBuffer
 
 #### Defined in
 
-[shared/utility/buffer.ts:23](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/buffer.ts#L23)
+[shared/utility/buffer.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/buffer.ts#L23)
 
 ___
 
 ### toBuffer
 
-▸ `Static` **toBuffer**(`data`, `size?`): `string`[]
+::: Tip
+AthenaShared.utility.buffer.AthenaBuffer.`Static` **toBuffer**(`data`, `size?`): `string`[]
+:::
 
 Create a String Buffer from a string.
 Splits huge strings into a larger array.
@@ -71,4 +75,4 @@ AthenaBuffer
 
 #### Defined in
 
-[shared/utility/buffer.ts:11](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/shared/utility/buffer.ts#L11)
+[shared/utility/buffer.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/buffer.ts#L11)

@@ -13,7 +13,9 @@ order: 0
 
 ### EventListener
 
-▸ **EventListener**(`evt`): `void`
+::: Tip
+AthenaShared.utility.flags.Internal.EventListener.**EventListener**(`evt`): `void`
+:::
 
 #### Parameters
 

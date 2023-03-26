@@ -11,7 +11,9 @@ order: 0
 
 ### draw
 
-▸ **draw**(`type`, `pos`, `scale`, `color`, `bobUpAndDown?`, `faceCamera?`, `rotate?`): `void`
+::: Tip
+AthenaClient.screen.marker.**draw**(`type`, `pos`, `scale`, `color`, `bobUpAndDown?`, `faceCamera?`, `rotate?`): `void`
+:::
 
 Draw a marker in an every tick.
 
@@ -33,13 +35,15 @@ Draw a marker in an every tick.
 
 #### Defined in
 
-[client/screen/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/marker.ts#L16)
+[client/screen/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/marker.ts#L16)
 
 ___
 
 ### drawSimple
 
-▸ **drawSimple**(`type`, `pos`, `rot`, `scale`, `color`, `faceCam`): `void`
+::: Tip
+AthenaClient.screen.marker.**drawSimple**(`type`, `pos`, `rot`, `scale`, `color`, `faceCam`): `void`
+:::
 
 #### Parameters
 
@@ -58,4 +62,4 @@ ___
 
 #### Defined in
 
-[client/screen/marker.ts:53](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/client/screen/marker.ts#L53)
+[client/screen/marker.ts:53](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/marker.ts#L53)

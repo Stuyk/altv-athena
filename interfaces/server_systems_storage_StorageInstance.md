@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[server/systems/storage.ts:14](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/storage.ts#L14)
+[server/systems/storage.ts:14](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/storage.ts#L14)
 
 ___
 
@@ -39,7 +39,7 @@ StorageInstance
 
 #### Defined in
 
-[server/systems/storage.ts:30](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/storage.ts#L30)
+[server/systems/storage.ts:30](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/storage.ts#L30)
 
 ___
 
@@ -55,4 +55,4 @@ StorageInstance
 
 #### Defined in
 
-[server/systems/storage.ts:22](https://github.com/Stuyk/altv-athena/blob/627294b/src/core/server/systems/storage.ts#L22)
+[server/systems/storage.ts:22](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/storage.ts#L22)
