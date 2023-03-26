@@ -7,7 +7,6 @@ import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
 import IAttachable from '@AthenaShared/interfaces/iAttachable';
 import ICredit from '@AthenaShared/interfaces/iCredit';
 import IErrorScreen from '@AthenaShared/interfaces/iErrorScreen';
-import { InputMenu } from '@AthenaShared/interfaces/inputMenus';
 import IShard from '@AthenaShared/interfaces/iShard';
 import ISpinner from '@AthenaShared/interfaces/iSpinner';
 import { Particle } from '@AthenaShared/interfaces/particle';
@@ -313,14 +312,6 @@ export function taskTimeline(player: alt.Player, tasks: Array<Task | TaskCallbac
     }
 
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks);
-}
-
-export function inputMenu(player: alt.Player, inputMenu: InputMenu) {
-    if (Overrides.inputMenu) {
-        return Overrides.inputMenu(player, inputMenu);
-    }
-
-    alt.emitClient(player, View_Events_Input_Menu.SetMenu, inputMenu);
 }
 
 /**
@@ -651,7 +642,6 @@ interface EmitFunctions {
     createShard: typeof createShard;
     createSpinner: typeof createSpinner;
     clearTimeCycleEffect: typeof clearTimeCycleEffect;
-    inputMenu: typeof inputMenu;
     fadeScreenToBlack: typeof fadeScreenToBlack;
     fadeScreenFromBlack: typeof fadeScreenFromBlack;
     message: typeof message;
@@ -687,7 +677,6 @@ export function override(functionName: 'createMissionText', callback: typeof cre
 export function override(functionName: 'createProgressBar', callback: typeof createProgressBar);
 export function override(functionName: 'createShard', callback: typeof createShard);
 export function override(functionName: 'createSpinner', callback: typeof createSpinner);
-export function override(functionName: 'inputMenu', callback: typeof inputMenu);
 export function override(functionName: 'fadeScreenFromBlack', callback: typeof fadeScreenFromBlack);
 export function override(functionName: 'fadeScreenToBlack', callback: typeof fadeScreenToBlack);
 export function override(functionName: 'message', callback: typeof message);
@@ -712,6 +701,7 @@ export function override(functionName: 'wheelMenu', callback: typeof wheelMenu);
 /**
  * Used to override any internal emit functions.
  *
+ * @ignore
  * @export
  * @param {keyof EmitFunctions} functionName
  * @param {*} callback

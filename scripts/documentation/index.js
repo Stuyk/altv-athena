@@ -76,5 +76,17 @@ for (let file of files) {
     rows.unshift(`title: ${apiPath}`);
     rows.unshift('---');
 
+    for (let i = 0; i < rows.length; i++) {
+        if (!rows[i].includes('▸')) {
+            continue;
+        }
+
+        const rowWithPathway = rows[i].replace('▸ ', apiPath + '.');
+        rows[i] = rowWithPathway;
+        rows.splice(i, 0, '::: Tip');
+        rows.splice(i + 2, 0, ':::');
+        i += 1; // Increment by 1 to prevent endless loop
+    }
+
     fs.writeFileSync(file, rows.join('\n'));
 }
