@@ -83,8 +83,8 @@ for (let file of files) {
 
         const rowWithPathway = rows[i].replace('▸ ', apiPath + '.');
         rows[i] = rowWithPathway;
-        rows.splice(i, 0, '::: Tip');
-        rows.splice(i + 2, 0, ':::');
+        rows.splice(i, 0, '::: Tip \r\n');
+        rows.splice(i + 2, 0, '::: \r\n');
         i += 1; // Increment by 1 to prevent endless loop
     }
 
