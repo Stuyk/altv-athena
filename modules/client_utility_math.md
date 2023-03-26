@@ -11,7 +11,7 @@ order: 0
 
 ### degToRad
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.math.**degToRad**(`degrees`): `number`
 :::
 
@@ -37,13 +37,13 @@ degToRad
 
 #### Defined in
 
-[client/utility/math.ts:43](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/math.ts#L43)
+[client/utility/math.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L43)
 
 ___
 
 ### getAverage
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.math.**getAverage**(`data`): `number`
 :::
 
@@ -63,13 +63,13 @@ Returns the average value among all numbers.
 
 #### Defined in
 
-[client/utility/math.ts:113](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/math.ts#L113)
+[client/utility/math.ts:113](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L113)
 
 ___
 
 ### getCrossProduct
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.math.**getCrossProduct**(`v1`, `v2`): `alt.Vector3`
 :::
 
@@ -96,13 +96,13 @@ getCrossProduct
 
 #### Defined in
 
-[client/utility/math.ts:14](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/math.ts#L14)
+[client/utility/math.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L14)
 
 ___
 
 ### getDirectionFromRotation
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.math.**getDirectionFromRotation**(`rotation`): `alt.IVector3`
 :::
 
@@ -128,13 +128,13 @@ getDirectionFromRotation
 
 #### Defined in
 
-[client/utility/math.ts:72](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/math.ts#L72)
+[client/utility/math.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L72)
 
 ___
 
 ### getNormalizedVector
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.math.**getNormalizedVector**(`vector`): `alt.Vector3`
 :::
 
@@ -160,13 +160,13 @@ getNormalizedVector
 
 #### Defined in
 
-[client/utility/math.ts:28](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/math.ts#L28)
+[client/utility/math.ts:28](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L28)
 
 ___
 
 ### getPointsInCircle
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.math.**getPointsInCircle**(`points`, `radius`, `center`): `alt.IVector2`[]
 :::
 
@@ -194,13 +194,13 @@ getPointsInCircle
 
 #### Defined in
 
-[client/utility/math.ts:92](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/math.ts#L92)
+[client/utility/math.ts:92](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L92)
 
 ___
 
 ### rotationToDirection
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.math.**rotationToDirection**(`rotation`): `alt.Vector3`
 :::
 
@@ -220,4 +220,4 @@ Could also be seen as rotAnglesToVector
 
 #### Defined in
 
-[client/utility/math.ts:54](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/math.ts#L54)
+[client/utility/math.ts:54](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/math.ts#L54)

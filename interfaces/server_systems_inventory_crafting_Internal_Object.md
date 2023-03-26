@@ -25,7 +25,7 @@ The initial value of Object.prototype.constructor is the standard built-in Objec
 
 ### hasOwnProperty
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.Internal.Object.**hasOwnProperty**(`v`): `boolean`
 :::
 
@@ -49,7 +49,7 @@ ___
 
 ### isPrototypeOf
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.Internal.Object.**isPrototypeOf**(`v`): `boolean`
 :::
 
@@ -73,7 +73,7 @@ ___
 
 ### propertyIsEnumerable
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.Internal.Object.**propertyIsEnumerable**(`v`): `boolean`
 :::
 
@@ -97,7 +97,7 @@ ___
 
 ### toLocaleString
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.Internal.Object.**toLocaleString**(): `string`
 :::
 
@@ -115,7 +115,7 @@ ___
 
 ### toString
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.Internal.Object.**toString**(): `string`
 :::
 
@@ -133,7 +133,7 @@ ___
 
 ### valueOf
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.Internal.Object.**valueOf**(): [`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object)
 :::
 

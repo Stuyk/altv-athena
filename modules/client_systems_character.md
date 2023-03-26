@@ -23,4 +23,4 @@ order: 0
 
 #### Defined in
 
-[client/systems/character.ts:7](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/character.ts#L7)
+[client/systems/character.ts:7](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/character.ts#L7)

@@ -11,7 +11,7 @@ order: 0
 
 ### all
 
-::: Tip
+::: tip Usage
 Athena.vehicle.spawn.**all**(): `any`
 :::
 
@@ -25,13 +25,13 @@ Spawn all vehicles from the database.
 
 #### Defined in
 
-[server/vehicle/spawn.ts:107](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/spawn.ts#L107)
+[server/vehicle/spawn.ts:107](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/spawn.ts#L107)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.vehicle.spawn.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -52,9 +52,9 @@ Used to override vehicle spawning functionality
 
 #### Defined in
 
-[server/vehicle/spawn.ts:131](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/spawn.ts#L131)
+[server/vehicle/spawn.ts:131](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/spawn.ts#L131)
 
-::: Tip
+::: tip Usage
 Athena.vehicle.spawn.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -75,9 +75,9 @@ Used to override vehicle spawning functionality
 
 #### Defined in
 
-[server/vehicle/spawn.ts:132](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/spawn.ts#L132)
+[server/vehicle/spawn.ts:132](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/spawn.ts#L132)
 
-::: Tip
+::: tip Usage
 Athena.vehicle.spawn.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -98,9 +98,9 @@ Used to override vehicle spawning functionality
 
 #### Defined in
 
-[server/vehicle/spawn.ts:133](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/spawn.ts#L133)
+[server/vehicle/spawn.ts:133](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/spawn.ts#L133)
 
-::: Tip
+::: tip Usage
 Athena.vehicle.spawn.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -121,13 +121,13 @@ Used to override vehicle spawning functionality
 
 #### Defined in
 
-[server/vehicle/spawn.ts:134](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/spawn.ts#L134)
+[server/vehicle/spawn.ts:134](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/spawn.ts#L134)
 
 ___
 
 ### persistent
 
-::: Tip
+::: tip Usage
 Athena.vehicle.spawn.**persistent**(`document`): `alt.Vehicle` \| `undefined`
 :::
 
@@ -146,13 +146,13 @@ Returns undefined if the vehicle is already spawned.
 
 #### Defined in
 
-[server/vehicle/spawn.ts:67](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/spawn.ts#L67)
+[server/vehicle/spawn.ts:67](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/spawn.ts#L67)
 
 ___
 
 ### temporary
 
-::: Tip
+::: tip Usage
 Athena.vehicle.spawn.**temporary**(`vehicleInfo`, `deleteOnLeave?`): `alt.Vehicle`
 :::
 
@@ -172,13 +172,13 @@ It is not owned by anyone.
 
 #### Defined in
 
-[server/vehicle/spawn.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/spawn.ts#L15)
+[server/vehicle/spawn.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/spawn.ts#L15)
 
 ___
 
 ### temporaryOwned
 
-::: Tip
+::: tip Usage
 Athena.vehicle.spawn.**temporaryOwned**(`player`, `vehicleInfo`, `deleteOnLeave?`): `alt.Vehicle`
 :::
 
@@ -199,4 +199,4 @@ Cannot be modified by the player.
 
 #### Defined in
 
-[server/vehicle/spawn.ts:42](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/spawn.ts#L42)
+[server/vehicle/spawn.ts:42](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/spawn.ts#L42)

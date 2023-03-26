@@ -11,7 +11,7 @@ order: 0
 
 ### load
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.model.**load**(`model`): `Promise`<`boolean`\>
 :::
 
@@ -31,4 +31,4 @@ Load a model based on string or hash
 
 #### Defined in
 
-[client/utility/model.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/model.ts#L11)
+[client/utility/model.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/model.ts#L11)

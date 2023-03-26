@@ -15,7 +15,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.effects.(`player`, `slot`, `type`): `void`
 :::
 
@@ -33,7 +33,7 @@ Athena.systems.inventory.effects.(`player`, `slot`, `type`): `void`
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:5](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/effects.ts#L5)
+[server/systems/inventory/effects.ts:5](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/effects.ts#L5)
 
 ___
 
@@ -43,13 +43,13 @@ ___
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:4](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/effects.ts#L4)
+[server/systems/inventory/effects.ts:4](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/effects.ts#L4)
 
 ## Functions
 
 ### add
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.effects.**add**(`effectNameFromItem`, `callback`): `any`
 :::
 
@@ -74,13 +74,13 @@ ItemEffects
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:17](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/effects.ts#L17)
+[server/systems/inventory/effects.ts:17](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/effects.ts#L17)
 
 ___
 
 ### invoke
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.effects.**invoke**(`player`, `slot`, `type`, `eventToCall?`): `boolean`
 :::
 
@@ -103,13 +103,13 @@ The callback function.
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/effects.ts#L51)
+[server/systems/inventory/effects.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/effects.ts#L51)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.effects.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -130,9 +130,9 @@ Used to override inventory item effects functionality
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:139](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/effects.ts#L139)
+[server/systems/inventory/effects.ts:139](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/effects.ts#L139)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.effects.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -153,9 +153,9 @@ Used to override inventory item effects functionality
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:140](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/effects.ts#L140)
+[server/systems/inventory/effects.ts:140](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/effects.ts#L140)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.effects.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -176,13 +176,13 @@ Used to override inventory item effects functionality
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:141](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/effects.ts#L141)
+[server/systems/inventory/effects.ts:141](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/effects.ts#L141)
 
 ___
 
 ### remove
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.effects.**remove**(`effectName`): `boolean`
 :::
 
@@ -202,4 +202,4 @@ The value of the effect.
 
 #### Defined in
 
-[server/systems/inventory/effects.ts:35](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/effects.ts#L35)
+[server/systems/inventory/effects.ts:35](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/effects.ts#L35)

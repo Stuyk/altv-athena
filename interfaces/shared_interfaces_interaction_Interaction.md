@@ -27,7 +27,7 @@ Interaction
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaShared.interfaces.interaction.Interaction.(`player`, `...args`): `void`
 :::
 
@@ -50,7 +50,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L51)
+[shared/interfaces/interaction.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L51)
 
 ___
 
@@ -67,7 +67,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:74](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L74)
+[shared/interfaces/interaction.ts:74](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L74)
 
 ___
 
@@ -83,7 +83,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:103](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L103)
+[shared/interfaces/interaction.ts:103](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L103)
 
 ___
 
@@ -99,7 +99,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:22](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L22)
+[shared/interfaces/interaction.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L22)
 
 ___
 
@@ -115,7 +115,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:45](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L45)
+[shared/interfaces/interaction.ts:45](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L45)
 
 ___
 
@@ -131,7 +131,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:96](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L96)
+[shared/interfaces/interaction.ts:96](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L96)
 
 ___
 
@@ -147,7 +147,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:88](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L88)
+[shared/interfaces/interaction.ts:88](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L88)
 
 ___
 
@@ -163,7 +163,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:81](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L81)
+[shared/interfaces/interaction.ts:81](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L81)
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaShared.interfaces.interaction.Interaction.(`player`, `...args`): `void`
 :::
 
@@ -196,7 +196,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:66](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L66)
+[shared/interfaces/interaction.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L66)
 
 ___
 
@@ -213,7 +213,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:31](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L31)
+[shared/interfaces/interaction.ts:31](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L31)
 
 ___
 
@@ -229,7 +229,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:38](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L38)
+[shared/interfaces/interaction.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L38)
 
 ___
 
@@ -245,7 +245,7 @@ Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:59](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L59)
+[shared/interfaces/interaction.ts:59](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L59)
 
 ___
 
@@ -257,4 +257,4 @@ A unique identifier for the Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/interaction.ts#L15)
+[shared/interfaces/interaction.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/interaction.ts#L15)

@@ -31,7 +31,7 @@ IPed
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iPed.ts#L51)
+[shared/interfaces/iPed.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L51)
 
 ___
 
@@ -47,7 +47,7 @@ IPed
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:81](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iPed.ts#L81)
+[shared/interfaces/iPed.ts:81](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L81)
 
 ___
 
@@ -63,7 +63,7 @@ IPed
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:30](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iPed.ts#L30)
+[shared/interfaces/iPed.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L30)
 
 ___
 
@@ -80,7 +80,7 @@ IPed
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:74](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iPed.ts#L74)
+[shared/interfaces/iPed.ts:74](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L74)
 
 ___
 
@@ -97,7 +97,7 @@ IPed
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:66](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iPed.ts#L66)
+[shared/interfaces/iPed.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L66)
 
 ___
 
@@ -113,7 +113,7 @@ IPed
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iPed.ts#L37)
+[shared/interfaces/iPed.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L37)
 
 ___
 
@@ -129,7 +129,7 @@ IPed
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iPed.ts#L23)
+[shared/interfaces/iPed.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L23)
 
 ___
 
@@ -145,7 +145,7 @@ IPed
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:16](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iPed.ts#L16)
+[shared/interfaces/iPed.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L16)
 
 ___
 
@@ -161,7 +161,7 @@ IPed
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:58](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iPed.ts#L58)
+[shared/interfaces/iPed.ts:58](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L58)
 
 ___
 
@@ -177,4 +177,4 @@ IPed
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:44](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iPed.ts#L44)
+[shared/interfaces/iPed.ts:44](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iPed.ts#L44)

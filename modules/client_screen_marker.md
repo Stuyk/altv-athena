@@ -11,7 +11,7 @@ order: 0
 
 ### draw
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.marker.**draw**(`type`, `pos`, `scale`, `color`, `bobUpAndDown?`, `faceCamera?`, `rotate?`): `void`
 :::
 
@@ -35,13 +35,13 @@ Draw a marker in an every tick.
 
 #### Defined in
 
-[client/screen/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/marker.ts#L16)
+[client/screen/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/marker.ts#L16)
 
 ___
 
 ### drawSimple
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.marker.**drawSimple**(`type`, `pos`, `rot`, `scale`, `color`, `faceCam`): `void`
 :::
 
@@ -62,4 +62,4 @@ AthenaClient.screen.marker.**drawSimple**(`type`, `pos`, `rot`, `scale`, `color`
 
 #### Defined in
 
-[client/screen/marker.ts:53](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/marker.ts#L53)
+[client/screen/marker.ts:53](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/marker.ts#L53)

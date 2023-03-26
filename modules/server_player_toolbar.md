@@ -11,7 +11,7 @@ order: 0
 
 ### add
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**add**(`player`, `item`): `Promise`<`boolean`\>
 :::
 
@@ -31,13 +31,13 @@ Toolbar only.
 
 #### Defined in
 
-[server/player/toolbar.ts:16](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L16)
+[server/player/toolbar.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L16)
 
 ___
 
 ### getAt
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**getAt**<`CustomData`\>(`player`, `slot`): [`player`](server_config.md#player) \| `undefined`
 :::
 
@@ -74,13 +74,13 @@ const someData = Athena.player.toolbar.getAt<{ myCustomStuff: string }>(somePlay
 
 #### Defined in
 
-[server/player/toolbar.ts:240](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L240)
+[server/player/toolbar.ts:240](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L240)
 
 ___
 
 ### getItemData
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**getItemData**<`CustomData`\>(`player`, `slot`): `CustomData` \| `undefined`
 :::
 
@@ -117,13 +117,13 @@ const someData = Athena.player.toolbar.getItemData<{ myCustomStuff: string }>(so
 
 #### Defined in
 
-[server/player/toolbar.ts:147](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L147)
+[server/player/toolbar.ts:147](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L147)
 
 ___
 
 ### has
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**has**(`player`, `dbName`, `quantity`, `version?`): `any`
 :::
 
@@ -146,13 +146,13 @@ Verify that the player has at least 'x' of an item in their toolbar
 
 #### Defined in
 
-[server/player/toolbar.ts:112](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L112)
+[server/player/toolbar.ts:112](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L112)
 
 ___
 
 ### modifyItemData
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**modifyItemData**<`CustomData`\>(`player`, `slot`, `customData`): `Promise`<`boolean`\>
 :::
 
@@ -194,13 +194,13 @@ await Athena.player.toolbar.modifyItemData<typeof someData>(player, someSlot, so
 
 #### Defined in
 
-[server/player/toolbar.ts:192](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L192)
+[server/player/toolbar.ts:192](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L192)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -221,9 +221,9 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:274](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L274)
+[server/player/toolbar.ts:274](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L274)
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -244,9 +244,9 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:275](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L275)
+[server/player/toolbar.ts:275](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L275)
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -267,9 +267,9 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:276](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L276)
+[server/player/toolbar.ts:276](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L276)
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -290,9 +290,9 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:277](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L277)
+[server/player/toolbar.ts:277](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L277)
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -313,9 +313,9 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:278](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L278)
+[server/player/toolbar.ts:278](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L278)
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -336,9 +336,9 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:279](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L279)
+[server/player/toolbar.ts:279](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L279)
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -359,13 +359,13 @@ Used to override any toolbar functions
 
 #### Defined in
 
-[server/player/toolbar.ts:280](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L280)
+[server/player/toolbar.ts:280](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L280)
 
 ___
 
 ### remove
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**remove**(`player`, `slot`): `Promise`<`boolean`\>
 :::
 
@@ -384,13 +384,13 @@ Delete an item in a specific slot in an toolbar data set.
 
 #### Defined in
 
-[server/player/toolbar.ts:81](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L81)
+[server/player/toolbar.ts:81](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L81)
 
 ___
 
 ### sub
 
-::: Tip
+::: tip Usage
 Athena.player.toolbar.**sub**(`player`, `item`): `Promise`<`boolean`\>
 :::
 
@@ -410,4 +410,4 @@ Toolbar only.
 
 #### Defined in
 
-[server/player/toolbar.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/toolbar.ts#L51)
+[server/player/toolbar.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/toolbar.ts#L51)

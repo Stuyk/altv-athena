@@ -11,7 +11,7 @@ order: 0
 
 ### create
 
-::: Tip
+::: tip Usage
 Athena.systems.jobTrigger.**create**(`player`, `data`): `any`
 :::
 
@@ -31,13 +31,13 @@ Will invoke a callback or an event if accepted or declined.
 
 #### Defined in
 
-[server/systems/jobTrigger.ts:87](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jobTrigger.ts#L87)
+[server/systems/jobTrigger.ts:87](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/jobTrigger.ts#L87)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.jobTrigger.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -58,4 +58,4 @@ Used to override job trigger functions.
 
 #### Defined in
 
-[server/systems/jobTrigger.ts:106](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jobTrigger.ts#L106)
+[server/systems/jobTrigger.ts:106](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/jobTrigger.ts#L106)

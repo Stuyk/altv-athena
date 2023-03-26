@@ -17,7 +17,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 Athena.systems.loginFlow.FlowInfo.(`player`): `void`
 :::
 
@@ -33,7 +33,7 @@ Athena.systems.loginFlow.FlowInfo.(`player`): `void`
 
 #### Defined in
 
-[server/systems/loginFlow.ts:10](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/loginFlow.ts#L10)
+[server/systems/loginFlow.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/loginFlow.ts#L10)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[server/systems/loginFlow.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/loginFlow.ts#L8)
+[server/systems/loginFlow.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/loginFlow.ts#L8)
 
 ___
 
@@ -53,4 +53,4 @@ ___
 
 #### Defined in
 
-[server/systems/loginFlow.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/loginFlow.ts#L9)
+[server/systems/loginFlow.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/loginFlow.ts#L9)

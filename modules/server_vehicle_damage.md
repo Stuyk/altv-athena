@@ -11,7 +11,7 @@ order: 0
 
 ### apply
 
-::: Tip
+::: tip Usage
 Athena.vehicle.damage.**apply**(`vehicle`, `damage`): `void`
 :::
 
@@ -32,13 +32,13 @@ Apply vehicle damage to a vehicle.
 
 #### Defined in
 
-[server/vehicle/damage.ts:147](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/damage.ts#L147)
+[server/vehicle/damage.ts:147](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/damage.ts#L147)
 
 ___
 
 ### get
 
-::: Tip
+::: tip Usage
 Athena.vehicle.damage.**get**(`vehicle`): [`player`](server_config.md#player) \| `undefined`
 :::
 
@@ -58,13 +58,13 @@ Returns vehicle damage for individual parts.
 
 #### Defined in
 
-[server/vehicle/damage.ts:66](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/damage.ts#L66)
+[server/vehicle/damage.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/damage.ts#L66)
 
 ___
 
 ### repair
 
-::: Tip
+::: tip Usage
 Athena.vehicle.damage.**repair**(`vehicle`): `Promise`<`void`\>
 :::
 
@@ -84,4 +84,4 @@ Used to repair all vehicle damage, and save changes to the Database.
 
 #### Defined in
 
-[server/vehicle/damage.ts:187](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/damage.ts#L187)
+[server/vehicle/damage.ts:187](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/damage.ts#L187)

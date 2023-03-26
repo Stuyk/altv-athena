@@ -11,7 +11,7 @@ order: 0
 
 ### banPlayer
 
-::: Tip
+::: tip Usage
 Athena.controllers.admin.**banPlayer**(`player`, `reason`): `Promise`<`boolean`\>
 :::
 
@@ -36,13 +36,13 @@ Athena.controllers.admin.banPlayer(player, 'was a bad person :(')
 
 #### Defined in
 
-[server/controllers/admin.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/admin.ts#L21)
+[server/controllers/admin.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/admin.ts#L21)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -59,9 +59,9 @@ Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[server/controllers/admin.ts:78](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/admin.ts#L78)
+[server/controllers/admin.ts:78](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/admin.ts#L78)
 
-::: Tip
+::: tip Usage
 Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -78,13 +78,13 @@ Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[server/controllers/admin.ts:79](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/admin.ts#L79)
+[server/controllers/admin.ts:79](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/admin.ts#L79)
 
 ___
 
 ### unbanPlayerByDiscord
 
-::: Tip
+::: tip Usage
 Athena.controllers.admin.**unbanPlayerByDiscord**(`discord`): `Promise`<`boolean`\>
 :::
 
@@ -112,4 +112,4 @@ AdminController
 
 #### Defined in
 
-[server/controllers/admin.ts:52](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/admin.ts#L52)
+[server/controllers/admin.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/admin.ts#L52)

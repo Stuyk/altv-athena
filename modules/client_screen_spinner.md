@@ -11,7 +11,7 @@ order: 0
 
 ### clear
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.spinner.**clear**(): `void`
 :::
 
@@ -23,13 +23,13 @@ Used to clear the last set spinner.
 
 #### Defined in
 
-[client/screen/spinner.ts:13](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/spinner.ts#L13)
+[client/screen/spinner.ts:13](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/spinner.ts#L13)
 
 ___
 
 ### create
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.spinner.**create**(`data`): `void`
 :::
 
@@ -47,4 +47,4 @@ Create a spinner to show in the bottom-right corner.
 
 #### Defined in
 
-[client/screen/spinner.ts:27](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/spinner.ts#L27)
+[client/screen/spinner.ts:27](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/spinner.ts#L27)

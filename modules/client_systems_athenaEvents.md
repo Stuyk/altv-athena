@@ -11,7 +11,7 @@ order: 0
 
 ### updateWaypoint
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.athenaEvents.**updateWaypoint**(): `Promise`<`void`\>
 :::
 
@@ -29,4 +29,4 @@ AthenaEvents
 
 #### Defined in
 
-[client/systems/athenaEvents.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/athenaEvents.ts#L37)
+[client/systems/athenaEvents.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/athenaEvents.ts#L37)

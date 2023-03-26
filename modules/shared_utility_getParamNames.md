@@ -11,7 +11,7 @@ order: 0
 
 ### getParamNames
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.getParamNames.**getParamNames**(`func`): `string`[]
 :::
 
@@ -32,4 +32,4 @@ Returns an array of parameter names.
 
 #### Defined in
 
-[shared/utility/getParamNames.ts:12](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/getParamNames.ts#L12)
+[shared/utility/getParamNames.ts:12](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/getParamNames.ts#L12)

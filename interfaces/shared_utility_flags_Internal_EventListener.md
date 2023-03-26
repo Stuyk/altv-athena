@@ -13,7 +13,7 @@ order: 0
 
 ### EventListener
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.EventListener.**EventListener**(`evt`): `void`
 :::
 

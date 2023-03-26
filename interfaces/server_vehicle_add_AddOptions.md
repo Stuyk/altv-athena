@@ -23,7 +23,7 @@ AddOptions
 
 #### Defined in
 
-[server/vehicle/add.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/add.ts#L51)
+[server/vehicle/add.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L51)
 
 ___
 
@@ -41,7 +41,7 @@ AddOptions
 
 #### Defined in
 
-[server/vehicle/add.ts:35](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/add.ts#L35)
+[server/vehicle/add.ts:35](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L35)
 
 ___
 
@@ -57,7 +57,7 @@ AddOptions
 
 #### Defined in
 
-[server/vehicle/add.ts:43](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/add.ts#L43)
+[server/vehicle/add.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L43)
 
 ___
 
@@ -74,7 +74,7 @@ AddOptions
 
 #### Defined in
 
-[server/vehicle/add.ts:25](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/add.ts#L25)
+[server/vehicle/add.ts:25](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L25)
 
 ___
 
@@ -91,4 +91,4 @@ AddOptions
 
 #### Defined in
 
-[server/vehicle/add.ts:16](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/add.ts#L16)
+[server/vehicle/add.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/add.ts#L16)

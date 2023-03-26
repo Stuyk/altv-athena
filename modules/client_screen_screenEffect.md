@@ -11,7 +11,7 @@ order: 0
 
 ### isEffectActive
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.screenEffect.**isEffectActive**(`screenEffect`): `any`
 :::
 
@@ -31,13 +31,13 @@ true if the screen effect is active; otherwise false
 
 #### Defined in
 
-[client/screen/screenEffect.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenEffect.ts#L9)
+[client/screen/screenEffect.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenEffect.ts#L9)
 
 ___
 
 ### startEffect
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.screenEffect.**startEffect**(`screenEffect`, `duration?`, `looped?`): `void`
 :::
 
@@ -57,13 +57,13 @@ Starts applying the specified effect to the screen.
 
 #### Defined in
 
-[client/screen/screenEffect.ts:19](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenEffect.ts#L19)
+[client/screen/screenEffect.ts:19](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenEffect.ts#L19)
 
 ___
 
 ### stopAllEffects
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.screenEffect.**stopAllEffects**(): `void`
 :::
 
@@ -75,13 +75,13 @@ Stops all currently running effects.
 
 #### Defined in
 
-[client/screen/screenEffect.ts:34](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenEffect.ts#L34)
+[client/screen/screenEffect.ts:34](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenEffect.ts#L34)
 
 ___
 
 ### stopEffect
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.screenEffect.**stopEffect**(`screenEffect`): `void`
 :::
 
@@ -99,4 +99,4 @@ Stops applying the specified effect to the screen.
 
 #### Defined in
 
-[client/screen/screenEffect.ts:27](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenEffect.ts#L27)
+[client/screen/screenEffect.ts:27](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenEffect.ts#L27)

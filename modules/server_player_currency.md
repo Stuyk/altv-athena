@@ -15,13 +15,13 @@ order: 0
 
 #### Defined in
 
-[server/player/currency.ts:5](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/currency.ts#L5)
+[server/player/currency.ts:5](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/currency.ts#L5)
 
 ## Functions
 
 ### add
 
-::: Tip
+::: tip Usage
 Athena.player.currency.**add**<`CustomCurrency`\>(`player`, `type`, `amount`): `boolean`
 :::
 
@@ -57,13 +57,13 @@ Currency
 
 #### Defined in
 
-[server/player/currency.ts:20](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/currency.ts#L20)
+[server/player/currency.ts:20](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/currency.ts#L20)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.player.currency.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -84,9 +84,9 @@ Used to override any internal currency functions.
 
 #### Defined in
 
-[server/player/currency.ts:202](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/currency.ts#L202)
+[server/player/currency.ts:202](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/currency.ts#L202)
 
-::: Tip
+::: tip Usage
 Athena.player.currency.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -107,9 +107,9 @@ Used to override any internal currency functions.
 
 #### Defined in
 
-[server/player/currency.ts:203](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/currency.ts#L203)
+[server/player/currency.ts:203](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/currency.ts#L203)
 
-::: Tip
+::: tip Usage
 Athena.player.currency.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -130,9 +130,9 @@ Used to override any internal currency functions.
 
 #### Defined in
 
-[server/player/currency.ts:204](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/currency.ts#L204)
+[server/player/currency.ts:204](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/currency.ts#L204)
 
-::: Tip
+::: tip Usage
 Athena.player.currency.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -153,13 +153,13 @@ Used to override any internal currency functions.
 
 #### Defined in
 
-[server/player/currency.ts:205](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/currency.ts#L205)
+[server/player/currency.ts:205](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/currency.ts#L205)
 
 ___
 
 ### set
 
-::: Tip
+::: tip Usage
 Athena.player.currency.**set**<`CustomCurrency`\>(`player`, `type`, `amount`): `boolean`
 :::
 
@@ -195,13 +195,13 @@ CurrencyPrototype
 
 #### Defined in
 
-[server/player/currency.ts:117](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/currency.ts#L117)
+[server/player/currency.ts:117](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/currency.ts#L117)
 
 ___
 
 ### sub
 
-::: Tip
+::: tip Usage
 Athena.player.currency.**sub**<`CustomCurrency`\>(`player`, `type`, `amount`): `boolean`
 :::
 
@@ -233,13 +233,13 @@ const didSubFullAmount = Athena.player.currency.sub(somePlayer, 'cash', 25);
 
 #### Defined in
 
-[server/player/currency.ts:68](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/currency.ts#L68)
+[server/player/currency.ts:68](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/currency.ts#L68)
 
 ___
 
 ### subAllCurrencies
 
-::: Tip
+::: tip Usage
 Athena.player.currency.**subAllCurrencies**(`player`, `amount`): `boolean`
 :::
 
@@ -265,4 +265,4 @@ const didRemoveFullAmount = Athena.player.currency.subAllCurrencies(somePlayer, 
 
 #### Defined in
 
-[server/player/currency.ts:153](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/currency.ts#L153)
+[server/player/currency.ts:153](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/currency.ts#L153)

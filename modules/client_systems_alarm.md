@@ -11,7 +11,7 @@ order: 0
 
 ### loadAlarm
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.alarm.**loadAlarm**(`name`, `count?`): `Promise`<`boolean`\>
 :::
 
@@ -30,13 +30,13 @@ Attempts to load an alarm multiple times before returning false.
 
 #### Defined in
 
-[client/systems/alarm.ts:17](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/alarm.ts#L17)
+[client/systems/alarm.ts:17](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/alarm.ts#L17)
 
 ___
 
 ### startAlarm
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.alarm.**startAlarm**(`name`): `Promise`<`void`\>
 :::
 
@@ -56,13 +56,13 @@ Play an alarm for the local player.
 
 #### Defined in
 
-[client/systems/alarm.ts:50](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/alarm.ts#L50)
+[client/systems/alarm.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/alarm.ts#L50)
 
 ___
 
 ### stopAlarm
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.alarm.**stopAlarm**(`name`): `Promise`<`void`\>
 :::
 
@@ -82,13 +82,13 @@ Stop an alarm for the local player.
 
 #### Defined in
 
-[client/systems/alarm.ts:73](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/alarm.ts#L73)
+[client/systems/alarm.ts:73](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/alarm.ts#L73)
 
 ___
 
 ### stopAllAlarms
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.alarm.**stopAllAlarms**(): `Promise`<`void`\>
 :::
 
@@ -102,4 +102,4 @@ Stop all alarms for the local player.
 
 #### Defined in
 
-[client/systems/alarm.ts:86](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/alarm.ts#L86)
+[client/systems/alarm.ts:86](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/alarm.ts#L86)

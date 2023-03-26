@@ -15,7 +15,7 @@ order: 0
 
 ### create
 
-::: Tip
+::: tip Usage
 Athena.utility.restrict.**create**<`T`\>(`handler`, `restrictions`): `T`
 :::
 
@@ -62,13 +62,13 @@ alt.onClient('something-from-a-client', doPoliceWorkRestricted);
 
 #### Defined in
 
-[server/utility/restrict.ts:109](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/restrict.ts#L109)
+[server/utility/restrict.ts:109](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/restrict.ts#L109)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.utility.restrict.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -89,4 +89,4 @@ Used to override restrict utility funcs
 
 #### Defined in
 
-[server/utility/restrict.ts:139](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/restrict.ts#L139)
+[server/utility/restrict.ts:139](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/restrict.ts#L139)

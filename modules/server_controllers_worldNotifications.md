@@ -11,7 +11,7 @@ order: 0
 
 ### addToPlayer
 
-::: Tip
+::: tip Usage
 Athena.controllers.worldNotifications.**addToPlayer**(`player`, `notification`): `string`
 :::
 
@@ -32,13 +32,13 @@ uid A unique string for notification
 
 #### Defined in
 
-[server/controllers/worldNotifications.ts:93](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/worldNotifications.ts#L93)
+[server/controllers/worldNotifications.ts:93](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/worldNotifications.ts#L93)
 
 ___
 
 ### append
 
-::: Tip
+::: tip Usage
 Athena.controllers.worldNotifications.**append**(`notification`): `string`
 :::
 
@@ -62,13 +62,13 @@ uid A unique string for notification
 
 #### Defined in
 
-[server/controllers/worldNotifications.ts:35](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/worldNotifications.ts#L35)
+[server/controllers/worldNotifications.ts:35](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/worldNotifications.ts#L35)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.controllers.worldNotifications.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -89,9 +89,9 @@ Used to override any in-world streamer notifications
 
 #### Defined in
 
-[server/controllers/worldNotifications.ts:131](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/worldNotifications.ts#L131)
+[server/controllers/worldNotifications.ts:131](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/worldNotifications.ts#L131)
 
-::: Tip
+::: tip Usage
 Athena.controllers.worldNotifications.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -112,9 +112,9 @@ Used to override any in-world streamer notifications
 
 #### Defined in
 
-[server/controllers/worldNotifications.ts:132](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/worldNotifications.ts#L132)
+[server/controllers/worldNotifications.ts:132](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/worldNotifications.ts#L132)
 
-::: Tip
+::: tip Usage
 Athena.controllers.worldNotifications.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -135,9 +135,9 @@ Used to override any in-world streamer notifications
 
 #### Defined in
 
-[server/controllers/worldNotifications.ts:133](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/worldNotifications.ts#L133)
+[server/controllers/worldNotifications.ts:133](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/worldNotifications.ts#L133)
 
-::: Tip
+::: tip Usage
 Athena.controllers.worldNotifications.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -158,9 +158,9 @@ Used to override any in-world streamer notifications
 
 #### Defined in
 
-[server/controllers/worldNotifications.ts:134](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/worldNotifications.ts#L134)
+[server/controllers/worldNotifications.ts:134](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/worldNotifications.ts#L134)
 
-::: Tip
+::: tip Usage
 Athena.controllers.worldNotifications.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -181,13 +181,13 @@ Used to override any in-world streamer notifications
 
 #### Defined in
 
-[server/controllers/worldNotifications.ts:135](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/worldNotifications.ts#L135)
+[server/controllers/worldNotifications.ts:135](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/worldNotifications.ts#L135)
 
 ___
 
 ### remove
 
-::: Tip
+::: tip Usage
 Athena.controllers.worldNotifications.**remove**(`uid`): `boolean`
 :::
 
@@ -209,13 +209,13 @@ WorldNotificationController
 
 #### Defined in
 
-[server/controllers/worldNotifications.ts:55](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/worldNotifications.ts#L55)
+[server/controllers/worldNotifications.ts:55](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/worldNotifications.ts#L55)
 
 ___
 
 ### removeFromPlayer
 
-::: Tip
+::: tip Usage
 Athena.controllers.worldNotifications.**removeFromPlayer**(`player`, `uid`): `any`
 :::
 
@@ -234,13 +234,13 @@ Remove a world notification from a single local player.
 
 #### Defined in
 
-[server/controllers/worldNotifications.ts:75](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/worldNotifications.ts#L75)
+[server/controllers/worldNotifications.ts:75](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/worldNotifications.ts#L75)
 
 ___
 
 ### update
 
-::: Tip
+::: tip Usage
 Athena.controllers.worldNotifications.**update**(`player`, `notifications`): `any`
 :::
 
@@ -259,4 +259,4 @@ Updates world notifications through the streamer service.
 
 #### Defined in
 
-[server/controllers/worldNotifications.ts:111](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/worldNotifications.ts#L111)
+[server/controllers/worldNotifications.ts:111](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/worldNotifications.ts#L111)

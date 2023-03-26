@@ -11,7 +11,7 @@ order: 0
 
 ### changeTo
 
-::: Tip
+::: tip Usage
 AthenaClient.world.weather.**changeTo**(`nextWeather`, `timeInSeconds`): `Promise`<`void`\>
 :::
 
@@ -32,13 +32,13 @@ Change the weather gracefully.
 
 #### Defined in
 
-[client/world/weather.ts:40](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/world/weather.ts#L40)
+[client/world/weather.ts:40](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/world/weather.ts#L40)
 
 ___
 
 ### freeze
 
-::: Tip
+::: tip Usage
 AthenaClient.world.weather.**freeze**(): `void`
 :::
 
@@ -54,13 +54,13 @@ Call this function after using the `changeTo` function.
 
 #### Defined in
 
-[client/world/weather.ts:20](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/world/weather.ts#L20)
+[client/world/weather.ts:20](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/world/weather.ts#L20)
 
 ___
 
 ### isChanging
 
-::: Tip
+::: tip Usage
 AthenaClient.world.weather.**isChanging**(): `boolean`
 :::
 
@@ -70,13 +70,13 @@ AthenaClient.world.weather.**isChanging**(): `boolean`
 
 #### Defined in
 
-[client/world/weather.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/world/weather.ts#L9)
+[client/world/weather.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/world/weather.ts#L9)
 
 ___
 
 ### unfreeze
 
-::: Tip
+::: tip Usage
 AthenaClient.world.weather.**unfreeze**(): `void`
 :::
 
@@ -90,4 +90,4 @@ Unfreeze the weather function.
 
 #### Defined in
 
-[client/world/weather.ts:29](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/world/weather.ts#L29)
+[client/world/weather.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/world/weather.ts#L29)

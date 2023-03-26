@@ -31,7 +31,7 @@ TextLabel
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:43](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/textLabel.ts#L43)
+[shared/interfaces/textLabel.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L43)
 
 ___
 
@@ -47,7 +47,7 @@ TextLabel
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/textLabel.ts#L51)
+[shared/interfaces/textLabel.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L51)
 
 ___
 
@@ -63,7 +63,7 @@ TextLabel
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:29](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/textLabel.ts#L29)
+[shared/interfaces/textLabel.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L29)
 
 ___
 
@@ -79,7 +79,7 @@ TextLabel
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/textLabel.ts#L15)
+[shared/interfaces/textLabel.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L15)
 
 ___
 
@@ -95,7 +95,7 @@ TextLabel
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:22](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/textLabel.ts#L22)
+[shared/interfaces/textLabel.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L22)
 
 ___
 
@@ -111,4 +111,4 @@ TextLabel
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/textLabel.ts#L36)
+[shared/interfaces/textLabel.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/textLabel.ts#L36)

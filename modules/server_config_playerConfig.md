@@ -21,13 +21,13 @@ order: 0
 
 #### Defined in
 
-[server/config/playerConfig.ts:26](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/config/playerConfig.ts#L26)
+[server/config/playerConfig.ts:26](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/config/playerConfig.ts#L26)
 
 ## Functions
 
 ### set
 
-::: Tip
+::: tip Usage
 Athena.config.playerConfig.**set**<`CustomKeys`\>(`player`, `key`, `value`): `void`
 :::
 
@@ -65,4 +65,4 @@ Athena.config.set<ExtendedKeys>('wanted-level', 5);
 
 #### Defined in
 
-[server/config/playerConfig.ts:22](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/config/playerConfig.ts#L22)
+[server/config/playerConfig.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/config/playerConfig.ts#L22)

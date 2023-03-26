@@ -11,7 +11,7 @@ order: 0
 
 ### findMissingElements
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.array.**findMissingElements**<`T`\>(`a`, `b`, `propertyName`): `T`[]
 :::
 
@@ -40,4 +40,4 @@ but are not present in B.
 
 #### Defined in
 
-[shared/utility/array.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/array.ts#L11)
+[shared/utility/array.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/array.ts#L11)

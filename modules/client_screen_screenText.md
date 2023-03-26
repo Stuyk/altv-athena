@@ -15,7 +15,7 @@ order: 0
 
 ### addLongString
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.screenText.**addLongString**(`text`): `void`
 :::
 
@@ -39,13 +39,13 @@ ScreenText
 
 #### Defined in
 
-[client/screen/screenText.ts:22](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenText.ts#L22)
+[client/screen/screenText.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenText.ts#L22)
 
 ___
 
 ### drawTextWithBackground
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.screenText.**drawTextWithBackground**(`text`, `x`, `y`, `scale`, `font`, `background`, `foreground`, `props`): `void`
 :::
 
@@ -76,13 +76,13 @@ ScreenText
 
 #### Defined in
 
-[client/screen/screenText.ts:85](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenText.ts#L85)
+[client/screen/screenText.ts:85](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenText.ts#L85)
 
 ___
 
 ### getHeight
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.screenText.**getHeight**(`scale`, `font`): `number`
 :::
 
@@ -107,13 +107,13 @@ ScreenText
 
 #### Defined in
 
-[client/screen/screenText.ts:68](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenText.ts#L68)
+[client/screen/screenText.ts:68](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenText.ts#L68)
 
 ___
 
 ### getWidth
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.screenText.**getWidth**(`text`, `font`, `scale`): `number`
 :::
 
@@ -139,4 +139,4 @@ ScreenText
 
 #### Defined in
 
-[client/screen/screenText.ts:52](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenText.ts#L52)
+[client/screen/screenText.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenText.ts#L52)

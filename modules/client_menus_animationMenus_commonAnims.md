@@ -11,7 +11,7 @@ order: 0
 
 ### default
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.animationMenus.commonAnims.**default**(`callback`): { `callback`: (...`args`: `any`[]) => `void` ; `data`: `any`[] ; `name`: `string` = 'CPR' }[]
 :::
 
@@ -27,4 +27,4 @@ AthenaClient.menus.animationMenus.commonAnims.**default**(`callback`): { `callba
 
 #### Defined in
 
-[client/menus/animationMenus/commonAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/animationMenus/commonAnims.ts#L3)
+[client/menus/animationMenus/commonAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/animationMenus/commonAnims.ts#L3)

@@ -11,7 +11,7 @@ order: 0
 
 ### append
 
-::: Tip
+::: tip Usage
 Athena.controllers.itemDrops.**append**(`itemDrop`): `string`
 :::
 
@@ -35,13 +35,13 @@ Returns a uid or generates one if not specified.
 
 #### Defined in
 
-[server/controllers/itemDrops.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/itemDrops.ts#L37)
+[server/controllers/itemDrops.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/itemDrops.ts#L37)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.controllers.itemDrops.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -62,9 +62,9 @@ Used to override any item drop streamer functionality.
 
 #### Defined in
 
-[server/controllers/itemDrops.ts:74](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/itemDrops.ts#L74)
+[server/controllers/itemDrops.ts:74](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/itemDrops.ts#L74)
 
-::: Tip
+::: tip Usage
 Athena.controllers.itemDrops.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -85,13 +85,13 @@ Used to override any item drop streamer functionality.
 
 #### Defined in
 
-[server/controllers/itemDrops.ts:75](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/itemDrops.ts#L75)
+[server/controllers/itemDrops.ts:75](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/itemDrops.ts#L75)
 
 ___
 
 ### remove
 
-::: Tip
+::: tip Usage
 Athena.controllers.itemDrops.**remove**(`id`): `boolean`
 :::
 
@@ -109,4 +109,4 @@ Removes an item drop in-world.
 
 #### Defined in
 
-[server/controllers/itemDrops.ts:53](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/itemDrops.ts#L53)
+[server/controllers/itemDrops.ts:53](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/itemDrops.ts#L53)

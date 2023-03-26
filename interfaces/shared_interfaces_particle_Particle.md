@@ -31,7 +31,7 @@ Particle
 
 #### Defined in
 
-[shared/interfaces/particle.ts:50](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/particle.ts#L50)
+[shared/interfaces/particle.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L50)
 
 ___
 
@@ -47,7 +47,7 @@ Particle
 
 #### Defined in
 
-[shared/interfaces/particle.ts:22](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/particle.ts#L22)
+[shared/interfaces/particle.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L22)
 
 ___
 
@@ -63,7 +63,7 @@ Particle
 
 #### Defined in
 
-[shared/interfaces/particle.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/particle.ts#L36)
+[shared/interfaces/particle.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L36)
 
 ___
 
@@ -79,7 +79,7 @@ Particle
 
 #### Defined in
 
-[shared/interfaces/particle.ts:29](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/particle.ts#L29)
+[shared/interfaces/particle.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L29)
 
 ___
 
@@ -95,7 +95,7 @@ Particle
 
 #### Defined in
 
-[shared/interfaces/particle.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/particle.ts#L15)
+[shared/interfaces/particle.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L15)
 
 ___
 
@@ -111,4 +111,4 @@ Particle
 
 #### Defined in
 
-[shared/interfaces/particle.ts:43](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/particle.ts#L43)
+[shared/interfaces/particle.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/particle.ts#L43)

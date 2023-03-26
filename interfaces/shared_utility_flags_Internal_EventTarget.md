@@ -15,7 +15,7 @@ EventTarget is a DOM interface implemented by objects that can receive events an
 
 ### addEventListener
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.EventTarget.**addEventListener**(`type`, `callback`, `options?`): `void`
 :::
 
@@ -53,7 +53,7 @@ ___
 
 ### dispatchEvent
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.EventTarget.**dispatchEvent**(`event`): `boolean`
 :::
 
@@ -77,7 +77,7 @@ ___
 
 ### removeEventListener
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.EventTarget.**removeEventListener**(`type`, `callback`, `options?`): `void`
 :::
 

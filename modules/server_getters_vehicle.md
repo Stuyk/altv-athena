@@ -11,7 +11,7 @@ order: 0
 
 ### byDatabaseID
 
-::: Tip
+::: tip Usage
 Athena.getters.vehicle.**byDatabaseID**(`id`): `alt.Vehicle` \| `undefined`
 :::
 
@@ -30,13 +30,13 @@ May return undefined if the vehicle is not currently spawned.
 
 #### Defined in
 
-[server/getters/vehicle.ts:55](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/vehicle.ts#L55)
+[server/getters/vehicle.ts:55](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/vehicle.ts#L55)
 
 ___
 
 ### byID
 
-::: Tip
+::: tip Usage
 Athena.getters.vehicle.**byID**(`id`): `alt.Vehicle` \| `undefined`
 :::
 
@@ -54,13 +54,13 @@ Get a vehicle by their alt:V ID
 
 #### Defined in
 
-[server/getters/vehicle.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/vehicle.ts#L11)
+[server/getters/vehicle.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/vehicle.ts#L11)
 
 ___
 
 ### byIncrementalDatabaseID
 
-::: Tip
+::: tip Usage
 Athena.getters.vehicle.**byIncrementalDatabaseID**(`id`): `alt.Vehicle` \| `undefined`
 :::
 
@@ -82,13 +82,13 @@ This only works for persistent vehicles.
 
 #### Defined in
 
-[server/getters/vehicle.ts:24](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/vehicle.ts#L24)
+[server/getters/vehicle.ts:24](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/vehicle.ts#L24)
 
 ___
 
 ### closestToPlayer
 
-::: Tip
+::: tip Usage
 Athena.getters.vehicle.**closestToPlayer**(`player`): `alt.Player` \| `undefined`
 :::
 
@@ -106,13 +106,13 @@ The player closest to a player.
 
 #### Defined in
 
-[server/getters/vehicle.ts:181](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/vehicle.ts#L181)
+[server/getters/vehicle.ts:181](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/vehicle.ts#L181)
 
 ___
 
 ### closestToVehicle
 
-::: Tip
+::: tip Usage
 Athena.getters.vehicle.**closestToVehicle**(`player`): `alt.Vehicle` \| `undefined`
 :::
 
@@ -130,13 +130,13 @@ The vehicle closest to a player.
 
 #### Defined in
 
-[server/getters/vehicle.ts:191](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/vehicle.ts#L191)
+[server/getters/vehicle.ts:191](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/vehicle.ts#L191)
 
 ___
 
 ### driver
 
-::: Tip
+::: tip Usage
 Athena.getters.vehicle.**driver**(`vehicle`): `alt.Player` \| `undefined`
 :::
 
@@ -155,13 +155,13 @@ Returns a player if they are driving this vehicle.
 
 #### Defined in
 
-[server/getters/vehicle.ts:171](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/vehicle.ts#L171)
+[server/getters/vehicle.ts:171](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/vehicle.ts#L171)
 
 ___
 
 ### inFrontOf
 
-::: Tip
+::: tip Usage
 Athena.getters.vehicle.**inFrontOf**(`entity`, `startDistance?`): `Promise`<`alt.Vehicle` \| `undefined`\>
 :::
 
@@ -183,13 +183,13 @@ Works best on flat land or very close distances.
 
 #### Defined in
 
-[server/getters/vehicle.ts:99](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/vehicle.ts#L99)
+[server/getters/vehicle.ts:99](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/vehicle.ts#L99)
 
 ___
 
 ### isNearPosition
 
-::: Tip
+::: tip Usage
 Athena.getters.vehicle.**isNearPosition**(`vehicle`, `pos`, `dist?`): `boolean`
 :::
 
@@ -209,13 +209,13 @@ Checks if a vehicle is within 3 distance of a position.
 
 #### Defined in
 
-[server/getters/vehicle.ts:150](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/vehicle.ts#L150)
+[server/getters/vehicle.ts:150](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/vehicle.ts#L150)
 
 ___
 
 ### isValidModel
 
-::: Tip
+::: tip Usage
 Athena.getters.vehicle.**isValidModel**(`model`): `boolean`
 :::
 
@@ -234,13 +234,13 @@ Use `alt.hash` to hash a plain text model. ex: `alt.hash('infernus')`
 
 #### Defined in
 
-[server/getters/vehicle.ts:78](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/vehicle.ts#L78)
+[server/getters/vehicle.ts:78](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/vehicle.ts#L78)
 
 ___
 
 ### passengers
 
-::: Tip
+::: tip Usage
 Athena.getters.vehicle.**passengers**(`vehicle`): `alt.Player`[]
 :::
 
@@ -259,4 +259,4 @@ No specific order.
 
 #### Defined in
 
-[server/getters/vehicle.ts:160](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/vehicle.ts#L160)
+[server/getters/vehicle.ts:160](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/vehicle.ts#L160)

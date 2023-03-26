@@ -34,7 +34,7 @@ ISpinner
 
 #### Defined in
 
-[shared/interfaces/iSpinner.ts:18](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iSpinner.ts#L18)
+[shared/interfaces/iSpinner.ts:18](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iSpinner.ts#L18)
 
 ___
 
@@ -50,7 +50,7 @@ ISpinner
 
 #### Defined in
 
-[shared/interfaces/iSpinner.ts:25](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iSpinner.ts#L25)
+[shared/interfaces/iSpinner.ts:25](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iSpinner.ts#L25)
 
 ___
 
@@ -66,4 +66,4 @@ ISpinner
 
 #### Defined in
 
-[shared/interfaces/iSpinner.ts:32](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iSpinner.ts#L32)
+[shared/interfaces/iSpinner.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iSpinner.ts#L32)

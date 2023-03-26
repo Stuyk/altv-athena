@@ -17,7 +17,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.sprites.SpriteInfo.(`uid`): `void`
 :::
 
@@ -39,7 +39,7 @@ Sprite
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:55](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/sprites/index.ts#L55)
+[client/rmlui/sprites/index.ts:55](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/sprites/index.ts#L55)
 
 ___
 
@@ -55,7 +55,7 @@ SpriteInfo
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:40](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/sprites/index.ts#L40)
+[client/rmlui/sprites/index.ts:40](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/sprites/index.ts#L40)
 
 ___
 
@@ -73,7 +73,7 @@ SpriteInfo
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:24](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/sprites/index.ts#L24)
+[client/rmlui/sprites/index.ts:24](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/sprites/index.ts#L24)
 
 ___
 
@@ -89,7 +89,7 @@ SpriteInfo
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:48](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/sprites/index.ts#L48)
+[client/rmlui/sprites/index.ts:48](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/sprites/index.ts#L48)
 
 ___
 
@@ -105,7 +105,7 @@ SpriteInfo
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:14](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/sprites/index.ts#L14)
+[client/rmlui/sprites/index.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/sprites/index.ts#L14)
 
 ___
 
@@ -121,4 +121,4 @@ SpriteInfo
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:32](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/sprites/index.ts#L32)
+[client/rmlui/sprites/index.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/sprites/index.ts#L32)

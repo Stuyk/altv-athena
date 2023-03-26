@@ -11,7 +11,7 @@ order: 0
 
 ### addCallback
 
-::: Tip
+::: tip Usage
 Athena.systems.plugins.**addCallback**(`callback`): `void`
 :::
 
@@ -30,13 +30,13 @@ Useful for using 'Athena API' at the top level of a document.
 
 #### Defined in
 
-[server/systems/plugins.ts:77](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/plugins.ts#L77)
+[server/systems/plugins.ts:77](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/plugins.ts#L77)
 
 ___
 
 ### getPlugins
 
-::: Tip
+::: tip Usage
 Athena.systems.plugins.**getPlugins**(): `string`[]
 :::
 
@@ -54,13 +54,13 @@ PluginSystem
 
 #### Defined in
 
-[server/systems/plugins.ts:65](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/plugins.ts#L65)
+[server/systems/plugins.ts:65](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/plugins.ts#L65)
 
 ___
 
 ### init
 
-::: Tip
+::: tip Usage
 Athena.systems.plugins.**init**(): `void`
 :::
 
@@ -72,13 +72,13 @@ Loads all plugins.
 
 #### Defined in
 
-[server/systems/plugins.ts:38](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/plugins.ts#L38)
+[server/systems/plugins.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/plugins.ts#L38)
 
 ___
 
 ### registerPlugin
 
-::: Tip
+::: tip Usage
 Athena.systems.plugins.**registerPlugin**(`name`, `callback`): `void`
 :::
 
@@ -104,4 +104,4 @@ PluginSystem
 
 #### Defined in
 
-[server/systems/plugins.ts:54](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/plugins.ts#L54)
+[server/systems/plugins.ts:54](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/plugins.ts#L54)

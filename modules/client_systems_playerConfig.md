@@ -15,7 +15,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.playerConfig.(`value`): `void`
 :::
 
@@ -31,13 +31,13 @@ AthenaClient.systems.playerConfig.(`value`): `void`
 
 #### Defined in
 
-[client/systems/playerConfig.ts:4](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/playerConfig.ts#L4)
+[client/systems/playerConfig.ts:4](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/playerConfig.ts#L4)
 
 ## Functions
 
 ### addCallback
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.playerConfig.**addCallback**<`CustomKeys`\>(`key`, `callback`): `void`
 :::
 
@@ -62,13 +62,13 @@ Add a custom callback to listen for config changes.
 
 #### Defined in
 
-[client/systems/playerConfig.ts:38](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/playerConfig.ts#L38)
+[client/systems/playerConfig.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/playerConfig.ts#L38)
 
 ___
 
 ### get
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.playerConfig.**get**<`ReturnType`, `CustomKeys`\>(`key`): `ReturnType` \| `undefined`
 :::
 
@@ -93,4 +93,4 @@ Get a value assigned by the server.
 
 #### Defined in
 
-[client/systems/playerConfig.ts:27](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/playerConfig.ts#L27)
+[client/systems/playerConfig.ts:27](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/playerConfig.ts#L27)

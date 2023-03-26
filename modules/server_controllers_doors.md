@@ -11,7 +11,7 @@ order: 0
 
 ### append
 
-::: Tip
+::: tip Usage
 Athena.controllers.doors.**append**(`door`): `string`
 :::
 
@@ -45,13 +45,13 @@ const uid = Athena.controllers.doors.append({
 
 #### Defined in
 
-[server/controllers/doors.ts:71](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/doors.ts#L71)
+[server/controllers/doors.ts:71](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/doors.ts#L71)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.controllers.doors.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -72,9 +72,9 @@ Used to override any door streamer functionaltiy
 
 #### Defined in
 
-[server/controllers/doors.ts:157](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/doors.ts#L157)
+[server/controllers/doors.ts:157](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/doors.ts#L157)
 
-::: Tip
+::: tip Usage
 Athena.controllers.doors.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -95,9 +95,9 @@ Used to override any door streamer functionaltiy
 
 #### Defined in
 
-[server/controllers/doors.ts:158](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/doors.ts#L158)
+[server/controllers/doors.ts:158](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/doors.ts#L158)
 
-::: Tip
+::: tip Usage
 Athena.controllers.doors.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -118,13 +118,13 @@ Used to override any door streamer functionaltiy
 
 #### Defined in
 
-[server/controllers/doors.ts:159](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/doors.ts#L159)
+[server/controllers/doors.ts:159](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/doors.ts#L159)
 
 ___
 
 ### remove
 
-::: Tip
+::: tip Usage
 Athena.controllers.doors.**remove**(`uid`): `boolean`
 :::
 
@@ -149,13 +149,13 @@ Athena.controllers.doors.remove(uid);
 
 #### Defined in
 
-[server/controllers/doors.ts:97](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/doors.ts#L97)
+[server/controllers/doors.ts:97](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/doors.ts#L97)
 
 ___
 
 ### update
 
-::: Tip
+::: tip Usage
 Athena.controllers.doors.**update**(`uid`, `isUnlocked`): `Promise`<`boolean`\>
 :::
 
@@ -183,4 +183,4 @@ Athena.controllers.doors.update('117', true);
 
 #### Defined in
 
-[server/controllers/doors.ts:127](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/doors.ts#L127)
+[server/controllers/doors.ts:127](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/doors.ts#L127)

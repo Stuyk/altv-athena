@@ -11,7 +11,7 @@ order: 0
 
 ### create
 
-::: Tip
+::: tip Usage
 Athena.systems.account.**create**(`player`, `dataToAppend`): `Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md)\>
 :::
 
@@ -34,13 +34,13 @@ AccountSystemRef
 
 #### Defined in
 
-[server/systems/account.ts:66](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/account.ts#L66)
+[server/systems/account.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/account.ts#L66)
 
 ___
 
 ### getAccount
 
-::: Tip
+::: tip Usage
 Athena.systems.account.**getAccount**(`key`, `value`): `Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md) \| `undefined`\>
 :::
 
@@ -63,13 +63,13 @@ AccountSystemRef
 
 #### Defined in
 
-[server/systems/account.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/account.ts#L36)
+[server/systems/account.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/account.ts#L36)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.account.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -90,9 +90,9 @@ Used to override any account system functionality
 
 #### Defined in
 
-[server/systems/account.ts:109](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/account.ts#L109)
+[server/systems/account.ts:109](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/account.ts#L109)
 
-::: Tip
+::: tip Usage
 Athena.systems.account.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -113,4 +113,4 @@ Used to override any account system functionality
 
 #### Defined in
 
-[server/systems/account.ts:110](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/account.ts#L110)
+[server/systems/account.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/account.ts#L110)

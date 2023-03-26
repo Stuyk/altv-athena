@@ -15,7 +15,7 @@ order: 0
 
 ### disableWeight
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.config.**disableWeight**(): `void`
 :::
 
@@ -27,13 +27,13 @@ Use this function to disable weight restrictions on inventories.
 
 #### Defined in
 
-[server/systems/inventory/config.ts:49](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/config.ts#L49)
+[server/systems/inventory/config.ts:49](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/config.ts#L49)
 
 ___
 
 ### get
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.config.**get**(): typeof [`DEFAULT_CONFIG`](server_systems_inventory_config_Internal.md#DEFAULT_CONFIG)
 :::
 
@@ -45,13 +45,13 @@ typeof [`DEFAULT_CONFIG`](server_systems_inventory_config_Internal.md#DEFAULT_CO
 
 #### Defined in
 
-[server/systems/inventory/config.ts:42](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/config.ts#L42)
+[server/systems/inventory/config.ts:42](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/config.ts#L42)
 
 ___
 
 ### set
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.config.**set**(`config`): `void`
 :::
 
@@ -79,4 +79,4 @@ Values set may not work with interfaces designed for default values above.
 
 #### Defined in
 
-[server/systems/inventory/config.ts:32](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/config.ts#L32)
+[server/systems/inventory/config.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/config.ts#L32)

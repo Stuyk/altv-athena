@@ -15,7 +15,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 Athena.systems.messenger.messaging.(`player`, `msg`): `void`
 :::
 
@@ -32,7 +32,7 @@ Athena.systems.messenger.messaging.(`player`, `msg`): `void`
 
 #### Defined in
 
-[server/systems/messenger/messaging.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/messenger/messaging.ts#L8)
+[server/systems/messenger/messaging.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/messaging.ts#L8)
 
 ## Variables
 
@@ -52,13 +52,13 @@ Athena.systems.messenger.messaging.(`player`, `msg`): `void`
 
 #### Defined in
 
-[server/systems/messenger/messaging.ts:134](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/messenger/messaging.ts#L134)
+[server/systems/messenger/messaging.ts:134](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/messaging.ts#L134)
 
 ## Functions
 
 ### addCallback
 
-::: Tip
+::: tip Usage
 Athena.systems.messenger.messaging.**addCallback**(`callback`): `any`
 :::
 
@@ -78,13 +78,13 @@ Useful for plugin creators.
 
 #### Defined in
 
-[server/systems/messenger/messaging.ts:83](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/messenger/messaging.ts#L83)
+[server/systems/messenger/messaging.ts:83](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/messaging.ts#L83)
 
 ___
 
 ### emit
 
-::: Tip
+::: tip Usage
 Athena.systems.messenger.messaging.**emit**(`player`, `msg`): `any`
 :::
 
@@ -103,13 +103,13 @@ Emits a message to all callbacks.
 
 #### Defined in
 
-[server/systems/messenger/messaging.ts:96](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/messenger/messaging.ts#L96)
+[server/systems/messenger/messaging.ts:96](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/messaging.ts#L96)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.messenger.messaging.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -130,9 +130,9 @@ Used to override messaging functionality
 
 #### Defined in
 
-[server/systems/messenger/messaging.ts:146](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/messenger/messaging.ts#L146)
+[server/systems/messenger/messaging.ts:146](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/messaging.ts#L146)
 
-::: Tip
+::: tip Usage
 Athena.systems.messenger.messaging.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -153,9 +153,9 @@ Used to override messaging functionality
 
 #### Defined in
 
-[server/systems/messenger/messaging.ts:147](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/messenger/messaging.ts#L147)
+[server/systems/messenger/messaging.ts:147](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/messaging.ts#L147)
 
-::: Tip
+::: tip Usage
 Athena.systems.messenger.messaging.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -176,9 +176,9 @@ Used to override messaging functionality
 
 #### Defined in
 
-[server/systems/messenger/messaging.ts:148](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/messenger/messaging.ts#L148)
+[server/systems/messenger/messaging.ts:148](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/messaging.ts#L148)
 
-::: Tip
+::: tip Usage
 Athena.systems.messenger.messaging.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -199,9 +199,9 @@ Used to override messaging functionality
 
 #### Defined in
 
-[server/systems/messenger/messaging.ts:149](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/messenger/messaging.ts#L149)
+[server/systems/messenger/messaging.ts:149](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/messaging.ts#L149)
 
-::: Tip
+::: tip Usage
 Athena.systems.messenger.messaging.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -222,13 +222,13 @@ Used to override messaging functionality
 
 #### Defined in
 
-[server/systems/messenger/messaging.ts:150](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/messenger/messaging.ts#L150)
+[server/systems/messenger/messaging.ts:150](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/messaging.ts#L150)
 
 ___
 
 ### send
 
-::: Tip
+::: tip Usage
 Athena.systems.messenger.messaging.**send**(`player`, `msg`): `any`
 :::
 
@@ -247,13 +247,13 @@ Send a message to an individual player.
 
 #### Defined in
 
-[server/systems/messenger/messaging.ts:54](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/messenger/messaging.ts#L54)
+[server/systems/messenger/messaging.ts:54](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/messaging.ts#L54)
 
 ___
 
 ### sendToPlayers
 
-::: Tip
+::: tip Usage
 Athena.systems.messenger.messaging.**sendToPlayers**(`players`, `msg`): `any`
 :::
 
@@ -272,4 +272,4 @@ Send a message to a group of players.
 
 #### Defined in
 
-[server/systems/messenger/messaging.ts:68](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/messenger/messaging.ts#L68)
+[server/systems/messenger/messaging.ts:68](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/messenger/messaging.ts#L68)

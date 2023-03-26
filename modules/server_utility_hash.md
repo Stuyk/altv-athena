@@ -24,13 +24,13 @@ order: 0
 
 #### Defined in
 
-[server/utility/hash.ts:66](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/hash.ts#L66)
+[server/utility/hash.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/hash.ts#L66)
 
 ## Functions
 
 ### hashPassword
 
-::: Tip
+::: tip Usage
 Athena.utility.hash.**hashPassword**(`plainTextPassword`): `string`
 :::
 
@@ -56,13 +56,13 @@ const result = Athena.utility.hash.hashPassword('somePassword');
 
 #### Defined in
 
-[server/utility/hash.ts:16](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/hash.ts#L16)
+[server/utility/hash.ts:16](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/hash.ts#L16)
 
 ___
 
 ### sha256
 
-::: Tip
+::: tip Usage
 Athena.utility.hash.**sha256**(`data`): `string`
 :::
 
@@ -80,13 +80,13 @@ Hash a string of data into a persistent SHA256 hash.
 
 #### Defined in
 
-[server/utility/hash.ts:50](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/hash.ts#L50)
+[server/utility/hash.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/hash.ts#L50)
 
 ___
 
 ### sha256Random
 
-::: Tip
+::: tip Usage
 Athena.utility.hash.**sha256Random**(`data`): `string`
 :::
 
@@ -104,13 +104,13 @@ Hash a string of data into a random SHA256 hash.
 
 #### Defined in
 
-[server/utility/hash.ts:61](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/hash.ts#L61)
+[server/utility/hash.ts:61](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/hash.ts#L61)
 
 ___
 
 ### testPassword
 
-::: Tip
+::: tip Usage
 Athena.utility.hash.**testPassword**(`plainTextPassword`, `pbkdf2Hash`): `boolean`
 :::
 
@@ -136,4 +136,4 @@ const doesMatch = Athena.utility.hash.testPassword('test', 'kjfdskljfsdkl$90jj0f
 
 #### Defined in
 
-[server/utility/hash.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/hash.ts#L36)
+[server/utility/hash.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/hash.ts#L36)

@@ -11,7 +11,7 @@ order: 0
 
 ### load
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.scene.**load**(`pos`): `Promise`<`boolean`\>
 :::
 
@@ -27,4 +27,4 @@ AthenaClient.utility.scene.**load**(`pos`): `Promise`<`boolean`\>
 
 #### Defined in
 
-[client/utility/scene.ts:4](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/scene.ts#L4)
+[client/utility/scene.ts:4](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/scene.ts#L4)

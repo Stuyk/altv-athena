@@ -11,7 +11,7 @@ order: 0
 
 ### on
 
-::: Tip
+::: tip Usage
 Athena.events.clientEvents.**on**(`eventName`, `callback`): `void`
 :::
 
@@ -36,13 +36,13 @@ ClientEvents
 
 #### Defined in
 
-[server/events/clientEvents.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/events/clientEvents.ts#L23)
+[server/events/clientEvents.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/events/clientEvents.ts#L23)
 
 ___
 
 ### trigger
 
-::: Tip
+::: tip Usage
 Athena.events.clientEvents.**trigger**(`eventName`, `player`, `...args`): `void`
 :::
 
@@ -60,4 +60,4 @@ Athena.events.clientEvents.**trigger**(`eventName`, `player`, `...args`): `void`
 
 #### Defined in
 
-[server/events/clientEvents.ts:6](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/events/clientEvents.ts#L6)
+[server/events/clientEvents.ts:6](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/events/clientEvents.ts#L6)

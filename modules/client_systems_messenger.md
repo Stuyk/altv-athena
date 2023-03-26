@@ -15,7 +15,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.messenger.(`msgs`): `void`
 :::
 
@@ -31,7 +31,7 @@ AthenaClient.systems.messenger.(`msgs`): `void`
 
 #### Defined in
 
-[client/systems/messenger.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/messenger.ts#L9)
+[client/systems/messenger.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/messenger.ts#L9)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.messenger.(`msg`): `void`
 :::
 
@@ -57,7 +57,7 @@ AthenaClient.systems.messenger.(`msg`): `void`
 
 #### Defined in
 
-[client/systems/messenger.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/messenger.ts#L8)
+[client/systems/messenger.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/messenger.ts#L8)
 
 ___
 
@@ -74,13 +74,13 @@ ___
 
 #### Defined in
 
-[client/systems/messenger.ts:7](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/messenger.ts#L7)
+[client/systems/messenger.ts:7](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/messenger.ts#L7)
 
 ## Functions
 
 ### emit
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.messenger.**emit**(`msg`): `void`
 :::
 
@@ -98,13 +98,13 @@ Emits a message to all callbacks.
 
 #### Defined in
 
-[client/systems/messenger.ts:43](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/messenger.ts#L43)
+[client/systems/messenger.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/messenger.ts#L43)
 
 ___
 
 ### getCommands
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.messenger.**getCommands**(): [`Omit`](server_player_inventory_Internal.md#Omit)<[`player`](server_config.md#player)<`alt.Player`\>, ``"callback"``\>[]
 :::
 
@@ -116,13 +116,13 @@ Get the commands that this client has permission for.
 
 #### Defined in
 
-[client/systems/messenger.ts:101](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/messenger.ts#L101)
+[client/systems/messenger.ts:101](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/messenger.ts#L101)
 
 ___
 
 ### getHistory
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.messenger.**getHistory**(): { `msg`: `string` ; `timestamp`: `number`  }[]
 :::
 
@@ -135,13 +135,13 @@ Newest message is always first element in array.
 
 #### Defined in
 
-[client/systems/messenger.ts:71](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/messenger.ts#L71)
+[client/systems/messenger.ts:71](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/messenger.ts#L71)
 
 ___
 
 ### registerHistoryCallback
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.messenger.**registerHistoryCallback**(`callback`): `void`
 :::
 
@@ -161,13 +161,13 @@ Useful for plugin creators.
 
 #### Defined in
 
-[client/systems/messenger.ts:34](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/messenger.ts#L34)
+[client/systems/messenger.ts:34](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/messenger.ts#L34)
 
 ___
 
 ### registerMessageCallback
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.messenger.**registerMessageCallback**(`callback`): `void`
 :::
 
@@ -187,13 +187,13 @@ Useful for plugin creators.
 
 #### Defined in
 
-[client/systems/messenger.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/messenger.ts#L23)
+[client/systems/messenger.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/messenger.ts#L23)
 
 ___
 
 ### send
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.messenger.**send**(`msg`): `void`
 :::
 
@@ -212,13 +212,13 @@ Commands must start with a forward slash. Such as '/'.
 
 #### Defined in
 
-[client/systems/messenger.ts:81](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/messenger.ts#L81)
+[client/systems/messenger.ts:81](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/messenger.ts#L81)
 
 ___
 
 ### setCommands
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.messenger.**setCommands**(`_commands`): `void`
 :::
 
@@ -237,4 +237,4 @@ Which can be used to
 
 #### Defined in
 
-[client/systems/messenger.ts:91](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/messenger.ts#L91)
+[client/systems/messenger.ts:91](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/messenger.ts#L91)

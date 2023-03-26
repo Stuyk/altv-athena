@@ -15,7 +15,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.object.(`existingObject`, `options`): [`IWheelOptionExt`](../interfaces/shared_interfaces_wheelMenu_IWheelOptionExt.md)[]
 :::
 
@@ -32,13 +32,13 @@ AthenaClient.menus.object.(`existingObject`, `options`): [`IWheelOptionExt`](../
 
 #### Defined in
 
-[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/object.ts#L8)
+[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/object.ts#L8)
 
 ## Functions
 
 ### addInjection
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.object.**addInjection**(`callback`): `void`
 :::
 
@@ -64,13 +64,13 @@ ObjectWheelMenu
 
 #### Defined in
 
-[client/menus/object.ts:24](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/object.ts#L24)
+[client/menus/object.ts:24](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/object.ts#L24)
 
 ___
 
 ### open
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.object.**open**(`object`): `void`
 :::
 
@@ -94,4 +94,4 @@ ObjectWheelMenu
 
 #### Defined in
 
-[client/menus/object.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/object.ts#L36)
+[client/menus/object.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/object.ts#L36)

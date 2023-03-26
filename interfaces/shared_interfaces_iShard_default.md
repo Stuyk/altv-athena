@@ -32,7 +32,7 @@ IShard
 
 #### Defined in
 
-[shared/interfaces/iShard.ts:14](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iShard.ts#L14)
+[shared/interfaces/iShard.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iShard.ts#L14)
 
 ___
 
@@ -48,7 +48,7 @@ ISpinner
 
 #### Defined in
 
-[shared/interfaces/iShard.ts:28](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iShard.ts#L28)
+[shared/interfaces/iShard.ts:28](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iShard.ts#L28)
 
 ___
 
@@ -64,4 +64,4 @@ IShard
 
 #### Defined in
 
-[shared/interfaces/iShard.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/iShard.ts#L21)
+[shared/interfaces/iShard.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/iShard.ts#L21)

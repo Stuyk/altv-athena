@@ -11,7 +11,7 @@ order: 0
 
 ### fromBlack
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.screenFade.**fromBlack**(`timeInMs`): `void`
 :::
 
@@ -31,13 +31,13 @@ Removes the black filter on a screen over time.
 
 #### Defined in
 
-[client/screen/screenFade.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenFade.ts#L11)
+[client/screen/screenFade.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenFade.ts#L11)
 
 ___
 
 ### toBlack
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.screenFade.**toBlack**(`timeInMs`): `void`
 :::
 
@@ -57,4 +57,4 @@ Turns a screen black over time.
 
 #### Defined in
 
-[client/screen/screenFade.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/screenFade.ts#L21)
+[client/screen/screenFade.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/screenFade.ts#L21)

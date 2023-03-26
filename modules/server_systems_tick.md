@@ -11,7 +11,7 @@ order: 0
 
 ### onTick
 
-::: Tip
+::: tip Usage
 Athena.systems.tick.**onTick**(`player`): `Promise`<`void`\>
 :::
 
@@ -31,13 +31,13 @@ Used to save the player every once in a while.
 
 #### Defined in
 
-[server/systems/tick.ts:18](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/tick.ts#L18)
+[server/systems/tick.ts:18](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/tick.ts#L18)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.tick.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -58,9 +58,9 @@ Used to override player tick functionality
 
 #### Defined in
 
-[server/systems/tick.ts:102](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/tick.ts#L102)
+[server/systems/tick.ts:102](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/tick.ts#L102)
 
-::: Tip
+::: tip Usage
 Athena.systems.tick.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -81,4 +81,4 @@ Used to override player tick functionality
 
 #### Defined in
 
-[server/systems/tick.ts:103](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/tick.ts#L103)
+[server/systems/tick.ts:103](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/tick.ts#L103)

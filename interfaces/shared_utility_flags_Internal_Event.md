@@ -209,7 +209,7 @@ Returns the type of event, e.g. "click", "hashchange", or "submit".
 
 ### composedPath
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.Event.**composedPath**(): [`EventTarget`](../modules/shared_utility_flags_Internal.md#EventTarget)[]
 :::
 
@@ -227,7 +227,7 @@ ___
 
 ### initEvent
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.Event.**initEvent**(`type`, `bubbles?`, `cancelable?`): `void`
 :::
 
@@ -253,7 +253,7 @@ ___
 
 ### preventDefault
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.Event.**preventDefault**(): `void`
 :::
 
@@ -271,7 +271,7 @@ ___
 
 ### stopImmediatePropagation
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.Event.**stopImmediatePropagation**(): `void`
 :::
 
@@ -289,7 +289,7 @@ ___
 
 ### stopPropagation
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.Event.**stopPropagation**(): `void`
 :::
 

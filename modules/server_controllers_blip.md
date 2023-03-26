@@ -11,7 +11,7 @@ order: 0
 
 ### addToPlayer
 
-::: Tip
+::: tip Usage
 Athena.controllers.blip.**addToPlayer**(`player`, `blipData`): `any`
 :::
 
@@ -49,13 +49,13 @@ const uid = Athena.controllers.blip.addToPlayer(somePlayer, {
 
 #### Defined in
 
-[server/controllers/blip.ts:146](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/blip.ts#L146)
+[server/controllers/blip.ts:146](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L146)
 
 ___
 
 ### append
 
-::: Tip
+::: tip Usage
 Athena.controllers.blip.**append**(`blip`): `string`
 :::
 
@@ -93,13 +93,13 @@ A uid to remove it later.
 
 #### Defined in
 
-[server/controllers/blip.ts:33](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/blip.ts#L33)
+[server/controllers/blip.ts:33](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L33)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.controllers.blip.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -120,9 +120,9 @@ Used to override any blip controller function.
 
 #### Defined in
 
-[server/controllers/blip.ts:185](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/blip.ts#L185)
+[server/controllers/blip.ts:185](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L185)
 
-::: Tip
+::: tip Usage
 Athena.controllers.blip.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -143,9 +143,9 @@ Used to override any blip controller function.
 
 #### Defined in
 
-[server/controllers/blip.ts:186](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/blip.ts#L186)
+[server/controllers/blip.ts:186](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L186)
 
-::: Tip
+::: tip Usage
 Athena.controllers.blip.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -166,9 +166,9 @@ Used to override any blip controller function.
 
 #### Defined in
 
-[server/controllers/blip.ts:187](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/blip.ts#L187)
+[server/controllers/blip.ts:187](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L187)
 
-::: Tip
+::: tip Usage
 Athena.controllers.blip.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -189,9 +189,9 @@ Used to override any blip controller function.
 
 #### Defined in
 
-[server/controllers/blip.ts:188](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/blip.ts#L188)
+[server/controllers/blip.ts:188](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L188)
 
-::: Tip
+::: tip Usage
 Athena.controllers.blip.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -212,13 +212,13 @@ Used to override any blip controller function.
 
 #### Defined in
 
-[server/controllers/blip.ts:189](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/blip.ts#L189)
+[server/controllers/blip.ts:189](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L189)
 
 ___
 
 ### populateGlobalBlips
 
-::: Tip
+::: tip Usage
 Athena.controllers.blip.**populateGlobalBlips**(`player`): `any`
 :::
 
@@ -245,13 +245,13 @@ Athena.controllers.blip.populateGlobalBlips(somePlayer);
 
 #### Defined in
 
-[server/controllers/blip.ts:170](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/blip.ts#L170)
+[server/controllers/blip.ts:170](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L170)
 
 ___
 
 ### remove
 
-::: Tip
+::: tip Usage
 Athena.controllers.blip.**remove**(`uid`): `boolean`
 :::
 
@@ -284,13 +284,13 @@ Athena.controllers.blip.remove(uid);
 
 #### Defined in
 
-[server/controllers/blip.ts:73](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/blip.ts#L73)
+[server/controllers/blip.ts:73](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L73)
 
 ___
 
 ### removeFromPlayer
 
-::: Tip
+::: tip Usage
 Athena.controllers.blip.**removeFromPlayer**(`player`, `uid`): `any`
 :::
 
@@ -325,4 +325,4 @@ Athena.controllers.blip.removeFromPlayer(somePlayer, uid);
 
 #### Defined in
 
-[server/controllers/blip.ts:110](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/blip.ts#L110)
+[server/controllers/blip.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/blip.ts#L110)

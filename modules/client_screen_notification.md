@@ -11,7 +11,7 @@ order: 0
 
 ### create
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.notification.**create**(`text`): `void`
 :::
 
@@ -31,4 +31,4 @@ Create a simple GTA:V Notification.
 
 #### Defined in
 
-[client/screen/notification.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/notification.ts#L9)
+[client/screen/notification.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/notification.ts#L9)

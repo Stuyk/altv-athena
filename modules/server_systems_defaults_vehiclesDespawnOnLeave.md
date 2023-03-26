@@ -11,7 +11,7 @@ order: 0
 
 ### disable
 
-::: Tip
+::: tip Usage
 Athena.systems.defaults.vehiclesDespawnOnLeave.**disable**(): `void`
 :::
 
@@ -31,4 +31,4 @@ Athena.systems.default.vehiclesDespawnOnLeave.disable();
 
 #### Defined in
 
-[server/systems/defaults/vehiclesDespawnOnLeave.ts:72](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/defaults/vehiclesDespawnOnLeave.ts#L72)
+[server/systems/defaults/vehiclesDespawnOnLeave.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/vehiclesDespawnOnLeave.ts#L72)

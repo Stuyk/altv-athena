@@ -31,7 +31,7 @@ VehicleInfo
 
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleInfo.ts#L36)
+[shared/interfaces/vehicleInfo.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L36)
 
 ___
 
@@ -47,7 +47,7 @@ VehicleInfo
 
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleInfo.ts#L15)
+[shared/interfaces/vehicleInfo.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L15)
 
 ___
 
@@ -63,7 +63,7 @@ VehicleInfo
 
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:71](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleInfo.ts#L71)
+[shared/interfaces/vehicleInfo.ts:71](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L71)
 
 ___
 
@@ -79,7 +79,7 @@ VehicleInfo
 
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:64](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleInfo.ts#L64)
+[shared/interfaces/vehicleInfo.ts:64](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L64)
 
 ___
 
@@ -95,7 +95,7 @@ VehicleInfo
 
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:22](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleInfo.ts#L22)
+[shared/interfaces/vehicleInfo.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L22)
 
 ___
 
@@ -111,7 +111,7 @@ VehicleInfo
 
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:50](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleInfo.ts#L50)
+[shared/interfaces/vehicleInfo.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L50)
 
 ___
 
@@ -127,7 +127,7 @@ VehicleInfo
 
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:78](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleInfo.ts#L78)
+[shared/interfaces/vehicleInfo.ts:78](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L78)
 
 ___
 
@@ -143,7 +143,7 @@ VehicleInfo
 
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:43](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleInfo.ts#L43)
+[shared/interfaces/vehicleInfo.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L43)
 
 ___
 
@@ -159,7 +159,7 @@ VehicleInfo
 
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:57](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleInfo.ts#L57)
+[shared/interfaces/vehicleInfo.ts:57](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L57)
 
 ___
 
@@ -175,4 +175,4 @@ VehicleInfo
 
 #### Defined in
 
-[shared/interfaces/vehicleInfo.ts:29](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleInfo.ts#L29)
+[shared/interfaces/vehicleInfo.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleInfo.ts#L29)

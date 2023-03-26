@@ -11,7 +11,7 @@ order: 0
 
 ### default
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.animationMenus.funAnims.**default**(`callback`): { `callback`: (...`args`: `any`[]) => `void` ; `data`: `any`[] ; `name`: `string` = 'Air Guitar' }[]
 :::
 
@@ -27,4 +27,4 @@ AthenaClient.menus.animationMenus.funAnims.**default**(`callback`): { `callback`
 
 #### Defined in
 
-[client/menus/animationMenus/funAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/animationMenus/funAnims.ts#L3)
+[client/menus/animationMenus/funAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/animationMenus/funAnims.ts#L3)

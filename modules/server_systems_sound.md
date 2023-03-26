@@ -15,7 +15,7 @@ order: 0
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.sound.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -36,9 +36,9 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:129](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L129)
+[server/systems/sound.ts:129](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/sound.ts#L129)
 
-::: Tip
+::: tip Usage
 Athena.systems.sound.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -59,9 +59,9 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:130](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L130)
+[server/systems/sound.ts:130](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/sound.ts#L130)
 
-::: Tip
+::: tip Usage
 Athena.systems.sound.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -82,13 +82,13 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:131](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L131)
+[server/systems/sound.ts:131](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/sound.ts#L131)
 
 ___
 
 ### playSound
 
-::: Tip
+::: tip Usage
 Athena.systems.sound.**playSound**(`player`, `soundInfo`): `any`
 :::
 
@@ -113,13 +113,13 @@ SoundSystem
 
 #### Defined in
 
-[server/systems/sound.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L51)
+[server/systems/sound.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/sound.ts#L51)
 
 ___
 
 ### playSoundInArea
 
-::: Tip
+::: tip Usage
 Athena.systems.sound.**playSoundInArea**(`soundInfo`): `any`
 :::
 
@@ -143,13 +143,13 @@ Sound
 
 #### Defined in
 
-[server/systems/sound.ts:100](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L100)
+[server/systems/sound.ts:100](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/sound.ts#L100)
 
 ___
 
 ### playSoundInDimension
 
-::: Tip
+::: tip Usage
 Athena.systems.sound.**playSoundInDimension**(`dimension`, `soundInfo`): `any`
 :::
 
@@ -175,4 +175,4 @@ Sound
 
 #### Defined in
 
-[server/systems/sound.ts:73](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/sound.ts#L73)
+[server/systems/sound.ts:73](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/sound.ts#L73)

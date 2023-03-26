@@ -11,7 +11,7 @@ order: 0
 
 ### byAccount
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**byAccount**(`id`): `alt.Player` \| `undefined`
 :::
 
@@ -29,13 +29,13 @@ Gets an online player by account identifier based on their MongoDB account _id.
 
 #### Defined in
 
-[server/getters/player.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L15)
+[server/getters/player.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L15)
 
 ___
 
 ### byDatabaseID
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**byDatabaseID**(`id`): `alt.Player` \| `undefined`
 :::
 
@@ -53,13 +53,13 @@ Get an online player based on their MongoDB _id
 
 #### Defined in
 
-[server/getters/player.ts:86](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L86)
+[server/getters/player.ts:86](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L86)
 
 ___
 
 ### byID
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**byID**(`id`): `alt.Player` \| `undefined`
 :::
 
@@ -78,13 +78,13 @@ Use this to get the player in-game that you see with your eyes.
 
 #### Defined in
 
-[server/getters/player.ts:108](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L108)
+[server/getters/player.ts:108](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L108)
 
 ___
 
 ### byName
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**byName**(`name`): `alt.Player` \| `undefined`
 :::
 
@@ -103,13 +103,13 @@ Not case sensitive and returns the first player it finds matching that name.
 
 #### Defined in
 
-[server/getters/player.ts:41](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L41)
+[server/getters/player.ts:41](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L41)
 
 ___
 
 ### byPartialName
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**byPartialName**(`partialName`): `alt.Player` \| `undefined`
 :::
 
@@ -128,13 +128,13 @@ Not case sensitive and returns the first player it finds that includes the parti
 
 #### Defined in
 
-[server/getters/player.ts:64](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L64)
+[server/getters/player.ts:64](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L64)
 
 ___
 
 ### characters
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**characters**(`playerOrAccount`): `Promise`<[`player`](server_config.md#player)[]\>
 :::
 
@@ -153,13 +153,13 @@ Requires account info, player, or account id string.
 
 #### Defined in
 
-[server/getters/player.ts:271](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L271)
+[server/getters/player.ts:271](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L271)
 
 ___
 
 ### closestOwnedVehicle
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**closestOwnedVehicle**(`player`): `alt.Vehicle` \| `undefined`
 :::
 
@@ -179,13 +179,13 @@ Ignores vehicles with keyless for start.
 
 #### Defined in
 
-[server/getters/player.ts:215](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L215)
+[server/getters/player.ts:215](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L215)
 
 ___
 
 ### closestToPlayer
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**closestToPlayer**(`player`): `alt.Player` \| `undefined`
 :::
 
@@ -203,13 +203,13 @@ The player closest to a player.
 
 #### Defined in
 
-[server/getters/player.ts:193](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L193)
+[server/getters/player.ts:193](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L193)
 
 ___
 
 ### closestToVehicle
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**closestToVehicle**(`vehicle`): `alt.Player` \| `undefined`
 :::
 
@@ -227,13 +227,13 @@ The player closest to a vehicle.
 
 #### Defined in
 
-[server/getters/player.ts:203](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L203)
+[server/getters/player.ts:203](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L203)
 
 ___
 
 ### inFrontOf
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**inFrontOf**(`player`, `startDistance?`): `Promise`<`alt.Player` \| `undefined`\>
 :::
 
@@ -255,13 +255,13 @@ Works best on flat land or very close distances.
 
 #### Defined in
 
-[server/getters/player.ts:122](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L122)
+[server/getters/player.ts:122](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L122)
 
 ___
 
 ### isDead
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**isDead**(`player`): `boolean`
 :::
 
@@ -281,13 +281,13 @@ Determine if a player is currently dead / marked as dead.
 
 #### Defined in
 
-[server/getters/player.ts:303](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L303)
+[server/getters/player.ts:303](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L303)
 
 ___
 
 ### isNearPosition
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**isNearPosition**(`player`, `pos`, `dist?`): `boolean`
 :::
 
@@ -307,13 +307,13 @@ Checks if a player is within 3 distance of a position.
 
 #### Defined in
 
-[server/getters/player.ts:173](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L173)
+[server/getters/player.ts:173](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L173)
 
 ___
 
 ### isValid
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**isValid**(`player`): `boolean`
 :::
 
@@ -333,13 +333,13 @@ Determine if a player is valid, and spawned as a character.
 
 #### Defined in
 
-[server/getters/player.ts:319](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L319)
+[server/getters/player.ts:319](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L319)
 
 ___
 
 ### ownedVehicleDocuments
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**ownedVehicleDocuments**(`player`): `Promise`<[`player`](server_config.md#player)[]\>
 :::
 
@@ -359,13 +359,13 @@ Get all owned vehicles from the database for a given character.
 
 #### Defined in
 
-[server/getters/player.ts:255](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L255)
+[server/getters/player.ts:255](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L255)
 
 ___
 
 ### waypoint
 
-::: Tip
+::: tip Usage
 Athena.getters.player.**waypoint**(`player`): `alt.IVector3` \| `undefined`
 :::
 
@@ -384,4 +384,4 @@ Will return undefined it is not currently set.
 
 #### Defined in
 
-[server/getters/player.ts:183](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/player.ts#L183)
+[server/getters/player.ts:183](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/player.ts#L183)

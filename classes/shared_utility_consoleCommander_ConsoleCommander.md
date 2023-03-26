@@ -19,7 +19,7 @@ order: 0
 
 ### getCommands
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **getCommands**(): `string`[]
 :::
 
@@ -37,13 +37,13 @@ ConsoleCommander
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:61](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/consoleCommander.ts#L61)
+[shared/utility/consoleCommander.ts:61](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/consoleCommander.ts#L61)
 
 ___
 
 ### init
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **init**(`alt`): `void`
 :::
 
@@ -60,13 +60,13 @@ AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **init**(`alt`):
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:25](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/consoleCommander.ts#L25)
+[shared/utility/consoleCommander.ts:25](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/consoleCommander.ts#L25)
 
 ___
 
 ### invokeCommand
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **invokeCommand**(`cmdName`, `...args`): `void`
 :::
 
@@ -91,13 +91,13 @@ ConsoleCommander
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/consoleCommander.ts#L37)
+[shared/utility/consoleCommander.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/consoleCommander.ts#L37)
 
 ___
 
 ### registerConsoleCommand
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **registerConsoleCommand**(`cmdName`, `callback`): `void`
 :::
 
@@ -123,4 +123,4 @@ ConsoleCommander
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:50](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/consoleCommander.ts#L50)
+[shared/utility/consoleCommander.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/consoleCommander.ts#L50)

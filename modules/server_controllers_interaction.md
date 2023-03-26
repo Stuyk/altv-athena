@@ -11,7 +11,7 @@ order: 0
 
 ### append
 
-::: Tip
+::: tip Usage
 Athena.controllers.interaction.**append**(`interaction`): `string`
 :::
 
@@ -66,13 +66,13 @@ A string representing the uid of the interaction.
 
 #### Defined in
 
-[server/controllers/interaction.ts:298](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/interaction.ts#L298)
+[server/controllers/interaction.ts:298](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/interaction.ts#L298)
 
 ___
 
 ### get
 
-::: Tip
+::: tip Usage
 Athena.controllers.interaction.**get**(`uid`): [`InteractionShape`](../classes/server_extensions_extColshape_InteractionShape.md) \| `undefined`
 :::
 
@@ -100,13 +100,13 @@ The InteractionShape object.
 
 #### Defined in
 
-[server/controllers/interaction.ts:367](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/interaction.ts#L367)
+[server/controllers/interaction.ts:367](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/interaction.ts#L367)
 
 ___
 
 ### getBindings
 
-::: Tip
+::: tip Usage
 Athena.controllers.interaction.**getBindings**(): `Object`
 :::
 
@@ -120,13 +120,13 @@ Used to obtain current interactions that are bound to a player id.
 
 #### Defined in
 
-[server/controllers/interaction.ts:386](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/interaction.ts#L386)
+[server/controllers/interaction.ts:386](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/interaction.ts#L386)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.controllers.interaction.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -147,9 +147,9 @@ Used to override any interaction controller function.
 
 #### Defined in
 
-[server/controllers/interaction.ts:421](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/interaction.ts#L421)
+[server/controllers/interaction.ts:421](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/interaction.ts#L421)
 
-::: Tip
+::: tip Usage
 Athena.controllers.interaction.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -170,9 +170,9 @@ Used to override any interaction controller function.
 
 #### Defined in
 
-[server/controllers/interaction.ts:422](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/interaction.ts#L422)
+[server/controllers/interaction.ts:422](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/interaction.ts#L422)
 
-::: Tip
+::: tip Usage
 Athena.controllers.interaction.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -193,9 +193,9 @@ Used to override any interaction controller function.
 
 #### Defined in
 
-[server/controllers/interaction.ts:423](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/interaction.ts#L423)
+[server/controllers/interaction.ts:423](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/interaction.ts#L423)
 
-::: Tip
+::: tip Usage
 Athena.controllers.interaction.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -216,13 +216,13 @@ Used to override any interaction controller function.
 
 #### Defined in
 
-[server/controllers/interaction.ts:424](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/interaction.ts#L424)
+[server/controllers/interaction.ts:424](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/interaction.ts#L424)
 
 ___
 
 ### overrideInternal
 
-::: Tip
+::: tip Usage
 Athena.controllers.interaction.**overrideInternal**(`functionName`, `callback`): `any`
 :::
 
@@ -244,9 +244,9 @@ Handles things such as entering colshapes, leaving, and trigger them.
 
 #### Defined in
 
-[server/controllers/interaction.ts:436](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/interaction.ts#L436)
+[server/controllers/interaction.ts:436](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/interaction.ts#L436)
 
-::: Tip
+::: tip Usage
 Athena.controllers.interaction.**overrideInternal**(`functionName`, `callback`): `any`
 :::
 
@@ -268,9 +268,9 @@ Handles things such as entering colshapes, leaving, and trigger them.
 
 #### Defined in
 
-[server/controllers/interaction.ts:437](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/interaction.ts#L437)
+[server/controllers/interaction.ts:437](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/interaction.ts#L437)
 
-::: Tip
+::: tip Usage
 Athena.controllers.interaction.**overrideInternal**(`functionName`, `callback`): `any`
 :::
 
@@ -292,13 +292,13 @@ Handles things such as entering colshapes, leaving, and trigger them.
 
 #### Defined in
 
-[server/controllers/interaction.ts:438](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/interaction.ts#L438)
+[server/controllers/interaction.ts:438](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/interaction.ts#L438)
 
 ___
 
 ### remove
 
-::: Tip
+::: tip Usage
 Athena.controllers.interaction.**remove**(`uid`): `void`
 :::
 
@@ -328,4 +328,4 @@ None
 
 #### Defined in
 
-[server/controllers/interaction.ts:346](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/controllers/interaction.ts#L346)
+[server/controllers/interaction.ts:346](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/controllers/interaction.ts#L346)

@@ -11,7 +11,7 @@ order: 0
 
 ### disable
 
-::: Tip
+::: tip Usage
 Athena.systems.defaults.toolbar.**disable**(): `void`
 :::
 
@@ -31,4 +31,4 @@ Athena.systems.default.toolbar.disable();
 
 #### Defined in
 
-[server/systems/defaults/toolbar.ts:83](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/defaults/toolbar.ts#L83)
+[server/systems/defaults/toolbar.ts:83](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/toolbar.ts#L83)

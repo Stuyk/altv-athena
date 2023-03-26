@@ -11,7 +11,7 @@ order: 0
 
 ### drawMissionText
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.missionText.**drawMissionText**(`text`, `duration?`): `void`
 :::
 
@@ -30,4 +30,4 @@ Draw mission text on the bottom of screen
 
 #### Defined in
 
-[client/screen/missionText.ts:13](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/missionText.ts#L13)
+[client/screen/missionText.ts:13](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/missionText.ts#L13)

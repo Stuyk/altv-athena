@@ -11,7 +11,7 @@ order: 0
 
 ### switchToMultiSecondpart
 
-::: Tip
+::: tip Usage
 AthenaClient.camera.switch.**switchToMultiSecondpart**(`timeInMs`, `switchType?`): `Promise`<`boolean`\>
 :::
 
@@ -32,4 +32,4 @@ Zoom all the way out. Then zoom all the way in from the sky.
 
 #### Defined in
 
-[client/camera/switch.ts:14](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/switch.ts#L14)
+[client/camera/switch.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/switch.ts#L14)

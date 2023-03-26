@@ -15,7 +15,7 @@ order: 0
 
 ### addNode
 
-::: Tip
+::: tip Usage
 AthenaClient.camera.cinematic.**addNode**(`node`): `Promise`<`void`\>
 :::
 
@@ -37,13 +37,13 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:319](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L319)
+[client/camera/cinematic.ts:319](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L319)
 
 ___
 
 ### destroy
 
-::: Tip
+::: tip Usage
 AthenaClient.camera.cinematic.**destroy**(): `Promise`<`void`\>
 :::
 
@@ -59,13 +59,13 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L305)
+[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L305)
 
 ___
 
 ### next
 
-::: Tip
+::: tip Usage
 AthenaClient.camera.cinematic.**next**(`removeFromArray?`): `Promise`<`boolean`\>
 :::
 
@@ -90,13 +90,13 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:345](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L345)
+[client/camera/cinematic.ts:345](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L345)
 
 ___
 
 ### overrideNodes
 
-::: Tip
+::: tip Usage
 AthenaClient.camera.cinematic.**overrideNodes**(`_nodes`): `Promise`<`void`\>
 :::
 
@@ -112,13 +112,13 @@ AthenaClient.camera.cinematic.**overrideNodes**(`_nodes`): `Promise`<`void`\>
 
 #### Defined in
 
-[client/camera/cinematic.ts:309](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L309)
+[client/camera/cinematic.ts:309](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L309)
 
 ___
 
 ### play
 
-::: Tip
+::: tip Usage
 AthenaClient.camera.cinematic.**play**(): `Promise`<`void`\>
 :::
 
@@ -134,4 +134,4 @@ CinematicCam
 
 #### Defined in
 
-[client/camera/cinematic.ts:374](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L374)
+[client/camera/cinematic.ts:374](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L374)

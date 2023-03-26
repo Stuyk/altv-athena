@@ -11,7 +11,7 @@ order: 0
 
 ### convertToPercentage
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.minimap.**convertToPercentage**(`value`, `isXAxis?`): `number`
 :::
 
@@ -36,13 +36,13 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:150](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/minimap.ts#L150)
+[client/screen/minimap.ts:150](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L150)
 
 ___
 
 ### getBottomLeft
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.minimap.**getBottomLeft**(`asPercent?`): `alt.IVector2`
 :::
 
@@ -66,13 +66,13 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:90](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/minimap.ts#L90)
+[client/screen/minimap.ts:90](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L90)
 
 ___
 
 ### getBottomRight
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.minimap.**getBottomRight**(`asPercent?`): `alt.IVector2`
 :::
 
@@ -96,13 +96,13 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:110](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/minimap.ts#L110)
+[client/screen/minimap.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L110)
 
 ___
 
 ### getHeight
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.minimap.**getHeight**(`asPercent?`): `number`
 :::
 
@@ -126,13 +126,13 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:30](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/minimap.ts#L30)
+[client/screen/minimap.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L30)
 
 ___
 
 ### getSafeZoneSize
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.minimap.**getSafeZoneSize**(): `number`
 :::
 
@@ -142,13 +142,13 @@ AthenaClient.screen.minimap.**getSafeZoneSize**(): `number`
 
 #### Defined in
 
-[client/screen/minimap.ts:123](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/minimap.ts#L123)
+[client/screen/minimap.ts:123](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L123)
 
 ___
 
 ### getScreenAspectRatio
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.minimap.**getScreenAspectRatio**(): `number`
 :::
 
@@ -158,13 +158,13 @@ AthenaClient.screen.minimap.**getScreenAspectRatio**(): `number`
 
 #### Defined in
 
-[client/screen/minimap.ts:127](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/minimap.ts#L127)
+[client/screen/minimap.ts:127](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L127)
 
 ___
 
 ### getScreenResolution
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.minimap.**getScreenResolution**(): `alt.IVector2`
 :::
 
@@ -178,13 +178,13 @@ Get current screen resolution
 
 #### Defined in
 
-[client/screen/minimap.ts:137](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/minimap.ts#L137)
+[client/screen/minimap.ts:137](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L137)
 
 ___
 
 ### getTopLeft
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.minimap.**getTopLeft**(`asPercent?`): `alt.IVector2`
 :::
 
@@ -208,13 +208,13 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:48](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/minimap.ts#L48)
+[client/screen/minimap.ts:48](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L48)
 
 ___
 
 ### getTopRight
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.minimap.**getTopRight**(`asPercent?`): `alt.IVector2`
 :::
 
@@ -238,13 +238,13 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:70](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/minimap.ts#L70)
+[client/screen/minimap.ts:70](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L70)
 
 ___
 
 ### getWidth
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.minimap.**getWidth**(`asPercent?`): `number`
 :::
 
@@ -268,4 +268,4 @@ Minimap
 
 #### Defined in
 
-[client/screen/minimap.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/minimap.ts#L11)
+[client/screen/minimap.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/minimap.ts#L11)

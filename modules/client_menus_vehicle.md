@@ -15,7 +15,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.vehicle.(`target`, `options`): [`player`](server_config.md#player)[]
 :::
 
@@ -32,13 +32,13 @@ AthenaClient.menus.vehicle.(`target`, `options`): [`player`](server_config.md#pl
 
 #### Defined in
 
-[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/vehicle.ts#L8)
+[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/vehicle.ts#L8)
 
 ## Functions
 
 ### addInjection
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.vehicle.**addInjection**(`callback`): `void`
 :::
 
@@ -64,13 +64,13 @@ VehicleMenu
 
 #### Defined in
 
-[client/menus/vehicle.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/vehicle.ts#L21)
+[client/menus/vehicle.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/vehicle.ts#L21)
 
 ___
 
 ### open
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.vehicle.**open**(`vehicle`): `void`
 :::
 
@@ -86,13 +86,13 @@ AthenaClient.menus.vehicle.**open**(`vehicle`): `void`
 
 #### Defined in
 
-[client/menus/vehicle.ts:74](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/vehicle.ts#L74)
+[client/menus/vehicle.ts:74](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/vehicle.ts#L74)
 
 ___
 
 ### openInVehicleMenu
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.vehicle.**openInVehicleMenu**(`vehicle`): `void`
 :::
 
@@ -116,4 +116,4 @@ VehicleWheelMenu
 
 #### Defined in
 
-[client/menus/vehicle.ts:33](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/vehicle.ts#L33)
+[client/menus/vehicle.ts:33](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/vehicle.ts#L33)

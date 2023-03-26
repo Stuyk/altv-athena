@@ -15,7 +15,7 @@ order: 0
 
 ### cancel
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.input.**cancel**(): `Promise`<`void`\>
 :::
 
@@ -25,13 +25,13 @@ AthenaClient.rmlui.input.**cancel**(): `Promise`<`void`\>
 
 #### Defined in
 
-[client/rmlui/input/index.ts:132](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/input/index.ts#L132)
+[client/rmlui/input/index.ts:132](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/input/index.ts#L132)
 
 ___
 
 ### create
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.input.**create**(`inputInfo`, `skipMenuCheck?`): `Promise`<`string` \| `undefined`\>
 :::
 
@@ -54,4 +54,4 @@ Retruns a string or undefined based on user input.
 
 #### Defined in
 
-[client/rmlui/input/index.ts:104](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/input/index.ts#L104)
+[client/rmlui/input/index.ts:104](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/input/index.ts#L104)

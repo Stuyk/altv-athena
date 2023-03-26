@@ -11,7 +11,7 @@ order: 0
 
 ### driving
 
-::: Tip
+::: tip Usage
 Athena.getters.players.**driving**(): `alt.Player`[]
 :::
 
@@ -23,13 +23,13 @@ Returns all players who are currently driving a vehicle.
 
 #### Defined in
 
-[server/getters/players.ts:124](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/players.ts#L124)
+[server/getters/players.ts:124](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/players.ts#L124)
 
 ___
 
 ### drivingSpecificModel
 
-::: Tip
+::: tip Usage
 Athena.getters.players.**drivingSpecificModel**(`model`): `alt.Player`[]
 :::
 
@@ -47,13 +47,13 @@ Return all online players driving a specific vehicle model.
 
 #### Defined in
 
-[server/getters/players.ts:156](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/players.ts#L156)
+[server/getters/players.ts:156](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/players.ts#L156)
 
 ___
 
 ### inRange
 
-::: Tip
+::: tip Usage
 Athena.getters.players.**inRange**(`pos`, `range`): `alt.Player`[]
 :::
 
@@ -72,13 +72,13 @@ Gets all players around a specific position.
 
 #### Defined in
 
-[server/getters/players.ts:80](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/players.ts#L80)
+[server/getters/players.ts:80](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/players.ts#L80)
 
 ___
 
 ### inRangeWithDistance
 
-::: Tip
+::: tip Usage
 Athena.getters.players.**inRangeWithDistance**(`pos`, `range`): { `dist`: `number` ; `player`: `alt.Player`  }[]
 :::
 
@@ -98,13 +98,13 @@ Array is automatically sorted into ascending order.
 
 #### Defined in
 
-[server/getters/players.ts:47](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/players.ts#L47)
+[server/getters/players.ts:47](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/players.ts#L47)
 
 ___
 
 ### inVehicle
 
-::: Tip
+::: tip Usage
 Athena.getters.players.**inVehicle**(`vehicle`): `alt.Player`[]
 :::
 
@@ -123,13 +123,13 @@ No specific order.
 
 #### Defined in
 
-[server/getters/players.ts:190](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/players.ts#L190)
+[server/getters/players.ts:190](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/players.ts#L190)
 
 ___
 
 ### online
 
-::: Tip
+::: tip Usage
 Athena.getters.players.**online**(): `alt.Player`[]
 :::
 
@@ -141,13 +141,13 @@ Return all players currently online and logged into a character.
 
 #### Defined in
 
-[server/getters/players.ts:10](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/players.ts#L10)
+[server/getters/players.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/players.ts#L10)
 
 ___
 
 ### onlineWithWeapons
 
-::: Tip
+::: tip Usage
 Athena.getters.players.**onlineWithWeapons**(): `alt.Player`[]
 :::
 
@@ -157,13 +157,13 @@ Athena.getters.players.**onlineWithWeapons**(): `alt.Player`[]
 
 #### Defined in
 
-[server/getters/players.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/players.ts#L21)
+[server/getters/players.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/players.ts#L21)
 
 ___
 
 ### walking
 
-::: Tip
+::: tip Usage
 Athena.getters.players.**walking**(): `alt.Player`[]
 :::
 
@@ -175,13 +175,13 @@ Return all players who are currently walking / on foot.
 
 #### Defined in
 
-[server/getters/players.ts:139](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/players.ts#L139)
+[server/getters/players.ts:139](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/players.ts#L139)
 
 ___
 
 ### withName
 
-::: Tip
+::: tip Usage
 Athena.getters.players.**withName**(`name`): `alt.Player`[]
 :::
 
@@ -199,4 +199,4 @@ Gets all online players with a given name.
 
 #### Defined in
 
-[server/getters/players.ts:103](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/getters/players.ts#L103)
+[server/getters/players.ts:103](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/getters/players.ts#L103)

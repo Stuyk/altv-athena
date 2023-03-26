@@ -11,7 +11,7 @@ order: 0
 
 ### account
 
-::: Tip
+::: tip Usage
 Athena.player.setter.**account**(`player`, `accountData`): `Promise`<`void`\>
 :::
 
@@ -34,13 +34,13 @@ SetPrototype
 
 #### Defined in
 
-[server/player/setter.ts:20](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/setter.ts#L20)
+[server/player/setter.ts:20](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L20)
 
 ___
 
 ### actionMenu
 
-::: Tip
+::: tip Usage
 Athena.player.setter.**actionMenu**(`player`, `actionMenu`): `any`
 :::
 
@@ -57,13 +57,13 @@ Athena.player.setter.**actionMenu**(`player`, `actionMenu`): `any`
 
 #### Defined in
 
-[server/player/setter.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/setter.ts#L37)
+[server/player/setter.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L37)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.player.setter.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -84,9 +84,9 @@ Used to override any setter functions
 
 #### Defined in
 
-[server/player/setter.ts:68](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/setter.ts#L68)
+[server/player/setter.ts:68](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L68)
 
-::: Tip
+::: tip Usage
 Athena.player.setter.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -107,9 +107,9 @@ Used to override any setter functions
 
 #### Defined in
 
-[server/player/setter.ts:69](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/setter.ts#L69)
+[server/player/setter.ts:69](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L69)
 
-::: Tip
+::: tip Usage
 Athena.player.setter.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -130,13 +130,13 @@ Used to override any setter functions
 
 #### Defined in
 
-[server/player/setter.ts:70](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/setter.ts#L70)
+[server/player/setter.ts:70](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L70)
 
 ___
 
 ### respawned
 
-::: Tip
+::: tip Usage
 Athena.player.setter.**respawned**(`player`, `position`): `void`
 :::
 
@@ -159,4 +159,4 @@ SetPrototype
 
 #### Defined in
 
-[server/player/setter.ts:50](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/setter.ts#L50)
+[server/player/setter.ts:50](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/setter.ts#L50)

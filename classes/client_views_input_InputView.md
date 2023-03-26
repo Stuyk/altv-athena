@@ -19,7 +19,7 @@ order: 0
 
 ### setMenu
 
-::: Tip
+::: tip Usage
 AthenaClient.views.input.InputView.`Static` **setMenu**(`_inputMenu`): `void`
 :::
 
@@ -43,4 +43,4 @@ InputView
 
 #### Defined in
 
-[client/views/input.ts:91](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/views/input.ts#L91)
+[client/views/input.ts:91](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/views/input.ts#L91)

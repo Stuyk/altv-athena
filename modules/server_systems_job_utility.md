@@ -11,7 +11,7 @@ order: 0
 
 ### cloneObjective
 
-::: Tip
+::: tip Usage
 Athena.systems.job.utility.**cloneObjective**(`objectiveData`): [`player`](server_config.md#player)
 :::
 
@@ -31,13 +31,13 @@ Cleanly clones an objective and rebinds all callbacks.
 
 #### Defined in
 
-[server/systems/job/utility.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/utility.ts#L11)
+[server/systems/job/utility.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/utility.ts#L11)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.job.utility.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -58,4 +58,4 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/utility.ts:32](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/utility.ts#L32)
+[server/systems/job/utility.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/utility.ts#L32)

@@ -11,7 +11,7 @@ order: 0
 
 ### frontend
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.sound.**frontend**(`audioName`, `ref`): `void`
 :::
 
@@ -34,13 +34,13 @@ None
 
 #### Defined in
 
-[client/systems/sound.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/sound.ts#L21)
+[client/systems/sound.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/sound.ts#L21)
 
 ___
 
 ### handlePlayAudioPositional
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.sound.**handlePlayAudioPositional**(`pos`, `soundName`, `soundInstantID?`): `void`
 :::
 
@@ -60,13 +60,13 @@ Handle play audio positional
 
 #### Defined in
 
-[client/systems/sound.ts:31](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/sound.ts#L31)
+[client/systems/sound.ts:31](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/sound.ts#L31)
 
 ___
 
 ### play2d
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.sound.**play2d**(`soundName`, `volume?`, `soundInstantID?`): `void`
 :::
 
@@ -88,13 +88,13 @@ None
 
 #### Defined in
 
-[client/systems/sound.ts:110](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/sound.ts#L110)
+[client/systems/sound.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/sound.ts#L110)
 
 ___
 
 ### play3d
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.sound.**play3d**(`entity`, `soundName`, `soundInstantID?`): `void`
 :::
 
@@ -115,13 +115,13 @@ Simply plays the audio based on your position.
 
 #### Defined in
 
-[client/systems/sound.ts:66](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/sound.ts#L66)
+[client/systems/sound.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/sound.ts#L66)
 
 ___
 
 ### stopAudio
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.sound.**stopAudio**(`soundInstantID?`): `void`
 :::
 
@@ -141,4 +141,4 @@ None
 
 #### Defined in
 
-[client/systems/sound.ts:120](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/sound.ts#L120)
+[client/systems/sound.ts:120](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/sound.ts#L120)

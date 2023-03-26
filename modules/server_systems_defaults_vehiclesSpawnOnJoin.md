@@ -11,7 +11,7 @@ order: 0
 
 ### disable
 
-::: Tip
+::: tip Usage
 Athena.systems.defaults.vehiclesSpawnOnJoin.**disable**(): `void`
 :::
 
@@ -31,4 +31,4 @@ Athena.systems.default.vehiclesSpawnOnJoin.disable();
 
 #### Defined in
 
-[server/systems/defaults/vehiclesSpawnOnJoin.ts:63](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/defaults/vehiclesSpawnOnJoin.ts#L63)
+[server/systems/defaults/vehiclesSpawnOnJoin.ts:63](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/vehiclesSpawnOnJoin.ts#L63)

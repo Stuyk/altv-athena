@@ -29,7 +29,7 @@ KeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:201](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L201)
+[client/interface/hotkeys.ts:201](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L201)
 
 ___
 
@@ -45,7 +45,7 @@ BaseKeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:209](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L209)
+[client/interface/hotkeys.ts:209](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L209)
 
 ___
 
@@ -67,7 +67,7 @@ KeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:157](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L157)
+[client/interface/hotkeys.ts:157](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L157)
 
 ___
 
@@ -83,7 +83,7 @@ KeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:141](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L141)
+[client/interface/hotkeys.ts:141](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L141)
 
 ___
 
@@ -99,7 +99,7 @@ BaseKeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:231](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L231)
+[client/interface/hotkeys.ts:231](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L231)
 
 ___
 
@@ -115,7 +115,7 @@ KeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:149](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L149)
+[client/interface/hotkeys.ts:149](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L149)
 
 ___
 
@@ -131,7 +131,7 @@ KeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:133](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L133)
+[client/interface/hotkeys.ts:133](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L133)
 
 ___
 
@@ -148,7 +148,7 @@ KeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:176](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L176)
+[client/interface/hotkeys.ts:176](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L176)
 
 ___
 
@@ -164,7 +164,7 @@ KeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:193](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L193)
+[client/interface/hotkeys.ts:193](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L193)
 
 ___
 
@@ -177,7 +177,7 @@ These are all optional. By default key binds work regardless of setting these va
 
 #### Defined in
 
-[client/interface/hotkeys.ts:223](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L223)
+[client/interface/hotkeys.ts:223](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L223)
 
 ___
 
@@ -193,7 +193,7 @@ BaseKeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:217](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L217)
+[client/interface/hotkeys.ts:217](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L217)
 
 ___
 
@@ -210,4 +210,4 @@ KeyInfo
 
 #### Defined in
 
-[client/interface/hotkeys.ts:185](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/interface/hotkeys.ts#L185)
+[client/interface/hotkeys.ts:185](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/interface/hotkeys.ts#L185)

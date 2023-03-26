@@ -11,7 +11,7 @@ order: 0
 
 ### remove
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.staticText.**remove**(`uid`): `void`
 :::
 
@@ -30,13 +30,13 @@ Marks for deletion, and then removes it.
 
 #### Defined in
 
-[client/rmlui/staticText/index.ts:121](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/staticText/index.ts#L121)
+[client/rmlui/staticText/index.ts:121](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/staticText/index.ts#L121)
 
 ___
 
 ### upsert
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.staticText.**upsert**(`drawable`): `void`
 :::
 
@@ -55,4 +55,4 @@ If the same uid is used it will simply replace the object.
 
 #### Defined in
 
-[client/rmlui/staticText/index.ts:90](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/staticText/index.ts#L90)
+[client/rmlui/staticText/index.ts:90](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/staticText/index.ts#L90)

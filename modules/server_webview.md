@@ -11,7 +11,7 @@ order: 0
 
 ### closePages
 
-::: Tip
+::: tip Usage
 Athena.webview.**closePages**(`player`, `pages?`): `void`
 :::
 
@@ -31,13 +31,13 @@ If pages are specified it only closes those specific pages.
 
 #### Defined in
 
-[server/webview/index.ts:22](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/webview/index.ts#L22)
+[server/webview/index.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/webview/index.ts#L22)
 
 ___
 
 ### emit
 
-::: Tip
+::: tip Usage
 Athena.webview.**emit**(`player`, `eventName`, `...args`): `void`
 :::
 
@@ -63,4 +63,4 @@ ServerView
 
 #### Defined in
 
-[server/webview/index.ts:12](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/webview/index.ts#L12)
+[server/webview/index.ts:12](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/webview/index.ts#L12)

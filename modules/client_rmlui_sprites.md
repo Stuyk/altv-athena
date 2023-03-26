@@ -15,7 +15,7 @@ order: 0
 
 ### create
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.sprites.**create**(`sprite`): `void`
 :::
 
@@ -33,13 +33,13 @@ Create a sprite. Create a JavaScript object to start building the sprite.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:222](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/sprites/index.ts#L222)
+[client/rmlui/sprites/index.ts:222](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/sprites/index.ts#L222)
 
 ___
 
 ### remove
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.sprites.**remove**(`uid`): `void`
 :::
 
@@ -57,13 +57,13 @@ Remove a sprite by `uid` and stop it from updating entirely.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:246](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/sprites/index.ts#L246)
+[client/rmlui/sprites/index.ts:246](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/sprites/index.ts#L246)
 
 ___
 
 ### update
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.sprites.**update**(`uid`, `sprite`): `void`
 :::
 
@@ -84,4 +84,4 @@ Requires the `uid` specified to update it.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:263](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/sprites/index.ts#L263)
+[client/rmlui/sprites/index.ts:263](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/sprites/index.ts#L263)

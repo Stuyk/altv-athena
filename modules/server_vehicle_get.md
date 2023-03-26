@@ -11,7 +11,7 @@ order: 0
 
 ### ownedVehicles
 
-::: Tip
+::: tip Usage
 Athena.vehicle.get.**ownedVehicles**(): `alt.Vehicle`[]
 :::
 
@@ -33,13 +33,13 @@ An array of owned vehicles.
 
 #### Defined in
 
-[server/vehicle/get.ts:32](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/get.ts#L32)
+[server/vehicle/get.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/get.ts#L32)
 
 ___
 
 ### playerOwnedVehicles
 
-::: Tip
+::: tip Usage
 Athena.vehicle.get.**playerOwnedVehicles**(`player`): `any`
 :::
 
@@ -69,13 +69,13 @@ An array of vehicles owned and spawned by a player.
 
 #### Defined in
 
-[server/vehicle/get.ts:52](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/get.ts#L52)
+[server/vehicle/get.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/get.ts#L52)
 
 ___
 
 ### temporaryVehicles
 
-::: Tip
+::: tip Usage
 Athena.vehicle.get.**temporaryVehicles**(): `alt.Vehicle`[]
 :::
 
@@ -97,4 +97,4 @@ An array of temporary vehicles.
 
 #### Defined in
 
-[server/vehicle/get.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/get.ts#L15)
+[server/vehicle/get.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/get.ts#L15)

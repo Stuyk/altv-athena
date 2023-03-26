@@ -24,7 +24,7 @@ order: 0
 
 #### Defined in
 
-[client/utility/directionToVector.ts:7](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/directionToVector.ts#L7)
+[client/utility/directionToVector.ts:7](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/directionToVector.ts#L7)
 
 ## Properties
 
@@ -34,7 +34,7 @@ order: 0
 
 #### Defined in
 
-[client/utility/directionToVector.ts:4](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/directionToVector.ts#L4)
+[client/utility/directionToVector.ts:4](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/directionToVector.ts#L4)
 
 ___
 
@@ -44,13 +44,13 @@ ___
 
 #### Defined in
 
-[client/utility/directionToVector.ts:5](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/directionToVector.ts#L5)
+[client/utility/directionToVector.ts:5](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/directionToVector.ts#L5)
 
 ## Methods
 
 ### eulerToQuaternion
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.directionToVector.DirectionVector.**eulerToQuaternion**(`rotation`): `Object`
 :::
 
@@ -73,13 +73,13 @@ AthenaClient.utility.directionToVector.DirectionVector.**eulerToQuaternion**(`ro
 
 #### Defined in
 
-[client/utility/directionToVector.ts:12](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/directionToVector.ts#L12)
+[client/utility/directionToVector.ts:12](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/directionToVector.ts#L12)
 
 ___
 
 ### forward
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.directionToVector.DirectionVector.**forward**(`distance`): `IVector3`
 :::
 
@@ -95,13 +95,13 @@ AthenaClient.utility.directionToVector.DirectionVector.**forward**(`distance`): 
 
 #### Defined in
 
-[client/utility/directionToVector.ts:42](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/directionToVector.ts#L42)
+[client/utility/directionToVector.ts:42](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/directionToVector.ts#L42)
 
 ___
 
 ### forwardVector
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.directionToVector.DirectionVector.**forwardVector**(): `IVector3`
 :::
 
@@ -111,13 +111,13 @@ AthenaClient.utility.directionToVector.DirectionVector.**forwardVector**(): `IVe
 
 #### Defined in
 
-[client/utility/directionToVector.ts:33](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/directionToVector.ts#L33)
+[client/utility/directionToVector.ts:33](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/directionToVector.ts#L33)
 
 ___
 
 ### right
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.directionToVector.DirectionVector.**right**(`distance`): `Object`
 :::
 
@@ -139,13 +139,13 @@ AthenaClient.utility.directionToVector.DirectionVector.**right**(`distance`): `O
 
 #### Defined in
 
-[client/utility/directionToVector.ts:62](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/directionToVector.ts#L62)
+[client/utility/directionToVector.ts:62](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/directionToVector.ts#L62)
 
 ___
 
 ### rightVector
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.directionToVector.DirectionVector.**rightVector**(): `Object`
 :::
 
@@ -161,13 +161,13 @@ AthenaClient.utility.directionToVector.DirectionVector.**rightVector**(): `Objec
 
 #### Defined in
 
-[client/utility/directionToVector.ts:52](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/directionToVector.ts#L52)
+[client/utility/directionToVector.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/directionToVector.ts#L52)
 
 ___
 
 ### up
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.directionToVector.DirectionVector.**up**(`distance`): `Object`
 :::
 
@@ -189,13 +189,13 @@ AthenaClient.utility.directionToVector.DirectionVector.**up**(`distance`): `Obje
 
 #### Defined in
 
-[client/utility/directionToVector.ts:81](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/directionToVector.ts#L81)
+[client/utility/directionToVector.ts:81](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/directionToVector.ts#L81)
 
 ___
 
 ### upVector
 
-::: Tip
+::: tip Usage
 AthenaClient.utility.directionToVector.DirectionVector.**upVector**(): `Object`
 :::
 
@@ -211,4 +211,4 @@ AthenaClient.utility.directionToVector.DirectionVector.**upVector**(): `Object`
 
 #### Defined in
 
-[client/utility/directionToVector.ts:72](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/utility/directionToVector.ts#L72)
+[client/utility/directionToVector.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/utility/directionToVector.ts#L72)

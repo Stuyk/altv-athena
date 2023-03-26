@@ -11,7 +11,7 @@ order: 0
 
 ### create
 
-::: Tip
+::: tip Usage
 Athena.systems.jwt.**create**(`account`): `Promise`<`undefined` \| `string`\>
 :::
 
@@ -29,13 +29,13 @@ Creates a JWT token with basic account id inside of it.
 
 #### Defined in
 
-[server/systems/jwt.ts:60](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L60)
+[server/systems/jwt.ts:60](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/jwt.ts#L60)
 
 ___
 
 ### fetch
 
-::: Tip
+::: tip Usage
 Athena.systems.jwt.**fetch**(`player`): `Promise`<`string` \| ``null``\>
 :::
 
@@ -51,13 +51,13 @@ Athena.systems.jwt.**fetch**(`player`): `Promise`<`string` \| ``null``\>
 
 #### Defined in
 
-[server/systems/jwt.ts:103](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L103)
+[server/systems/jwt.ts:103](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/jwt.ts#L103)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.jwt.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -78,9 +78,9 @@ Used to override jwt functions.
 
 #### Defined in
 
-[server/systems/jwt.ts:159](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L159)
+[server/systems/jwt.ts:159](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/jwt.ts#L159)
 
-::: Tip
+::: tip Usage
 Athena.systems.jwt.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -101,9 +101,9 @@ Used to override jwt functions.
 
 #### Defined in
 
-[server/systems/jwt.ts:160](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L160)
+[server/systems/jwt.ts:160](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/jwt.ts#L160)
 
-::: Tip
+::: tip Usage
 Athena.systems.jwt.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -124,13 +124,13 @@ Used to override jwt functions.
 
 #### Defined in
 
-[server/systems/jwt.ts:161](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L161)
+[server/systems/jwt.ts:161](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/jwt.ts#L161)
 
 ___
 
 ### verify
 
-::: Tip
+::: tip Usage
 Athena.systems.jwt.**verify**(`data`): `Promise`<`string` \| `undefined`\>
 :::
 
@@ -148,4 +148,4 @@ Verifies a compact JWT string is valid.
 
 #### Defined in
 
-[server/systems/jwt.ts:85](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/jwt.ts#L85)
+[server/systems/jwt.ts:85](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/jwt.ts#L85)

@@ -25,13 +25,13 @@ order: 0
 
 #### Defined in
 
-[server/utility/config.ts:85](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L85)
+[server/utility/config.ts:85](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/config.ts#L85)
 
 ## Functions
 
 ### get
 
-::: Tip
+::: tip Usage
 Athena.utility.config.**get**(): `Promise`<[`IConfig`](../interfaces/server_interface_iConfig_IConfig.md) \| `undefined`\>
 :::
 
@@ -41,13 +41,13 @@ Athena.utility.config.**get**(): `Promise`<[`IConfig`](../interfaces/server_inte
 
 #### Defined in
 
-[server/utility/config.ts:13](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L13)
+[server/utility/config.ts:13](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/config.ts#L13)
 
 ___
 
 ### getAthenaVersion
 
-::: Tip
+::: tip Usage
 Athena.utility.config.**getAthenaVersion**(): `string`
 :::
 
@@ -57,13 +57,13 @@ Athena.utility.config.**getAthenaVersion**(): `string`
 
 #### Defined in
 
-[server/utility/config.ts:71](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L71)
+[server/utility/config.ts:71](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/config.ts#L71)
 
 ___
 
 ### getViteServer
 
-::: Tip
+::: tip Usage
 Athena.utility.config.**getViteServer**(): `string`
 :::
 
@@ -73,13 +73,13 @@ Athena.utility.config.**getViteServer**(): `string`
 
 #### Defined in
 
-[server/utility/config.ts:63](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L63)
+[server/utility/config.ts:63](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/config.ts#L63)
 
 ___
 
 ### getVueDebugMode
 
-::: Tip
+::: tip Usage
 Athena.utility.config.**getVueDebugMode**(): `boolean`
 :::
 
@@ -89,13 +89,13 @@ Athena.utility.config.**getVueDebugMode**(): `boolean`
 
 #### Defined in
 
-[server/utility/config.ts:67](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L67)
+[server/utility/config.ts:67](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/config.ts#L67)
 
 ___
 
 ### isDevMode
 
-::: Tip
+::: tip Usage
 Athena.utility.config.**isDevMode**(): `boolean`
 :::
 
@@ -107,4 +107,4 @@ Check if the current server instance is running in dev mode.
 
 #### Defined in
 
-[server/utility/config.ts:56](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/config.ts#L56)
+[server/utility/config.ts:56](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/config.ts#L56)

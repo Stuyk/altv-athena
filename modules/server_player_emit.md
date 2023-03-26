@@ -11,7 +11,7 @@ order: 0
 
 ### acceptDeclineEvent
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**acceptDeclineEvent**(`player`, `eventInfo`): `any`
 :::
 
@@ -31,13 +31,13 @@ They must react by holding l-shift to open the menu.
 
 #### Defined in
 
-[server/player/emit.ts:560](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L560)
+[server/player/emit.ts:560](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L560)
 
 ___
 
 ### animation
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**animation**(`player`, `dictionary`, `name`, `flags`, `duration?`): `void`
 :::
 
@@ -63,13 +63,13 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:85](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L85)
+[server/player/emit.ts:85](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L85)
 
 ___
 
 ### clearAnimation
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**clearAnimation**(`player`): `any`
 :::
 
@@ -88,13 +88,13 @@ Does not trigger if the player is in a vehicle.
 
 #### Defined in
 
-[server/player/emit.ts:111](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L111)
+[server/player/emit.ts:111](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L111)
 
 ___
 
 ### clearCredits
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**clearCredits**(`player`): `any`
 :::
 
@@ -112,13 +112,13 @@ Clears a 'credits' display.
 
 #### Defined in
 
-[server/player/emit.ts:411](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L411)
+[server/player/emit.ts:411](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L411)
 
 ___
 
 ### clearErrorScreen
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**clearErrorScreen**(`player`): `any`
 :::
 
@@ -136,13 +136,13 @@ Clear a full-screen message.
 
 #### Defined in
 
-[server/player/emit.ts:360](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L360)
+[server/player/emit.ts:360](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L360)
 
 ___
 
 ### clearShard
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**clearShard**(`player`): `any`
 :::
 
@@ -160,13 +160,13 @@ Clear a shard.
 
 #### Defined in
 
-[server/player/emit.ts:385](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L385)
+[server/player/emit.ts:385](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L385)
 
 ___
 
 ### clearSpinner
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**clearSpinner**(`player`): `any`
 :::
 
@@ -185,13 +185,13 @@ No UID necessary since it can only have one spinner at a time.
 
 #### Defined in
 
-[server/player/emit.ts:335](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L335)
+[server/player/emit.ts:335](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L335)
 
 ___
 
 ### clearTimeCycleEffect
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**clearTimeCycleEffect**(`player`): `void`
 :::
 
@@ -211,13 +211,13 @@ Used to clear a screen effect from a player.
 
 #### Defined in
 
-[server/player/emit.ts:613](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L613)
+[server/player/emit.ts:613](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L613)
 
 ___
 
 ### createCredits
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**createCredits**(`player`, `credits`): `any`
 :::
 
@@ -237,13 +237,13 @@ Automatically clear(s) over-time.
 
 #### Defined in
 
-[server/player/emit.ts:399](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L399)
+[server/player/emit.ts:399](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L399)
 
 ___
 
 ### createErrorScreen
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**createErrorScreen**(`player`, `screen`): `any`
 :::
 
@@ -262,13 +262,13 @@ Create a full-screen message. Cannot be cleared by the player.
 
 #### Defined in
 
-[server/player/emit.ts:348](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L348)
+[server/player/emit.ts:348](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L348)
 
 ___
 
 ### createMissionText
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**createMissionText**(`player`, `text`, `duration?`): `any`
 :::
 
@@ -288,13 +288,13 @@ Create a subtitle on the bottom of the screen with optional duration.
 
 #### Defined in
 
-[server/player/emit.ts:206](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L206)
+[server/player/emit.ts:206](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L206)
 
 ___
 
 ### createProgressBar
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**createProgressBar**(`player`, `progressbar`): `string`
 :::
 
@@ -315,13 +315,13 @@ A unique identifier to remove the progress bar.
 
 #### Defined in
 
-[server/player/emit.ts:220](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L220)
+[server/player/emit.ts:220](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L220)
 
 ___
 
 ### createShard
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**createShard**(`player`, `shard`): `any`
 :::
 
@@ -340,13 +340,13 @@ Create a full-screen shard. Similar to 'mission-passed' or 'wasted'.
 
 #### Defined in
 
-[server/player/emit.ts:373](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L373)
+[server/player/emit.ts:373](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L373)
 
 ___
 
 ### createSpinner
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**createSpinner**(`player`, `spinner`): `any`
 :::
 
@@ -365,13 +365,13 @@ Create a spinner in the bottom-right corner.
 
 #### Defined in
 
-[server/player/emit.ts:322](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L322)
+[server/player/emit.ts:322](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L322)
 
 ___
 
 ### fadeScreenFromBlack
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**fadeScreenFromBlack**(`player`, `timeInMs`): `void`
 :::
 
@@ -392,13 +392,13 @@ Removes the black filter over the screen over time.
 
 #### Defined in
 
-[server/player/emit.ts:587](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L587)
+[server/player/emit.ts:587](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L587)
 
 ___
 
 ### fadeScreenToBlack
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**fadeScreenToBlack**(`player`, `timeInMs`): `void`
 :::
 
@@ -419,13 +419,13 @@ Turns the player's screen black over time.
 
 #### Defined in
 
-[server/player/emit.ts:576](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L576)
+[server/player/emit.ts:576](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L576)
 
 ___
 
 ### message
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**message**(`player`, `msg`): `any`
 :::
 
@@ -444,13 +444,13 @@ Emit a message to a given player.
 
 #### Defined in
 
-[server/player/emit.ts:545](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L545)
+[server/player/emit.ts:545](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L545)
 
 ___
 
 ### meta
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**meta**(`player`, `key`, `value`): `void`
 :::
 
@@ -474,13 +474,13 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:157](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L157)
+[server/player/emit.ts:157](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L157)
 
 ___
 
 ### notification
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**notification**(`player`, `message`): `void`
 :::
 
@@ -503,13 +503,13 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:170](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L170)
+[server/player/emit.ts:170](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L170)
 
 ___
 
 ### objectAttach
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**objectAttach**(`player`, `attachable`, `removeAfterMilliseconds?`): `string` \| ``null``
 :::
 
@@ -533,13 +533,13 @@ UID for attachable object
 
 #### Defined in
 
-[server/player/emit.ts:428](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L428)
+[server/player/emit.ts:428](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L428)
 
 ___
 
 ### objectRemove
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**objectRemove**(`player`, `uid`): `any`
 :::
 
@@ -558,13 +558,13 @@ Remove an object from the player.
 
 #### Defined in
 
-[server/player/emit.ts:475](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L475)
+[server/player/emit.ts:475](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L475)
 
 ___
 
 ### particle
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**particle**(`player`, `particle`, `emitToNearbyPlayers?`): `void`
 :::
 
@@ -584,13 +584,13 @@ Play a particle effect at a specific coordinate.
 
 #### Defined in
 
-[server/player/emit.ts:183](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L183)
+[server/player/emit.ts:183](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L183)
 
 ___
 
 ### removeProgressBar
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**removeProgressBar**(`player`, `uid`): `any`
 :::
 
@@ -609,13 +609,13 @@ Remove a progress bar based on its unique identifier.
 
 #### Defined in
 
-[server/player/emit.ts:238](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L238)
+[server/player/emit.ts:238](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L238)
 
 ___
 
 ### scenario
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**scenario**(`player`, `name`, `duration`): `void`
 :::
 
@@ -639,13 +639,13 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:138](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L138)
+[server/player/emit.ts:138](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L138)
 
 ___
 
 ### setTimeCycleEffect
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**setTimeCycleEffect**(`player`, `name`, `amountInMs`): `any`
 :::
 
@@ -669,9 +669,9 @@ Think of like screen wobbling, drunkness, etc.
 
 #### Defined in
 
-[server/player/emit.ts:591](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L591)
+[server/player/emit.ts:591](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L591)
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**setTimeCycleEffect**(`player`, `name`, `amountInMs`): `any`
 :::
 
@@ -695,13 +695,13 @@ Think of like screen wobbling, drunkness, etc.
 
 #### Defined in
 
-[server/player/emit.ts:592](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L592)
+[server/player/emit.ts:592](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L592)
 
 ___
 
 ### setWeather
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**setWeather**(`player`, `weather`, `timeInSeconds`): `void`
 :::
 
@@ -725,13 +725,13 @@ Does not use alt:V functionality. Only uses natives.
 
 #### Defined in
 
-[server/player/emit.ts:626](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L626)
+[server/player/emit.ts:626](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L626)
 
 ___
 
 ### sound2D
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**sound2D**(`player`, `audioName`, `volume?`, `soundInstantID?`): `any`
 :::
 
@@ -752,13 +752,13 @@ Play a sound without any positional data.
 
 #### Defined in
 
-[server/player/emit.ts:253](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L253)
+[server/player/emit.ts:253](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L253)
 
 ___
 
 ### sound3D
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**sound3D**(`player`, `audioName`, `target`, `soundInstantID?`): `void`
 :::
 
@@ -783,13 +783,13 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:268](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L268)
+[server/player/emit.ts:268](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L268)
 
 ___
 
 ### soundFrontend
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**soundFrontend**(`player`, `audioName`, `ref`): `void`
 :::
 
@@ -813,13 +813,13 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:297](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L297)
+[server/player/emit.ts:297](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L297)
 
 ___
 
 ### soundStop
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**soundStop**(`player`, `soundInstantID?`): `void`
 :::
 
@@ -842,13 +842,13 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:283](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L283)
+[server/player/emit.ts:283](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L283)
 
 ___
 
 ### startAlarm
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**startAlarm**(`player`, `name`): `void`
 :::
 
@@ -872,13 +872,13 @@ EmitPrototype
 
 #### Defined in
 
-[server/player/emit.ts:29](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L29)
+[server/player/emit.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L29)
 
 ___
 
 ### stopAlarm
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**stopAlarm**(`player`, `name`): `any`
 :::
 
@@ -897,13 +897,13 @@ Stop an alarm for this player.
 
 #### Defined in
 
-[server/player/emit.ts:48](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L48)
+[server/player/emit.ts:48](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L48)
 
 ___
 
 ### stopAllAlarms
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**stopAllAlarms**(`player`): `any`
 :::
 
@@ -921,13 +921,13 @@ Stop all alarms for this player.
 
 #### Defined in
 
-[server/player/emit.ts:64](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L64)
+[server/player/emit.ts:64](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L64)
 
 ___
 
 ### taskTimeline
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**taskTimeline**(`player`, `tasks`): `any`
 :::
 
@@ -946,13 +946,13 @@ Force the player to perform an uncancellable task timeline.
 
 #### Defined in
 
-[server/player/emit.ts:309](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L309)
+[server/player/emit.ts:309](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L309)
 
 ___
 
 ### tempObjectLerp
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**tempObjectLerp**(`player`, `model`, `start`, `end`, `speed`): `any`
 :::
 
@@ -975,13 +975,13 @@ The object is only seen by this one player.
 
 #### Defined in
 
-[server/player/emit.ts:509](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L509)
+[server/player/emit.ts:509](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L509)
 
 ___
 
 ### wheelMenu
 
-::: Tip
+::: tip Usage
 Athena.player.emit.**wheelMenu**(`player`, `label`, `wheelItems`): `any`
 :::
 
@@ -1002,4 +1002,4 @@ Can emit events to client or server-side.
 
 #### Defined in
 
-[server/player/emit.ts:531](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/emit.ts#L531)
+[server/player/emit.ts:531](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/emit.ts#L531)

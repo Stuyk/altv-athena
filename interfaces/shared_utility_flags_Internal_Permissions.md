@@ -13,7 +13,7 @@ order: 0
 
 ### query
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.Permissions.**query**(`permissionDesc`): `Promise`<[`PermissionStatus`](../modules/shared_utility_flags_Internal.md#PermissionStatus)\>
 :::
 

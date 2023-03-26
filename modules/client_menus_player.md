@@ -15,7 +15,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.player.(`target`, `options`): [`player`](server_config.md#player)[]
 :::
 
@@ -32,13 +32,13 @@ AthenaClient.menus.player.(`target`, `options`): [`player`](server_config.md#pla
 
 #### Defined in
 
-[client/menus/player.ts:5](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/player.ts#L5)
+[client/menus/player.ts:5](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/player.ts#L5)
 
 ## Functions
 
 ### addInjection
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.player.**addInjection**(`callback`): `void`
 :::
 
@@ -62,13 +62,13 @@ PlayerWheelMenu
 
 #### Defined in
 
-[client/menus/player.ts:17](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/player.ts#L17)
+[client/menus/player.ts:17](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/player.ts#L17)
 
 ___
 
 ### open
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.player.**open**(`target`): `void`
 :::
 
@@ -90,4 +90,4 @@ PlayerWheelMenu
 
 #### Defined in
 
-[client/menus/player.ts:28](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/player.ts#L28)
+[client/menus/player.ts:28](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/player.ts#L28)

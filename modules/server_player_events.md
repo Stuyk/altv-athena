@@ -15,13 +15,13 @@ order: 0
 
 #### Defined in
 
-[server/player/events.ts:6](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L6)
+[server/player/events.ts:6](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L6)
 
 ## Functions
 
 ### on
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -42,9 +42,9 @@ Called when a player item has changed from unequipped to equipped.
 
 #### Defined in
 
-[server/player/events.ts:68](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L68)
+[server/player/events.ts:68](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L68)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -65,9 +65,9 @@ Called when a player item has changed to unequipped
 
 #### Defined in
 
-[server/player/events.ts:80](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L80)
+[server/player/events.ts:80](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L80)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -88,9 +88,9 @@ Called when a player has died.
 
 #### Defined in
 
-[server/player/events.ts:92](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L92)
+[server/player/events.ts:92](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L92)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -112,9 +112,9 @@ Check `characterDocument.data`
 
 #### Defined in
 
-[server/player/events.ts:102](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L102)
+[server/player/events.ts:102](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L102)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -136,9 +136,9 @@ Uniform is set to undefined / null
 
 #### Defined in
 
-[server/player/events.ts:112](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L112)
+[server/player/events.ts:112](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L112)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -159,9 +159,9 @@ Called when a player has their model set to non-multiplayer models.
 
 #### Defined in
 
-[server/player/events.ts:121](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L121)
+[server/player/events.ts:121](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L121)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -182,9 +182,9 @@ Called when a player has their model cleared to a multiplayer model.
 
 #### Defined in
 
-[server/player/events.ts:130](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L130)
+[server/player/events.ts:130](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L130)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -206,9 +206,9 @@ This is never called when `player.health` is modified
 
 #### Defined in
 
-[server/player/events.ts:140](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L140)
+[server/player/events.ts:140](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L140)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -230,9 +230,9 @@ This is never called when `player.armour` is modified.
 
 #### Defined in
 
-[server/player/events.ts:150](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L150)
+[server/player/events.ts:150](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L150)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -254,9 +254,9 @@ This is never called when `player.pos` is modified.
 
 #### Defined in
 
-[server/player/events.ts:160](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L160)
+[server/player/events.ts:160](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L160)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -277,9 +277,9 @@ Called when playtime has increased slightly.
 
 #### Defined in
 
-[server/player/events.ts:169](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L169)
+[server/player/events.ts:169](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L169)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -300,9 +300,9 @@ Called when a player has dropped an item.
 
 #### Defined in
 
-[server/player/events.ts:178](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L178)
+[server/player/events.ts:178](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L178)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -324,9 +324,9 @@ The `_id` is a reference to the item in the database; or the item in the ItemDro
 
 #### Defined in
 
-[server/player/events.ts:188](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L188)
+[server/player/events.ts:188](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L188)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -347,9 +347,9 @@ Called when a player selects a character
 
 #### Defined in
 
-[server/player/events.ts:197](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L197)
+[server/player/events.ts:197](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L197)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -370,9 +370,9 @@ Called when a player has been respawned by internal functions.
 
 #### Defined in
 
-[server/player/events.ts:206](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L206)
+[server/player/events.ts:206](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L206)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -393,9 +393,9 @@ Called when a player has left a vehicle seat.
 
 #### Defined in
 
-[server/player/events.ts:215](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L215)
+[server/player/events.ts:215](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L215)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**(`eventName`, `callback`): `any`
 :::
 
@@ -416,9 +416,9 @@ Called when a player enters a vehicle as a driver.
 
 #### Defined in
 
-[server/player/events.ts:227](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L227)
+[server/player/events.ts:227](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L227)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**<`T`\>(`eventName`, `callback`): `any`
 :::
 
@@ -447,9 +447,9 @@ PLAYER WILL BE UNDEFINED, DO NOT USE VARIABLE
 
 #### Defined in
 
-[server/player/events.ts:242](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L242)
+[server/player/events.ts:242](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L242)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**<`T`\>(`eventName`, `callback`): `any`
 :::
 
@@ -476,9 +476,9 @@ Triggers when a player unequips a weapon.
 
 #### Defined in
 
-[server/player/events.ts:255](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L255)
+[server/player/events.ts:255](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L255)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**<`T`\>(`eventName`, `callback`): `any`
 :::
 
@@ -509,9 +509,9 @@ Any additional document changes with this event will need to handled through the
 
 #### Defined in
 
-[server/player/events.ts:272](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L272)
+[server/player/events.ts:272](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L272)
 
-::: Tip
+::: tip Usage
 Athena.player.events.**on**<`T`\>(`eventName`, `callback`): `any`
 :::
 
@@ -542,13 +542,13 @@ Any additional document changes with this event will need to handled through the
 
 #### Defined in
 
-[server/player/events.ts:286](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L286)
+[server/player/events.ts:286](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L286)
 
 ___
 
 ### trigger
 
-::: Tip
+::: tip Usage
 Athena.player.events.**trigger**<`CustomEvents`\>(`eventName`, `player`, `...args`): `void`
 :::
 
@@ -578,4 +578,4 @@ PlayerEvents
 
 #### Defined in
 
-[server/player/events.ts:43](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/events.ts#L43)
+[server/player/events.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/events.ts#L43)

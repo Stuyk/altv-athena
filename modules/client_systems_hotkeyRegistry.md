@@ -15,13 +15,13 @@ order: 0
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/hotkeyRegistry.ts#L8)
+[client/systems/hotkeyRegistry.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/hotkeyRegistry.ts#L8)
 
 ## Functions
 
 ### add
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.hotkeyRegistry.**add**(`keyBind`): `void`
 :::
 
@@ -40,13 +40,13 @@ https://www.toptal.com/developers/keycode
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:236](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/hotkeyRegistry.ts#L236)
+[client/systems/hotkeyRegistry.ts:236](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/hotkeyRegistry.ts#L236)
 
 ___
 
 ### checkValidation
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.hotkeyRegistry.**checkValidation**(`keyOrIdentifier`): `boolean`
 :::
 
@@ -66,13 +66,13 @@ Should only be called periodically. Roughly every 500ms~1s
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:254](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/hotkeyRegistry.ts#L254)
+[client/systems/hotkeyRegistry.ts:254](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/hotkeyRegistry.ts#L254)
 
 ___
 
 ### disable
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.hotkeyRegistry.**disable**(`keyOrIdentifier`): `void`
 :::
 
@@ -90,13 +90,13 @@ Disble a keybind
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:268](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/hotkeyRegistry.ts#L268)
+[client/systems/hotkeyRegistry.ts:268](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/hotkeyRegistry.ts#L268)
 
 ___
 
 ### enable
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.hotkeyRegistry.**enable**(`keyOrIdentifier`): `void`
 :::
 
@@ -114,13 +114,13 @@ Enable a keybind
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:277](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/hotkeyRegistry.ts#L277)
+[client/systems/hotkeyRegistry.ts:277](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/hotkeyRegistry.ts#L277)
 
 ___
 
 ### hotkey
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.hotkeyRegistry.**hotkey**(`keyOrIdentifier`): [`player`](server_config.md#player) \| `undefined`
 :::
 
@@ -139,13 +139,13 @@ Returns undefined if key is not bound, or found.
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:324](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/hotkeyRegistry.ts#L324)
+[client/systems/hotkeyRegistry.ts:324](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/hotkeyRegistry.ts#L324)
 
 ___
 
 ### hotkeys
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.hotkeyRegistry.**hotkeys**(): [`KeyInfoDefault`](client_systems_hotkeyRegistry.md#KeyInfoDefault)[]
 :::
 
@@ -157,13 +157,13 @@ Returns all hotkeys and their relevant information.
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:313](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/hotkeyRegistry.ts#L313)
+[client/systems/hotkeyRegistry.ts:313](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/hotkeyRegistry.ts#L313)
 
 ___
 
 ### rebind
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.hotkeyRegistry.**rebind**(`keyOrIdentifier`, `keyCode`): `void`
 :::
 
@@ -183,4 +183,4 @@ Once a key is rebound, it will automatically be loaded on server rejoin.
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:286](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/hotkeyRegistry.ts#L286)
+[client/systems/hotkeyRegistry.ts:286](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/hotkeyRegistry.ts#L286)

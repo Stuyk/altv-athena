@@ -19,7 +19,7 @@ order: 0
 
 ### buildData
 
-::: Tip
+::: tip Usage
 Athena.utility.screenshot.AthenaScreenshot.`Static` **buildData**(`player`, `data`, `index`, `lengthOfData`): `Promise`<`void`\>
 :::
 
@@ -46,13 +46,13 @@ AthenaScreenshot
 
 #### Defined in
 
-[server/utility/screenshot.ts:59](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/screenshot.ts#L59)
+[server/utility/screenshot.ts:59](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/screenshot.ts#L59)
 
 ___
 
 ### takeScreenshot
 
-::: Tip
+::: tip Usage
 Athena.utility.screenshot.AthenaScreenshot.`Static` **takeScreenshot**(`player`): `Promise`<`string`\>
 :::
 
@@ -77,4 +77,4 @@ AthenaScreenshot
 
 #### Defined in
 
-[server/utility/screenshot.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/screenshot.ts#L23)
+[server/utility/screenshot.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/screenshot.ts#L23)

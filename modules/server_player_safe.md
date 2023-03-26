@@ -11,7 +11,7 @@ order: 0
 
 ### addArmour
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**addArmour**(`player`, `value`, `exactValue?`, `doNotInvokeEventCall?`): `void`
 :::
 
@@ -36,13 +36,13 @@ SafePrototype
 
 #### Defined in
 
-[server/player/safe.ts:108](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L108)
+[server/player/safe.ts:108](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L108)
 
 ___
 
 ### addHealth
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**addHealth**(`player`, `value`, `exactValue?`, `doNotInvokeEventCall?`): `any`
 :::
 
@@ -67,13 +67,13 @@ SafePrototype
 
 #### Defined in
 
-[server/player/safe.ts:41](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L41)
+[server/player/safe.ts:41](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L41)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -94,9 +94,9 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:196](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L196)
+[server/player/safe.ts:196](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L196)
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -117,9 +117,9 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:197](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L197)
+[server/player/safe.ts:197](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L197)
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -140,9 +140,9 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:198](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L198)
+[server/player/safe.ts:198](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L198)
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -163,9 +163,9 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:199](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L199)
+[server/player/safe.ts:199](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L199)
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -186,9 +186,9 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:200](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L200)
+[server/player/safe.ts:200](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L200)
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -209,13 +209,13 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:201](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L201)
+[server/player/safe.ts:201](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L201)
 
 ___
 
 ### setDimension
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**setDimension**(`player`, `value`): `any`
 :::
 
@@ -236,13 +236,13 @@ Set the player's dimension safely.
 
 #### Defined in
 
-[server/player/safe.ts:176](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L176)
+[server/player/safe.ts:176](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L176)
 
 ___
 
 ### setPosition
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**setPosition**(`player`, `x`, `y`, `z`, `doNotInvokeEventCall?`): `void`
 :::
 
@@ -268,13 +268,13 @@ SafePrototype
 
 #### Defined in
 
-[server/player/safe.ts:12](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L12)
+[server/player/safe.ts:12](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L12)
 
 ___
 
 ### subArmour
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**subArmour**(`player`, `value`, `exactValue?`, `doNotInvokeEventCall?`): `void`
 :::
 
@@ -299,13 +299,13 @@ SafePrototype
 
 #### Defined in
 
-[server/player/safe.ts:141](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L141)
+[server/player/safe.ts:141](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L141)
 
 ___
 
 ### subHealth
 
-::: Tip
+::: tip Usage
 Athena.player.safe.**subHealth**(`player`, `value`, `exactValue?`, `doNotInvokeEventCall?`): `any`
 :::
 
@@ -330,4 +330,4 @@ SafePrototype
 
 #### Defined in
 
-[server/player/safe.ts:75](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/safe.ts#L75)
+[server/player/safe.ts:75](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/safe.ts#L75)

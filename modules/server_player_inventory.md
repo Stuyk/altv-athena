@@ -15,7 +15,7 @@ order: 0
 
 ### add
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**add**(`player`, `item`): `Promise`<`boolean`\>
 :::
 
@@ -44,13 +44,13 @@ const didAdd = await Athena.player.inventory.add(somePlayer, { dbName: 'burger',
 
 #### Defined in
 
-[server/player/inventory.ts:24](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L24)
+[server/player/inventory.ts:24](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L24)
 
 ___
 
 ### getAt
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**getAt**<`CustomData`\>(`player`, `slot`): [`player`](server_config.md#player) \| `undefined`
 :::
 
@@ -87,13 +87,13 @@ const someData = Athena.player.inventory.getAt<{ myCustomStuff: string }>(somePl
 
 #### Defined in
 
-[server/player/inventory.ts:219](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L219)
+[server/player/inventory.ts:219](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L219)
 
 ___
 
 ### getItemData
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**getItemData**<`CustomData`\>(`player`, `slot`): `CustomData` \| `undefined`
 :::
 
@@ -130,13 +130,13 @@ const someData = Athena.player.inventory.getItemData<{ myCustomStuff: string }>(
 
 #### Defined in
 
-[server/player/inventory.ts:178](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L178)
+[server/player/inventory.ts:178](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L178)
 
 ___
 
 ### has
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**has**(`player`, `dbName`, `quantity`, `version?`): `any`
 :::
 
@@ -165,13 +165,13 @@ const hasItem = await Athena.player.inventory.has(somePlayer, 'burger', 1);
 
 #### Defined in
 
-[server/player/inventory.ts:143](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L143)
+[server/player/inventory.ts:143](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L143)
 
 ___
 
 ### modifyItemData
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**modifyItemData**<`CustomData`\>(`player`, `slot`, `customData`): `Promise`<`boolean`\>
 :::
 
@@ -213,13 +213,13 @@ await Athena.player.inventory.modifyItemData<typeof someData>(player, someSlot, 
 
 #### Defined in
 
-[server/player/inventory.ts:264](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L264)
+[server/player/inventory.ts:264](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L264)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -240,9 +240,9 @@ Used to override any internal inventory functions
 
 #### Defined in
 
-[server/player/inventory.ts:305](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L305)
+[server/player/inventory.ts:305](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L305)
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -263,9 +263,9 @@ Used to override any internal inventory functions
 
 #### Defined in
 
-[server/player/inventory.ts:306](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L306)
+[server/player/inventory.ts:306](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L306)
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -286,9 +286,9 @@ Used to override any internal inventory functions
 
 #### Defined in
 
-[server/player/inventory.ts:307](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L307)
+[server/player/inventory.ts:307](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L307)
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -309,9 +309,9 @@ Used to override any internal inventory functions
 
 #### Defined in
 
-[server/player/inventory.ts:308](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L308)
+[server/player/inventory.ts:308](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L308)
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -332,9 +332,9 @@ Used to override any internal inventory functions
 
 #### Defined in
 
-[server/player/inventory.ts:309](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L309)
+[server/player/inventory.ts:309](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L309)
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -355,9 +355,9 @@ Used to override any internal inventory functions
 
 #### Defined in
 
-[server/player/inventory.ts:310](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L310)
+[server/player/inventory.ts:310](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L310)
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -378,13 +378,13 @@ Used to override any internal inventory functions
 
 #### Defined in
 
-[server/player/inventory.ts:311](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L311)
+[server/player/inventory.ts:311](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L311)
 
 ___
 
 ### remove
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**remove**(`player`, `slot`): `Promise`<`boolean`\>
 :::
 
@@ -411,13 +411,13 @@ const didRemove = await Athena.player.inventory.remove(somePlayer, someSlot);
 
 #### Defined in
 
-[server/player/inventory.ts:107](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L107)
+[server/player/inventory.ts:107](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L107)
 
 ___
 
 ### sub
 
-::: Tip
+::: tip Usage
 Athena.player.inventory.**sub**(`player`, `item`): `Promise`<`boolean`\>
 :::
 
@@ -443,4 +443,4 @@ const didRemove = await Athena.player.inventory.sub(somePlayer, { dbName: 'burge
 
 #### Defined in
 
-[server/player/inventory.ts:70](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/player/inventory.ts#L70)
+[server/player/inventory.ts:70](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/player/inventory.ts#L70)

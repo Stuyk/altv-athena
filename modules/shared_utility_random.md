@@ -11,7 +11,7 @@ order: 0
 
 ### getRandomElement
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.random.**getRandomElement**<`T`\>(`elements`): `T`
 :::
 
@@ -37,13 +37,13 @@ Return a random value from an array of values
 
 #### Defined in
 
-[shared/utility/random.ts:79](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/random.ts#L79)
+[shared/utility/random.ts:79](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L79)
 
 ___
 
 ### getRandomRGB
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.random.**getRandomRGB**(`alpha?`): `alt.RGBA`
 :::
 
@@ -61,13 +61,13 @@ Get a random color excluding alpha
 
 #### Defined in
 
-[shared/utility/random.ts:27](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/random.ts#L27)
+[shared/utility/random.ts:27](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L27)
 
 ___
 
 ### getRandomRGBA
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.random.**getRandomRGBA**(): `alt.RGBA`
 :::
 
@@ -79,13 +79,13 @@ Get a random color including random alpha
 
 #### Defined in
 
-[shared/utility/random.ts:38](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/random.ts#L38)
+[shared/utility/random.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L38)
 
 ___
 
 ### randomNumberBetween
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.random.**randomNumberBetween**(`min`, `max`): `number`
 :::
 
@@ -104,13 +104,13 @@ Get a random number between min and max (max excluded)
 
 #### Defined in
 
-[shared/utility/random.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/random.ts#L9)
+[shared/utility/random.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L9)
 
 ___
 
 ### randomNumberBetweenInclusive
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.random.**randomNumberBetweenInclusive**(`min`, `max`): `number`
 :::
 
@@ -129,13 +129,13 @@ Get a random number between min and max (max included)
 
 #### Defined in
 
-[shared/utility/random.ts:19](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/random.ts#L19)
+[shared/utility/random.ts:19](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L19)
 
 ___
 
 ### shuffle
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.random.**shuffle**<`T`\>(`array`): `T`[]
 :::
 
@@ -161,4 +161,4 @@ Shuffle an array, and return randomized order.
 
 #### Defined in
 
-[shared/utility/random.ts:54](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/random.ts#L54)
+[shared/utility/random.ts:54](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/random.ts#L54)

@@ -23,7 +23,7 @@ CommandInput
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/commands/index.ts#L23)
+[client/rmlui/commands/index.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/commands/index.ts#L23)
 
 ___
 
@@ -40,4 +40,4 @@ CommandInput
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/commands/index.ts#L15)
+[client/rmlui/commands/index.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/commands/index.ts#L15)

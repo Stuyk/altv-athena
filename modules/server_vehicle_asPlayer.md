@@ -11,7 +11,7 @@ order: 0
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.vehicle.asPlayer.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -32,9 +32,9 @@ Used to override vehicle control as a player functionality
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:123](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/asPlayer.ts#L123)
+[server/vehicle/asPlayer.ts:123](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/asPlayer.ts#L123)
 
-::: Tip
+::: tip Usage
 Athena.vehicle.asPlayer.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -55,9 +55,9 @@ Used to override vehicle control as a player functionality
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:124](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/asPlayer.ts#L124)
+[server/vehicle/asPlayer.ts:124](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/asPlayer.ts#L124)
 
-::: Tip
+::: tip Usage
 Athena.vehicle.asPlayer.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -78,13 +78,13 @@ Used to override vehicle control as a player functionality
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:125](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/asPlayer.ts#L125)
+[server/vehicle/asPlayer.ts:125](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/asPlayer.ts#L125)
 
 ___
 
 ### toggleDoor
 
-::: Tip
+::: tip Usage
 Athena.vehicle.asPlayer.**toggleDoor**(`player`, `vehicle`, `door`): `any`
 :::
 
@@ -104,13 +104,13 @@ Toggles a door lock as if a player toggled it.
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:85](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/asPlayer.ts#L85)
+[server/vehicle/asPlayer.ts:85](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/asPlayer.ts#L85)
 
 ___
 
 ### toggleEngine
 
-::: Tip
+::: tip Usage
 Athena.vehicle.asPlayer.**toggleEngine**(`player`, `vehicle`): `any`
 :::
 
@@ -129,13 +129,13 @@ Toggles an engine lock as if a player toggled it.
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:60](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/asPlayer.ts#L60)
+[server/vehicle/asPlayer.ts:60](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/asPlayer.ts#L60)
 
 ___
 
 ### toggleLock
 
-::: Tip
+::: tip Usage
 Athena.vehicle.asPlayer.**toggleLock**(`player`, `vehicle`): `any`
 :::
 
@@ -154,4 +154,4 @@ Toggles a vehicle lock as if a player toggled it.
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:31](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/vehicle/asPlayer.ts#L31)
+[server/vehicle/asPlayer.ts:31](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/vehicle/asPlayer.ts#L31)

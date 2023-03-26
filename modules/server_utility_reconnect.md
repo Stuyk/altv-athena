@@ -23,13 +23,13 @@ order: 0
 
 #### Defined in
 
-[server/utility/reconnect.ts:39](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/reconnect.ts#L39)
+[server/utility/reconnect.ts:39](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/reconnect.ts#L39)
 
 ## Functions
 
 ### invoke
 
-::: Tip
+::: tip Usage
 Athena.utility.reconnect.**invoke**(): `Promise`<`void`\>
 :::
 
@@ -39,13 +39,13 @@ Athena.utility.reconnect.**invoke**(): `Promise`<`void`\>
 
 #### Defined in
 
-[server/utility/reconnect.ts:5](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/reconnect.ts#L5)
+[server/utility/reconnect.ts:5](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/reconnect.ts#L5)
 
 ___
 
 ### isWindows
 
-::: Tip
+::: tip Usage
 Athena.utility.reconnect.**isWindows**(): `boolean`
 :::
 
@@ -55,13 +55,13 @@ Athena.utility.reconnect.**isWindows**(): `boolean`
 
 #### Defined in
 
-[server/utility/reconnect.ts:19](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/reconnect.ts#L19)
+[server/utility/reconnect.ts:19](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/reconnect.ts#L19)
 
 ___
 
 ### reconnect
 
-::: Tip
+::: tip Usage
 Athena.utility.reconnect.**reconnect**(): `Promise`<`void`\>
 :::
 
@@ -71,4 +71,4 @@ Athena.utility.reconnect.**reconnect**(): `Promise`<`void`\>
 
 #### Defined in
 
-[server/utility/reconnect.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/utility/reconnect.ts#L23)
+[server/utility/reconnect.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/utility/reconnect.ts#L23)

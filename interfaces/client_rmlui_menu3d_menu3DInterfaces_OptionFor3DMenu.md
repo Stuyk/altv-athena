@@ -17,7 +17,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.menu3d.menu3DInterfaces.OptionFor3DMenu.(): `void`
 :::
 
@@ -33,7 +33,7 @@ OptionFor3DMenu
 
 #### Defined in
 
-[client/rmlui/menu3d/menu3DInterfaces.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu3d/menu3DInterfaces.ts#L15)
+[client/rmlui/menu3d/menu3DInterfaces.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu3d/menu3DInterfaces.ts#L15)
 
 ___
 
@@ -49,4 +49,4 @@ OptionFor3DMenu
 
 #### Defined in
 
-[client/rmlui/menu3d/menu3DInterfaces.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu3d/menu3DInterfaces.ts#L8)
+[client/rmlui/menu3d/menu3DInterfaces.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu3d/menu3DInterfaces.ts#L8)

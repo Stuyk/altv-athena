@@ -15,7 +15,7 @@ order: 0
 
 ### decrease
 
-::: Tip
+::: tip Usage
 Athena.systems.global.**decrease**(`key`, `decreaseByValue?`, `startValue?`): `Promise`<`boolean`\>
 :::
 
@@ -35,13 +35,13 @@ Decrease the value of a key in the document by a given value
 
 #### Defined in
 
-[server/systems/global.ts:113](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L113)
+[server/systems/global.ts:113](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/global.ts#L113)
 
 ___
 
 ### get
 
-::: Tip
+::: tip Usage
 Athena.systems.global.**get**<`IGlobal`\>(): `Promise`<`IGlobal`\>
 :::
 
@@ -61,13 +61,13 @@ A promise of an IGlobal object.
 
 #### Defined in
 
-[server/systems/global.ts:80](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L80)
+[server/systems/global.ts:80](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/global.ts#L80)
 
 ___
 
 ### getKey
 
-::: Tip
+::: tip Usage
 Athena.systems.global.**getKey**<`T`\>(`key`): `Promise`<`T`\>
 :::
 
@@ -93,13 +93,13 @@ The value of the key.
 
 #### Defined in
 
-[server/systems/global.ts:70](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L70)
+[server/systems/global.ts:70](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/global.ts#L70)
 
 ___
 
 ### increase
 
-::: Tip
+::: tip Usage
 Athena.systems.global.**increase**(`key`, `increaseByValue?`, `startValue?`): `Promise`<`boolean`\>
 :::
 
@@ -119,13 +119,13 @@ Increase the value of a key in a document by a given value
 
 #### Defined in
 
-[server/systems/global.ts:90](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L90)
+[server/systems/global.ts:90](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/global.ts#L90)
 
 ___
 
 ### isReady
 
-::: Tip
+::: tip Usage
 Athena.systems.global.**isReady**(): `Promise`<`boolean`\>
 :::
 
@@ -140,13 +140,13 @@ defined.
 
 #### Defined in
 
-[server/systems/global.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L37)
+[server/systems/global.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/global.ts#L37)
 
 ___
 
 ### setKey
 
-::: Tip
+::: tip Usage
 Athena.systems.global.**setKey**<`T`\>(`key`, `value`): `Promise`<`void`\>
 :::
 
@@ -171,4 +171,4 @@ It sets and overrides the value of the key in the database.
 
 #### Defined in
 
-[server/systems/global.ts:60](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/global.ts#L60)
+[server/systems/global.ts:60](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/global.ts#L60)

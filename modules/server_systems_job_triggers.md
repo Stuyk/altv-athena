@@ -11,7 +11,7 @@ order: 0
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.job.triggers.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -32,9 +32,9 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/triggers.ts:110](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/triggers.ts#L110)
+[server/systems/job/triggers.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L110)
 
-::: Tip
+::: tip Usage
 Athena.systems.job.triggers.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -55,9 +55,9 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/triggers.ts:111](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/triggers.ts#L111)
+[server/systems/job/triggers.ts:111](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L111)
 
-::: Tip
+::: tip Usage
 Athena.systems.job.triggers.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -78,13 +78,13 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/triggers.ts:112](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/triggers.ts#L112)
+[server/systems/job/triggers.ts:112](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L112)
 
 ___
 
 ### tryAnimation
 
-::: Tip
+::: tip Usage
 Athena.systems.job.triggers.**tryAnimation**(`player`, `objective`): `any`
 :::
 
@@ -107,13 +107,13 @@ This should almost never be invoked manually.
 
 #### Defined in
 
-[server/systems/job/triggers.ts:41](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/triggers.ts#L41)
+[server/systems/job/triggers.ts:41](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L41)
 
 ___
 
 ### tryAttach
 
-::: Tip
+::: tip Usage
 Athena.systems.job.triggers.**tryAttach**(`player`, `objective`): `any`
 :::
 
@@ -136,13 +136,13 @@ This should almost never be invoked manually.
 
 #### Defined in
 
-[server/systems/job/triggers.ts:82](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/triggers.ts#L82)
+[server/systems/job/triggers.ts:82](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L82)
 
 ___
 
 ### tryEventCall
 
-::: Tip
+::: tip Usage
 Athena.systems.job.triggers.**tryEventCall**(`player`, `objective`): `any`
 :::
 
@@ -165,4 +165,4 @@ Try calling an event. This should almost never be invoked manually.
 
 #### Defined in
 
-[server/systems/job/triggers.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/triggers.ts#L15)
+[server/systems/job/triggers.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/triggers.ts#L15)

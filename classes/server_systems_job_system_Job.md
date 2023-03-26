@@ -63,7 +63,7 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:68](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L68)
+[server/systems/job/system.ts:68](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L68)
 
 ## Properties
 
@@ -73,7 +73,7 @@ Job
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.(`job`): `Promise`<`void`\>
 :::
 
@@ -89,7 +89,7 @@ Athena.systems.job.system.Job.(`job`): `Promise`<`void`\>
 
 #### Defined in
 
-[server/systems/job/system.ts:56](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L56)
+[server/systems/job/system.ts:56](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L56)
 
 ___
 
@@ -105,7 +105,7 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L51)
+[server/systems/job/system.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L51)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 #### Defined in
 
-[server/systems/job/system.ts:53](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L53)
+[server/systems/job/system.ts:53](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L53)
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 #### Defined in
 
-[server/systems/job/system.ts:52](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L52)
+[server/systems/job/system.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L52)
 
 ___
 
@@ -135,7 +135,7 @@ ___
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.(`job`, `reason`): `void`
 :::
 
@@ -152,7 +152,7 @@ Athena.systems.job.system.Job.(`job`, `reason`): `void`
 
 #### Defined in
 
-[server/systems/job/system.ts:57](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L57)
+[server/systems/job/system.ts:57](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L57)
 
 ___
 
@@ -162,7 +162,7 @@ ___
 
 #### Defined in
 
-[server/systems/job/system.ts:55](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L55)
+[server/systems/job/system.ts:55](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L55)
 
 ___
 
@@ -172,13 +172,13 @@ ___
 
 #### Defined in
 
-[server/systems/job/system.ts:54](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L54)
+[server/systems/job/system.ts:54](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L54)
 
 ## Methods
 
 ### addNextObjective
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**addNextObjective**(`objectiveData`): `void`
 :::
 
@@ -200,13 +200,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:323](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L323)
+[server/systems/job/system.ts:323](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L323)
 
 ___
 
 ### addObjective
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**addObjective**(`objectiveData`): `void`
 :::
 
@@ -229,13 +229,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:92](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L92)
+[server/systems/job/system.ts:92](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L92)
 
 ___
 
 ### addPlayer
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**addPlayer**(`player`): `void`
 :::
 
@@ -259,13 +259,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:78](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L78)
+[server/systems/job/system.ts:78](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L78)
 
 ___
 
 ### addVehicle
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**addVehicle**(`player`, `model`, `pos`, `rot`, `color1?`, `color2?`): `Vehicle`
 :::
 
@@ -298,13 +298,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:108](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L108)
+[server/systems/job/system.ts:108](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L108)
 
 ___
 
 ### getCurrentObjective
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**getCurrentObjective**(): `any`
 :::
 
@@ -320,13 +320,13 @@ JobBuilder
 
 #### Defined in
 
-[server/systems/job/system.ts:303](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L303)
+[server/systems/job/system.ts:303](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L303)
 
 ___
 
 ### getElapsedMilliseconds
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**getElapsedMilliseconds**(): `number`
 :::
 
@@ -342,13 +342,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:313](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L313)
+[server/systems/job/system.ts:313](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L313)
 
 ___
 
 ### getPlayer
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**getPlayer**(): `Player`
 :::
 
@@ -364,13 +364,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:253](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L253)
+[server/systems/job/system.ts:253](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L253)
 
 ___
 
 ### goToNextObjective
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.`Private` **goToNextObjective**(): `Promise`<`void`\>
 :::
 
@@ -386,13 +386,13 @@ JobBuilder
 
 #### Defined in
 
-[server/systems/job/system.ts:221](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L221)
+[server/systems/job/system.ts:221](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L221)
 
 ___
 
 ### loadObjectives
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**loadObjectives**(`objectiveData`): `void`
 :::
 
@@ -414,13 +414,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:173](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L173)
+[server/systems/job/system.ts:173](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L173)
 
 ___
 
 ### quit
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**quit**(`reason`): `void`
 :::
 
@@ -442,13 +442,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:198](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L198)
+[server/systems/job/system.ts:198](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L198)
 
 ___
 
 ### removeAllVehicles
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**removeAllVehicles**(): `void`
 :::
 
@@ -464,13 +464,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:138](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L138)
+[server/systems/job/system.ts:138](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L138)
 
 ___
 
 ### removeAttachable
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**removeAttachable**(): `void`
 :::
 
@@ -486,13 +486,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:262](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L262)
+[server/systems/job/system.ts:262](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L262)
 
 ___
 
 ### removeVehicle
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**removeVehicle**(`uid`): `void`
 :::
 
@@ -514,13 +514,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:153](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L153)
+[server/systems/job/system.ts:153](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L153)
 
 ___
 
 ### setCompletedCallback
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**setCompletedCallback**(`callback`): `void`
 :::
 
@@ -542,13 +542,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:335](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L335)
+[server/systems/job/system.ts:335](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L335)
 
 ___
 
 ### setQuitCallback
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.**setQuitCallback**(`callback`): `void`
 :::
 
@@ -570,13 +570,13 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:345](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L345)
+[server/systems/job/system.ts:345](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L345)
 
 ___
 
 ### syncObjective
 
-::: Tip
+::: tip Usage
 Athena.systems.job.system.Job.`Private` **syncObjective**(): `void`
 :::
 
@@ -592,4 +592,4 @@ Job
 
 #### Defined in
 
-[server/systems/job/system.ts:276](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/system.ts#L276)
+[server/systems/job/system.ts:276](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/system.ts#L276)

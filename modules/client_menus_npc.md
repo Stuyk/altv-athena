@@ -15,7 +15,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.npc.(`scriptID`, `ped`, `options`): [`player`](server_config.md#player)[]
 :::
 
@@ -33,13 +33,13 @@ AthenaClient.menus.npc.(`scriptID`, `ped`, `options`): [`player`](server_config.
 
 #### Defined in
 
-[client/menus/npc.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/npc.ts#L8)
+[client/menus/npc.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/npc.ts#L8)
 
 ## Functions
 
 ### addInjection
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.npc.**addInjection**(`callback`): `void`
 :::
 
@@ -65,13 +65,13 @@ NpcWheelMenu
 
 #### Defined in
 
-[client/menus/npc.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/npc.ts#L21)
+[client/menus/npc.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/npc.ts#L21)
 
 ___
 
 ### open
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.npc.**open**(`scriptID`): `void`
 :::
 
@@ -95,4 +95,4 @@ NpcWheelMenu
 
 #### Defined in
 
-[client/menus/npc.ts:33](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/npc.ts#L33)
+[client/menus/npc.ts:33](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/npc.ts#L33)

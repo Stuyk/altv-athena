@@ -31,7 +31,7 @@ AcceptDeclineEvent
 
 #### Defined in
 
-[shared/interfaces/acceptDeclineEvent.ts:14](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/acceptDeclineEvent.ts#L14)
+[shared/interfaces/acceptDeclineEvent.ts:14](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/acceptDeclineEvent.ts#L14)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/acceptDeclineEvent.ts:10](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/acceptDeclineEvent.ts#L10)
+[shared/interfaces/acceptDeclineEvent.ts:10](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/acceptDeclineEvent.ts#L10)
 
 ___
 
@@ -58,4 +58,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/acceptDeclineEvent.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/acceptDeclineEvent.ts#L9)
+[shared/interfaces/acceptDeclineEvent.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/acceptDeclineEvent.ts#L9)

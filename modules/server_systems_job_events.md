@@ -11,7 +11,7 @@ order: 0
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.job.events.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -32,4 +32,4 @@ Used to override job objective checking functionality
 
 #### Defined in
 
-[server/systems/job/events.ts:52](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/job/events.ts#L52)
+[server/systems/job/events.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/job/events.ts#L52)

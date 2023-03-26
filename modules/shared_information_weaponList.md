@@ -15,7 +15,7 @@ order: 0
 
 ### getWeaponByName
 
-::: Tip
+::: tip Usage
 AthenaShared.information.weaponList.**getWeaponByName**(`name`): [`Weapon`](../interfaces/shared_information_weaponList_Weapon.md) \| ``null``
 :::
 
@@ -35,13 +35,13 @@ Get a weapon hash by its string name.
 
 #### Defined in
 
-[shared/information/weaponList.ts:1565](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/information/weaponList.ts#L1565)
+[shared/information/weaponList.ts:1565](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/information/weaponList.ts#L1565)
 
 ___
 
 ### getWeaponList
 
-::: Tip
+::: tip Usage
 AthenaShared.information.weaponList.**getWeaponList**(): [`Weapon`](../interfaces/shared_information_weaponList_Weapon.md)[]
 :::
 
@@ -55,13 +55,13 @@ An array of all the weapons in the WeaponList.
 
 #### Defined in
 
-[shared/information/weaponList.ts:1573](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/information/weaponList.ts#L1573)
+[shared/information/weaponList.ts:1573](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/information/weaponList.ts#L1573)
 
 ___
 
 ### getWeaponMap
 
-::: Tip
+::: tip Usage
 AthenaShared.information.weaponList.**getWeaponMap**(): `Object`
 :::
 
@@ -71,4 +71,4 @@ AthenaShared.information.weaponList.**getWeaponMap**(): `Object`
 
 #### Defined in
 
-[shared/information/weaponList.ts:1577](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/information/weaponList.ts#L1577)
+[shared/information/weaponList.ts:1577](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/information/weaponList.ts#L1577)

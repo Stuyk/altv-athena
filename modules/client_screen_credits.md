@@ -11,7 +11,7 @@ order: 0
 
 ### clear
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.credits.**clear**(): `void`
 :::
 
@@ -27,13 +27,13 @@ Shard
 
 #### Defined in
 
-[client/screen/credits.ts:18](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/credits.ts#L18)
+[client/screen/credits.ts:18](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/credits.ts#L18)
 
 ___
 
 ### create
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.credits.**create**(`credit`): `Promise`<`void`\>
 :::
 
@@ -51,4 +51,4 @@ Creates on-screen text that looks like the GTA:V credits.
 
 #### Defined in
 
-[client/screen/credits.ts:41](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/credits.ts#L41)
+[client/screen/credits.ts:41](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/credits.ts#L41)

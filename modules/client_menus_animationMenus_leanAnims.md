@@ -11,7 +11,7 @@ order: 0
 
 ### default
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.animationMenus.leanAnims.**default**(`callback`): ({ `callback`: (...`args`: `any`[]) => `void` ; `data`: `any`[] ; `name`: `string` = 'Lean 1' } \| { `callback`: () => `void` ; `data?`: `undefined` ; `name`: `string` = 'Next' })[]
 :::
 
@@ -27,4 +27,4 @@ AthenaClient.menus.animationMenus.leanAnims.**default**(`callback`): ({ `callbac
 
 #### Defined in
 
-[client/menus/animationMenus/leanAnims.ts:39](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/animationMenus/leanAnims.ts#L39)
+[client/menus/animationMenus/leanAnims.ts:39](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/animationMenus/leanAnims.ts#L39)

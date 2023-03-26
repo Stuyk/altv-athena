@@ -11,7 +11,7 @@ order: 0
 
 ### disable
 
-::: Tip
+::: tip Usage
 Athena.systems.defaults.weaponItems.**disable**(): `void`
 :::
 
@@ -32,4 +32,4 @@ Athena.systems.default.weaponItems.disable();
 
 #### Defined in
 
-[server/systems/defaults/weaponItems.ts:58](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/defaults/weaponItems.ts#L58)
+[server/systems/defaults/weaponItems.ts:58](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/weaponItems.ts#L58)

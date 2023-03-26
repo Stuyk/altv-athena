@@ -11,7 +11,7 @@ order: 0
 
 ### getGroundZ
 
-::: Tip
+::: tip Usage
 AthenaClient.world.position.**getGroundZ**(`pos`, `options?`): `alt.IVector3`
 :::
 
@@ -37,13 +37,13 @@ Otherwise, returns the original Vector3.
 
 #### Defined in
 
-[client/world/position.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/world/position.ts#L21)
+[client/world/position.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/world/position.ts#L21)
 
 ___
 
 ### isEntityBlockingPosition
 
-::: Tip
+::: tip Usage
 AthenaClient.world.position.**isEntityBlockingPosition**(`pos`, `range?`, `maxDistance?`): `boolean`
 :::
 
@@ -64,4 +64,4 @@ Should be used periodically and not in an every tick. Could be expensive.
 
 #### Defined in
 
-[client/world/position.ts:43](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/world/position.ts#L43)
+[client/world/position.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/world/position.ts#L43)

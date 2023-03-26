@@ -19,7 +19,7 @@ order: 0
 
 ### get
 
-::: Tip
+::: tip Usage
 AthenaShared.locale.locale.LocaleController.`Static` **get**(`key`, `...args`): `string`
 :::
 
@@ -44,13 +44,13 @@ LocaleController
 
 #### Defined in
 
-[shared/locale/locale.ts:46](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/locale/locale.ts#L46)
+[shared/locale/locale.ts:46](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/locale/locale.ts#L46)
 
 ___
 
 ### getWebviewLocale
 
-::: Tip
+::: tip Usage
 AthenaShared.locale.locale.LocaleController.`Static` **getWebviewLocale**(`key`): [`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object)
 :::
 
@@ -74,13 +74,13 @@ LocaleController
 
 #### Defined in
 
-[shared/locale/locale.ts:67](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/locale/locale.ts#L67)
+[shared/locale/locale.ts:67](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/locale/locale.ts#L67)
 
 ___
 
 ### setLanguage
 
-::: Tip
+::: tip Usage
 AthenaShared.locale.locale.LocaleController.`Static` **setLanguage**(`iso639?`): `void`
 :::
 
@@ -104,4 +104,4 @@ LocaleController
 
 #### Defined in
 
-[shared/locale/locale.ts:34](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/locale/locale.ts#L34)
+[shared/locale/locale.ts:34](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/locale/locale.ts#L34)

@@ -11,7 +11,7 @@ order: 0
 
 ### close
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.menu3d.**close**(): `Promise`<`void`\>
 :::
 
@@ -24,13 +24,13 @@ Make sure to wait for it to close before opening a new menu.
 
 #### Defined in
 
-[client/rmlui/menu3d/index.ts:192](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu3d/index.ts#L192)
+[client/rmlui/menu3d/index.ts:192](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu3d/index.ts#L192)
 
 ___
 
 ### create
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.menu3d.**create**(`pos`, `options`, `maxDistance?`): `void`
 :::
 
@@ -50,4 +50,4 @@ Create an in-world 3D menu with maximum options.
 
 #### Defined in
 
-[client/rmlui/menu3d/index.ts:166](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/menu3d/index.ts#L166)
+[client/rmlui/menu3d/index.ts:166](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/menu3d/index.ts#L166)

@@ -19,13 +19,13 @@ order: 0
 
 #### Defined in
 
-[shared/utility/weather.ts:19](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/weather.ts#L19)
+[shared/utility/weather.ts:19](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/weather.ts#L19)
 
 ## Functions
 
 ### getWeatherFromString
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.weather.**getWeatherFromString**(`weatherName`): `number`
 :::
 
@@ -41,4 +41,4 @@ AthenaShared.utility.weather.**getWeatherFromString**(`weatherName`): `number`
 
 #### Defined in
 
-[shared/utility/weather.ts:21](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/weather.ts#L21)
+[shared/utility/weather.ts:21](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/weather.ts#L21)

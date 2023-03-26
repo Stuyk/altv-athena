@@ -28,7 +28,7 @@ order: 0
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:28](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L28)
+[server/systems/inventory/manager.ts:28](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L28)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:29](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L29)
+[server/systems/inventory/manager.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L29)
 
 ___
 
@@ -55,13 +55,13 @@ ___
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:27](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L27)
+[server/systems/inventory/manager.ts:27](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L27)
 
 ## Functions
 
 ### add
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**add**<`CustomData`\>(`item`, `data`, `size?`): [`player`](server_config.md#player)[] \| `undefined`
 :::
 
@@ -91,13 +91,13 @@ Returns undefined or the new array of added items.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:312](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L312)
+[server/systems/inventory/manager.ts:312](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L312)
 
 ___
 
 ### addQuantity
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**addQuantity**(`item`, `amount`): [`ItemQuantityChange`](../interfaces/server_systems_inventory_manager_ItemQuantityChange.md) \| `undefined`
 :::
 
@@ -122,13 +122,13 @@ If you wish to modify a full item use `add<Item>(...)`
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:158](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L158)
+[server/systems/inventory/manager.ts:158](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L158)
 
 ___
 
 ### calculateItemWeight
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**calculateItemWeight**(`baseItem`, `storedItem`): [`player`](server_config.md#player)
 :::
 
@@ -147,13 +147,13 @@ Calculate the total weight of the item, and return the modified item with total 
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:38](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L38)
+[server/systems/inventory/manager.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L38)
 
 ___
 
 ### clearData
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**clearData**(`item`): `any`
 :::
 
@@ -173,13 +173,13 @@ Always returns a new item with the modified contents.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:270](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L270)
+[server/systems/inventory/manager.ts:270](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L270)
 
 ___
 
 ### combineAt
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**combineAt**(`fromSlot`, `toSlot`, `data`): [`player`](server_config.md#player)[] \| `undefined`
 :::
 
@@ -200,13 +200,13 @@ It's like a stack method.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:541](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L541)
+[server/systems/inventory/manager.ts:541](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L541)
 
 ___
 
 ### combineAtComplex
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**combineAtComplex**(`from`, `to`): [`ComplexSwapReturn`](server_systems_inventory_manager.md#ComplexSwapReturn) \| `undefined`
 :::
 
@@ -223,13 +223,13 @@ Athena.systems.inventory.manager.**combineAtComplex**(`from`, `to`): [`ComplexSw
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:593](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L593)
+[server/systems/inventory/manager.ts:593](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L593)
 
 ___
 
 ### compare
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**compare**(`firstItem`, `secondItem`): `boolean`
 :::
 
@@ -248,13 +248,13 @@ Compare two items to check if they are the same version.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:924](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L924)
+[server/systems/inventory/manager.ts:924](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L924)
 
 ___
 
 ### convertFromStored
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**convertFromStored**(`data`): [`player`](server_config.md#player)<[`player`](server_config.md#player), {}\>[]
 :::
 
@@ -274,13 +274,13 @@ Convert an array of stored items into full items
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:287](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L287)
+[server/systems/inventory/manager.ts:287](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L287)
 
 ___
 
 ### hasItem
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**hasItem**(`dataSet`, `dbName`, `quantity`, `version?`): `boolean`
 :::
 
@@ -301,13 +301,13 @@ Check if the player has enough of an item in a given data set.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:193](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L193)
+[server/systems/inventory/manager.ts:193](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L193)
 
 ___
 
 ### modifyItemQuantity
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**modifyItemQuantity**(`item`, `amount`, `isRemoving?`): [`ItemQuantityChange`](../interfaces/server_systems_inventory_manager_ItemQuantityChange.md)
 :::
 
@@ -333,13 +333,13 @@ It will automatically re-calculate weight if the baseItem weight is present.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:66](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L66)
+[server/systems/inventory/manager.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L66)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -360,9 +360,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:976](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L976)
+[server/systems/inventory/manager.ts:976](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L976)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -383,9 +383,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:977](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L977)
+[server/systems/inventory/manager.ts:977](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L977)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -406,9 +406,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:978](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L978)
+[server/systems/inventory/manager.ts:978](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L978)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -429,9 +429,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:979](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L979)
+[server/systems/inventory/manager.ts:979](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L979)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -452,9 +452,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:980](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L980)
+[server/systems/inventory/manager.ts:980](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L980)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -475,9 +475,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:981](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L981)
+[server/systems/inventory/manager.ts:981](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L981)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -498,9 +498,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:982](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L982)
+[server/systems/inventory/manager.ts:982](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L982)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -521,9 +521,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:983](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L983)
+[server/systems/inventory/manager.ts:983](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L983)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -544,9 +544,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:984](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L984)
+[server/systems/inventory/manager.ts:984](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L984)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -567,9 +567,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:985](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L985)
+[server/systems/inventory/manager.ts:985](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L985)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -590,9 +590,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:986](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L986)
+[server/systems/inventory/manager.ts:986](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L986)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -613,9 +613,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:987](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L987)
+[server/systems/inventory/manager.ts:987](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L987)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -636,9 +636,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:988](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L988)
+[server/systems/inventory/manager.ts:988](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L988)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -659,9 +659,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:989](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L989)
+[server/systems/inventory/manager.ts:989](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L989)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -682,9 +682,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:990](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L990)
+[server/systems/inventory/manager.ts:990](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L990)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -705,9 +705,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:991](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L991)
+[server/systems/inventory/manager.ts:991](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L991)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -728,9 +728,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:992](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L992)
+[server/systems/inventory/manager.ts:992](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L992)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -751,9 +751,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:993](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L993)
+[server/systems/inventory/manager.ts:993](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L993)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -774,9 +774,9 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:994](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L994)
+[server/systems/inventory/manager.ts:994](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L994)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -797,13 +797,13 @@ Used to override inventory item manager functionality
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:995](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L995)
+[server/systems/inventory/manager.ts:995](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L995)
 
 ___
 
 ### removeZeroQuantityItems
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**removeZeroQuantityItems**(`items`): ([`player`](server_config.md#player) \| [`player`](server_config.md#player))[]
 :::
 
@@ -821,13 +821,13 @@ Remove all items with zero quantity.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:123](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L123)
+[server/systems/inventory/manager.ts:123](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L123)
 
 ___
 
 ### setData
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**setData**<`DataType`\>(`item`, `data`): `any`
 :::
 
@@ -854,13 +854,13 @@ Always returns a new item with the modified contents.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:246](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L246)
+[server/systems/inventory/manager.ts:246](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L246)
 
 ___
 
 ### splitAt
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**splitAt**(`slot`, `data`, `splitCount`, `dataSize?`): [`player`](server_config.md#player)[] \| `undefined`
 :::
 
@@ -881,13 +881,13 @@ Split an item into a new item given the slot number, and a split size.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:474](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L474)
+[server/systems/inventory/manager.ts:474](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L474)
 
 ___
 
 ### sub
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**sub**<`CustomData`\>(`item`, `data`): [`player`](server_config.md#player)[] \| `undefined`
 :::
 
@@ -912,13 +912,13 @@ Subtract an item quantity from a data set.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:413](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L413)
+[server/systems/inventory/manager.ts:413](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L413)
 
 ___
 
 ### subQuantity
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**subQuantity**(`item`, `amount`): [`ItemQuantityChange`](../interfaces/server_systems_inventory_manager_ItemQuantityChange.md) \| `undefined`
 :::
 
@@ -941,13 +941,13 @@ If you wish to modify a full item use `remove<Item>(...)`
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:177](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L177)
+[server/systems/inventory/manager.ts:177](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L177)
 
 ___
 
 ### swap
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**swap**(`fromSlot`, `toSlot`, `data`, `dataSize?`): [`player`](server_config.md#player)[] \| `undefined`
 :::
 
@@ -968,13 +968,13 @@ Swaps slots between a single data set.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:662](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L662)
+[server/systems/inventory/manager.ts:662](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L662)
 
 ___
 
 ### swapBetween
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**swapBetween**(`from`, `to`): [`ComplexSwapReturn`](server_systems_inventory_manager.md#ComplexSwapReturn) \| `undefined`
 :::
 
@@ -993,13 +993,13 @@ Swap items between two different data sets; with a given size.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:710](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L710)
+[server/systems/inventory/manager.ts:710](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L710)
 
 ___
 
 ### toggleItem
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**toggleItem**(`player`, `slot`, `type`): `Promise`<`boolean`\>
 :::
 
@@ -1021,13 +1021,13 @@ Automatically saves.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:850](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L850)
+[server/systems/inventory/manager.ts:850](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L850)
 
 ___
 
 ### upsertData
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**upsertData**<`DataType`\>(`item`, `data`): `any`
 :::
 
@@ -1050,13 +1050,13 @@ Athena.systems.inventory.manager.**upsertData**<`DataType`\>(`item`, `data`): `a
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:219](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L219)
+[server/systems/inventory/manager.ts:219](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L219)
 
 ___
 
 ### useItem
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.manager.**useItem**(`player`, `slot`, `type?`, `eventToCall?`): `any`
 :::
 
@@ -1077,4 +1077,4 @@ Invokes an item use effect
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:783](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/manager.ts#L783)
+[server/systems/inventory/manager.ts:783](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/manager.ts#L783)

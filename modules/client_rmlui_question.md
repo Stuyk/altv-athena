@@ -15,7 +15,7 @@ order: 0
 
 ### cancel
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.question.**cancel**(): `Promise`<`void`\>
 :::
 
@@ -25,13 +25,13 @@ AthenaClient.rmlui.question.**cancel**(): `Promise`<`void`\>
 
 #### Defined in
 
-[client/rmlui/question/index.ts:140](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/question/index.ts#L140)
+[client/rmlui/question/index.ts:140](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/question/index.ts#L140)
 
 ___
 
 ### create
 
-::: Tip
+::: tip Usage
 AthenaClient.rmlui.question.**create**(`info`): `Promise`<`boolean`\>
 :::
 
@@ -51,4 +51,4 @@ Create a box that asks for a simple yes or no answer.
 
 #### Defined in
 
-[client/rmlui/question/index.ts:117](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/rmlui/question/index.ts#L117)
+[client/rmlui/question/index.ts:117](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/rmlui/question/index.ts#L117)

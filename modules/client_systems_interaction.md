@@ -11,7 +11,7 @@ order: 0
 
 ### invoke
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.interaction.**invoke**(): `void`
 :::
 
@@ -23,13 +23,13 @@ Invoke an interaction
 
 #### Defined in
 
-[client/systems/interaction.ts:32](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/interaction.ts#L32)
+[client/systems/interaction.ts:32](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/interaction.ts#L32)
 
 ___
 
 ### isInteractionAvailable
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.interaction.**isInteractionAvailable**(): `boolean`
 :::
 
@@ -41,4 +41,4 @@ Check if an interaction is currently available to be invoked
 
 #### Defined in
 
-[client/systems/interaction.ts:44](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/interaction.ts#L44)
+[client/systems/interaction.ts:44](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/interaction.ts#L44)

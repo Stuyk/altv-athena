@@ -31,7 +31,7 @@ ProgressBar
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:30](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/progressBar.ts#L30)
+[shared/interfaces/progressBar.ts:30](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L30)
 
 ___
 
@@ -47,7 +47,7 @@ ProgressBar
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:44](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/progressBar.ts#L44)
+[shared/interfaces/progressBar.ts:44](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L44)
 
 ___
 
@@ -63,7 +63,7 @@ ProgressBar
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:67](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/progressBar.ts#L67)
+[shared/interfaces/progressBar.ts:67](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L67)
 
 ___
 
@@ -79,7 +79,7 @@ ProgressBar
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:37](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/progressBar.ts#L37)
+[shared/interfaces/progressBar.ts:37](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L37)
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:53](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/progressBar.ts#L53)
+[shared/interfaces/progressBar.ts:53](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L53)
 
 ___
 
@@ -114,7 +114,7 @@ ProgressBar
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/progressBar.ts#L23)
+[shared/interfaces/progressBar.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L23)
 
 ___
 
@@ -130,7 +130,7 @@ ProgressBar
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:60](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/progressBar.ts#L60)
+[shared/interfaces/progressBar.ts:60](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L60)
 
 ___
 
@@ -146,7 +146,7 @@ ProgressBar
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/progressBar.ts#L51)
+[shared/interfaces/progressBar.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L51)
 
 ___
 
@@ -162,4 +162,4 @@ ProgressBar
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/progressBar.ts#L15)
+[shared/interfaces/progressBar.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/progressBar.ts#L15)

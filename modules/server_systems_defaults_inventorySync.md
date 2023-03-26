@@ -11,7 +11,7 @@ order: 0
 
 ### disable
 
-::: Tip
+::: tip Usage
 Athena.systems.defaults.inventorySync.**disable**(): `void`
 :::
 
@@ -31,4 +31,4 @@ Athena.systems.default.ammo.disable();
 
 #### Defined in
 
-[server/systems/defaults/inventorySync.ts:114](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/defaults/inventorySync.ts#L114)
+[server/systems/defaults/inventorySync.ts:114](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/defaults/inventorySync.ts#L114)

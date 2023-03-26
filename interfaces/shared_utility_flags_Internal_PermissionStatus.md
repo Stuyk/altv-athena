@@ -23,7 +23,7 @@ order: 0
 
 #### Type declaration
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.PermissionStatus.(`this`, `ev`): `any`
 :::
 
@@ -56,7 +56,7 @@ ___
 
 ### addEventListener
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.PermissionStatus.**addEventListener**<`K`\>(`type`, `listener`, `options?`): `void`
 :::
 
@@ -86,7 +86,7 @@ EventTarget.addEventListener
 
 ../../node_modules/typescript/lib/lib.dom.d.ts:10525
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.PermissionStatus.**addEventListener**(`type`, `listener`, `options?`): `void`
 :::
 
@@ -114,7 +114,7 @@ ___
 
 ### dispatchEvent
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.PermissionStatus.**dispatchEvent**(`event`): `boolean`
 :::
 
@@ -142,7 +142,7 @@ ___
 
 ### removeEventListener
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.PermissionStatus.**removeEventListener**<`K`\>(`type`, `listener`, `options?`): `void`
 :::
 
@@ -172,7 +172,7 @@ EventTarget.removeEventListener
 
 ../../node_modules/typescript/lib/lib.dom.d.ts:10527
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.flags.Internal.PermissionStatus.**removeEventListener**(`type`, `listener`, `options?`): `void`
 :::
 

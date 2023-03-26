@@ -11,7 +11,7 @@ order: 0
 
 ### default
 
-::: Tip
+::: tip Usage
 AthenaClient.menus.animationMenus.danceAnims.**default**(`callback`): { `callback`: (...`args`: `any`[]) => `void` ; `data`: `any`[] ; `name`: `string` = 'Dance F1' }[]
 :::
 
@@ -27,4 +27,4 @@ AthenaClient.menus.animationMenus.danceAnims.**default**(`callback`): { `callbac
 
 #### Defined in
 
-[client/menus/animationMenus/danceAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/menus/animationMenus/danceAnims.ts#L3)
+[client/menus/animationMenus/danceAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/menus/animationMenus/danceAnims.ts#L3)

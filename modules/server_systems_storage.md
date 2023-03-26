@@ -15,7 +15,7 @@ order: 0
 
 ### closeOnDisconnect
 
-::: Tip
+::: tip Usage
 Athena.systems.storage.**closeOnDisconnect**(`player`, `id`): `boolean`
 :::
 
@@ -40,13 +40,13 @@ Returns false if a player binding is already present.
 
 #### Defined in
 
-[server/systems/storage.ts:154](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/storage.ts#L154)
+[server/systems/storage.ts:154](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L154)
 
 ___
 
 ### create
 
-::: Tip
+::: tip Usage
 Athena.systems.storage.**create**(`items`): `Promise`<`string`\>
 :::
 
@@ -68,13 +68,13 @@ Use the ID returned to fetch the data with the other storage functions.
 
 #### Defined in
 
-[server/systems/storage.ts:42](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/storage.ts#L42)
+[server/systems/storage.ts:42](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L42)
 
 ___
 
 ### get
 
-::: Tip
+::: tip Usage
 Athena.systems.storage.**get**<`CustomData`\>(`id`): `Promise`<[`player`](server_config.md#player)<`CustomData`\>[]\>
 :::
 
@@ -100,13 +100,13 @@ Fetches stored items from a storage array.
 
 #### Defined in
 
-[server/systems/storage.ts:72](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/storage.ts#L72)
+[server/systems/storage.ts:72](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L72)
 
 ___
 
 ### isOpen
 
-::: Tip
+::: tip Usage
 Athena.systems.storage.**isOpen**(`id`): `boolean`
 :::
 
@@ -126,13 +126,13 @@ Checks if a storage identifier is currently in use.
 
 #### Defined in
 
-[server/systems/storage.ts:108](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/storage.ts#L108)
+[server/systems/storage.ts:108](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L108)
 
 ___
 
 ### removeAsOpen
 
-::: Tip
+::: tip Usage
 Athena.systems.storage.**removeAsOpen**(`id`): `boolean`
 :::
 
@@ -154,13 +154,13 @@ Returns true if the value was successfully removed.
 
 #### Defined in
 
-[server/systems/storage.ts:121](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/storage.ts#L121)
+[server/systems/storage.ts:121](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L121)
 
 ___
 
 ### set
 
-::: Tip
+::: tip Usage
 Athena.systems.storage.**set**(`id`, `items`): `Promise`<`boolean`\>
 :::
 
@@ -181,13 +181,13 @@ Stores items into a database instance by providing the storage identifier, and t
 
 #### Defined in
 
-[server/systems/storage.ts:60](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/storage.ts#L60)
+[server/systems/storage.ts:60](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L60)
 
 ___
 
 ### setAsOpen
 
-::: Tip
+::: tip Usage
 Athena.systems.storage.**setAsOpen**(`id`): `boolean`
 :::
 
@@ -209,4 +209,4 @@ Returns true if the value was set to in-use, and didn't already exist.
 
 #### Defined in
 
-[server/systems/storage.ts:91](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/storage.ts#L91)
+[server/systems/storage.ts:91](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/storage.ts#L91)

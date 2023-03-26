@@ -25,7 +25,7 @@ order: 0
 
 #### Defined in
 
-[client/systems/entitySelector.ts:12](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/entitySelector.ts#L12)
+[client/systems/entitySelector.ts:12](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/entitySelector.ts#L12)
 
 ___
 
@@ -35,13 +35,13 @@ ___
 
 #### Defined in
 
-[client/systems/entitySelector.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/entitySelector.ts#L11)
+[client/systems/entitySelector.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/entitySelector.ts#L11)
 
 ## Functions
 
 ### getSelectables
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.entitySelector.**getSelectables**(): [`TargetInfo`](client_systems_entitySelector.md#TargetInfo)[]
 :::
 
@@ -53,13 +53,13 @@ Get all of the current entities in the player's radius.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:268](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/entitySelector.ts#L268)
+[client/systems/entitySelector.ts:268](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/entitySelector.ts#L268)
 
 ___
 
 ### getSelection
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.entitySelector.**getSelection**(): [`TargetInfo`](client_systems_entitySelector.md#TargetInfo) \| `undefined`
 :::
 
@@ -71,13 +71,13 @@ Return the currently selected entity.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:255](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/entitySelector.ts#L255)
+[client/systems/entitySelector.ts:255](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/entitySelector.ts#L255)
 
 ___
 
 ### setInteraction
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.entitySelector.**setInteraction**(`interaction`): `void`
 :::
 
@@ -95,13 +95,13 @@ Sets an interaction to be pushed into the entity list.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:277](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/entitySelector.ts#L277)
+[client/systems/entitySelector.ts:277](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/entitySelector.ts#L277)
 
 ___
 
 ### setMarkerColor
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.entitySelector.**setMarkerColor**(`customColor`): `void`
 :::
 
@@ -119,13 +119,13 @@ Change the defualt marker colour.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:294](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/entitySelector.ts#L294)
+[client/systems/entitySelector.ts:294](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/entitySelector.ts#L294)
 
 ___
 
 ### setMarkerOff
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.entitySelector.**setMarkerOff**(): `void`
 :::
 
@@ -137,13 +137,13 @@ Turn the marker off.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:285](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/entitySelector.ts#L285)
+[client/systems/entitySelector.ts:285](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/entitySelector.ts#L285)
 
 ___
 
 ### setMarkerSize
 
-::: Tip
+::: tip Usage
 AthenaClient.systems.entitySelector.**setMarkerSize**(`markerSize`): `void`
 :::
 
@@ -161,4 +161,4 @@ Change the defualt marker size.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:303](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/systems/entitySelector.ts#L303)
+[client/systems/entitySelector.ts:303](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/systems/entitySelector.ts#L303)

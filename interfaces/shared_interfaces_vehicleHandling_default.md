@@ -25,7 +25,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:8](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L8)
+[shared/interfaces/vehicleHandling.ts:8](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L8)
 
 ___
 
@@ -41,7 +41,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:15](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L15)
+[shared/interfaces/vehicleHandling.ts:15](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L15)
 
 ___
 
@@ -57,7 +57,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:22](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L22)
+[shared/interfaces/vehicleHandling.ts:22](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L22)
 
 ___
 
@@ -73,7 +73,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:29](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L29)
+[shared/interfaces/vehicleHandling.ts:29](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L29)
 
 ___
 
@@ -89,7 +89,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:36](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L36)
+[shared/interfaces/vehicleHandling.ts:36](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L36)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:38](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L38)
+[shared/interfaces/vehicleHandling.ts:38](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L38)
 
 ___
 
@@ -115,7 +115,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:45](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L45)
+[shared/interfaces/vehicleHandling.ts:45](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L45)
 
 ___
 
@@ -131,7 +131,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:52](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L52)
+[shared/interfaces/vehicleHandling.ts:52](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L52)
 
 ___
 
@@ -155,7 +155,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:59](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L59)
+[shared/interfaces/vehicleHandling.ts:59](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L59)
 
 ___
 
@@ -171,7 +171,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:66](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L66)
+[shared/interfaces/vehicleHandling.ts:66](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L66)
 
 ___
 
@@ -187,7 +187,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:73](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L73)
+[shared/interfaces/vehicleHandling.ts:73](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L73)
 
 ___
 
@@ -203,7 +203,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:80](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L80)
+[shared/interfaces/vehicleHandling.ts:80](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L80)
 
 ___
 
@@ -219,7 +219,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:87](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L87)
+[shared/interfaces/vehicleHandling.ts:87](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L87)
 
 ___
 
@@ -235,7 +235,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:94](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L94)
+[shared/interfaces/vehicleHandling.ts:94](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L94)
 
 ___
 
@@ -251,7 +251,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:101](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L101)
+[shared/interfaces/vehicleHandling.ts:101](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L101)
 
 ___
 
@@ -267,7 +267,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:108](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L108)
+[shared/interfaces/vehicleHandling.ts:108](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L108)
 
 ___
 
@@ -277,7 +277,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:110](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L110)
+[shared/interfaces/vehicleHandling.ts:110](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L110)
 
 ___
 
@@ -293,7 +293,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:117](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L117)
+[shared/interfaces/vehicleHandling.ts:117](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L117)
 
 ___
 
@@ -309,7 +309,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:124](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L124)
+[shared/interfaces/vehicleHandling.ts:124](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L124)
 
 ___
 
@@ -326,7 +326,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:132](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L132)
+[shared/interfaces/vehicleHandling.ts:132](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L132)
 
 ___
 
@@ -342,7 +342,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:139](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L139)
+[shared/interfaces/vehicleHandling.ts:139](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L139)
 
 ___
 
@@ -358,7 +358,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:146](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L146)
+[shared/interfaces/vehicleHandling.ts:146](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L146)
 
 ___
 
@@ -374,7 +374,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:153](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L153)
+[shared/interfaces/vehicleHandling.ts:153](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L153)
 
 ___
 
@@ -390,7 +390,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:160](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L160)
+[shared/interfaces/vehicleHandling.ts:160](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L160)
 
 ___
 
@@ -406,7 +406,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:167](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L167)
+[shared/interfaces/vehicleHandling.ts:167](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L167)
 
 ___
 
@@ -422,7 +422,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:174](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L174)
+[shared/interfaces/vehicleHandling.ts:174](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L174)
 
 ___
 
@@ -432,7 +432,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:176](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L176)
+[shared/interfaces/vehicleHandling.ts:176](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L176)
 
 ___
 
@@ -448,7 +448,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:183](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L183)
+[shared/interfaces/vehicleHandling.ts:183](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L183)
 
 ___
 
@@ -458,7 +458,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:185](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L185)
+[shared/interfaces/vehicleHandling.ts:185](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L185)
 
 ___
 
@@ -474,7 +474,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:192](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L192)
+[shared/interfaces/vehicleHandling.ts:192](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L192)
 
 ___
 
@@ -484,7 +484,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:194](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L194)
+[shared/interfaces/vehicleHandling.ts:194](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L194)
 
 ___
 
@@ -500,7 +500,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:201](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L201)
+[shared/interfaces/vehicleHandling.ts:201](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L201)
 
 ___
 
@@ -516,7 +516,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:208](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L208)
+[shared/interfaces/vehicleHandling.ts:208](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L208)
 
 ___
 
@@ -532,7 +532,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:215](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L215)
+[shared/interfaces/vehicleHandling.ts:215](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L215)
 
 ___
 
@@ -548,7 +548,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:222](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L222)
+[shared/interfaces/vehicleHandling.ts:222](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L222)
 
 ___
 
@@ -564,7 +564,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:229](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L229)
+[shared/interfaces/vehicleHandling.ts:229](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L229)
 
 ___
 
@@ -580,7 +580,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:236](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L236)
+[shared/interfaces/vehicleHandling.ts:236](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L236)
 
 ___
 
@@ -596,7 +596,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:243](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L243)
+[shared/interfaces/vehicleHandling.ts:243](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L243)
 
 ___
 
@@ -606,7 +606,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:245](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L245)
+[shared/interfaces/vehicleHandling.ts:245](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L245)
 
 ___
 
@@ -622,7 +622,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:252](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L252)
+[shared/interfaces/vehicleHandling.ts:252](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L252)
 
 ___
 
@@ -632,7 +632,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:254](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L254)
+[shared/interfaces/vehicleHandling.ts:254](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L254)
 
 ___
 
@@ -648,7 +648,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:261](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L261)
+[shared/interfaces/vehicleHandling.ts:261](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L261)
 
 ___
 
@@ -658,7 +658,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:263](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L263)
+[shared/interfaces/vehicleHandling.ts:263](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L263)
 
 ___
 
@@ -674,7 +674,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:270](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L270)
+[shared/interfaces/vehicleHandling.ts:270](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L270)
 
 ___
 
@@ -684,7 +684,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:272](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L272)
+[shared/interfaces/vehicleHandling.ts:272](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L272)
 
 ___
 
@@ -700,7 +700,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:279](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L279)
+[shared/interfaces/vehicleHandling.ts:279](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L279)
 
 ___
 
@@ -716,7 +716,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:286](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L286)
+[shared/interfaces/vehicleHandling.ts:286](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L286)
 
 ___
 
@@ -726,7 +726,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:288](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L288)
+[shared/interfaces/vehicleHandling.ts:288](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L288)
 
 ___
 
@@ -742,4 +742,4 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:295](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/interfaces/vehicleHandling.ts#L295)
+[shared/interfaces/vehicleHandling.ts:295](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/interfaces/vehicleHandling.ts#L295)

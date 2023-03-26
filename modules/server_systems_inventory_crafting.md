@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:9](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/crafting.ts#L9)
+[server/systems/inventory/crafting.ts:9](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L9)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/crafting.ts#L11)
+[server/systems/inventory/crafting.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L11)
 
 ___
 
@@ -43,13 +43,13 @@ ___
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:7](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/crafting.ts#L7)
+[server/systems/inventory/crafting.ts:7](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L7)
 
 ## Functions
 
 ### addRecipe
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.**addRecipe**(`recipe`): `boolean`
 :::
 
@@ -67,13 +67,13 @@ Add a recipe in-memory. Does not store to database.
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:101](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/crafting.ts#L101)
+[server/systems/inventory/crafting.ts:101](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L101)
 
 ___
 
 ### combineItems
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.**combineItems**(`dataSet`, `slot1`, `slot2`, `type`): { `dataSet`: [`player`](server_config.md#player)[] ; `sound?`: `string`  } \| `undefined`
 :::
 
@@ -96,13 +96,13 @@ Returns an object with the modified dataSet, and a sound associated with the cra
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:173](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/crafting.ts#L173)
+[server/systems/inventory/crafting.ts:173](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L173)
 
 ___
 
 ### findRecipe
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.**findRecipe**(`combo`): [`CraftRecipe`](../interfaces/server_systems_inventory_crafting_CraftRecipe.md) \| `undefined`
 :::
 
@@ -122,13 +122,13 @@ Otherwise, returns undefined.
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:129](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/crafting.ts#L129)
+[server/systems/inventory/crafting.ts:129](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L129)
 
 ___
 
 ### override
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -149,9 +149,9 @@ Used to override inventory crafting functionality
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:288](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/crafting.ts#L288)
+[server/systems/inventory/crafting.ts:288](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L288)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -172,9 +172,9 @@ Used to override inventory crafting functionality
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:289](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/crafting.ts#L289)
+[server/systems/inventory/crafting.ts:289](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L289)
 
-::: Tip
+::: tip Usage
 Athena.systems.inventory.crafting.**override**(`functionName`, `callback`): `any`
 :::
 
@@ -195,4 +195,4 @@ Used to override inventory crafting functionality
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:290](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/server/systems/inventory/crafting.ts#L290)
+[server/systems/inventory/crafting.ts:290](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/server/systems/inventory/crafting.ts#L290)

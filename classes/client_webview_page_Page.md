@@ -29,7 +29,7 @@ Page
 
 #### Defined in
 
-[client/webview/page.ts:175](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/page.ts#L175)
+[client/webview/page.ts:175](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/webview/page.ts#L175)
 
 ## Properties
 
@@ -39,13 +39,13 @@ Page
 
 #### Defined in
 
-[client/webview/page.ts:168](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/page.ts#L168)
+[client/webview/page.ts:168](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/webview/page.ts#L168)
 
 ## Methods
 
 ### close
 
-::: Tip
+::: tip Usage
 AthenaClient.webview.page.Page.**close**(`isManuallyTriggered?`): `void`
 :::
 
@@ -69,13 +69,13 @@ Page
 
 #### Defined in
 
-[client/webview/page.ts:283](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/page.ts#L283)
+[client/webview/page.ts:283](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/webview/page.ts#L283)
 
 ___
 
 ### open
 
-::: Tip
+::: tip Usage
 AthenaClient.webview.page.Page.**open**(): `Promise`<`boolean`\>
 :::
 
@@ -91,4 +91,4 @@ Page
 
 #### Defined in
 
-[client/webview/page.ts:209](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/webview/page.ts#L209)
+[client/webview/page.ts:209](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/webview/page.ts#L209)

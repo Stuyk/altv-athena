@@ -11,7 +11,7 @@ order: 0
 
 ### clear
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.progressBar.**clear**(): `void`
 :::
 
@@ -25,13 +25,13 @@ None
 
 #### Defined in
 
-[client/screen/progressBar.ts:105](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/progressBar.ts#L105)
+[client/screen/progressBar.ts:105](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/progressBar.ts#L105)
 
 ___
 
 ### create
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.progressBar.**create**(`progressBar`): `void`
 :::
 
@@ -51,13 +51,13 @@ None
 
 #### Defined in
 
-[client/screen/progressBar.ts:64](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/progressBar.ts#L64)
+[client/screen/progressBar.ts:64](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/progressBar.ts#L64)
 
 ___
 
 ### remove
 
-::: Tip
+::: tip Usage
 AthenaClient.screen.progressBar.**remove**(`uid`): `void`
 :::
 
@@ -77,4 +77,4 @@ The function that is being returned is the function that is being called.
 
 #### Defined in
 
-[client/screen/progressBar.ts:87](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/screen/progressBar.ts#L87)
+[client/screen/progressBar.ts:87](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/screen/progressBar.ts#L87)

@@ -11,7 +11,7 @@ order: 0
 
 ### append
 
-::: Tip
+::: tip Usage
 AthenaClient.streamers.ped.**append**(`pedData`): `void`
 :::
 
@@ -31,13 +31,13 @@ Create a client-only static pedestrian.
 
 #### Defined in
 
-[client/streamers/ped.ts:221](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/ped.ts#L221)
+[client/streamers/ped.ts:221](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/streamers/ped.ts#L221)
 
 ___
 
 ### get
 
-::: Tip
+::: tip Usage
 AthenaClient.streamers.ped.**get**(`scriptId`): [`player`](server_config.md#player) \| `undefined`
 :::
 
@@ -61,13 +61,13 @@ ClientPedController
 
 #### Defined in
 
-[client/streamers/ped.ts:184](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/ped.ts#L184)
+[client/streamers/ped.ts:184](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/streamers/ped.ts#L184)
 
 ___
 
 ### remove
 
-::: Tip
+::: tip Usage
 AthenaClient.streamers.ped.**remove**(`uid`): `void`
 :::
 
@@ -87,4 +87,4 @@ Remove a client ped by uid
 
 #### Defined in
 
-[client/streamers/ped.ts:248](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/streamers/ped.ts#L248)
+[client/streamers/ped.ts:248](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/streamers/ped.ts#L248)

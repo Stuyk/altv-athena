@@ -19,7 +19,7 @@ order: 0
 
 ### fromBuffer
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.buffer.AthenaBuffer.`Static` **fromBuffer**(`data`): `string`
 :::
 
@@ -43,13 +43,13 @@ AthenaBuffer
 
 #### Defined in
 
-[shared/utility/buffer.ts:23](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/buffer.ts#L23)
+[shared/utility/buffer.ts:23](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/buffer.ts#L23)
 
 ___
 
 ### toBuffer
 
-::: Tip
+::: tip Usage
 AthenaShared.utility.buffer.AthenaBuffer.`Static` **toBuffer**(`data`, `size?`): `string`[]
 :::
 
@@ -75,4 +75,4 @@ AthenaBuffer
 
 #### Defined in
 
-[shared/utility/buffer.ts:11](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/shared/utility/buffer.ts#L11)
+[shared/utility/buffer.ts:11](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/shared/utility/buffer.ts#L11)

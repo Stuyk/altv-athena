@@ -11,7 +11,7 @@ order: 0
 
 ### open
 
-::: Tip
+::: tip Usage
 AthenaClient.views.wheelMenu.**open**(`label`, `options`, `setMouseToCenter?`): `Promise`<`void`\>
 :::
 
@@ -34,13 +34,13 @@ When a user clicks on an option it executes that option based on whatever events
 
 #### Defined in
 
-[client/views/wheelMenu.ts:111](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/views/wheelMenu.ts#L111)
+[client/views/wheelMenu.ts:111](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/views/wheelMenu.ts#L111)
 
 ___
 
 ### update
 
-::: Tip
+::: tip Usage
 AthenaClient.views.wheelMenu.**update**(`label`, `options`, `setMouseToCenter?`): `void`
 :::
 
@@ -62,4 +62,4 @@ Does not close the wheel menu but instead overwrites its current options.
 
 #### Defined in
 
-[client/views/wheelMenu.ts:161](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/views/wheelMenu.ts#L161)
+[client/views/wheelMenu.ts:161](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/views/wheelMenu.ts#L161)

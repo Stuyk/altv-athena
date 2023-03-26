@@ -23,7 +23,7 @@ iCameraNode
 
 #### Defined in
 
-[client/camera/cinematic.ts:51](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L51)
+[client/camera/cinematic.ts:51](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L51)
 
 ___
 
@@ -40,7 +40,7 @@ iCameraNode
 
 #### Defined in
 
-[client/camera/cinematic.ts:76](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L76)
+[client/camera/cinematic.ts:76](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L76)
 
 ___
 
@@ -56,7 +56,7 @@ iCameraNode
 
 #### Defined in
 
-[client/camera/cinematic.ts:59](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L59)
+[client/camera/cinematic.ts:59](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L59)
 
 ___
 
@@ -72,7 +72,7 @@ iCameraNode
 
 #### Defined in
 
-[client/camera/cinematic.ts:43](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L43)
+[client/camera/cinematic.ts:43](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L43)
 
 ___
 
@@ -88,7 +88,7 @@ iCameraNode
 
 #### Defined in
 
-[client/camera/cinematic.ts:100](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L100)
+[client/camera/cinematic.ts:100](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L100)
 
 ___
 
@@ -104,7 +104,7 @@ iCameraNode
 
 #### Defined in
 
-[client/camera/cinematic.ts:35](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L35)
+[client/camera/cinematic.ts:35](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L35)
 
 ___
 
@@ -120,7 +120,7 @@ iCameraNode
 
 #### Defined in
 
-[client/camera/cinematic.ts:92](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L92)
+[client/camera/cinematic.ts:92](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L92)
 
 ___
 
@@ -136,7 +136,7 @@ iCameraNode
 
 #### Defined in
 
-[client/camera/cinematic.ts:18](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L18)
+[client/camera/cinematic.ts:18](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L18)
 
 ___
 
@@ -152,7 +152,7 @@ iCameraNode
 
 #### Defined in
 
-[client/camera/cinematic.ts:67](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L67)
+[client/camera/cinematic.ts:67](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L67)
 
 ___
 
@@ -169,7 +169,7 @@ iCameraNode
 
 #### Defined in
 
-[client/camera/cinematic.ts:27](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L27)
+[client/camera/cinematic.ts:27](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L27)
 
 ___
 
@@ -185,4 +185,4 @@ iCameraNode
 
 #### Defined in
 
-[client/camera/cinematic.ts:84](https://github.com/Stuyk/altv-athena/blob/6013452/src/core/client/camera/cinematic.ts#L84)
+[client/camera/cinematic.ts:84](https://github.com/Stuyk/altv-athena/blob/217ba5f/src/core/client/camera/cinematic.ts#L84)
