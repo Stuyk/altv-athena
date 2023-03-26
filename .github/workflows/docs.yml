@@ -3,6 +3,7 @@ on:
 jobs:
     # Build job
     build:
+      if: github.actor == 'stuyk'
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
@@ -19,3 +20,9 @@ jobs:
               uses: JamesIves/github-pages-deploy-action@v4
               with:
                   folder: docs
+            - name: Invoke Documentation Build
+              uses: benc-uk/workflow-dispatch@v1
+              with:
+                  workflow: deploy.yml
+                  repo: stuyk/athena-docs-latest
+                  token: ${{ secrets.DOCS_PAT }}
