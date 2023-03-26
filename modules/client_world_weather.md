@@ -1,0 +1,85 @@
+---
+title: AthenaClient.world.weather
+outline: [1,3]
+order: 0
+---
+
+# {{ $frontmatter.title }}
+
+
+## Functions
+
+### changeTo
+
+▸ **changeTo**(`nextWeather`, `timeInSeconds`): `Promise`<`void`\>
+
+Change the weather gracefully.
+
+**`Export`**
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `nextWeather` | `string` |
+| `timeInSeconds` | `number` |
+
+#### Returns
+
+`Promise`<`void`\>
+
+#### Defined in
+
+[client/world/weather.ts:40](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/world/weather.ts#L40)
+
+___
+
+### freeze
+
+▸ **freeze**(): `void`
+
+Used to freeze the weather to a specific value.
+
+Call this function after using the `changeTo` function.
+
+**`Export`**
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[client/world/weather.ts:20](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/world/weather.ts#L20)
+
+___
+
+### isChanging
+
+▸ **isChanging**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+#### Defined in
+
+[client/world/weather.ts:9](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/world/weather.ts#L9)
+
+___
+
+### unfreeze
+
+▸ **unfreeze**(): `void`
+
+Unfreeze the weather function.
+
+**`Export`**
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[client/world/weather.ts:29](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/client/world/weather.ts#L29)

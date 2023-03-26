@@ -1,0 +1,38 @@
+---
+title: AthenaShared.interfaces.vehicleMod.default
+outline: [1,3]
+order: 0
+---
+
+# {{ $frontmatter.title }}
+
+
+[shared/interfaces/vehicleMod](../modules/shared_interfaces_vehicleMod.md).default
+
+Used to describe a vehicle modification, and the value it should have.
+
+**`Export`**
+
+**`Interface`**
+
+IVehicleMod
+
+## Properties
+
+### id
+
+• **id**: `number`
+
+#### Defined in
+
+[shared/interfaces/vehicleMod.ts:8](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/vehicleMod.ts#L8)
+
+___
+
+### value
+
+• **value**: `number`
+
+#### Defined in
+
+[shared/interfaces/vehicleMod.ts:9](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/shared/interfaces/vehicleMod.ts#L9)

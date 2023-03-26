@@ -1,0 +1,156 @@
+---
+title: Athena.systems.job.objective
+outline: [1,3]
+order: 0
+---
+
+# {{ $frontmatter.title }}
+
+
+## Interfaces
+
+- [DefaultCriteriaOptions](../interfaces/server_systems_job_objective_DefaultCriteriaOptions.md)
+
+## Functions
+
+### buildCriteria
+
+▸ **buildCriteria**(`criteria`): `number`
+
+Builds a numerical representation of the flags used to check job criteria.
+
+**`Export`**
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `criteria` | [`DefaultCriteriaOptions`](../interfaces/server_systems_job_objective_DefaultCriteriaOptions.md) |
+
+#### Returns
+
+`number`
+
+#### Defined in
+
+[server/systems/job/objective.ts:98](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/job/objective.ts#L98)
+
+___
+
+### createAndAdd
+
+▸ **createAndAdd**(`job`, `objective`): [`player`](server_config.md#player)
+
+Cleanly creates an objective to add to a job.
+
+Removes all deep refs.
+
+**`Export`**
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `job` | [`Job`](../classes/server_systems_job_system_Job.md) |
+| `objective` | `Objective` |
+
+#### Returns
+
+[`player`](server_config.md#player)
+
+Returns the objective instance; does not need to be added.
+
+#### Defined in
+
+[server/systems/job/objective.ts:81](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/job/objective.ts#L81)
+
+___
+
+### getType
+
+▸ **getType**(`type`): `number`
+
+Returns the numerical representation of a default objective type.
+
+**`Export`**
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `type` | `string` \| `number` \| `symbol` |
+
+#### Returns
+
+`number`
+
+#### Defined in
+
+[server/systems/job/objective.ts:127](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/job/objective.ts#L127)
+
+___
+
+### override
+
+▸ **override**(`functionName`, `callback`): `any`
+
+Used to override job objective creation functionality
+
+**`Export`**
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"createAndAdd"`` |
+| `callback` | (`job`: [`Job`](../classes/server_systems_job_system_Job.md), `objective`: `Objective`) => [`player`](server_config.md#player) |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/systems/job/objective.ts:143](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/job/objective.ts#L143)
+
+▸ **override**(`functionName`, `callback`): `any`
+
+Used to override job objective creation functionality
+
+**`Export`**
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"buildCriteria"`` |
+| `callback` | (`criteria`: [`DefaultCriteriaOptions`](../interfaces/server_systems_job_objective_DefaultCriteriaOptions.md)) => `number` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/systems/job/objective.ts:144](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/job/objective.ts#L144)
+
+▸ **override**(`functionName`, `callback`): `any`
+
+Used to override job objective creation functionality
+
+**`Export`**
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"getType"`` |
+| `callback` | (`type`: `string` \| `number` \| `symbol`) => `number` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/systems/job/objective.ts:145](https://github.com/Stuyk/altv-athena/blob/2ba937d/src/core/server/systems/job/objective.ts#L145)
