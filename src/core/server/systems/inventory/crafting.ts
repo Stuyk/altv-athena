@@ -96,6 +96,16 @@ const recipes: Array<CraftRecipe> = [];
 /**
  * Add a recipe in-memory. Does not store to database.
  *
+ * #### Example
+ * ```ts
+ * Athena.systems.inventory.crafting.addRecipe({
+ *   combo: ['burger', 'tomato'],
+ *   quantities: [1, 1],
+ *   uid: 'burger-with-tomato',
+ *   result: { dbName: 'burger-with-tomato', quantity: 1 },
+ * });
+ * ```
+ *
  * @param {Recipe} recipe
  */
 export function addRecipe(recipe: CraftRecipe): boolean {

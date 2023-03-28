@@ -55,6 +55,49 @@ export function removeAll(dataSet: Array<StoredItem>): Array<StoredItem> {
 }
 
 /**
+ * Add a weapon component to a weapon at a given slot.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {('inventory' | 'toolbar')} type
+ * @param {number} slot
+ * @param {(number | string)} component
+ * @return {Promise<boolean>}
+ */
+export async function addComponent(
+    player: alt.Player,
+    type: 'inventory' | 'toolbar',
+    slot: number,
+    component: number | string,
+): Promise<boolean> {
+    const data = Athena.document.character.get(player);
+    if (typeof data === 'undefined') {
+        return false;
+    }
+
+    if (typeof data[type] === 'undefined') {
+        return false;
+    }
+
+    const index = data[type].findIndex((x) => x.slot === slot);
+    if (index <= -1) {
+        return false;
+    }
+
+    const dataCopy = deepCloneArray<StoredItem<WeaponInfo>>(data[type]);
+    if (typeof dataCopy[index].data === 'undefined') {
+        return false;
+    }
+
+    if (typeof dataCopy[index].data.components === 'undefined') {
+        dataCopy[index].data.components = [];
+    }
+
+    dataCopy[index].data.components.push(component);
+    return await Athena.document.character.set(player, type, dataCopy);
+}
+
+/**
  * Looks into the item toolbar and determines what weapons to equip / unequip.
  *
  * @param {alt.Player} player An alt:V Player Entity
