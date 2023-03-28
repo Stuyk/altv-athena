@@ -40,7 +40,7 @@ When the key is updated with data it will come back through the callback.
 
 #### Defined in
 
-[server/systems/streamer.ts:145](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/streamer.ts#L145)
+[server/systems/streamer.ts:145](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/systems/streamer.ts#L145)
 
 ___
 
@@ -73,4 +73,4 @@ Populates Stream Data for External Process
 
 #### Defined in
 
-[server/systems/streamer.ts:190](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/streamer.ts#L190)
+[server/systems/streamer.ts:190](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/systems/streamer.ts#L190)

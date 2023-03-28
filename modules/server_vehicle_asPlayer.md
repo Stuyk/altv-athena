@@ -30,7 +30,7 @@ Used to override vehicle control as a player functionality
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:123](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/vehicle/asPlayer.ts#L123)
+[server/vehicle/asPlayer.ts:123](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/vehicle/asPlayer.ts#L123)
 
 ::: tip Usage
 Athena.vehicle.asPlayer.**override**(`functionName`, `callback`): `any`
@@ -51,7 +51,7 @@ Used to override vehicle control as a player functionality
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:124](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/vehicle/asPlayer.ts#L124)
+[server/vehicle/asPlayer.ts:124](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/vehicle/asPlayer.ts#L124)
 
 ::: tip Usage
 Athena.vehicle.asPlayer.**override**(`functionName`, `callback`): `any`
@@ -72,7 +72,7 @@ Used to override vehicle control as a player functionality
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:125](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/vehicle/asPlayer.ts#L125)
+[server/vehicle/asPlayer.ts:125](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/vehicle/asPlayer.ts#L125)
 
 ___
 
@@ -98,7 +98,7 @@ Toggles a door lock as if a player toggled it.
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:85](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/vehicle/asPlayer.ts#L85)
+[server/vehicle/asPlayer.ts:85](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/vehicle/asPlayer.ts#L85)
 
 ___
 
@@ -123,7 +123,7 @@ Toggles an engine lock as if a player toggled it.
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:60](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/vehicle/asPlayer.ts#L60)
+[server/vehicle/asPlayer.ts:60](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/vehicle/asPlayer.ts#L60)
 
 ___
 
@@ -148,4 +148,4 @@ Toggles a vehicle lock as if a player toggled it.
 
 #### Defined in
 
-[server/vehicle/asPlayer.ts:31](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/vehicle/asPlayer.ts#L31)
+[server/vehicle/asPlayer.ts:31](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/vehicle/asPlayer.ts#L31)

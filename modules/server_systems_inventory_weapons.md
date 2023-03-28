@@ -9,6 +9,35 @@ order: 0
 
 ## Functions
 
+### addComponent
+
+::: tip Usage
+Athena.systems.inventory.weapons.**addComponent**(`player`, `type`, `slot`, `component`): `Promise`<`boolean`\>
+:::
+
+Add a weapon component to a weapon at a given slot.
+
+**`Export`**
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `player` | `Player` |
+| `type` | ``"inventory"`` \| ``"toolbar"`` |
+| `slot` | `number` |
+| `component` | `string` \| `number` |
+
+#### Returns
+
+`Promise`<`boolean`\>
+
+#### Defined in
+
+[server/systems/inventory/weapons.ts:67](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/systems/inventory/weapons.ts#L67)
+
+___
+
 ### get
 
 ::: tip Usage
@@ -29,7 +58,7 @@ Return all weapons from a given data set.
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:13](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/inventory/weapons.ts#L13)
+[server/systems/inventory/weapons.ts:13](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/systems/inventory/weapons.ts#L13)
 
 ___
 
@@ -54,7 +83,7 @@ Used to override inventory item weapon functionality
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:117](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/inventory/weapons.ts#L117)
+[server/systems/inventory/weapons.ts:160](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/systems/inventory/weapons.ts#L160)
 
 ___
 
@@ -78,7 +107,7 @@ Remove all weapons from a given data set.
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:40](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/inventory/weapons.ts#L40)
+[server/systems/inventory/weapons.ts:40](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/systems/inventory/weapons.ts#L40)
 
 ___
 
@@ -102,4 +131,4 @@ Looks into the item toolbar and determines what weapons to equip / unequip.
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:63](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/inventory/weapons.ts#L63)
+[server/systems/inventory/weapons.ts:106](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/systems/inventory/weapons.ts#L106)

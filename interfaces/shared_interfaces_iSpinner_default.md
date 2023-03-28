@@ -28,7 +28,7 @@ Use -1 to set forever.
 
 #### Defined in
 
-[shared/interfaces/iSpinner.ts:18](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/interfaces/iSpinner.ts#L18)
+[shared/interfaces/iSpinner.ts:18](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/shared/interfaces/iSpinner.ts#L18)
 
 ___
 
@@ -40,7 +40,7 @@ The text this spinner should have beside it.
 
 #### Defined in
 
-[shared/interfaces/iSpinner.ts:25](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/interfaces/iSpinner.ts#L25)
+[shared/interfaces/iSpinner.ts:25](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/shared/interfaces/iSpinner.ts#L25)
 
 ___
 
@@ -52,4 +52,4 @@ The type of spinner to use.
 
 #### Defined in
 
-[shared/interfaces/iSpinner.ts:32](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/interfaces/iSpinner.ts#L32)
+[shared/interfaces/iSpinner.ts:32](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/shared/interfaces/iSpinner.ts#L32)

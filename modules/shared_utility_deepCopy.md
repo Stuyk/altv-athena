@@ -35,7 +35,7 @@ Makes a complete copy of an array and all objects.
 
 #### Defined in
 
-[shared/utility/deepCopy.ts:29](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/utility/deepCopy.ts#L29)
+[shared/utility/deepCopy.ts:29](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/shared/utility/deepCopy.ts#L29)
 
 ___
 
@@ -67,4 +67,4 @@ This is required to prevent data from being modified in other items.
 
 #### Defined in
 
-[shared/utility/deepCopy.ts:9](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/utility/deepCopy.ts#L9)
+[shared/utility/deepCopy.ts:9](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/shared/utility/deepCopy.ts#L9)

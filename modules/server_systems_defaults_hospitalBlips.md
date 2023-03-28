@@ -28,4 +28,4 @@ Athena.systems.default.hospitalBlips.disable();
 
 #### Defined in
 
-[server/systems/defaults/hospitalBlips.ts:57](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/defaults/hospitalBlips.ts#L57)
+[server/systems/defaults/hospitalBlips.ts:57](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/systems/defaults/hospitalBlips.ts#L57)
