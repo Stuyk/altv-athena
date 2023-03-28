@@ -1,4 +1,5 @@
 export * as account from '@AthenaServer/systems/account';
+export * as adminControl from '@AthenaServer/systems/adminControl';
 export * as character from '@AthenaServer/systems/character';
 export * as defaults from '@AthenaServer/systems/defaults';
 export * as global from '@AthenaServer/systems/global';

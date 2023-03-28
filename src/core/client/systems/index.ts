@@ -1,3 +1,4 @@
+export * as adminControl from './adminControl';
 export * as animations from './animations';
 export * as entitySelector from './entitySelector';
 export * as hotkeys from './hotkeyRegistry';

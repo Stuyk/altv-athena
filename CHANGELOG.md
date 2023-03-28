@@ -326,6 +326,12 @@ Notification System
 - Default uses GTA:V notification system.
 - New overrides on client-side to turn off default behavior.
 - Can add callbacks to intercept notification messages, and do something else with it
+
+Added Admin Control System
+- Allows an easy way to identify admin permissions on client-side
+- Allows invoking admin functionality from client-side
+- Invoked callbacks on server-side are automatically checked
+- Athena.systems.adminControl.x
 ```
 
 

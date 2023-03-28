@@ -27,6 +27,30 @@ export interface Restrictions {
      *
      */
     notify?: string;
+
+    /**
+     * Kick the player if they do not have permission
+     *
+     * @type {boolean}
+     * @memberof Restrictions
+     */
+    kickOnBadPermission?: {
+        /**
+         * What do we tell them when they are kicked
+         *
+         * @type {string}
+         */
+        kickMessage: string;
+
+        /**
+         * What to tell console when they are kicked.
+         *
+         * Player name is automatically appended to the beginning.
+         *
+         * @type {string}
+         */
+        consoleMessage: string;
+    };
 }
 
 function verifyRestrictions(player: alt.Player, restrictions: Restrictions): boolean {
@@ -72,6 +96,16 @@ function verifyRestrictions(player: alt.Player, restrictions: Restrictions): boo
 
     if (!passed && restrictions.notify) {
         Athena.player.emit.notification(player, restrictions.notify);
+    }
+
+    if (!passed && restrictions.kickOnBadPermission) {
+        alt.logWarning(`${data.name} ${restrictions.kickOnBadPermission.consoleMessage}`);
+
+        if (player && player.valid) {
+            player.kick(restrictions.kickOnBadPermission.kickMessage);
+        }
+
+        return false;
     }
 
     return passed;
