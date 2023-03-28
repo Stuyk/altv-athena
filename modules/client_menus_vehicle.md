@@ -32,7 +32,7 @@ AthenaClient.menus.vehicle.(`target`, `options`): [`player`](server_config.md#pl
 
 #### Defined in
 
-[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/client/menus/vehicle.ts#L8)
+[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/client/menus/vehicle.ts#L8)
 
 ## Functions
 
@@ -60,7 +60,7 @@ Must always return the original wheel menu options + your changes.
 
 #### Defined in
 
-[client/menus/vehicle.ts:21](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/client/menus/vehicle.ts#L21)
+[client/menus/vehicle.ts:21](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/client/menus/vehicle.ts#L21)
 
 ___
 
@@ -82,7 +82,7 @@ AthenaClient.menus.vehicle.**open**(`vehicle`): `void`
 
 #### Defined in
 
-[client/menus/vehicle.ts:74](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/client/menus/vehicle.ts#L74)
+[client/menus/vehicle.ts:74](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/client/menus/vehicle.ts#L74)
 
 ___
 
@@ -108,4 +108,4 @@ Open an in-vehicle menu option and add injections relevant to in-vehicle.
 
 #### Defined in
 
-[client/menus/vehicle.ts:33](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/client/menus/vehicle.ts#L33)
+[client/menus/vehicle.ts:33](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/client/menus/vehicle.ts#L33)

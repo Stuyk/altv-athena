@@ -28,4 +28,4 @@ Athena.systems.default.death.disable();
 
 #### Defined in
 
-[server/systems/defaults/death.ts:122](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/systems/defaults/death.ts#L122)
+[server/systems/defaults/death.ts:122](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/defaults/death.ts#L122)

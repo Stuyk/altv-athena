@@ -39,4 +39,4 @@ Show an input menu from client-side.
 
 #### Defined in
 
-[client/views/input.ts:91](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/client/views/input.ts#L91)
+[client/views/input.ts:91](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/client/views/input.ts#L91)

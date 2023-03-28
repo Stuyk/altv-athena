@@ -9,6 +9,12 @@ order: 0
 
 ## References
 
+### adminControl
+
+Renames and re-exports [client/systems/adminControl](client_systems_adminControl.md)
+
+___
+
 ### animations
 
 Renames and re-exports [client/systems/animations](client_systems_animations.md)

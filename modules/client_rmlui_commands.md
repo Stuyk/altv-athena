@@ -25,7 +25,7 @@ AthenaClient.rmlui.commands.**cancel**(): `Promise`<`void`\>
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:277](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/client/rmlui/commands/index.ts#L277)
+[client/rmlui/commands/index.ts:277](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/client/rmlui/commands/index.ts#L277)
 
 ___
 
@@ -48,7 +48,7 @@ AthenaClient.rmlui.commands.**create**(`inputInfo`, `skipMenuCheck?`): `Promise`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:247](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/client/rmlui/commands/index.ts#L247)
+[client/rmlui/commands/index.ts:247](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/client/rmlui/commands/index.ts#L247)
 
 ___
 
@@ -66,4 +66,4 @@ Returns whether or not this interface is open.
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:308](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/client/rmlui/commands/index.ts#L308)
+[client/rmlui/commands/index.ts:308](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/client/rmlui/commands/index.ts#L308)

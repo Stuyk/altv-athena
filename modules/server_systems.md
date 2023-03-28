@@ -15,6 +15,12 @@ Renames and re-exports [player](server_config.md#player)
 
 ___
 
+### adminControl
+
+Renames and re-exports [player](server_config.md#player)
+
+___
+
 ### character
 
 Renames and re-exports [player](server_config.md#player)

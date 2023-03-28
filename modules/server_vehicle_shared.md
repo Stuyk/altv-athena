@@ -28,4 +28,4 @@ order: 0
 
 #### Defined in
 
-[server/vehicle/shared.ts:4](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/vehicle/shared.ts#L4)
+[server/vehicle/shared.ts:4](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/vehicle/shared.ts#L4)

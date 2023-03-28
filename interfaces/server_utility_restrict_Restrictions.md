@@ -17,6 +17,29 @@ Restrictions
 
 ## Properties
 
+### kickOnBadPermission
+
+• `Optional` **kickOnBadPermission**: `Object`
+
+Kick the player if they do not have permission
+
+**`Memberof`**
+
+Restrictions
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `consoleMessage` | `string` | What to tell console when they are kicked. Player name is automatically appended to the beginning. |
+| `kickMessage` | `string` | What do we tell them when they are kicked |
+
+#### Defined in
+
+[server/utility/restrict.ts:37](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/utility/restrict.ts#L37)
+
+___
+
 ### notify
 
 • `Optional` **notify**: `string`
@@ -25,7 +48,7 @@ What to tell the user if they are restricted
 
 #### Defined in
 
-[server/utility/restrict.ts:29](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/utility/restrict.ts#L29)
+[server/utility/restrict.ts:29](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/utility/restrict.ts#L29)
 
 ___
 
@@ -42,7 +65,7 @@ ___
 
 #### Defined in
 
-[server/utility/restrict.ts:11](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/utility/restrict.ts#L11)
+[server/utility/restrict.ts:11](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/utility/restrict.ts#L11)
 
 ___
 
@@ -55,4 +78,4 @@ hasAll - Expects all permissions to exist on character && account
 
 #### Defined in
 
-[server/utility/restrict.ts:22](https://github.com/Stuyk/altv-athena/blob/84a2fd9/src/core/server/utility/restrict.ts#L22)
+[server/utility/restrict.ts:22](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/utility/restrict.ts#L22)
