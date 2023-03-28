@@ -15,7 +15,7 @@ order: 0
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:8](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/systems/hotkeyRegistry.ts#L8)
+[client/systems/hotkeyRegistry.ts:8](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/systems/hotkeyRegistry.ts#L8)
 
 ## Functions
 
@@ -40,7 +40,7 @@ https://www.toptal.com/developers/keycode
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:236](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/systems/hotkeyRegistry.ts#L236)
+[client/systems/hotkeyRegistry.ts:240](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/systems/hotkeyRegistry.ts#L240)
 
 ___
 
@@ -66,7 +66,7 @@ Should only be called periodically. Roughly every 500ms~1s
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:254](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/systems/hotkeyRegistry.ts#L254)
+[client/systems/hotkeyRegistry.ts:258](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/systems/hotkeyRegistry.ts#L258)
 
 ___
 
@@ -90,7 +90,7 @@ Disble a keybind
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:268](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/systems/hotkeyRegistry.ts#L268)
+[client/systems/hotkeyRegistry.ts:272](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/systems/hotkeyRegistry.ts#L272)
 
 ___
 
@@ -114,7 +114,7 @@ Enable a keybind
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:277](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/systems/hotkeyRegistry.ts#L277)
+[client/systems/hotkeyRegistry.ts:281](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/systems/hotkeyRegistry.ts#L281)
 
 ___
 
@@ -139,7 +139,7 @@ Returns undefined if key is not bound, or found.
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:324](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/systems/hotkeyRegistry.ts#L324)
+[client/systems/hotkeyRegistry.ts:328](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/systems/hotkeyRegistry.ts#L328)
 
 ___
 
@@ -157,7 +157,7 @@ Returns all hotkeys and their relevant information.
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:313](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/systems/hotkeyRegistry.ts#L313)
+[client/systems/hotkeyRegistry.ts:317](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/systems/hotkeyRegistry.ts#L317)
 
 ___
 
@@ -183,4 +183,4 @@ Once a key is rebound, it will automatically be loaded on server rejoin.
 
 #### Defined in
 
-[client/systems/hotkeyRegistry.ts:286](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/systems/hotkeyRegistry.ts#L286)
+[client/systems/hotkeyRegistry.ts:290](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/systems/hotkeyRegistry.ts#L290)

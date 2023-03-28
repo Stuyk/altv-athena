@@ -25,7 +25,7 @@ A unique MongoDB identifier to identify the accoutn in the database.
 
 #### Defined in
 
-[server/interface/iAccount.ts:14](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/interface/iAccount.ts#L14)
+[server/interface/iAccount.ts:14](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/interface/iAccount.ts#L14)
 
 ___
 
@@ -37,7 +37,7 @@ Is this user banned?
 
 #### Defined in
 
-[server/interface/iAccount.ts:79](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/interface/iAccount.ts#L79)
+[server/interface/iAccount.ts:79](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/interface/iAccount.ts#L79)
 
 ___
 
@@ -49,7 +49,7 @@ Discord user ID. The one you get from developer mode.
 
 #### Defined in
 
-[server/interface/iAccount.ts:28](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/interface/iAccount.ts#L28)
+[server/interface/iAccount.ts:28](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/interface/iAccount.ts#L28)
 
 ___
 
@@ -61,7 +61,7 @@ Email bound to the discord account.
 
 #### Defined in
 
-[server/interface/iAccount.ts:35](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/interface/iAccount.ts#L35)
+[server/interface/iAccount.ts:35](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/interface/iAccount.ts#L35)
 
 ___
 
@@ -73,7 +73,7 @@ Hardware Identifiers associated with an account.
 
 #### Defined in
 
-[server/interface/iAccount.ts:49](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/interface/iAccount.ts#L49)
+[server/interface/iAccount.ts:49](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/interface/iAccount.ts#L49)
 
 ___
 
@@ -85,7 +85,7 @@ A incremented ID for individual accounts.
 
 #### Defined in
 
-[server/interface/iAccount.ts:21](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/interface/iAccount.ts#L21)
+[server/interface/iAccount.ts:21](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/interface/iAccount.ts#L21)
 
 ___
 
@@ -97,7 +97,7 @@ Last 5 IPs that have logged into an account.
 
 #### Defined in
 
-[server/interface/iAccount.ts:42](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/interface/iAccount.ts#L42)
+[server/interface/iAccount.ts:42](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/interface/iAccount.ts#L42)
 
 ___
 
@@ -109,7 +109,7 @@ Time in milliseconds when they last logged in since epoch.
 
 #### Defined in
 
-[server/interface/iAccount.ts:56](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/interface/iAccount.ts#L56)
+[server/interface/iAccount.ts:56](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/interface/iAccount.ts#L56)
 
 ___
 
@@ -122,7 +122,7 @@ Default: 0
 
 #### Defined in
 
-[server/interface/iAccount.ts:64](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/interface/iAccount.ts#L64)
+[server/interface/iAccount.ts:64](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/interface/iAccount.ts#L64)
 
 ___
 
@@ -134,7 +134,7 @@ A list of permissions assigned to this account.
 
 #### Defined in
 
-[server/interface/iAccount.ts:72](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/interface/iAccount.ts#L72)
+[server/interface/iAccount.ts:72](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/interface/iAccount.ts#L72)
 
 ___
 
@@ -146,4 +146,4 @@ Why are they banned?
 
 #### Defined in
 
-[server/interface/iAccount.ts:86](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/interface/iAccount.ts#L86)
+[server/interface/iAccount.ts:86](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/interface/iAccount.ts#L86)

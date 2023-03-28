@@ -17,6 +17,26 @@ order: 0
 
 ## Properties
 
+### allowIfDead
+
+• `Optional` **allowIfDead**: ``true``
+
+Allow using the keybind even if the player is dead.
+
+**`Memberof`**
+
+BaseKeyInfo
+
+#### Inherited from
+
+[BaseKeyInfo](client_interface_hotkeys_BaseKeyInfo.md).[allowIfDead](client_interface_hotkeys_BaseKeyInfo.md#allowIfDead)
+
+#### Defined in
+
+[client/interface/hotkeys.ts:209](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L209)
+
+___
+
 ### allowInAnyMenu
 
 • `Optional` **allowInAnyMenu**: ``true``
@@ -29,7 +49,7 @@ If set to true, any page / menu will allow triggering this keybind.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:201](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L201)
+[client/interface/hotkeys.ts:201](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L201)
 
 ___
 
@@ -45,7 +65,7 @@ Allows the keybind to be ignore menu checks if in a specific page.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:209](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L209)
+[client/interface/hotkeys.ts:217](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L217)
 
 ___
 
@@ -68,7 +88,7 @@ Only triggered when `msToTrigger` is also specified for this key bind.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:80](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L80)
+[client/interface/hotkeys.ts:80](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L80)
 
 ___
 
@@ -84,7 +104,7 @@ Describe what this keybind is meant to do.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:141](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L141)
+[client/interface/hotkeys.ts:141](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L141)
 
 ___
 
@@ -96,7 +116,7 @@ Set a key as disabled, preventing all function callbacks.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:123](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L123)
+[client/interface/hotkeys.ts:123](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L123)
 
 ___
 
@@ -112,7 +132,7 @@ Prevent his key from being rebound?
 
 #### Defined in
 
-[client/interface/hotkeys.ts:231](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L231)
+[client/interface/hotkeys.ts:239](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L239)
 
 ___
 
@@ -128,7 +148,7 @@ Give a keybind an identifier, like a unique id.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:149](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L149)
+[client/interface/hotkeys.ts:149](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L149)
 
 ___
 
@@ -144,7 +164,7 @@ The primary key for this keybind.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:133](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L133)
+[client/interface/hotkeys.ts:133](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L133)
 
 ___
 
@@ -156,7 +176,7 @@ Call this function when the key is pressed down once.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:72](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L72)
+[client/interface/hotkeys.ts:72](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L72)
 
 ___
 
@@ -173,7 +193,7 @@ This function is only called when a key is released.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:106](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L106)
+[client/interface/hotkeys.ts:106](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L106)
 
 ___
 
@@ -189,7 +209,7 @@ Specify a modifier for this key to trigger
 
 #### Defined in
 
-[client/interface/hotkeys.ts:193](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L193)
+[client/interface/hotkeys.ts:193](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L193)
 
 ___
 
@@ -206,7 +226,7 @@ These are all optional. By default key binds work regardless of setting these va
 
 #### Defined in
 
-[client/interface/hotkeys.ts:223](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L223)
+[client/interface/hotkeys.ts:231](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L231)
 
 ___
 
@@ -222,7 +242,7 @@ The amount of milliseconds before this hotkey can be pressed again.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:217](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L217)
+[client/interface/hotkeys.ts:225](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L225)
 
 ___
 
@@ -239,4 +259,4 @@ Equivalent to an everyTick.
 
 #### Defined in
 
-[client/interface/hotkeys.ts:115](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/interface/hotkeys.ts#L115)
+[client/interface/hotkeys.ts:115](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/interface/hotkeys.ts#L115)

@@ -15,7 +15,7 @@ order: 0
 
 #### Defined in
 
-[server/systems/permission.ts:7](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L7)
+[server/systems/permission.ts:7](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L7)
 
 ___
 
@@ -25,7 +25,7 @@ ___
 
 #### Defined in
 
-[server/systems/permission.ts:8](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L8)
+[server/systems/permission.ts:8](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L8)
 
 ## Variables
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[server/systems/permission.ts:451](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L451)
+[server/systems/permission.ts:451](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L451)
 
 ## Functions
 
@@ -80,7 +80,7 @@ Add a permission to an account or character.
 
 #### Defined in
 
-[server/systems/permission.ts:241](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L241)
+[server/systems/permission.ts:241](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L241)
 
 ___
 
@@ -105,7 +105,7 @@ Clear all permissions for an account or character.
 
 #### Defined in
 
-[server/systems/permission.ts:275](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L275)
+[server/systems/permission.ts:275](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L275)
 
 ___
 
@@ -137,7 +137,7 @@ Will return an empty array if no permissions are found.
 
 #### Defined in
 
-[server/systems/permission.ts:342](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L342)
+[server/systems/permission.ts:342](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L342)
 
 ___
 
@@ -162,7 +162,7 @@ Get permissions for a given entity and type
 
 #### Defined in
 
-[server/systems/permission.ts:424](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L424)
+[server/systems/permission.ts:424](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L424)
 
 ::: tip Usage
 Athena.systems.permission.**getPermissions**(`entity`, `type`): `any`
@@ -183,7 +183,7 @@ Get permissions for a given entity and type
 
 #### Defined in
 
-[server/systems/permission.ts:425](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L425)
+[server/systems/permission.ts:425](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L425)
 
 ___
 
@@ -215,7 +215,7 @@ Check if a character or account has a single permission.
 
 #### Defined in
 
-[server/systems/permission.ts:289](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L289)
+[server/systems/permission.ts:289](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L289)
 
 ___
 
@@ -247,7 +247,7 @@ Check if a character or account has all the permissions.
 
 #### Defined in
 
-[server/systems/permission.ts:325](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L325)
+[server/systems/permission.ts:325](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L325)
 
 ___
 
@@ -279,7 +279,7 @@ Check if a character or account has a atleast one permission.
 
 #### Defined in
 
-[server/systems/permission.ts:307](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L307)
+[server/systems/permission.ts:307](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L307)
 
 ___
 
@@ -311,7 +311,7 @@ Remove a permission from an account or character.
 
 #### Defined in
 
-[server/systems/permission.ts:259](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L259)
+[server/systems/permission.ts:259](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L259)
 
 ___
 
@@ -344,4 +344,4 @@ Automatically rebinds the document after updating.
 
 #### Defined in
 
-[server/systems/permission.ts:374](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/server/systems/permission.ts#L374)
+[server/systems/permission.ts:374](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/server/systems/permission.ts#L374)

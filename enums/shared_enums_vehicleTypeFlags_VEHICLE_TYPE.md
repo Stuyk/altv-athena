@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[shared/enums/vehicleTypeFlags.ts:37](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/enums/vehicleTypeFlags.ts#L37)
+[shared/enums/vehicleTypeFlags.ts:37](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/enums/vehicleTypeFlags.ts#L37)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[shared/enums/vehicleTypeFlags.ts:36](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/enums/vehicleTypeFlags.ts#L36)
+[shared/enums/vehicleTypeFlags.ts:36](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/enums/vehicleTypeFlags.ts#L36)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[shared/enums/vehicleTypeFlags.ts:39](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/enums/vehicleTypeFlags.ts#L39)
+[shared/enums/vehicleTypeFlags.ts:39](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/enums/vehicleTypeFlags.ts#L39)
 
 ___
 
@@ -47,4 +47,4 @@ ___
 
 #### Defined in
 
-[shared/enums/vehicleTypeFlags.ts:38](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/enums/vehicleTypeFlags.ts#L38)
+[shared/enums/vehicleTypeFlags.ts:38](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/enums/vehicleTypeFlags.ts#L38)

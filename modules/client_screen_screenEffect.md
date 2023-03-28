@@ -31,7 +31,7 @@ true if the screen effect is active; otherwise false
 
 #### Defined in
 
-[client/screen/screenEffect.ts:9](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/screen/screenEffect.ts#L9)
+[client/screen/screenEffect.ts:9](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/screen/screenEffect.ts#L9)
 
 ___
 
@@ -57,7 +57,7 @@ Starts applying the specified effect to the screen.
 
 #### Defined in
 
-[client/screen/screenEffect.ts:19](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/screen/screenEffect.ts#L19)
+[client/screen/screenEffect.ts:19](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/screen/screenEffect.ts#L19)
 
 ___
 
@@ -75,7 +75,7 @@ Stops all currently running effects.
 
 #### Defined in
 
-[client/screen/screenEffect.ts:34](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/screen/screenEffect.ts#L34)
+[client/screen/screenEffect.ts:34](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/screen/screenEffect.ts#L34)
 
 ___
 
@@ -99,4 +99,4 @@ Stops applying the specified effect to the screen.
 
 #### Defined in
 
-[client/screen/screenEffect.ts:27](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/client/screen/screenEffect.ts#L27)
+[client/screen/screenEffect.ts:27](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/client/screen/screenEffect.ts#L27)

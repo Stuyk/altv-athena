@@ -18,6 +18,24 @@ order: 0
 
 ## Type Aliases
 
+### BaseItemEx
+
+Ƭ **BaseItemEx**<`T`\>: [`BaseItem`](../interfaces/shared_interfaces_item_BaseItem.md)<[`DefaultItemBehavior`](../interfaces/shared_interfaces_item_DefaultItemBehavior.md), `T`\>
+
+Apply a generic type to a base item's data set.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Defined in
+
+[shared/interfaces/item.ts:283](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/interfaces/item.ts#L283)
+
+___
+
 ### ClothingInfo
 
 Ƭ **ClothingInfo**: `Object`
@@ -33,13 +51,17 @@ Default Clothing Information
 
 #### Defined in
 
-[shared/interfaces/item.ts:22](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L22)
+[shared/interfaces/item.ts:22](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/interfaces/item.ts#L22)
 
 ___
 
 ### Item
 
 Ƭ **Item**<`Behavior`, `CustomData`\>: [`BaseItem`](../interfaces/shared_interfaces_item_BaseItem.md)<`Behavior`, `CustomData`\> & [`StoredItem`](../interfaces/shared_interfaces_item_StoredItem.md)<`CustomData`\>
+
+A combination of the stored, and base item.
+
+A stored item is merged into the base item to create this
 
 #### Type parameters
 
@@ -50,7 +72,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/item.ts:370](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L370)
+[shared/interfaces/item.ts:385](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/interfaces/item.ts#L385)
 
 ___
 
@@ -62,7 +84,47 @@ An Item Drop that is represented on server s ide and client side.
 
 #### Defined in
 
-[shared/interfaces/item.ts:11](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L11)
+[shared/interfaces/item.ts:11](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/interfaces/item.ts#L11)
+
+___
+
+### ItemEx
+
+Ƭ **ItemEx**<`T`\>: [`BaseItem`](../interfaces/shared_interfaces_item_BaseItem.md)<[`DefaultItemBehavior`](../interfaces/shared_interfaces_item_DefaultItemBehavior.md), `T`\> & [`StoredItem`](../interfaces/shared_interfaces_item_StoredItem.md)<`T`\>
+
+A combination of the stored, and base item.
+
+A stored item is merged into the base item to create this
+
+This one allows for custom data.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Defined in
+
+[shared/interfaces/item.ts:395](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/interfaces/item.ts#L395)
+
+___
+
+### StoredItemEx
+
+Ƭ **StoredItemEx**<`T`\>: [`StoredItem`](../interfaces/shared_interfaces_item_StoredItem.md)<`T`\>
+
+Apply a generic type to a custom item's data set
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Defined in
+
+[shared/interfaces/item.ts:218](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/interfaces/item.ts#L218)
 
 ___
 
@@ -82,4 +144,4 @@ Default Weapon Data Information
 
 #### Defined in
 
-[shared/interfaces/item.ts:6](https://github.com/Stuyk/altv-athena/blob/9c5aa90/src/core/shared/interfaces/item.ts#L6)
+[shared/interfaces/item.ts:6](https://github.com/Stuyk/altv-athena/blob/feb0cb2/src/core/shared/interfaces/item.ts#L6)
