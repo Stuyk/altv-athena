@@ -772,6 +772,7 @@ export function setTimeCycleEffect(player: alt.Player, name: string, amountInMs:
  * Athena.player.emit.setTimeCycleEffect(somePlayer, 'REDMIST', 30000);
  * ```
  *
+ * @export
  * @param {alt.Player} player An alt:V Player Entity
  * @param {string} name
  * @param {number} amountInMs How long it should last. -1 for infinite.

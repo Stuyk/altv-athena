@@ -213,6 +213,11 @@ export interface SharedItem<CustomData = {}> {
 }
 
 /**
+ * Apply a generic type to a custom item's data set
+ */
+export type StoredItemEx<T> = StoredItem<T>;
+
+/**
  * The StoredItem is stored in the player in the following locations:
  * equipment, inventory, and toolbar
  *
@@ -271,6 +276,11 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
      */
     disableCrafting?: boolean;
 }
+
+/**
+ * Apply a generic type to a base item's data set.
+ */
+export type BaseItemEx<T> = BaseItem<DefaultItemBehavior, T>;
 
 /**
  * The BaseItem is used as a way for the main items to point towards item information.
@@ -367,5 +377,19 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
     msTimeout?: number;
 }
 
+/**
+ * A combination of the stored, and base item.
+ *
+ * A stored item is merged into the base item to create this
+ */
 export type Item<Behavior = DefaultItemBehavior, CustomData = {}> = BaseItem<Behavior, CustomData> &
     StoredItem<CustomData>;
+
+/**
+ * A combination of the stored, and base item.
+ *
+ * A stored item is merged into the base item to create this
+ *
+ * This one allows for custom data.
+ */
+export type ItemEx<T> = BaseItem<DefaultItemBehavior, T> & StoredItem<T>;

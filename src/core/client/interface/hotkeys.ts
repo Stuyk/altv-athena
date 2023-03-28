@@ -201,6 +201,14 @@ export interface BaseKeyInfo {
     allowInAnyMenu?: true;
 
     /**
+     * Allow using the keybind even if the player is dead.
+     *
+     * @type {true}
+     * @memberof BaseKeyInfo
+     */
+    allowIfDead?: true;
+
+    /**
      * Allows the keybind to be ignore menu checks if in a specific page.
      *
      * @type {string}

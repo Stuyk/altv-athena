@@ -54,6 +54,8 @@ export async function add(player: alt.Player, item: Omit<StoredItem, 'slot'>): P
     return true;
 }
 
+
+
 /**
  * Subtract a quantity of an item from a player's inventory.
  * Does not look into toolbar.

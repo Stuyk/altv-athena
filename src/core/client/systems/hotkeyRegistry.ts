@@ -122,6 +122,10 @@ const Internal = {
                 overrideMenuCheck = AthenaClient.webview.isPageOpen(keyInfo.allowInSpecificPage);
             }
 
+            if (keyInfo.allowIfDead) {
+                overrideMenuCheck = true;
+            }
+
             if (!keyInfo.allowInAnyMenu && AthenaClient.webview.isAnyMenuOpen() && !overrideMenuCheck) {
                 continue;
             }
