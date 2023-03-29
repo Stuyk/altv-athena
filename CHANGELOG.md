@@ -358,6 +358,11 @@ Permission for Vehicle / Player
 - Athena.vehicle.permissions.addGroupPerm
 - Athena.vehicle.permissions.hasCommonGroupPermission
 - Athena.vehicle.permissions.hasGroupPermission
+
+Discord Login
+- Deprecated Web Service Based Authentication
+- Moved into alt:V Provided APIs
+- Starting Sunset of V4/V5 Discord Authentication with External APIs
 ```
 
 
