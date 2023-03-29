@@ -187,6 +187,14 @@ export interface Character {
      *
      */
     skin?: string | number;
+
+    /**
+     * A key value pair that contains a list of permissions a character has for a group.
+     *
+     * @type {{ [key: string]: Array<string> }}
+     * @memberof Character
+     */
+    groups?: { [key: string]: Array<string> };
 }
 
 export const CharacterDefaults: Partial<Character> = {

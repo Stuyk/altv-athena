@@ -116,4 +116,12 @@ export interface BaseVehicle {
      *
      */
     lastUsed?: number;
+
+    /**
+     * A key value pair of a group, and what permissions they have in that group.
+     *
+     * @type {{ [key: string]: Array<string> }}
+     * @memberof BaseVehicle
+     */
+    groups: { [key: string]: Array<string> };
 }

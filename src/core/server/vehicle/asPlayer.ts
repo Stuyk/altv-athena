@@ -15,7 +15,13 @@ function sharedOwnershipChecks(player: alt.Player, vehicle: alt.Vehicle) {
         return false;
     }
 
-    if (!Athena.vehicle.ownership.isOwner(player, vehicle, { includeKeys: true, includePermissions: true })) {
+    const options = {
+        includeKeys: true,
+        includePermissions: true,
+        includeGroupPermissions: true,
+    };
+
+    if (!Athena.vehicle.ownership.isOwner(player, vehicle, options)) {
         return false;
     }
 

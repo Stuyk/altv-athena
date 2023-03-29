@@ -12,6 +12,7 @@ export * as loginFlow from '@AthenaServer/systems/loginFlow';
 export * as messenger from '@AthenaServer/systems/messenger';
 export * as notification from '@AthenaServer/systems/notification';
 export * as permission from '@AthenaServer/systems/permission';
+export * as permissionGroup from '@AthenaServer/systems/permissionGroup';
 export * as plugins from '@AthenaServer/systems/plugins';
 export * as sound from '@AthenaServer/systems/sound';
 export * as storage from '@AthenaServer/systems/storage';

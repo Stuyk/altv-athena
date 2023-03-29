@@ -332,6 +332,32 @@ Added Admin Control System
 - Allows invoking admin functionality from client-side
 - Invoked callbacks on server-side are automatically checked
 - Athena.systems.adminControl.x
+
+Group Permissions
+- Group permissions let you add grouping structure to any document.
+- Documents can then be compared to check for similarities.
+- Group permissions allow for an easy way to gate access to specific objects based on permissions.
+- This system is good for police, doors, vehicle access, etc.
+- If a player and a vehicle have matching group permissions the player is given access.
+- Athena.systems.permissionGroup.addGroupPerm
+- Athena.systems.permissionGroup.hasAtLeastOneGroupPerm
+- Athena.systems.permissionGroup.hasCommonPermission
+- Athena.systems.permissionGroup.hasGroup
+- Athena.systems.permissionGroup.hasGroupPerm
+- Athena.systems.permissionGroup.removeGroup
+- Athena.systems.permissionGroup.removeGroupPerm
+
+Permission for Vehicle / Player
+- Athena.player.permission.addGroupPerm
+- Athena.player.permission.addPermission
+- Athena.player.permission.hasAccountPermission
+- Athena.player.permission.hasCommonGroupPermission
+- Athena.player.permission.hasGroupPermission
+- Athena.player.permission.hasPermission
+- Athena.player.permission.removePermission
+- Athena.vehicle.permissions.addGroupPerm
+- Athena.vehicle.permissions.hasCommonGroupPermission
+- Athena.vehicle.permissions.hasGroupPermission
 ```
 
 

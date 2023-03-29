@@ -9,7 +9,6 @@ import Database from '@stuyk/ezmongodb';
  *
  * Options can be specified to check if a passenger has keys and so on and so forth.
  *
- *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
  * @param {{ includePermissions?: boolean; includeKeys?: boolean; includeAdminOverride?: boolean; preventWhileAttached?: boolean; }}
@@ -22,6 +21,7 @@ export function isOwner(
         includePermissions?: boolean;
         includeKeys?: boolean;
         includeAdminOverride?: boolean;
+        includeGroupPermissions?: boolean;
         preventWhileAttached?: boolean;
     } = {},
 ): boolean {
@@ -52,10 +52,15 @@ export function isOwner(
     }
 
     if (options.includePermissions && Athena.vehicle.ownership.hasPermission(player, vehicle)) {
+        console.log('has perm I guess');
         return true;
     }
 
     if (options.includeKeys && Athena.vehicle.ownership.hasKeys(player, vehicle)) {
+        return true;
+    }
+
+    if (options.includeGroupPermissions && Athena.vehicle.ownership.hasGroupPermission(player, vehicle)) {
         return true;
     }
 
@@ -64,7 +69,6 @@ export function isOwner(
 
 /**
  * Checks if a player's character has a matching permission for a vehicle.
- *
  *
  * @param {alt.Player} player An alt:V Player Entity
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
@@ -85,6 +89,64 @@ export function hasPermission(player: alt.Player, vehicle: alt.Vehicle): boolean
     }
 
     return Athena.systems.permission.hasOne('character', player, data.permissions);
+}
+
+/**
+ * It's checking if the player has a group permission for the vehicle.
+ *
+ * If both the player and the vehicle are in the same group and have at least one matching perm, vehicle access is allowed.
+ *
+ * @name hasGroupPermission
+ * @param {alt.Player} player
+ * @param {alt.Vehicle} vehicle
+ * @returns {boolean}
+ * @exports
+ */
+export function hasGroupPermission(player: alt.Player, vehicle: alt.Vehicle): boolean {
+    if (Overrides.hasGroupPermission) {
+        return Overrides.hasGroupPermission(player, vehicle);
+    }
+
+    if (Athena.vehicle.tempVehicles.has(vehicle)) {
+        return false;
+    }
+
+    const playerData = Athena.document.character.get(player);
+    if (typeof playerData === 'undefined') {
+        return false;
+    }
+
+    if (typeof playerData.groups === 'undefined') {
+        return false;
+    }
+
+    const data = Athena.document.vehicle.get(vehicle);
+    if (typeof data === 'undefined') {
+        return false;
+    }
+
+    if (typeof data.groups === 'undefined') {
+        return false;
+    }
+
+    const vehicleGroupNames = Object.keys(data.groups);
+    for (let groupName of vehicleGroupNames) {
+        if (!playerData.groups[groupName]) {
+            continue;
+        }
+
+        const intersections = [
+            ...new Set(playerData.groups[groupName].filter((element) => data.groups[groupName].includes(element))),
+        ];
+
+        if (intersections.length <= 0) {
+            continue;
+        }
+
+        return true;
+    }
+
+    return false;
 }
 
 /**
@@ -298,6 +360,7 @@ export async function transfer(vehicle: alt.Vehicle, _id: string): Promise<boole
 interface VehicleOwnershipFuncs {
     isOwner: typeof isOwner;
     hasPermission: typeof hasPermission;
+    hasGroupPermission: typeof hasGroupPermission;
     hasKeys: typeof hasKeys;
     get: typeof get;
     getAsPlayer: typeof getAsPlayer;
