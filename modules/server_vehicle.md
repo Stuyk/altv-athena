@@ -57,6 +57,12 @@ Renames and re-exports [server/vehicle/ownership](server_vehicle_ownership.md)
 
 ___
 
+### permissions
+
+Renames and re-exports [server/vehicle/permissions](server_vehicle_permissions.md)
+
+___
+
 ### shared
 
 Renames and re-exports [server/vehicle/shared](server_vehicle_shared.md)

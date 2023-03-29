@@ -25,7 +25,7 @@ The color of the progress bar.
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:30](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/shared/interfaces/progressBar.ts#L30)
+[shared/interfaces/progressBar.ts:30](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/progressBar.ts#L30)
 
 ___
 
@@ -37,7 +37,7 @@ The distance in which the progress bar can be seen.
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:44](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/shared/interfaces/progressBar.ts#L44)
+[shared/interfaces/progressBar.ts:44](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/progressBar.ts#L44)
 
 ___
 
@@ -49,7 +49,7 @@ Do not set this. Leave it alone.
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:67](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/shared/interfaces/progressBar.ts#L67)
+[shared/interfaces/progressBar.ts:67](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/progressBar.ts#L67)
 
 ___
 
@@ -61,7 +61,7 @@ How long this progress bar should last.
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:37](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/shared/interfaces/progressBar.ts#L37)
+[shared/interfaces/progressBar.ts:37](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/progressBar.ts#L37)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:53](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/shared/interfaces/progressBar.ts#L53)
+[shared/interfaces/progressBar.ts:53](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/progressBar.ts#L53)
 
 ___
 
@@ -92,7 +92,7 @@ Only a single client will see it.
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:23](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/shared/interfaces/progressBar.ts#L23)
+[shared/interfaces/progressBar.ts:23](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/progressBar.ts#L23)
 
 ___
 
@@ -104,7 +104,7 @@ Do not set this. Leave it alone.
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:60](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/shared/interfaces/progressBar.ts#L60)
+[shared/interfaces/progressBar.ts:60](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/progressBar.ts#L60)
 
 ___
 
@@ -116,7 +116,7 @@ The text to display on the progress bar.
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:51](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/shared/interfaces/progressBar.ts#L51)
+[shared/interfaces/progressBar.ts:51](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/progressBar.ts#L51)
 
 ___
 
@@ -128,4 +128,4 @@ A unique identifier to remove the progress bar early.
 
 #### Defined in
 
-[shared/interfaces/progressBar.ts:15](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/shared/interfaces/progressBar.ts#L15)
+[shared/interfaces/progressBar.ts:15](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/progressBar.ts#L15)

@@ -42,7 +42,7 @@ Builds data from a screenshot event.
 
 #### Defined in
 
-[server/utility/screenshot.ts:59](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/utility/screenshot.ts#L59)
+[server/utility/screenshot.ts:59](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/utility/screenshot.ts#L59)
 
 ___
 
@@ -69,4 +69,4 @@ If the data becomes corrupted or does not retrieve in time it will return null.
 
 #### Defined in
 
-[server/utility/screenshot.ts:23](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/utility/screenshot.ts#L23)
+[server/utility/screenshot.ts:23](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/utility/screenshot.ts#L23)

@@ -93,6 +93,12 @@ Renames and re-exports [player](server_config.md#player)
 
 ___
 
+### permissionGroup
+
+Renames and re-exports [player](server_config.md#player)
+
+___
+
 ### plugins
 
 Renames and re-exports [player](server_config.md#player)

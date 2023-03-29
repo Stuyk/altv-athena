@@ -46,4 +46,4 @@ order: 0
 
 #### Defined in
 
-[server/athena/main.ts:4](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/athena/main.ts#L4)
+[server/athena/main.ts:4](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/athena/main.ts#L4)

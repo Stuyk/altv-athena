@@ -39,6 +39,12 @@ Renames and re-exports [player](server_config.md#player)
 
 ___
 
+### permission
+
+Renames and re-exports [player](server_config.md#player)
+
+___
+
 ### safe
 
 Renames and re-exports [player](server_config.md#player)

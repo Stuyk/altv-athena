@@ -15,7 +15,7 @@ order: 0
 
 #### Defined in
 
-[server/systems/permission.ts:7](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L7)
+[server/systems/permission.ts:7](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L7)
 
 ___
 
@@ -25,7 +25,7 @@ ___
 
 #### Defined in
 
-[server/systems/permission.ts:8](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L8)
+[server/systems/permission.ts:8](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L8)
 
 ## Variables
 
@@ -37,18 +37,18 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `add` | <CustomPerms\>(`type`: ``"account"`` \| ``"character"``, `player`: `Player`, `perm`: `CustomPerms` \| [`DefaultPerms`](server_systems_permission.md#DefaultPerms)) => `Promise`<`boolean`\> |
-| `clear` | (`type`: ``"account"`` \| ``"character"``, `player`: `Player`) => `Promise`<`void`\> |
-| `getAll` | <CustomPerms\>(`type`: ``"account"`` \| ``"character"``, `perm`: [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`) => `Promise`<[`player`](server_config.md#player)[] \| [`player`](server_config.md#player)[]\> |
-| `has` | <CustomPerms\>(`type`: ``"account"`` \| ``"character"``, `player`: `Player`, `perm`: [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`) => `boolean` |
-| `hasAll` | <CustomPerms\>(`type`: ``"account"`` \| ``"character"``, `player`: `Player`, `perms`: ([`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`)[]) => `boolean` |
-| `hasOne` | <CustomPerms\>(`type`: ``"account"`` \| ``"character"``, `player`: `Player`, `perms`: ([`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`)[]) => `boolean` |
-| `remove` | <CustomPerms\>(`type`: ``"account"`` \| ``"character"``, `player`: `Player`, `perm`: [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`) => `Promise`<`boolean`\> |
-| `removeAll` | <CustomPerms\>(`type`: ``"account"`` \| ``"character"``, `perm`: [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`, `ids`: `string`[]) => `Promise`<`void`\> |
+| `add` | <CustomPerms\>(`type`: ``"character"`` \| ``"account"``, `player`: `Player`, `perm`: `CustomPerms` \| [`DefaultPerms`](server_systems_permission.md#DefaultPerms)) => `Promise`<`boolean`\> |
+| `clear` | (`type`: ``"character"`` \| ``"account"``, `player`: `Player`) => `Promise`<`void`\> |
+| `getAll` | <CustomPerms\>(`type`: ``"character"`` \| ``"account"``, `perm`: [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`) => `Promise`<[`player`](server_config.md#player)[] \| [`player`](server_config.md#player)[]\> |
+| `has` | <CustomPerms\>(`type`: ``"character"`` \| ``"account"``, `player`: `Player`, `perm`: [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`) => `boolean` |
+| `hasAll` | <CustomPerms\>(`type`: ``"character"`` \| ``"account"``, `player`: `Player`, `perms`: ([`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`)[]) => `boolean` |
+| `hasOne` | <CustomPerms\>(`type`: ``"character"`` \| ``"account"``, `player`: `Player`, `perms`: ([`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`)[]) => `boolean` |
+| `remove` | <CustomPerms\>(`type`: ``"character"`` \| ``"account"``, `player`: `Player`, `perm`: [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`) => `Promise`<`boolean`\> |
+| `removeAll` | <CustomPerms\>(`type`: ``"character"`` \| ``"account"``, `perm`: [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`, `ids`: `string`[]) => `Promise`<`void`\> |
 
 #### Defined in
 
-[server/systems/permission.ts:451](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L451)
+[server/systems/permission.ts:439](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L439)
 
 ## Functions
 
@@ -70,7 +70,7 @@ Add a permission to an account or character.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `type` | ``"account"`` \| ``"character"`` |  |
+| `type` | ``"character"`` \| ``"account"`` |  |
 | `player` | `Player` | An alt:V Player Entity |
 | `perm` | `CustomPerms` \| [`DefaultPerms`](server_systems_permission.md#DefaultPerms) |  |
 
@@ -80,7 +80,7 @@ Add a permission to an account or character.
 
 #### Defined in
 
-[server/systems/permission.ts:241](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L241)
+[server/systems/permission.ts:229](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L229)
 
 ___
 
@@ -96,7 +96,7 @@ Clear all permissions for an account or character.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `type` | ``"account"`` \| ``"character"`` |  |
+| `type` | ``"character"`` \| ``"account"`` |  |
 | `player` | `Player` | An alt:V Player Entity |
 
 #### Returns
@@ -105,7 +105,7 @@ Clear all permissions for an account or character.
 
 #### Defined in
 
-[server/systems/permission.ts:275](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L275)
+[server/systems/permission.ts:263](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L263)
 
 ___
 
@@ -128,7 +128,7 @@ Will return an empty array if no permissions are found.
 
 | Name | Type |
 | :------ | :------ |
-| `type` | ``"account"`` \| ``"character"`` |
+| `type` | ``"character"`` \| ``"account"`` |
 | `perm` | [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms` |
 
 #### Returns
@@ -137,7 +137,7 @@ Will return an empty array if no permissions are found.
 
 #### Defined in
 
-[server/systems/permission.ts:342](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L342)
+[server/systems/permission.ts:330](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L330)
 
 ___
 
@@ -154,7 +154,7 @@ Get permissions for a given entity and type
 | Name | Type |
 | :------ | :------ |
 | `entity` | `Player` |
-| `type` | ``"account"`` \| ``"character"`` |
+| `type` | ``"character"`` \| ``"account"`` |
 
 #### Returns
 
@@ -162,7 +162,7 @@ Get permissions for a given entity and type
 
 #### Defined in
 
-[server/systems/permission.ts:424](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L424)
+[server/systems/permission.ts:412](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L412)
 
 ::: tip Usage
 Athena.systems.permission.**getPermissions**(`entity`, `type`): `any`
@@ -183,7 +183,7 @@ Get permissions for a given entity and type
 
 #### Defined in
 
-[server/systems/permission.ts:425](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L425)
+[server/systems/permission.ts:413](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L413)
 
 ___
 
@@ -205,7 +205,7 @@ Check if a character or account has a single permission.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `type` | ``"account"`` \| ``"character"`` |  |
+| `type` | ``"character"`` \| ``"account"`` |  |
 | `player` | `Player` | An alt:V Player Entity |
 | `perm` | [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms` |  |
 
@@ -215,7 +215,7 @@ Check if a character or account has a single permission.
 
 #### Defined in
 
-[server/systems/permission.ts:289](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L289)
+[server/systems/permission.ts:277](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L277)
 
 ___
 
@@ -237,7 +237,7 @@ Check if a character or account has all the permissions.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `type` | ``"account"`` \| ``"character"`` |  |
+| `type` | ``"character"`` \| ``"account"`` |  |
 | `player` | `Player` | An alt:V Player Entity |
 | `perms` | ([`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`)[] |  |
 
@@ -247,7 +247,7 @@ Check if a character or account has all the permissions.
 
 #### Defined in
 
-[server/systems/permission.ts:325](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L325)
+[server/systems/permission.ts:313](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L313)
 
 ___
 
@@ -269,7 +269,7 @@ Check if a character or account has a atleast one permission.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `type` | ``"account"`` \| ``"character"`` |  |
+| `type` | ``"character"`` \| ``"account"`` |  |
 | `player` | `Player` | An alt:V Player Entity |
 | `perms` | ([`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms`)[] |  |
 
@@ -279,7 +279,7 @@ Check if a character or account has a atleast one permission.
 
 #### Defined in
 
-[server/systems/permission.ts:307](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L307)
+[server/systems/permission.ts:295](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L295)
 
 ___
 
@@ -301,7 +301,7 @@ Remove a permission from an account or character.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `type` | ``"account"`` \| ``"character"`` |  |
+| `type` | ``"character"`` \| ``"account"`` |  |
 | `player` | `Player` | An alt:V Player Entity |
 | `perm` | [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms` |  |
 
@@ -311,7 +311,7 @@ Remove a permission from an account or character.
 
 #### Defined in
 
-[server/systems/permission.ts:259](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L259)
+[server/systems/permission.ts:247](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L247)
 
 ___
 
@@ -334,7 +334,7 @@ Automatically rebinds the document after updating.
 
 | Name | Type |
 | :------ | :------ |
-| `type` | ``"account"`` \| ``"character"`` |
+| `type` | ``"character"`` \| ``"account"`` |
 | `perm` | [`DefaultPerms`](server_systems_permission.md#DefaultPerms) \| `CustomPerms` |
 | `ids` | `string`[] |
 
@@ -344,4 +344,4 @@ Automatically rebinds the document after updating.
 
 #### Defined in
 
-[server/systems/permission.ts:374](https://github.com/Stuyk/altv-athena/blob/2226a0a/src/core/server/systems/permission.ts#L374)
+[server/systems/permission.ts:362](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/server/systems/permission.ts#L362)
