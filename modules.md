@@ -3,13 +3,6 @@
 ## Modules
 
 - [client/api](modules/client_api.md)
-- [client/api/consts/cameraConst](modules/client_api_consts_cameraConst.md)
-- [client/api/consts/dataConst](modules/client_api_consts_dataConst.md)
-- [client/api/consts/rmluiConst](modules/client_api_consts_rmluiConst.md)
-- [client/api/consts/screenConst](modules/client_api_consts_screenConst.md)
-- [client/api/consts/soundConst](modules/client_api_consts_soundConst.md)
-- [client/api/consts/utilityConst](modules/client_api_consts_utilityConst.md)
-- [client/api/consts/wheelMenus](modules/client_api_consts_wheelMenus.md)
 - [client/camera](modules/client_camera.md)
 - [client/camera/cinematic](modules/client_camera_cinematic.md)
 - [client/camera/gameplay](modules/client_camera_gameplay.md)

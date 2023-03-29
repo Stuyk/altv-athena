@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[shared/enums/views.ts:19](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/enums/views.ts#L19)
+[shared/enums/views.ts:19](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/enums/views.ts#L19)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[shared/enums/views.ts:21](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/enums/views.ts#L21)
+[shared/enums/views.ts:21](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/enums/views.ts#L21)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[shared/enums/views.ts:22](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/enums/views.ts#L22)
+[shared/enums/views.ts:22](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/enums/views.ts#L22)
 
 ___
 
@@ -47,4 +47,4 @@ ___
 
 #### Defined in
 
-[shared/enums/views.ts:20](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/enums/views.ts#L20)
+[shared/enums/views.ts:20](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/enums/views.ts#L20)

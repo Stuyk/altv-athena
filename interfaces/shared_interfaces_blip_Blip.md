@@ -32,7 +32,7 @@ Another identifier field for the blip.
 
 #### Defined in
 
-[shared/interfaces/blip.ts:67](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/blip.ts#L67)
+[shared/interfaces/blip.ts:67](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/interfaces/blip.ts#L67)
 
 ___
 
@@ -44,7 +44,7 @@ The color of this
 
 #### Defined in
 
-[shared/interfaces/blip.ts:39](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/blip.ts#L39)
+[shared/interfaces/blip.ts:39](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/interfaces/blip.ts#L39)
 
 ___
 
@@ -56,7 +56,7 @@ An identifier for the blip.
 
 #### Defined in
 
-[shared/interfaces/blip.ts:74](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/blip.ts#L74)
+[shared/interfaces/blip.ts:74](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/interfaces/blip.ts#L74)
 
 ___
 
@@ -68,7 +68,7 @@ The 3D position of the blip on the map.
 
 #### Defined in
 
-[shared/interfaces/blip.ts:16](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/blip.ts#L16)
+[shared/interfaces/blip.ts:16](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/interfaces/blip.ts#L16)
 
 ___
 
@@ -80,7 +80,7 @@ The scale of this blip.
 
 #### Defined in
 
-[shared/interfaces/blip.ts:53](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/blip.ts#L53)
+[shared/interfaces/blip.ts:53](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/interfaces/blip.ts#L53)
 
 ___
 
@@ -92,7 +92,7 @@ Set this to true if you don't want it on the map all of the time.
 
 #### Defined in
 
-[shared/interfaces/blip.ts:23](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/blip.ts#L23)
+[shared/interfaces/blip.ts:23](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/interfaces/blip.ts#L23)
 
 ___
 
@@ -106,7 +106,7 @@ https://docs.fivem.net/docs/game-references/blips/
 
 #### Defined in
 
-[shared/interfaces/blip.ts:32](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/blip.ts#L32)
+[shared/interfaces/blip.ts:32](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/interfaces/blip.ts#L32)
 
 ___
 
@@ -118,7 +118,7 @@ The text / name of this blip. Can be whatever.
 
 #### Defined in
 
-[shared/interfaces/blip.ts:46](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/blip.ts#L46)
+[shared/interfaces/blip.ts:46](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/interfaces/blip.ts#L46)
 
 ___
 
@@ -130,4 +130,4 @@ Another identifier field for the blip.
 
 #### Defined in
 
-[shared/interfaces/blip.ts:81](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/interfaces/blip.ts#L81)
+[shared/interfaces/blip.ts:81](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/interfaces/blip.ts#L81)

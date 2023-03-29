@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/information/hairColors.ts:1](https://github.com/Stuyk/altv-athena/blob/6375486/src/core/shared/information/hairColors.ts#L1)
+[shared/information/hairColors.ts:1](https://github.com/Stuyk/altv-athena/blob/97e73cc/src/core/shared/information/hairColors.ts#L1)
