@@ -1,6 +1,6 @@
 //import { VEHICLE_TYPE, VEHICLE_CLASS, FUEL_TYPE } from '../enums/vehicleInformationFlags';
 //import { VehicleInfo } from '../interfaces/vehicleInfo';
-import { VEHICLE_TYPE, VEHICLE_CLASS, FUEL_TYPE } from '@AthenaShared/enums/vehicleInformationFlags';
+import { VEHICLE_TYPE, VEHICLE_CLASS, FUEL_TYPE } from '@AthenaShared/enums/vehicleTypeFlags';
 import { VehicleInfo } from '@AthenaShared/interfaces/vehicleInfo';
 
 /**
