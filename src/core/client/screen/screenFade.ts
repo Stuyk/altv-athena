@@ -8,8 +8,9 @@ import * as native from 'natives';
  *
  * @param {number} timeInMs
  */
-export function fromBlack(timeInMs: number) {
-    native.doScreenFadeOut(timeInMs);
+export async function fromBlack(timeInMs: number) {
+    await alt.Utils.waitFor(() => native.isScreenFadedIn() === true || native.isScreenFadingIn() === false);
+    native.doScreenFadeIn(timeInMs);
 }
 
 /**
@@ -18,8 +19,9 @@ export function fromBlack(timeInMs: number) {
  *
  * @param {number} timeInMs
  */
-export function toBlack(timeInMs: number) {
-    native.doScreenFadeIn(timeInMs);
+export async function toBlack(timeInMs: number) {
+    await alt.Utils.waitFor(() => native.isScreenFadedOut() === true || native.isScreenFadingOut() === false);
+    native.doScreenFadeOut(timeInMs);
 }
 
 alt.onServer(SYSTEM_EVENTS.SCREEN_FADE_FROM_BLACK, fromBlack);

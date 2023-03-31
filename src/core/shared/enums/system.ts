@@ -32,6 +32,8 @@ export enum SYSTEM_EVENTS {
     ENTITYSET_ACTIVATE = 'entityset:Activate',
     ENTITYSET_DEACTIVATE = 'entityset:Deactivate',
     ENTITYSET_IS_ACTIVE = 'entityset:IsActive',
+    // TIME
+    SET_GAME_TIME = 'player:freeze:time',
     // Holograms
     HOLOGRAM_APPEND = 'hologram:Append',
     //

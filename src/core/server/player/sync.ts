@@ -5,6 +5,7 @@ import * as emit from './emit';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { Appearance } from '../../shared/interfaces/appearance';
 import * as Athena from '@AthenaServer/api';
+import { Character } from '@AthenaShared/interfaces/character';
 
 /**
  * Synchronize currency data like bank, cash, etc.
@@ -24,13 +25,27 @@ export function currencyData(player: alt.Player): void {
     }
 }
 
-export function appearance(player: alt.Player) {
+/**
+ * Apply an appearance on a player, or use a selected character document to update.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {Character} [document=undefined]
+ * @return {*}
+ */
+export function appearance(player: alt.Player, document: Character = undefined) {
     if (Overrides.appearance) {
         return Overrides.appearance(player);
     }
 
-    const data = Athena.document.character.get(player);
-    if (!data) {
+    let data: Character;
+    if (typeof document === 'undefined') {
+        data = Athena.document.character.get(player);
+    } else {
+        data = document;
+    }
+
+    if (typeof data === 'undefined') {
         return;
     }
 

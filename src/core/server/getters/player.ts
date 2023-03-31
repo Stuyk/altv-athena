@@ -9,6 +9,17 @@ import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
 /**
  * Gets an online player by account identifier based on their MongoDB account _id.
  *
+ *
+ * #### Example
+ * ```ts
+ * const player = Athena.getters.player.byAccount('123456789');
+ * if (player) {
+ *     console.log(`Found player ${player.id} with account ID ${player.account._id}`);
+ * } else {
+ *    console.log('No player found with that account ID');
+ * }
+ * ```
+ *
  * @param {string} id
  * @return {(alt.Player | undefined)}
  */
@@ -33,7 +44,18 @@ export function byAccount(id: string): alt.Player | undefined {
 
 /**
  * Gets an online player by their name.
+ *
  * Not case sensitive and returns the first player it finds matching that name.
+ *
+ * #### Example
+ * ```ts
+ * const player = Athena.getters.player.byName('john_fettermanjoe');
+ * if (player) {
+ *     console.log(`Found player ${player.id} with name ${player.name}`);
+ * } else {
+ *     console.log('No player found with that name');
+ * }
+ * ```
  *
  * @param {string} name
  * @return {(alt.Player | undefined)}
@@ -56,7 +78,20 @@ export function byName(name: string): alt.Player | undefined {
 
 /**
  * Gets an online player by their partial name.
+ *
  * Not case sensitive and returns the first player it finds that includes the partial
+ *
+ * #### Example
+ * ```ts
+ * const partialName = 'john';
+ * const player = Athena.getters.player.byPartialName(partialName);
+ *
+ * if (player) {
+ *     console.log(`Found player ${player.id} with name ${player.name}`);
+ * } else {
+ *     console.log(`No player found with the partial name '${partialName}'`);
+ * }
+ * ```
  *
  * @param {string} partialName
  * @return {(alt.Player | undefined)}
@@ -79,6 +114,18 @@ export function byPartialName(partialName: string): alt.Player | undefined {
 
 /**
  * Get an online player based on their MongoDB _id
+ *
+ * #### Example
+ * ```ts
+ * const id = 'abc123jkfewfwe';
+ * const player = Athena.getters.player.byDatabaseID(id);
+ *
+ * if (player) {
+ *     console.log(`Found player with id ${id}`);
+ * } else {
+ *     console.log(`No player found with the id '${id}'`);
+ * }
+ * ```
  *
  * @param {string} id
  * @return {(alt.Player | undefined)}
