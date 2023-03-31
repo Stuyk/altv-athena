@@ -1,7 +1,6 @@
-import { AthenaClient } from '@AthenaClient/api/athena';
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
-import { OptionFor3DMenu } from './menu3DInterfaces';
 import * as alt from 'alt-client';
+import * as AthenaClient from '@AthenaClient/api';
+import { OptionFor3DMenu } from './menu3DInterfaces';
 
 const KEYS = {
     ESCAPE_KEY: 27,
@@ -46,7 +45,7 @@ const InternalFunctions = {
             optionsElement.appendChild(newOption);
         }
 
-        interval = AthenaClient.timer.createInterval(InternalFunctions.tick, 0);
+        interval = alt.setInterval(InternalFunctions.tick, 0);
     },
     updateIndex() {
         const element = document.getElementByID(`option-${optionIndex}`);
@@ -57,7 +56,7 @@ const InternalFunctions = {
      *
      */
     close(skipSound = false) {
-        AthenaClient.timer.clearInterval(interval);
+        alt.clearInterval(interval);
 
         if (typeof document !== 'undefined') {
             document.destroy();
@@ -68,7 +67,7 @@ const InternalFunctions = {
         internalPos = undefined;
 
         if (!skipSound) {
-            AthenaClient.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
+            AthenaClient.systems.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
         }
 
         alt.Player.local.isMenuOpen = false;
@@ -80,7 +79,7 @@ const InternalFunctions = {
     async select() {
         const option = internalOptions[optionIndex];
         option.callback();
-        AthenaClient.sound.frontend('SELECT', 'HUD_FREEMODE_SOUNDSET');
+        AthenaClient.systems.sound.frontend('SELECT', 'HUD_FREEMODE_SOUNDSET');
         InternalFunctions.close(true);
     },
     /**
@@ -97,7 +96,7 @@ const InternalFunctions = {
         }
 
         InternalFunctions.updateIndex();
-        AthenaClient.sound.frontend('NAV_UP_DOWN', 'HUD_FREEMODE_SOUNDSET');
+        AthenaClient.systems.sound.frontend('NAV_UP_DOWN', 'HUD_FREEMODE_SOUNDSET');
     },
     /**
      * Moves the option selection navigation down.
@@ -113,7 +112,7 @@ const InternalFunctions = {
         }
 
         InternalFunctions.updateIndex();
-        AthenaClient.sound.frontend('NAV_UP_DOWN', 'HUD_FREEMODE_SOUNDSET');
+        AthenaClient.systems.sound.frontend('NAV_UP_DOWN', 'HUD_FREEMODE_SOUNDSET');
     },
     /**
      * Invokes key press functions.
@@ -143,7 +142,7 @@ const InternalFunctions = {
         }
 
         const screenPos = alt.worldToScreen(internalPos);
-        const dist = AthenaClient.utility.distance3D(alt.Player.local.pos, internalPos);
+        const dist = AthenaClient.utility.vector.distance(alt.Player.local.pos, internalPos);
         if (dist > maxDistance) {
             InternalFunctions.close(true);
             return;
@@ -156,45 +155,44 @@ const InternalFunctions = {
     },
 };
 
-const Menu3DConst = {
-    /**
-     * Create an in-world 3D menu with maximum options.
-     *
-     * @param {alt.IVector3} pos
-     * @param {Array<OptionFor3DMenu>} options
-     * @param {number} maxDistance
-     * @return {void}
-     */
-    create(pos: alt.IVector3, options: Array<OptionFor3DMenu>, maxDistance = 8): void {
-        if (isAnyMenuOpen(false)) {
-            alt.logWarning(`Menu could not be created because a menu is already open.`);
-            return undefined;
-        }
+/**
+ * Create an in-world 3D menu with maximum options.
+ *
+ * @param {alt.IVector3} pos A position in the world.
+ * @param {Array<OptionFor3DMenu>} options
+ * @param {number} maxDistance
+ * @return {void}
+ */
+export function create(pos: alt.IVector3, options: Array<OptionFor3DMenu>, maxDistance = 8): void {
+    if (AthenaClient.webview.isAnyMenuOpen(false)) {
+        alt.logWarning(`Menu could not be created because a menu is already open.`);
+        return undefined;
+    }
 
-        if (options.length > 8) {
-            alt.logWarning(`Menu Options exceeded 8 entries. Trimmed off excess menu entries.`);
-            options = options.slice(0, 8);
-        }
+    if (options.length > 8) {
+        alt.logWarning(`Menu Options exceeded 8 entries. Trimmed off excess menu entries.`);
+        options = options.slice(0, 8);
+    }
 
-        if (typeof document === 'undefined') {
-            document = new alt.RmlDocument('/client/rmlui/menu3d/index.rml');
-            document.show();
-        }
+    if (typeof document === 'undefined') {
+        document = new alt.RmlDocument('/client/rmlui/menu3d/index.rml');
+        document.show();
+    }
 
-        alt.Player.local.isMenuOpen = true;
-        alt.on('keyup', InternalFunctions.handleKeyUp);
-        InternalFunctions.init(pos, options, maxDistance);
-    },
-    /**
-     * Call this function to close the menu.
-     * Make sure to wait for it to close before opening a new menu.
-     *
-     */
-    async close(): Promise<void> {
-        await InternalFunctions.close();
-        await alt.Utils.wait(100);
-    },
-};
+    alt.Player.local.isMenuOpen = true;
+    alt.on('keyup', InternalFunctions.handleKeyUp);
+    InternalFunctions.init(pos, options, maxDistance);
+}
+
+/**
+ * Call this function to close the menu.
+ * Make sure to wait for it to close before opening a new menu.
+ *
+ */
+export async function close(): Promise<void> {
+    await InternalFunctions.close();
+    await alt.Utils.wait(100);
+}
 
 const FUNCTION_BINDS = {
     [KEYS.ESCAPE_KEY]: InternalFunctions.close,
@@ -209,7 +207,3 @@ alt.on('disconnect', () => {
         alt.log('menu3d | Destroyed RMLUI Document on Disconnect');
     }
 });
-
-export const Menu3D = {
-    ...Menu3DConst,
-};

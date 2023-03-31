@@ -1,33 +1,25 @@
-import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-
+import connection from './database/connection';
+import reconnect from './utility/reconnect';
+import serverConfig from './utility/config';
+import Database from '@stuyk/ezmongodb';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 import { IConfig } from './interface/iConfig';
-import Ares from './utility/ares';
-import ConfigUtil from './utility/config';
-import MongoUtil from './utility/mongo';
-import { ReconnectHelper } from './utility/reconnect';
 
-const DEFAULT_ARES_ENDPOINT = 'https://ares.stuyk.com';
 const startTime = Date.now();
 let config: IConfig | undefined;
 
 class Startup {
     static async begin() {
-        // Validate the Configuration
-        config = ConfigUtil.get();
-
-        // Start Database
+        config = await serverConfig.get();
         Startup.database();
-
-        // Start Ares Connection Protocol
-        await Startup.ares();
+        await Startup.load();
     }
 
     /**
      * Used to start the Database.
      * @static
-     * @memberof Startup
+     *
      */
     static database() {
         if (typeof config === 'undefined') {
@@ -37,12 +29,12 @@ class Startup {
             process.exit(1);
         }
 
-        const url = MongoUtil.getURL(config);
-        const collections = MongoUtil.getCollections();
+        const url = connection.getURL(config);
+        const collections = connection.getCollections();
 
-        Database.init(url, MongoUtil.getName(config), collections)
+        Database.init(url, connection.getName(config), collections)
             .catch(() => {
-                MongoUtil.throwConnectionError();
+                connection.throwConnectionError();
             })
             .then((res) => {
                 if (res) {
@@ -50,16 +42,16 @@ class Startup {
                     return;
                 }
 
-                MongoUtil.throwConnectionError();
+                connection.throwConnectionError();
             });
     }
 
     /**
      * Sets the current ares endpoint.
      * @static
-     * @memberof Startup
+     *
      */
-    static async ares() {
+    static async load() {
         if (typeof config === 'undefined') {
             alt.logWarning(
                 `Failed to load Configuration File. Is 'AthenaConfig.json' file malformed? Try setting to default values again.`,
@@ -67,16 +59,14 @@ class Startup {
             process.exit(1);
         }
 
-        Ares.setAresEndpoint(config.ARES_ENDPOINT ? config.ARES_ENDPOINT : DEFAULT_ARES_ENDPOINT);
         // @ts-ignore
         await import(`./boot.js`);
-        alt.log(`==> Total Bootup Time -- ${Date.now() - startTime}ms`);
+        alt.log(`~lc~Boot Time: ~g~${Date.now() - startTime}ms`);
     }
 
     static async toggleEntry() {
         alt.off('playerConnect', Startup.handleEarlyConnect);
-        alt.log(`Server Warmup Complete. Now accepting connections.`);
-        ReconnectHelper.invoke();
+        reconnect.invoke();
     }
 
     static handleEarlyConnect(player: alt.Player) {

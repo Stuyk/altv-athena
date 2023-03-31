@@ -1,5 +1,371 @@
 # Changelog
 
+## 5.0.0
+
+```
+Major Breaking Changes
+---> These changes reflect a larger set of changes that will be occuring to the framework during the 5.0.0 release window.
+---> These changes are necessary to scale the framework more and lower the complexity of the framework further.
+- Removed Inventory
+- Removed Equipment
+- Removed Toolbar
+- Removed Storage System
+- Removed Vehicle Keys
+- Removed Holograms
+- Removed CameraTarget
+- Updated Object Wheel Menu
+
+Death
+- Added default death system to help decouple framework from opinionated systems.
+- Removed default death plugin and moved to the Athena Framework Plugin organization.
+- Athena.systems.default.death.disable() -> Used to disable default Death System.
+- Default death automatically respawns a player at the closest hospital after 5 seconds.
+
+Time
+- Removed world time system.
+- Added default world time system based on server time.
+- Athena.systems.default.time.disable() -> Used to disable default Time System.
+- Athena.systems.default.time.getHour()
+- Athena.systems.default.time.getMinute()
+
+Weather
+- Removed weather plugin commands. Removed weather system.
+- Added default weather system.
+- Athena.systems.default.weather.disable() -> Disabled all weather & weather sync.
+- Added getWeatherFromString() function to get a numbered value from a weather string.
+- Athena.systems.default.weather.getCurrentWeather() -> Can return number, or string value
+
+Attachables
+- Fixed alt.Object.getByID bug; replaced with proper find.
+
+StateManager (Removed)
+- Completely removed and replaced with Document Based State Management
+- Why? The limitations of complexity of this system were overdone.
+- The following changes below are more responsive and much easier to understand.
+
+Athena.document.character
+- A 'character' specific document with individual state updates for all interface values.
+- Includes better extendability for core interfaces through generic types.
+- Adds functions: get, getField, set, setBulk, onChange
+- Fixed small issue with references
+
+Athena.document.vehicle
+- A 'vehicle' specific document with individual state updates for all interface values.
+- Includes better extendability for core interfaces through generic types.
+- Adds functions: get, getField, set, setBulk, onChange
+
+Athena.player.save (Removed)
+- Removed this in favor of the above changes (Athena.document.character)
+- Moved the onTick function to the onTick file, and exposed with export.
+
+Currency
+- Updated currency logic to allow old / new value watching.
+- Uses new document system to log new / old data changes.
+- Removes direct modifiction of player.data.x
+- Added Custom Currency Type Support
+
+Chat
+- Began moving chat into its own self-contained plugin.
+- Removed decorator system.
+- Chat Vue interface reworked with lots of individual configurations.
+- Added pgup/pgdn controls for pagination
+- Began work on input rmlui for commands / text inputs
+- Finished command suggestions above input box
+- Created new command input rmlui option
+- Created message history in command input
+- TAB -> AutoFills with bottom command.
+- UP -> Goes to previously sent message or command
+- Down -> Navigates to previously sent messages, or fills with empty message
+- Known Issue: Input Caret does not go to the end of the input box. There is nothing that can be done to fix this currently.
+
+Permission System
+- Began refactor on permission system to use array of 'strings' to assign permissions.
+- Allows a player to have multiple permissions such as: ['admin', 'moderator']
+- No hierarchy will be created, and simply appending / removing these strings will enable / disable commands.
+- Character Permissions
+-- addPerm - Adds a permission to a player's account.
+-- removePerm - Removes a permission from a player's account.
+-- has - Check if a player has a permission given a string.
+-- hasOne - Check if a player has at least one permission given an array of strings.
+-- hasAll - Check if a player has all permissions given an array of strings.
+-- clear - Clears all permissions associated with a player.
+- Account Permissions
+-- addPerm - Adds a permission to a player's account.
+-- removePerm - Removes a permission from a player's account.
+-- has - Check if a player has a permission given a string.
+-- hasOne - Check if a player has at least one permission given an array of strings.
+-- hasAll - Check if a player has all permissions given an array of strings.
+-- clear - Clears all permissions associated with a player.
+
+Messenger System
+- Handles messages to be sent to some form of chat system.
+- Allows for client-side, and server-side callbacks to handle messages sent between players and server and client.
+- By default the messenger system will simply log to console if no chat systems are registered with Athena.
+-- This also applies to client-side.
+- Command logic being reworked to get more in-depth responses about what may be missing from a command based on args passed.
+- Command logic works with new permission system stated above.
+- Old permissions system is being deprecated.
+- Added timestamps to client-side message history.
+- Added a client history callback listener.
+- Added way to differentiate between a character permission command, and an account permission command
+- By default all commands use account permissions
+
+Getters
+- Added Athena.get.players.inRangeWithDistance - Returns players and their distance from a position.
+
+Refactors
+- Update existing code base to use new Athena.document APIs
+
+Vue Dev Menu
+- Added 'Hide' Button
+- Added 'Hide on Refresh' Button
+
+Item Interface
+- Initial Type Definitions & Design
+
+Item Factory
+- Created Initial Item Factory Functions
+- Created way to upsert new items into Item Factory
+- Created way to obtain a 'base item' from the Item Factory
+- Created a way to convert a 'stored item' from the Item Factory into a 'full item'
+- Created a way to convert a 'full item' from the Item Factory into a 'stored item'
+- Created weight calculations when using these functions
+
+Item Manager
+- Created Item Manager Functions
+-- quantity
+--- add - Adds a quantity to an item. If it exceeds max stack size; it returns remaining amount.
+--- sub - Removes quantity from an item. If the amount exceeds available. It returns remaining not removed.
+-- data
+--- upsert - appends data to the existing item.data field
+--- set - completely overwrites the item.data field
+--- clear - completely clears the item.data field and sets it to an empty object
+-- inventory
+--- add - Adds an item amount to an inventory given an array size, creates new items automatically.  Returns undefined if invalid.
+--- sub - Subs an item amount from an inventory. Returns undefined if invalid.
+--- getFreeSlot - Determines a free slot given an array size
+- Weight Configurations
+- Inventory Size Configurations
+- Weight Calculation / Auto-restrictions
+
+Item Effects
+- Reworked to support new API
+
+Plugin System
+- Added ability to append a callback to initialize a function after all plugins have loaded.
+- This resolves an issue with top-level 'Athena' API usage.
+- Used like: Athena.systems.plugins.addCallback(() => {})
+
+Inventory - Default System
+- Adds synchronization for inventory and toolbar data.
+- This can be disabled through the system defaults API if necessary.
+- Fixed small bug with synchronization that would only sync one data value instead of both.
+
+Inventory Plugin
+- Hooked up a majority of the functionality.
+- Made some general design changes such as quantity displayed.
+- Added context menu option for give.
+- Added some better handling for some events on client-side.
+- Hooked up main swapping / stacking logic when dragging.
+- Added sounds for opening / closing inventory
+- Added sound for moving an item
+- Added item combining for crafting
+- Enable movement while inventory is open
+
+Event for SYSTEM_EVENTS.TICKS_START
+- Removed all default usages.
+- Introduced an API that can be called on client-side to auto-append callbacks.
+- onTicksStart.add(() => {});
+- Makes it much easier to understand what is happening.
+
+WebView Related
+- Added WebViewEvents.playSound - Play custom sounds from any page.
+- Added Generic Type Support for Event Names
+- Added method to register a page that disables the default 'escape to close' behavior.
+- Added WebViewEvents.playSoundFrontend - Play native sounds from WebView call.
+- Added Athena.webview.closePages - Allows closing all pages, if non are specified, or closing specific pages if pages are specified.
+
+Weapon Items List
+- Added a default plugin that auto-appends a weapon item list to the database.
+
+Player Config
+- Player config uses the player.setLocalMeta internally.
+- However, this wraps around the event to provide type safety and Athena specific events easily.
+- On client-side values can be listened to for changes; which you can do whatever you need with it.
+
+Item Crafting
+- Introduced an item crafting recipe handler.
+- Combine any two items to return a new item.
+- Data can be appended to the new item from the old items if necessary.
+- Custom sound returned after crafting an item successfully.
+
+Item Weapons
+- Weapons can be handed to a player through their dbnames.
+- Component hashes can be appended to `item.data.components`
+- Components are automatically equipped when the weapon is equipped.
+
+Item Clothing
+- The old clothing system was thrown out.
+- New clothing system uses the alt:V dlc info entirely for the outfits.
+- New clothing items allow for an unlimited amount of components to be combined into a single item.
+- New clothing items allow for priority in inventory. The last item in the inventory overwrites any items before it.
+
+Item Drops
+- Added item drop streamer
+- Added alt.Object support
+- Added item models for all weapons
+
+Uniforms
+- Uniforms allow for existing clothing to be equipped, and then outfits are overwritten last.
+- Athena.systems.itemClothing.uniform.set
+- Athena.systems.itemClothing.uniform.clear
+
+Skins
+- Skins allow for the player model to be completely overwritten.
+- All appearance, and clothing synchronization will be ignored while a skin is set.
+- Athena.systems.itemClothing.skin.set
+- Athena.systems.itemClothing.skin.clear
+
+Ammunition
+- Added a default ammunition system
+- Can be disabled through Athena.systems.default.ammo
+- Use the item 'ammo-box' and apply it to a weapon to give it ammo.
+- Ammo is tracked per individual weapon.
+
+Clothing Crafting
+- Individual clothing items can be combined.
+- This can be done by using two clothing items together.
+
+Ares
+- Deprecated
+
+Discord Login
+- Integrated auth.athenaframework.com
+- Utilizes this repository: https://github.com/Stuyk/discord-oauth2-service
+- Added configuration options to easily change the URL
+
+Entity Selector (Formally cameraTarget)
+- Removed old cameraTarget code
+- Opted in for Tabbable Entity Selection
+- Hold Tab to turn on Entity Selection
+- Tab Tab to cycle through closest entities
+- EntitySelector.isSelecting() - Checks if the local player has entity selection turned on
+- EntitySelector.get.selection() - Returns current selection
+- EntitySelector.get.selectables() - Returns the array of entities the player can select from currently
+- EntitySelector.set.alwaysOn() - Forces the entity selector to only allow selecting closest to the player
+- EntitySelector.set.markerOff() - Turns off the marker that shows above entities
+- EntitySelector.set.markerColor() - Change the marker color
+- EntitySelector.set.markerSize() - Change the marker size
+
+Hotkey Registry
+- Literally better hotkeys in every shape and form
+- Key Up / Key Down
+- Trigger an everyTick while key is held down
+- Trigger a delayed function if key is held down for specified milliseconds
+- Trigger only in a certain vehicle model
+- Trigger only in the water
+- Trigger only while aiming
+- Trigger only while wielding a specific weapon
+- Trigger only as the driver of a vehicle
+- Trigger only as the passenger of a vehicle
+- Trigger only when in a vehicle
+- Trigger only when on foot
+- Option to allow the keybind while in any page menu
+- Ability to enable / disable a keybind through the API
+- Key Modifiers - Shift, Alt, CTRL
+
+Vehicle System
+- Removed VehicleFuncs
+- Removed Old Vehicle System
+- Added New Pathway (Athena.vehicle.x)
+- Vehicle ownership is character _id
+- Added permissions to vehicle ownership
+- Added ability to add characters to vehicle keys
+- Added functions to add / remove characters to keys
+- Differentiated ownership from keys
+- Updated vehicle controller on client-side
+- Updated vehicle controller on server-side
+- Updated vehicle document
+
+Spawn Vehicles on Join
+- Added default system that spawns player owned vehicles on join
+- Added way to disable this system
+
+Spawn Vehicles on Leave
+- Added defaulty system that despawns vehicles on leave
+- Added way to disable this system
+
+Began Deprecation of src/core/athena/main.ts File
+
+Admin System
+- First account created always gets 'admin' permission by default
+- /addperm [account or character] [ingame-id] [permission] - Add permission to an account
+- /removeperm [account or character] [ingame-id] [permission] - Remove permission from an account
+- /getperms [account or character] [ingame-id] - Returns the current list of permissions for given type
+
+Display ID
+- Added default system to show ID in top-right of screen.
+- Can be disabled through Athena.systems.defaults.displayId.disable()
+- Can be customized to move position elsewhere through similar API as above
+
+Athena.player.appearance
+- These are all new utility functions to help with updating player appearance
+- setHair
+- setFacialHair
+- setEyebrows
+- setEyeColor
+- setModel
+- updateTattoos
+
+Athena.utility.restrict
+- Used to make ANY function permission restricted for a given player.
+- Easily wrap a function, or a event and restrict it.
+- Allows for notifying the user if the function is restricted.
+
+Notification System
+- Default uses GTA:V notification system.
+- New overrides on client-side to turn off default behavior.
+- Can add callbacks to intercept notification messages, and do something else with it
+
+Added Admin Control System
+- Allows an easy way to identify admin permissions on client-side
+- Allows invoking admin functionality from client-side
+- Invoked callbacks on server-side are automatically checked
+- Athena.systems.adminControl.x
+
+Group Permissions
+- Group permissions let you add grouping structure to any document.
+- Documents can then be compared to check for similarities.
+- Group permissions allow for an easy way to gate access to specific objects based on permissions.
+- This system is good for police, doors, vehicle access, etc.
+- If a player and a vehicle have matching group permissions the player is given access.
+- Athena.systems.permissionGroup.addGroupPerm
+- Athena.systems.permissionGroup.hasAtLeastOneGroupPerm
+- Athena.systems.permissionGroup.hasCommonPermission
+- Athena.systems.permissionGroup.hasGroup
+- Athena.systems.permissionGroup.hasGroupPerm
+- Athena.systems.permissionGroup.removeGroup
+- Athena.systems.permissionGroup.removeGroupPerm
+
+Permission for Vehicle / Player
+- Athena.player.permission.addGroupPerm
+- Athena.player.permission.addPermission
+- Athena.player.permission.hasAccountPermission
+- Athena.player.permission.hasCommonGroupPermission
+- Athena.player.permission.hasGroupPermission
+- Athena.player.permission.hasPermission
+- Athena.player.permission.removePermission
+- Athena.vehicle.permissions.addGroupPerm
+- Athena.vehicle.permissions.hasCommonGroupPermission
+- Athena.vehicle.permissions.hasGroupPermission
+
+Discord Login
+- Deprecated Web Service Based Authentication
+- Moved into alt:V Provided APIs
+- Starting Sunset of V4/V5 Discord Authentication with External APIs
+```
+
+
 ## 4.0.0
 
 ```

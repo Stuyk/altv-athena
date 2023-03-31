@@ -1,7 +1,7 @@
+import * as alt from 'alt-client';
+import * as AthenaClient from '@AthenaClient/api';
 import { ProgressBar as ProgressBarType } from '@AthenaShared/interfaces/progressBar';
 import { rgbaToHexAlpha } from '@AthenaShared/utility/color';
-import * as alt from 'alt-client';
-import { AthenaClient } from '../../api/athena';
 
 const DEFAULT_DIMENSIONS = {
     width: 200,
@@ -82,7 +82,7 @@ const InternalFunctions = {
         }
 
         if (document && elements.length <= 0) {
-            AthenaClient.timer.clearInterval(interval);
+            alt.clearInterval(interval);
             document.destroy();
             document = undefined;
             interval = undefined;
@@ -109,7 +109,7 @@ const InternalFunctions = {
 
             // Handle 3D drawing of elements...
             const barPosition = elements[i].position as alt.IVector3;
-            const dist = AthenaClient.utility.distance3D(alt.Player.local.pos, barPosition);
+            const dist = AthenaClient.utility.vector.distance(alt.Player.local.pos, barPosition);
 
             // Removes the element from the rmlui document entirely.
             if (dist > elements[i].distance) {
@@ -137,7 +137,7 @@ const InternalFunctions = {
 
             if (Date.now() > lastBlockingCheck) {
                 didBlockingCheck = true;
-                if (AthenaClient.utility.isEntityBlockingPosition(barPosition)) {
+                if (AthenaClient.world.position.isEntityBlockingPosition(barPosition)) {
                     elements[i].isBlocked = true;
                 } else {
                     elements[i].isBlocked = false;
@@ -208,7 +208,7 @@ const ProgressBarConst = {
         if (typeof document === 'undefined') {
             document = new alt.RmlDocument('/client/rmlui/progressbar/index.rml');
             document.show();
-            interval = AthenaClient.timer.createInterval(InternalFunctions.update, 0, 'rmlui/progressbar/index.ts');
+            interval = alt.setInterval(InternalFunctions.update, 0);
         }
 
         const index = InternalFunctions.getIndexOfElement(bar.uid);
@@ -221,8 +221,8 @@ const ProgressBarConst = {
     /**
      * Remove a progress bar early.
      *
-     * @param {string} uid
-     * @return {*}
+     * @param {string} uid A unique string
+     * @return {void}
      */
     remove(uid: string) {
         const index = InternalFunctions.getIndexOfElement(uid);
@@ -234,14 +234,10 @@ const ProgressBarConst = {
     },
 };
 
-export const ProgressBar = {
-    ...ProgressBarConst,
-};
-
 alt.on('disconnect', () => {
     if (typeof document !== 'undefined') {
         document.destroy();
-        AthenaClient.timer.clearInterval(interval);
+        alt.clearInterval(interval);
         alt.log('progressbar | Destroyed RMLUI Document on Disconnect');
     }
 });

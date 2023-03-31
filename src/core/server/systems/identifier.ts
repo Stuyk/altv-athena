@@ -1,126 +1,161 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { PlayerEvents } from '../events/playerEvents';
+import * as Athena from '@AthenaServer/api';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 
-type IdentifierStrategy = 'account_id' | 'character_id' | 'server_id';
+export type IdentifierStrategy = 'account_id' | 'character_id' | 'server_id';
 
 let strategy: IdentifierStrategy = 'server_id';
 
-const IdentityRef = {
-    /**
-     * Initialize player selection identifier creation
-     *
-     */
-    init() {
-        PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, IdentityRef.setPlayerIdentifier);
-    },
-    /**
-     * Should be set during the server startup phase to change player identification strategies.
-     * This will apply to all players when they select a character.
-     * DO NOT CHANGE THIS AFTER SERVER STARTUP.
-     *
-     * @static
-     * @param {IdentifierStrategy} _strategy
-     * @memberof Identifier
-     */
-    setIdentificationStrategy(_strategy: IdentifierStrategy) {
-        strategy = _strategy;
-    },
-    /**
-     * Automatically sets the player identification by strategy to the synced meta.
-     *
-     * @static
-     * @memberof Identifier
-     */
-    setPlayerIdentifier(player: alt.Player) {
-        if (!player || !player.valid) {
-            return;
-        }
-
-        const identifier = IdentityRef.getIdByStrategy(player);
-        alt.log(`${player.data.name} ID join and set to ${identifier} using id strategy ${strategy}.`);
-        player.setSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID, identifier);
-    },
-    /**
-     * Returns the player by the currently set identification strategy.
-     *
-     * @static
-     * @param {(number | string)} id
-     * @memberof Identifier
-     */
-    getPlayer(id: number | string): alt.Player {
-        if (typeof id === 'string') {
-            id = parseInt(id);
-        }
-
-        return alt.Player.all.find((target) => {
-            if (!target || !target.valid || !target.data || !target.data._id) {
-                return false;
-            }
-
-            if (strategy === 'account_id' && target.accountData.id === id) {
-                return true;
-            }
-
-            if (strategy === 'character_id' && target.data.character_id === id) {
-                return true;
-            }
-
-            if (target.id !== id) {
-                return false;
-            }
-
-            return true;
-        });
-    },
-    /**
-     * Returns the current numerical identifier based on current strategy.
-     *
-     * @static
-     * @param {alt.Player} player
-     * @return {number}
-     * @memberof Identifier
-     */
-    getIdByStrategy(player: alt.Player): number {
-        const accountData = player.accountData;
-        const data = player.data;
-
-        if (!player || !accountData || !data || !data._id) {
-            return -1;
-        }
-
-        if (strategy === 'account_id') {
-            return accountData.id;
-        }
-
-        if (strategy === 'character_id') {
-            return data.character_id;
-        }
-
-        return player.id;
-    },
-};
+/**
+ * Initialize player selection identifier creation
+ *
+ */
+function init() {
+    Athena.player.events.on('selected-character', setPlayerIdentifier);
+}
 
 /**
- * It takes a function name and a callback, and if the function exists in the exports object, it
- * overrides it with the callback
- * @param {Key} functionName - The name of the function you want to override.
- * @param callback - The function that will be called when the original function is called.
- * @returns The function is being returned.
+ * Should be set during the server startup phase to change player identification strategies.
+ *
+ * This will apply to all players when they select a character.
+ *
+ * DO NOT CHANGE THIS AFTER SERVER STARTUP.
+ *
+ * @param {IdentifierStrategy} _strategy
  */
-function override<Key extends keyof typeof IdentityRef>(functionName: Key, callback: typeof IdentityRef[Key]): void {
-    if (typeof exports[functionName] === 'undefined') {
-        alt.logError(`systems/identifier.ts does not provide an export named ${functionName}`);
+export function setIdentificationStrategy(_strategy: IdentifierStrategy) {
+    if (Overrides.setIdentificationStrategy) {
+        return Overrides.setIdentificationStrategy(_strategy);
+    }
+
+    strategy = _strategy;
+}
+
+/**
+ * Automatically sets the player identification by strategy to the synced meta.
+ *
+ * @param {alt.Player} player An alt:V Player Entity
+ */
+export function setPlayerIdentifier(player: alt.Player) {
+    if (Overrides.setPlayerIdentifier) {
+        return Overrides.setPlayerIdentifier(player);
+    }
+
+    if (!player || !player.valid) {
         return;
     }
 
-    exports[functionName] = callback;
+    const identifier = getIdByStrategy(player);
+    const data = Athena.document.character.get(player);
+    if (typeof data === 'undefined') {
+        throw new Error(`Could not set identifier for player: ${player.id}, data was not defined.`);
+    }
+
+    player.setSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID, identifier);
 }
 
-export const Identifier: typeof IdentityRef & { override?: typeof override } = {
-    ...IdentityRef,
-    override,
-};
+/**
+ * Returns the player by the currently set identification strategy.
+ *
+ * @param {(number | string)} id
+ */
+export function getPlayer(id: number | string): alt.Player {
+    if (Overrides.getPlayer) {
+        return Overrides.getPlayer(id);
+    }
 
-Identifier.init();
+    if (typeof id === 'string') {
+        id = parseInt(id);
+    }
+
+    return alt.Player.all.find((target) => {
+        if (!target || !target.valid) {
+            return false;
+        }
+
+        if (strategy === 'account_id') {
+            const accountData = Athena.document.account.get(target);
+            if (typeof accountData === 'undefined') {
+                return false;
+            }
+
+            return accountData.id === id;
+        }
+
+        if (strategy === 'character_id') {
+            const data = Athena.document.character.get(target);
+            if (typeof data === 'undefined') {
+                return false;
+            }
+
+            return data.character_id === id;
+        }
+
+        if (target.id !== id) {
+            return false;
+        }
+
+        return true;
+    });
+}
+
+/**
+ * Returns the current numerical identifier based on current strategy.
+ *
+ * @param {alt.Player} player An alt:V Player Entity
+ * @return {number}
+ */
+export function getIdByStrategy(player: alt.Player): number {
+    if (Overrides.getIdByStrategy) {
+        return Overrides.getIdByStrategy(player);
+    }
+
+    const accountData = Athena.document.account.get(player);
+    const data = Athena.document.character.get(player);
+
+    if (typeof accountData === 'undefined' || typeof data === 'undefined') {
+        alt.logWarning(`Could not fetch player identifier for player: ${player.id} (${player.name})`);
+        return -1;
+    }
+
+    if (!player || !accountData || !data || !data._id) {
+        return -1;
+    }
+
+    if (strategy === 'account_id') {
+        return accountData.id;
+    }
+
+    if (strategy === 'character_id') {
+        return data.character_id;
+    }
+
+    return player.id;
+}
+
+interface IdentifierFuncs {
+    setIdentificationStrategy: typeof setIdentificationStrategy;
+    setPlayerIdentifier: typeof setPlayerIdentifier;
+    getPlayer: typeof getPlayer;
+    getIdByStrategy: typeof getIdByStrategy;
+}
+
+const Overrides: Partial<IdentifierFuncs> = {};
+
+export function override(functionName: 'setIdentificationStrategy', callback: typeof setIdentificationStrategy);
+export function override(functionName: 'setPlayerIdentifier', callback: typeof setPlayerIdentifier);
+export function override(functionName: 'getPlayer', callback: typeof getPlayer);
+export function override(functionName: 'getIdByStrategy', callback: typeof getIdByStrategy);
+
+/**
+ * Used to override identification strategy functions.
+ *
+ *
+ * @param {keyof IdentifierFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof IdentifierFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}
+
+init();

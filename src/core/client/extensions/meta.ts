@@ -1,5 +1,4 @@
-import { Appearance } from '../../shared/interfaces/appearance';
-import { Item } from '../../shared/interfaces/item';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
 
 export interface Meta {
     permissionLevel: number; // Used to determine the player's current permissionLevel as a player..
@@ -10,7 +9,7 @@ export interface Meta {
      * Check if in a voice channel.
      *
      * @type {boolean}
-     * @memberof Meta
+     *
      */
     voice: boolean;
 
@@ -25,9 +24,4 @@ export interface Meta {
 
     // Player Info
     appearance: Appearance;
-
-    // Inventory
-    inventory: Array<Partial<Item>>;
-    equipment: Array<Partial<Item>>;
-    toolbar: Array<Partial<Item>>;
 }

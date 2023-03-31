@@ -1,16 +1,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Timer } from '../utility/timers';
+import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
 import { VehicleController } from './vehicle';
-
-alt.onServer(SYSTEM_EVENTS.TICKS_START, toggleOn);
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 let interval: number | undefined;
 
 function toggleOn() {
-    interval = Timer.createInterval(disableDefaultBehavior, 0, 'disable.ts');
+    interval = alt.setInterval(disableDefaultBehavior, 0);
 }
 
 function disableDefaultBehavior(): void {
@@ -33,8 +30,15 @@ function disableDefaultBehavior(): void {
     native.disableControlAction(0, 13, true);
     native.disableControlAction(0, 14, true);
     native.disableControlAction(0, 15, true);
+    native.disableControlAction(0, 37, true);
+    native.disableControlAction(0, 192, true);
+    native.disableControlAction(0, 204, true);
+    native.disableControlAction(0, 211, true);
+    native.disableControlAction(0, 349, true);
 
     // Disable Default Controls
     native.disableControlAction(0, 104, true); // H
     VehicleController.handleVehicleDisables();
 }
+
+onTicksStart.add(toggleOn);

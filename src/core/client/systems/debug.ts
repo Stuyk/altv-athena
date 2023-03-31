@@ -1,17 +1,18 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { KEY_BINDS } from '../../shared/enums/keyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { KeybindController } from '../events/keyup';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import * as AthenaClient from '@AthenaClient/api';
 
 export const DebugController = {
     registerKeybinds() {
-        KeybindController.registerKeybind({
+        AthenaClient.systems.hotkeys.add({
             key: KEY_BINDS.DEBUG_KEY,
-            singlePress: DebugController.handleDebugMessages,
+            description: 'Print World Info to alt:V Console',
+            identifier: 'debug-info',
+            keyDown: DebugController.handleDebugMessages,
         });
     },
-
     handleDebugMessages() {
         alt.log(`POSITION:`);
         const pos = { ...alt.Player.local.pos };
@@ -38,4 +39,4 @@ export const DebugController = {
     },
 };
 
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, DebugController.registerKeybinds);
+onTicksStart.add(DebugController.registerKeybinds);

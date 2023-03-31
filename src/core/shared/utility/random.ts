@@ -42,3 +42,41 @@ export function getRandomRGBA(): alt.RGBA {
     const a = randomNumberBetween(0, 255);
     return new alt.RGBA(r, g, b, a);
 }
+
+/**
+ * Shuffle an array, and return randomized order.
+ *
+ *
+ * @template T
+ * @param {Array<T>} array
+ * @return {Array<T>}
+ */
+export function shuffle<T>(array: Array<T>): Array<T> {
+    let currentIndex = array.length;
+    let randomIndex: number;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+}
+
+/**
+ * Return a random value from an array of values
+ *
+ *
+ * @template T
+ * @param {Array<T>} elements
+ * @return {T}
+ */
+export function getRandomElement<T>(elements: Array<T>): T {
+    const index = Math.floor(Math.random() * elements.length);
+    return elements[index];
+}

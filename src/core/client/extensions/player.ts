@@ -1,4 +1,3 @@
-import { GroundItem } from '../../shared/interfaces/groundItem';
 import { Meta } from './meta';
 
 declare module 'alt-client' {
@@ -8,7 +7,6 @@ declare module 'alt-client' {
 
         // Check if a re-usable WebView is open.
         isMenuOpen: boolean;
-        isChatOpen: boolean;
         isWheelMenuOpen: boolean;
         isActionMenuOpen: boolean;
         isLeaderboardOpen: boolean;

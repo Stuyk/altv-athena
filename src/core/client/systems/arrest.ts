@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Timer } from '../utility/timers';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { playAnimation } from './animations';
 
 let interval: number;
@@ -10,19 +9,19 @@ let cuffer: alt.Player;
 const ArrestController = {
     cuff(_cuffer: alt.Player) {
         if (interval) {
-            Timer.clearInterval(interval);
+            alt.clearInterval(interval);
             interval = null;
         }
 
         cuffer = _cuffer;
-        Timer.createInterval(ArrestController.handleCuff, 500, 'arrest.ts');
+        alt.setInterval(ArrestController.handleCuff, 500);
     },
 
     uncuff(target: alt.Player) {},
 
     async handleCuff() {
         if (!cuffer || !cuffer.valid) {
-            Timer.clearInterval(interval);
+            alt.clearInterval(interval);
             interval = null;
             return;
         }

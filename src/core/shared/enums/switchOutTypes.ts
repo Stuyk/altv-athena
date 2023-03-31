@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ *
+ * @enum {number}
+ */
 export enum SWITCHOUT_TYPES {
     /**
      * Camera will go up in the sky in 3 steps.

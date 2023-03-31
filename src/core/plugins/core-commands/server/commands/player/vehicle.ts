@@ -1,103 +1,114 @@
 import * as alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
-import { command } from '@AthenaServer/decorators/commands';
-import VehicleFuncs from '@AthenaServer/extensions/vehicleFuncs';
-import { VehicleSystem } from '@AthenaServer/systems/vehicle';
-import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
-import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+
+import * as Athena from '@AthenaServer/api';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
+import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 
 const SeatbeltState: Array<{ id: number; vehicle_id: number; state: boolean }> = [];
-
-class VehicleCommands {
-    @command('engine', LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_ENGINE, '/engine'), PERMISSIONS.NONE)
-    private static engineCommand(player: alt.Player) {
-        if (!player || !player.valid || !player.vehicle) return;
-
-        VehicleSystem.toggleEngine(player);
-    }
-
-    @command('vehlock', LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_VEH_LOCK, '/vehlock'), PERMISSIONS.NONE)
-    private static vehicleLockCommand(player: alt.Player) {
-        if (!player || !player.valid || !player.vehicle) return;
-
-        VehicleSystem.toggleLock(player);
-    }
-
-    @command('togdoor', LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_VEH_DOOR, '/togdoor'), PERMISSIONS.NONE)
-    private static toggleDoorCommand(player: alt.Player, door: string) {
-        if (!player || !player.valid) return;
-        if (!door) return;
-
-        const doorIndex = +door;
-        if (doorIndex >= 6) return;
-
-        VehicleSystem.toggleDoor(player, doorIndex);
-    }
-
-    @command('givevehkey', LocaleController.get(LOCALE_KEYS.COMMAND_GIVE_VEH_KEY, '/givevehkey'), PERMISSIONS.NONE)
-    private static giveVehicleKeyCommand(player: alt.Player, id: string) {
-        if (!player || !player.valid || id === null || id === undefined) {
-            Athena.player.emit.message(player, `/givevehkey [id]`);
-            return;
-        }
-
-        if (!player.vehicle || !player.vehicle.data) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NOT_OWN_BY_YOU));
-            return;
-        }
-
-        if (player.vehicle.data.owner.toString() !== player.data._id.toString()) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NOT_OWN_BY_YOU));
-            return;
-        }
-
-        const target = Athena.systems.identifier.getPlayer(id);
-        if (!target) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
-            return;
-        }
-
-        VehicleFuncs.createKey(target, player.vehicle);
-        Athena.player.emit.notification(
-            player,
-            `${LocaleController.get(LOCALE_KEYS.VEHICLE_KEY_GIVEN_TO)} ${target.data.name}.`,
-        );
-    }
-
-    @command('seatbelt', LocaleController.get(LOCALE_KEYS.COMMAND_SEATBELT, '/seatbelt'), PERMISSIONS.NONE)
-    private static handleSeatbeltCommand(player: alt.Player): void {
+Athena.systems.messenger.commands.register(
+    'vehengine',
+    '/vehengine - Toggle Vehicle Engine',
+    [],
+    (player: alt.Player) => {
         if (!player || !player.valid || !player.vehicle) {
             return;
         }
 
-        if (player.data.isDead) {
+        Athena.vehicle.asPlayer.toggleEngine(player, player.vehicle);
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'vehdoor',
+    '/vehdoor [0|1|2|3|4|5] - Open / Close a Vehicle Door',
+    [],
+    async (player: alt.Player, door: string) => {
+        const doorNumber = parseInt(door) as 0 | 1 | 2 | 3 | 4 | 5;
+        if (isNaN(doorNumber)) {
             return;
         }
 
-        let index = SeatbeltState.findIndex((x) => x.vehicle_id === player.vehicle.id && x.id === player.id);
-        if (index >= 0) {
-            SeatbeltState[index].state = !SeatbeltState[index].state;
-        } else {
-            SeatbeltState.push({ id: player.id, vehicle_id: player.vehicle.id, state: true });
-            index = SeatbeltState.length - 1;
+        if (doorNumber <= -1 || doorNumber >= 6) {
+            return;
         }
 
-        const currentState = SeatbeltState[index].state;
-        if (currentState) {
-            Athena.player.emit.sound2D(player, 'seatbelt_on', 0.75);
-        } else {
-            Athena.player.emit.sound2D(player, 'seatbelt_off', 0.75);
+        if (!player.vehicle) {
+            return;
         }
 
-        currentState
-            ? Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_ON))
-            : Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_OFF));
+        let closeVehicle = player.vehicle;
+        if (typeof closeVehicle === 'undefined') {
+            closeVehicle = await Athena.getters.vehicle.inFrontOf(player, 3);
+        }
 
-        alt.emitClient(player, VEHICLE_EVENTS.SET_SEATBELT, currentState);
+        if (typeof closeVehicle === 'undefined') {
+            Athena.player.emit.notification(player, 'No vehicle in range.');
+            return;
+        }
+
+        Athena.vehicle.asPlayer.toggleDoor(player, closeVehicle, doorNumber);
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'vehlock',
+    '/vehlock - Toggle Vehicle Lock',
+    [],
+    async (player: alt.Player) => {
+        if (!player || !player.valid || !player.vehicle) {
+            return;
+        }
+
+        let closeVehicle = player.vehicle;
+        if (typeof closeVehicle === 'undefined') {
+            closeVehicle = await Athena.getters.vehicle.inFrontOf(player, 3);
+        }
+
+        if (typeof closeVehicle === 'undefined') {
+            Athena.player.emit.notification(player, 'No vehicle in range.');
+            return;
+        }
+
+        Athena.vehicle.asPlayer.toggleLock(player, closeVehicle);
+    },
+);
+
+Athena.systems.messenger.commands.register('seatbelt', '/seatbelt', [], (player: alt.Player) => {
+    if (!player || !player.valid || !player.vehicle) {
+        return;
     }
-}
+
+    const data = Athena.document.character.get(player);
+    if (typeof data === 'undefined') {
+        return;
+    }
+
+    if (data.isDead) {
+        return;
+    }
+
+    let index = SeatbeltState.findIndex((x) => x.vehicle_id === player.vehicle.id && x.id === player.id);
+    if (index >= 0) {
+        SeatbeltState[index].state = !SeatbeltState[index].state;
+    } else {
+        SeatbeltState.push({ id: player.id, vehicle_id: player.vehicle.id, state: true });
+        index = SeatbeltState.length - 1;
+    }
+
+    const currentState = SeatbeltState[index].state;
+    if (currentState) {
+        Athena.player.emit.sound2D(player, 'seatbelt_on', 0.75);
+    } else {
+        Athena.player.emit.sound2D(player, 'seatbelt_off', 0.75);
+    }
+
+    currentState
+        ? Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_ON))
+        : Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_OFF));
+
+    alt.emitClient(player, VEHICLE_EVENTS.SET_SEATBELT, currentState);
+});
 
 function setSeatbeltToFalse(player: alt.Player, vehicle: alt.Vehicle) {
     if (!player || !player.valid || !vehicle || !vehicle.valid) {
@@ -115,3 +126,6 @@ function setSeatbeltToFalse(player: alt.Player, vehicle: alt.Vehicle) {
 
 alt.on('playerEnteredVehicle', setSeatbeltToFalse);
 alt.on('playerLeftVehicle', setSeatbeltToFalse);
+alt.on('playerDisconnect', (player: alt.Player) => {
+    delete SeatbeltState[player.id];
+});

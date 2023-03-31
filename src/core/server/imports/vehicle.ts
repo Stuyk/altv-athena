@@ -1,0 +1,9 @@
+import '@AthenaServer/vehicle/asPlayer';
+import '@AthenaServer/vehicle/controls';
+import '@AthenaServer/vehicle/events';
+import '@AthenaServer/vehicle/get';
+import '@AthenaServer/vehicle/internalEvents';
+import '@AthenaServer/vehicle/ownership';
+import '@AthenaServer/vehicle/spawn';
+import '@AthenaServer/vehicle/tempVehicles';
+import '@AthenaServer/vehicle/tuning';

@@ -1,18 +1,17 @@
 import * as alt from 'alt-client';
-import natives from 'natives';
+import * as natives from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
 
-import JobEnums, { Objective } from '../../shared/interfaces/job';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance } from '../../shared/utility/vector';
-import { drawMarker } from '../utility/marker';
-import { drawText3D } from '../utility/text';
-import { Timer } from '../utility/timers';
-import { HudSystem } from './hud';
+import JobEnums, { Objective } from '@AthenaShared/interfaces/job';
+import { isFlagEnabled } from '@AthenaShared/utility/flags';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 
 let objective: Objective | null;
 let interval: number;
 let cooldown: number;
 let blip: alt.Blip;
+let isPressed = false;
 
 const ObjectiveController = {
     updateObjective(data: Objective | null) {
@@ -26,7 +25,7 @@ const ObjectiveController = {
      */
     handleSync(data: Objective | null) {
         if (interval) {
-            Timer.clearInterval(interval);
+            alt.clearInterval(interval);
             interval = null;
         }
 
@@ -38,7 +37,6 @@ const ObjectiveController = {
 
         if (!data) {
             objective = null;
-            HudSystem.setObjective(null);
             return;
         }
 
@@ -58,9 +56,8 @@ const ObjectiveController = {
             blip.route = true;
         }
 
-        HudSystem.setObjective(data.description);
         objective = { ...data };
-        interval = Timer.createInterval(ObjectiveController.verifyObjective, 0, 'job.ts');
+        interval = alt.setInterval(ObjectiveController.verifyObjective, 0);
     },
 
     getVector3Range() {
@@ -76,6 +73,16 @@ const ObjectiveController = {
 
         if (isFlagEnabled(objective.type, JobEnums.ObjectiveType.CAPTURE_POINT)) {
             if (dist <= objective.range) {
+                return true;
+            }
+        }
+
+        if (isFlagEnabled(objective.type, JobEnums.ObjectiveType.PRESS_INTERACT_TO_COMPLETE)) {
+            if (dist <= objective.range) {
+                return true;
+            }
+
+            if (isPressed) {
                 return true;
             }
         }
@@ -113,17 +120,22 @@ const ObjectiveController = {
             return;
         }
 
-        const dist = distance(alt.Player.local.pos, objective.pos);
+        const dist = AthenaClient.utility.vector.distance(alt.Player.local.pos, objective.pos);
 
         if (objective.marker && dist <= objective.range * 25) {
             const scale = objective.marker.scale ? objective.marker.scale : ObjectiveController.getVector3Range();
 
-            drawMarker(objective.marker.type, objective.marker.pos as alt.Vector3, scale, objective.marker.color);
+            AthenaClient.screen.marker.draw(
+                objective.marker.type,
+                objective.marker.pos as alt.Vector3,
+                scale,
+                objective.marker.color,
+            );
         }
 
         if (objective.textLabel && dist <= objective.range * 10) {
-            drawText3D(
-                objective.textLabel.data,
+            AthenaClient.screen.text.drawText3D(
+                objective.textLabel.text,
                 objective.textLabel.pos as alt.Vector3,
                 0.4,
                 new alt.RGBA(255, 255, 255, 255),
@@ -132,7 +144,12 @@ const ObjectiveController = {
 
         if (objective.captureProgress >= 1 && dist <= objective.range * 10) {
             const progressText = `${objective.captureProgress}/${objective.captureMaximum}`;
-            drawText3D(progressText, objective.pos as alt.Vector3, 0.4, new alt.RGBA(255, 255, 255, 255));
+            AthenaClient.screen.text.drawText3D(
+                progressText,
+                objective.pos as alt.Vector3,
+                0.4,
+                new alt.RGBA(255, 255, 255, 255),
+            );
         }
 
         if (cooldown && Date.now() < cooldown) {
@@ -155,3 +172,29 @@ const ObjectiveController = {
 
 alt.onServer(JobEnums.ObjectiveEvents.JOB_SYNC, ObjectiveController.handleSync);
 alt.onServer(JobEnums.ObjectiveEvents.JOB_UPDATE, ObjectiveController.updateObjective);
+onTicksStart.add(() => {
+    AthenaClient.systems.hotkeys.add({
+        key: KEY_BINDS.INTERACT,
+        description: 'Interact Job',
+        identifier: 'interact-hotkey-job',
+        modifier: 'shift',
+        keyDown: () => {
+            isPressed = true;
+        },
+        keyUp: () => {
+            isPressed = false;
+        },
+    });
+
+    AthenaClient.systems.hotkeys.add({
+        key: KEY_BINDS.INTERACT_ALT,
+        description: 'Interact Job Alternative',
+        identifier: 'interact-hotkey-job-alt',
+        keyDown: () => {
+            isPressed = true;
+        },
+        keyUp: () => {
+            isPressed = false;
+        },
+    });
+});

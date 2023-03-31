@@ -1,5 +1,5 @@
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import * as AthenaClient from '@AthenaClient/api';
 import { Door } from '@AthenaShared/interfaces/door';
 import * as alt from 'alt-client';
 import * as native from 'natives';
@@ -19,17 +19,13 @@ const ClientDoorController = {
             return;
         }
 
-        AthenaClient.timer.clearInterval(interval);
+        alt.clearInterval(interval);
     },
     populate(streamedDoors: Array<Door>) {
         doors = streamedDoors;
 
         if (!interval) {
-            interval = AthenaClient.timer.createInterval(
-                handleDrawMarkers,
-                alt.debug ? 0 : 500,
-                'client/streamers/doors.ts',
-            );
+            interval = alt.setInterval(handleDrawMarkers, alt.debug ? 0 : 500);
         }
     },
 };
@@ -41,12 +37,12 @@ function handleDrawMarkers() {
 
     for (let door of doors) {
         if (alt.debug) {
-            const dist = AthenaClient.utility.distance2D(alt.Player.local.pos, door.pos);
+            const dist = AthenaClient.utility.vector.distance2d(alt.Player.local.pos, door.pos);
             if (dist > 5) {
                 continue;
             }
 
-            AthenaClient.screen.drawText3D(
+            AthenaClient.screen.text.drawText3D(
                 `UID: ${door.uid} - Unlocked: ${door.isUnlocked}`,
                 door.pos,
                 0.5,

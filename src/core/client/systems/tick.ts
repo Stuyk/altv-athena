@@ -1,13 +1,11 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Timer } from '../utility/timers';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 const pingEvery = 5000;
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, startTick);
-
 function startTick() {
-    Timer.createInterval(handlePing, pingEvery, 'tick.ts');
+    alt.setInterval(handlePing, pingEvery);
 }
 
 /**
@@ -16,3 +14,5 @@ function startTick() {
 function handlePing() {
     alt.emitServer(SYSTEM_EVENTS.PLAYER_TICK);
 }
+
+onTicksStart.add(startTick);

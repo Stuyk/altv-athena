@@ -29,9 +29,21 @@
         "module": "ES2022",
         "target": "ES2022",
         "outDir": "athena-cache",
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "esModuleInterop": true
     },
-    "include": ["src/**/*.ts", "src-webviews/**/*.ts"],
+    "include": [
+        "src/**/*.ts",
+        "src-webviews/**/*.ts",
+        "src-webviews/**/*.d.ts",
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "src/core/plugins/**/webview/**.ts",
+        "src/core/plugins/**/webview/**.vue",
+        "src/core/plugins/**/components/**.vue"
+    ],
     "exclude": [
         "resources",
         "scripts",

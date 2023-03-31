@@ -9,7 +9,7 @@ const Commands: ConsoleCommand = {};
  *
  * @param {string} cmdName
  * @param {...string[]} args
- * @return {*}
+ * @return {void}
  */
 function handleConsoleMessage(cmdName: string, ...args: string[]): void {
     const cmdNameclean = cmdName.replace(/^\s+|\s+$/g, '');
@@ -32,7 +32,7 @@ export class ConsoleCommander {
      * @static
      * @param {string} cmdName
      * @param {...string[]} args
-     * @memberof ConsoleCommander
+     *
      */
     static invokeCommand(cmdName: string, ...args: string[]): void {
         handleConsoleMessage(cmdName, ...args);
@@ -45,7 +45,7 @@ export class ConsoleCommander {
      * @static
      * @param {string} cmdName
      * @param {(...args: string[]) => void} callback
-     * @memberof ConsoleCommander
+     *
      */
     static registerConsoleCommand(cmdName: string, callback: (...args: string[]) => void) {
         Commands[cmdName] = callback;
@@ -55,8 +55,8 @@ export class ConsoleCommander {
      * Return a list of commands...
      *
      * @static
-     * @return {*}
-     * @memberof ConsoleCommander
+     * @return {void}
+     *
      */
     static getCommands() {
         return Object.keys(Commands);

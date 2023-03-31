@@ -1,9 +1,8 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { TextLabel } from '../../shared/interfaces/textLabel';
-import { distance2d } from '../../shared/utility/vector';
-import { drawText3D } from '../utility/text';
-import { Timer } from '../utility/timers';
+import * as AthenaClient from '@AthenaClient/api';
+
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { TextLabel } from '@AthenaShared/interfaces/textLabel';
 
 let labels: Array<TextLabel> = [];
 let interval: number;
@@ -22,7 +21,7 @@ const ClientTextLabelController = {
             return;
         }
 
-        Timer.clearInterval(interval);
+        alt.clearInterval(interval);
     },
 
     /**
@@ -49,11 +48,11 @@ const ClientTextLabelController = {
      * Add a single text label.
      * @static
      * @param {TextLabel} label
-     * @memberof MarkerController
+     *
      */
     append(label: TextLabel) {
         if (!label.uid) {
-            alt.logError(`(${JSON.stringify(label.data)}) Label is missing uid.`);
+            alt.logError(`(${JSON.stringify(label.text)}) Label is missing uid.`);
             return;
         }
 
@@ -65,7 +64,7 @@ const ClientTextLabelController = {
         }
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
+            interval = alt.setInterval(handleDrawTextlabels, 0);
         }
     },
 
@@ -75,22 +74,22 @@ const ClientTextLabelController = {
      *
      * @static
      * @param {Array<Marker>} labels
-     * @memberof MarkerController
+     *
      */
     populate(serverLabels: Array<TextLabel>) {
         labels = labels.filter((x) => !x.isServerWide).concat(serverLabels);
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
+            interval = alt.setInterval(handleDrawTextlabels, 0);
         }
     },
 
     /**
      * Remove a marker from being drawn.
      * @static
-     * @param {string} uid
-     * @return {*}
-     * @memberof MarkerController
+     * @param {string} uid A unique string
+     * @return {void}
+     *
      */
     remove(uid: string) {
         isRemoving = true;
@@ -134,11 +133,11 @@ function handleDrawTextlabels() {
             label.maxDistance = 15;
         }
 
-        if (distance2d(alt.Player.local.pos, label.pos) > label.maxDistance) {
+        if (AthenaClient.utility.vector.distance2d(alt.Player.local.pos, label.pos) > label.maxDistance) {
             continue;
         }
 
-        drawText3D(label.data, label.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
+        AthenaClient.screen.text.drawText3D(label.text, label.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
     }
 }
 

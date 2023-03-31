@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ *
+ * @enum {number}
+ */
 export enum SPINNER_TYPE {
     CLOCKWISE_WHITE_0 = 0,
     CLOCKWISE_WHITE_1 = 1,

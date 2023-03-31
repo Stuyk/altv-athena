@@ -1,5 +1,5 @@
 export const INVENTORY_EVENTS = {
-    PAGE: 'Inventory2',
+    PAGE: 'Inventory',
     TO_SERVER: {
         USE: 'inventory:event:server:use',
         DROP: 'inventory:event:server:drop',
@@ -9,6 +9,7 @@ export const INVENTORY_EVENTS = {
         OPEN: 'inventory:event:server:open',
         CLOSE: 'inventory:event:client:close',
         COMBINE: 'inventory:event:server:combine',
+        GIVE: 'inventory:event:server:give',
     },
     TO_CLIENT: {
         OPEN: 'inventory:event:client:open',
@@ -16,9 +17,16 @@ export const INVENTORY_EVENTS = {
     },
     FROM_WEBVIEW: {
         READY: 'inventory:event:ready',
+        GET_CLOSEST_PLAYERS: 'inventory:get:closest:players',
+    },
+    FROM_CLIENT: {
+        SET_CLOSEST_PLAYERS: 'inventory:set:closest:players',
     },
     TO_WEBVIEW: {
-        SET_EQUIPMENT: 'inventory:event:set:equipment',
+        SET_CUSTOM: 'inventory:event:set:custom',
         SET_INVENTORY: 'inventory:event:set:inventory',
+        SET_SIZE: 'inventory:event:set:size',
+        SET_WEIGHT_STATE: 'inventory:event:set:weight:state',
+        SET_MAX_WEIGHT: 'inventory:event:set:max:weight',
     },
 };

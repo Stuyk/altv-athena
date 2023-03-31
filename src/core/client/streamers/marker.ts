@@ -1,9 +1,8 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Marker } from '../../shared/interfaces/marker';
-import { distance2d } from '../../shared/utility/vector';
-import { drawMarker } from '../utility/marker';
-import { Timer } from '../utility/timers';
+import * as AthenaClient from '@AthenaClient/api';
+
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Marker } from '@AthenaShared/interfaces/marker';
 
 let addedMarkers: Array<Marker> = [];
 let localMarkers: Array<Marker> = [];
@@ -24,14 +23,14 @@ const ClientMarkerController = {
             return;
         }
 
-        Timer.clearInterval(interval);
+        alt.clearInterval(interval);
     },
 
     /**
      * Add a single local marker.
      * @static
      * @param {Marker} marker
-     * @memberof ClientMarkerController
+     *
      */
     append(marker: Marker) {
         if (!marker.uid) {
@@ -48,7 +47,7 @@ const ClientMarkerController = {
         }
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawMarkers, 0, 'marker.ts');
+            interval = alt.setInterval(handleDrawMarkers, 0);
         }
     },
 
@@ -57,22 +56,22 @@ const ClientMarkerController = {
      * separate from local markers.
      * @static
      * @param {Array<Marker>} markers
-     * @memberof ClientMarkerController
+     *
      */
     populate(markers: Array<Marker>) {
         addedMarkers = markers;
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawMarkers, 0, 'marker.ts');
+            interval = alt.setInterval(handleDrawMarkers, 0);
         }
     },
 
     /**
      * Remove a local marker from being drawn.
      * @static
-     * @param {string} uid
-     * @return {*}
-     * @memberof ClientMarkerController
+     * @param {string} uid A unique string
+     * @return {void}
+     *
      */
     remove(uid: string) {
         isRemoving = true;
@@ -123,7 +122,7 @@ function handleDrawMarkers() {
             marker.maxDistance = 25;
         }
 
-        if (distance2d(alt.Player.local.pos, marker.pos) > marker.maxDistance) {
+        if (AthenaClient.utility.vector.distance2d(alt.Player.local.pos, marker.pos) > marker.maxDistance) {
             continue;
         }
 
@@ -131,7 +130,7 @@ function handleDrawMarkers() {
             marker.scale = new alt.Vector3(1, 1, 1);
         }
 
-        drawMarker(
+        AthenaClient.screen.marker.draw(
             marker.type,
             marker.pos,
             marker.scale,

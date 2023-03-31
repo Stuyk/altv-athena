@@ -7,7 +7,13 @@ import { JobAnimation } from './animation';
 import { Particle } from './particle';
 import { JobAttachable } from './iAttachable';
 
-enum ObjectiveCriteria {
+/**
+ *
+ *
+ *
+ * @enum {number}
+ */
+export enum ObjectiveCriteria {
     NO_VEHICLE = 1,
     NO_WEAPON = 2,
     NO_DYING = 4,
@@ -18,36 +24,57 @@ enum ObjectiveCriteria {
     VEHICLE_ENGINE_OFF = 128,
 }
 
-enum ObjectiveType {
+/**
+ *
+ *
+ *
+ * @enum {number}
+ */
+export enum ObjectiveType {
     WAYPOINT = 1,
     CAPTURE_POINT = 2,
+    PRESS_INTERACT_TO_COMPLETE = 4,
 }
 
-enum ObjectiveEvents {
+export enum ObjectiveEvents {
     JOB_SYNC = 'job:Sync',
     JOB_VERIFY = 'job:Verify',
     JOB_UPDATE = 'job:Update',
 }
 
+/**
+ * Used to pass objective information from server to client.
+ *
+ *
+ * @interface Objective
+ */
 export interface Objective {
+    /**
+     * A unique identifier that can be assigned to an objective to help identify it easily.
+     *
+     * @type {string}
+     *
+     */
+    uid?: string;
+
     /**
      * The criteria necessary to complete this Objective.
      * @type {ObjectiveCriteria}
-     * @memberof Objective
+     *
      */
-    criteria: ObjectiveCriteria | number;
+    criteria: ObjectiveCriteria;
 
     /**
      * An objective type that is unique to this objective.
      * @type {ObjectiveType}
-     * @memberof Objective
+     *
      */
-    type: ObjectiveType | number;
+    type: ObjectiveType;
 
     /**
      * The 3D Position of this objective.
      * @type {alt.IVector3}
-     * @memberof Objective
+     *
      */
     pos: alt.IVector3;
 
@@ -55,70 +82,70 @@ export interface Objective {
      * The range which this objective can be completed in.
      * Usually set to around 2.
      * @type {number}
-     * @memberof Objective
+     *
      */
     range: number;
 
     /**
      * A description of what to do to complete this objective.
      * @type {string}
-     * @memberof Objective
+     *
      */
     description: string;
 
     /**
      * An optional internal tracker for how far this objective is along.
      * @type {number}
-     * @memberof Objective
+     *
      */
     captureProgress?: number;
 
     /**
      * An optional internal tracker for how much progress needs to be done to complete it.
      * @type {number}
-     * @memberof Objective
+     *
      */
     captureMaximum?: number;
 
     /**
      * The time between captures. This should be left alone.
      * @type {number}
-     * @memberof Objective
+     *
      */
     nextCaptureTime?: number;
 
     /**
      * A local marker to associate with this objective.
      * @type {Marker}
-     * @memberof Objective
+     *
      */
     marker?: Marker;
 
     /**
      * A local text label to associate with this objective.
      * @type {TextLabel}
-     * @memberof Objective
+     *
      */
     textLabel?: TextLabel;
 
     /**
      * A local blip to associate with this objective.
      * @type {Blip}
-     * @memberof Objective
+     *
      */
     blip?: Blip;
 
     /**
      * An animation to associate with this objective.
      * @type {JobAnimation}
-     * @memberof Objective
+     *
      */
     animation?: JobAnimation;
 
     /**
      * An object to associate with this objective.
      * @type {JobAttachable}
-     * @memberof Objective
+     *
      */
     attachable?: JobAttachable;
 
@@ -126,7 +153,7 @@ export interface Objective {
      * An event that can be triggered when the objective is started, completed, etc.
      * Useful for adding custom functionality to an objective.
      * @type {EventCall}
-     * @memberof Objective
+     *
      */
     eventCall?: EventCall;
 
@@ -134,7 +161,7 @@ export interface Objective {
      * Particles to show in the area of the objective.
      * Useful to add some 'flavor' to your objective.
      * @type {Particle}
-     * @memberof Objective
+     *
      */
     particle?: Particle;
 
@@ -142,7 +169,7 @@ export interface Objective {
      * Turns off all other objective checks, and only does the `callbackOnCheck` callback provided.
      *
      * @type {boolean}
-     * @memberof Objective
+     *
      */
     onlyCallbackCheck?: boolean;
 
@@ -151,25 +178,25 @@ export interface Objective {
      * Do not add callbacks.
      *
      * @type {{ [key: string]: any }}
-     * @memberof Objective
+     *
      */
     data?: { [key: string]: any };
 
     /**
      * Server-side callback when objective is started.
-     * @memberof Objective
+     *
      */
     callbackOnStart?: (player: any) => void;
 
     /**
      *
-     * @memberof Objective
+     *
      */
     callbackOnCheck?: (player: any) => Promise<boolean>;
 
     /**
      * Server-side callback when objective is completed.
-     * @memberof Objective
+     *
      */
     callbackOnFinish?: (player: any) => void;
 }

@@ -3,7 +3,8 @@
  * The parameters much the natives on the client-side.
  * It may be a little difficult to understand what this does.
  * Look at some the examples of where this is written.
- * @export
+ *
+ *
  * @interface Task
  */
 export interface Task {
@@ -14,7 +15,8 @@ export interface Task {
 
 /**
  * After completing a task it calls back to the server.
- * @export
+ *
+ *
  * @interface TaskCallback
  */
 export interface TaskCallback {

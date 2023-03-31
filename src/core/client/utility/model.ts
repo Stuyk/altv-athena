@@ -1,7 +1,16 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-export async function loadModel(hash: number): Promise<boolean> {
+/**
+ * Load a model based on string or hash
+ *
+ *
+ * @param {number} hash
+ * @return {Promise<boolean>}
+ */
+export async function load(model: number | string): Promise<boolean> {
+    const hash = typeof model === 'string' ? alt.hash(model) : model;
+
     return await new Promise((resolve: Function) => {
         native.requestModel(hash);
         let count = 0;

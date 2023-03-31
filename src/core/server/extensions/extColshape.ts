@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Interaction } from '../../shared/interfaces/interaction';
-import { sha256Random } from '../utility/encryption';
+import { sha256Random } from '../utility/hash';
 
 const DEFAULT_INTERACTION_HEIGHT = 3;
 
@@ -71,8 +71,8 @@ export class PolygonShape extends alt.ColshapePolygon {
      *
      * @param {number} minZ The floor level of the polygon
      * @param {number} maxZ The max height of the polygon
-     * @param {Array<alt.IVector2>} vertices An array of {x, y} to determine where to draw the polygon around
-     * @memberof PolygonShape
+     * @param {Array<alt.IVector2>} vertices An array of `x, y` to determine where to draw the polygon around
+     *
      */
     constructor(
         minZ: number,

@@ -7,8 +7,8 @@ class InternalFunctions {
      * Initializes `alt.on` forwarders.
      *
      * @static
-     * @return {*}
-     * @memberof InternalFunctions
+     * @return {void}
+     *
      */
     static init() {
         if (!('alt' in window)) {
@@ -24,8 +24,8 @@ class InternalFunctions {
      * @static
      * @param {string} eventName
      * @param {...any[]} args
-     * @return {*}
-     * @memberof InternalFunctions
+     * @return {void}
+     *
      */
     static handleEmits(eventName: string, ...args: any[]) {
         if (!OnEvents[eventName]) {
@@ -42,8 +42,8 @@ export default class WebViewEvents {
      * Closes the WebView page.
      *
      * @static
-     * @return {*}
-     * @memberof WebViewEvents
+     * @return {void}
+     *
      */
     static emitClose() {
         if (!('alt' in window)) {
@@ -59,8 +59,8 @@ export default class WebViewEvents {
      *
      * @static
      * @param {string} pageName
-     * @return {*}
-     * @memberof WebViewEvents
+     * @return {void}
+     *
      */
     static emitReady(pageName: string, ...args: any[]) {
         if (!('alt' in window)) {
@@ -79,9 +79,9 @@ export default class WebViewEvents {
      * @param {string} eventName
      * @param {...any[]} args
      * @return {void}
-     * @memberof WebViewEvents
+     *
      */
-    static emitServer(eventName: string, ...args: any[]): void {
+    static emitServer<EventNames = string>(eventName: EventNames, ...args: any[]): void {
         if (!('alt' in window)) {
             console.log(`[SERVER] -> Event: ${eventName} | Args: ${JSON.stringify(args)}`);
             return;
@@ -99,9 +99,9 @@ export default class WebViewEvents {
      * @param {string} eventName
      * @param {...any[]} args
      * @return {void}
-     * @memberof WebViewEvents
+     *
      */
-    static emitClient(eventName: string, ...args: any[]): void {
+    static emitClient<EventNames = string>(eventName: EventNames, ...args: any[]): void {
         if (!('alt' in window)) {
             console.log(`[CLIENT] -> Event: ${eventName} | Args: ${JSON.stringify(args)}`);
             return;
@@ -117,10 +117,47 @@ export default class WebViewEvents {
      * @static
      * @param {string} eventName
      * @param {(...args: any[]) => void} callback
-     * @memberof WebViewEvents
+     *
      */
+    static on<EventNames = string, Callback = (...args: any[]) => void>(eventName: EventNames, callback: Callback);
     static on(eventName: string, callback: (...args: any[]) => void) {
         OnEvents[eventName] = callback;
+    }
+
+    /**
+     * Play a sound from the WebView instance.
+     *
+     * @static
+     * @param {string} soundName
+     * @param {number} pan
+     * @param {number} volume
+     * @param {string} [soundInstantID]
+     *
+     */
+    static playSound(soundName: string, volume: number, soundInstantID?: string) {
+        if (!('alt' in window)) {
+            console.log(`[CLIENT] -> Sound Emit: ${soundName} ${volume} ${soundInstantID}`);
+            return;
+        }
+
+        alt.emit(WebViewEventNames.EMIT_CLIENT, WebViewEventNames.PLAY_SOUND, soundName, 0, volume, soundInstantID);
+    }
+
+    /**
+     * Play a native GTA:V frontend sound
+     *
+     * @static
+     * @param {string} audioName
+     * @param {string} ref
+     *
+     */
+    static playSoundFrontend(audioName: string, ref: string) {
+        if (!('alt' in window)) {
+            console.log(`[CLIENT] -> Frontend Sound Emit: ${audioName} ${ref}`);
+            return;
+        }
+
+        alt.emit(WebViewEventNames.EMIT_CLIENT, WebViewEventNames.PLAY_SOUND_FRONTEND, audioName, ref);
     }
 }
 

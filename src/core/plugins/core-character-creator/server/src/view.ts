@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
-import { CharacterSystem } from '@AthenaServer/systems/character';
+import * as Athena from '@AthenaServer/api';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo';
 import { CHARACTER_CREATOR_CONFIG } from '../../shared/config';
@@ -13,12 +12,12 @@ class InternalFunctions {
      * Verifies if a name is available during the Character Creation process.
      *
      * @static
-     * @param {alt.Player} player
+     * @param {alt.Player} player An alt:V Player Entity
      * @param {string} name
-     * @memberof CharacterCreatorView
+     *
      */
     static verifyName(player: alt.Player, name: string) {
-        const isValidName = CharacterSystem.isNameTaken(name);
+        const isValidName = Athena.systems.character.isNameTaken(name);
         alt.emitClient(player, CHARACTER_CREATOR_EVENTS.VERIFY_NAME, isValidName);
     }
 
@@ -27,8 +26,8 @@ class InternalFunctions {
      *
      * @static
      * @param {(number | null | undefined)} characterCount
-     * @return {*}
-     * @memberof InternalFunctions
+     * @return {void}
+     *
      */
     static isInvalid(characterCount: number | null | undefined) {
         if (typeof characterCount === 'number') {
@@ -54,18 +53,19 @@ class InternalFunctions {
             return;
         }
 
-        const didCreate = await CharacterSystem.create(player, appearance, info, name);
-        if (!didCreate) {
-            InternalFunctions.show(player, CreatorList[player.id] ? CreatorList[player.id] : 0);
+        const didCreate = await Athena.systems.character.create(player, appearance, info, name);
+        if (didCreate) {
             return;
         }
+
+        InternalFunctions.show(player, CreatorList[player.id] ? CreatorList[player.id] : 0);
     }
 
     static show(player: alt.Player, totalCharacters: number) {
         CreatorList[player.id] = totalCharacters;
 
         player.visible = false;
-        Athena.player.set.frozen(player, true);
+        player.frozen = true;
         Athena.player.safe.setPosition(
             player,
             CHARACTER_CREATOR_CONFIG.CHARACTER_CREATOR_POS.x,
@@ -90,7 +90,7 @@ export class CharacterCreatorView {
     static init() {
         // Makes this character creator the primary character creator if it is loaded...
         // This can be overwritten by changing the callback for this function.
-        CharacterSystem.setCreatorCallback(InternalFunctions.show);
+        Athena.systems.character.setCreatorCallback(InternalFunctions.show);
 
         alt.onClient(CHARACTER_CREATOR_EVENTS.VERIFY_NAME, InternalFunctions.verifyName);
         alt.onClient(CHARACTER_CREATOR_EVENTS.DONE, InternalFunctions.done);

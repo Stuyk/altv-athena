@@ -6,7 +6,7 @@ export class AthenaBuffer {
      * @param {string} data
      * @param {number} size
      * @return {Array<string>}
-     * @memberof AthenaBuffer
+     *
      */
     static toBuffer(data: string, size: number = 512): Array<string> {
         const stringMatch = new RegExp(`.{1,${size}}`, 'g');
@@ -18,7 +18,7 @@ export class AthenaBuffer {
      * @static
      * @param {Array<string>} data
      * @return {string}
-     * @memberof AthenaBuffer
+     *
      */
     static fromBuffer(data: Array<string>): string {
         return data.join('');

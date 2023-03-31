@@ -24,5 +24,8 @@
         ".github": false,
         "resources/core/**": false,
         "CONTRIBUTING.md": true
-    }
+    },
+    "css.lint.unknownProperties": "ignore",
+    "docify.commentService.docstringFormat": "JsDoc",
+    "docify.commentService.programmingLanguage": "javascript"
 }

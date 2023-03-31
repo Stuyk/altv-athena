@@ -1,285 +1,218 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IObject } from '../../shared/interfaces/iObject';
-import { distance2d } from '../../shared/utility/vector';
-import { loadModel } from '../utility/model';
-import { Timer } from '../utility/timers';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { IObject } from '@AthenaShared/interfaces/iObject';
 
-interface LocalObject extends IObject {
-    id: number;
-}
+export type CreatedObject = IObject & { createdObject?: alt.Object };
 
-let localObjects: Array<IObject> = [];
-let globalObjects: Array<IObject> = [];
-let createdObjects: Array<LocalObject> = [];
+const clientObjects: { [uid: string]: CreatedObject } = {};
+const serverObjects: { [uid: string]: CreatedObject } = {};
 
-let isRemoving = false;
-let interval;
+let interval: number;
 
 /**
  * Do Not Export Internal Only
  */
-const ClientObjectController = {
-    init() {
-        alt.on('disconnect', ClientObjectController.stop);
-        alt.onServer(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, ClientObjectController.removeGlobalObject);
-        alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, ClientObjectController.append);
-        alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, ClientObjectController.populate);
-        alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, ClientObjectController.removeLocalObject);
-        alt.onServer(SYSTEM_EVENTS.UPDATE_OBJECT, ClientObjectController.update);
-        localObjects = [];
-        globalObjects = [];
-    },
-
-    /**
-     * Updates an object's position if it exists.
-     *
-     * @param {IObject} objectData
-     */
-    update(objectData: IObject) {
-        const index = localObjects.findIndex((obj) => obj.uid === objectData.uid);
-        if (index <= -1) {
-            return;
-        }
-
-        localObjects[index] = { ...localObjects[index], ...objectData };
-    },
-
-    /**
-     * Add a single marker.
-     * @static
-     * @param {IObject} objectData
-     * @memberof ClientObjectController
-     */
-    append(objectData: IObject) {
-        if (!objectData.uid) {
-            alt.logError(`(${JSON.stringify(objectData.pos)}) Object is missing uid.`);
-            return;
-        }
-
-        const index = localObjects.findIndex((obj) => obj.uid === objectData.uid);
-        if (index <= -1) {
-            localObjects.push(objectData);
-        } else {
-            alt.logWarning(`${objectData.uid} was not a unique identifier. Replaced Object in ClientObjectController.`);
-            localObjects[index] = objectData;
-        }
-
-        if (!interval) {
-            interval = Timer.createInterval(ClientObjectController.handleDrawObjects, 100, 'object.ts');
-        }
-    },
-
-    /**
-     * Used to populate server-side markers.
-     * @static
-     * @param {Array<IObject>} objects
-     * @memberof ClientObjectController
-     */
-    populate(objects: Array<IObject>) {
-        globalObjects = objects;
-
-        if (!interval) {
-            interval = Timer.createInterval(ClientObjectController.handleDrawObjects, 100, 'object.ts');
-        }
-    },
-
-    async stop() {
-        isRemoving = true;
-
-        for (let i = localObjects.length - 1; i >= 0; i--) {
-            await ClientObjectController.removeLocalObject(localObjects[i].uid);
-        }
-
-        for (let i = globalObjects.length - 1; i >= 0; i--) {
-            await ClientObjectController.removeGlobalObject(globalObjects[i].uid);
-        }
-
+const InternalFunctions = {
+    stop() {
         if (!interval) {
             return;
         }
 
-        Timer.clearInterval(interval);
+        alt.clearInterval(interval);
     },
+    moveObject(uid: string, pos: alt.IVector3) {
+        const dataRef = serverObjects[uid] ? serverObjects : clientObjects;
+        if (!dataRef[uid]) {
+            return;
+        }
 
-    /**
-     * Remove a object from being drawn.
-     * @static
-     * @param {string} uid
-     * @return {*}
-     * @memberof ClientObjectController
-     */
-    async removeLocalObject(uid: string, removeAllInterior = false) {
-        isRemoving = true;
+        dataRef[uid].pos = pos;
+        if (!dataRef[uid].createdObject || !dataRef[uid].createdObject.valid) {
+            return;
+        }
 
-        for (let i = localObjects.length - 1; i >= 0; i--) {
+        dataRef[uid].createdObject.pos = new alt.Vector3(pos);
+    },
+    updateObjectModel(uid: string, model: string) {
+        const dataRef = serverObjects[uid] ? serverObjects : clientObjects;
+        if (!dataRef[uid]) {
+            return;
+        }
+
+        dataRef[uid].model = model;
+
+        if (dataRef[uid].createdObject && dataRef[uid].createdObject.valid) {
+            dataRef[uid].createdObject.destroy();
+        }
+
+        const createdObject = new alt.Object(
+            model,
+            new alt.Vector3(dataRef[uid].pos),
+            new alt.Vector3(0, 0, 0),
+            true,
+            false,
+        );
+
+        if (dataRef[uid].noCollision) {
+            createdObject.toggleCollision(false, false);
+        }
+
+        createdObject.setPositionFrozen(true);
+        dataRef[uid].createdObject = createdObject;
+    },
+    populate(newObjects: Array<IObject>) {
+        const currentUids: string[] = [];
+
+        // Go through new objects, and create objects that may not have objects yet.
+        for (let objRef of newObjects) {
+            currentUids.push(objRef.uid);
+
+            // If uid exists, and object has been created. Move on.
             if (
-                (removeAllInterior && !localObjects[i].isInterior) ||
-                (!removeAllInterior && localObjects[i].uid !== uid)
+                serverObjects[objRef.uid] &&
+                serverObjects[objRef.uid].createdObject &&
+                serverObjects[objRef.uid].createdObject.valid
             ) {
+                // Just update object position, even if it hasn't moved.
+                serverObjects[objRef.uid].pos = objRef.pos;
+                serverObjects[objRef.uid].createdObject.pos = new alt.Vector3(objRef.pos);
+
+                if (serverObjects[objRef.uid].model === objRef.model) {
+                    continue;
+                }
+
+                serverObjects[objRef.uid].createdObject.destroy();
+                delete serverObjects[objRef.uid];
+            }
+
+            const createdObject = new alt.Object(
+                objRef.model,
+                new alt.Vector3(objRef.pos),
+                new alt.Vector3(0, 0, 0),
+                true,
+                false,
+            );
+
+            if (objRef.noCollision) {
+                createdObject.toggleCollision(false, false);
+            }
+
+            createdObject.setPositionFrozen(true);
+
+            serverObjects[objRef.uid] = {
+                ...objRef,
+                createdObject,
+            };
+        }
+
+        // Go through all spawned objects
+        // Use the uid list above, and check if an entry exists that should not
+        // Remove all entries which are not in the current list
+        const keyList = Object.keys(serverObjects);
+        for (let key of keyList) {
+            const index = currentUids.findIndex((x) => x === key);
+            if (index >= 0) {
                 continue;
             }
 
-            await ClientObjectController.removeObject(localObjects[i]);
-            localObjects.splice(i, 1);
-        }
-
-        isRemoving = false;
-    },
-
-    /**
-     * Force remove a global object if present.
-     * @static
-     * @param {string} uid
-     * @memberof ClientObjectController
-     */
-    async removeGlobalObject(uid: string) {
-        isRemoving = true;
-
-        for (let i = globalObjects.length - 1; i >= 0; i--) {
-            if (globalObjects[i].uid !== uid) {
+            if (!serverObjects[key]) {
                 continue;
             }
 
-            await ClientObjectController.removeObject(globalObjects[i]);
-            globalObjects.splice(i, 1);
-        }
-
-        isRemoving = false;
-    },
-
-    /**
-     * Verify if an object already exists.
-     *
-     * @static
-     * @param {string} uid
-     * @return {boolean}
-     * @memberof ClientObjectController
-     */
-    doesObjectExist(uid: string): boolean {
-        return createdObjects.findIndex((obj) => obj.uid === uid && native.doesEntityExist(obj.id)) >= 0;
-    },
-    /**
-     * Update object position if it needs to be updated.
-     *
-     * @param {string} uid
-     * @return {*}
-     */
-    updateObjectPosition(uid: string, pos: alt.IVector3) {
-        const createdIndex = createdObjects.findIndex((obj) => obj.uid === uid && native.doesEntityExist(obj.id));
-        if (createdIndex <= -1) {
-            return;
-        }
-
-        if (!native.doesEntityExist(createdObjects[createdIndex].id)) {
-            return;
-        }
-
-        createdObjects[createdIndex].pos = pos;
-        native.setEntityCoordsNoOffset(createdObjects[createdIndex].id, pos.x, pos.y, pos.z, false, false, false);
-    },
-
-    /**
-     * Create an object if it does not exist.
-     *
-     * @static
-     * @param {IObject} object
-     * @memberof ClientObjectController
-     */
-    async createObject(object: IObject) {
-        if (ClientObjectController.doesObjectExist(object.uid)) {
-            return;
-        }
-
-        const hash = alt.hash(object.model);
-        await loadModel(hash);
-
-        const newObject: LocalObject = {
-            id: native.createObjectNoOffset(hash, object.pos.x, object.pos.y, object.pos.z, false, false, false),
-            ...object,
-        };
-
-        const rot = object.rot ? object.rot : { x: 0, y: 0, z: 0 };
-        native.setEntityRotation(newObject.id, rot.x, rot.y, rot.z, 1, false);
-        native.freezeEntityPosition(newObject.id, true);
-
-        if (object.noCollision) {
-            native.setEntityCollision(newObject.id, false, true);
-        }
-
-        createdObjects.push(newObject);
-    },
-
-    /**
-     * Remove an object if it exists.
-     *
-     * @static
-     * @param {IObject} object
-     * @memberof ClientObjectController
-     */
-    async removeObject(object: IObject) {
-        isRemoving = true;
-
-        for (let i = createdObjects.length - 1; i >= 0; i--) {
-            if (createdObjects[i].uid !== object.uid) {
-                continue;
+            if (serverObjects[key].createdObject && serverObjects[key].createdObject.valid) {
+                serverObjects[key].createdObject.destroy();
             }
 
-            while (native.doesEntityExist(createdObjects[i].id)) {
-                native.setEntityAsMissionEntity(createdObjects[i].id, true, true);
-                native.deleteEntity(createdObjects[i].id);
-                native.deleteObject(createdObjects[i].id);
-                native.setEntityAsNoLongerNeeded(createdObjects[i].id);
-                native.clearAreaOfObjects(
-                    createdObjects[i].pos.x,
-                    createdObjects[i].pos.y,
-                    createdObjects[i].pos.z,
-                    0.1,
-                    0,
-                );
-            }
-
-            createdObjects.splice(i, 1);
-        }
-
-        isRemoving = false;
-    },
-
-    async handleDrawObjects() {
-        if (isRemoving) {
-            return;
-        }
-
-        const objects = globalObjects.concat(localObjects);
-
-        if (objects.length <= 0) {
-            return;
-        }
-
-        if (alt.Player.local.isMenuOpen) {
-            return;
-        }
-
-        for (let i = 0; i < objects.length; i++) {
-            const data = objects[i];
-            const maxDistance = data.maxDistance ? Math.abs(data.maxDistance) : 25;
-
-            // Remove the Object if it has an id
-            if (distance2d(alt.Player.local.pos, data.pos) > maxDistance) {
-                ClientObjectController.removeObject(data);
-                continue;
-            }
-
-            if (ClientObjectController.doesObjectExist(data.uid)) {
-                ClientObjectController.updateObjectPosition(data.uid, data.pos);
-                continue;
-            }
-
-            await ClientObjectController.createObject(data);
+            delete serverObjects[key];
         }
     },
 };
 
-alt.on('connectionComplete', ClientObjectController.init);
+export function addObject(newObject: IObject) {
+    if (clientObjects[newObject.uid]) {
+        throw new Error(`Object with ${newObject.uid} already exists! Use a unique identifier.`);
+    }
+
+    const createdObject = new alt.Object(
+        newObject.model,
+        new alt.Vector3(newObject.pos),
+        new alt.Vector3(0, 0, 0),
+        true,
+        false,
+    );
+
+    if (newObject.noCollision) {
+        createdObject.toggleCollision(false, false);
+    }
+
+    createdObject.setPositionFrozen(true);
+    clientObjects[newObject.uid] = {
+        ...newObject,
+        createdObject,
+    };
+}
+
+export function removeObject(uid: string) {
+    if (!clientObjects[uid]) {
+        return;
+    }
+
+    if (clientObjects[uid].createdObject) {
+        clientObjects[uid].createdObject.destroy();
+    }
+
+    delete clientObjects[uid];
+}
+
+/**
+ * Used to obtain a CreatedObject instance from a generic scriptID
+ *
+ *
+ * @param {number} scriptId
+ * @return {CreatedObject}
+ */
+export function getFromScriptId(scriptId: number): CreatedObject | undefined {
+    const serverKeys = Object.keys(serverObjects);
+    for (let key of serverKeys) {
+        if (!serverObjects[key]) {
+            continue;
+        }
+
+        if (!serverObjects[key].createdObject) {
+            continue;
+        }
+
+        if (serverObjects[key].createdObject.scriptID !== scriptId) {
+            continue;
+        }
+
+        return serverObjects[key];
+    }
+
+    const clientKeys = Object.keys(clientObjects);
+    for (let key of clientKeys) {
+        if (!clientObjects[key]) {
+            continue;
+        }
+
+        if (!clientObjects[key].createdObject) {
+            continue;
+        }
+
+        if (clientObjects[key].createdObject.scriptID !== scriptId) {
+            continue;
+        }
+
+        return clientObjects[key];
+    }
+
+    return undefined;
+}
+
+alt.on('disconnect', InternalFunctions.stop);
+alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, InternalFunctions.populate);
+alt.onServer(SYSTEM_EVENTS.MOVE_OBJECT, InternalFunctions.moveObject);
+alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, addObject);
+alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, removeObject);
+alt.onServer(SYSTEM_EVENTS.UPDATE_OBJECT_MODEL, InternalFunctions.updateObjectModel);

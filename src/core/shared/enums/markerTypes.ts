@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ *
+ * @enum {number}
+ */
 export enum MARKER_TYPE {
     UPSIDE_DOWN_CONE = 0,
     CYLINDER = 1,

@@ -1,9 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { ClothingComponent } from '../../shared/interfaces/clothing';
-import { Appearance } from '../../shared/interfaces/appearance';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Item } from '../../shared/interfaces/item';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Item } from '@AthenaShared/interfaces/item';
 
 export const CharacterSystem = {
     /**
@@ -11,8 +10,8 @@ export const CharacterSystem = {
      * @static
      * @param {number} ped
      * @param {Appearance} appearance
-     * @return {*}
-     * @memberof CharacterSystem
+     * @return {void}
+     *
      */
     applyAppearance(ped: number, appearance: Appearance) {
         if (!ped || !native.doesEntityExist(ped)) {
@@ -106,84 +105,73 @@ export const CharacterSystem = {
      * @static
      * @param {number} ped
      * @param {Array<ClothingComponent>} components
-     * @memberof CharacterSystem
+     *
      */
-    applyEquipment(ped: number, components: Array<Item<ClothingComponent>>, isMale = false) {
-        if (!ped || !native.doesEntityExist(ped)) {
-            return;
-        }
-
-        native.clearAllPedProps(ped);
-
-        if (!isMale) {
-            native.setPedComponentVariation(ped, 1, 0, 0, 0); // mask
-            native.setPedComponentVariation(ped, 3, 0, 0, 0); // arms
-            native.setPedComponentVariation(ped, 4, 14, 0, 0); // pants
-            native.setPedComponentVariation(ped, 5, 0, 0, 0); // bag
-            native.setPedComponentVariation(ped, 6, 35, 0, 0); // shoes
-            native.setPedComponentVariation(ped, 7, 0, 0, 0); // accessories
-            native.setPedComponentVariation(ped, 8, 15, 0, 0); // undershirt
-            native.setPedComponentVariation(ped, 9, 0, 0, 0); // body armour
-            native.setPedComponentVariation(ped, 11, 0, 0, 0); // torso
-        } else {
-            native.setPedComponentVariation(ped, 1, 0, 0, 0); // mask
-            native.setPedComponentVariation(ped, 3, 15, 0, 0); // arms
-            native.setPedComponentVariation(ped, 5, 0, 0, 0); // bag
-            native.setPedComponentVariation(ped, 4, 14, 0, 0); // pants
-            native.setPedComponentVariation(ped, 6, 34, 0, 0); // shoes
-            native.setPedComponentVariation(ped, 7, 0, 0, 0); // accessories
-            native.setPedComponentVariation(ped, 8, 15, 0, 0); // undershirt
-            native.setPedComponentVariation(ped, 9, 0, 0, 0); // body armour
-            native.setPedComponentVariation(ped, 11, 91, 0, 0); // torso
-        }
-
-        if (!components || !Array.isArray(components)) {
-            return;
-        }
-
-        for (let i = 0; i < components.length; i++) {
-            const component = components[i].data as ClothingComponent;
-            if (!component) {
-                continue;
-            }
-
-            for (let index = 0; index < component.drawables.length; index++) {
-                const id = component.ids[index];
-                const drawable = component.drawables[index];
-                const texture = component.textures[index];
-
-                if (component.dlcHashes && component.dlcHashes.length >= 1) {
-                    let dlc = component.dlcHashes[index];
-                    if (typeof dlc === 'string') {
-                        dlc = alt.hash(dlc);
-                    }
-
-                    if (component.isProp) {
-                        if (drawable <= -1) {
-                            native.clearPedProp(ped, id);
-                            continue;
-                        }
-
-                        alt.setPedDlcProp(ped, dlc, id, drawable, texture);
-                        continue;
-                    }
-
-                    alt.setPedDlcClothes(ped, dlc, id, drawable, texture, 0);
-                    continue;
-                }
-
-                if (component.isProp) {
-                    if (drawable <= -1) {
-                        native.clearPedProp(ped, id);
-                        continue;
-                    }
-
-                    native.setPedPropIndex(ped, id, drawable, texture, true);
-                } else {
-                    native.setPedComponentVariation(ped, id, drawable, texture, 0);
-                }
-            }
-        }
+    applyEquipment(ped: number, components: Array<Item>, isMale = false) {
+        // if (!ped || !native.doesEntityExist(ped)) {
+        //     return;
+        // }
+        // native.clearAllPedProps(ped);
+        // if (!isMale) {
+        //     native.setPedComponentVariation(ped, 1, 0, 0, 0); // mask
+        //     native.setPedComponentVariation(ped, 3, 0, 0, 0); // arms
+        //     native.setPedComponentVariation(ped, 4, 14, 0, 0); // pants
+        //     native.setPedComponentVariation(ped, 5, 0, 0, 0); // bag
+        //     native.setPedComponentVariation(ped, 6, 35, 0, 0); // shoes
+        //     native.setPedComponentVariation(ped, 7, 0, 0, 0); // accessories
+        //     native.setPedComponentVariation(ped, 8, 15, 0, 0); // undershirt
+        //     native.setPedComponentVariation(ped, 9, 0, 0, 0); // body armour
+        //     native.setPedComponentVariation(ped, 11, 0, 0, 0); // torso
+        // } else {
+        //     native.setPedComponentVariation(ped, 1, 0, 0, 0); // mask
+        //     native.setPedComponentVariation(ped, 3, 15, 0, 0); // arms
+        //     native.setPedComponentVariation(ped, 5, 0, 0, 0); // bag
+        //     native.setPedComponentVariation(ped, 4, 14, 0, 0); // pants
+        //     native.setPedComponentVariation(ped, 6, 34, 0, 0); // shoes
+        //     native.setPedComponentVariation(ped, 7, 0, 0, 0); // accessories
+        //     native.setPedComponentVariation(ped, 8, 15, 0, 0); // undershirt
+        //     native.setPedComponentVariation(ped, 9, 0, 0, 0); // body armour
+        //     native.setPedComponentVariation(ped, 11, 91, 0, 0); // torso
+        // }
+        // if (!components || !Array.isArray(components)) {
+        //     return;
+        // }
+        // for (let i = 0; i < components.length; i++) {
+        //     const component = components[i].data;
+        //     if (!component) {
+        //         continue;
+        //     }
+        //     for (let index = 0; index < component.drawables.length; index++) {
+        //         const id = component.ids[index];
+        //         const drawable = component.drawables[index];
+        //         const texture = component.textures[index];
+        //         if (component.dlcHashes && component.dlcHashes.length >= 1) {
+        //             let dlc = component.dlcHashes[index];
+        //             if (typeof dlc === 'string') {
+        //                 dlc = alt.hash(dlc);
+        //             }
+        //             if (component.isProp) {
+        //                 if (drawable <= -1) {
+        //                     native.clearPedProp(ped, id);
+        //                     continue;
+        //                 }
+        //                 alt.setPedDlcProp(ped, dlc, id, drawable, texture);
+        //                 continue;
+        //             }
+        //             alt.setPedDlcClothes(ped, dlc, id, drawable, texture, 0);
+        //             continue;
+        //         }
+        //         if (component.isProp) {
+        //             if (drawable <= -1) {
+        //                 native.clearPedProp(ped, id);
+        //                 continue;
+        //             }
+        //             native.setPedPropIndex(ped, id, drawable, texture, true);
+        //         } else {
+        //             native.setPedComponentVariation(ped, id, drawable, texture, 0);
+        //         }
+        //     }
+        // }
     },
 
     applyHairOverlay(decorations: Array<{ collection: string; overlay: string }>) {

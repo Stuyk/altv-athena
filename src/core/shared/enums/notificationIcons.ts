@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ *
+ * @enum {number}
+ */
 export enum NOTIFICATION_ICON {
     Abigail = 'CHAR_ABIGAIL',
     AllPlayersConf = 'CHAR_ALL_PLAYERS_CONF',

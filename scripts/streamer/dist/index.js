@@ -17,7 +17,7 @@ class StreamerServer {
     /**
      * @static
      * @param {SockJS.Connection} conn
-     * @memberof StreamerServer
+     *
      */ static init(_conn) {
         conn = _conn;
         conn.on('data', StreamerServer.receive);
@@ -25,7 +25,7 @@ class StreamerServer {
     /**
      * @static
      * @param {string} message
-     * @memberof StreamerServer
+     *
      */ static receive(message) {
         /** @type {{id: number, route: string, data: Object}} */ const msg = JSON.parse(message);
         if (!msg || !msg.route) {
@@ -57,7 +57,7 @@ class StreamerServer {
      * @static
      * @param {number} id
      * @param {string} data
-     * @memberof StreamerServer
+     *
      */ static ping(id) {
         StreamData = {};
         conn.write(
@@ -73,7 +73,7 @@ class StreamerServer {
      * @static
      * @param {number} id
      * @param {{ locations: Array<> }} data
-     * @memberof StreamerServer
+     *
      */ static populate(id, data) {
         if (!data) {
             return;
@@ -86,8 +86,8 @@ class StreamerServer {
      * @static
      * @param {number} id
      * @param {{ key: string; range: number }} data
-     * @return {*}
-     * @memberof StreamerServer
+     * @return {void}
+     *
      */ static updateRange(id, data) {
         if (!data) {
             return;
@@ -99,7 +99,7 @@ class StreamerServer {
      * @static
      * @param {number} id
      * @param {IStreamUpdate} data
-     * @memberof StreamerServer
+     *
      */ static update(id, data) {
         const keys = Object.keys(StreamData);
         const response = {
@@ -136,8 +136,8 @@ class StreamerServer {
         }
         return Math.sqrt(
             Math.pow(vector1.x - vector2.x, 2) +
-            Math.pow(vector1.y - vector2.y, 2) +
-            Math.pow(vector1.z - vector2.z, 2),
+                Math.pow(vector1.y - vector2.y, 2) +
+                Math.pow(vector1.z - vector2.z, 2),
         );
     }
 }

@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { ATHENA_DEBUG_EVENTS } from '../../shared/events';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
 interface LastStoredData {
     pos: alt.IVector3;
@@ -24,7 +25,7 @@ const KeysConst = {
             return undefined;
         }
 
-        const data = Athena.utility.deepCloneObject<LastStoredData>(lastStoredData);
+        const data = deepCloneObject<LastStoredData>(lastStoredData);
         lastStoredData = undefined;
         return data;
     },

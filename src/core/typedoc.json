@@ -1,0 +1,20 @@
+{
+    "entryPoints": ["./server/**/*.ts", "./shared/**/*.ts", "./client/**/*.ts"],
+    "exclude": ["**/server/api/**/*", "**/client/api/**/*"],
+    "out": "../../docs",
+    "skipErrorChecking": true,
+    "tsconfig": "./custom.json",
+    "plugin": ["typedoc-plugin-missing-exports", "typedoc-plugin-markdown"],
+    "theme": "markdown",
+    "basePath": "./",
+    "entryPointStrategy": "expand",
+    "excludeInternal": true,
+    "excludeNotDocumented": false,
+    "preserveAnchorCasing": true,
+    "hideBreadcrumbs": true,
+    "hideInPageTOC": true,
+    "hideMembersSymbol": false,
+    "objectLiteralTypeDeclarationStyle": "table",
+    "filenameSeparator": "_",
+    "internalModule": "Internal"
+}

@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { loadModel } from './model';
-import { Appearance } from '../../shared/interfaces/appearance';
-import { CharacterSystem } from '../systems/character';
+import * as AthenaClient from '@AthenaClient/api';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
+import { CharacterSystem } from '@AthenaClient/systems/character';
 
 let id: number;
 let appearance: Appearance = null;
@@ -15,17 +15,17 @@ let hidden: boolean = false;
  * Used to create a single instance of a character pedestrian.
  * Mostly used for appearance editing and such.
  * Do not use it for anything else.
- * @export
+ *
  * @class Ped
  */
 export const PedCharacter = {
     /**
      * Create a Temporary Character Pedestrian
      * @param {boolean} isMale
-     * @param {alt.IVector3} pos
-     * @param {(alt.IVector3 | number)} [rot={ x: 0, y: 0, z: 0 }]
+     * @param {alt.IVector3} pos A position in the world.
+     * @param {(alt.IVector3 | number) = {x: 0, y: 0, z: 0}}
      * @return {Promise<void>}
-     * @memberof Ped
+     *
      */
     async create(
         isMale: boolean,
@@ -40,7 +40,7 @@ export const PedCharacter = {
 
         const model = isMale ? 'mp_m_freemode_01' : 'mp_f_freemode_01';
         const hash = alt.hash(model);
-        await loadModel(hash);
+        await AthenaClient.utility.model.load(hash);
         id = native.createPed(1, hash, _pos.x, _pos.y, _pos.z, 0, false, false);
 
         return new Promise(async (resolve: Function) => {
@@ -71,7 +71,7 @@ export const PedCharacter = {
      * @static
      * @param {Appearance} appearance
      * @param {boolean} forceSameShoes Set to true to make female / male switching equal height.
-     * @memberof PedCharacter
+     *
      */
     async apply(_appearance: Appearance, forceSameShoes = false): Promise<void> {
         if (isUpdating) {
@@ -103,7 +103,7 @@ export const PedCharacter = {
      * Get the pedestrian id.
      * @static
      * @return {number}
-     * @memberof PedCharacter
+     *
      */
     get(): number {
         if (id === undefined || id === null) {
@@ -117,7 +117,7 @@ export const PedCharacter = {
      * Hide this pedestrian
      * @static
      * @param {boolean} value
-     * @memberof PedCharacter
+     *
      */
     setHidden(value: boolean) {
         hidden = value;
@@ -135,7 +135,7 @@ export const PedCharacter = {
      * Destroy the pedestrian character.
      * Does not clear previous position or rotation.
      * @static
-     * @memberof PedCharacter
+     *
      */
     async destroy() {
         return new Promise((resolve: Function) => {

@@ -13,6 +13,7 @@ export interface Weapon {
     };
     overall?: number;
     icon?: string;
+    model: string;
 }
 
 const WeaponList: { [key: string]: Weapon } = {
@@ -31,6 +32,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 47.8,
         icon: 'advancedrifle',
+        model: 'w_ar_advancedrifle',
     },
     appistol: {
         hash: 584646201,
@@ -47,6 +49,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 38.2,
         icon: 'appistol',
+        model: 'w_pi_appistol',
     },
     assaultrifle: {
         hash: 3220176749,
@@ -63,6 +66,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 44,
         icon: 'assaultrifle',
+        model: 'w_ar_assaultrifle',
     },
     assaultriflemk2: {
         hash: 961495388,
@@ -79,6 +83,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 44.6,
         icon: 'assaultriflemk2',
+        model: 'w_ar_carbineriflemk2',
     },
     assaultshotgun: {
         hash: 3800352039,
@@ -95,6 +100,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 35.4,
         icon: 'assaultshotgun',
+        model: 'w_sg_assaultshotgun',
     },
     assaultsmg: {
         hash: 4024951519,
@@ -111,6 +117,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 40.6,
         icon: 'assaultsmg',
+        model: 'w_sb_assaultsmg',
     },
     autoshotgun: {
         hash: 317205821,
@@ -127,6 +134,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 35.4,
         icon: 'autoshotgun',
+        model: 'w_sg_sweeper',
     },
     ball: {
         hash: 600439132,
@@ -143,6 +151,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 5,
         icon: 'ball',
+        model: 'w_am_baseball',
     },
     bat: {
         hash: 2508868239,
@@ -157,6 +166,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 10.33,
         icon: 'bat',
+        model: 'w_me_bat',
     },
     battleaxe: {
         hash: 3441901897,
@@ -171,6 +181,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 10,
         icon: 'battleaxe',
+        model: 'w_me_battleaxe',
     },
     bottle: {
         hash: 4192643659,
@@ -185,6 +196,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 12,
         icon: 'bottle',
+        model: 'w_me_bottle',
     },
     bullpuprifle: {
         hash: 2132975508,
@@ -201,6 +213,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 46,
         icon: 'bullpuprifle',
+        model: 'w_ar_bullpuprifle',
     },
     bullpupriflemk2: {
         hash: 2228681469,
@@ -217,6 +230,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 47.4,
         icon: 'bullpupriflemk2',
+        model: 'w_ar_bullpupriflemk2',
     },
     bullpupshotgun: {
         hash: 2640438543,
@@ -233,6 +247,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 31.4,
         icon: 'bullpupshotgun',
+        model: 'w_sg_bullpupshotgun',
     },
     bzgas: {
         hash: 2694266206,
@@ -249,6 +264,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 13.75,
         icon: 'bzgas',
+        model: 'w_ex_grenadesmoke',
     },
     carbinerifle: {
         hash: 2210333304,
@@ -265,6 +281,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 47.4,
         icon: 'carbinerifle',
+        model: 'w_ar_carbinerifle',
     },
     carbineriflemk2: {
         hash: 4208062921,
@@ -281,6 +298,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 48.2,
         icon: 'carbineriflemk2',
+        model: 'w_ar_carbineriflemk2',
     },
     ceramicpistol: {
         hash: 727643628,
@@ -297,6 +315,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 27.6,
         icon: 'ceramicpistol',
+        model: 'w_pi_ceramic_pistol',
     },
     combatmg: {
         hash: 2144741730,
@@ -313,6 +332,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 59,
         icon: 'combatmg',
+        model: 'w_mg_combatmg',
     },
     combatmgmk2: {
         hash: 3686625920,
@@ -329,6 +349,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 59.4,
         icon: 'combatmgmk2',
+        model: 'w_mg_combatmgmk2',
     },
     combatpdw: {
         hash: 171789620,
@@ -345,6 +366,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 39.6,
         icon: 'combatpdw',
+        model: 'w_sb_pdw',
     },
     combatpistol: {
         hash: 1593441988,
@@ -361,6 +383,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 31.4,
         icon: 'combatpistol',
+        model: 'w_pi_combatpistol',
     },
     compactlauncher: {
         hash: 125959754,
@@ -377,6 +400,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 39,
         icon: 'compactlauncher',
+        model: 'w_lr_compactgl',
     },
     compactrifle: {
         hash: 1649403952,
@@ -393,6 +417,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 43.2,
         icon: 'compactrifle',
+        model: 'w_ar_assaultrifle_smg',
     },
     crowbar: {
         hash: 2227010557,
@@ -407,6 +432,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 8.67,
         icon: 'crowbar',
+        model: 'w_me_crowbar',
     },
     dagger: {
         hash: 2460120199,
@@ -421,6 +447,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 14,
         icon: 'dagger',
+        model: 'w_me_dagger',
     },
     dbshotgun: {
         hash: 4019527611,
@@ -437,6 +464,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 30,
         icon: 'dbshotgun',
+        model: 'w_sg_doublebarrel',
     },
     doubleaction: {
         hash: 2548703416,
@@ -453,6 +481,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 39.2,
         icon: 'doubleaction',
+        model: 'w_pi_wep1_gun',
     },
     fireextinguisher: {
         hash: 101631238,
@@ -462,6 +491,7 @@ const WeaponList: { [key: string]: Weapon } = {
         price: 200,
         clip: 100,
         icon: 'fireextinguisher',
+        model: 'prop_fire_exting_1a',
     },
     firework: {
         hash: 2138347493,
@@ -478,6 +508,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 26.4,
         icon: 'firework',
+        model: 'w_lr_firework_rocket',
     },
     flare: {
         hash: 1233104067,
@@ -494,6 +525,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 11.25,
         icon: 'flare',
+        model: 'w_am_flare',
     },
     flaregun: {
         hash: 1198879012,
@@ -510,6 +542,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 16,
         icon: 'flaregun',
+        model: 'w_pi_flaregun',
     },
     flashlight: {
         hash: 2343591895,
@@ -524,6 +557,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 8.33,
         icon: 'flashlight',
+        model: 'w_me_flashlight',
     },
     golfclub: {
         hash: 1141786504,
@@ -538,6 +572,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 10.33,
         icon: 'golfclub',
+        model: 'w_me_gclub',
     },
     grenade: {
         hash: 2481070269,
@@ -554,6 +589,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 35,
         icon: 'grenade',
+        model: 'w_ex_grenadefrag',
     },
     grenadelauncher: {
         hash: 2726580491,
@@ -570,6 +606,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 39,
         icon: 'grenadelauncher',
+        model: 'w_lr_grenadelauncher',
     },
     smokelauncher: {
         hash: 1305664598,
@@ -579,6 +616,7 @@ const WeaponList: { [key: string]: Weapon } = {
         price: 4200,
         clip: 10,
         icon: 'smokelauncher',
+        model: 'w_lr_grenadelauncher',
     },
     gusenberg: {
         hash: 1627465347,
@@ -595,6 +633,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 46.6,
         icon: 'gusenberg',
+        model: 'w_sb_gusenberg',
     },
     hammer: {
         hash: 1317494643,
@@ -609,6 +648,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 8.67,
         icon: 'hammer',
+        model: 'w_me_hammer',
     },
     hatchet: {
         hash: 4191993645,
@@ -623,6 +663,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 10,
         icon: 'hatchet',
+        model: 'w_me_hatchet',
     },
     hazardcan: {
         hash: 3126027122,
@@ -639,6 +680,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 24.2,
         icon: 'hazardcan',
+        model: 'w_ch_jerrycan',
     },
     heavypistol: {
         hash: 3523564046,
@@ -655,6 +697,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 37,
         icon: 'heavypistol',
+        model: 'w_pi_heavypistol',
     },
     heavyshotgun: {
         hash: 984333226,
@@ -671,6 +714,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 38.6,
         icon: 'heavyshotgun',
+        model: 'w_sg_heavyshotgun',
     },
     heavysniper: {
         hash: 205991906,
@@ -687,6 +731,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 62.6,
         icon: 'heavysniper',
+        model: 'w_sr_heavysniper',
     },
     heavysnipermk2: {
         hash: 177293209,
@@ -703,6 +748,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 62.6,
         icon: 'heavysnipermk2',
+        model: 'w_sr_heavysnipermk2',
     },
     hominglauncher: {
         hash: 1672152130,
@@ -719,6 +765,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 42,
         icon: 'hominglauncher',
+        model: 'w_lr_homing',
     },
     knife: {
         hash: 2578778090,
@@ -733,6 +780,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 12,
         icon: 'knife',
+        model: 'w_me_knife_01',
     },
     knuckle: {
         hash: 3638508604,
@@ -747,6 +795,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 1,
         icon: 'knuckle',
+        model: 'w_me_knuckle',
     },
     machete: {
         hash: 3713923289,
@@ -761,6 +810,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 10,
         icon: 'machete',
+        model: 'w_me_machette_lr',
     },
     machinepistol: {
         hash: 3675956304,
@@ -777,6 +827,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 36,
         icon: 'machinepistol',
+        model: 'w_sb_compactsmg',
     },
     marksmanpistol: {
         hash: 3696079510,
@@ -793,6 +844,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 32.4,
         icon: 'marksmanpistol',
+        model: 'w_pi_singleshot',
     },
     marksmanrifle: {
         hash: 3342088282,
@@ -809,6 +861,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 58,
         icon: 'marksmanrifle',
+        model: 'w_sr_marksmanrifle',
     },
     marksmanriflemk2: {
         hash: 1785463520,
@@ -825,6 +878,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 58,
         icon: 'marksmanriflemk2',
+        model: 'w_sr_marksmanriflemk2',
     },
     mg: {
         hash: 2634544996,
@@ -841,6 +895,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 52,
         icon: 'mg',
+        model: 'w_mg_mg',
     },
     microsmg: {
         hash: 324215364,
@@ -857,6 +912,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 31.2,
         icon: 'microsmg',
+        model: 'w_sb_microsmg',
     },
     minigun: {
         hash: 1119849093,
@@ -873,6 +929,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 63,
         icon: 'minigun',
+        model: 'w_mg_minigun',
     },
     minismg: {
         hash: 3173288789,
@@ -889,6 +946,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 36.2,
         icon: 'minismg',
+        model: 'w_sb_minismg',
     },
     molotov: {
         hash: 615608432,
@@ -905,6 +963,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 24.5,
         icon: 'molotov',
+        model: 'w_ex_molotov',
     },
     musket: {
         hash: 2828843422,
@@ -921,6 +980,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 53.4,
         icon: 'musket',
+        model: 'w_ar_musket',
     },
     navyrevolver: {
         hash: 2441047180,
@@ -936,6 +996,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 40,
         icon: 'navyrevolver',
+        model: 'w_pi_wep2_gun',
     },
     nightstick: {
         hash: 1737195953,
@@ -950,6 +1011,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 8.67,
         icon: 'nightstick',
+        model: 'w_me_nightstick',
     },
     parachute: {
         hash: 4222310262,
@@ -958,6 +1020,7 @@ const WeaponList: { [key: string]: Weapon } = {
         type: 'Utility',
         price: 250,
         icon: 'parachute',
+        model: 'p_parachute_s_shop',
     },
     jerrycan: {
         hash: 883325847,
@@ -974,6 +1037,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 24.2,
         icon: 'jerrycan',
+        model: 'w_am_jerrycan',
     },
     pipebomb: {
         hash: 3125143736,
@@ -990,6 +1054,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 36.25,
         icon: 'pipebomb',
+        model: 'w_ex_pipebomb',
     },
     pipewrench: {
         hash: 419712736,
@@ -1004,6 +1069,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 8.33,
         icon: 'pipewrench',
+        model: 'w_me_wrench',
     },
     pistol: {
         hash: 453432689,
@@ -1020,6 +1086,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 28.2,
         icon: 'pistol',
+        model: 'w_pi_pistol',
     },
     pistol50: {
         hash: 2578377531,
@@ -1036,6 +1103,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 37.8,
         icon: 'pistol50',
+        model: 'w_pi_pistol50',
     },
     pistolmk2: {
         hash: 3219281620,
@@ -1052,6 +1120,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 30.6,
         icon: 'pistolmk2',
+        model: 'w_pi_pistolmk2',
     },
     poolcue: {
         hash: 2484171525,
@@ -1066,6 +1135,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 10,
         icon: 'poolcue',
+        model: 'w_me_poolcue',
     },
     proxmine: {
         hash: 2874559379,
@@ -1082,6 +1152,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 37.5,
         icon: 'proxmine',
+        model: 'w_ex_apmine',
     },
     pumpshotgun: {
         hash: 487013001,
@@ -1098,6 +1169,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 29.4,
         icon: 'pumpshotgun',
+        model: 'w_sg_pumpshotgun',
     },
     pumpshotgunmk2: {
         hash: 1432025498,
@@ -1114,6 +1186,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 29.4,
         icon: 'pumpshotgunmk2',
+        model: 'w_sg_pumpshotgunmk2_mag1',
     },
     railgun: {
         hash: 1834241177,
@@ -1130,6 +1203,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 44,
         icon: 'railgun',
+        model: 'w_ar_railgun',
     },
     raycarbine: {
         hash: 1198256469,
@@ -1146,6 +1220,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 59,
         icon: 'raycarbine',
+        model: 'w_ar_srifle',
     },
     rayminigun: {
         hash: 3056410471,
@@ -1162,6 +1237,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 63,
         icon: 'rayminigun',
+        model: 'w_mg_sminigun',
     },
     raypistol: {
         hash: 2939590305,
@@ -1178,6 +1254,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 32,
         icon: 'raypistol',
+        model: 'w_pi_raygun',
     },
     revolver: {
         hash: 3249783761,
@@ -1194,6 +1271,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 39.2,
         icon: 'revolver',
+        model: 'w_pi_revolver_g',
     },
     revolvermk2: {
         hash: 3415619887,
@@ -1210,6 +1288,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 42.2,
         icon: 'revolvermk2',
+        model: 'w_pi_revolvermk2_mag1',
     },
     rpg: {
         hash: 2982836145,
@@ -1226,6 +1305,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 39,
         icon: 'rpg',
+        model: 'w_lr_rpg',
     },
     sawnoffshotgun: {
         hash: 2017895192,
@@ -1242,6 +1322,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 32.2,
         icon: 'sawnoffshotgun',
+        model: 'w_sg_sawnoff',
     },
     smg: {
         hash: 736523883,
@@ -1258,6 +1339,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 38.4,
         icon: 'smg',
+        model: 'w_sb_smg',
     },
     smgmk2: {
         hash: 2024373456,
@@ -1274,6 +1356,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 38.4,
         icon: 'smgmk2',
+        model: 'w_sb_smgmk2',
     },
     smokegrenade: {
         hash: 4256991824,
@@ -1282,6 +1365,7 @@ const WeaponList: { [key: string]: Weapon } = {
         type: 'Thrown',
         price: 800,
         icon: 'smokegrenade',
+        model: 'w_ex_grenadesmoke',
     },
     sniperrifle: {
         hash: 100416529,
@@ -1298,6 +1382,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 59.2,
         icon: 'sniperrifle',
+        model: 'w_sr_sniperrifle',
     },
     snowball: {
         hash: 126349499,
@@ -1314,6 +1399,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 5.25,
         icon: 'snowball',
+        model: 'w_ex_snowball',
     },
     snspistol: {
         hash: 3218215474,
@@ -1330,6 +1416,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 26.6,
         icon: 'snspistol',
+        model: 'w_pi_sns_pistol',
     },
     snspistolmk2: {
         hash: 2285322324,
@@ -1346,6 +1433,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 26.6,
         icon: 'snspistolmk2',
+        model: 'w_pi_sns_pistolmk2',
     },
     specialcarbine: {
         hash: 3231910285,
@@ -1362,6 +1450,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 46.8,
         icon: 'specialcarbine',
+        model: 'w_ar_specialcarbine',
     },
     specialcarbinemk2: {
         hash: 2526821735,
@@ -1378,6 +1467,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 46.8,
         icon: 'specialcarbinemk2',
+        model: 'w_ar_specialcarbinemk2',
     },
     stickybomb: {
         hash: 741814745,
@@ -1394,6 +1484,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 36.25,
         icon: 'stickybomb',
+        model: 'w_ex_pe',
     },
     stonehatchet: {
         hash: 940833800,
@@ -1408,6 +1499,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 15,
         icon: 'stonehatchet',
+        model: 'w_me_stonehatchet',
     },
     stungun: {
         hash: 911657153,
@@ -1423,6 +1515,7 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 31.2,
         icon: 'stungun',
+        model: 'w_pi_stungun',
     },
     switchblade: {
         hash: 3756226112,
@@ -1437,11 +1530,13 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 11.67,
         icon: 'switchblade',
+        model: 'w_me_switchblade',
     },
     unarmed: {
         hash: 2725352035,
         name: 'unarmed',
         icon: 'unarmed',
+        model: 'prop_cs_cardbox_01',
     },
     vintagepistol: {
         hash: 137902532,
@@ -1457,14 +1552,15 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 29.2,
         icon: 'vintagepistol',
+        model: 'w_pi_vintage_pistol',
     },
 };
 
 /**
  * Get a weapon hash by its string name.
- * @export
+ *
  * @param {string} name
- * @return {*}  {(number | null)}
+ * @return {(number | null)}
  */
 export function getWeaponByName(name: string): Weapon | null {
     return WeaponList[name];
@@ -1476,4 +1572,8 @@ export function getWeaponByName(name: string): Weapon | null {
  */
 export function getWeaponList(): Array<Weapon> {
     return Object.values(WeaponList);
+}
+
+export function getWeaponMap(): { [name: string]: Weapon } {
+    return WeaponList;
 }

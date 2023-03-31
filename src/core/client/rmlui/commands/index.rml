@@ -1,0 +1,76 @@
+<rml>
+    <head>
+        <title>Demo</title>
+        <style>
+            body {
+                width: 100vw;
+                height: 100vh;
+                position: absolute;
+                overflow: hidden;
+                padding: 0;
+                margin: 0;
+                font-family: inter-bold;
+            }
+
+            .filler {
+                min-height: 60vh;
+            }
+
+            .input-wrapper {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                font-family: inter-bold;
+                font-weight: bold;
+                font-style: normal;
+                font-size: 16px;
+                min-width: 500px;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .suggestion {
+                font-size: 13px;
+                margin-bottom: 6px;
+                opacity: 1;
+                min-height: 24px;
+                min-width: 500px;
+                max-width: 500px;
+                padding-left: 3px;
+                font-effect: shadow(2px 2px #000000c2);
+                white-space: nowrap;
+            }
+
+            .placeholder {
+                font-size: 13px;
+                padding-bottom: 6px;
+                padding-left: 3px;
+                opacity: 1;
+                min-height: 24px;
+                font-effect: shadow(2px 2px #000000c2);
+            }
+
+            input {
+                width: 100%;
+                padding: 6px;
+                background: #000000c2;
+                color: white;
+                box-sizing: border-box;
+                border: 2px #000000e2;
+                font-family: inter-bold;
+                font-size: 13px;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <div id="input-wrapper" class="input-wrapper">
+            <div class="filler"></div>
+            <div class="suggestion" id="suggestion-3"></div>
+            <div class="suggestion" id="suggestion-2"></div>
+            <div class="suggestion" id="suggestion-1"></div>
+            <div class="suggestion" id="suggestion-0"></div>
+            <div id="placeholder" class="placeholder"></div>
+            <input class="input" id="input" type="text" />
+        </div>
+    </body>
+</rml>

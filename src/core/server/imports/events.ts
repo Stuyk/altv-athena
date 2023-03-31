@@ -1,6 +1,7 @@
 import '../events/clientEvents';
+import '../events/onAppearance';
+import '../events/pickupItemEvent';
 import '../events/playerConnect';
 import '../events/playerDeath';
-import '../events/playerEvents';
-import '../events/vehicleEvents';
+import '../vehicle/events';
 import '../events/waypointEvent';

@@ -1,155 +1,449 @@
 import * as alt from 'alt-server';
-import { BaseItem } from '../../../shared/interfaces/inventory';
-import { Athena } from '../../api/athena';
+import Database from '@stuyk/ezmongodb';
+import * as Athena from '@AthenaServer/api';
 
-const DEFAULT_TIMEOUT = 60000;
-const COLLECTION_NAME = 'itemfactory';
-let baseItems: Array<BaseItem> = [];
-let isDoneRefreshing = true;
+import { BaseItem, StoredItem, Item, DefaultItemBehavior, ClothingComponent } from '@AthenaShared/interfaces/item';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { sha256 } from '@AthenaServer/utility/hash';
 
-/**
- * Create collection, fetch all items, convert ids to strings, and assign to local cache.
- */
-async function init() {
-    isDoneRefreshing = false;
+let databaseItems: Array<BaseItem<DefaultItemBehavior, {}>> = [];
+let isDoneLoading = false;
 
-    // Create collection if it does not exist.
-    await Athena.database.funcs.createCollection(COLLECTION_NAME);
+const InternalFunctions = {
+    async init() {
+        await Database.createCollection(Athena.database.collections.Items);
+        databaseItems = await Database.fetchAllData<BaseItem>(Athena.database.collections.Items);
 
-    // Read all base items from database.
-    baseItems = await Athena.database.funcs.fetchAllData<BaseItem>(COLLECTION_NAME);
+        // Convert all MongoDB _id entries to strings.
+        for (let i = 0; i < databaseItems.length; i++) {
+            databaseItems[i]._id = databaseItems[i]._id.toString();
+        }
 
-    for (let i = 0; i < baseItems.length; i++) {
-        baseItems[i]._id = baseItems[i]._id.toString();
-    }
-
-    isDoneRefreshing = true;
-}
-
-/**
- * Verify if the item factory is done refreshing.
- *
- * @return {Promise<void>}
- */
-async function isRefreshComplete(): Promise<void> {
-    return alt.Utils.waitFor(() => {
-        return isDoneRefreshing;
-    }, DEFAULT_TIMEOUT);
-}
-
-/**
- * It checks if a base item exists in the baseItems array.
- * @param {string} name - string - The name of the base item to check for.
- * @returns A boolean value.
- */
-async function doesBaseItemExist(name: string): Promise<boolean> {
-    await isRefreshComplete();
-
-    name = name.toLowerCase();
-    const index = baseItems.findIndex((item) => item.base.toLowerCase() === name);
-    return index >= 0;
-}
-
-async function getByName(name: string): Promise<BaseItem> {
-    await isRefreshComplete();
-    name = name.toLowerCase();
-    const index = baseItems.findIndex((item) => item.base.toLowerCase() === name);
-    return baseItems[index];
-}
-
-/**
- * Add a base item to the database.
- *
- * @param {BaseItem} baseItem
- * @return {Promise<boolean>}
- */
-async function add(baseItem: BaseItem): Promise<boolean> {
-    await isRefreshComplete();
-
-    baseItem.base = baseItem.base.toLowerCase();
-
-    const index = baseItems.findIndex((item) => item.base.toLowerCase() === baseItem.base);
-    if (index >= 0) {
-        return false;
-    }
-
-    const newBaseItem = await Athena.database.funcs.insertData(baseItem, COLLECTION_NAME, true);
-    if (typeof newBaseItem === 'undefined') {
-        return false;
-    }
-
-    newBaseItem._id = newBaseItem._id.toString();
-    baseItems.push(newBaseItem);
-    return true;
-}
-
-/**
- * Returns all base items in the cache.
- *
- * @return {Promise<Array<BaseItem>>}
- */
-async function get(): Promise<Array<BaseItem>> {
-    await isRefreshComplete();
-    return baseItems;
-}
-
-/**
- * Updates an item, and auto-increments the base reference version.
- *
- * @param {Omit<BaseItem, 'version'>} baseItem
- * @return {Promise<boolean>}
- */
-async function update(baseItem: Omit<BaseItem, 'version'>): Promise<boolean> {
-    await isRefreshComplete();
-
-    isDoneRefreshing = false;
-
-    baseItem.base = baseItem.base.toLowerCase();
-
-    const index = baseItems.findIndex((item) => item.base.toLowerCase() === baseItem.base);
-    if (index <= -1) {
-        isDoneRefreshing = true;
-        return false;
-    }
-
-    // Update Local Cache First
-    baseItems[index] = Object.assign(baseItems[index], baseItem);
-    baseItems[index].version = baseItems[index].version + 1;
-
-    const baseItemCopy = Athena.utility.deepCloneObject<BaseItem>(baseItems[index]);
-    delete baseItemCopy._id;
-
-    // ! - TODO -> Auto-refresh players through refresh function.
-    // ! - Automatically converts old item versions of logged in players to new item base versions.
-    // ! - -> Updating Weight
-    // ! - -> Updating Name
-
-    isDoneRefreshing = true;
-
-    return await Athena.database.funcs.updatePartialData(baseItems[index]._id, baseItemCopy, COLLECTION_NAME);
-}
-
-const ItemFactory = {
-    add,
-    doesBaseItemExist,
-    get,
-    getByName,
-    isRefreshComplete,
-    update,
+        isDoneLoading = true;
+    },
 };
 
-function override<Key extends keyof typeof ItemFactory>(functionName: Key, callback: typeof ItemFactory[Key]): void {
-    if (typeof exports[functionName] === 'undefined') {
+/**
+ * Wait until the `isDoneLoading` variable is set to `true` before continuing.
+ */
+export async function isDoneLoadingAsync(): Promise<void> {
+    return new Promise((resolve: Function) => {
+        const interval = alt.setInterval(() => {
+            if (!isDoneLoading) {
+                return;
+            }
+
+            alt.clearInterval(interval);
+            resolve();
+        }, 0);
+    });
+}
+
+/**
+ * Get a base item based on dbName, and version if supplied.
+ *
+ * @template CustomData
+ * @template CustomBehavior
+ * @param {string} dbName
+ * @param {number} [version=undefined]
+ * @return {(BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>)}
+ */
+export async function getBaseItemAsync<CustomData = {}, CustomBehavior = {}>(
+    dbName: string,
+    version: number = undefined,
+): Promise<BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>> {
+    await isDoneLoadingAsync();
+
+    if (Overrides.getBaseItemAsync) {
+        return await Overrides.getBaseItemAsync<CustomData, CustomBehavior>(dbName, version);
+    }
+
+    const index = databaseItems.findIndex((item) => {
+        const hasMatchingName = item.dbName === dbName;
+
+        if (!hasMatchingName) {
+            return false;
+        }
+
+        const hasMatchingVersion = item.version === version;
+        if (!hasMatchingVersion) {
+            return false;
+        }
+
+        return true;
+    });
+
+    if (index <= -1) {
+        alt.logWarning(`Could not find item with dbName: ${dbName} in getBaseItem`);
+        return undefined;
+    }
+
+    return deepCloneObject<BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>>(databaseItems[index]);
+}
+
+/**
+ * Updates or inserts a new database item into the database.
+ *
+ * If a verison is specified and it does not find a matching version it will add a new item.
+ *
+ * If a version is not specified; it will find a non-versioned item to replace.
+ *
+ * #### Example
+ * ```ts
+ * Athena.systems.inventory.factory.upsertAsync({
+ *     dbName: 'burger',
+ *     data: { health: 5 },
+ *     icon: 'burger',
+ *     name: 'Burger',
+ *     maxStack: 8,
+ *     weight: 25,
+ *     behavior: {
+ *         canDrop: true,
+ *         canStack: true,
+ *         canTrade: true,
+ *         destroyOnDrop: false,
+ *         isToolbar: true
+ *     },
+ *     consumableEventToCall: 'edible',
+ *     customEventsToCall: [
+ *          {
+ *              name: 'Desconstruct',
+ *              eventToCall: 'deconstruct-item-ingredients'
+ *          }
+ *    ]
+ * });
+ * ```
+ *
+ * @param {BaseItem} baseItem
+ */
+export async function upsertAsync(baseItem: BaseItem) {
+    await isDoneLoadingAsync();
+
+    if (Overrides.upsertAsync) {
+        return await Overrides.upsertAsync(baseItem);
+    }
+
+    const index = databaseItems.findIndex((item) => {
+        const hasMatchingName = item.dbName === baseItem.dbName;
+
+        if (!hasMatchingName) {
+            return false;
+        }
+
+        const hasMatchingVersion = item.version === baseItem.version;
+        if (!hasMatchingVersion) {
+            return false;
+        }
+
+        return true;
+    });
+
+    // Create New Item Entry
+    if (index <= -1) {
+        const document = await Database.insertData<BaseItem>(baseItem, Athena.database.collections.Items, true);
+
+        document._id = document._id.toString();
+        databaseItems.push(document);
         return;
     }
 
-    exports[functionName] = callback;
+    const itemClone = deepCloneObject<BaseItem>(databaseItems[index]);
+    delete itemClone._id;
+
+    const hash1 = sha256(JSON.stringify(itemClone));
+    const hash2 = sha256(JSON.stringify(baseItem));
+
+    if (hash1 === hash2) {
+        return;
+    }
+
+    // Update Existing Item
+    await Database.updatePartialData(databaseItems[index]._id.toString(), baseItem, Athena.database.collections.Items);
+    databaseItems[index] = deepCloneObject<BaseItem>({ ...databaseItems[index], ...baseItem });
 }
 
-const exports: typeof ItemFactory & { override?: typeof override } = {
-    ...ItemFactory,
-    override,
-};
+/**
+ * Converts an item from a player inventory, equipment, or toolbar to a full item set.
+ *
+ * Also performs weight calculations.
+ *
+ * @template CustomData
+ * @template CustomBehavior
+ * @param {StoredItem<CustomData>} item
+ * @return {(Item<CustomBehavior & DefaultItemBehavior, CustomData> | undefined)}
+ */
+export async function fromStoredItemAsync<CustomData = {}, CustomBehavior = {}>(
+    item: StoredItem<CustomData>,
+): Promise<Item<CustomBehavior & DefaultItemBehavior, CustomData> | undefined> {
+    await isDoneLoadingAsync();
 
-export default exports;
-init();
+    if (Overrides.fromStoredItemAsync) {
+        return await Overrides.fromStoredItemAsync<CustomData, CustomBehavior>(item);
+    }
+
+    const baseItem = await getBaseItemAsync<CustomData, CustomBehavior>(item.dbName, item.version);
+    if (typeof baseItem === 'undefined') {
+        return undefined;
+    }
+
+    const combinedItem = Object.assign(baseItem, item) as Item<CustomBehavior & DefaultItemBehavior, CustomData>;
+
+    if (typeof combinedItem.weight === 'number') {
+        combinedItem.totalWeight = combinedItem.weight * combinedItem.quantity;
+    }
+
+    return combinedItem;
+}
+
+/**
+ * Converts a full item, into a storeable version of the item.
+ *
+ * Only certain parts of the item will be stored.
+ *
+ * @template CustomData
+ * @param {Item<DefaultItemBehavior, CustomData>} item
+ * @return {StoredItem<CustomData>}
+ */
+export async function toStoredItemAsync<CustomData = {}>(
+    item: Item<DefaultItemBehavior, CustomData>,
+): Promise<StoredItem<CustomData>> {
+    await isDoneLoadingAsync();
+
+    if (Overrides.toStoredItem) {
+        return await Overrides.toStoredItem<CustomData>(item);
+    }
+
+    const storedItem: StoredItem<CustomData> = {
+        dbName: item.dbName,
+        data: item.data,
+        quantity: item.quantity,
+        slot: item.slot,
+    };
+
+    if (typeof item.weight === 'number') {
+        item.totalWeight = item.quantity * item.weight;
+    }
+
+    if (typeof item.version !== 'undefined') {
+        storedItem.version = item.version;
+    }
+
+    return storedItem;
+}
+
+/**
+ * Converts a base item to a stored item asynchronously.
+ *
+ *
+ * @template CustomData
+ * @param {BaseItem<DefaultItemBehavior, CustomData>} baseItem
+ * @param {number} quantity
+ * @return {Promise<StoredItem<CustomData>>}
+ */
+export async function fromBaseToStoredAsync<CustomData = {}>(
+    baseItem: BaseItem<DefaultItemBehavior, CustomData>,
+    quantity: number,
+): Promise<StoredItem<CustomData>> {
+    await isDoneLoadingAsync();
+
+    if (Overrides.fromBaseToStoredAsync) {
+        return await Overrides.fromBaseToStoredAsync<CustomData>(baseItem, quantity);
+    }
+
+    const storedItem: StoredItem<CustomData> = {
+        dbName: baseItem.dbName,
+        data: baseItem.data,
+        quantity: quantity,
+        slot: -1,
+    };
+
+    if (typeof baseItem.weight === 'number') {
+        storedItem.totalWeight = quantity * baseItem.weight;
+    }
+
+    if (typeof baseItem.version !== 'undefined') {
+        storedItem.version = baseItem.version;
+    }
+
+    return storedItem;
+}
+
+/**
+ * Get a base item based on dbName, and version if supplied.
+ *
+ * Does not wait for database of items to load first.
+ *
+ * Use when usage is not at server-start.
+ *
+ * @template CustomData
+ * @template CustomBehavior
+ * @param {string} dbName
+ * @param {number} [version=undefined]
+ * @return {(BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>)}
+ */
+export function getBaseItem<CustomData = {}, CustomBehavior = {}>(
+    dbName: string,
+    version: number = undefined,
+): BaseItem<DefaultItemBehavior & CustomBehavior, CustomData> {
+    if (Overrides.getBaseItem) {
+        return Overrides.getBaseItem<CustomData, CustomBehavior>(dbName, version);
+    }
+
+    const index = databaseItems.findIndex((item) => {
+        const hasMatchingName = item.dbName === dbName;
+
+        if (!hasMatchingName) {
+            return false;
+        }
+
+        const hasMatchingVersion = item.version === version;
+        if (!hasMatchingVersion) {
+            return false;
+        }
+
+        return true;
+    });
+
+    if (index <= -1) {
+        alt.logWarning(`Could not find item with dbName: ${dbName} in getBaseItem`);
+        return undefined;
+    }
+
+    return deepCloneObject<BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>>(databaseItems[index]);
+}
+
+/**
+ * Converts an item from a player inventory, or toolbar to a full item set.
+ *
+ * Also performs weight calculations.
+ *
+ * Use when usage is not at server-start.
+ *
+ * @template CustomData
+ * @template CustomBehavior
+ * @param {StoredItem<CustomData>} item
+ * @return {(Item<CustomBehavior & DefaultItemBehavior, CustomData> | undefined)}
+ */
+export function fromStoredItem<CustomData = {}, CustomBehavior = DefaultItemBehavior>(
+    item: StoredItem<CustomData>,
+): Item<CustomBehavior & DefaultItemBehavior, CustomData> | undefined {
+    if (Overrides.fromStoredItem) {
+        return Overrides.fromStoredItem<CustomData, CustomBehavior>(item);
+    }
+
+    const baseItem = getBaseItem<CustomData, CustomBehavior>(item.dbName, item.version);
+    if (typeof baseItem === 'undefined') {
+        return undefined;
+    }
+
+    const combinedItem = Object.assign(baseItem, item) as Item<CustomBehavior & DefaultItemBehavior, CustomData>;
+
+    if (typeof combinedItem.weight === 'number') {
+        combinedItem.totalWeight = combinedItem.weight * combinedItem.quantity;
+    }
+
+    return combinedItem;
+}
+
+/**
+ * Converts a full item, into a storeable version of the item.
+ *
+ * Only certain parts of the item will be stored.
+ *
+ * Use when usage is not at server-start.
+ *
+ * @template CustomData
+ * @param {Item<DefaultItemBehavior, CustomData>} item
+ * @return {StoredItem<CustomData>}
+ */
+export function toStoredItem<CustomData = {}>(item: Item<DefaultItemBehavior, CustomData>): StoredItem<CustomData> {
+    if (Overrides.toStoredItem) {
+        return Overrides.toStoredItem<CustomData>(item);
+    }
+
+    const storedItem: StoredItem<CustomData> = {
+        dbName: item.dbName,
+        data: item.data,
+        quantity: item.quantity,
+        slot: item.slot,
+    };
+
+    if (typeof item.weight === 'number') {
+        item.totalWeight = item.quantity * item.weight;
+    }
+
+    if (typeof item.version !== 'undefined') {
+        storedItem.version = item.version;
+    }
+
+    return storedItem;
+}
+
+/**
+ * Converts a base item into a stored item for reference.
+ *
+ *
+ * @template CustomData
+ * @param {BaseItem<DefaultItemBehavior, CustomData>} baseItem
+ * @param {number} quantity
+ * @return {void}
+ */
+export function fromBaseToStored<CustomData = {}>(
+    baseItem: BaseItem<DefaultItemBehavior, CustomData>,
+    quantity: number,
+) {
+    if (Overrides.fromBaseToStored) {
+        return Overrides.fromBaseToStored(baseItem, quantity);
+    }
+
+    const storedItem: StoredItem<CustomData> = {
+        dbName: baseItem.dbName,
+        data: baseItem.data,
+        quantity: quantity,
+        slot: -1,
+    };
+
+    if (typeof baseItem.weight === 'number') {
+        storedItem.totalWeight = quantity * baseItem.weight;
+    }
+
+    if (typeof baseItem.version !== 'undefined') {
+        storedItem.version = baseItem.version;
+    }
+
+    return storedItem;
+}
+
+interface FactoryFuncs {
+    getBaseItemAsync: typeof getBaseItemAsync;
+    upsertAsync: typeof upsertAsync;
+    fromStoredItemAsync: typeof fromStoredItemAsync;
+    fromBaseToStoredAsync: typeof fromBaseToStoredAsync;
+    getBaseItem: typeof getBaseItem;
+    fromStoredItem: typeof fromStoredItem;
+    toStoredItem: typeof toStoredItem;
+    fromBaseToStored: typeof fromBaseToStored;
+}
+
+const Overrides: Partial<FactoryFuncs> = {};
+
+export function override(functionName: 'getBaseItemAsync', callback: typeof getBaseItemAsync);
+export function override(functionName: 'upsertAsync', callback: typeof upsertAsync);
+export function override(functionName: 'fromStoredItemAsync', callback: typeof fromStoredItemAsync);
+export function override(functionName: 'fromBaseToStoredAsync', callback: typeof fromBaseToStoredAsync);
+export function override(functionName: 'getBaseItem', callback: typeof getBaseItem);
+export function override(functionName: 'fromStoredItem', callback: typeof fromStoredItem);
+export function override(functionName: 'toStoredItem', callback: typeof toStoredItem);
+export function override(functionName: 'fromBaseToStored', callback: typeof fromBaseToStored);
+/**
+ * Used to override inventory item factory functionality
+ *
+ *
+ * @param {keyof FactoryFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof FactoryFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}
+
+InternalFunctions.init();

@@ -1,11 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { onTicksStart } from './onTicksStart';
 
 alt.on('connectionComplete', handleConnectionComplete);
-alt.onServer(SYSTEM_EVENTS.TICKS_START, handleTick);
 alt.setWatermarkPosition(4);
 
 async function handleConnectionComplete() {
@@ -46,3 +46,5 @@ function handleTick() {
     native.setAudioFlag('LoadMPData', true);
     native.setAudioFlag('DisableFlightMusic', true);
 }
+
+onTicksStart.add(handleTick);

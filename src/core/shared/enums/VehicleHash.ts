@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ *
+ * @enum {number}
+ */
 export enum VEHICLE_HASH {
     ADDER = 3078201489,
     AIRBUS = 1283517198,

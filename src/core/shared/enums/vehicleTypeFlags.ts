@@ -1,35 +1,49 @@
+/**
+ *
+ * @ignore
+ *
+ * @enum {number}
+ */
 export const enum VEHICLE_CLASS {
     BOAT = 'boat',
-    SPEED_BOAT = 'speedboat',
     COMMERCIAL = 'commercial',
     COMPACT = 'compact',
     COUPE = 'coupe',
     CYCLE = 'cycle',
     EMERGENCY = 'emergency',
+    HELICOPTER = 'helicopter',
     INDUSTRIAL = 'industrial',
     MILITARY = 'military',
     MOTORCYCLE = 'motorcycle',
     MUSCLE = 'muscle',
-    OFFROAD = 'offroad',
-    OPENWHEEL = 'openwheel',
-    HELICOPTER = 'helicopter',
+    OFF_ROAD = 'off_road',
+    OPEN_WHEEL = 'open_wheel',
     PLANE = 'plane',
-    SUV = 'suv',
+    RAIL = 'rail',
     SEDAN = 'sedan',
     SERVICE = 'service',
     SPORT = 'sport',
-    SPORT_CLASSIC = 'sportclassic',
+    SPORT_CLASSIC = 'sport_classic',
     SUPER = 'super',
-    TRAILER = 'trailer',
-    TRAIN = 'train',
+    SUV = 'suv',
     UTILITY = 'utility',
     VAN = 'van',
 }
 
 export const enum VEHICLE_TYPE {
+    AMPHIBIOUS_AUTOMOBILE = 'amphibious_automobile',
+    AMPHIBIOUS_QUADBIKE = 'amphibious_quadbike',
+    BICYCLE = 'bicycle',
+    BIKE = 'bike',
+    BLIMP = 'blimp',
     BOAT = 'boat',
-    AIRCRAFT = 'aircraft',
-    VEHICLE = 'vehicle',
+    CAR = 'car',
+    HELI = 'heli',
+    PLANE = 'plane',
+    QUADBIKE = 'quadbike',
+    SUBMARINE = 'submarine',
+    SUBMARINECAR = 'submarinecar',
+    TRAILER = 'trailer',
     TRAIN = 'train',
 }
 

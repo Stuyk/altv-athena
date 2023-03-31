@@ -1,6 +1,8 @@
 /**
  * Colors followed by '_' are duplicates.
- * @export
+ *
+ * @ignore
+ *
  * @enum {number}
  */
 export enum BLIP_COLOR {

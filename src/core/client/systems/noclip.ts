@@ -1,10 +1,10 @@
 import alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { DirectionVector } from '../utility/directionToVector';
-import { drawText2D } from '../utility/text';
+import * as AthenaClient from '@AthenaClient/api';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { DirectionVector } from '@AthenaClient/utility/directionToVector';
 
 const timeBetweenPlayerUpdates = 250;
 let nextUpdate = Date.now() + 50;
@@ -202,15 +202,15 @@ const NoClip = {
             alt.emitServer(SYSTEM_EVENTS.NOCLIP_UPDATE, fwd);
         }
 
-        drawText2D(
+        AthenaClient.screen.text.drawText2D(
             LocaleController.get(LOCALE_KEYS.NOCLIP_SPEED_INFO),
             { x: 0.5, y: 0.89 },
             0.4,
             new alt.RGBA(255, 255, 255, 200),
             0,
         );
-        
-        drawText2D(
+
+        AthenaClient.screen.text.drawText2D(
             `${LocaleController.get(LOCALE_KEYS.NOCLIP_SPEED)}: ${sens.toFixed(2)}`,
             { x: 0.5, y: 0.92 },
             0.4,

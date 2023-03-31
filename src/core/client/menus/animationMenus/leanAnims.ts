@@ -1,5 +1,5 @@
-import { ANIMATION_FLAGS } from '../../../shared/flags/animationFlags';
-import { WheelMenu } from '../../views/wheelMenu';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
+import * as AthenaClient from '@AthenaClient/api';
 
 const getLeanMenu2 = (callback: (...args: any[]) => void) => {
     return [
@@ -86,7 +86,7 @@ export default (callback: (...args: any[]) => void) => {
         {
             name: 'Next',
             callback: () => {
-                WheelMenu.update('Lean 2', getLeanMenu2(callback));
+                AthenaClient.systems.wheelMenu.update('Lean 2', getLeanMenu2(callback));
             },
         },
     ];

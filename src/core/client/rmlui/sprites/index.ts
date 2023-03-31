@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { AthenaClient } from '../../api/athena';
+import * as AthenaClient from '@AthenaClient/api';
 
 const DEFAULT_DRAW_DISTANCE = 20;
 const TOUCH_DISTANCE = 2;
@@ -9,7 +9,7 @@ export interface SpriteInfo {
      * A unique identifier for this sprite.
      *
      * @type {string}
-     * @memberof SpriteInfo
+     *
      */
     uid: string;
 
@@ -19,7 +19,7 @@ export interface SpriteInfo {
      * Otherwise paths are based on `../../../plugins/plugin-name/client/image.png`.
      *
      * @type {string}
-     * @memberof SpriteInfo
+     *
      */
     path: string;
 
@@ -27,7 +27,7 @@ export interface SpriteInfo {
      * The width of the image. Pixels.
      *
      * @type {number}
-     * @memberof SpriteInfo
+     *
      */
     width: number;
 
@@ -35,7 +35,7 @@ export interface SpriteInfo {
      * The height of the image. Pixels.
      *
      * @type {number}
-     * @memberof SpriteInfo
+     *
      */
     height: number;
 
@@ -43,14 +43,14 @@ export interface SpriteInfo {
      * A position in-world, or on-screen where to draw this image.
      *
      * @type {alt.IVector3}
-     * @memberof SpriteInfo
+     *
      */
     position: alt.IVector3;
 
     /**
      * Call this callback once, when the sprite is touched.
      *
-     * @memberof Sprite
+     *
      */
     callOnceOnTouch?: (uid: string) => void;
 }
@@ -82,7 +82,7 @@ const InternalFunctions = {
     /**
      * Get the index of the image we want to modify.
      *
-     * @param {string} uid
+     * @param {string} uid A unique string
      * @return {number}
      */
     getIndexOfElement(uid: string): number {
@@ -91,7 +91,7 @@ const InternalFunctions = {
     /**
      * Create the rml element if it does not exist.
      *
-     * @param {string} uid
+     * @param {string} uid A unique string
      */
     createElement(uid: string) {
         const index = InternalFunctions.getIndexOfElement(uid);
@@ -111,7 +111,7 @@ const InternalFunctions = {
     /**
      * Remove the rml element if it exists.
      *
-     * @param {string} uid
+     * @param {string} uid A unique string
      */
     removeElement(uid: string) {
         const index = InternalFunctions.getIndexOfElement(uid);
@@ -132,7 +132,7 @@ const InternalFunctions = {
         }
 
         if (document && elements.length <= 0) {
-            AthenaClient.timer.clearInterval(interval);
+            alt.clearInterval(interval);
             document.destroy();
             document = undefined;
             interval = undefined;
@@ -154,7 +154,7 @@ const InternalFunctions = {
 
             // Handle 3D drawing of elements...
             const spritePosition = elements[i].position as alt.IVector3;
-            const dist = AthenaClient.utility.distance3D(alt.Player.local.pos, spritePosition);
+            const dist = AthenaClient.utility.vector.distance(alt.Player.local.pos, spritePosition);
 
             // Removes the element from the rmlui document entirely.
             if (dist > DEFAULT_DRAW_DISTANCE) {
@@ -173,7 +173,7 @@ const InternalFunctions = {
 
             if (Date.now() > lastBlockingCheck) {
                 didBlockingCheck = true;
-                if (AthenaClient.utility.isEntityBlockingPosition(spritePosition)) {
+                if (AthenaClient.world.position.isEntityBlockingPosition(spritePosition)) {
                     elements[i].isBlocked = true;
                 } else {
                     elements[i].isBlocked = false;
@@ -215,72 +215,68 @@ const InternalFunctions = {
     },
 };
 
-const SpriteConst = {
-    /**
-     * Create a sprite. Create a JavaScript object to start building the sprite.
-     * @param {SpriteInfo} sprite
-     */
-    create(sprite: SpriteInfo) {
-        if (typeof document === 'undefined') {
-            document = new alt.RmlDocument('/client/rmlui/sprites/index.rml');
-            document.show();
-            interval = AthenaClient.timer.createInterval(InternalFunctions.update, 0, 'rmlui/sprites/index.ts');
-        }
+/**
+ * Create a sprite. Create a JavaScript object to start building the sprite.
+ * @param {SpriteInfo} sprite
+ */
+export function create(sprite: SpriteInfo) {
+    if (typeof document === 'undefined') {
+        document = new alt.RmlDocument('/client/rmlui/sprites/index.rml');
+        document.show();
+        interval = alt.setInterval(InternalFunctions.update, 0);
+    }
 
-        if (sprite.path.includes('@plugins')) {
-            sprite.path = sprite.path.replace('@plugins', '../../../plugins');
-        }
+    if (sprite.path.includes('@plugins')) {
+        sprite.path = sprite.path.replace('@plugins', '../../../plugins');
+    }
 
-        const index = InternalFunctions.getIndexOfElement(sprite.uid);
-        if (index === -1) {
-            elements.push({ ...sprite, markForDeletion: false });
-        } else {
-            elements[index] = { ...sprite, markForDeletion: false };
-        }
-    },
-    /**
-     * Remove a sprite by `uid` and stop it from updating entirely.
-     *
-     * @param {string} uid
-     */
-    remove(uid: string) {
-        const index = InternalFunctions.getIndexOfElement(uid);
-        if (index === -1) {
-            return;
-        }
+    const index = InternalFunctions.getIndexOfElement(sprite.uid);
+    if (index === -1) {
+        elements.push({ ...sprite, markForDeletion: false });
+    } else {
+        elements[index] = { ...sprite, markForDeletion: false };
+    }
+}
 
-        elements[index].markForDeletion = true;
-    },
-    /**
-     * Updates the sprite data.
-     * Use this to update position of the sprite dynamically.
-     * Requires the `uid` specified to update it.
-     *
-     * @param {string} uid
-     * @param {Partial<Sprite>} sprite
-     */
-    update(uid: string, sprite: Partial<SpriteInfo>) {
-        const index = InternalFunctions.getIndexOfElement(uid);
-        if (index === -1) {
-            return;
-        }
+/**
+ * Remove a sprite by `uid` and stop it from updating entirely.
+ *
+ * @param {string} uid A unique string
+ */
+export function remove(uid: string) {
+    const index = InternalFunctions.getIndexOfElement(uid);
+    if (index === -1) {
+        return;
+    }
 
-        if (sprite.path && sprite.path.includes('@plugins')) {
-            sprite.path = sprite.path.replace('@plugins', '../../../plugins');
-        }
+    elements[index].markForDeletion = true;
+}
 
-        elements[index] = { ...elements[index], ...sprite };
-    },
-};
+/**
+ * Updates the sprite data.
+ * Use this to update position of the sprite dynamically.
+ * Requires the `uid` specified to update it.
+ *
+ * @param {string} uid A unique string
+ * @param {Partial<Sprite>} sprite
+ */
+export function update(uid: string, sprite: Partial<SpriteInfo>) {
+    const index = InternalFunctions.getIndexOfElement(uid);
+    if (index === -1) {
+        return;
+    }
 
-export const Sprite = {
-    ...SpriteConst,
-};
+    if (sprite.path && sprite.path.includes('@plugins')) {
+        sprite.path = sprite.path.replace('@plugins', '../../../plugins');
+    }
+
+    elements[index] = { ...elements[index], ...sprite };
+}
 
 alt.on('disconnect', () => {
     if (typeof document !== 'undefined') {
         document.destroy();
-        AthenaClient.timer.clearInterval(interval);
+        alt.clearInterval(interval);
         alt.log('progressbar | Destroyed RMLUI Document on Disconnect');
     }
 });

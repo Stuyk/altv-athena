@@ -1,0 +1,59 @@
+{
+    "compilerOptions": {
+        "baseUrl": "src",
+        "paths": {
+            "@AthenaServer/*": [
+                "server/*"
+            ],
+            "@AthenaClient/*": [
+                "client/*"
+            ],
+            "@AthenaShared/*": [
+                "shared/*"
+            ],
+            "@AthenaPlugins/*": [
+                "plugins/*"
+            ]
+        },
+        "typeRoots": [
+            "./node_modules/@types",
+            "./node_modules/@altv"
+        ],
+        "removeComments": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noImplicitReturns": true,
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "composite": false,
+        "forceConsistentCasingInFileNames": true,
+        "strict": false,
+        "module": "ES2022",
+        "target": "ES2022",
+        "outDir": "athena-cache",
+        "skipLibCheck": true,
+        "esModuleInterop": true
+    },
+    "include": [
+        "server/**/*.ts",
+        "client/**/*.ts",
+        "shared/**/*.ts"
+    ],
+    "exclude": [
+        "resources",
+        "scripts",
+        "altv-athena-cache",
+        "athena-cache",
+        "node_modules",
+        "cache",
+        "crashdumps",
+        "data",
+        "doc",
+        "modules",
+        "screenshots"
+    ]
+}

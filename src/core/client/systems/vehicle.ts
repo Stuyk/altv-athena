@@ -1,41 +1,53 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import * as AthenaClient from '@AthenaClient/api';
 
-import { KEY_BINDS } from '../../shared/enums/keyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
-import { PED_CONFIG_FLAG } from '../../shared/flags/pedflags';
-import { KeybindController } from '../events/keyup';
-import { isAnyMenuOpen } from '../utility/menus';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
+import { PED_CONFIG_FLAG } from '@AthenaShared/flags/pedflags';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
-import './push';
-import { PushVehicle } from './push';
+const Internal = {
+    init() {
+        alt.onServer(VEHICLE_EVENTS.SET_SEATBELT, VehicleController.enableSeatBelt);
+        alt.onServer(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);
+        alt.onServer(SYSTEM_EVENTS.VEHICLE_ENGINE, VehicleController.toggleEngine);
+        alt.on('enteredVehicle', VehicleController.enterVehicle);
+        alt.on('leftVehicle', VehicleController.removeSeatBelt);
+        VehicleController.registerKeybinds();
+    },
+};
 
 export const VehicleController = {
     /**
      * Register the default vehicle keybinds.
      * @static
-     * @memberof VehicleController
+     *
      */
     registerKeybinds() {
-        KeybindController.registerKeybind({
+        AthenaClient.systems.hotkeys.add({
             key: KEY_BINDS.VEHICLE_ENGINE,
-            singlePress: VehicleController.emitEngine,
+            description: 'Vehicle Engine Toggle',
+            identifier: 'toggle-vehicle-engine',
+            keyDown: VehicleController.emitEngine,
         });
 
-        KeybindController.registerKeybind({
+        AthenaClient.systems.hotkeys.add({
             key: KEY_BINDS.VEHICLE_LOCK,
-            singlePress: VehicleController.emitLock,
+            description: 'Vehicle Lock Toggle',
+            identifier: 'toggle-vehicle-lock',
+            keyDown: VehicleController.emitLock,
         });
     },
 
     /**
      * Starts / stops the engine.
      * @static
-     * @memberof VehicleController
+     *
      */
     emitEngine() {
-        if (isAnyMenuOpen()) {
+        if (AthenaClient.webview.isAnyMenuOpen()) {
             return;
         }
 
@@ -49,20 +61,42 @@ export const VehicleController = {
     /**
      * Toggles lock from locked / unlocked.
      * @static
-     * @memberof VehicleController
+     *
      */
     emitLock() {
-        if (isAnyMenuOpen()) {
+        if (AthenaClient.webview.isAnyMenuOpen()) {
             return;
         }
 
-        alt.emitServer(VEHICLE_EVENTS.SET_LOCK);
+        const target = AthenaClient.systems.entitySelector.getSelection();
+        if (target) {
+            if (target.type !== 'vehicle') {
+                return;
+            }
+
+            const vehicle = alt.Vehicle.all.find((x) => {
+                return x.scriptID === target.id;
+            });
+
+            if (!vehicle) {
+                return;
+            }
+
+            alt.emitServer(VEHICLE_EVENTS.SET_LOCK, vehicle);
+            return;
+        }
+
+        if (!alt.Player.local.vehicle) {
+            return;
+        }
+
+        alt.emitServer(VEHICLE_EVENTS.SET_LOCK, alt.Player.local.vehicle);
     },
 
     /**
      * Prevents seat shuffling and engine control.
      * @static
-     * @memberof VehicleController
+     *
      */
     enterVehicle() {
         native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.DISABLE_SEAT_SHUFFLE, true);
@@ -73,7 +107,7 @@ export const VehicleController = {
     /**
      * Warps the local player into the vehicle.
      * @static
-     * @memberof VehicleController
+     *
      */
     async setIntoVehicle(vehicle: alt.Vehicle, seat: number) {
         const isVehicleReady = await new Promise((resolve: Function) => {
@@ -108,7 +142,7 @@ export const VehicleController = {
      * Prevents a pedestrian from flying out of a vehicle window.
      * @static
      * @param {boolean} [value=true]
-     * @memberof VehicleController
+     *
      */
     enableSeatBelt(value: boolean) {
         alt.Player.local.setMeta('SEATBELT', value);
@@ -143,8 +177,7 @@ export const VehicleController = {
         }
 
         const isDead = alt.Player.local.meta.isDead;
-        const isPushing = PushVehicle.isPushing();
-        if (!isDead && !isLocked && !isPushing) {
+        if (!isDead && !isLocked) {
             return;
         }
 
@@ -166,9 +199,4 @@ export const VehicleController = {
     },
 };
 
-alt.onServer(VEHICLE_EVENTS.SET_SEATBELT, VehicleController.enableSeatBelt);
-alt.onServer(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);
-alt.onServer(SYSTEM_EVENTS.VEHICLE_ENGINE, VehicleController.toggleEngine);
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, VehicleController.registerKeybinds);
-alt.on('enteredVehicle', VehicleController.enterVehicle);
-alt.on('leftVehicle', VehicleController.removeSeatBelt);
+onTicksStart.add(Internal.init);

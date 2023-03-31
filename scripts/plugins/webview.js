@@ -19,7 +19,9 @@ function writeWebViewPlugins(plugins) {
 
         for (const file of files) {
             const componentName = path.basename(file, '.vue');
-            vueFiles[componentName] = `../../../src/core/plugins/${pluginName}/webview/${componentName}.vue`;
+            vueFiles[componentName] = sanitizePath(
+                `../../../src/core/plugins/${pluginName}/webview/${componentName}.vue`,
+            );
         }
     }
 
@@ -60,7 +62,9 @@ function writeVuePlugins(plugins) {
 
         for (const file of files) {
             const componentName = path.basename(file, '.ts');
-            vueFiles[componentName] = `../../../src/core/plugins/${pluginName}/webview/plugins/${componentName}.ts`;
+            vueFiles[componentName] = sanitizePath(
+                `../../../src/core/plugins/${pluginName}/webview/plugins/${componentName}.ts`,
+            );
         }
     }
 

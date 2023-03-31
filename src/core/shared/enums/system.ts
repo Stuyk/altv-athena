@@ -1,3 +1,9 @@
+/**
+ *
+ * @ignore
+ *
+ * @enum {number}
+ */
 export enum SYSTEM_EVENTS {
     APPEND_BLIP = 'append:Blip',
     APPEND_MARKER = 'append:Marker',
@@ -6,6 +12,8 @@ export enum SYSTEM_EVENTS {
     APPEND_PED = 'append:Ped',
     APPEND_WORLD_NOTIFICATION = 'append:WorldNotification',
     APPEND_POLYGON = 'append:Polygon',
+    //
+    ACCEPT_DECLINE_EVENT_SET = 'accept:Decline:Event:Set',
     //
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
     // Check
@@ -24,6 +32,8 @@ export enum SYSTEM_EVENTS {
     ENTITYSET_ACTIVATE = 'entityset:Activate',
     ENTITYSET_DEACTIVATE = 'entityset:Deactivate',
     ENTITYSET_IS_ACTIVE = 'entityset:IsActive',
+    // TIME
+    SET_GAME_TIME = 'player:freeze:time',
     // Holograms
     HOLOGRAM_APPEND = 'hologram:Append',
     //
@@ -33,11 +43,14 @@ export enum SYSTEM_EVENTS {
     INTERACTION_TEXT_CREATE = 'interaction:Text:Create',
     INTERACTION_TEXT_REMOVE = 'interaction:Text:Remove',
     INTERACTION_TEMPORARY = 'interaction:Temporary',
+    INTERACTION_PICKUP_ITEM = 'interaction:Pickup:Item',
     // ITEM
     ITEM_CONSUME = 'item:Consume',
     // IPL
     IPL_LOAD = 'ipl:Load',
     IPL_UNLOAD = 'ipl:Unload',
+    //
+    MOVE_OBJECT = 'object:move:around',
     //
     NOCLIP_UPDATE = 'noclip:Update',
     NOCLIP_RESET = 'noclip:Reset',
@@ -49,6 +62,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_ALARM_STOP = 'alarm:Stop',
     PLAYER_EMIT_ALARM_STOP_ALL = 'alarm:StopAll',
     PLAYER_EMIT_ANIMATION = 'animation:Play',
+    PLAYER_EMIT_AMMUNITION_UPDATE = 'player:emit:ammunition:update',
     PLAYER_EMIT_SCENARIO = 'scenario:Play',
     PLAYER_EMIT_AUDIO_STREAM = 'audio:Stream',
     PLAYER_EMIT_CREDITS = 'credits:Create',
@@ -68,11 +82,10 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_TASK_MOVE = 'task:Move',
     PLAYER_EMIT_TASK_TIMELINE = 'task:Timeline',
     PLAYER_EMIT_INVENTORY_NOTIFICATION = 'inventory:Notification',
+    PLAYER_EMIT_INVENTORY_SYNC = 'inventory:Sync',
     PLAYER_EMIT_TEMP_OBJECT_LERP = 'temp:Object:Lerp',
     PLAYER_EMIT_WHEEL_MENU = 'wheelMenu:Dynamic',
     PLAYER_EMIT_MISSION_TEXT = 'missionText:Create',
-    //
-    PLAYER_RELOAD = 'player:ForceReload',
     //
     PLAYER_SET_FREEZE = 'freeze:Set',
     PLAYER_SET_DEATH = 'death:Toggle',
@@ -80,6 +93,8 @@ export enum SYSTEM_EVENTS {
     //
     PLAYER_TICK = 'player:Tick',
     //
+    PLAYER_TOOLBAR_INVOKE = 'player:Toolbar:Invoke',
+    PLAYER_TOOLBAR_ENABLE = 'player:Toolbar:Enable',
     PLAYER_TOOLBAR_SET = 'player:Toolbar',
     PLAYER_ITEM_CHANGE = 'player:ItemChange',
     //
@@ -102,7 +117,7 @@ export enum SYSTEM_EVENTS {
     POPULATE_OBJECTS = 'objects:Populate',
     POPULATE_PEDS = 'peds:Populate',
     POPULATE_WORLD_NOTIFICATIONS = 'worldNotifications:Populate',
-    POPULATE_ITEM_DROPS = 'itemDrops:Populate',
+    POPULATE_ITEM_DROPS = 'item:drops:Populate',
     POPULATE_POLYGONS = 'polygons:Populate',
     //
     QUICK_TOKEN_UPDATE = 'quicktoken:update',
@@ -121,6 +136,12 @@ export enum SYSTEM_EVENTS {
     SET_ACTION_MENU = 'actions:Set',
     SET_VIEW_URL = 'actions:SetViewURL',
     //
+    SCREEN_TIMECYCLE_EFFECT_CLEAR = 'screen:timecycle:effect:clear',
+    SCREEN_TIMECYCLE_EFFECT = 'screen:timecycle:effect',
+    SCREEN_FADE_TO_BLACK = 'screen:fade:to:black',
+    SCREEN_FADE_FROM_BLACK = 'screen:fade:from:black',
+    SHOW_SCREEN_PLAYER_ID = 'screen:player:id',
+    //
     SCREENSHOT_POPULATE_DATA = 'screenshot:Populate:Data',
     SCREENSHOT_CREATE = 'screenshot:Create',
     //
@@ -133,6 +154,7 @@ export enum SYSTEM_EVENTS {
     UPDATE_DOORS = 'update:Doors',
     UPDATE_TEXT_LABEL = 'update:TextLabel',
     UPDATE_OBJECT = 'update:Object',
+    UPDATE_OBJECT_MODEL = 'update:Object:Model',
     //
     VEHICLE_ENGINE = 'vehicle:Engine',
     VEHICLES_VIEW_SPAWN = 'vehicles:Spawn',
@@ -145,4 +167,6 @@ export enum SYSTEM_EVENTS {
     VOICE_JOINED = 'voice:Joined',
     //
     WEBVIEW_INFO = 'webview:Info',
+    //
+    WEATHER_CHANGE_TO = 'weather:change:to',
 }

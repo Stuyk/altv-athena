@@ -1,3 +1,12 @@
+/**
+ * Takes an array of numbers and attempts to determine which number is missing given a range.
+ * Returns the first missing number.
+ *
+ *
+ * @param {Array<number>} arr
+ * @param {number} [startIndex=0]
+ * @return {number}
+ */
 export function getMissingNumber(arr: Array<number>, startIndex = 0): number {
     if (arr.length <= 0) {
         return startIndex;
@@ -12,3 +21,5 @@ export function getMissingNumber(arr: Array<number>, startIndex = 0): number {
 
     return arr.length + 1;
 }
+
+export default { getMissingNumber };
