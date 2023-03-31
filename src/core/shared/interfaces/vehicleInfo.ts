@@ -12,7 +12,7 @@ export interface VehicleInfo {
      * @type {string}
      *
      */
-    display: string;
+    displayName: string;
 
     /**
      * The model of the vehicle.
@@ -20,6 +20,20 @@ export interface VehicleInfo {
      *
      */
     name: string;
+
+    /**
+     * The display name of the manufacturer of the vehicle.
+     * @type {string}
+     * @memberof VehicleInfo
+     */
+    manufacturerDisplayName: string;
+
+    /**
+     * The manufacturer of the vehicle.
+     * @type {string}
+     * @memberof VehicleInfo
+     */
+    manufacturer: string;
 
     /**
      * The vehicle type; vehicle, boat, plane, etc.
@@ -62,6 +76,27 @@ export interface VehicleInfo {
      *
      */
     fuelType: FUEL_TYPE;
+
+    /**
+     * The model hash of this vehicle.
+     * @type {number}
+     * @memberof VehicleInfo
+     */
+    hash: number;
+
+    /**
+     * The signed model hash of this vehicle.
+     * @type {number}
+     * @memberof VehicleInfo
+     */
+    signedHash?: number;
+
+    /**
+     * The hex model hash of this vehicle.
+     * @type {string}
+     * @memberof VehicleInfo
+     */
+    hexHash?: string;
 
     /**
      * The total tanksize of the vehicle used for fuel cost calculations

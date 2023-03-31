@@ -34,6 +34,33 @@ Athena.systems.messenger.commands.register(
     },
 );
 
+Athena.systems.messenger.commands.register(
+    'vehiclerepair',
+    '/vehiclerepair - Repairs the nearest vehicle',
+    ['admin'],
+    (player: alt.Player) => {
+        const vehicle = player.vehicle ? player.vehicle : Athena.utility.closest.getClosestVehicle(player.pos);
+
+        if (!vehicle) {
+            Athena.player.emit.message(player, 'No spawned vehicle.');
+            return;
+        }
+
+        if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4) {
+            Athena.player.emit.message(player, 'No vehicle in range.');
+            return;
+        }
+
+        Athena.vehicle.damage.repair(vehicle);
+
+        const hash = typeof vehicle.model === 'number' ? vehicle.model : alt.hash(vehicle.model);
+
+        let vehInfo = Athena.utility.hashLookup.vehicle.hash(hash);
+
+        Athena.player.emit.message(player, `${vehInfo.displayName} got repaired.`);
+    },
+);
+
 // import { command } from '@AthenaServer/decorators/commands';
 // import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 // import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
