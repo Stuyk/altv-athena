@@ -4,6 +4,7 @@ import * as Athena from '@AthenaServer/api';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { ClothingComponent, ClothingInfo, StoredItem } from '@AthenaShared/interfaces/item';
 import { isNullOrUndefined } from '@AthenaShared/utility/undefinedCheck';
+import { Character } from '@AthenaShared/interfaces/character';
 
 const fModel = alt.hash('mp_f_freemode_01');
 const mModel = alt.hash(`mp_m_freemode_01`);
@@ -204,7 +205,7 @@ export function outfitFromPlayer(
  * @param {alt.Player} player An alt:V Player Entity
  * @return {void}
  */
-export function update(player: alt.Player) {
+export function update(player: alt.Player, document: Character = undefined) {
     if (Overrides.update) {
         return Overrides.update(player);
     }
@@ -213,7 +214,13 @@ export function update(player: alt.Player) {
         return;
     }
 
-    const data = Athena.document.character.get(player);
+    let data: Character;
+    if (typeof document === 'undefined') {
+        data = Athena.document.character.get(player);
+    } else {
+        data = document;
+    }
+
     if (typeof data === 'undefined') {
         return;
     }

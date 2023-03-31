@@ -52,10 +52,10 @@ export function create(screen: IErrorScreen) {
             'warning_text2',
             false,
             -1,
-            0,
-            0,
+            null,
+            null,
             true,
-            0,
+            Number(1),
         );
     }, 0);
 

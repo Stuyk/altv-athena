@@ -757,7 +757,7 @@ export function fadeScreenToBlack(player: alt.Player, timeInMs: number) {
  * @param {number} timeInMs
  */
 export function fadeScreenFromBlack(player: alt.Player, timeInMs: number) {
-    player.emit(SYSTEM_EVENTS.SCREEN_FADE_TO_BLACK, timeInMs);
+    player.emit(SYSTEM_EVENTS.SCREEN_FADE_FROM_BLACK, timeInMs);
 }
 
 export function setTimeCycleEffect(player: alt.Player, name: RecommendedTimecycleTypes, amountInMs: number);

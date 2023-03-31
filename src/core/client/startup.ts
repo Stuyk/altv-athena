@@ -70,6 +70,7 @@ import './streamers/worldNotifications';
 // Systems Default
 import './systems/defaults/ammo';
 import './systems/defaults/displayId';
+import './systems/defaults/time';
 import './systems/defaults/toolbar';
 
 // Systems

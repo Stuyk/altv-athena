@@ -139,11 +139,10 @@ async function handleToken(player: alt.Player, token: string) {
         return;
     }
 
+    Athena.player.emit.clearSpinner(player);
+
     await Athena.player.set.account(player, account);
     Athena.systems.loginFlow.next(player);
-
-    Athena.player.emit.fadeScreenFromBlack(player, 2000);
-    Athena.player.emit.clearSpinner(player);
 
     const name = discordInfo.username + '#' + discordInfo.discriminator;
     alt.log(`${name} has authenticated.`);

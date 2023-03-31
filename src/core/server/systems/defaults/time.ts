@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 /**
  * THIS IS A DEFAULT SYSTEM.
@@ -68,6 +69,7 @@ export function updatePlayer(player: alt.Player) {
     }
 
     player.setDateTime(1, 1, 2023, hour, minute, 0);
+    player.emit(SYSTEM_EVENTS.SET_GAME_TIME, hour, minute);
 }
 
 /**
