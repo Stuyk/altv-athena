@@ -17,6 +17,16 @@ Athena.getters.player.**byAccount**(`id`): `alt.Player` \| `undefined`
 
 Gets an online player by account identifier based on their MongoDB account _id.
 
+#### Example
+```ts
+const player = Athena.getters.player.byAccount('123456789');
+if (player) {
+    console.log(`Found player ${player.id} with account ID ${player.account._id}`);
+} else {
+   console.log('No player found with that account ID');
+}
+```
+
 #### Parameters
 
 | Name | Type |
@@ -29,7 +39,7 @@ Gets an online player by account identifier based on their MongoDB account _id.
 
 #### Defined in
 
-[server/getters/player.ts:15](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L15)
+[server/getters/player.ts:26](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L26)
 
 ___
 
@@ -41,6 +51,18 @@ Athena.getters.player.**byDatabaseID**(`id`): `alt.Player` \| `undefined`
 
 Get an online player based on their MongoDB _id
 
+#### Example
+```ts
+const id = 'abc123jkfewfwe';
+const player = Athena.getters.player.byDatabaseID(id);
+
+if (player) {
+    console.log(`Found player with id ${id}`);
+} else {
+    console.log(`No player found with the id '${id}'`);
+}
+```
+
 #### Parameters
 
 | Name | Type |
@@ -53,7 +75,7 @@ Get an online player based on their MongoDB _id
 
 #### Defined in
 
-[server/getters/player.ts:86](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L86)
+[server/getters/player.ts:133](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L133)
 
 ___
 
@@ -78,7 +100,7 @@ Use this to get the player in-game that you see with your eyes.
 
 #### Defined in
 
-[server/getters/player.ts:108](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L108)
+[server/getters/player.ts:155](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L155)
 
 ___
 
@@ -89,7 +111,18 @@ Athena.getters.player.**byName**(`name`): `alt.Player` \| `undefined`
 :::
 
 Gets an online player by their name.
+
 Not case sensitive and returns the first player it finds matching that name.
+
+#### Example
+```ts
+const player = Athena.getters.player.byName('john_fettermanjoe');
+if (player) {
+    console.log(`Found player ${player.id} with name ${player.name}`);
+} else {
+    console.log('No player found with that name');
+}
+```
 
 #### Parameters
 
@@ -103,7 +136,7 @@ Not case sensitive and returns the first player it finds matching that name.
 
 #### Defined in
 
-[server/getters/player.ts:41](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L41)
+[server/getters/player.ts:63](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L63)
 
 ___
 
@@ -114,7 +147,20 @@ Athena.getters.player.**byPartialName**(`partialName`): `alt.Player` \| `undefin
 :::
 
 Gets an online player by their partial name.
+
 Not case sensitive and returns the first player it finds that includes the partial
+
+#### Example
+```ts
+const partialName = 'john';
+const player = Athena.getters.player.byPartialName(partialName);
+
+if (player) {
+    console.log(`Found player ${player.id} with name ${player.name}`);
+} else {
+    console.log(`No player found with the partial name '${partialName}'`);
+}
+```
 
 #### Parameters
 
@@ -128,7 +174,7 @@ Not case sensitive and returns the first player it finds that includes the parti
 
 #### Defined in
 
-[server/getters/player.ts:64](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L64)
+[server/getters/player.ts:99](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L99)
 
 ___
 
@@ -153,7 +199,7 @@ Requires account info, player, or account id string.
 
 #### Defined in
 
-[server/getters/player.ts:271](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L271)
+[server/getters/player.ts:318](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L318)
 
 ___
 
@@ -179,7 +225,7 @@ Ignores vehicles with keyless for start.
 
 #### Defined in
 
-[server/getters/player.ts:215](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L215)
+[server/getters/player.ts:262](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L262)
 
 ___
 
@@ -203,7 +249,7 @@ The player closest to a player.
 
 #### Defined in
 
-[server/getters/player.ts:193](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L193)
+[server/getters/player.ts:240](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L240)
 
 ___
 
@@ -227,7 +273,7 @@ The player closest to a vehicle.
 
 #### Defined in
 
-[server/getters/player.ts:203](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L203)
+[server/getters/player.ts:250](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L250)
 
 ___
 
@@ -255,7 +301,7 @@ Works best on flat land or very close distances.
 
 #### Defined in
 
-[server/getters/player.ts:122](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L122)
+[server/getters/player.ts:169](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L169)
 
 ___
 
@@ -279,7 +325,7 @@ Determine if a player is currently dead / marked as dead.
 
 #### Defined in
 
-[server/getters/player.ts:303](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L303)
+[server/getters/player.ts:350](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L350)
 
 ___
 
@@ -305,7 +351,7 @@ Checks if a player is within 3 distance of a position.
 
 #### Defined in
 
-[server/getters/player.ts:173](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L173)
+[server/getters/player.ts:220](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L220)
 
 ___
 
@@ -329,7 +375,7 @@ Determine if a player is valid, and spawned as a character.
 
 #### Defined in
 
-[server/getters/player.ts:319](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L319)
+[server/getters/player.ts:366](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L366)
 
 ___
 
@@ -353,7 +399,7 @@ Get all owned vehicles from the database for a given character.
 
 #### Defined in
 
-[server/getters/player.ts:255](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L255)
+[server/getters/player.ts:302](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L302)
 
 ___
 
@@ -378,4 +424,4 @@ Will return undefined it is not currently set.
 
 #### Defined in
 
-[server/getters/player.ts:183](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/getters/player.ts#L183)
+[server/getters/player.ts:230](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/getters/player.ts#L230)

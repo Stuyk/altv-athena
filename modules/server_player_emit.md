@@ -53,7 +53,7 @@ alt.onClient('from-client-event-doNothing', (player: alt.Player) => {
 
 #### Defined in
 
-[server/player/emit.ts:724](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L724)
+[server/player/emit.ts:724](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L724)
 
 ___
 
@@ -81,7 +81,7 @@ Play an animation on this player.
 
 #### Defined in
 
-[server/player/emit.ts:85](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L85)
+[server/player/emit.ts:85](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L85)
 
 ___
 
@@ -106,7 +106,7 @@ Does not trigger if the player is in a vehicle.
 
 #### Defined in
 
-[server/player/emit.ts:111](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L111)
+[server/player/emit.ts:111](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L111)
 
 ___
 
@@ -135,7 +135,7 @@ const uidFromAttachment = Athena.player.emit.clearCredits(somePlayer);
 
 #### Defined in
 
-[server/player/emit.ts:522](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L522)
+[server/player/emit.ts:522](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L522)
 
 ___
 
@@ -164,7 +164,7 @@ Athena.player.emit.clearErrorScreen(somePlayer)
 
 #### Defined in
 
-[server/player/emit.ts:446](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L446)
+[server/player/emit.ts:446](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L446)
 
 ___
 
@@ -193,7 +193,7 @@ Athena.player.emit.clearShard(somePlayer);
 
 #### Defined in
 
-[server/player/emit.ts:483](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L483)
+[server/player/emit.ts:483](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L483)
 
 ___
 
@@ -224,7 +224,7 @@ Athena.player.emit.clearSpinner(somePlayer);
 
 #### Defined in
 
-[server/player/emit.ts:409](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L409)
+[server/player/emit.ts:409](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L409)
 
 ___
 
@@ -253,7 +253,7 @@ Athena.player.emit.clearTimeCycleEffect(somePlayer);
 
 #### Defined in
 
-[server/player/emit.ts:794](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L794)
+[server/player/emit.ts:794](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L794)
 
 ___
 
@@ -285,7 +285,7 @@ Athena.player.emit.createCredits(somePlayer, { name: 'Big Text', role: 'Small Te
 
 #### Defined in
 
-[server/player/emit.ts:504](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L504)
+[server/player/emit.ts:504](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L504)
 
 ___
 
@@ -315,7 +315,7 @@ Athena.player.emit.createErrorScreen(somePlayer, { title: 'Oh No!', text: 'Somet
 
 #### Defined in
 
-[server/player/emit.ts:428](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L428)
+[server/player/emit.ts:428](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L428)
 
 ___
 
@@ -341,7 +341,7 @@ Create a subtitle on the bottom of the screen with optional duration.
 
 #### Defined in
 
-[server/player/emit.ts:215](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L215)
+[server/player/emit.ts:215](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L215)
 
 ___
 
@@ -378,7 +378,7 @@ A unique identifier to remove the progress bar.
 
 #### Defined in
 
-[server/player/emit.ts:240](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L240)
+[server/player/emit.ts:240](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L240)
 
 ___
 
@@ -408,7 +408,7 @@ Athena.player.emit.createShard(somePlayer, { title: 'Big Text', text: 'Small Tex
 
 #### Defined in
 
-[server/player/emit.ts:465](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L465)
+[server/player/emit.ts:465](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L465)
 
 ___
 
@@ -438,7 +438,7 @@ Athena.player.emit.createSpinner(somePlayer, { text: 'Doing Something With Spinn
 
 #### Defined in
 
-[server/player/emit.ts:389](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L389)
+[server/player/emit.ts:389](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L389)
 
 ___
 
@@ -468,7 +468,7 @@ Athena.player.emit.fadeScreenFromBlack(somePlayer, 5000);
 
 #### Defined in
 
-[server/player/emit.ts:759](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L759)
+[server/player/emit.ts:759](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L759)
 
 ___
 
@@ -498,7 +498,7 @@ Athena.player.emit.fadeScreenToBlack(somePlayer, 5000);
 
 #### Defined in
 
-[server/player/emit.ts:744](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L744)
+[server/player/emit.ts:744](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L744)
 
 ___
 
@@ -528,7 +528,7 @@ Athena.player.emit.message(somePlayer, '{FF0000} Hello there! This text is Red :
 
 #### Defined in
 
-[server/player/emit.ts:687](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L687)
+[server/player/emit.ts:687](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L687)
 
 ___
 
@@ -554,7 +554,7 @@ Synchronize a local variable to access locally for this player.
 
 #### Defined in
 
-[server/player/emit.ts:157](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L157)
+[server/player/emit.ts:157](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L157)
 
 ___
 
@@ -584,7 +584,7 @@ Athena.player.emit.notification(somePlayer, '~y~Hello There~');
 
 #### Defined in
 
-[server/player/emit.ts:177](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L177)
+[server/player/emit.ts:177](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L177)
 
 ___
 
@@ -626,7 +626,7 @@ UID for attachable object
 
 #### Defined in
 
-[server/player/emit.ts:552](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L552)
+[server/player/emit.ts:552](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L552)
 
 ___
 
@@ -663,7 +663,7 @@ Athena.player.emit.objectRemove(somePlayer, uidFromAttachment);
 
 #### Defined in
 
-[server/player/emit.ts:612](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L612)
+[server/player/emit.ts:612](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L612)
 
 ___
 
@@ -689,7 +689,7 @@ Play a particle effect at a specific coordinate.
 
 #### Defined in
 
-[server/player/emit.ts:192](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L192)
+[server/player/emit.ts:192](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L192)
 
 ___
 
@@ -726,7 +726,7 @@ Athena.player.emit.removeProgressBar(somePlayer, someUid);
 
 #### Defined in
 
-[server/player/emit.ts:271](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L271)
+[server/player/emit.ts:271](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L271)
 
 ___
 
@@ -752,7 +752,7 @@ Play an animation on this player.
 
 #### Defined in
 
-[server/player/emit.ts:138](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L138)
+[server/player/emit.ts:138](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L138)
 
 ___
 
@@ -787,7 +787,7 @@ Athena.player.emit.setTimeCycleEffect(somePlayer, 'REDMIST', 30000);
 
 #### Defined in
 
-[server/player/emit.ts:763](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L763)
+[server/player/emit.ts:763](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L763)
 
 ::: tip Usage
 Athena.player.emit.**setTimeCycleEffect**(`player`, `name`, `amountInMs`): `any`
@@ -818,7 +818,7 @@ Athena.player.emit.setTimeCycleEffect(somePlayer, 'REDMIST', 30000);
 
 #### Defined in
 
-[server/player/emit.ts:764](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L764)
+[server/player/emit.ts:764](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L764)
 
 ___
 
@@ -851,7 +851,7 @@ Athena.player.emit.setWeather(somePlayer, 'Thunder', 30);
 
 #### Defined in
 
-[server/player/emit.ts:811](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L811)
+[server/player/emit.ts:811](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L811)
 
 ___
 
@@ -883,7 +883,7 @@ Athena.player.emit.sound3D(somePlayer, 'error.ogg');
 
 #### Defined in
 
-[server/player/emit.ts:292](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L292)
+[server/player/emit.ts:292](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L292)
 
 ___
 
@@ -915,7 +915,7 @@ Athena.player.emit.sound3D(somePlayer, 'car_lock.ogg', someVehicle);
 
 #### Defined in
 
-[server/player/emit.ts:313](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L313)
+[server/player/emit.ts:313](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L313)
 
 ___
 
@@ -948,7 +948,7 @@ Athena.player.emit.soundFrontend(somePlayer, 'HUD_FRONTEND_DEFAULT_SOUNDSET', 'B
 
 #### Defined in
 
-[server/player/emit.ts:358](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L358)
+[server/player/emit.ts:358](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L358)
 
 ___
 
@@ -980,7 +980,7 @@ Athena.player.emit.soundStop(somePlayer);
 
 #### Defined in
 
-[server/player/emit.ts:336](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L336)
+[server/player/emit.ts:336](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L336)
 
 ___
 
@@ -1006,7 +1006,7 @@ List of all alarms: https://github.com/DurtyFree/gta-v-data-dumps/blob/master/al
 
 #### Defined in
 
-[server/player/emit.ts:29](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L29)
+[server/player/emit.ts:29](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L29)
 
 ___
 
@@ -1031,7 +1031,7 @@ Stop an alarm for this player.
 
 #### Defined in
 
-[server/player/emit.ts:48](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L48)
+[server/player/emit.ts:48](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L48)
 
 ___
 
@@ -1055,7 +1055,7 @@ Stop all alarms for this player.
 
 #### Defined in
 
-[server/player/emit.ts:64](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L64)
+[server/player/emit.ts:64](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L64)
 
 ___
 
@@ -1080,7 +1080,7 @@ Force the player to perform an uncancellable task timeline.
 
 #### Defined in
 
-[server/player/emit.ts:370](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L370)
+[server/player/emit.ts:370](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L370)
 
 ___
 
@@ -1109,7 +1109,7 @@ The object is only seen by this one player.
 
 #### Defined in
 
-[server/player/emit.ts:646](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L646)
+[server/player/emit.ts:646](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L646)
 
 ___
 
@@ -1136,4 +1136,4 @@ Can emit events to client or server-side.
 
 #### Defined in
 
-[server/player/emit.ts:668](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/player/emit.ts#L668)
+[server/player/emit.ts:668](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/server/player/emit.ts#L668)

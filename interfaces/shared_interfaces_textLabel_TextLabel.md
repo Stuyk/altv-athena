@@ -25,7 +25,7 @@ The dimension to show this text label in.
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:43](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/interfaces/textLabel.ts#L43)
+[shared/interfaces/textLabel.ts:43](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/textLabel.ts#L43)
 
 ___
 
@@ -37,7 +37,7 @@ Always set to true when creating a server-wide text label.
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:51](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/interfaces/textLabel.ts#L51)
+[shared/interfaces/textLabel.ts:51](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/textLabel.ts#L51)
 
 ___
 
@@ -49,7 +49,7 @@ The maximum distance this text label should render at.
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:29](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/interfaces/textLabel.ts#L29)
+[shared/interfaces/textLabel.ts:29](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/textLabel.ts#L29)
 
 ___
 
@@ -61,7 +61,7 @@ The position where to place the TextLabel in a 3D space.
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:15](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/interfaces/textLabel.ts#L15)
+[shared/interfaces/textLabel.ts:15](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/textLabel.ts#L15)
 
 ___
 
@@ -73,7 +73,7 @@ The 'Text' to show on this text label.
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:22](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/interfaces/textLabel.ts#L22)
+[shared/interfaces/textLabel.ts:22](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/textLabel.ts#L22)
 
 ___
 
@@ -85,4 +85,4 @@ The unique identifier to remove this text label if necessary.
 
 #### Defined in
 
-[shared/interfaces/textLabel.ts:36](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/interfaces/textLabel.ts#L36)
+[shared/interfaces/textLabel.ts:36](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/textLabel.ts#L36)

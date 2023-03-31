@@ -17,6 +17,22 @@ order: 0
 
 ## Methods
 
+### init
+
+::: tip Usage
+AthenaClient.views.audio.AudioView.`Static` **init**(): `void`
+:::
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[client/views/audio.ts:71](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/client/views/audio.ts#L71)
+
+___
+
 ### play3DAudio
 
 ::: tip Usage
@@ -44,7 +60,7 @@ Do not add '.ogg'.
 
 #### Defined in
 
-[client/views/audio.ts:83](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/client/views/audio.ts#L83)
+[client/views/audio.ts:86](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/client/views/audio.ts#L86)
 
 ___
 
@@ -70,4 +86,4 @@ Stop current audio
 
 #### Defined in
 
-[client/views/audio.ts:96](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/client/views/audio.ts#L96)
+[client/views/audio.ts:99](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/client/views/audio.ts#L99)
