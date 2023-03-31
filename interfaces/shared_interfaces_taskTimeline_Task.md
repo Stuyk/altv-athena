@@ -26,7 +26,7 @@ Task
 
 #### Defined in
 
-[shared/interfaces/taskTimeline.ts:11](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/taskTimeline.ts#L11)
+[shared/interfaces/taskTimeline.ts:11](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/shared/interfaces/taskTimeline.ts#L11)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/taskTimeline.ts:12](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/taskTimeline.ts#L12)
+[shared/interfaces/taskTimeline.ts:12](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/shared/interfaces/taskTimeline.ts#L12)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/taskTimeline.ts:13](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/taskTimeline.ts#L13)
+[shared/interfaces/taskTimeline.ts:13](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/shared/interfaces/taskTimeline.ts#L13)

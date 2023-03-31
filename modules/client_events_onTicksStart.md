@@ -21,4 +21,4 @@ order: 0
 
 #### Defined in
 
-[client/events/onTicksStart.ts:14](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/client/events/onTicksStart.ts#L14)
+[client/events/onTicksStart.ts:14](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/client/events/onTicksStart.ts#L14)

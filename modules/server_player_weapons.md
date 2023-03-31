@@ -31,7 +31,7 @@ Returns true if weapons were found and removed.
 
 #### Defined in
 
-[server/player/weapons.ts:40](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/server/player/weapons.ts#L40)
+[server/player/weapons.ts:40](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/server/player/weapons.ts#L40)
 
 ___
 
@@ -60,4 +60,4 @@ Return all weapons the player currently has in their inventory, and toolbar.
 
 #### Defined in
 
-[server/player/weapons.ts:12](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/server/player/weapons.ts#L12)
+[server/player/weapons.ts:12](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/server/player/weapons.ts#L12)
