@@ -27,7 +27,7 @@ Gets or sets the active radio station.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:18](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L18)
+[shared/interfaces/vehicleState.ts:18](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L18)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:255](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L255)
+[shared/interfaces/vehicleState.ts:255](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L255)
 
 ___
 
@@ -49,7 +49,7 @@ Gets or sets the additional body health.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:23](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L23)
+[shared/interfaces/vehicleState.ts:23](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L23)
 
 ___
 
@@ -61,7 +61,7 @@ Gets or sets the body health.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:27](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L27)
+[shared/interfaces/vehicleState.ts:27](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L27)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:261](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L261)
+[shared/interfaces/vehicleState.ts:261](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L261)
 
 ___
 
@@ -83,7 +83,7 @@ Gets or sets the custom primary color as a RGBA type
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:32](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L32)
+[shared/interfaces/vehicleState.ts:32](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L32)
 
 ___
 
@@ -101,7 +101,7 @@ console.log(`Vehicle custom secondary color was set to red`);
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:43](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L43)
+[shared/interfaces/vehicleState.ts:43](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L43)
 
 ___
 
@@ -113,7 +113,7 @@ Gets or sets if the vehicle instance has custom tires.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:48](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L48)
+[shared/interfaces/vehicleState.ts:48](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L48)
 
 ___
 
@@ -125,7 +125,7 @@ Applies some decoration effects to the vehicle (e.g.: It makes the hydra looking
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:53](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L53)
+[shared/interfaces/vehicleState.ts:53](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L53)
 
 ___
 
@@ -139,7 +139,7 @@ Dash board colors range from 0 to 159.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:61](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L61)
+[shared/interfaces/vehicleState.ts:61](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L61)
 
 ___
 
@@ -151,7 +151,7 @@ Gets or sets the dirt level of the vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:66](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L66)
+[shared/interfaces/vehicleState.ts:66](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L66)
 
 ___
 
@@ -163,7 +163,7 @@ Gets or sets the drift mode state of the vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:183](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L183)
+[shared/interfaces/vehicleState.ts:183](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L183)
 
 ___
 
@@ -178,7 +178,7 @@ The `vehicle.repair()` function should be used to repair a vehicle if the engine
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:75](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L75)
+[shared/interfaces/vehicleState.ts:75](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L75)
 
 ___
 
@@ -192,7 +192,7 @@ The functionality of the vehicle engine can be triggered on either client-side o
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:83](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L83)
+[shared/interfaces/vehicleState.ts:83](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L83)
 
 ___
 
@@ -204,7 +204,7 @@ Gets or sets the headlight color of a vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:88](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L88)
+[shared/interfaces/vehicleState.ts:88](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L88)
 
 ___
 
@@ -214,7 +214,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:265](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L265)
+[shared/interfaces/vehicleState.ts:265](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L265)
 
 ___
 
@@ -224,7 +224,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:267](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L267)
+[shared/interfaces/vehicleState.ts:267](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L267)
 
 ___
 
@@ -236,7 +236,7 @@ Gets or sets the interior color of a vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:92](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L92)
+[shared/interfaces/vehicleState.ts:92](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L92)
 
 ___
 
@@ -248,7 +248,7 @@ Gets or sets if the created train is a mission train.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:188](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L188)
+[shared/interfaces/vehicleState.ts:188](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L188)
 
 ___
 
@@ -260,7 +260,7 @@ Gets or sets if the train is a caboose.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:217](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L217)
+[shared/interfaces/vehicleState.ts:217](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L217)
 
 ___
 
@@ -272,7 +272,7 @@ Gets or sets if the train is the engine of the train.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:212](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L212)
+[shared/interfaces/vehicleState.ts:212](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L212)
 
 ___
 
@@ -282,7 +282,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:257](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L257)
+[shared/interfaces/vehicleState.ts:257](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L257)
 
 ___
 
@@ -294,7 +294,7 @@ Gets or sets the lights intensity and distance of a vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:96](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L96)
+[shared/interfaces/vehicleState.ts:96](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L96)
 
 ___
 
@@ -306,7 +306,7 @@ Gets or sets the livery of a vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:100](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L100)
+[shared/interfaces/vehicleState.ts:100](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L100)
 
 ___
 
@@ -318,7 +318,7 @@ Gets or sets the lock state of a vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:104](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L104)
+[shared/interfaces/vehicleState.ts:104](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L104)
 
 ___
 
@@ -330,7 +330,7 @@ Enables or disables the manual engine control.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:108](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L108)
+[shared/interfaces/vehicleState.ts:108](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L108)
 
 ___
 
@@ -342,7 +342,7 @@ Enables or disables a neon light on a specific position.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:113](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L113)
+[shared/interfaces/vehicleState.ts:113](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L113)
 
 ___
 
@@ -354,7 +354,7 @@ Gets or sets the color of the neon lights.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:118](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L118)
+[shared/interfaces/vehicleState.ts:118](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L118)
 
 ___
 
@@ -366,7 +366,7 @@ Gets or sets the current number plate style.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:123](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L123)
+[shared/interfaces/vehicleState.ts:123](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L123)
 
 ___
 
@@ -378,7 +378,7 @@ Gets or sets the current text displayed on the number plate.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:128](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L128)
+[shared/interfaces/vehicleState.ts:128](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L128)
 
 ___
 
@@ -390,7 +390,7 @@ Gets or sets the pearl color of a vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:133](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L133)
+[shared/interfaces/vehicleState.ts:133](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L133)
 
 ___
 
@@ -402,7 +402,7 @@ Gets or sets the current health amount of the petrol tank.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:138](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L138)
+[shared/interfaces/vehicleState.ts:138](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L138)
 
 ___
 
@@ -414,7 +414,7 @@ Gets or sets the current primary color of a vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:143](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L143)
+[shared/interfaces/vehicleState.ts:143](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L143)
 
 ___
 
@@ -424,7 +424,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:259](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L259)
+[shared/interfaces/vehicleState.ts:259](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L259)
 
 ___
 
@@ -436,7 +436,7 @@ Gets or sets the roof livery of a vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:148](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L148)
+[shared/interfaces/vehicleState.ts:148](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L148)
 
 ___
 
@@ -448,7 +448,7 @@ Gets or sets the roof state of a vehicle (closed or open).
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:153](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L153)
+[shared/interfaces/vehicleState.ts:153](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L153)
 
 ___
 
@@ -458,7 +458,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:263](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L263)
+[shared/interfaces/vehicleState.ts:263](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L263)
 
 ___
 
@@ -470,7 +470,7 @@ Gets or sets the current secondary color.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:158](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L158)
+[shared/interfaces/vehicleState.ts:158](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L158)
 
 ___
 
@@ -482,7 +482,7 @@ Gets or sets the siren state of a vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:163](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L163)
+[shared/interfaces/vehicleState.ts:163](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L163)
 
 ___
 
@@ -494,7 +494,7 @@ Gets or sets the color of the tire smoke.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:168](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L168)
+[shared/interfaces/vehicleState.ts:168](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L168)
 
 ___
 
@@ -506,7 +506,7 @@ Gets or sets the config index of the train's carriage.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:247](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L247)
+[shared/interfaces/vehicleState.ts:247](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L247)
 
 ___
 
@@ -522,7 +522,7 @@ You can find a list of all possible config indices in the trains.xml. Valid indi
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:202](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L202)
+[shared/interfaces/vehicleState.ts:202](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L202)
 
 ___
 
@@ -534,7 +534,7 @@ Gets or sets the cruise speed of the train.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:242](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L242)
+[shared/interfaces/vehicleState.ts:242](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L242)
 
 ___
 
@@ -546,7 +546,7 @@ Gets or sets the direction of the train.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:227](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L227)
+[shared/interfaces/vehicleState.ts:227](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L227)
 
 ___
 
@@ -558,7 +558,7 @@ Gets or sets the distance of the trains to the engine.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:207](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L207)
+[shared/interfaces/vehicleState.ts:207](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L207)
 
 ___
 
@@ -570,7 +570,7 @@ Gets or sets if the doors of the trains should be forced open.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:237](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L237)
+[shared/interfaces/vehicleState.ts:237](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L237)
 
 ___
 
@@ -582,7 +582,7 @@ Gets or sets if the train is a passenger carriage.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:222](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L222)
+[shared/interfaces/vehicleState.ts:222](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L222)
 
 ___
 
@@ -594,7 +594,7 @@ Gets or sets if the trains is rendered derailed.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:232](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L232)
+[shared/interfaces/vehicleState.ts:232](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L232)
 
 ___
 
@@ -610,7 +610,7 @@ Valid track ids are between 0 and 11.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:195](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L195)
+[shared/interfaces/vehicleState.ts:195](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L195)
 
 ___
 
@@ -620,7 +620,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:249](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L249)
+[shared/interfaces/vehicleState.ts:249](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L249)
 
 ___
 
@@ -630,7 +630,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:251](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L251)
+[shared/interfaces/vehicleState.ts:251](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L251)
 
 ___
 
@@ -640,7 +640,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:253](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L253)
+[shared/interfaces/vehicleState.ts:253](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L253)
 
 ___
 
@@ -652,7 +652,7 @@ Gets or sets the wheel color.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:173](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L173)
+[shared/interfaces/vehicleState.ts:173](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L173)
 
 ___
 
@@ -664,4 +664,4 @@ Gets or sets the window tint of a vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleState.ts:178](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/interfaces/vehicleState.ts#L178)
+[shared/interfaces/vehicleState.ts:178](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/interfaces/vehicleState.ts#L178)

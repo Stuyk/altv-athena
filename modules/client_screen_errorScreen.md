@@ -23,7 +23,7 @@ Clear the currently drawn error screen.
 
 #### Defined in
 
-[client/screen/errorScreen.ts:15](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/client/screen/errorScreen.ts#L15)
+[client/screen/errorScreen.ts:15](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/client/screen/errorScreen.ts#L15)
 
 ___
 
@@ -47,4 +47,4 @@ Create an error screen that takes up the whole screen.
 
 #### Defined in
 
-[client/screen/errorScreen.ts:33](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/client/screen/errorScreen.ts#L33)
+[client/screen/errorScreen.ts:33](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/client/screen/errorScreen.ts#L33)

@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[shared/information/weaponList.ts:7](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/information/weaponList.ts#L7)
+[shared/information/weaponList.ts:7](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/information/weaponList.ts#L7)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[shared/information/weaponList.ts:4](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/information/weaponList.ts#L4)
+[shared/information/weaponList.ts:4](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/information/weaponList.ts#L4)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[shared/information/weaponList.ts:2](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/information/weaponList.ts#L2)
+[shared/information/weaponList.ts:2](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/information/weaponList.ts#L2)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[shared/information/weaponList.ts:15](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/information/weaponList.ts#L15)
+[shared/information/weaponList.ts:15](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/information/weaponList.ts#L15)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[shared/information/weaponList.ts:16](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/information/weaponList.ts#L16)
+[shared/information/weaponList.ts:16](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/information/weaponList.ts#L16)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[shared/information/weaponList.ts:3](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/information/weaponList.ts#L3)
+[shared/information/weaponList.ts:3](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/information/weaponList.ts#L3)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[shared/information/weaponList.ts:14](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/information/weaponList.ts#L14)
+[shared/information/weaponList.ts:14](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/information/weaponList.ts#L14)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[shared/information/weaponList.ts:6](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/information/weaponList.ts#L6)
+[shared/information/weaponList.ts:6](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/information/weaponList.ts#L6)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 #### Defined in
 
-[shared/information/weaponList.ts:8](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/information/weaponList.ts#L8)
+[shared/information/weaponList.ts:8](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/information/weaponList.ts#L8)
 
 ___
 
@@ -116,4 +116,4 @@ ___
 
 #### Defined in
 
-[shared/information/weaponList.ts:5](https://github.com/Stuyk/altv-athena/blob/d18d8cd/src/core/shared/information/weaponList.ts#L5)
+[shared/information/weaponList.ts:5](https://github.com/Stuyk/altv-athena/blob/acd5f2f/src/core/shared/information/weaponList.ts#L5)
