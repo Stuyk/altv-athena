@@ -1,6 +1,8 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import { Character } from '@AthenaShared/interfaces/character';
+import Database from '@stuyk/ezmongodb';
+import { CharSelectEvents } from '../shared/events';
 
 const PLUGIN_NAME = 'Character Select';
 const Characters: { [player_id: string]: Array<Character> } = {};
@@ -39,7 +41,7 @@ async function show(player: alt.Player) {
 }
 
 async function showCharacter(player: alt.Player, index: number) {
-    if (!Characters[player.id]) {
+    if (typeof Characters[player.id] === 'undefined') {
         return;
     }
 
@@ -60,7 +62,86 @@ async function showCharacter(player: alt.Player, index: number) {
     player.frozen = true;
 
     Athena.player.emit.fadeScreenFromBlack(player, 2000);
-    player.emit('updateCharacterSelectPedPreview', Characters[player.id][index], Characters[player.id].length);
+    player.emit(CharSelectEvents.toClient.update, Characters[player.id][index], Characters[player.id].length);
+}
+
+async function handleDelete(player: alt.Player) {
+    if (typeof Characters[player.id] === 'undefined') {
+        return;
+    }
+
+    if (typeof CurrentIndex[player.id] === 'undefined') {
+        return;
+    }
+
+    if (typeof Characters[player.id][CurrentIndex[player.id]] === 'undefined') {
+        return;
+    }
+
+    if (Characters[player.id].length <= 1) {
+        showCharacter(player, 0);
+        return;
+    }
+
+    const character = Characters[player.id][CurrentIndex[player.id]];
+    Athena.player.emit.fadeScreenToBlack(player, 200);
+    Athena.player.emit.createSpinner(player, { duration: -1, text: 'Deleting Character', type: 4 });
+
+    await Database.deleteById(String(character._id), Athena.database.collections.Characters);
+
+    Athena.player.emit.fadeScreenFromBlack(player, 200);
+    Athena.player.emit.clearSpinner(player);
+    Characters[player.id].splice(CurrentIndex[player.id], 1);
+    CurrentIndex[player.id] = 0;
+    showCharacter(player, 0);
+}
+
+function handleSelect(player: alt.Player) {
+    if (!player || !player.valid) {
+        return;
+    }
+
+    if (typeof Characters[player.id] === 'undefined') {
+        return;
+    }
+
+    if (typeof CurrentIndex[player.id] === 'undefined') {
+        return;
+    }
+
+    if (typeof Characters[player.id][CurrentIndex[player.id]] === 'undefined') {
+        return;
+    }
+
+    Athena.player.emit.fadeScreenToBlack(player, 200);
+    const character = Characters[player.id][CurrentIndex[player.id]];
+    Athena.systems.character.select(player, character);
+
+    player.emit(CharSelectEvents.toClient.done);
+    delete Characters[player.id];
+    delete CurrentIndex[player.id];
+}
+
+function handleNew(player: alt.Player) {
+    if (typeof Characters[player.id] === 'undefined') {
+        return;
+    }
+
+    if (typeof CurrentIndex[player.id] === 'undefined') {
+        return;
+    }
+
+    if (typeof Characters[player.id][CurrentIndex[player.id]] === 'undefined') {
+        return;
+    }
+
+    const currentLength = Characters[player.id];
+
+    delete Characters[player.id];
+    delete CurrentIndex[player.id];
+
+    player.emit(CharSelectEvents.toClient.done);
+    Athena.systems.character.invokeCreator(player, Characters[player.id]);
 }
 
 function handleNext(player: alt.Player) {
@@ -102,8 +183,11 @@ function handleDisconnect(player: alt.Player) {
 }
 
 Athena.systems.plugins.registerPlugin(PLUGIN_NAME, () => {
-    alt.on('playerDisconnect', handleDisconnect);
     Athena.systems.loginFlow.add('character-select', 99, show);
-    alt.onClient('charSelectGoNext', handleNext);
-    alt.onClient('charSelectGoPrev', handlePrev);
+    alt.on('playerDisconnect', handleDisconnect);
+    alt.onClient(CharSelectEvents.toServer.next, handleNext);
+    alt.onClient(CharSelectEvents.toServer.prev, handlePrev);
+    alt.onClient(CharSelectEvents.toServer.select, handleSelect);
+    alt.onClient(CharSelectEvents.toServer.delete, handleDelete);
+    alt.onClient(CharSelectEvents.toServer.new, handleNew);
 });

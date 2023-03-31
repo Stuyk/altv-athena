@@ -104,7 +104,8 @@ const RestServiceConst = {
         if (!server) {
             server = http.createServer(InternalFunctions.response);
             server.listen(port, () => {
-                alt.log(`~c~REST Server: ~lg~http://localhost:${port}`);
+                alt.log(`~c~Dev Toolkit Started`);
+                alt.log(`~c~https://athenaframework.com/tools/toolkit`);
             });
         }
     },

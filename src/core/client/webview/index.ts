@@ -5,6 +5,7 @@ import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
 import { OverlayPageType } from '@AthenaShared/interfaces/webview';
+import { AudioView } from '@AthenaClient/views/audio';
 
 export type AnyCallback = ((...args: any[]) => void) | ((...args: any[]) => Promise<void>) | Function;
 
@@ -254,6 +255,7 @@ export function create(url: string) {
         });
 
         _webview.on(WebViewEventNames.CLOSE_PAGE, InternalFunctions.closeNonOverlayPages);
+        AudioView.init();
     }
 }
 

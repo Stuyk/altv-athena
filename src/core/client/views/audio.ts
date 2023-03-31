@@ -2,7 +2,6 @@ import * as alt from 'alt-client';
 import * as AthenaClient from '@AthenaClient/api';
 
 import ViewModel from '@AthenaClient/models/viewModel';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
 
 const PAGE_NAME = 'Audio';
@@ -69,6 +68,10 @@ class InternalFunctions implements ViewModel {
 }
 
 export class AudioView {
+    static init() {
+        InternalFunctions.open();
+    }
+
     /**
      * Play an audio from the WebView.
      * Requires a specific name for a file.
@@ -97,5 +100,3 @@ export class AudioView {
         InternalFunctions.stop3DAudio(soundInstantID);
     }
 }
-
-onTicksStart.add(InternalFunctions.open);
