@@ -12,7 +12,7 @@ order: 0
 ### fromBlack
 
 ::: tip Usage
-AthenaClient.screen.screenFade.**fromBlack**(`timeInMs`): `Promise`<`void`\>
+AthenaClient.screen.screenFade.**fromBlack**(`timeInMs`): `void`
 :::
 
 Removes the black filter on a screen over time.
@@ -25,18 +25,18 @@ Removes the black filter on a screen over time.
 
 #### Returns
 
-`Promise`<`void`\>
+`void`
 
 #### Defined in
 
-[client/screen/screenFade.ts:11](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/client/screen/screenFade.ts#L11)
+[client/screen/screenFade.ts:11](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/client/screen/screenFade.ts#L11)
 
 ___
 
 ### toBlack
 
 ::: tip Usage
-AthenaClient.screen.screenFade.**toBlack**(`timeInMs`): `Promise`<`void`\>
+AthenaClient.screen.screenFade.**toBlack**(`timeInMs`): `void`
 :::
 
 Turns a screen black over time.
@@ -49,8 +49,8 @@ Turns a screen black over time.
 
 #### Returns
 
-`Promise`<`void`\>
+`void`
 
 #### Defined in
 
-[client/screen/screenFade.ts:22](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/client/screen/screenFade.ts#L22)
+[client/screen/screenFade.ts:21](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/client/screen/screenFade.ts#L21)

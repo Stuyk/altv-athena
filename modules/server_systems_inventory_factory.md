@@ -36,7 +36,7 @@ Converts a base item into a stored item for reference.
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:391](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L391)
+[server/systems/inventory/factory.ts:391](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L391)
 
 ___
 
@@ -67,7 +67,7 @@ Converts a base item to a stored item asynchronously.
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:243](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L243)
+[server/systems/inventory/factory.ts:243](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L243)
 
 ___
 
@@ -102,7 +102,7 @@ Use when usage is not at server-start.
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:327](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L327)
+[server/systems/inventory/factory.ts:327](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L327)
 
 ___
 
@@ -135,7 +135,7 @@ Also performs weight calculations.
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:175](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L175)
+[server/systems/inventory/factory.ts:175](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L175)
 
 ___
 
@@ -171,7 +171,7 @@ Use when usage is not at server-start.
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:284](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L284)
+[server/systems/inventory/factory.ts:284](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L284)
 
 ___
 
@@ -203,7 +203,7 @@ Get a base item based on dbName, and version if supplied.
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:51](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L51)
+[server/systems/inventory/factory.ts:51](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L51)
 
 ___
 
@@ -221,7 +221,7 @@ Wait until the `isDoneLoading` variable is set to `true` before continuing.
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:29](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L29)
+[server/systems/inventory/factory.ts:29](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L29)
 
 ___
 
@@ -246,7 +246,7 @@ Used to override inventory item factory functionality
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:430](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L430)
+[server/systems/inventory/factory.ts:430](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L430)
 
 ::: tip Usage
 Athena.systems.inventory.factory.**override**(`functionName`, `callback`): `any`
@@ -267,7 +267,7 @@ Used to override inventory item factory functionality
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:431](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L431)
+[server/systems/inventory/factory.ts:431](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L431)
 
 ::: tip Usage
 Athena.systems.inventory.factory.**override**(`functionName`, `callback`): `any`
@@ -288,7 +288,7 @@ Used to override inventory item factory functionality
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:432](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L432)
+[server/systems/inventory/factory.ts:432](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L432)
 
 ::: tip Usage
 Athena.systems.inventory.factory.**override**(`functionName`, `callback`): `any`
@@ -309,7 +309,7 @@ Used to override inventory item factory functionality
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:433](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L433)
+[server/systems/inventory/factory.ts:433](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L433)
 
 ::: tip Usage
 Athena.systems.inventory.factory.**override**(`functionName`, `callback`): `any`
@@ -330,7 +330,7 @@ Used to override inventory item factory functionality
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:434](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L434)
+[server/systems/inventory/factory.ts:434](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L434)
 
 ::: tip Usage
 Athena.systems.inventory.factory.**override**(`functionName`, `callback`): `any`
@@ -351,7 +351,7 @@ Used to override inventory item factory functionality
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:435](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L435)
+[server/systems/inventory/factory.ts:435](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L435)
 
 ::: tip Usage
 Athena.systems.inventory.factory.**override**(`functionName`, `callback`): `any`
@@ -372,7 +372,7 @@ Used to override inventory item factory functionality
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:436](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L436)
+[server/systems/inventory/factory.ts:436](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L436)
 
 ::: tip Usage
 Athena.systems.inventory.factory.**override**(`functionName`, `callback`): `any`
@@ -393,7 +393,7 @@ Used to override inventory item factory functionality
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:437](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L437)
+[server/systems/inventory/factory.ts:437](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L437)
 
 ___
 
@@ -427,7 +427,7 @@ Use when usage is not at server-start.
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:359](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L359)
+[server/systems/inventory/factory.ts:359](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L359)
 
 ___
 
@@ -459,7 +459,7 @@ Only certain parts of the item will be stored.
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:207](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L207)
+[server/systems/inventory/factory.ts:207](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L207)
 
 ___
 
@@ -513,4 +513,4 @@ Athena.systems.inventory.factory.upsertAsync({
 
 #### Defined in
 
-[server/systems/inventory/factory.ts:119](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/systems/inventory/factory.ts#L119)
+[server/systems/inventory/factory.ts:119](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/systems/inventory/factory.ts#L119)

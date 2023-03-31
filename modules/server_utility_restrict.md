@@ -60,7 +60,7 @@ alt.onClient('something-from-a-client', doPoliceWorkRestricted);
 
 #### Defined in
 
-[server/utility/restrict.ts:143](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/utility/restrict.ts#L143)
+[server/utility/restrict.ts:143](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/utility/restrict.ts#L143)
 
 ___
 
@@ -85,4 +85,4 @@ Used to override restrict utility funcs
 
 #### Defined in
 
-[server/utility/restrict.ts:173](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/server/utility/restrict.ts#L173)
+[server/utility/restrict.ts:173](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/server/utility/restrict.ts#L173)

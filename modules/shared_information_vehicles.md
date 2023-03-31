@@ -11,7 +11,7 @@ order: 0
 
 ### VehicleData
 
-• `Const` **VehicleData**: [`VehicleInfo`](../interfaces/shared_interfaces_vehicleInfo_VehicleInfo.md)[]
+• `Const` **VehicleData**: [`player`](server_config.md#player)[]
 
 If you add a 'modded vehicle' you will need to append it into this list.
 This list contains the seat count, and basically makes modded vehicles function.
@@ -21,4 +21,4 @@ Find a default vehicle that has similar seating to the vehicle you are adding.
 
 #### Defined in
 
-[shared/information/vehicles.ts:11](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/shared/information/vehicles.ts#L11)
+[shared/information/vehicles.ts:13](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/information/vehicles.ts#L13)

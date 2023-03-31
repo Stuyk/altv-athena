@@ -130,4 +130,4 @@ order: 0
 
 #### Defined in
 
-[shared/utility/keyCodes.ts:1](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/shared/utility/keyCodes.ts#L1)
+[shared/utility/keyCodes.ts:1](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/utility/keyCodes.ts#L1)

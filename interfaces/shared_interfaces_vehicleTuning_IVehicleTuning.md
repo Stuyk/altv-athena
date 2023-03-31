@@ -25,7 +25,7 @@ Cannot exceed modkit count
 
 #### Defined in
 
-[shared/interfaces/vehicleTuning.ts:16](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/shared/interfaces/vehicleTuning.ts#L16)
+[shared/interfaces/vehicleTuning.ts:16](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/interfaces/vehicleTuning.ts#L16)
 
 ___
 
@@ -37,4 +37,4 @@ Mods to apply to this vehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleTuning.ts:24](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/shared/interfaces/vehicleTuning.ts#L24)
+[shared/interfaces/vehicleTuning.ts:24](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/interfaces/vehicleTuning.ts#L24)

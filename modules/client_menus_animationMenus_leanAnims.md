@@ -27,4 +27,4 @@ AthenaClient.menus.animationMenus.leanAnims.**default**(`callback`): ({ `callbac
 
 #### Defined in
 
-[client/menus/animationMenus/leanAnims.ts:39](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/client/menus/animationMenus/leanAnims.ts#L39)
+[client/menus/animationMenus/leanAnims.ts:39](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/client/menus/animationMenus/leanAnims.ts#L39)

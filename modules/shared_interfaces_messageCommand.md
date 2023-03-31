@@ -43,4 +43,4 @@ AthenaShared.interfaces.messageCommand.(`player`, `...args`): `void`
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:1](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/shared/interfaces/messageCommand.ts#L1)
+[shared/interfaces/messageCommand.ts:1](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/interfaces/messageCommand.ts#L1)

@@ -15,6 +15,12 @@ Re-exports [DirectionVector](../classes/client_utility_directionToVector_Directi
 
 ___
 
+### hashLookup
+
+Renames and re-exports [player](server_config.md#player)
+
+___
+
 ### math
 
 Renames and re-exports [client/utility/math](client_utility_math.md)

@@ -27,4 +27,4 @@ AthenaClient.menus.animationMenus.funAnims.**default**(`callback`): { `callback`
 
 #### Defined in
 
-[client/menus/animationMenus/funAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/client/menus/animationMenus/funAnims.ts#L3)
+[client/menus/animationMenus/funAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/client/menus/animationMenus/funAnims.ts#L3)

@@ -19,4 +19,4 @@ How often the interval will update players.
 
 #### Defined in
 
-[shared/interfaces/iStream.ts:9](https://github.com/Stuyk/altv-athena/blob/a3c2264/src/core/shared/interfaces/iStream.ts#L9)
+[shared/interfaces/iStream.ts:9](https://github.com/Stuyk/altv-athena/blob/fe85c1b/src/core/shared/interfaces/iStream.ts#L9)
