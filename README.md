@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://i.imgur.com/o0B5JzN.png" width="200">
+    <img src="https://i.imgur.com/LhhWWET.png" width="200">
 </p>
 
 <h2 align="center">
@@ -30,12 +30,10 @@ Ever wanted to start your own GTA:V Roleplay Server? No idea where to start? Wel
 
 ## Important Links
 
-* [Discord Membership](https://discord.com/servers/athena-framework-790039623648542760)
 * [Guides / Installation](https://athenaframework.com)
-* [API Documentation](https://stuyk.github.io/altv-athena/index.html)
+* [Discord & Forums](https://ares.stuyk.com/v1/get/discord)
+* [Discord Membership](https://discord.com/servers/athena-framework-790039623648542760)
 * [Issues](https://github.com/Stuyk/altv-athena/issues)
-* [Support](https://patreon.com/stuyk/)
-* [Discord](https://ares.stuyk.com/v1/get/discord)
 * [alt:V Client](https://altv.mp)
 
 ## Quick Start
@@ -44,7 +42,7 @@ Ever wanted to start your own GTA:V Roleplay Server? No idea where to start? Wel
 
 - [Install MongoDB Server](https://www.mongodb.com/try/download/community)
 - [Install Git](https://git-scm.com/downloads)
-- [NodeJS 17 or 18](https://nodejs.org/en/download/)
+- [NodeJS 18+](https://nodejs.org/en/download/)
 - [alt:V Client](https://altv.mp/)
 
 ### Run Commands in Terminal or Powershell
