@@ -35,7 +35,7 @@ If a player group permission, and a vehicle group permission intercept, then veh
 
 #### Defined in
 
-[server/player/permissions.ts:109](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/server/player/permissions.ts#L109)
+[server/player/permissions.ts:109](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/server/player/permissions.ts#L109)
 
 ___
 
@@ -68,7 +68,7 @@ addPermission
 
 #### Defined in
 
-[server/player/permissions.ts:15](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/server/player/permissions.ts#L15)
+[server/player/permissions.ts:15](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/server/player/permissions.ts#L15)
 
 ___
 
@@ -95,7 +95,7 @@ Check if the player has an account permission.
 
 #### Defined in
 
-[server/player/permissions.ts:53](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/server/player/permissions.ts#L53)
+[server/player/permissions.ts:53](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/server/player/permissions.ts#L53)
 
 ___
 
@@ -124,7 +124,7 @@ Check if a player has any matching permissions against another document.
 
 #### Defined in
 
-[server/player/permissions.ts:84](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/server/player/permissions.ts#L84)
+[server/player/permissions.ts:84](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/server/player/permissions.ts#L84)
 
 ___
 
@@ -152,7 +152,7 @@ Check if a player character has a group permission.
 
 #### Defined in
 
-[server/player/permissions.ts:66](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/server/player/permissions.ts#L66)
+[server/player/permissions.ts:66](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/server/player/permissions.ts#L66)
 
 ___
 
@@ -179,7 +179,7 @@ Check if the current player character has a permission.
 
 #### Defined in
 
-[server/player/permissions.ts:41](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/server/player/permissions.ts#L41)
+[server/player/permissions.ts:41](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/server/player/permissions.ts#L41)
 
 ___
 
@@ -212,4 +212,4 @@ removePermission
 
 #### Defined in
 
-[server/player/permissions.ts:29](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/server/player/permissions.ts#L29)
+[server/player/permissions.ts:29](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/server/player/permissions.ts#L29)

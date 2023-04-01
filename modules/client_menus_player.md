@@ -32,7 +32,7 @@ AthenaClient.menus.player.(`target`, `options`): [`player`](server_config.md#pla
 
 #### Defined in
 
-[client/menus/player.ts:5](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/client/menus/player.ts#L5)
+[client/menus/player.ts:5](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/client/menus/player.ts#L5)
 
 ## Functions
 
@@ -58,7 +58,7 @@ Must always return the original wheel menu options + your changes.
 
 #### Defined in
 
-[client/menus/player.ts:17](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/client/menus/player.ts#L17)
+[client/menus/player.ts:17](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/client/menus/player.ts#L17)
 
 ___
 
@@ -82,4 +82,4 @@ Opens the wheel menu against a target player.
 
 #### Defined in
 
-[client/menus/player.ts:28](https://github.com/Stuyk/altv-athena/blob/71db7b8/src/core/client/menus/player.ts#L28)
+[client/menus/player.ts:28](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/client/menus/player.ts#L28)
