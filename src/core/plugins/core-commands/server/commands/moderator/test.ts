@@ -4,7 +4,7 @@ import * as Athena from '@AthenaServer/api';
 // import { PedController } from '@AthenaServer/streamers/ped';
 // import { WorldNotificationController } from '@AthenaServer/streamers/worldNotifications';
 // import { ServerJobTrigger } from '@AthenaServer/systems/jobTrigger';
-// import { WORLD_NOTIFICATION_TYPE } from '@AthenaShared/enums/worldNotificationTypes';
+import { WORLD_NOTIFICATION_TYPE } from '@AthenaShared/enums/worldNotificationTypes';
 // import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
 // import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 // import { Action } from '@AthenaShared/interfaces/actions';
@@ -66,48 +66,71 @@ Athena.systems.messenger.commands.register(
     },
 );
 
+Athena.systems.messenger.commands.register(
+    'testerrorscreen',
+    '/testerrorscreen - Shows a temporary error screen',
+    ['admin'],
+    (player: alt.Player) => {
+        Athena.player.emit.createErrorScreen(player, { duration: 5000, title: 'Test', text: 'Hello World!' });
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'testworldhelptext',
+    '/testworldhelptext - Shows temporary world help text',
+    ['admin'],
+    (player: alt.Player) => {
+        const uid = Athena.controllers.worldNotification.addToPlayer(player, {
+            text: 'Hello World!',
+            type: WORLD_NOTIFICATION_TYPE.ARROW_BOTTOM,
+            pos: { ...player.pos },
+        });
+
+        alt.setTimeout(() => {
+            if (!player || !player.valid) return;
+            Athena.controllers.worldNotification.removeFromPlayer(player, uid);
+        }, 5000);
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'testspinner',
+    '/testspinner - Shows a temporary spinner',
+    ['admin'],
+    (player: alt.Player) => {
+        Athena.player.emit.createSpinner(player, { duration: 5000, text: 'Hello World!' });
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'testshard',
+    '/testshard - Shows a temporary shard',
+    ['admin'],
+    (player: alt.Player) => {
+        Athena.player.emit.createShard(player, {
+            duration: 5000,
+            title: '~r~Hello World!',
+            text: '~y~Shards are pretty neat sometimes.',
+        });
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'testcredits',
+    '/testcredits - Shows a temporary credits display',
+    ['admin'],
+    (player: alt.Player) => {
+        Athena.player.emit.createCredits(player, {
+            duration: 5000,
+            role: 'Athena Creator',
+            name: 'Stuyk',
+        });
+    },
+);
+
 // class TestCommands {
-//     @command('testerrorscreen', '/testerrorscreen - Shows a temporary error screen', PERMISSIONS.ADMIN)
-//     private static testErrorScreen(player: alt.Player) {
-//         Athena.player.emit.createErrorScreen(player, { duration: 5000, title: 'Test', text: 'Hello World!' });
-//     }
-
-//     @command('testworldhelptext', '/testworldhelptext - Shows temporary world help text', PERMISSIONS.ADMIN)
-//     private static testWorldHelpTextComamnd(player: alt.Player) {
-//         const uid = WorldNotificationController.addToPlayer(player, {
-//             text: 'Hello World!',
-//             type: WORLD_NOTIFICATION_TYPE.ARROW_BOTTOM,
-//             pos: { ...player.pos },
-//         });
-
-//         alt.setTimeout(() => {
-//             if (!player || !player.valid) return;
-//             WorldNotificationController.removeFromPlayer(player, uid);
-//         }, 5000);
-//     }
-
-//     @command('testspinner', '/testspinner - Shows a temporary spinner', PERMISSIONS.ADMIN)
-//     private static testSpinnerCommand(player: alt.Player) {
-//         Athena.player.emit.createSpinner(player, { duration: 5000, text: 'Hello World!' });
-//     }
-
-//     @command('testshard', '/testshard - Shows a temporary shard', PERMISSIONS.ADMIN)
-//     private static testShardCommand(player: alt.Player) {
-//         Athena.player.emit.createShard(player, {
-//             duration: 5000,
-//             title: '~r~Hello World!',
-//             text: '~y~Shards are pretty neat sometimes.',
-//         });
-//     }
-
-//     @command('testcredits', '/testcredits - Shows a temporary credits display', PERMISSIONS.ADMIN)
-//     private static testCreditsCommand(player: alt.Player) {
-//         Athena.player.emit.createCredits(player, {
-//             duration: 5000,
-//             role: 'Athena Creator',
-//             name: 'Stuyk',
-//         });
-//     }
+//
+//
 
 //     @command('testinput', '/testinput', PERMISSIONS.ADMIN)
 //     private static testInputCommand(player: alt.Player) {
