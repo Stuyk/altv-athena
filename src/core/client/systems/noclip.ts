@@ -218,7 +218,9 @@ const NoClip = {
             0,
         );
 
-        NoClip.processCameraRotation();
+        if (!native.isPauseMenuActive()) {
+            NoClip.processCameraRotation();
+        }
     },
 
     // Noclip functions
