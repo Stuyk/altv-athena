@@ -3,6 +3,8 @@ import * as Athena from '@AthenaServer/api';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
 import { VehicleState } from '@AthenaShared/interfaces/vehicleState';
+import IVehicleTuning from '@AthenaShared/interfaces/vehicleTuning';
+import IVehicleMod from '@AthenaShared/interfaces/vehicleMod';
 
 Athena.systems.messenger.commands.register(
     'tempvehicle',
@@ -114,6 +116,10 @@ function setLivery(player: alt.Player, livery: number) {
     Athena.vehicle.controls.updateLastUsed(vehicle);
     Athena.vehicle.controls.update(vehicle);
 
+    var tuningData: IVehicleTuning = Athena.vehicle.tuning.getTuning(vehicle);
+
+    Athena.document.vehicle.set(vehicle, 'tuning', tuningData);
+
     const hash = typeof vehicle.model === 'number' ? vehicle.model : alt.hash(vehicle.model);
 
     let vehInfo = Athena.utility.hashLookup.vehicle.hash(hash);
@@ -219,6 +225,10 @@ Athena.systems.messenger.commands.register(
         }
         Athena.vehicle.controls.updateLastUsed(vehicle);
         Athena.vehicle.controls.update(vehicle);
+
+        var tuningData: IVehicleTuning = Athena.vehicle.tuning.getTuning(vehicle);
+
+        Athena.document.vehicle.set(vehicle, 'tuning', tuningData);
     },
 );
 
