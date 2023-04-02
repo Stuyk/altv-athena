@@ -25,7 +25,7 @@ Will show across all dimensions.
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:60](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/interfaces/iObject.ts#L60)
+[shared/interfaces/iObject.ts:60](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/interfaces/iObject.ts#L60)
 
 ___
 
@@ -37,7 +37,7 @@ The max distance this object should render at.
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:53](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/interfaces/iObject.ts#L53)
+[shared/interfaces/iObject.ts:53](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/interfaces/iObject.ts#L53)
 
 ___
 
@@ -49,7 +49,7 @@ The model name this object.
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:39](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/interfaces/iObject.ts#L39)
+[shared/interfaces/iObject.ts:39](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/interfaces/iObject.ts#L39)
 
 ___
 
@@ -61,7 +61,7 @@ Should this object have no collision?
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:67](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/interfaces/iObject.ts#L67)
+[shared/interfaces/iObject.ts:67](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/interfaces/iObject.ts#L67)
 
 ___
 
@@ -73,7 +73,7 @@ Position of the Object in a 3D space.
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:32](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/interfaces/iObject.ts#L32)
+[shared/interfaces/iObject.ts:32](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/interfaces/iObject.ts#L32)
 
 ___
 
@@ -85,7 +85,7 @@ The rotation of this object.
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:46](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/interfaces/iObject.ts#L46)
+[shared/interfaces/iObject.ts:46](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/interfaces/iObject.ts#L46)
 
 ___
 
@@ -99,7 +99,7 @@ Useful for wheel menu based functionality.
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:25](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/interfaces/iObject.ts#L25)
+[shared/interfaces/iObject.ts:25](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/interfaces/iObject.ts#L25)
 
 ___
 
@@ -111,4 +111,4 @@ A unique identifier for this object.
 
 #### Defined in
 
-[shared/interfaces/iObject.ts:15](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/interfaces/iObject.ts#L15)
+[shared/interfaces/iObject.ts:15](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/interfaces/iObject.ts#L15)

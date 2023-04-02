@@ -25,4 +25,4 @@ order: 0
 
 #### Defined in
 
-[client/events/onInventoryUpdate.ts:17](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/events/onInventoryUpdate.ts#L17)
+[client/events/onInventoryUpdate.ts:17](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/client/events/onInventoryUpdate.ts#L17)

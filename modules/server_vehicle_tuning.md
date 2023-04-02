@@ -31,7 +31,7 @@ These match the alt:V API, and can be pulled from a database.
 
 #### Defined in
 
-[server/vehicle/tuning.ts:14](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/server/vehicle/tuning.ts#L14)
+[server/vehicle/tuning.ts:14](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/vehicle/tuning.ts#L14)
 
 ___
 
@@ -56,7 +56,31 @@ Apply tuning to the specified vehicle.
 
 #### Defined in
 
-[server/vehicle/tuning.ts:31](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/server/vehicle/tuning.ts#L31)
+[server/vehicle/tuning.ts:31](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/vehicle/tuning.ts#L31)
+
+___
+
+### getTuning
+
+::: tip Usage
+Athena.vehicle.tuning.**getTuning**(`vehicle`): [`player`](server_config.md#player)
+:::
+
+Get all mods of the specified vehicle.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `vehicle` | `Vehicle` | An alt:V Vehicle Entity |
+
+#### Returns
+
+[`player`](server_config.md#player)
+
+#### Defined in
+
+[server/vehicle/tuning.ts:58](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/vehicle/tuning.ts#L58)
 
 ___
 
@@ -81,7 +105,7 @@ Used to override vehicle tuning functionality
 
 #### Defined in
 
-[server/vehicle/tuning.ts:58](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/server/vehicle/tuning.ts#L58)
+[server/vehicle/tuning.ts:81](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/vehicle/tuning.ts#L81)
 
 ::: tip Usage
 Athena.vehicle.tuning.**override**(`functionName`, `callback`): `any`
@@ -102,4 +126,25 @@ Used to override vehicle tuning functionality
 
 #### Defined in
 
-[server/vehicle/tuning.ts:59](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/server/vehicle/tuning.ts#L59)
+[server/vehicle/tuning.ts:82](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/vehicle/tuning.ts#L82)
+
+::: tip Usage
+Athena.vehicle.tuning.**override**(`functionName`, `callback`): `any`
+:::
+
+Used to override vehicle tuning functionality
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"getTuning"`` |
+| `callback` | (`vehicle`: `Vehicle`) => [`player`](server_config.md#player) |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/vehicle/tuning.ts:83](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/vehicle/tuning.ts#L83)

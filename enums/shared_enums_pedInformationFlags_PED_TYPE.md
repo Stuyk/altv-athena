@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[shared/enums/pedInformationFlags.ts:2](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/enums/pedInformationFlags.ts#L2)
+[shared/enums/pedInformationFlags.ts:2](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/enums/pedInformationFlags.ts#L2)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[shared/enums/pedInformationFlags.ts:3](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/enums/pedInformationFlags.ts#L3)
+[shared/enums/pedInformationFlags.ts:3](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/enums/pedInformationFlags.ts#L3)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[shared/enums/pedInformationFlags.ts:4](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/enums/pedInformationFlags.ts#L4)
+[shared/enums/pedInformationFlags.ts:4](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/enums/pedInformationFlags.ts#L4)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[shared/enums/pedInformationFlags.ts:5](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/enums/pedInformationFlags.ts#L5)
+[shared/enums/pedInformationFlags.ts:5](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/enums/pedInformationFlags.ts#L5)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[shared/enums/pedInformationFlags.ts:6](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/enums/pedInformationFlags.ts#L6)
+[shared/enums/pedInformationFlags.ts:6](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/enums/pedInformationFlags.ts#L6)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[shared/enums/pedInformationFlags.ts:7](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/enums/pedInformationFlags.ts#L7)
+[shared/enums/pedInformationFlags.ts:7](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/enums/pedInformationFlags.ts#L7)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[shared/enums/pedInformationFlags.ts:8](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/enums/pedInformationFlags.ts#L8)
+[shared/enums/pedInformationFlags.ts:8](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/enums/pedInformationFlags.ts#L8)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[shared/enums/pedInformationFlags.ts:9](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/enums/pedInformationFlags.ts#L9)
+[shared/enums/pedInformationFlags.ts:9](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/enums/pedInformationFlags.ts#L9)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[shared/enums/pedInformationFlags.ts:10](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/enums/pedInformationFlags.ts#L10)
+[shared/enums/pedInformationFlags.ts:10](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/enums/pedInformationFlags.ts#L10)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Defined in
 
-[shared/enums/pedInformationFlags.ts:11](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/enums/pedInformationFlags.ts#L11)
+[shared/enums/pedInformationFlags.ts:11](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/enums/pedInformationFlags.ts#L11)
 
 ___
 
@@ -117,4 +117,4 @@ ___
 
 #### Defined in
 
-[shared/enums/pedInformationFlags.ts:12](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/enums/pedInformationFlags.ts#L12)
+[shared/enums/pedInformationFlags.ts:12](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/enums/pedInformationFlags.ts#L12)

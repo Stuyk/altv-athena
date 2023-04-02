@@ -34,4 +34,4 @@ Verify if a bitwise flag is enabled.
 
 #### Defined in
 
-[shared/utility/flags.ts:10](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/utility/flags.ts#L10)
+[shared/utility/flags.ts:10](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/utility/flags.ts#L10)

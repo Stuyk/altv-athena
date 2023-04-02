@@ -29,7 +29,7 @@ A callback when this menu option is changed.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
+[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
 
 ___
 
@@ -45,7 +45,7 @@ A description of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
+[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
 
 ___
 
@@ -61,7 +61,7 @@ Only for Range & Selection Types
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
+[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
 
 ___
 
@@ -77,7 +77,7 @@ The title of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
+[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:66](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/rmlui/menu/menuInterfaces.ts#L66)
+[client/rmlui/menu/menuInterfaces.ts:66](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/client/rmlui/menu/menuInterfaces.ts#L66)
 
 ___
 
@@ -99,4 +99,4 @@ The default value for this menu.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:74](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/rmlui/menu/menuInterfaces.ts#L74)
+[client/rmlui/menu/menuInterfaces.ts:74](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/client/rmlui/menu/menuInterfaces.ts#L74)

@@ -27,4 +27,4 @@ AthenaClient.menus.animationMenus.idleAnims.**default**(`callback`): { `callback
 
 #### Defined in
 
-[client/menus/animationMenus/idleAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/menus/animationMenus/idleAnims.ts#L3)
+[client/menus/animationMenus/idleAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/client/menus/animationMenus/idleAnims.ts#L3)

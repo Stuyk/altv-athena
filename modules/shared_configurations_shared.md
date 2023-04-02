@@ -29,4 +29,4 @@ order: 0
 
 #### Defined in
 
-[shared/configurations/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/configurations/shared.ts#L1)
+[shared/configurations/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/configurations/shared.ts#L1)

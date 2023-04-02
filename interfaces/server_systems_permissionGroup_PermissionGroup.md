@@ -21,4 +21,4 @@ order: 0
 
 #### Defined in
 
-[server/systems/permissionGroup.ts:2](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/server/systems/permissionGroup.ts#L2)
+[server/systems/permissionGroup.ts:2](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/systems/permissionGroup.ts#L2)
