@@ -26,7 +26,7 @@ Only useful for the job system.
 
 #### Defined in
 
-[shared/interfaces/eventCall.ts:34](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/shared/interfaces/eventCall.ts#L34)
+[shared/interfaces/eventCall.ts:34](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/interfaces/eventCall.ts#L34)
 
 ___
 
@@ -39,7 +39,7 @@ ie. 'openTrunk'
 
 #### Defined in
 
-[shared/interfaces/eventCall.ts:15](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/shared/interfaces/eventCall.ts#L15)
+[shared/interfaces/eventCall.ts:15](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/interfaces/eventCall.ts#L15)
 
 ___
 
@@ -55,4 +55,4 @@ Must be entirely client-side or entirely server-side if false.
 
 #### Defined in
 
-[shared/interfaces/eventCall.ts:26](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/shared/interfaces/eventCall.ts#L26)
+[shared/interfaces/eventCall.ts:26](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/shared/interfaces/eventCall.ts#L26)

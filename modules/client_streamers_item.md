@@ -15,7 +15,7 @@ order: 0
 
 #### Defined in
 
-[client/streamers/item.ts:8](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/client/streamers/item.ts#L8)
+[client/streamers/item.ts:8](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/streamers/item.ts#L8)
 
 ## Functions
 
@@ -35,7 +35,7 @@ Return an array of items that are closest to the player.
 
 #### Defined in
 
-[client/streamers/item.ts:132](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/client/streamers/item.ts#L132)
+[client/streamers/item.ts:132](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/streamers/item.ts#L132)
 
 ___
 
@@ -59,7 +59,7 @@ Determine if this alt.Object is an item drop.
 
 #### Defined in
 
-[client/streamers/item.ts:161](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/client/streamers/item.ts#L161)
+[client/streamers/item.ts:161](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/streamers/item.ts#L161)
 
 ___
 
@@ -84,7 +84,7 @@ By default it is a cardboard box.
 
 #### Defined in
 
-[client/streamers/item.ts:142](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/client/streamers/item.ts#L142)
+[client/streamers/item.ts:142](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/streamers/item.ts#L142)
 
 ___
 
@@ -108,4 +108,4 @@ Set the maximum distance a player can see item drops.
 
 #### Defined in
 
-[client/streamers/item.ts:151](https://github.com/Stuyk/altv-athena/blob/b36eb29/src/core/client/streamers/item.ts#L151)
+[client/streamers/item.ts:151](https://github.com/Stuyk/altv-athena/blob/76e36de/src/core/client/streamers/item.ts#L151)
