@@ -9,6 +9,11 @@ Athena.systems.messenger.commands.register(
     '/tempvehicle [model] - Adds a temporary vehicle to drive around. Despawns on exit.',
     ['admin'],
     (player: alt.Player, model: string) => {
+        if (!model) {
+            Athena.player.emit.message(player, `No model specified.`);
+            return;
+        }
+
         const vehicle = Athena.vehicle.spawn.temporary({ model, pos: player.pos, rot: player.rot }, true);
         if (!vehicle) {
             return;
@@ -24,6 +29,7 @@ Athena.systems.messenger.commands.register(
     ['admin'],
     (player: alt.Player, model: string) => {
         if (!model) {
+            Athena.player.emit.message(player, `No model specified.`);
             return;
         }
 
@@ -148,6 +154,25 @@ function setVehicleDirtlevel(player: alt.Player, dirtLevel: number) {
     Athena.player.emit.message(player, `Dirtlevel of ${vehInfo.displayName} was set to ID ${dirtLevel}.`);
 }
 
+Athena.systems.messenger.commands.register(
+    'sessionvehicle',
+    LocaleController.get(LOCALE_KEYS.COMMAND_SESSION_VEHICLE, '/sessionvehicle'),
+    ['admin'],
+    (player: alt.Player, model: string) => {
+        if (!model) {
+            Athena.player.emit.message(player, `No model specified.`);
+            return;
+        }
+
+        const vehicle = Athena.vehicle.spawn.temporary({ model, pos: player.pos, rot: player.rot }, false);
+        if (!vehicle) {
+            return;
+        }
+
+        player.setIntoVehicle(vehicle, Athena.vehicle.shared.SEAT.DRIVER);
+    },
+);
+
 //@command(
 //         ['fullTuneVehicle', 'ft'],
 //         LocaleController.get(LOCALE_KEYS.COMMAND_FULL_TUNE_VEHICLE, '/ft'),
@@ -186,20 +211,8 @@ function setVehicleDirtlevel(player: alt.Player, dirtLevel: number) {
 // import { getClosestEntity } from '@AthenaServer/utility/vector';
 
 // class VehicleCommands {
-//     @command(
-//         'refillVehicle',
-//         LocaleController.get(LOCALE_KEYS.COMMAND_REFILL_VEHICLE, '/refillVehicle'),
-//         PERMISSIONS.ADMIN,
-//     )
-//     private static refillVehicleCommand(player: alt.Player) {
-//         if (!player.vehicle || !player.vehicle.data.fuel) {
-//             return;
-//         }
-//         player.vehicle.data.fuel = 100;
-//         Athena.vehicle.funcs.save(player.vehicle, player.vehicle.data);
-//         Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_REFILLED));
-//     }
 //
+
 //     @command(
 //         ['setVehicleHandling', 'sh'],
 //         LocaleController.get(LOCALE_KEYS.COMMAND_SET_VEHICLE_HANDLING, '/sh'),
@@ -215,29 +228,6 @@ function setVehicleDirtlevel(player: alt.Player, dirtLevel: number) {
 //         vehicle.data.tuning.handling[key] = nValue;
 //         vehicle.setStreamSyncedMeta('handlingData', vehicle.data.tuning.handling);
 //         Athena.vehicle.funcs.save(vehicle, vehicle.data);
-//     }
-
-//     @command(
-//         'sessionvehicle',
-//         LocaleController.get(LOCALE_KEYS.COMMAND_SESSION_VEHICLE, '/sessionvehicle'),
-//         PERMISSIONS.ADMIN,
-//     )
-//     private static createSessionVehicle(player: alt.Player, model: string): void {
-//         let vehicle: alt.Vehicle;
-//         try {
-//             vehicle = Athena.vehicle.funcs.sessionVehicle(player, model, player.pos, new alt.Vector3(0, 0, 0));
-//         } catch (err) {
-//             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_MODEL_INVALID));
-//         }
-//         if (!vehicle) {
-//             return;
-//         }
-
-//         Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_CREATED));
-
-//         alt.nextTick(() => {
-//             player.setIntoVehicle(vehicle, 1);
-//         });
 //     }
 
 //     @command(
