@@ -116,7 +116,7 @@ function setLivery(player: alt.Player, livery: number) {
     Athena.vehicle.controls.updateLastUsed(vehicle);
     Athena.vehicle.controls.update(vehicle);
 
-    var tuningData: IVehicleTuning = Athena.vehicle.tuning.getTuning(vehicle);
+    const tuningData: IVehicleTuning = Athena.vehicle.tuning.getTuning(vehicle);
 
     Athena.document.vehicle.set(vehicle, 'tuning', tuningData);
 
@@ -226,7 +226,7 @@ Athena.systems.messenger.commands.register(
         Athena.vehicle.controls.updateLastUsed(vehicle);
         Athena.vehicle.controls.update(vehicle);
 
-        var tuningData: IVehicleTuning = Athena.vehicle.tuning.getTuning(vehicle);
+        const tuningData: IVehicleTuning = Athena.vehicle.tuning.getTuning(vehicle);
 
         Athena.document.vehicle.set(vehicle, 'tuning', tuningData);
     },
