@@ -60,10 +60,10 @@ export function getTuning(vehicle: alt.Vehicle): VehicleTuning {
         return Overrides.getTuning(vehicle);
     }
 
-    var tuningData: VehicleTuning = { modkit: vehicle.modKit, mods: [] };
+    let tuningData: VehicleTuning = { modkit: vehicle.modKit, mods: [] };
 
     for (let id = 0; id < 70; ++id) {
-        var value = vehicle.getMod(id);
+        let value = vehicle.getMod(id);
         tuningData.mods.push({ id, value });
     }
 
