@@ -101,9 +101,16 @@ function setLivery(player: alt.Player, livery: number) {
         return;
     }
 
-    const liveryState: Partial<VehicleState> = { livery };
+    if (vehicle.modKit == 0 && vehicle.modKitsCount > 0) {
+        Athena.vehicle.tuning.applyTuning(vehicle, { modkit: 1 });
+    }
 
-    Athena.vehicle.tuning.applyState(vehicle, liveryState);
+    if (vehicle.modKit == 0) {
+        Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_HAS_NO_MOD_KIT));
+        return;
+    }
+
+    Athena.vehicle.tuning.applyTuning(vehicle, { mods: [{ id: 48, value: livery }] });
     Athena.vehicle.controls.updateLastUsed(vehicle);
     Athena.vehicle.controls.update(vehicle);
 
@@ -202,12 +209,16 @@ Athena.systems.messenger.commands.register(
         for (let i = 0; i < 70; ++i) {
             const maxId = vehicle.getModsCount(i);
 
+            if (i == 48) {
+                continue;
+            }
+
             if (maxId > 0) {
                 Athena.vehicle.tuning.applyTuning(vehicle, { mods: [{ id: i, value: maxId }] });
-                Athena.vehicle.controls.updateLastUsed(vehicle);
-                Athena.vehicle.controls.update(vehicle);
             }
         }
+        Athena.vehicle.controls.updateLastUsed(vehicle);
+        Athena.vehicle.controls.update(vehicle);
     },
 );
 
