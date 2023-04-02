@@ -173,36 +173,43 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-//@command(
-//         ['fullTuneVehicle', 'ft'],
-//         LocaleController.get(LOCALE_KEYS.COMMAND_FULL_TUNE_VEHICLE, '/ft'),
-//         PERMISSIONS.ADMIN,
-//     )
-//     private static fullTuneVehicleCommand(player: alt.Player): void {
-//         const vehicle = player.vehicle;
-//         if (!vehicle?.valid || !vehicle?.data) return;
+Athena.systems.messenger.commands.register(
+    'fullTuneVehicle',
+    LocaleController.get(LOCALE_KEYS.COMMAND_FULL_TUNE_VEHICLE, '/fullTuneVehicle'),
+    ['admin'],
+    (player: alt.Player) => {
+        const vehicle = player.vehicle ? player.vehicle : Athena.utility.closest.getClosestVehicle(player.pos);
 
-//         if (!vehicle.data.tuning) vehicle.data.tuning = {};
-//         delete vehicle.data.tuning.mods;
+        if (!vehicle) {
+            Athena.player.emit.message(player, 'No spawned vehicle.');
+            return;
+        }
 
-//         if (vehicle.modKit == 0 && vehicle.modKitsCount > 0) Athena.vehicle.funcs.setModKit(vehicle, 1);
+        if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4) {
+            Athena.player.emit.message(player, 'No vehicle in range.');
+            return;
+        }
 
-//         if (vehicle.modKit == 0) {
-//             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_HAS_NO_MOD_KIT));
-//             return;
-//         }
+        if (vehicle.modKit == 0 && vehicle.modKitsCount > 0) {
+            Athena.vehicle.tuning.applyTuning(vehicle, { modkit: 1 });
+        }
 
-//         for (let i = 0; i < 70; ++i) {
-//             const maxId = vehicle.getModsCount(i);
+        if (vehicle.modKit == 0) {
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_HAS_NO_MOD_KIT));
+            return;
+        }
 
-//             if (maxId > 0) {
-//                 Athena.vehicle.funcs.setMod(vehicle, i, maxId);
-//             }
-//         }
+        for (let i = 0; i < 70; ++i) {
+            const maxId = vehicle.getModsCount(i);
 
-//         console.log(vehicle.data);
-//         Athena.vehicle.funcs.save(vehicle, vehicle.data);
-//     }
+            if (maxId > 0) {
+                Athena.vehicle.tuning.applyTuning(vehicle, { mods: [{ id: i, value: maxId }] });
+                Athena.vehicle.controls.updateLastUsed(vehicle);
+                Athena.vehicle.controls.update(vehicle);
+            }
+        }
+    },
+);
 
 // import { command } from '@AthenaServer/decorators/commands';
 // import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
