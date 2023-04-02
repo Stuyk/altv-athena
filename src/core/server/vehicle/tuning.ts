@@ -48,15 +48,39 @@ export function applyTuning(vehicle: alt.Vehicle, tuning: VehicleTuning | Partia
     }
 }
 
+/**
+ * Get all mods of the specified vehicle.
+ *
+ *
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
+ * @param {VehicleTuning } tuning
+ */
+export function getTuning(vehicle: alt.Vehicle): VehicleTuning {
+    if (Overrides.getTuning) {
+        return Overrides.getTuning(vehicle);
+    }
+
+    let tuningData: VehicleTuning = { modkit: vehicle.modKit, mods: [] };
+
+    for (let id = 0; id < 70; ++id) {
+        let value = vehicle.getMod(id);
+        tuningData.mods.push({ id, value });
+    }
+
+    return tuningData;
+}
+
 interface VehicleTuningFuncs {
     applyState: typeof applyState;
     applyTuning: typeof applyTuning;
+    getTuning: typeof getTuning;
 }
 
 const Overrides: Partial<VehicleTuningFuncs> = {};
 
 export function override(functionName: 'applyState', callback: typeof applyState);
 export function override(functionName: 'applyTuning', callback: typeof applyTuning);
+export function override(functionName: 'getTuning', callback: typeof getTuning);
 /**
  * Used to override vehicle tuning functionality
  *

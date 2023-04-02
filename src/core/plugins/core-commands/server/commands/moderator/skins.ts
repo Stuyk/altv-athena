@@ -30,6 +30,9 @@ Athena.systems.messenger.commands.register(
     ['admin'],
     async (player: alt.Player, id: string | undefined) => {
         let target = player;
+
+        const hash = typeof target.model === 'number' ? target.model : alt.hash(target.model);
+
         if (typeof id !== 'undefined') {
             target = Athena.systems.identifier.getPlayer(id);
         }
@@ -39,5 +42,9 @@ Athena.systems.messenger.commands.register(
         }
 
         Athena.systems.inventory.clothing.clearSkin(target);
+
+        let pedInfo = Athena.utility.hashLookup.ped.hash(hash);
+
+        Athena.player.emit.message(player, `Skin ${pedInfo.name} was removed.`);
     },
 );
