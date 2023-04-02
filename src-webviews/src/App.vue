@@ -38,6 +38,7 @@ import { CORE_IMPORTS } from './pages/components';
 import { PLUGIN_IMPORTS } from './plugins/imports';
 import { WebViewEventNames } from '../../src/core/shared/enums/webViewEvents';
 import VueDevMenu from './components/VueDevMenu.vue';
+import './utility/state';
 
 // Interfaces
 import IPageData from './interfaces/IPageData';

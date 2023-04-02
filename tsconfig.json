@@ -26,11 +26,14 @@
         "composite": false,
         "forceConsistentCasingInFileNames": true,
         "strict": false,
-        "module": "ES2022",
+        "module": "AMD",
         "target": "ES2022",
         "outDir": "athena-cache",
         "skipLibCheck": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "outFile": "typedefs.ts"
     },
     "include": [
         "src/**/*.ts",

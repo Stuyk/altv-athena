@@ -10,7 +10,6 @@ import * as Athena from '@AthenaServer/api';
 // import { Action } from '@AthenaShared/interfaces/actions';
 // import { Animation } from '@AthenaShared/interfaces/animation';
 // import IAttachable from '@AthenaShared/interfaces/iAttachable';
-// import { InputMenu, InputOptionType, InputResult } from '@AthenaShared/interfaces/inputMenus';
 // import { IPed } from '@AthenaShared/interfaces/iPed';
 // import { JobTrigger } from '@AthenaShared/interfaces/jobTrigger';
 

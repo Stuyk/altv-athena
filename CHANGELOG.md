@@ -3,6 +3,15 @@
 ## 5.0.0
 
 ```
+- Fixed Character Select Event Bug
+- Added in-game editor for debug mode / admins
+--- Command is /editor
+- Fixed restrict function
+
+--------------------------------------
+--- Everything Below is Before April 2
+--------------------------------------
+
 Major Breaking Changes
 ---> These changes reflect a larger set of changes that will be occuring to the framework during the 5.0.0 release window.
 ---> These changes are necessary to scale the framework more and lower the complexity of the framework further.

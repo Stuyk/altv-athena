@@ -76,6 +76,14 @@ export function register(
 
     commands[name] = { description: desc, permissions: perms, callback, isCharacterPermission };
     alt.log(`~lc~Command: ~g~${name}`);
+
+    if (alt.Player.all.length <= 0) {
+        return;
+    }
+
+    alt.Player.all.forEach((player) => {
+        populateCommands(player);
+    });
 }
 
 /**
