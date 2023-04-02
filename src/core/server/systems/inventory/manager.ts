@@ -349,7 +349,7 @@ export function add<CustomData = {}>(
     // - Adds stackable items, and automatically tries to fill item quantity.
     if (!baseItem.behavior.canStack || actualMaxStack === 1 || availableStackIndex === -1) {
         // Ensure there is enough room to add items.
-        if (data.length >= size) {
+        if (copyOfData.length >= parseFloat(String(size))) {
             return undefined;
         }
 

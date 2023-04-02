@@ -48,3 +48,5 @@ yarn.lock
 # Resources
 resources/core/**
 resources/webviews/**
+
+typedefs.d.ts

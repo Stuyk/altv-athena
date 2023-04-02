@@ -86,10 +86,23 @@ function verifyRestrictions(player: alt.Player, restrictions: Restrictions): boo
     }
 
     if (restrictions.strategy === 'hasOne') {
-        hasCharacterPerms = Athena.systems.permission.hasAll('character', player, restrictions.permissions.character);
-        hasAccountPerms = Athena.systems.permission.hasAll('account', player, restrictions.permissions.account);
+        if (restrictions.permissions.account.length >= 0) {
+            hasAccountPerms = Athena.systems.permission.hasOne('account', player, restrictions.permissions.account);
+        } else {
+            hasAccountPerms = true;
+        }
 
-        if (hasCharacterPerms || hasCharacterPerms) {
+        if (restrictions.permissions.character.length >= 0) {
+            hasCharacterPerms = Athena.systems.permission.hasOne(
+                'character',
+                player,
+                restrictions.permissions.character,
+            );
+        } else {
+            hasCharacterPerms = true;
+        }
+
+        if (hasCharacterPerms || hasAccountPerms) {
             passed = true;
         }
     }

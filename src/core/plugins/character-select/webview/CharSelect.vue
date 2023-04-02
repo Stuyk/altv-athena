@@ -107,9 +107,14 @@ function newCharacter() {
     WebViewEvents.emitServer(CharSelectEvents.toServer.new);
 }
 
-onMounted(() => {
-    WebViewEvents.emitReady('CharSelect');
+onMounted(async () => {
     WebViewEvents.on(CharSelectEvents.toWebview.updateName, setData);
+
+    await new Promise((resolve: Function) => {
+        setTimeout(resolve, 1000);
+    });
+
+    WebViewEvents.emitReady('CharSelect');
 });
 </script>
 
