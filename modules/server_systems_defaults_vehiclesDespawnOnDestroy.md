@@ -28,7 +28,7 @@ Athena.systems.default.vehiclesDespawnOnDestroy.disable();
 
 #### Defined in
 
-[server/systems/defaults/vehiclesDespawnOnDestroy.ts:55](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/systems/defaults/vehiclesDespawnOnDestroy.ts#L55)
+[server/systems/defaults/vehiclesDespawnOnDestroy.ts:55](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/systems/defaults/vehiclesDespawnOnDestroy.ts#L55)
 
 ___
 
@@ -52,4 +52,4 @@ Set the time before a vehicle is removed after it is destroyed.
 
 #### Defined in
 
-[server/systems/defaults/vehiclesDespawnOnDestroy.ts:66](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/systems/defaults/vehiclesDespawnOnDestroy.ts#L66)
+[server/systems/defaults/vehiclesDespawnOnDestroy.ts:66](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/systems/defaults/vehiclesDespawnOnDestroy.ts#L66)

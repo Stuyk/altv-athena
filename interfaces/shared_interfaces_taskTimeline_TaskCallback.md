@@ -23,4 +23,4 @@ TaskCallback
 
 #### Defined in
 
-[shared/interfaces/taskTimeline.ts:23](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/interfaces/taskTimeline.ts#L23)
+[shared/interfaces/taskTimeline.ts:23](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/interfaces/taskTimeline.ts#L23)

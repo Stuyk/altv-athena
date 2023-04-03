@@ -191,6 +191,7 @@
 - [server/player/safe](modules/server_player_safe.md)
 - [server/player/setter](modules/server_player_setter.md)
 - [server/player/sync](modules/server_player_sync.md)
+- [server/player/teleport](modules/server_player_teleport.md)
 - [server/player/toolbar](modules/server_player_toolbar.md)
 - [server/player/weapons](modules/server_player_weapons.md)
 - [server/startup](modules/server_startup.md)

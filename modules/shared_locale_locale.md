@@ -19,4 +19,4 @@ order: 0
 
 #### Defined in
 
-[shared/locale/locale.ts:4](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/shared/locale/locale.ts#L4)
+[shared/locale/locale.ts:4](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/locale/locale.ts#L4)

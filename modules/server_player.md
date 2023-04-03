@@ -63,6 +63,12 @@ Renames and re-exports [player](server_config.md#player)
 
 ___
 
+### teleport
+
+Renames and re-exports [player](server_config.md#player)
+
+___
+
 ### toolbar
 
 Renames and re-exports [player](server_config.md#player)

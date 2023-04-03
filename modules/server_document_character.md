@@ -33,7 +33,7 @@ Athena.document.character.(`player`, `newValue`, `oldValue`): `void`
 
 #### Defined in
 
-[server/document/character.ts:7](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L7)
+[server/document/character.ts:7](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L7)
 
 ## Functions
 
@@ -73,7 +73,7 @@ async function doSomething(somePlayer: alt.Player, someMongoDBId: string) {
 
 #### Defined in
 
-[server/document/character.ts:34](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L34)
+[server/document/character.ts:34](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L34)
 
 ___
 
@@ -124,7 +124,7 @@ function someFunction(player: alt.Player) {
 
 #### Defined in
 
-[server/document/character.ts:94](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L94)
+[server/document/character.ts:94](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L94)
 
 ___
 
@@ -181,7 +181,7 @@ if (typeof bitcoins === 'undefined') {
 
 #### Defined in
 
-[server/document/character.ts:135](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L135)
+[server/document/character.ts:135](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L135)
 
 ___
 
@@ -221,7 +221,7 @@ Athena.document.character.onChange('cash', (player: alt.Player, newValue: number
 
 #### Defined in
 
-[server/document/character.ts:279](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L279)
+[server/document/character.ts:279](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L279)
 
 ___
 
@@ -246,7 +246,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:319](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L319)
+[server/document/character.ts:319](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L319)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -267,7 +267,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:320](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L320)
+[server/document/character.ts:320](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L320)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -288,7 +288,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:321](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L321)
+[server/document/character.ts:321](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L321)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -309,7 +309,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:322](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L322)
+[server/document/character.ts:322](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L322)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -330,7 +330,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:323](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L323)
+[server/document/character.ts:323](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L323)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -351,7 +351,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:324](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L324)
+[server/document/character.ts:324](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L324)
 
 ::: tip Usage
 Athena.document.character.**override**(`functionName`, `callback`): `any`
@@ -372,7 +372,7 @@ Used to override any character document functionality
 
 #### Defined in
 
-[server/document/character.ts:325](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L325)
+[server/document/character.ts:325](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L325)
 
 ___
 
@@ -423,7 +423,7 @@ await Athena.document.character.set<CustomCharacter>(somePlayer, 'someKey', 'hel
 
 #### Defined in
 
-[server/document/character.ts:176](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L176)
+[server/document/character.ts:176](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L176)
 
 ___
 
@@ -463,7 +463,7 @@ await Athena.document.character.setBulk(player, { cash: 25, bank: 100 });
 
 #### Defined in
 
-[server/document/character.ts:238](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L238)
+[server/document/character.ts:238](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L238)
 
 ___
 
@@ -493,4 +493,4 @@ Athena.document.character.unbind(1);
 
 #### Defined in
 
-[server/document/character.ts:58](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/document/character.ts#L58)
+[server/document/character.ts:58](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/document/character.ts#L58)

@@ -30,7 +30,7 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/triggers.ts:110](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/systems/job/triggers.ts#L110)
+[server/systems/job/triggers.ts:110](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/systems/job/triggers.ts#L110)
 
 ::: tip Usage
 Athena.systems.job.triggers.**override**(`functionName`, `callback`): `any`
@@ -51,7 +51,7 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/triggers.ts:111](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/systems/job/triggers.ts#L111)
+[server/systems/job/triggers.ts:111](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/systems/job/triggers.ts#L111)
 
 ::: tip Usage
 Athena.systems.job.triggers.**override**(`functionName`, `callback`): `any`
@@ -72,7 +72,7 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/triggers.ts:112](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/systems/job/triggers.ts#L112)
+[server/systems/job/triggers.ts:112](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/systems/job/triggers.ts#L112)
 
 ___
 
@@ -99,7 +99,7 @@ This should almost never be invoked manually.
 
 #### Defined in
 
-[server/systems/job/triggers.ts:41](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/systems/job/triggers.ts#L41)
+[server/systems/job/triggers.ts:41](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/systems/job/triggers.ts#L41)
 
 ___
 
@@ -126,7 +126,7 @@ This should almost never be invoked manually.
 
 #### Defined in
 
-[server/systems/job/triggers.ts:82](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/systems/job/triggers.ts#L82)
+[server/systems/job/triggers.ts:82](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/systems/job/triggers.ts#L82)
 
 ___
 
@@ -153,4 +153,4 @@ Try calling an event. This should almost never be invoked manually.
 
 #### Defined in
 
-[server/systems/job/triggers.ts:15](https://github.com/Stuyk/altv-athena/blob/2b4a7e1/src/core/server/systems/job/triggers.ts#L15)
+[server/systems/job/triggers.ts:15](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/server/systems/job/triggers.ts#L15)
