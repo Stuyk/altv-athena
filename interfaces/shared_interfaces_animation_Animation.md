@@ -31,7 +31,7 @@ The animation dictionary for the animation.
 
 #### Defined in
 
-[shared/interfaces/animation.ts:16](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/interfaces/animation.ts#L16)
+[shared/interfaces/animation.ts:16](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/animation.ts#L16)
 
 ___
 
@@ -44,7 +44,7 @@ Set this to -1 for infinite.
 
 #### Defined in
 
-[shared/interfaces/animation.ts:39](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/interfaces/animation.ts#L39)
+[shared/interfaces/animation.ts:39](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/animation.ts#L39)
 
 ___
 
@@ -57,7 +57,7 @@ Combine them with 'ANIMATION_FLAGS.X | ANIMATION_FLAGS.Y'
 
 #### Defined in
 
-[shared/interfaces/animation.ts:31](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/interfaces/animation.ts#L31)
+[shared/interfaces/animation.ts:31](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/animation.ts#L31)
 
 ___
 
@@ -69,4 +69,4 @@ The name of the animation.
 
 #### Defined in
 
-[shared/interfaces/animation.ts:23](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/interfaces/animation.ts#L23)
+[shared/interfaces/animation.ts:23](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/animation.ts#L23)

@@ -33,4 +33,4 @@ order: 0
 
 #### Defined in
 
-[shared/interfaces/job.ts:204](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/interfaces/job.ts#L204)
+[shared/interfaces/job.ts:204](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/job.ts#L204)

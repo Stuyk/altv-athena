@@ -21,4 +21,4 @@ order: 0
 
 #### Defined in
 
-[shared/enums/vehicleSyncedMeta.ts:1](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/enums/vehicleSyncedMeta.ts#L1)
+[shared/enums/vehicleSyncedMeta.ts:1](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/enums/vehicleSyncedMeta.ts#L1)

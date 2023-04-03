@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[client/webview/page.ts:6](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/client/webview/page.ts#L6)
+[client/webview/page.ts:6](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/client/webview/page.ts#L6)

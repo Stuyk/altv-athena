@@ -38,4 +38,4 @@ but are not present in B.
 
 #### Defined in
 
-[shared/utility/array.ts:11](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/utility/array.ts#L11)
+[shared/utility/array.ts:11](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/utility/array.ts#L11)

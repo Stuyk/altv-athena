@@ -17,4 +17,4 @@ order: 0
 
 #### Defined in
 
-[shared/interfaces/iStream.ts:13](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/interfaces/iStream.ts#L13)
+[shared/interfaces/iStream.ts:13](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/iStream.ts#L13)

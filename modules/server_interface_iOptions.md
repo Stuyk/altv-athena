@@ -19,7 +19,7 @@ order: 0
 
 #### Defined in
 
-[server/interface/iOptions.ts:1](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/interface/iOptions.ts#L1)
+[server/interface/iOptions.ts:1](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/server/interface/iOptions.ts#L1)
 
 ## Variables
 
@@ -35,4 +35,4 @@ order: 0
 
 #### Defined in
 
-[server/interface/iOptions.ts:8](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/interface/iOptions.ts#L8)
+[server/interface/iOptions.ts:8](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/server/interface/iOptions.ts#L8)
