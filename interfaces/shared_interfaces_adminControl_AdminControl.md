@@ -25,7 +25,7 @@ BaseAdminControl
 
 #### Defined in
 
-[shared/interfaces/adminControl.ts:31](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/adminControl.ts#L31)
+[shared/interfaces/adminControl.ts:31](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/interfaces/adminControl.ts#L31)
 
 ___
 
@@ -43,7 +43,7 @@ BaseAdminControl
 
 #### Defined in
 
-[shared/interfaces/adminControl.ts:49](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/adminControl.ts#L49)
+[shared/interfaces/adminControl.ts:49](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/interfaces/adminControl.ts#L49)
 
 ___
 
@@ -63,7 +63,7 @@ BaseAdminControl
 
 #### Defined in
 
-[shared/interfaces/adminControl.ts:21](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/adminControl.ts#L21)
+[shared/interfaces/adminControl.ts:21](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/interfaces/adminControl.ts#L21)
 
 ___
 
@@ -79,7 +79,7 @@ BaseAdminControl
 
 #### Defined in
 
-[shared/interfaces/adminControl.ts:57](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/adminControl.ts#L57)
+[shared/interfaces/adminControl.ts:57](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/interfaces/adminControl.ts#L57)
 
 ___
 
@@ -95,4 +95,4 @@ BaseAdminControl
 
 #### Defined in
 
-[shared/interfaces/adminControl.ts:39](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/adminControl.ts#L39)
+[shared/interfaces/adminControl.ts:39](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/shared/interfaces/adminControl.ts#L39)

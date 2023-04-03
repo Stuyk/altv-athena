@@ -39,7 +39,7 @@ if (player) {
 
 #### Defined in
 
-[server/getters/player.ts:26](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L26)
+[server/getters/player.ts:26](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L26)
 
 ___
 
@@ -75,7 +75,7 @@ if (player) {
 
 #### Defined in
 
-[server/getters/player.ts:133](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L133)
+[server/getters/player.ts:133](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L133)
 
 ___
 
@@ -100,7 +100,7 @@ Use this to get the player in-game that you see with your eyes.
 
 #### Defined in
 
-[server/getters/player.ts:155](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L155)
+[server/getters/player.ts:155](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L155)
 
 ___
 
@@ -136,7 +136,7 @@ if (player) {
 
 #### Defined in
 
-[server/getters/player.ts:63](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L63)
+[server/getters/player.ts:63](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L63)
 
 ___
 
@@ -174,7 +174,7 @@ if (player) {
 
 #### Defined in
 
-[server/getters/player.ts:99](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L99)
+[server/getters/player.ts:99](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L99)
 
 ___
 
@@ -199,7 +199,7 @@ Requires account info, player, or account id string.
 
 #### Defined in
 
-[server/getters/player.ts:318](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L318)
+[server/getters/player.ts:318](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L318)
 
 ___
 
@@ -225,7 +225,7 @@ Ignores vehicles with keyless for start.
 
 #### Defined in
 
-[server/getters/player.ts:262](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L262)
+[server/getters/player.ts:262](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L262)
 
 ___
 
@@ -249,7 +249,7 @@ The player closest to a player.
 
 #### Defined in
 
-[server/getters/player.ts:240](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L240)
+[server/getters/player.ts:240](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L240)
 
 ___
 
@@ -273,7 +273,7 @@ The player closest to a vehicle.
 
 #### Defined in
 
-[server/getters/player.ts:250](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L250)
+[server/getters/player.ts:250](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L250)
 
 ___
 
@@ -301,7 +301,7 @@ Works best on flat land or very close distances.
 
 #### Defined in
 
-[server/getters/player.ts:169](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L169)
+[server/getters/player.ts:169](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L169)
 
 ___
 
@@ -325,7 +325,7 @@ Determine if a player is currently dead / marked as dead.
 
 #### Defined in
 
-[server/getters/player.ts:350](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L350)
+[server/getters/player.ts:350](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L350)
 
 ___
 
@@ -351,7 +351,7 @@ Checks if a player is within 3 distance of a position.
 
 #### Defined in
 
-[server/getters/player.ts:220](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L220)
+[server/getters/player.ts:220](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L220)
 
 ___
 
@@ -375,7 +375,7 @@ Determine if a player is valid, and spawned as a character.
 
 #### Defined in
 
-[server/getters/player.ts:366](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L366)
+[server/getters/player.ts:366](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L366)
 
 ___
 
@@ -399,7 +399,7 @@ Get all owned vehicles from the database for a given character.
 
 #### Defined in
 
-[server/getters/player.ts:302](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L302)
+[server/getters/player.ts:302](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L302)
 
 ___
 
@@ -424,4 +424,4 @@ Will return undefined it is not currently set.
 
 #### Defined in
 
-[server/getters/player.ts:230](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/server/getters/player.ts#L230)
+[server/getters/player.ts:230](https://github.com/Stuyk/altv-athena/blob/1620176/src/core/server/getters/player.ts#L230)
