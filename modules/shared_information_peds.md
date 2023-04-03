@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/information/peds.ts:4](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/information/peds.ts#L4)
+[shared/information/peds.ts:4](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/information/peds.ts#L4)

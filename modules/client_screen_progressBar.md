@@ -25,7 +25,7 @@ None
 
 #### Defined in
 
-[client/screen/progressBar.ts:105](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/client/screen/progressBar.ts#L105)
+[client/screen/progressBar.ts:105](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/client/screen/progressBar.ts#L105)
 
 ___
 
@@ -51,7 +51,7 @@ None
 
 #### Defined in
 
-[client/screen/progressBar.ts:64](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/client/screen/progressBar.ts#L64)
+[client/screen/progressBar.ts:64](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/client/screen/progressBar.ts#L64)
 
 ___
 
@@ -77,4 +77,4 @@ The function that is being returned is the function that is being called.
 
 #### Defined in
 
-[client/screen/progressBar.ts:87](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/client/screen/progressBar.ts#L87)
+[client/screen/progressBar.ts:87](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/client/screen/progressBar.ts#L87)

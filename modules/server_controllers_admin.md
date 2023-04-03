@@ -35,7 +35,7 @@ Athena.controllers.admin.banPlayer(player, 'was a bad person :(')
 
 #### Defined in
 
-[server/controllers/admin.ts:21](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/server/controllers/admin.ts#L21)
+[server/controllers/admin.ts:21](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/admin.ts#L21)
 
 ___
 
@@ -58,7 +58,7 @@ Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[server/controllers/admin.ts:78](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/server/controllers/admin.ts#L78)
+[server/controllers/admin.ts:78](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/admin.ts#L78)
 
 ::: tip Usage
 Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
@@ -77,7 +77,7 @@ Athena.controllers.admin.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[server/controllers/admin.ts:79](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/server/controllers/admin.ts#L79)
+[server/controllers/admin.ts:79](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/admin.ts#L79)
 
 ___
 
@@ -106,4 +106,4 @@ Athena.controllers.admin.unbanPlayerByDiscord('202685967935471617');
 
 #### Defined in
 
-[server/controllers/admin.ts:52](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/server/controllers/admin.ts#L52)
+[server/controllers/admin.ts:52](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/admin.ts#L52)

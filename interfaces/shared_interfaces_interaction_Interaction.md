@@ -44,7 +44,7 @@ What function to call back after the player has interacted with the Interaction 
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:51](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L51)
+[shared/interfaces/interaction.ts:51](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L51)
 
 ___
 
@@ -57,7 +57,7 @@ Serves as a way to pass unique data through the callback.
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:74](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L74)
+[shared/interfaces/interaction.ts:74](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L74)
 
 ___
 
@@ -69,7 +69,7 @@ If set to true debug information will be sent to console.
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:103](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L103)
+[shared/interfaces/interaction.ts:103](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L103)
 
 ___
 
@@ -81,7 +81,7 @@ Description of what the Interaction does
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:22](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L22)
+[shared/interfaces/interaction.ts:22](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L22)
 
 ___
 
@@ -93,7 +93,7 @@ What dimension this player must be in to use this colshape.
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:45](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L45)
+[shared/interfaces/interaction.ts:45](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L45)
 
 ___
 
@@ -105,7 +105,7 @@ Overrides the height for the interaction.
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:96](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L96)
+[shared/interfaces/interaction.ts:96](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L96)
 
 ___
 
@@ -117,7 +117,7 @@ Should this interaction only work if the player is on foot?
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:88](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L88)
+[shared/interfaces/interaction.ts:88](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L88)
 
 ___
 
@@ -129,7 +129,7 @@ Should this interaction only work if the player is in a vehicle?
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:81](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L81)
+[shared/interfaces/interaction.ts:81](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L81)
 
 ___
 
@@ -158,7 +158,7 @@ Called when a player has left an interaction point.
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:66](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L66)
+[shared/interfaces/interaction.ts:66](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L66)
 
 ___
 
@@ -171,7 +171,7 @@ Remember to subtract `1` from the z axis if you're using player coordinates.
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:31](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L31)
+[shared/interfaces/interaction.ts:31](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L31)
 
 ___
 
@@ -183,7 +183,7 @@ The max distance in which this interaction can be interacted with.
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:38](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L38)
+[shared/interfaces/interaction.ts:38](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L38)
 
 ___
 
@@ -195,7 +195,7 @@ Forces the callback to immediately trigger without actually interacting.
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:59](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L59)
+[shared/interfaces/interaction.ts:59](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L59)
 
 ___
 
@@ -207,4 +207,4 @@ A unique identifier for the Interaction
 
 #### Defined in
 
-[shared/interfaces/interaction.ts:15](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/shared/interfaces/interaction.ts#L15)
+[shared/interfaces/interaction.ts:15](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/interfaces/interaction.ts#L15)

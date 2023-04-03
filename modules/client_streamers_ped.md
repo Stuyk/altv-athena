@@ -29,7 +29,7 @@ Create a client-only static pedestrian.
 
 #### Defined in
 
-[client/streamers/ped.ts:221](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/client/streamers/ped.ts#L221)
+[client/streamers/ped.ts:221](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/client/streamers/ped.ts#L221)
 
 ___
 
@@ -55,7 +55,7 @@ Gets an NPC based on their scriptID if present.
 
 #### Defined in
 
-[client/streamers/ped.ts:184](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/client/streamers/ped.ts#L184)
+[client/streamers/ped.ts:184](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/client/streamers/ped.ts#L184)
 
 ___
 
@@ -79,4 +79,4 @@ Remove a client ped by uid
 
 #### Defined in
 
-[client/streamers/ped.ts:248](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/client/streamers/ped.ts#L248)
+[client/streamers/ped.ts:248](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/client/streamers/ped.ts#L248)

@@ -23,7 +23,7 @@ Removes all time cycle effects on the player's screen.
 
 #### Defined in
 
-[client/screen/timecycle.ts:35](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/client/screen/timecycle.ts#L35)
+[client/screen/timecycle.ts:35](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/client/screen/timecycle.ts#L35)
 
 ___
 
@@ -48,4 +48,4 @@ Applies a time cycle effect to the player's screen.
 
 #### Defined in
 
-[client/screen/timecycle.ts:15](https://github.com/Stuyk/altv-athena/blob/fd05e62/src/core/client/screen/timecycle.ts#L15)
+[client/screen/timecycle.ts:15](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/client/screen/timecycle.ts#L15)
