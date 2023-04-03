@@ -49,7 +49,7 @@ const InternalFunctions = {
         const createdObject = new alt.Object(
             model,
             new alt.Vector3(dataRef[uid].pos),
-            new alt.Vector3(0, 0, 0),
+            new alt.Vector3(dataRef[uid].rot),
             true,
             false,
         );
@@ -77,6 +77,7 @@ const InternalFunctions = {
                 // Just update object position, even if it hasn't moved.
                 serverObjects[objRef.uid].pos = objRef.pos;
                 serverObjects[objRef.uid].createdObject.pos = new alt.Vector3(objRef.pos);
+                serverObjects[objRef.uid].createdObject.rot = new alt.Vector3(objRef.rot);
 
                 if (serverObjects[objRef.uid].model === objRef.model) {
                     continue;
@@ -89,7 +90,7 @@ const InternalFunctions = {
             const createdObject = new alt.Object(
                 objRef.model,
                 new alt.Vector3(objRef.pos),
-                new alt.Vector3(0, 0, 0),
+                new alt.Vector3(objRef.rot),
                 true,
                 false,
             );
@@ -137,7 +138,7 @@ export function addObject(newObject: IObject) {
     const createdObject = new alt.Object(
         newObject.model,
         new alt.Vector3(newObject.pos),
-        new alt.Vector3(0, 0, 0),
+        new alt.Vector3(newObject.rot),
         true,
         false,
     );
