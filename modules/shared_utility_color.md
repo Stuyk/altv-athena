@@ -27,4 +27,4 @@ AthenaShared.utility.color.**rgbaToHexAlpha**(`color`): `string`
 
 #### Defined in
 
-[shared/utility/color.ts:3](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/utility/color.ts#L3)
+[shared/utility/color.ts:3](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/utility/color.ts#L3)

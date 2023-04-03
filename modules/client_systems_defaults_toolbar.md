@@ -21,4 +21,4 @@ order: 0
 
 #### Defined in
 
-[client/systems/defaults/toolbar.ts:94](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/client/systems/defaults/toolbar.ts#L94)
+[client/systems/defaults/toolbar.ts:94](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/client/systems/defaults/toolbar.ts#L94)

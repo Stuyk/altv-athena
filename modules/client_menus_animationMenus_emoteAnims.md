@@ -27,4 +27,4 @@ AthenaClient.menus.animationMenus.emoteAnims.**default**(`callback`): { `callbac
 
 #### Defined in
 
-[client/menus/animationMenus/emoteAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/client/menus/animationMenus/emoteAnims.ts#L3)
+[client/menus/animationMenus/emoteAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/client/menus/animationMenus/emoteAnims.ts#L3)

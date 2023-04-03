@@ -30,4 +30,4 @@ Do not use it for anything else.
 
 #### Defined in
 
-[client/utility/characterPed.ts:21](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/client/utility/characterPed.ts#L21)
+[client/utility/characterPed.ts:21](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/client/utility/characterPed.ts#L21)

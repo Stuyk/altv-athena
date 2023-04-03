@@ -25,7 +25,7 @@ A list of random animations to play on this pedestrian.
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:51](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/interfaces/iPed.ts#L51)
+[shared/interfaces/iPed.ts:51](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/iPed.ts#L51)
 
 ___
 
@@ -37,7 +37,7 @@ Will show across all dimensions.
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:81](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/interfaces/iPed.ts#L81)
+[shared/interfaces/iPed.ts:81](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/iPed.ts#L81)
 
 ___
 
@@ -49,7 +49,7 @@ The rotation of this Ped. 0 - 360
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:30](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/interfaces/iPed.ts#L30)
+[shared/interfaces/iPed.ts:30](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/iPed.ts#L30)
 
 ___
 
@@ -62,7 +62,7 @@ Do not automatically fill this out.
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:74](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/interfaces/iPed.ts#L74)
+[shared/interfaces/iPed.ts:74](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/iPed.ts#L74)
 
 ___
 
@@ -75,7 +75,7 @@ Do not actually fill this out.
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:66](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/interfaces/iPed.ts#L66)
+[shared/interfaces/iPed.ts:66](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/iPed.ts#L66)
 
 ___
 
@@ -87,7 +87,7 @@ The max distance this Ped should render at.
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:37](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/interfaces/iPed.ts#L37)
+[shared/interfaces/iPed.ts:37](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/iPed.ts#L37)
 
 ___
 
@@ -99,7 +99,7 @@ The model name this Ped.
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:23](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/interfaces/iPed.ts#L23)
+[shared/interfaces/iPed.ts:23](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/iPed.ts#L23)
 
 ___
 
@@ -111,7 +111,7 @@ Position of the Ped in a 3D space.
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:16](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/interfaces/iPed.ts#L16)
+[shared/interfaces/iPed.ts:16](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/iPed.ts#L16)
 
 ___
 
@@ -123,7 +123,7 @@ Should the appearance of this ped be randomized when spawned?
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:58](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/interfaces/iPed.ts#L58)
+[shared/interfaces/iPed.ts:58](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/iPed.ts#L58)
 
 ___
 
@@ -135,4 +135,4 @@ A unique identifier for this Ped.
 
 #### Defined in
 
-[shared/interfaces/iPed.ts:44](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/shared/interfaces/iPed.ts#L44)
+[shared/interfaces/iPed.ts:44](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/shared/interfaces/iPed.ts#L44)

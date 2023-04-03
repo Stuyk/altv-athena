@@ -27,4 +27,4 @@ AthenaClient.utility.scene.**load**(`pos`): `Promise`<`boolean`\>
 
 #### Defined in
 
-[client/utility/scene.ts:4](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/client/utility/scene.ts#L4)
+[client/utility/scene.ts:4](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/client/utility/scene.ts#L4)

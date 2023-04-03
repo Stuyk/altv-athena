@@ -27,7 +27,7 @@ AthenaClient.utility.disableControls.**disableAllAttacks**(`value`): `void`
 
 #### Defined in
 
-[client/utility/disableControls.ts:25](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/client/utility/disableControls.ts#L25)
+[client/utility/disableControls.ts:25](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/client/utility/disableControls.ts#L25)
 
 ___
 
@@ -51,7 +51,7 @@ Completely disabled all local player controls.
 
 #### Defined in
 
-[client/utility/disableControls.ts:13](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/client/utility/disableControls.ts#L13)
+[client/utility/disableControls.ts:13](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/client/utility/disableControls.ts#L13)
 
 ___
 
@@ -67,4 +67,4 @@ AthenaClient.utility.disableControls.**handleDisablingAttacks**(): `void`
 
 #### Defined in
 
-[client/utility/disableControls.ts:37](https://github.com/Stuyk/altv-athena/blob/94f5f1a/src/core/client/utility/disableControls.ts#L37)
+[client/utility/disableControls.ts:37](https://github.com/Stuyk/altv-athena/blob/75aefbb/src/core/client/utility/disableControls.ts#L37)
