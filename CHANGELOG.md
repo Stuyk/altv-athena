@@ -11,6 +11,8 @@
 - Athena.player.appearance.setHeadBlendData
 - Athena.player.appearance.setSkin
 - Athena.player.appearance.clearSkin
+- Added automatic character document synchronization to WebViews
+--- Available as a prop, or from the "import * as state from '@utility/state';" export
 
 --------------------------------------
 --- Everything Below is Before April 2

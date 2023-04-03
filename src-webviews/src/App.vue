@@ -38,10 +38,13 @@ import { CORE_IMPORTS } from './pages/components';
 import { PLUGIN_IMPORTS } from './plugins/imports';
 import { WebViewEventNames } from '../../src/core/shared/enums/webViewEvents';
 import VueDevMenu from './components/VueDevMenu.vue';
-import './utility/state';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Character } from '@AthenaShared/interfaces/character';
+import * as state from '@utility/state';
 
 // Interfaces
 import IPageData from './interfaces/IPageData';
+import WebViewEvents from '@utility/webViewEvents';
 
 const ALL_THE_COMPONENTS = {
     ...CORE_IMPORTS,
@@ -143,8 +146,14 @@ export default defineComponent({
             this.handleSetPages(currentPages, 'pages');
             localStorage.setItem('pages', JSON.stringify(currentPages));
         },
+        setCharacterState(characterData: Character) {
+            state.set('data', characterData);
+            this.state = characterData;
+        },
     },
     mounted() {
+        WebViewEvents.on(SYSTEM_EVENTS.PLAYER_EMIT_STATE, this.setCharacterState);
+
         // What to show when 'alt' is not present.
         // Basically if alt:V isn't running with this page present inside of it.
         if (!('alt' in window)) {

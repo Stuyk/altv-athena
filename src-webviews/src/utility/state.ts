@@ -1,3 +1,5 @@
+import { Character } from '@AthenaShared/interfaces/character';
+
 const state: { [key: string]: any } = {};
 
 /**
@@ -23,4 +25,15 @@ export function set(key: string, value: any) {
  */
 export function get<T>(key: string): T | undefined {
     return state[key];
+}
+
+/**
+ * Returns character data when synchronized from server.
+ *
+ * @export
+ * @template T
+ * @return {*}  {(T | undefined)}
+ */
+export function getCharacterData<T = Character>(): T | undefined {
+    return state['data'];
 }

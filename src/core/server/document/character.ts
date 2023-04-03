@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import { Character } from '@AthenaShared/interfaces/character';
 import { KnownKeys } from '@AthenaShared/utility/knownKeys';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import Database from '@stuyk/ezmongodb';
 
 export type KeyChangeCallback = (player: alt.Player, newValue: any, oldValue: any) => void;
@@ -206,6 +207,7 @@ export async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(
         );
     }
 
+    Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, cache[player.id]);
     if (typeof callbacks[typeSafeFieldName] === 'undefined') {
         return;
     }
@@ -248,6 +250,7 @@ export async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt
 
     cache[player.id] = Object.assign(cache[player.id], fields);
     await Database.updatePartialData(cache[player.id]._id, fields, Athena.database.collections.Characters);
+    Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, cache[player.id]);
 
     Object.keys(fields).forEach((key) => {
         if (typeof callbacks[key] === 'undefined') {

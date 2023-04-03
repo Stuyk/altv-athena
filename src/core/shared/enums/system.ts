@@ -87,6 +87,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_TEMP_OBJECT_LERP = 'temp:Object:Lerp',
     PLAYER_EMIT_WHEEL_MENU = 'wheelMenu:Dynamic',
     PLAYER_EMIT_MISSION_TEXT = 'missionText:Create',
+    PLAYER_EMIT_STATE = 'playerEmit:state',
     //
     PLAYER_SET_FREEZE = 'freeze:Set',
     PLAYER_SET_DEATH = 'death:Toggle',

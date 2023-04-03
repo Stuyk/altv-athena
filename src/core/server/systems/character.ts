@@ -194,6 +194,7 @@ export async function select(player: alt.Player, character: Character) {
 
         Athena.player.emit.fadeScreenFromBlack(player, 2000);
         Athena.player.events.trigger('selected-character', player);
+        Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, data);
     }, 500);
 }
 
