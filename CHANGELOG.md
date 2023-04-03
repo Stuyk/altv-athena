@@ -7,6 +7,7 @@
 - Added in-game editor for debug mode / admins
 --- Command is /editor
 - Fixed restrict function
+- Athena.player.teleport
 
 --------------------------------------
 --- Everything Below is Before April 2
