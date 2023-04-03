@@ -123,6 +123,27 @@ export async function setModel(player: alt.Player, isFeminine: boolean) {
 }
 
 /**
+ * Set player appearance to a skin / model / ped.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {(string | number)} model
+ */
+export async function setSkin(player: alt.Player, model: string | number) {
+    Athena.systems.inventory.clothing.setSkin(player, model);
+}
+
+/**
+ * Clear player custom model.
+ *
+ * @export
+ * @param {alt.Player} player
+ */
+export async function clearSkin(player: alt.Player) {
+    Athena.systems.inventory.clothing.clearSkin(player);
+}
+
+/**
  * Set an eye color on a player.
  *
  * Automatically saves to database.
@@ -143,6 +164,45 @@ export async function setEyeColor(player: alt.Player, color: number) {
     }
 
     data.appearance.eyes = color;
+    await Athena.document.character.set(player, 'appearance', data.appearance);
+}
+
+/**
+ * Change the player's face
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {{
+ *         faceFather: number;
+ *         faceMother: number;
+ *         skinFather: number;
+ *         skinMother: number;
+ *         faceMix: number;
+ *         skinMix: number;
+ *     }} faceData
+ * @return {*}
+ */
+export async function setHeadBlendData(
+    player: alt.Player,
+    faceData: {
+        faceFather: number;
+        faceMother: number;
+        skinFather: number;
+        skinMother: number;
+        faceMix: number;
+        skinMix: number;
+    },
+) {
+    if (Overrides.setHeadBlendData) {
+        return Overrides.setHeadBlendData(player, faceData);
+    }
+
+    const data = Athena.document.character.get(player);
+    if (!data || !data.appearance) {
+        return;
+    }
+
+    data.appearance = { ...data.appearance, ...faceData };
     await Athena.document.character.set(player, 'appearance', data.appearance);
 }
 
@@ -186,12 +246,14 @@ interface AppearanceFuncs {
     setModel: typeof setModel;
     setEyeColor: typeof setEyeColor;
     updateTattoos: typeof updateTattoos;
+    setHeadBlendData: typeof setHeadBlendData;
 }
 
 const Overrides: Partial<AppearanceFuncs> = {};
 
 export function override(functionName: 'setHairStyle', callback: typeof setHairStyle);
 export function override(functionName: 'setFacialHair', callback: typeof setFacialHair);
+export function override(functionName: 'setHeadBlendData', callback: typeof setHeadBlendData);
 export function override(functionName: 'setEyebrows', callback: typeof setEyebrows);
 export function override(functionName: 'setModel', callback: typeof setModel);
 export function override(functionName: 'setEyeColor', callback: typeof setEyeColor);

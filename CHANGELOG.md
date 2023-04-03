@@ -8,6 +8,9 @@
 --- Command is /editor
 - Fixed restrict function
 - Athena.player.teleport
+- Athena.player.appearance.setHeadBlendData
+- Athena.player.appearance.setSkin
+- Athena.player.appearance.clearSkin
 
 --------------------------------------
 --- Everything Below is Before April 2

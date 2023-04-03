@@ -17,6 +17,18 @@ export async function addPermission(player: alt.Player, permission: string) {
 }
 
 /**
+ * Add a permission to the given player's account.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {string} permission
+ * @return {*}
+ */
+export async function addAcountPermissions(player: alt.Player, permission: string) {
+    return await Athena.systems.permission.add('account', player, permission);
+}
+
+/**
  * Removes a permission from the given player character.
  *
  * @async
@@ -28,6 +40,18 @@ export async function addPermission(player: alt.Player, permission: string) {
  */
 export async function removePermission(player: alt.Player, permission: string) {
     return await Athena.systems.permission.remove('character', player, permission);
+}
+
+/**
+ * Remove a permission to the given player's account.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {string} permission
+ * @return {*}
+ */
+export async function removeAccountPermission(player: alt.Player, permission: string) {
+    return await Athena.systems.permission.remove('account', player, permission);
 }
 
 /**
