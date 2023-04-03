@@ -78,8 +78,3 @@ export function toVehicle(player: alt.Player, vehicle: alt.Vehicle) {
 export function toPosition(player: alt.Player, pos: alt.IVector3) {
     Athena.player.safe.setPosition(player, pos.x, pos.y, pos.z, false);
 }
-
-Athena.systems.defaults.time.disable();
-
-
-
