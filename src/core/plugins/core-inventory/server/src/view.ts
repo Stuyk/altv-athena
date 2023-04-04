@@ -30,6 +30,7 @@ const offers: { [hash: string]: OfferInfo } = {};
 // Storages
 const openStorages: { [player_id: string]: Array<StoredItem> } = {};
 const openStorageSessions: { [player_id: string]: string } = {};
+const openStoragesWeight: { [player_id: string]: number } = {};
 
 // Callbacks
 const openCallbacks: Array<PlayerCallback> = [];
@@ -315,12 +316,24 @@ const Internal = {
         }
 
         if (info.startType === 'custom') {
+            const maxWeight = openStoragesWeight[player.id];
+            if (Athena.systems.inventory.weight.isWeightExceeded([complexSwap.from], maxWeight)) {
+                InventoryView.storage.resync(player);
+                return;
+            }
+
             openStorages[player.id] = complexSwap.from;
         } else {
             await Athena.document.character.set(player, info.startType, complexSwap.from);
         }
 
         if (info.endType === 'custom') {
+            const maxWeight = openStoragesWeight[player.id];
+            if (Athena.systems.inventory.weight.isWeightExceeded([complexSwap.to], maxWeight)) {
+                InventoryView.storage.resync(player);
+                return;
+            }
+
             openStorages[player.id] = complexSwap.to;
         } else {
             await Athena.document.character.set(player, info.endType, complexSwap.to);
@@ -649,6 +662,7 @@ export const InventoryView = {
             items: Array<StoredItem>,
             storageSize: number,
             forceOpenInventory = false,
+            maxWeight: number = Number.MAX_SAFE_INTEGER,
         ) {
             if (forceOpenInventory) {
                 player.emit(INVENTORY_EVENTS.TO_CLIENT.OPEN);
@@ -666,6 +680,7 @@ export const InventoryView = {
 
             openStorages[player.id] = deepCloneArray<StoredItem>(items);
             openStorageSessions[player.id] = uid;
+            openStoragesWeight[player.id] = maxWeight;
             const fullStorageList = Athena.systems.inventory.manager.convertFromStored(openStorages[player.id]);
             Athena.webview.emit(player, INVENTORY_EVENTS.TO_WEBVIEW.SET_CUSTOM, fullStorageList, storageSize);
         },
