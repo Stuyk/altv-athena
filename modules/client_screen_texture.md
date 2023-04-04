@@ -32,7 +32,7 @@ Draw a texture in-world from a GTA:V file, or DLC
 
 #### Defined in
 
-[client/screen/texture.ts:74](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/client/screen/texture.ts#L74)
+[client/screen/texture.ts:74](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/client/screen/texture.ts#L74)
 
 ___
 
@@ -60,4 +60,4 @@ Draw a texture on-screen from a GTA:V file or DLC
 
 #### Defined in
 
-[client/screen/texture.ts:17](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/client/screen/texture.ts#L17)
+[client/screen/texture.ts:17](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/client/screen/texture.ts#L17)

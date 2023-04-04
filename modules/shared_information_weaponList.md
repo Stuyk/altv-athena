@@ -33,7 +33,7 @@ Get a weapon hash by its string name.
 
 #### Defined in
 
-[shared/information/weaponList.ts:1565](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/shared/information/weaponList.ts#L1565)
+[shared/information/weaponList.ts:1565](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/shared/information/weaponList.ts#L1565)
 
 ___
 
@@ -53,7 +53,7 @@ An array of all the weapons in the WeaponList.
 
 #### Defined in
 
-[shared/information/weaponList.ts:1573](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/shared/information/weaponList.ts#L1573)
+[shared/information/weaponList.ts:1573](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/shared/information/weaponList.ts#L1573)
 
 ___
 
@@ -69,4 +69,4 @@ AthenaShared.information.weaponList.**getWeaponMap**(): `Object`
 
 #### Defined in
 
-[shared/information/weaponList.ts:1577](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/shared/information/weaponList.ts#L1577)
+[shared/information/weaponList.ts:1577](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/shared/information/weaponList.ts#L1577)

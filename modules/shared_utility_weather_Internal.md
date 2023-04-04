@@ -35,4 +35,4 @@ order: 0
 
 #### Defined in
 
-[shared/utility/weather.ts:1](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/shared/utility/weather.ts#L1)
+[shared/utility/weather.ts:1](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/shared/utility/weather.ts#L1)

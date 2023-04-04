@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/information/eyebrows.ts:1](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/shared/information/eyebrows.ts#L1)
+[shared/information/eyebrows.ts:1](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/shared/information/eyebrows.ts#L1)

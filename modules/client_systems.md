@@ -39,6 +39,12 @@ Renames and re-exports [client/systems/interaction](client_systems_interaction.m
 
 ___
 
+### inventory
+
+Renames and re-exports [client/systems/inventory](client_systems_inventory.md)
+
+___
+
 ### messenger
 
 Renames and re-exports [client/systems/messenger](client_systems_messenger.md)

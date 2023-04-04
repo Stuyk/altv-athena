@@ -92,6 +92,8 @@
 - [client/systems/hotkeyRegistry](modules/client_systems_hotkeyRegistry.md)
 - [client/systems/interaction](modules/client_systems_interaction.md)
 - [client/systems/interiors](modules/client_systems_interiors.md)
+- [client/systems/inventory](modules/client_systems_inventory.md)
+- [client/systems/inventory/get](modules/client_systems_inventory_get.md)
 - [client/systems/job](modules/client_systems_job.md)
 - [client/systems/jwt](modules/client_systems_jwt.md)
 - [client/systems/messenger](modules/client_systems_messenger.md)

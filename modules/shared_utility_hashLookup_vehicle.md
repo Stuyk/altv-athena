@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[shared/utility/hashLookup/vehicle.ts:43](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/shared/utility/hashLookup/vehicle.ts#L43)
+[shared/utility/hashLookup/vehicle.ts:43](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/shared/utility/hashLookup/vehicle.ts#L43)
 
 ## Functions
 
@@ -49,7 +49,7 @@ Get the VehicleInfo corresponding to a hash.
 
 #### Defined in
 
-[shared/utility/hashLookup/vehicle.ts:11](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/shared/utility/hashLookup/vehicle.ts#L11)
+[shared/utility/hashLookup/vehicle.ts:11](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/shared/utility/hashLookup/vehicle.ts#L11)
 
 ___
 
@@ -75,7 +75,7 @@ Get the VehicleInfo corresponding to a hex hash.
 
 #### Defined in
 
-[shared/utility/hashLookup/vehicle.ts:37](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/shared/utility/hashLookup/vehicle.ts#L37)
+[shared/utility/hashLookup/vehicle.ts:37](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/shared/utility/hashLookup/vehicle.ts#L37)
 
 ___
 
@@ -101,4 +101,4 @@ Get the VehicleInfo corresponding to a signed hash.
 
 #### Defined in
 
-[shared/utility/hashLookup/vehicle.ts:24](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/shared/utility/hashLookup/vehicle.ts#L24)
+[shared/utility/hashLookup/vehicle.ts:24](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/shared/utility/hashLookup/vehicle.ts#L24)
