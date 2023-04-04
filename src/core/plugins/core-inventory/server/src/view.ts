@@ -316,25 +316,42 @@ const Internal = {
             return;
         }
 
+        // Check Storage Capacity
+        const maxWeight = openStoragesWeight[player.id];
+        let itemsToCheck: Array<StoredItem>;
+
         if (info.startType === 'custom') {
-            const maxWeight = openStoragesWeight[player.id];
-            if (Athena.systems.inventory.weight.isWeightExceeded([complexSwap.from], maxWeight)) {
+            itemsToCheck = complexSwap.from;
+
+            if (Athena.systems.inventory.weight.isWeightExceeded([complexSwap.to])) {
                 InventoryView.storage.resync(player);
                 return;
             }
+        }
 
+        if (info.endType === 'custom') {
+            itemsToCheck = complexSwap.to;
+
+            if (Athena.systems.inventory.weight.isWeightExceeded([complexSwap.from])) {
+                InventoryView.storage.resync(player);
+                return;
+            }
+        }
+
+        const isWeightExceeded = Athena.systems.inventory.weight.isWeightExceeded([itemsToCheck], maxWeight);
+        if (isWeightExceeded) {
+            InventoryView.storage.resync(player);
+            return;
+        }
+
+        // Assign Data
+        if (info.startType === 'custom') {
             openStorages[player.id] = complexSwap.from;
         } else {
             await Athena.document.character.set(player, info.startType, complexSwap.from);
         }
 
         if (info.endType === 'custom') {
-            const maxWeight = openStoragesWeight[player.id];
-            if (Athena.systems.inventory.weight.isWeightExceeded([complexSwap.to], maxWeight)) {
-                InventoryView.storage.resync(player);
-                return;
-            }
-
             openStorages[player.id] = complexSwap.to;
         } else {
             await Athena.document.character.set(player, info.endType, complexSwap.to);
