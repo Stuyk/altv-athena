@@ -1,15 +1,33 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
-import { KnownKeys } from '@AthenaShared/utility/knownKeys';
-import { Account } from '@AthenaServer/interface/iAccount';
 import Database from '@stuyk/ezmongodb';
+import { KnownKeys } from '@AthenaShared/utility/knownKeys';
+import { Account } from '@AthenaShared/interfaces/iAccount';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
 export type KeyChangeCallback = (player: alt.Player, newValue: any, oldValue: any) => void;
 
 const callbacks: { [key: string]: Array<KeyChangeCallback> } = {};
 const cache: { [id: string]: Account } = {};
 const DEBUG_MODE = false; // Use this to see what state is being set.
+
+const restrictedFields = ['username', 'password', 'salt', 'hardware', 'ips', 'banned'];
+
+/**
+ * Removes restricted fields to be passed to the player.
+ *
+ * @param {Account} data
+ * @return {Partial<Account>}
+ */
+function removeRestrictedFields(data: Account): Partial<Account> {
+    for (let fieldName of restrictedFields) {
+        delete data[fieldName];
+    }
+
+    return data;
+}
 
 /**
  * Binds a player identifier to a Account document.
@@ -34,6 +52,10 @@ export function bind(player: alt.Player, document: Account) {
     }
 
     cache[player.id] = document;
+    try {
+        const dataCopy = deepCloneObject<Account>(cache[player.id]);
+        Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, removeRestrictedFields(dataCopy));
+    } catch (err) {}
 }
 
 /**
@@ -129,6 +151,11 @@ export async function set<T = {}, Keys = keyof KnownKeys<Account & T>>(
         );
     }
 
+    try {
+        const dataCopy = deepCloneObject<Account>(cache[player.id]);
+        Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, removeRestrictedFields(dataCopy));
+    } catch (err) {}
+
     if (typeof callbacks[typeSafeFieldName] === 'undefined') {
         return;
     }
@@ -160,6 +187,11 @@ export async function setBulk<T = {}, Keys = Partial<Account & T>>(player: alt.P
 
     cache[player.id] = Object.assign(cache[player.id], fields);
     await Database.updatePartialData(cache[player.id]._id, fields, Athena.database.collections.Accounts);
+
+    try {
+        const dataCopy = deepCloneObject<Account>(cache[player.id]);
+        Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, removeRestrictedFields(dataCopy));
+    } catch (err) {}
 
     Object.keys(fields).forEach((key) => {
         if (typeof callbacks[key] === 'undefined') {

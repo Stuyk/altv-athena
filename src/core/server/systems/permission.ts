@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
-import { Account } from '@AthenaServer/interface/iAccount';
+import { Account } from '@AthenaShared/interfaces/iAccount';
 import { Character } from '@AthenaShared/interfaces/character';
 import Database from '@stuyk/ezmongodb';
 

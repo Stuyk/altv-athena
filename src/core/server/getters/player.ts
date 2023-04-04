@@ -3,7 +3,7 @@ import * as Athena from '@AthenaServer/api';
 
 import Database from '@stuyk/ezmongodb';
 import { Character } from '@AthenaShared/interfaces/character';
-import { Account } from '@AthenaServer/interface/iAccount';
+import { Account } from '@AthenaShared/interfaces/iAccount';
 import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
 
 /**

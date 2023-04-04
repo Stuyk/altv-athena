@@ -1,5 +1,3 @@
-import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-
 /**
  * Used to store Discord Information, IPs, and User Data
  *
@@ -54,14 +52,6 @@ export interface Account {
      *
      */
     lastLogin: number;
-
-    /**
-     * What administrative permissions does this account have.
-     * Default: 0
-     * @type {PERMISSIONS}
-     *
-     */
-    permissionLevel: PERMISSIONS;
 
     /**
      * A list of permissions assigned to this account.

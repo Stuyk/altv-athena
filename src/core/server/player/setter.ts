@@ -5,7 +5,7 @@ import * as PlayerEvents from '@AthenaServer/player/events';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { ActionMenu } from '@AthenaShared/interfaces/actions';
-import { Account } from '../interface/iAccount';
+import { Account } from '../../shared/interfaces/iAccount';
 import { Collections } from '../database/collections';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 import Database from '@stuyk/ezmongodb';

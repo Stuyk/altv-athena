@@ -1,4 +1,5 @@
 import { Character } from '@AthenaShared/interfaces/character';
+import { Account } from '@AthenaShared/interfaces/iAccount';
 
 const state: { [key: string]: any } = {};
 
@@ -32,8 +33,19 @@ export function get<T>(key: string): T | undefined {
  *
  * @export
  * @template T
- * @return {*}  {(T | undefined)}
+ * @return {(T | undefined)}
  */
 export function getCharacterData<T = Character>(): T | undefined {
-    return state['data'];
+    return state['characterState'];
+}
+
+/**
+ * Returns account state when synchronized from server.
+ *
+ * @export
+ * @template T
+ * @return {(T | undefined)}
+ */
+export function getAccountData<T = Partial<Account>>(): T | undefined {
+    return state['accountState'];
 }
