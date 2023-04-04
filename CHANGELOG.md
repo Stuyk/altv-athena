@@ -13,6 +13,8 @@
 - Athena.player.appearance.clearSkin
 - Added automatic character document synchronization to WebViews
 --- Available as a prop, or from the "import * as state from '@utility/state';" export
+- Athena.player.inventory.getAt - Fixed Type Definition
+- Athena.player.toolbar.getAt - Fixed Type Definition
 
 --------------------------------------
 --- Everything Below is Before April 2

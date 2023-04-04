@@ -237,7 +237,7 @@ export async function modifyItemData<CustomData = {}>(
  * @param {number} slot
  * @return {(StoredItem | undefined)}
  */
-export function getAt<CustomData = {}>(player: alt.Player, slot: number): StoredItem | undefined {
+export function getAt<CustomData = {}>(player: alt.Player, slot: number): StoredItem<CustomData> | undefined {
     if (Overrides.getAt) {
         return Overrides.getAt<CustomData>(player, slot);
     }
