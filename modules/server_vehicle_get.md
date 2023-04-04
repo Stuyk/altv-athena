@@ -30,7 +30,7 @@ An array of owned vehicles.
 
 #### Defined in
 
-[server/vehicle/get.ts:32](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/vehicle/get.ts#L32)
+[server/vehicle/get.ts:32](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/vehicle/get.ts#L32)
 
 ___
 
@@ -63,7 +63,7 @@ An array of vehicles owned and spawned by a player.
 
 #### Defined in
 
-[server/vehicle/get.ts:52](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/vehicle/get.ts#L52)
+[server/vehicle/get.ts:52](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/vehicle/get.ts#L52)
 
 ___
 
@@ -88,4 +88,4 @@ An array of temporary vehicles.
 
 #### Defined in
 
-[server/vehicle/get.ts:15](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/vehicle/get.ts#L15)
+[server/vehicle/get.ts:15](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/vehicle/get.ts#L15)

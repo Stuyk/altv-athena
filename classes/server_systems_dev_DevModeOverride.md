@@ -42,7 +42,7 @@ None
 
 #### Defined in
 
-[server/systems/dev.ts:20](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/systems/dev.ts#L20)
+[server/systems/dev.ts:20](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/systems/dev.ts#L20)
 
 ___
 
@@ -64,4 +64,4 @@ Athena.systems.dev.DevModeOverride.`Static` **setDevAccountCallback**(`cb`): `vo
 
 #### Defined in
 
-[server/systems/dev.ts:7](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/systems/dev.ts#L7)
+[server/systems/dev.ts:7](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/systems/dev.ts#L7)

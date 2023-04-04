@@ -32,7 +32,7 @@ Add a permission to the given player's account.
 
 #### Defined in
 
-[server/player/permissions.ts:27](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/permissions.ts#L27)
+[server/player/permissions.ts:27](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/player/permissions.ts#L27)
 
 ___
 
@@ -62,7 +62,7 @@ If a player group permission, and a vehicle group permission intercept, then veh
 
 #### Defined in
 
-[server/player/permissions.ts:133](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/permissions.ts#L133)
+[server/player/permissions.ts:133](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/player/permissions.ts#L133)
 
 ___
 
@@ -95,7 +95,7 @@ addPermission
 
 #### Defined in
 
-[server/player/permissions.ts:15](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/permissions.ts#L15)
+[server/player/permissions.ts:15](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/player/permissions.ts#L15)
 
 ___
 
@@ -122,7 +122,7 @@ Check if the player has an account permission.
 
 #### Defined in
 
-[server/player/permissions.ts:77](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/permissions.ts#L77)
+[server/player/permissions.ts:77](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/player/permissions.ts#L77)
 
 ___
 
@@ -151,7 +151,7 @@ Check if a player has any matching permissions against another document.
 
 #### Defined in
 
-[server/player/permissions.ts:108](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/permissions.ts#L108)
+[server/player/permissions.ts:108](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/player/permissions.ts#L108)
 
 ___
 
@@ -179,7 +179,7 @@ Check if a player character has a group permission.
 
 #### Defined in
 
-[server/player/permissions.ts:90](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/permissions.ts#L90)
+[server/player/permissions.ts:90](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/player/permissions.ts#L90)
 
 ___
 
@@ -206,7 +206,7 @@ Check if the current player character has a permission.
 
 #### Defined in
 
-[server/player/permissions.ts:65](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/permissions.ts#L65)
+[server/player/permissions.ts:65](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/player/permissions.ts#L65)
 
 ___
 
@@ -233,7 +233,7 @@ Remove a permission to the given player's account.
 
 #### Defined in
 
-[server/player/permissions.ts:53](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/permissions.ts#L53)
+[server/player/permissions.ts:53](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/player/permissions.ts#L53)
 
 ___
 
@@ -266,4 +266,4 @@ removePermission
 
 #### Defined in
 
-[server/player/permissions.ts:41](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/permissions.ts#L41)
+[server/player/permissions.ts:41](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/player/permissions.ts#L41)

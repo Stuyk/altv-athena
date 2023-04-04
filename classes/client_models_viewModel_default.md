@@ -27,7 +27,7 @@ Called when the view is closed.
 
 #### Defined in
 
-[client/models/viewModel.ts:16](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/models/viewModel.ts#L16)
+[client/models/viewModel.ts:16](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/client/models/viewModel.ts#L16)
 
 ___
 
@@ -41,7 +41,7 @@ Called when the view is being opened and the url is being set.
 
 #### Defined in
 
-[client/models/viewModel.ts:8](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/models/viewModel.ts#L8)
+[client/models/viewModel.ts:8](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/client/models/viewModel.ts#L8)
 
 ___
 
@@ -55,4 +55,4 @@ Called when the view has loaded and it sends an event to this function.
 
 #### Defined in
 
-[client/models/viewModel.ts:24](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/models/viewModel.ts#L24)
+[client/models/viewModel.ts:24](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/client/models/viewModel.ts#L24)

@@ -35,7 +35,7 @@ Draw a marker in an every tick.
 
 #### Defined in
 
-[client/screen/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/screen/marker.ts#L16)
+[client/screen/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/client/screen/marker.ts#L16)
 
 ___
 
@@ -62,4 +62,4 @@ AthenaClient.screen.marker.**drawSimple**(`type`, `pos`, `rot`, `scale`, `color`
 
 #### Defined in
 
-[client/screen/marker.ts:53](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/screen/marker.ts#L53)
+[client/screen/marker.ts:53](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/client/screen/marker.ts#L53)

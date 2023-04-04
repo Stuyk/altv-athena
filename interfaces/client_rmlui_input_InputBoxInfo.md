@@ -19,7 +19,7 @@ If set to true, it will blur the background while responding.
 
 #### Defined in
 
-[client/rmlui/input/index.ts:24](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/rmlui/input/index.ts#L24)
+[client/rmlui/input/index.ts:24](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/client/rmlui/input/index.ts#L24)
 
 ___
 
@@ -31,7 +31,7 @@ If set to true, it will darken the background while responding.
 
 #### Defined in
 
-[client/rmlui/input/index.ts:32](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/rmlui/input/index.ts#L32)
+[client/rmlui/input/index.ts:32](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/client/rmlui/input/index.ts#L32)
 
 ___
 
@@ -43,7 +43,7 @@ Hide Radar?
 
 #### Defined in
 
-[client/rmlui/input/index.ts:40](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/rmlui/input/index.ts#L40)
+[client/rmlui/input/index.ts:40](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/client/rmlui/input/index.ts#L40)
 
 ___
 
@@ -56,4 +56,4 @@ ie. 'What is your first name?'
 
 #### Defined in
 
-[client/rmlui/input/index.ts:16](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/rmlui/input/index.ts#L16)
+[client/rmlui/input/index.ts:16](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/client/rmlui/input/index.ts#L16)
