@@ -38,7 +38,7 @@ When a function is invoked it is automatically checked for proper permissions.
 
 #### Defined in
 
-[server/systems/adminControl.ts:18](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/systems/adminControl.ts#L18)
+[server/systems/adminControl.ts:18](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/server/systems/adminControl.ts#L18)
 
 ___
 
@@ -64,7 +64,7 @@ Get all admin controls available for a player.
 
 #### Defined in
 
-[server/systems/adminControl.ts:40](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/systems/adminControl.ts#L40)
+[server/systems/adminControl.ts:40](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/server/systems/adminControl.ts#L40)
 
 ___
 
@@ -88,4 +88,4 @@ Parses controls and pushes them down to the client. Updating their control list.
 
 #### Defined in
 
-[server/systems/adminControl.ts:63](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/systems/adminControl.ts#L63)
+[server/systems/adminControl.ts:63](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/server/systems/adminControl.ts#L63)

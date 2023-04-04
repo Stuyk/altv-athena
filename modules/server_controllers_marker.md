@@ -41,7 +41,7 @@ uid A unique string for marker
 
 #### Defined in
 
-[server/controllers/marker.ts:150](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/marker.ts#L150)
+[server/controllers/marker.ts:150](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/server/controllers/marker.ts#L150)
 
 ___
 
@@ -88,7 +88,7 @@ uid A unique string for marker
 
 #### Defined in
 
-[server/controllers/marker.ts:67](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/marker.ts#L67)
+[server/controllers/marker.ts:67](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/server/controllers/marker.ts#L67)
 
 ___
 
@@ -113,7 +113,7 @@ Used to override any marker streamer functionality
 
 #### Defined in
 
-[server/controllers/marker.ts:169](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/marker.ts#L169)
+[server/controllers/marker.ts:169](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/server/controllers/marker.ts#L169)
 
 ::: tip Usage
 Athena.controllers.marker.**override**(`functionName`, `callback`): `any`
@@ -134,7 +134,7 @@ Used to override any marker streamer functionality
 
 #### Defined in
 
-[server/controllers/marker.ts:170](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/marker.ts#L170)
+[server/controllers/marker.ts:170](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/server/controllers/marker.ts#L170)
 
 ::: tip Usage
 Athena.controllers.marker.**override**(`functionName`, `callback`): `any`
@@ -155,7 +155,7 @@ Used to override any marker streamer functionality
 
 #### Defined in
 
-[server/controllers/marker.ts:171](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/marker.ts#L171)
+[server/controllers/marker.ts:171](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/server/controllers/marker.ts#L171)
 
 ::: tip Usage
 Athena.controllers.marker.**override**(`functionName`, `callback`): `any`
@@ -176,7 +176,7 @@ Used to override any marker streamer functionality
 
 #### Defined in
 
-[server/controllers/marker.ts:172](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/marker.ts#L172)
+[server/controllers/marker.ts:172](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/server/controllers/marker.ts#L172)
 
 ___
 
@@ -207,7 +207,7 @@ Athena.controllers.marker.remove('the-uid-you-specified');
 
 #### Defined in
 
-[server/controllers/marker.ts:94](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/marker.ts#L94)
+[server/controllers/marker.ts:94](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/server/controllers/marker.ts#L94)
 
 ___
 
@@ -239,4 +239,4 @@ Athena.controllers.marker.removeFromPlayer(somePlayer, someUid);
 
 #### Defined in
 
-[server/controllers/marker.ts:122](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/server/controllers/marker.ts#L122)
+[server/controllers/marker.ts:122](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/server/controllers/marker.ts#L122)

@@ -27,4 +27,4 @@ AthenaShared.utility.undefinedCheck.**isNullOrUndefined**(`value`): `boolean`
 
 #### Defined in
 
-[shared/utility/undefinedCheck.ts:1](https://github.com/Stuyk/altv-athena/blob/ce61c7c/src/core/shared/utility/undefinedCheck.ts#L1)
+[shared/utility/undefinedCheck.ts:1](https://github.com/Stuyk/altv-athena/blob/36098eb/src/core/shared/utility/undefinedCheck.ts#L1)
