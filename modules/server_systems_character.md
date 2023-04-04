@@ -32,7 +32,7 @@ Create a new character for a specific player.
 
 #### Defined in
 
-[server/systems/character.ts:61](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L61)
+[server/systems/character.ts:61](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L61)
 
 ___
 
@@ -56,7 +56,7 @@ Get all characters that belong to an account by account identifier.
 
 #### Defined in
 
-[server/systems/character.ts:223](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L223)
+[server/systems/character.ts:223](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L223)
 
 ___
 
@@ -81,7 +81,7 @@ Invokes the custom creator to be opened.
 
 #### Defined in
 
-[server/systems/character.ts:38](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L38)
+[server/systems/character.ts:38](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L38)
 
 ___
 
@@ -105,7 +105,7 @@ Check if a character name is taken.
 
 #### Defined in
 
-[server/systems/character.ts:208](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L208)
+[server/systems/character.ts:208](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L208)
 
 ___
 
@@ -130,7 +130,7 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:273](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L273)
+[server/systems/character.ts:273](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L273)
 
 ::: tip Usage
 Athena.systems.character.**override**(`functionName`, `callback`): `any`
@@ -151,7 +151,7 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:274](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L274)
+[server/systems/character.ts:274](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L274)
 
 ::: tip Usage
 Athena.systems.character.**override**(`functionName`, `callback`): `any`
@@ -172,7 +172,7 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:275](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L275)
+[server/systems/character.ts:275](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L275)
 
 ::: tip Usage
 Athena.systems.character.**override**(`functionName`, `callback`): `any`
@@ -193,7 +193,7 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:276](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L276)
+[server/systems/character.ts:276](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L276)
 
 ::: tip Usage
 Athena.systems.character.**override**(`functionName`, `callback`): `any`
@@ -214,7 +214,7 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:277](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L277)
+[server/systems/character.ts:277](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L277)
 
 ::: tip Usage
 Athena.systems.character.**override**(`functionName`, `callback`): `any`
@@ -235,7 +235,7 @@ Used to override character creation / management internally.
 
 #### Defined in
 
-[server/systems/character.ts:278](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L278)
+[server/systems/character.ts:278](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L278)
 
 ___
 
@@ -264,7 +264,7 @@ Always call this function last in login flow modifications.
 
 #### Defined in
 
-[server/systems/character.ts:105](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L105)
+[server/systems/character.ts:105](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L105)
 
 ___
 
@@ -288,4 +288,4 @@ Allows a custom character creator to be shown.
 
 #### Defined in
 
-[server/systems/character.ts:23](https://github.com/Stuyk/altv-athena/blob/46a95d3/src/core/server/systems/character.ts#L23)
+[server/systems/character.ts:23](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/character.ts#L23)

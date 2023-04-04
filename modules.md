@@ -275,6 +275,7 @@
 - [server/vehicle/tempVehicles](modules/server_vehicle_tempVehicles.md)
 - [server/vehicle/tuning](modules/server_vehicle_tuning.md)
 - [server/webview](modules/server_webview.md)
+- [server/webview/utilities](modules/server_webview_utilities.md)
 - [shared/configurations/shared](modules/shared_configurations_shared.md)
 - [shared/enums/VehicleHash](modules/shared_enums_VehicleHash.md)
 - [shared/enums/athenaEvents](modules/shared_enums_athenaEvents.md)
