@@ -15,6 +15,13 @@
 --- Available as a prop, or from the "import * as state from '@utility/state';" export
 - Athena.player.inventory.getAt - Fixed Type Definition
 - Athena.player.toolbar.getAt - Fixed Type Definition
+- AthenaClient.systems.inventory.get
+- AthenaClient.systems.inventory.get.toolbar
+- AthenaClient.systems.inventory.get.inventory
+- AthenaClient.systems.inventory.get.totalWeight
+- AthenaClient.systems.inventory.get.onInventoryChange
+- AthenaClient.systems.inventory.get.onToolbarChange
+- AthenaClient.systems.inventory.get.onWeightChange
 
 --------------------------------------
 --- Everything Below is Before April 2
