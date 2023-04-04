@@ -33,7 +33,7 @@ alt.ColshapeCylinder.constructor
 
 #### Defined in
 
-[server/extensions/extColshape.ts:13](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/server/extensions/extColshape.ts#L13)
+[server/extensions/extColshape.ts:13](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/server/extensions/extColshape.ts#L13)
 
 ## Properties
 
@@ -43,4 +43,4 @@ alt.ColshapeCylinder.constructor
 
 #### Defined in
 
-[server/extensions/extColshape.ts:9](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/server/extensions/extColshape.ts#L9)
+[server/extensions/extColshape.ts:9](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/server/extensions/extColshape.ts#L9)

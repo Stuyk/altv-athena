@@ -25,7 +25,7 @@ order: 0
 
 #### Defined in
 
-[client/systems/entitySelector.ts:12](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/systems/entitySelector.ts#L12)
+[client/systems/entitySelector.ts:12](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/systems/entitySelector.ts#L12)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[client/systems/entitySelector.ts:11](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/systems/entitySelector.ts#L11)
+[client/systems/entitySelector.ts:11](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/systems/entitySelector.ts#L11)
 
 ## Functions
 
@@ -53,7 +53,7 @@ Get all of the current entities in the player's radius.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:268](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/systems/entitySelector.ts#L268)
+[client/systems/entitySelector.ts:261](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/systems/entitySelector.ts#L261)
 
 ___
 
@@ -71,7 +71,7 @@ Return the currently selected entity.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:255](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/systems/entitySelector.ts#L255)
+[client/systems/entitySelector.ts:248](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/systems/entitySelector.ts#L248)
 
 ___
 
@@ -95,7 +95,7 @@ Sets an interaction to be pushed into the entity list.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:277](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/systems/entitySelector.ts#L277)
+[client/systems/entitySelector.ts:270](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/systems/entitySelector.ts#L270)
 
 ___
 
@@ -119,7 +119,7 @@ Change the defualt marker colour.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:294](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/systems/entitySelector.ts#L294)
+[client/systems/entitySelector.ts:287](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/systems/entitySelector.ts#L287)
 
 ___
 
@@ -137,7 +137,7 @@ Turn the marker off.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:285](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/systems/entitySelector.ts#L285)
+[client/systems/entitySelector.ts:278](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/systems/entitySelector.ts#L278)
 
 ___
 
@@ -161,4 +161,25 @@ Change the defualt marker size.
 
 #### Defined in
 
-[client/systems/entitySelector.ts:303](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/systems/entitySelector.ts#L303)
+[client/systems/entitySelector.ts:296](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/systems/entitySelector.ts#L296)
+
+___
+
+### setToAutoMode
+
+::: tip Usage
+AthenaClient.systems.entitySelector.**setToAutoMode**(): `void`
+:::
+
+When this function is called, it automatically will always
+find the closest entity. It will not allow cycling Targets.
+
+**`Export`**
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[client/systems/entitySelector.ts:306](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/systems/entitySelector.ts#L306)

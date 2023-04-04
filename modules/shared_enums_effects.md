@@ -23,4 +23,4 @@ order: 0
 
 #### Defined in
 
-[shared/enums/effects.ts:1](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/shared/enums/effects.ts#L1)
+[shared/enums/effects.ts:1](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/shared/enums/effects.ts#L1)

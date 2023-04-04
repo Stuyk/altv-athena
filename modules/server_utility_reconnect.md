@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[server/utility/reconnect.ts:39](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/server/utility/reconnect.ts#L39)
+[server/utility/reconnect.ts:39](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/server/utility/reconnect.ts#L39)
 
 ## Functions
 
@@ -39,7 +39,7 @@ Athena.utility.reconnect.**invoke**(): `Promise`<`void`\>
 
 #### Defined in
 
-[server/utility/reconnect.ts:5](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/server/utility/reconnect.ts#L5)
+[server/utility/reconnect.ts:5](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/server/utility/reconnect.ts#L5)
 
 ___
 
@@ -55,7 +55,7 @@ Athena.utility.reconnect.**isWindows**(): `boolean`
 
 #### Defined in
 
-[server/utility/reconnect.ts:19](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/server/utility/reconnect.ts#L19)
+[server/utility/reconnect.ts:19](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/server/utility/reconnect.ts#L19)
 
 ___
 
@@ -71,4 +71,4 @@ Athena.utility.reconnect.**reconnect**(): `Promise`<`void`\>
 
 #### Defined in
 
-[server/utility/reconnect.ts:23](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/server/utility/reconnect.ts#L23)
+[server/utility/reconnect.ts:23](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/server/utility/reconnect.ts#L23)
