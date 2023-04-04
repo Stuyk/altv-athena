@@ -49,3 +49,39 @@ export function getCharacterData<T = Character>(): T | undefined {
 export function getAccountData<T = Partial<Account>>(): T | undefined {
     return state['accountState'];
 }
+
+/**
+ * Return a list of character permissions.
+ *
+ * @export
+ * @return {Array<string>}
+ */
+export function getCharacterPermissions(): Array<string> {
+    if (!state['characterState']) {
+        return [];
+    }
+
+    if (!state['characterState'].permissions) {
+        return [];
+    }
+
+    return state['characterState'].permissions;
+}
+
+/**
+ * Return a list of account permissions.
+ *
+ * @export
+ * @return {Array<string>}
+ */
+export function getAccountPermissions(): Array<string> {
+    if (!state['accountState']) {
+        return [];
+    }
+
+    if (!state['accountState'].permissions) {
+        return [];
+    }
+
+    return state['accountState'].permissions;
+}

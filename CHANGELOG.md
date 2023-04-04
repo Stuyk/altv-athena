@@ -23,6 +23,16 @@
 - AthenaClient.systems.inventory.get.onToolbarChange
 - AthenaClient.systems.inventory.get.onWeightChange
 
+- import * as state from '@ViewUtility/state'
+- This allows you to get character, or account info in the view easily.
+- Alternatively use a Vue Prop with 'state' or 'accountData'.
+- state.get
+- state.set
+- state.getAccountData
+- state.getAccountPermissions
+- state.getCharacterData
+- state.getCharacterPermissions
+
 --------------------------------------
 --- Everything Below is Before April 2
 --------------------------------------
