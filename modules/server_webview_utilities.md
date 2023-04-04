@@ -31,7 +31,7 @@ If pages are specified it only closes those specific pages.
 
 #### Defined in
 
-[server/webview/utilities.ts:22](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/server/webview/utilities.ts#L22)
+[server/webview/utilities.ts:22](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/webview/utilities.ts#L22)
 
 ___
 
@@ -59,4 +59,4 @@ Emits an event directly to the client's WebView.
 
 #### Defined in
 
-[server/webview/utilities.ts:12](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/server/webview/utilities.ts#L12)
+[server/webview/utilities.ts:12](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/webview/utilities.ts#L12)

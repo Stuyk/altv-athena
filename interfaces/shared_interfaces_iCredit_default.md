@@ -25,7 +25,7 @@ The alignment of the credits. Defaults to left.
 
 #### Defined in
 
-[shared/interfaces/iCredit.ts:39](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/shared/interfaces/iCredit.ts#L39)
+[shared/interfaces/iCredit.ts:39](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/iCredit.ts#L39)
 
 ___
 
@@ -38,7 +38,7 @@ Use -1 to set forever.
 
 #### Defined in
 
-[shared/interfaces/iCredit.ts:32](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/shared/interfaces/iCredit.ts#L32)
+[shared/interfaces/iCredit.ts:32](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/iCredit.ts#L32)
 
 ___
 
@@ -51,7 +51,7 @@ Can use GTA Colors.
 
 #### Defined in
 
-[shared/interfaces/iCredit.ts:24](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/shared/interfaces/iCredit.ts#L24)
+[shared/interfaces/iCredit.ts:24](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/iCredit.ts#L24)
 
 ___
 
@@ -64,4 +64,4 @@ CANNOT use GTA Colors like ~r~
 
 #### Defined in
 
-[shared/interfaces/iCredit.ts:16](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/shared/interfaces/iCredit.ts#L16)
+[shared/interfaces/iCredit.ts:16](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/iCredit.ts#L16)

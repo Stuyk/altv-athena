@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[shared/utility/hashLookup/ped.ts:43](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/shared/utility/hashLookup/ped.ts#L43)
+[shared/utility/hashLookup/ped.ts:43](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/utility/hashLookup/ped.ts#L43)
 
 ## Functions
 
@@ -49,7 +49,7 @@ Get the PedInfo corresponding to a hex hash.
 
 #### Defined in
 
-[shared/utility/hashLookup/ped.ts:37](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/shared/utility/hashLookup/ped.ts#L37)
+[shared/utility/hashLookup/ped.ts:37](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/utility/hashLookup/ped.ts#L37)
 
 ___
 
@@ -75,4 +75,4 @@ Get the PedInfo corresponding to a signed hash.
 
 #### Defined in
 
-[shared/utility/hashLookup/ped.ts:24](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/shared/utility/hashLookup/ped.ts#L24)
+[shared/utility/hashLookup/ped.ts:24](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/utility/hashLookup/ped.ts#L24)

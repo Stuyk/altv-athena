@@ -25,4 +25,4 @@ Sends an event to the server when the local player's waypoint is updated.
 
 #### Defined in
 
-[client/systems/athenaEvents.ts:37](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/systems/athenaEvents.ts#L37)
+[client/systems/athenaEvents.ts:37](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/client/systems/athenaEvents.ts#L37)

@@ -35,7 +35,7 @@ s
 
 #### Defined in
 
-[client/utility/math.ts:43](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/utility/math.ts#L43)
+[client/utility/math.ts:43](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/client/utility/math.ts#L43)
 
 ___
 
@@ -59,7 +59,7 @@ Returns the average value among all numbers.
 
 #### Defined in
 
-[client/utility/math.ts:113](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/utility/math.ts#L113)
+[client/utility/math.ts:113](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/client/utility/math.ts#L113)
 
 ___
 
@@ -90,7 +90,7 @@ s
 
 #### Defined in
 
-[client/utility/math.ts:14](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/utility/math.ts#L14)
+[client/utility/math.ts:14](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/client/utility/math.ts#L14)
 
 ___
 
@@ -120,7 +120,7 @@ s
 
 #### Defined in
 
-[client/utility/math.ts:72](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/utility/math.ts#L72)
+[client/utility/math.ts:72](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/client/utility/math.ts#L72)
 
 ___
 
@@ -150,7 +150,7 @@ s
 
 #### Defined in
 
-[client/utility/math.ts:28](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/utility/math.ts#L28)
+[client/utility/math.ts:28](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/client/utility/math.ts#L28)
 
 ___
 
@@ -182,7 +182,7 @@ s
 
 #### Defined in
 
-[client/utility/math.ts:92](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/utility/math.ts#L92)
+[client/utility/math.ts:92](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/client/utility/math.ts#L92)
 
 ___
 
@@ -206,4 +206,4 @@ Could also be seen as rotAnglesToVector
 
 #### Defined in
 
-[client/utility/math.ts:54](https://github.com/Stuyk/altv-athena/blob/1862056/src/core/client/utility/math.ts#L54)
+[client/utility/math.ts:54](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/client/utility/math.ts#L54)
