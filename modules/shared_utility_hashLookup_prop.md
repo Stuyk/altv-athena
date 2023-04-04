@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[shared/utility/hashLookup/prop.ts:43](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/shared/utility/hashLookup/prop.ts#L43)
+[shared/utility/hashLookup/prop.ts:43](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/shared/utility/hashLookup/prop.ts#L43)
 
 ## Functions
 
@@ -49,7 +49,7 @@ Get the PropInfo corresponding to a hex hash.
 
 #### Defined in
 
-[shared/utility/hashLookup/prop.ts:37](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/shared/utility/hashLookup/prop.ts#L37)
+[shared/utility/hashLookup/prop.ts:37](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/shared/utility/hashLookup/prop.ts#L37)
 
 ___
 
@@ -75,4 +75,4 @@ Get the PropInfo corresponding to a signed hash.
 
 #### Defined in
 
-[shared/utility/hashLookup/prop.ts:24](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/shared/utility/hashLookup/prop.ts#L24)
+[shared/utility/hashLookup/prop.ts:24](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/shared/utility/hashLookup/prop.ts#L24)

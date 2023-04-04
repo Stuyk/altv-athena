@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[client/screen/screenText.ts:11](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/screenText.ts#L11)
+[client/screen/screenText.ts:11](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/screen/screenText.ts#L11)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[client/screen/screenText.ts:12](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/screenText.ts#L12)
+[client/screen/screenText.ts:12](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/screen/screenText.ts#L12)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[client/screen/screenText.ts:10](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/screenText.ts#L10)
+[client/screen/screenText.ts:10](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/screen/screenText.ts#L10)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[client/screen/screenText.ts:7](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/screenText.ts#L7)
+[client/screen/screenText.ts:7](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/screen/screenText.ts#L7)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[client/screen/screenText.ts:8](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/screenText.ts#L8)
+[client/screen/screenText.ts:8](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/screen/screenText.ts#L8)
 
 ___
 
@@ -67,4 +67,4 @@ ___
 
 #### Defined in
 
-[client/screen/screenText.ts:9](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/screenText.ts#L9)
+[client/screen/screenText.ts:9](https://github.com/Stuyk/altv-athena/blob/d77637c/src/core/client/screen/screenText.ts#L9)
