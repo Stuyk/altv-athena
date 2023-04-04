@@ -19,7 +19,7 @@ Time to ease between camera nodes. If only one camera node is present it does no
 
 #### Defined in
 
-[client/camera/cinematic.ts:51](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/cinematic.ts#L51)
+[client/camera/cinematic.ts:51](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/camera/cinematic.ts#L51)
 
 ___
 
@@ -32,7 +32,7 @@ Use `scriptID` for this.
 
 #### Defined in
 
-[client/camera/cinematic.ts:76](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/cinematic.ts#L76)
+[client/camera/cinematic.ts:76](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/camera/cinematic.ts#L76)
 
 ___
 
@@ -44,7 +44,7 @@ The entity `scriptID` to follow with the camera.
 
 #### Defined in
 
-[client/camera/cinematic.ts:59](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/cinematic.ts#L59)
+[client/camera/cinematic.ts:59](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/camera/cinematic.ts#L59)
 
 ___
 
@@ -56,7 +56,7 @@ The FOV for the camera. Default is set to 90.
 
 #### Defined in
 
-[client/camera/cinematic.ts:43](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/cinematic.ts#L43)
+[client/camera/cinematic.ts:43](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/camera/cinematic.ts#L43)
 
 ___
 
@@ -68,7 +68,7 @@ If this is the last camera node, should we destroy the camera after easeTime?
 
 #### Defined in
 
-[client/camera/cinematic.ts:100](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/cinematic.ts#L100)
+[client/camera/cinematic.ts:100](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/camera/cinematic.ts#L100)
 
 ___
 
@@ -80,7 +80,7 @@ Applies to entity attachment, and the offset from said entity.
 
 #### Defined in
 
-[client/camera/cinematic.ts:35](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/cinematic.ts#L35)
+[client/camera/cinematic.ts:35](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/camera/cinematic.ts#L35)
 
 ___
 
@@ -92,7 +92,7 @@ A pedestrian bone index to attach to if `entityToAttachTo` is specified
 
 #### Defined in
 
-[client/camera/cinematic.ts:92](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/cinematic.ts#L92)
+[client/camera/cinematic.ts:92](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/camera/cinematic.ts#L92)
 
 ___
 
@@ -104,7 +104,7 @@ Position for where to create this camera.
 
 #### Defined in
 
-[client/camera/cinematic.ts:18](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/cinematic.ts#L18)
+[client/camera/cinematic.ts:18](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/camera/cinematic.ts#L18)
 
 ___
 
@@ -116,7 +116,7 @@ A position to point that camera towards if applicable.
 
 #### Defined in
 
-[client/camera/cinematic.ts:67](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/cinematic.ts#L67)
+[client/camera/cinematic.ts:67](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/camera/cinematic.ts#L67)
 
 ___
 
@@ -129,7 +129,7 @@ Also applies as rotation for entity attachment if applicable.
 
 #### Defined in
 
-[client/camera/cinematic.ts:27](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/cinematic.ts#L27)
+[client/camera/cinematic.ts:27](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/camera/cinematic.ts#L27)
 
 ___
 
@@ -141,4 +141,4 @@ A vehicle bone index to attach to if `entityToAttachTo` is specified
 
 #### Defined in
 
-[client/camera/cinematic.ts:84](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/cinematic.ts#L84)
+[client/camera/cinematic.ts:84](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/camera/cinematic.ts#L84)

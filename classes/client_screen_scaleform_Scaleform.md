@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[client/screen/scaleform.ts:7](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/screen/scaleform.ts#L7)
+[client/screen/scaleform.ts:7](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/scaleform.ts#L7)
 
 ## Properties
 
@@ -33,7 +33,7 @@ order: 0
 
 #### Defined in
 
-[client/screen/scaleform.ts:5](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/screen/scaleform.ts#L5)
+[client/screen/scaleform.ts:5](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/scaleform.ts#L5)
 
 ## Methods
 
@@ -49,7 +49,7 @@ AthenaClient.screen.scaleform.Scaleform.**destroy**(): `void`
 
 #### Defined in
 
-[client/screen/scaleform.ts:48](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/screen/scaleform.ts#L48)
+[client/screen/scaleform.ts:48](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/scaleform.ts#L48)
 
 ___
 
@@ -65,7 +65,7 @@ AthenaClient.screen.scaleform.Scaleform.**hasLoaded**(): `boolean`
 
 #### Defined in
 
-[client/screen/scaleform.ts:11](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/screen/scaleform.ts#L11)
+[client/screen/scaleform.ts:11](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/scaleform.ts#L11)
 
 ___
 
@@ -88,7 +88,7 @@ AthenaClient.screen.scaleform.Scaleform.**passFunction**(`functionName`, `...arg
 
 #### Defined in
 
-[client/screen/scaleform.ts:15](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/screen/scaleform.ts#L15)
+[client/screen/scaleform.ts:15](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/scaleform.ts#L15)
 
 ___
 
@@ -113,4 +113,4 @@ AthenaClient.screen.scaleform.Scaleform.**render**(`x`, `y`, `width`, `height`):
 
 #### Defined in
 
-[client/screen/scaleform.ts:53](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/screen/scaleform.ts#L53)
+[client/screen/scaleform.ts:53](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/screen/scaleform.ts#L53)

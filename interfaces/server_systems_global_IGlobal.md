@@ -17,4 +17,4 @@ order: 0
 
 #### Defined in
 
-[server/systems/global.ts:8](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/server/systems/global.ts#L8)
+[server/systems/global.ts:8](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/server/systems/global.ts#L8)

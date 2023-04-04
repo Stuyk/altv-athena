@@ -22,4 +22,4 @@ order: 0
 
 #### Defined in
 
-[client/systems/debug.ts:7](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/systems/debug.ts#L7)
+[client/systems/debug.ts:7](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/client/systems/debug.ts#L7)

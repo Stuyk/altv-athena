@@ -31,4 +31,4 @@ AthenaShared.utility.classCheck.**default**(`funcOrClass`): `boolean`
 
 #### Defined in
 
-[shared/utility/classCheck.ts:1](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/shared/utility/classCheck.ts#L1)
+[shared/utility/classCheck.ts:1](https://github.com/Stuyk/altv-athena/blob/c82c34f/src/core/shared/utility/classCheck.ts#L1)
