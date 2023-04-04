@@ -17,11 +17,12 @@ let selections: Array<TargetInfo> = [];
 let selectionIndex = 0;
 let lastSelection: TargetInfo;
 let nextUpdate = Date.now();
-let timeBetweenUpdates = 5000;
+let timeBetweenUpdates = 500;
 let showMarker = true;
 let color: alt.RGBA = new alt.RGBA(255, 255, 255, 200);
 let size = new alt.Vector3(0.1, 0.05, 0.1);
 let latestInteraction: Interaction;
+let autoMode = false;
 
 const Internal = {
     init() {
@@ -107,7 +108,7 @@ const Internal = {
         }
 
         lastSelection = selections[index];
-        selectionIndex = index;
+        selectionIndex = autoMode === false ? index : 0;
     },
     selectClosestEntity() {
         if (AthenaClient.webview.isAnyMenuOpen()) {
@@ -214,6 +215,10 @@ const Internal = {
             return;
         }
 
+        if (autoMode) {
+            selectionIndex = 0;
+        }
+
         const pos = new alt.Vector3(selections[selectionIndex].pos).add(
             0,
             0,
@@ -221,18 +226,6 @@ const Internal = {
         );
 
         if (!showMarker) {
-            return;
-        }
-
-        if (alt.Player.local.vehicle && selections[selectionIndex].id === alt.Player.local.vehicle.scriptID) {
-            AthenaClient.screen.marker.drawSimple(
-                MARKER_TYPE.CHEVRON_UP,
-                alt.Player.local.vehicle.pos.add(0, 0, 2),
-                new alt.Vector3(0, 180, 0),
-                size,
-                color,
-                true,
-            );
             return;
         }
 
@@ -302,6 +295,16 @@ export function setMarkerColor(customColor: alt.RGBA) {
  */
 export function setMarkerSize(markerSize: alt.Vector3) {
     size = markerSize;
+}
+
+/**
+ * When this function is called, it automatically will always
+ * find the closest entity. It will not allow cycling Targets.
+ *
+ * @export
+ */
+export function setToAutoMode() {
+    autoMode = true;
 }
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, Internal.init);
