@@ -219,7 +219,12 @@ const Internal = {
             selectionIndex = 0;
         }
 
-        const pos = new alt.Vector3(selections[selectionIndex].pos).add(
+        let existingPos: alt.IVector3 = selections[selectionIndex].pos;
+        if (native.doesEntityExist(selections[selectionIndex].id)) {
+            existingPos = native.getEntityCoords(selections[selectionIndex].id, false);
+        }
+
+        const pos = new alt.Vector3(existingPos).add(
             0,
             0,
             isNaN(selections[selectionIndex].height) ? 1 : selections[selectionIndex].height,
@@ -227,6 +232,13 @@ const Internal = {
 
         if (!showMarker) {
             return;
+        }
+
+        if (selections[selectionIndex].type === 'player' || selections[selectionIndex].type === 'vehicle') {
+            const velocity = native.getEntitySpeed(selections[selectionIndex].id);
+            if (velocity >= 6) {
+                return;
+            }
         }
 
         AthenaClient.screen.marker.drawSimple(
