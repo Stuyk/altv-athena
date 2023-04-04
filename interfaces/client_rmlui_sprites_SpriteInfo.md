@@ -35,7 +35,7 @@ Call this callback once, when the sprite is touched.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:55](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/client/rmlui/sprites/index.ts#L55)
+[client/rmlui/sprites/index.ts:55](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/rmlui/sprites/index.ts#L55)
 
 ___
 
@@ -47,7 +47,7 @@ The height of the image. Pixels.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:40](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/client/rmlui/sprites/index.ts#L40)
+[client/rmlui/sprites/index.ts:40](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/rmlui/sprites/index.ts#L40)
 
 ___
 
@@ -61,7 +61,7 @@ Otherwise paths are based on `../../../plugins/plugin-name/client/image.png`.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:24](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/client/rmlui/sprites/index.ts#L24)
+[client/rmlui/sprites/index.ts:24](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/rmlui/sprites/index.ts#L24)
 
 ___
 
@@ -73,7 +73,7 @@ A position in-world, or on-screen where to draw this image.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:48](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/client/rmlui/sprites/index.ts#L48)
+[client/rmlui/sprites/index.ts:48](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/rmlui/sprites/index.ts#L48)
 
 ___
 
@@ -85,7 +85,7 @@ A unique identifier for this sprite.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:14](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/client/rmlui/sprites/index.ts#L14)
+[client/rmlui/sprites/index.ts:14](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/rmlui/sprites/index.ts#L14)
 
 ___
 
@@ -97,4 +97,4 @@ The width of the image. Pixels.
 
 #### Defined in
 
-[client/rmlui/sprites/index.ts:32](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/client/rmlui/sprites/index.ts#L32)
+[client/rmlui/sprites/index.ts:32](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/rmlui/sprites/index.ts#L32)

@@ -25,7 +25,7 @@ Creates a WebView Page Controller
 
 #### Defined in
 
-[client/webview/page.ts:175](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/client/webview/page.ts#L175)
+[client/webview/page.ts:175](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/webview/page.ts#L175)
 
 ## Properties
 
@@ -35,7 +35,7 @@ Creates a WebView Page Controller
 
 #### Defined in
 
-[client/webview/page.ts:168](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/client/webview/page.ts#L168)
+[client/webview/page.ts:168](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/webview/page.ts#L168)
 
 ## Methods
 
@@ -61,7 +61,7 @@ Useful for when you want your own exit functionality for your WebView.
 
 #### Defined in
 
-[client/webview/page.ts:285](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/client/webview/page.ts#L285)
+[client/webview/page.ts:285](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/webview/page.ts#L285)
 
 ___
 
@@ -79,4 +79,4 @@ Open this WebView Page
 
 #### Defined in
 
-[client/webview/page.ts:209](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/client/webview/page.ts#L209)
+[client/webview/page.ts:209](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/client/webview/page.ts#L209)

@@ -12,7 +12,7 @@ order: 0
 ### create
 
 ::: tip Usage
-Athena.systems.account.**create**(`player`, `dataToAppend`): `Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md)\>
+Athena.systems.account.**create**(`player`, `dataToAppend`): `Promise`<[`Account`](../interfaces/shared_interfaces_iAccount_Account.md)\>
 :::
 
 Create an account with default data.
@@ -26,18 +26,18 @@ Create an account with default data.
 
 #### Returns
 
-`Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md)\>
+`Promise`<[`Account`](../interfaces/shared_interfaces_iAccount_Account.md)\>
 
 #### Defined in
 
-[server/systems/account.ts:66](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/account.ts#L66)
+[server/systems/account.ts:66](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/systems/account.ts#L66)
 
 ___
 
 ### getAccount
 
 ::: tip Usage
-Athena.systems.account.**getAccount**(`key`, `value`): `Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md) \| `undefined`\>
+Athena.systems.account.**getAccount**(`key`, `value`): `Promise`<[`Account`](../interfaces/shared_interfaces_iAccount_Account.md) \| `undefined`\>
 :::
 
 Fetch account for a player based on key / value pair.
@@ -51,11 +51,11 @@ Fetch account for a player based on key / value pair.
 
 #### Returns
 
-`Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md) \| `undefined`\>
+`Promise`<[`Account`](../interfaces/shared_interfaces_iAccount_Account.md) \| `undefined`\>
 
 #### Defined in
 
-[server/systems/account.ts:36](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/account.ts#L36)
+[server/systems/account.ts:36](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/systems/account.ts#L36)
 
 ___
 
@@ -72,7 +72,7 @@ Used to override any account system functionality
 | Name | Type |
 | :------ | :------ |
 | `functionName` | ``"create"`` |
-| `callback` | (`player`: `Player`, `dataToAppend`: { `[key: string]`: `any`;  }) => `Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md)\> |
+| `callback` | (`player`: `Player`, `dataToAppend`: { `[key: string]`: `any`;  }) => `Promise`<[`Account`](../interfaces/shared_interfaces_iAccount_Account.md)\> |
 
 #### Returns
 
@@ -80,7 +80,7 @@ Used to override any account system functionality
 
 #### Defined in
 
-[server/systems/account.ts:109](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/account.ts#L109)
+[server/systems/account.ts:109](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/systems/account.ts#L109)
 
 ::: tip Usage
 Athena.systems.account.**override**(`functionName`, `callback`): `any`
@@ -93,7 +93,7 @@ Used to override any account system functionality
 | Name | Type |
 | :------ | :------ |
 | `functionName` | ``"getAccount"`` |
-| `callback` | (`key`: `string`, `value`: `any`) => `Promise`<[`Account`](../interfaces/server_interface_iAccount_Account.md) \| `undefined`\> |
+| `callback` | (`key`: `string`, `value`: `any`) => `Promise`<[`Account`](../interfaces/shared_interfaces_iAccount_Account.md) \| `undefined`\> |
 
 #### Returns
 
@@ -101,4 +101,4 @@ Used to override any account system functionality
 
 #### Defined in
 
-[server/systems/account.ts:110](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/systems/account.ts#L110)
+[server/systems/account.ts:110](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/systems/account.ts#L110)

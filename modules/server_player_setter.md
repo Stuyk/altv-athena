@@ -22,7 +22,7 @@ Set the current account data for this player.
 | Name | Type |
 | :------ | :------ |
 | `player` | `Player` |
-| `accountData` | [`Account`](../interfaces/server_interface_iAccount_Account.md) |
+| `accountData` | [`Account`](../interfaces/shared_interfaces_iAccount_Account.md) |
 
 #### Returns
 
@@ -30,7 +30,7 @@ Set the current account data for this player.
 
 #### Defined in
 
-[server/player/setter.ts:20](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/player/setter.ts#L20)
+[server/player/setter.ts:20](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/setter.ts#L20)
 
 ___
 
@@ -53,7 +53,7 @@ Athena.player.setter.**actionMenu**(`player`, `actionMenu`): `any`
 
 #### Defined in
 
-[server/player/setter.ts:37](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/player/setter.ts#L37)
+[server/player/setter.ts:37](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/setter.ts#L37)
 
 ___
 
@@ -70,7 +70,7 @@ Used to override any setter functions
 | Name | Type |
 | :------ | :------ |
 | `functionName` | ``"account"`` |
-| `callback` | (`player`: `Player`, `accountData`: [`Account`](../interfaces/server_interface_iAccount_Account.md)) => `Promise`<`void`\> |
+| `callback` | (`player`: `Player`, `accountData`: [`Account`](../interfaces/shared_interfaces_iAccount_Account.md)) => `Promise`<`void`\> |
 
 #### Returns
 
@@ -78,7 +78,7 @@ Used to override any setter functions
 
 #### Defined in
 
-[server/player/setter.ts:68](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/player/setter.ts#L68)
+[server/player/setter.ts:68](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/setter.ts#L68)
 
 ::: tip Usage
 Athena.player.setter.**override**(`functionName`, `callback`): `any`
@@ -99,7 +99,7 @@ Used to override any setter functions
 
 #### Defined in
 
-[server/player/setter.ts:69](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/player/setter.ts#L69)
+[server/player/setter.ts:69](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/setter.ts#L69)
 
 ::: tip Usage
 Athena.player.setter.**override**(`functionName`, `callback`): `any`
@@ -120,7 +120,7 @@ Used to override any setter functions
 
 #### Defined in
 
-[server/player/setter.ts:70](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/player/setter.ts#L70)
+[server/player/setter.ts:70](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/setter.ts#L70)
 
 ___
 
@@ -145,4 +145,4 @@ Set this player as respawned.
 
 #### Defined in
 
-[server/player/setter.ts:50](https://github.com/Stuyk/altv-athena/blob/9e819c0/src/core/server/player/setter.ts#L50)
+[server/player/setter.ts:50](https://github.com/Stuyk/altv-athena/blob/a06179b/src/core/server/player/setter.ts#L50)
