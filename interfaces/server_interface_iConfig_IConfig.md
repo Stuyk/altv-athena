@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[server/interface/iConfig.ts:5](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L5)
+[server/interface/iConfig.ts:5](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L5)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:2](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L2)
+[server/interface/iConfig.ts:2](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L2)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:3](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L3)
+[server/interface/iConfig.ts:3](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L3)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:9](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L9)
+[server/interface/iConfig.ts:9](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L9)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:10](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L10)
+[server/interface/iConfig.ts:10](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L10)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:8](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L8)
+[server/interface/iConfig.ts:8](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L8)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:6](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L6)
+[server/interface/iConfig.ts:6](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L6)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:7](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L7)
+[server/interface/iConfig.ts:7](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L7)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:13](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L13)
+[server/interface/iConfig.ts:13](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L13)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:14](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L14)
+[server/interface/iConfig.ts:14](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L14)
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:12](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L12)
+[server/interface/iConfig.ts:12](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L12)
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:11](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L11)
+[server/interface/iConfig.ts:11](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L11)
 
 ___
 
@@ -137,4 +137,4 @@ ___
 
 #### Defined in
 
-[server/interface/iConfig.ts:4](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/server/interface/iConfig.ts#L4)
+[server/interface/iConfig.ts:4](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iConfig.ts#L4)

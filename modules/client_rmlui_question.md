@@ -25,7 +25,7 @@ AthenaClient.rmlui.question.**cancel**(): `Promise`<`void`\>
 
 #### Defined in
 
-[client/rmlui/question/index.ts:140](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/client/rmlui/question/index.ts#L140)
+[client/rmlui/question/index.ts:140](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/client/rmlui/question/index.ts#L140)
 
 ___
 
@@ -49,4 +49,4 @@ Create a box that asks for a simple yes or no answer.
 
 #### Defined in
 
-[client/rmlui/question/index.ts:117](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/client/rmlui/question/index.ts#L117)
+[client/rmlui/question/index.ts:117](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/client/rmlui/question/index.ts#L117)

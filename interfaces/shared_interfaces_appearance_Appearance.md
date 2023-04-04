@@ -26,7 +26,7 @@ This will not show without opacity being set.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:158](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L158)
+[shared/interfaces/appearance.ts:158](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L158)
 
 ___
 
@@ -38,7 +38,7 @@ The colors of the chest hair.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:173](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L173)
+[shared/interfaces/appearance.ts:173](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L173)
 
 ___
 
@@ -51,7 +51,7 @@ Values 0.0 to 1.0
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:166](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L166)
+[shared/interfaces/appearance.ts:166](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L166)
 
 ___
 
@@ -63,7 +63,7 @@ These have to do with makeup, lipstick, etc.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:195](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L195)
+[shared/interfaces/appearance.ts:195](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L195)
 
 ___
 
@@ -76,7 +76,7 @@ This will not show without opacity being set.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:135](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L135)
+[shared/interfaces/appearance.ts:135](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L135)
 
 ___
 
@@ -88,7 +88,7 @@ The colors of the eyebrows.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:150](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L150)
+[shared/interfaces/appearance.ts:150](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L150)
 
 ___
 
@@ -101,7 +101,7 @@ Values 0.0 to 1.0
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:143](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L143)
+[shared/interfaces/appearance.ts:143](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L143)
 
 ___
 
@@ -113,7 +113,7 @@ Eye Color
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:180](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L180)
+[shared/interfaces/appearance.ts:180](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L180)
 
 ___
 
@@ -125,7 +125,7 @@ Values range from 0 to 45
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:20](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L20)
+[shared/interfaces/appearance.ts:20](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L20)
 
 ___
 
@@ -138,7 +138,7 @@ Values range from 0.0 to 1.0
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:49](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L49)
+[shared/interfaces/appearance.ts:49](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L49)
 
 ___
 
@@ -150,7 +150,7 @@ Values range from 0 to 45
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:27](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L27)
+[shared/interfaces/appearance.ts:27](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L27)
 
 ___
 
@@ -163,7 +163,7 @@ This will not show without opacity being set.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:112](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L112)
+[shared/interfaces/appearance.ts:112](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L112)
 
 ___
 
@@ -175,7 +175,7 @@ Facial hair color for facial hair.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:119](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L119)
+[shared/interfaces/appearance.ts:119](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L119)
 
 ___
 
@@ -188,7 +188,7 @@ Values 0.0 to 1.0
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:127](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L127)
+[shared/interfaces/appearance.ts:127](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L127)
 
 ___
 
@@ -201,7 +201,7 @@ Should be a relative id to the dlc hash.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:74](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L74)
+[shared/interfaces/appearance.ts:74](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L74)
 
 ___
 
@@ -213,7 +213,7 @@ The color of the hair.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:89](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L89)
+[shared/interfaces/appearance.ts:89](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L89)
 
 ___
 
@@ -225,7 +225,7 @@ The highlight color of the hair.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:96](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L96)
+[shared/interfaces/appearance.ts:96](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L96)
 
 ___
 
@@ -237,7 +237,7 @@ The dlc hash of the hair to use.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:82](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L82)
+[shared/interfaces/appearance.ts:82](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L82)
 
 ___
 
@@ -257,7 +257,7 @@ achieve that look.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:104](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L104)
+[shared/interfaces/appearance.ts:104](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L104)
 
 ___
 
@@ -270,7 +270,7 @@ Blemishes, moles, etc.
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:188](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L188)
+[shared/interfaces/appearance.ts:188](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L188)
 
 ___
 
@@ -282,7 +282,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:13](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L13)
+[shared/interfaces/appearance.ts:13](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L13)
 
 ___
 
@@ -294,7 +294,7 @@ Values range from 0 to 45
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:34](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L34)
+[shared/interfaces/appearance.ts:34](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L34)
 
 ___
 
@@ -307,7 +307,7 @@ Values range from 0.0 to 1.0
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:57](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L57)
+[shared/interfaces/appearance.ts:57](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L57)
 
 ___
 
@@ -319,7 +319,7 @@ Values range from 0 to 45
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:41](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L41)
+[shared/interfaces/appearance.ts:41](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L41)
 
 ___
 
@@ -333,4 +333,4 @@ Values range from -1.0 to 1.0
 
 #### Defined in
 
-[shared/interfaces/appearance.ts:66](https://github.com/Stuyk/altv-athena/blob/d2642d1/src/core/shared/interfaces/appearance.ts#L66)
+[shared/interfaces/appearance.ts:66](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/shared/interfaces/appearance.ts#L66)
