@@ -69,6 +69,7 @@ const Internal = {
 
             delete openStorageSessions[id];
             delete openStorages[id];
+            delete openStoragesWeight[id];
         },
     },
     disconnect(player: alt.Player) {
