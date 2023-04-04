@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[server/interface/iCategoryData.ts:2](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iCategoryData.ts#L2)
+[server/interface/iCategoryData.ts:2](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/server/interface/iCategoryData.ts#L2)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[server/interface/iCategoryData.ts:7](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iCategoryData.ts#L7)
+[server/interface/iCategoryData.ts:7](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/server/interface/iCategoryData.ts#L7)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[server/interface/iCategoryData.ts:4](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iCategoryData.ts#L4)
+[server/interface/iCategoryData.ts:4](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/server/interface/iCategoryData.ts#L4)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[server/interface/iCategoryData.ts:5](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iCategoryData.ts#L5)
+[server/interface/iCategoryData.ts:5](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/server/interface/iCategoryData.ts#L5)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[server/interface/iCategoryData.ts:3](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iCategoryData.ts#L3)
+[server/interface/iCategoryData.ts:3](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/server/interface/iCategoryData.ts#L3)
 
 ___
 
@@ -67,4 +67,4 @@ ___
 
 #### Defined in
 
-[server/interface/iCategoryData.ts:6](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/interface/iCategoryData.ts#L6)
+[server/interface/iCategoryData.ts:6](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/server/interface/iCategoryData.ts#L6)

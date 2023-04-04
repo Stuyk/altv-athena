@@ -30,4 +30,4 @@ Zoom all the way out. Then zoom all the way in from the sky.
 
 #### Defined in
 
-[client/camera/switch.ts:14](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/client/camera/switch.ts#L14)
+[client/camera/switch.ts:14](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/camera/switch.ts#L14)

@@ -29,4 +29,4 @@ order: 0
 
 #### Defined in
 
-[client/systems/vehicle.ts:22](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/client/systems/vehicle.ts#L22)
+[client/systems/vehicle.ts:22](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/systems/vehicle.ts#L22)

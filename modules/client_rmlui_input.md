@@ -25,7 +25,7 @@ AthenaClient.rmlui.input.**cancel**(): `Promise`<`void`\>
 
 #### Defined in
 
-[client/rmlui/input/index.ts:132](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/client/rmlui/input/index.ts#L132)
+[client/rmlui/input/index.ts:132](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/rmlui/input/index.ts#L132)
 
 ___
 
@@ -52,4 +52,4 @@ Retruns a string or undefined based on user input.
 
 #### Defined in
 
-[client/rmlui/input/index.ts:104](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/client/rmlui/input/index.ts#L104)
+[client/rmlui/input/index.ts:104](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/client/rmlui/input/index.ts#L104)

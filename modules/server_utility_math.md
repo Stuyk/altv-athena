@@ -21,7 +21,7 @@ order: 0
 
 #### Defined in
 
-[server/utility/math.ts:25](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/utility/math.ts#L25)
+[server/utility/math.ts:25](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/server/utility/math.ts#L25)
 
 ## Functions
 
@@ -47,4 +47,4 @@ Returns the first missing number.
 
 #### Defined in
 
-[server/utility/math.ts:10](https://github.com/Stuyk/altv-athena/blob/6e181c5/src/core/server/utility/math.ts#L10)
+[server/utility/math.ts:10](https://github.com/Stuyk/altv-athena/blob/10fa575/src/core/server/utility/math.ts#L10)
