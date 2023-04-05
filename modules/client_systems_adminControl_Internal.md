@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[client/systems/adminControl.ts:4](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/systems/adminControl.ts#L4)
+[client/systems/adminControl.ts:4](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/systems/adminControl.ts#L4)

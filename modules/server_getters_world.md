@@ -30,7 +30,7 @@ Uses a simple 'z' positional check and dimension check.
 
 #### Defined in
 
-[server/getters/world.ts:40](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/getters/world.ts#L40)
+[server/getters/world.ts:40](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/getters/world.ts#L40)
 
 ___
 
@@ -55,4 +55,4 @@ Check if a world position is free of vehicles.
 
 #### Defined in
 
-[server/getters/world.ts:10](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/getters/world.ts#L10)
+[server/getters/world.ts:10](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/getters/world.ts#L10)

@@ -32,4 +32,4 @@ Athena.systems.adminControl.Internal.(`player`, `...args`): `void`
 
 #### Defined in
 
-[server/systems/adminControl.ts:5](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/systems/adminControl.ts#L5)
+[server/systems/adminControl.ts:5](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/systems/adminControl.ts#L5)
