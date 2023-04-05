@@ -36,6 +36,12 @@
 - Athena.vehicle.tuning.getMods
 - Athena.vehicle.tuning.applyMods
 
+Overrides -> src/core/client/cameras/cinematic
+Overrides -> src/core/client/cameras/gameplay
+Overrides -> src/core/client/cameras/pedEdit
+Overrides -> src/core/client/cameras/switch
+Overrides -> src/core/client/rmlui/commands/index
+
 --------------------------------------
 --- Everything Below is Before April 2
 --------------------------------------
