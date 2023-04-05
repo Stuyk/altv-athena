@@ -32,14 +32,14 @@ AthenaClient.menus.vehicle.(`target`, `options`): [`player`](server_config.md#pl
 
 #### Defined in
 
-[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/menus/vehicle.ts#L8)
+[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/vehicle.ts#L8)
 
 ## Functions
 
 ### addInjection
 
 ::: tip Usage
-AthenaClient.menus.vehicle.**addInjection**(`callback`): `void`
+AthenaClient.menus.vehicle.**addInjection**(`callback`): `any`
 :::
 
 Create a vehicle wheel menu injection.
@@ -56,18 +56,38 @@ Must always return the original wheel menu options + your changes.
 
 #### Returns
 
+`any`
+
+#### Defined in
+
+[client/menus/vehicle.ts:22](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/vehicle.ts#L22)
+
+___
+
+### disable
+
+::: tip Usage
+AthenaClient.menus.vehicle.**disable**(): `void`
+:::
+
+Disable the Vehicle Wheel Menu
+
+**`Export`**
+
+#### Returns
+
 `void`
 
 #### Defined in
 
-[client/menus/vehicle.ts:21](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/menus/vehicle.ts#L21)
+[client/menus/vehicle.ts:155](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/vehicle.ts#L155)
 
 ___
 
 ### open
 
 ::: tip Usage
-AthenaClient.menus.vehicle.**open**(`vehicle`): `void`
+AthenaClient.menus.vehicle.**open**(`vehicle`): `any`
 :::
 
 #### Parameters
@@ -78,18 +98,18 @@ AthenaClient.menus.vehicle.**open**(`vehicle`): `void`
 
 #### Returns
 
-`void`
+`any`
 
 #### Defined in
 
-[client/menus/vehicle.ts:74](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/menus/vehicle.ts#L74)
+[client/menus/vehicle.ts:87](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/vehicle.ts#L87)
 
 ___
 
 ### openInVehicleMenu
 
 ::: tip Usage
-AthenaClient.menus.vehicle.**openInVehicleMenu**(`vehicle`): `void`
+AthenaClient.menus.vehicle.**openInVehicleMenu**(`vehicle`): `any`
 :::
 
 Open an in-vehicle menu option and add injections relevant to in-vehicle.
@@ -104,8 +124,69 @@ Open an in-vehicle menu option and add injections relevant to in-vehicle.
 
 #### Returns
 
-`void`
+`any`
 
 #### Defined in
 
-[client/menus/vehicle.ts:33](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/menus/vehicle.ts#L33)
+[client/menus/vehicle.ts:38](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/vehicle.ts#L38)
+
+___
+
+### override
+
+::: tip Usage
+AthenaClient.menus.vehicle.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"addInjection"`` |
+| `callback` | (`callback`: [`VehicleMenuInjection`](client_menus_vehicle.md#VehicleMenuInjection)) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/menus/vehicle.ts:167](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/vehicle.ts#L167)
+
+::: tip Usage
+AthenaClient.menus.vehicle.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"open"`` |
+| `callback` | (`vehicle`: `Vehicle`) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/menus/vehicle.ts:168](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/vehicle.ts#L168)
+
+::: tip Usage
+AthenaClient.menus.vehicle.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"openInVehicleMenu"`` |
+| `callback` | (`vehicle`: `Vehicle`) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/menus/vehicle.ts:169](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/vehicle.ts#L169)

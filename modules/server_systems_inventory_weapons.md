@@ -34,7 +34,7 @@ Add a weapon component to a weapon at a given slot.
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:67](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/inventory/weapons.ts#L67)
+[server/systems/inventory/weapons.ts:67](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/systems/inventory/weapons.ts#L67)
 
 ___
 
@@ -58,7 +58,7 @@ Return all weapons from a given data set.
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:13](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/inventory/weapons.ts#L13)
+[server/systems/inventory/weapons.ts:13](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/systems/inventory/weapons.ts#L13)
 
 ___
 
@@ -83,7 +83,7 @@ Used to override inventory item weapon functionality
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:160](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/inventory/weapons.ts#L160)
+[server/systems/inventory/weapons.ts:160](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/systems/inventory/weapons.ts#L160)
 
 ___
 
@@ -107,7 +107,7 @@ Remove all weapons from a given data set.
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:40](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/inventory/weapons.ts#L40)
+[server/systems/inventory/weapons.ts:40](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/systems/inventory/weapons.ts#L40)
 
 ___
 
@@ -131,4 +131,4 @@ Looks into the item toolbar and determines what weapons to equip / unequip.
 
 #### Defined in
 
-[server/systems/inventory/weapons.ts:106](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/inventory/weapons.ts#L106)
+[server/systems/inventory/weapons.ts:106](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/systems/inventory/weapons.ts#L106)

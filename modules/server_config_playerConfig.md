@@ -21,7 +21,7 @@ order: 0
 
 #### Defined in
 
-[server/config/playerConfig.ts:25](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/config/playerConfig.ts#L25)
+[server/config/playerConfig.ts:25](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/config/playerConfig.ts#L25)
 
 ## Functions
 
@@ -62,4 +62,4 @@ Athena.config.set<ExtendedKeys>('wanted-level', 5);
 
 #### Defined in
 
-[server/config/playerConfig.ts:21](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/config/playerConfig.ts#L21)
+[server/config/playerConfig.ts:21](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/config/playerConfig.ts#L21)

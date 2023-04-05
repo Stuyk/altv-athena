@@ -32,7 +32,7 @@ AthenaClient.menus.object.(`existingObject`, `options`): [`IWheelOptionExt`](../
 
 #### Defined in
 
-[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/menus/object.ts#L8)
+[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/object.ts#L8)
 
 ## Functions
 
@@ -60,7 +60,27 @@ Must always return the original wheel menu options + your changes.
 
 #### Defined in
 
-[client/menus/object.ts:24](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/menus/object.ts#L24)
+[client/menus/object.ts:25](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/object.ts#L25)
+
+___
+
+### disable
+
+::: tip Usage
+AthenaClient.menus.object.**disable**(): `void`
+:::
+
+Disable the Object Wheel Menu
+
+**`Export`**
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[client/menus/object.ts:98](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/object.ts#L98)
 
 ___
 
@@ -86,4 +106,46 @@ Opens the wheel menu against a target object created with the server-side object
 
 #### Defined in
 
-[client/menus/object.ts:36](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/menus/object.ts#L36)
+[client/menus/object.ts:45](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/object.ts#L45)
+
+___
+
+### override
+
+::: tip Usage
+AthenaClient.menus.object.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"addInjection"`` |
+| `callback` | (`callback`: [`ObjectMenuInjection`](client_menus_object.md#ObjectMenuInjection)) => `void` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/menus/object.ts:109](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/object.ts#L109)
+
+::: tip Usage
+AthenaClient.menus.object.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"open"`` |
+| `callback` | (`object`: `CreatedObject`) => `void` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/menus/object.ts:110](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/client/menus/object.ts#L110)

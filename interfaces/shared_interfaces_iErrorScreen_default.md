@@ -26,7 +26,7 @@ Use -1 to set forever.
 
 #### Defined in
 
-[shared/interfaces/iErrorScreen.ts:35](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/shared/interfaces/iErrorScreen.ts#L35)
+[shared/interfaces/iErrorScreen.ts:35](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/shared/interfaces/iErrorScreen.ts#L35)
 
 ___
 
@@ -38,7 +38,7 @@ Text below title.
 
 #### Defined in
 
-[shared/interfaces/iErrorScreen.ts:20](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/shared/interfaces/iErrorScreen.ts#L20)
+[shared/interfaces/iErrorScreen.ts:20](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/shared/interfaces/iErrorScreen.ts#L20)
 
 ___
 
@@ -50,7 +50,7 @@ Text below other text option.
 
 #### Defined in
 
-[shared/interfaces/iErrorScreen.ts:27](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/shared/interfaces/iErrorScreen.ts#L27)
+[shared/interfaces/iErrorScreen.ts:27](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/shared/interfaces/iErrorScreen.ts#L27)
 
 ___
 
@@ -62,4 +62,4 @@ Large Text
 
 #### Defined in
 
-[shared/interfaces/iErrorScreen.ts:13](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/shared/interfaces/iErrorScreen.ts#L13)
+[shared/interfaces/iErrorScreen.ts:13](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/shared/interfaces/iErrorScreen.ts#L13)

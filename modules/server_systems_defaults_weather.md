@@ -28,7 +28,7 @@ Athena.systems.default.weather.disable();
 
 #### Defined in
 
-[server/systems/defaults/weather.ts:91](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/defaults/weather.ts#L91)
+[server/systems/defaults/weather.ts:91](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/systems/defaults/weather.ts#L91)
 
 ___
 
@@ -52,7 +52,7 @@ Get the current weather as a string or number.
 
 #### Defined in
 
-[server/systems/defaults/weather.ts:117](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/defaults/weather.ts#L117)
+[server/systems/defaults/weather.ts:117](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/systems/defaults/weather.ts#L117)
 
 ::: tip Usage
 Athena.systems.defaults.weather.**getCurrentWeather**(`asString`): `string`
@@ -72,7 +72,7 @@ Get the current weather as a string or number.
 
 #### Defined in
 
-[server/systems/defaults/weather.ts:118](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/defaults/weather.ts#L118)
+[server/systems/defaults/weather.ts:118](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/systems/defaults/weather.ts#L118)
 
 ___
 
@@ -96,7 +96,7 @@ Used to override the default weather cycle.
 
 #### Defined in
 
-[server/systems/defaults/weather.ts:108](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/defaults/weather.ts#L108)
+[server/systems/defaults/weather.ts:108](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/systems/defaults/weather.ts#L108)
 
 ___
 
@@ -120,4 +120,4 @@ Updates the player weather to match current weather system.
 
 #### Defined in
 
-[server/systems/defaults/weather.ts:72](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/defaults/weather.ts#L72)
+[server/systems/defaults/weather.ts:72](https://github.com/Stuyk/altv-athena/blob/8e03099/src/core/server/systems/defaults/weather.ts#L72)
