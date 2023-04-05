@@ -8,6 +8,7 @@ import { IPed } from '@AthenaShared/interfaces/iPed';
 export type NpcMenuInjection = (scriptID: number, ped: IPed, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
 const Injections: Array<NpcMenuInjection> = [];
+let disabled = false;
 
 /**
  * Allows the current Menu Options to be modified.
@@ -19,6 +20,14 @@ const Injections: Array<NpcMenuInjection> = [];
  *
  */
 export function addInjection(callback: NpcMenuInjection) {
+    if (Overrides.addInjection) {
+        return Overrides.addInjection(callback);
+    }
+
+    if (disabled) {
+        return;
+    }
+
     Injections.push(callback);
 }
 
@@ -31,6 +40,14 @@ export function addInjection(callback: NpcMenuInjection) {
  *
  */
 export function open(scriptID: number): void {
+    if (Overrides.open) {
+        return Overrides.open(scriptID);
+    }
+
+    if (disabled) {
+        return;
+    }
+
     if (AthenaClient.webview.isAnyMenuOpen()) {
         return;
     }
@@ -66,4 +83,26 @@ export function open(scriptID: number): void {
     }
 
     AthenaClient.systems.wheelMenu.open('NPC', options);
+}
+
+/**
+ * Disable the NPC Wheel Menu
+ *
+ * @export
+ */
+export function disable() {
+    disabled = true;
+}
+
+interface NpcMenuFuncs {
+    addInjection: typeof addInjection;
+    open: typeof open;
+}
+
+const Overrides: Partial<NpcMenuFuncs> = {};
+
+export function override(functionName: 'addInjection', callback: typeof addInjection);
+export function override(functionName: 'open', callback: typeof open);
+export function override(functionName: keyof NpcMenuFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

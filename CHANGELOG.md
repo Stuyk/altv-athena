@@ -41,6 +41,10 @@ Overrides -> src/core/client/cameras/gameplay
 Overrides -> src/core/client/cameras/pedEdit
 Overrides -> src/core/client/cameras/switch
 Overrides -> src/core/client/rmlui/commands/index
+Overrides -> src/core/client/menus/npc
+Overrides -> src/core/client/menus/object
+Overrides -> src/core/client/menus/player
+Overrides -> src/core/client/menus/vehicle
 
 --------------------------------------
 --- Everything Below is Before April 2

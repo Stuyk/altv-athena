@@ -8,6 +8,7 @@ import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
 export type VehicleMenuInjection = (target: alt.Vehicle, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
 const Injections: Array<VehicleMenuInjection> = [];
+let disabled = false;
 
 /**
  * Create a vehicle wheel menu injection.
@@ -19,6 +20,10 @@ const Injections: Array<VehicleMenuInjection> = [];
  *
  */
 export function addInjection(callback: VehicleMenuInjection) {
+    if (Overrides.addInjection) {
+        return Overrides.addInjection(callback);
+    }
+
     Injections.push(callback);
 }
 
@@ -31,6 +36,14 @@ export function addInjection(callback: VehicleMenuInjection) {
  *
  */
 export function openInVehicleMenu(vehicle: alt.Vehicle) {
+    if (Overrides.openInVehicleMenu) {
+        return Overrides.openInVehicleMenu(vehicle);
+    }
+
+    if (disabled) {
+        return;
+    }
+
     if (AthenaClient.webview.isAnyMenuOpen()) {
         return;
     }
@@ -72,6 +85,14 @@ export function openInVehicleMenu(vehicle: alt.Vehicle) {
 }
 
 export function open(vehicle: alt.Vehicle) {
+    if (Overrides.open) {
+        return Overrides.open(vehicle);
+    }
+
+    if (disabled) {
+        return;
+    }
+
     if (AthenaClient.webview.isAnyMenuOpen()) {
         return;
     }
@@ -124,4 +145,28 @@ export function open(vehicle: alt.Vehicle) {
     }
 
     AthenaClient.systems.wheelMenu.open('Vehicle Options', options);
+}
+
+/**
+ * Disable the Vehicle Wheel Menu
+ *
+ * @export
+ */
+export function disable() {
+    disabled = true;
+}
+
+interface VehicleWheelMenuFuncs {
+    addInjection: typeof addInjection;
+    open: typeof open;
+    openInVehicleMenu: typeof openInVehicleMenu;
+}
+
+const Overrides: Partial<VehicleWheelMenuFuncs> = {};
+
+export function override(functionName: 'addInjection', callback: typeof addInjection);
+export function override(functionName: 'open', callback: typeof open);
+export function override(functionName: 'openInVehicleMenu', callback: typeof openInVehicleMenu);
+export function override(functionName: keyof VehicleWheelMenuFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

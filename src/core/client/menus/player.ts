@@ -5,6 +5,7 @@ import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
 export type PlayerMenuInjection = (target: alt.Player, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
 const Injections: Array<PlayerMenuInjection> = [];
+let disabled = false;
 
 /**
  * Allows the current Menu Options to be modified.
@@ -15,6 +16,14 @@ const Injections: Array<PlayerMenuInjection> = [];
  *
  */
 export function addInjection(callback: PlayerMenuInjection) {
+    if (Overrides.addInjection) {
+        return Overrides.addInjection(callback);
+    }
+
+    if (disabled) {
+        return;
+    }
+
     Injections.push(callback);
 }
 
@@ -26,6 +35,14 @@ export function addInjection(callback: PlayerMenuInjection) {
  *
  */
 export function open(target: alt.Player) {
+    if (Overrides.open) {
+        return Overrides.open(target);
+    }
+
+    if (disabled) {
+        return;
+    }
+
     if (AthenaClient.webview.isAnyMenuOpen()) {
         return;
     }
@@ -57,4 +74,26 @@ export function open(target: alt.Player) {
     }
 
     AthenaClient.systems.wheelMenu.open('Player', options);
+}
+
+/**
+ * Disable the Player Wheel Menu
+ *
+ * @export
+ */
+export function disable() {
+    disabled = true;
+}
+
+interface PlayerWheelMenuFuncs {
+    addInjection: typeof addInjection;
+    open: typeof open;
+}
+
+const Overrides: Partial<PlayerWheelMenuFuncs> = {};
+
+export function override(functionName: 'addInjection', callback: typeof addInjection);
+export function override(functionName: 'open', callback: typeof open);
+export function override(functionName: keyof PlayerWheelMenuFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }
