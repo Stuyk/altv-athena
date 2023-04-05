@@ -15,7 +15,7 @@ order: 0
 
 #### Defined in
 
-[server/player/currency.ts:5](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/player/currency.ts#L5)
+[server/player/currency.ts:5](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/player/currency.ts#L5)
 
 ## Functions
 
@@ -52,7 +52,7 @@ const didAddFullAmount = Athena.player.currency.add(somePlayer, 'cash', 25);
 
 #### Defined in
 
-[server/player/currency.ts:20](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/player/currency.ts#L20)
+[server/player/currency.ts:20](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/player/currency.ts#L20)
 
 ___
 
@@ -77,7 +77,7 @@ Used to override any internal currency functions.
 
 #### Defined in
 
-[server/player/currency.ts:205](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/player/currency.ts#L205)
+[server/player/currency.ts:205](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/player/currency.ts#L205)
 
 ::: tip Usage
 Athena.player.currency.**override**(`functionName`, `callback`): `any`
@@ -98,7 +98,7 @@ Used to override any internal currency functions.
 
 #### Defined in
 
-[server/player/currency.ts:206](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/player/currency.ts#L206)
+[server/player/currency.ts:206](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/player/currency.ts#L206)
 
 ::: tip Usage
 Athena.player.currency.**override**(`functionName`, `callback`): `any`
@@ -119,7 +119,7 @@ Used to override any internal currency functions.
 
 #### Defined in
 
-[server/player/currency.ts:207](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/player/currency.ts#L207)
+[server/player/currency.ts:207](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/player/currency.ts#L207)
 
 ::: tip Usage
 Athena.player.currency.**override**(`functionName`, `callback`): `any`
@@ -140,7 +140,7 @@ Used to override any internal currency functions.
 
 #### Defined in
 
-[server/player/currency.ts:208](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/player/currency.ts#L208)
+[server/player/currency.ts:208](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/player/currency.ts#L208)
 
 ___
 
@@ -177,7 +177,7 @@ const didSetFullAmount = Athena.player.currency.set(somePlayer, 'bank', 25);
 
 #### Defined in
 
-[server/player/currency.ts:120](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/player/currency.ts#L120)
+[server/player/currency.ts:120](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/player/currency.ts#L120)
 
 ___
 
@@ -214,7 +214,7 @@ const didSubFullAmount = Athena.player.currency.sub(somePlayer, 'cash', 25);
 
 #### Defined in
 
-[server/player/currency.ts:71](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/player/currency.ts#L71)
+[server/player/currency.ts:71](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/player/currency.ts#L71)
 
 ___
 
@@ -245,4 +245,4 @@ const didRemoveFullAmount = Athena.player.currency.subAllCurrencies(somePlayer, 
 
 #### Defined in
 
-[server/player/currency.ts:156](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/server/player/currency.ts#L156)
+[server/player/currency.ts:156](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/player/currency.ts#L156)

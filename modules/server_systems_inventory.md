@@ -21,6 +21,12 @@ Renames and re-exports [server/systems/inventory/config](server_systems_inventor
 
 ___
 
+### convert
+
+Renames and re-exports [server/systems/inventory/convert](server_systems_inventory_convert.md)
+
+___
+
 ### crafting
 
 Renames and re-exports [server/systems/inventory/crafting](server_systems_inventory_crafting.md)

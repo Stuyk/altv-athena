@@ -25,7 +25,7 @@ AthenaClient.rmlui.commands.**cancel**(): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:318](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L318)
+[client/rmlui/commands/index.ts:318](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L318)
 
 ___
 
@@ -48,7 +48,7 @@ AthenaClient.rmlui.commands.**create**(`inputInfo`, `skipMenuCheck?`): `Promise`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:284](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L284)
+[client/rmlui/commands/index.ts:284](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L284)
 
 ___
 
@@ -66,7 +66,7 @@ Returns whether or not this interface is open.
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:353](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L353)
+[client/rmlui/commands/index.ts:353](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L353)
 
 ___
 
@@ -89,7 +89,7 @@ AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:386](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L386)
+[client/rmlui/commands/index.ts:386](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L386)
 
 ::: tip Usage
 AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
@@ -108,7 +108,7 @@ AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:387](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L387)
+[client/rmlui/commands/index.ts:387](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L387)
 
 ::: tip Usage
 AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
@@ -127,7 +127,7 @@ AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:388](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L388)
+[client/rmlui/commands/index.ts:388](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L388)
 
 ::: tip Usage
 AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
@@ -146,7 +146,7 @@ AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:389](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L389)
+[client/rmlui/commands/index.ts:389](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L389)
 
 ::: tip Usage
 AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
@@ -165,7 +165,7 @@ AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:390](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L390)
+[client/rmlui/commands/index.ts:390](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L390)
 
 ::: tip Usage
 AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
@@ -184,7 +184,7 @@ AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:391](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L391)
+[client/rmlui/commands/index.ts:391](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L391)
 
 ::: tip Usage
 AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
@@ -203,7 +203,7 @@ AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:392](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L392)
+[client/rmlui/commands/index.ts:392](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L392)
 
 ::: tip Usage
 AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
@@ -222,7 +222,7 @@ AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:393](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L393)
+[client/rmlui/commands/index.ts:393](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L393)
 
 ::: tip Usage
 AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
@@ -241,7 +241,7 @@ AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:394](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L394)
+[client/rmlui/commands/index.ts:394](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L394)
 
 ::: tip Usage
 AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
@@ -260,7 +260,7 @@ AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:395](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L395)
+[client/rmlui/commands/index.ts:395](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L395)
 
 ::: tip Usage
 AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
@@ -279,4 +279,4 @@ AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:396](https://github.com/Stuyk/altv-athena/blob/f69c9e6/src/core/client/rmlui/commands/index.ts#L396)
+[client/rmlui/commands/index.ts:396](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/commands/index.ts#L396)

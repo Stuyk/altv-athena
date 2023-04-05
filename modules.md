@@ -220,6 +220,7 @@
 - [server/systems/inventory](modules/server_systems_inventory.md)
 - [server/systems/inventory/clothing](modules/server_systems_inventory_clothing.md)
 - [server/systems/inventory/config](modules/server_systems_inventory_config.md)
+- [server/systems/inventory/convert](modules/server_systems_inventory_convert.md)
 - [server/systems/inventory/crafting](modules/server_systems_inventory_crafting.md)
 - [server/systems/inventory/drops](modules/server_systems_inventory_drops.md)
 - [server/systems/inventory/effects](modules/server_systems_inventory_effects.md)
