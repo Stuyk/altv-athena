@@ -33,6 +33,9 @@
 - state.getCharacterData
 - state.getCharacterPermissions
 
+- Athena.vehicle.tuning.getMods
+- Athena.vehicle.tuning.applyMods
+
 --------------------------------------
 --- Everything Below is Before April 2
 --------------------------------------
