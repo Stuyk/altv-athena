@@ -46,6 +46,10 @@ Overrides -> src/core/client/menus/object
 Overrides -> src/core/client/menus/player
 Overrides -> src/core/client/menus/vehicle
 
+Athena.systems.inventory.convert.toBaseItem
+Athena.systems.inventory.convert.toItem
+Athena.systems.inventory.convert.toStoredItem
+
 --------------------------------------
 --- Everything Below is Before April 2
 --------------------------------------
