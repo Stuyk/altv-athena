@@ -123,5 +123,5 @@ export interface BaseVehicle {
      * @type {{ [key: string]: Array<string> }}
      * @memberof BaseVehicle
      */
-    groups: { [key: string]: Array<string> };
+    groups?: { [key: string]: Array<string> };
 }

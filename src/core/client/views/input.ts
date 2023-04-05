@@ -93,4 +93,4 @@ import * as AthenaClient from '@AthenaClient/api';
 //     }
 // }
 
-alt.onServer(View_Events_Input_Menu.SetMenu, InternalFunctions.show);
+// alt.onServer(View_Events_Input_Menu.SetMenu, InternalFunctions.show);

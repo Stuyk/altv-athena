@@ -11,7 +11,7 @@ import ConfigUtil from '../utility/config';
  * @param  {alt.Player} player An alt:V Player Entity
  */
 async function handlePlayerConnect(player: alt.Player): Promise<void> {
-    const config = ConfigUtil.get();
+    const config = await ConfigUtil.get();
 
     if (!player || !player.valid) {
         return;
