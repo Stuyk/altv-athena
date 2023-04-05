@@ -1,4 +1,3 @@
-/** @ignore */
 export * as camera from '@AthenaClient/camera';
 export * as menu from '@AthenaClient/menus';
 export * as rmlui from '@AthenaClient/rmlui';

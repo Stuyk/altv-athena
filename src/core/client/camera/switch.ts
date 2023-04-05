@@ -15,6 +15,10 @@ export async function switchToMultiSecondpart(
     timeInMs: number,
     switchType: SWITCHOUT_TYPES = SWITCHOUT_TYPES.THREE_STEPS,
 ): Promise<boolean> {
+    if (Overrides.switchToMultiSecondpart) {
+        return Overrides.switchToMultiSecondpart(timeInMs, switchType);
+    }
+
     if (!native.isPlayerSwitchInProgress()) {
         native.switchToMultiFirstpart(alt.Player.local.scriptID, 0, switchType);
     }
@@ -23,4 +27,15 @@ export async function switchToMultiSecondpart(
 
     native.switchToMultiSecondpart(alt.Player.local.scriptID);
     return true;
+}
+
+interface SwitchCameraFuncs {
+    switchToMultiSecondpart: typeof switchToMultiSecondpart;
+}
+
+const Overrides: Partial<SwitchCameraFuncs> = {};
+
+export function override(functionName: 'switchToMultiSecondpart', callback: typeof switchToMultiSecondpart);
+export function override(functionName: keyof SwitchCameraFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

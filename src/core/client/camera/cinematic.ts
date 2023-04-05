@@ -303,10 +303,18 @@ const InternalFunctions = {
  *
  */
 export async function destroy(): Promise<void> {
+    if (Overrides.destroy) {
+        return Overrides.destroy();
+    }
+
     return await InternalFunctions.destroy();
 }
 
 export async function overrideNodes(_nodes: Array<iCameraNode>) {
+    if (Overrides.overrideNodes) {
+        return Overrides.overrideNodes(_nodes);
+    }
+
     nodes = _nodes;
 }
 
@@ -317,6 +325,10 @@ export async function overrideNodes(_nodes: Array<iCameraNode>) {
  *
  */
 export async function addNode(node: iCameraNode) {
+    if (Overrides.addNode) {
+        return Overrides.addNode(node);
+    }
+
     if (!node.pos) {
         throw new Error(`Camera Node -> Error: Position was not set for camera node.`);
     }
@@ -343,6 +355,10 @@ export async function addNode(node: iCameraNode) {
  *
  */
 export async function next(removeFromArray = true): Promise<boolean> {
+    if (Overrides.next) {
+        return Overrides.next(removeFromArray);
+    }
+
     if (nodes.length <= 0) {
         return false;
     }
@@ -372,9 +388,32 @@ export async function next(removeFromArray = true): Promise<boolean> {
  *
  */
 export async function play() {
+    if (Overrides.play) {
+        return Overrides.play();
+    }
+
     const cameraNodes = [...nodes];
     for (let i = 0; i < cameraNodes.length; i++) {
         await InternalFunctions.isCameraUpdating();
         await InternalFunctions.next(cameraNodes[i]);
     }
+}
+
+interface CinematicCamFuncs {
+    addNode: typeof addNode;
+    destroy: typeof destroy;
+    overrideNodes: typeof overrideNodes;
+    next: typeof next;
+    play: typeof play;
+}
+
+const Overrides: Partial<CinematicCamFuncs> = {};
+
+export function override(functionName: 'addNode', callback: typeof addNode);
+export function override(functionName: 'destroy', callback: typeof destroy);
+export function override(functionName: 'overrideNodes', callback: typeof overrideNodes);
+export function override(functionName: 'next', callback: typeof next);
+export function override(functionName: 'play', callback: typeof play);
+export function override(functionName: keyof CinematicCamFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }
