@@ -33,7 +33,7 @@ Calculates a camera offset.
 
 #### Defined in
 
-[client/camera/pedEdit.ts:82](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/pedEdit.ts#L82)
+[client/camera/pedEdit.ts:86](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L86)
 
 ___
 
@@ -61,14 +61,14 @@ Creates a Pedestrian Edit Camera
 
 #### Defined in
 
-[client/camera/pedEdit.ts:26](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/pedEdit.ts#L26)
+[client/camera/pedEdit.ts:26](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L26)
 
 ___
 
 ### destroy
 
 ::: tip Usage
-AthenaClient.camera.pedEdit.**destroy**(): `Promise`<`void`\>
+AthenaClient.camera.pedEdit.**destroy**(): `any`
 :::
 
 Destroy the Ped Edit Camera
@@ -77,11 +77,11 @@ Destroy the Ped Edit Camera
 
 #### Returns
 
-`Promise`<`void`\>
+`any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:119](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/pedEdit.ts#L119)
+[client/camera/pedEdit.ts:135](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L135)
 
 ___
 
@@ -107,14 +107,14 @@ Disable All Controls?
 
 #### Defined in
 
-[client/camera/pedEdit.ts:151](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/pedEdit.ts#L151)
+[client/camera/pedEdit.ts:171](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L171)
 
 ___
 
 ### exists
 
 ::: tip Usage
-AthenaClient.camera.pedEdit.**exists**(): `boolean`
+AthenaClient.camera.pedEdit.**exists**(): `any`
 :::
 
 Check if a PedEditCamera exists.
@@ -123,50 +123,225 @@ Check if a PedEditCamera exists.
 
 #### Returns
 
-`boolean`
+`any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:110](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/pedEdit.ts#L110)
+[client/camera/pedEdit.ts:122](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L122)
 
 ___
 
 ### handleControls
 
 ::: tip Usage
-AthenaClient.camera.pedEdit.**handleControls**(): `void`
+AthenaClient.camera.pedEdit.**handleControls**(): `any`
 :::
 
 #### Returns
 
-`void`
+`any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:228](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/pedEdit.ts#L228)
+[client/camera/pedEdit.ts:264](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L264)
+
+___
+
+### override
+
+::: tip Usage
+AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"create"`` |
+| `callback` | (`_scriptID`: `number`, `offset?`: `IVector3`, `_isLocalPlayer`: `boolean`) => `Promise`<`void`\> |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/pedEdit.ts:424](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L424)
+
+::: tip Usage
+AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"destroy"`` |
+| `callback` | () => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/pedEdit.ts:425](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L425)
+
+::: tip Usage
+AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"disableControls"`` |
+| `callback` | (`status`: `boolean`) => `void` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/pedEdit.ts:426](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L426)
+
+::: tip Usage
+AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"update"`` |
+| `callback` | (`id`: `number`) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/pedEdit.ts:427](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L427)
+
+::: tip Usage
+AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"handleControls"`` |
+| `callback` | () => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/pedEdit.ts:428](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L428)
+
+::: tip Usage
+AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"exists"`` |
+| `callback` | () => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/pedEdit.ts:429](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L429)
+
+::: tip Usage
+AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"runQueue"`` |
+| `callback` | () => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/pedEdit.ts:430](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L430)
+
+::: tip Usage
+AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"setCameraOffset"`` |
+| `callback` | (`offset`: `IVector3`) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/pedEdit.ts:431](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L431)
+
+::: tip Usage
+AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"setCamParams"`` |
+| `callback` | (`_zpos`: `number`, `_fov`: `number`, `_easeTime`: `number`) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/pedEdit.ts:432](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L432)
 
 ___
 
 ### runQueue
 
 ::: tip Usage
-AthenaClient.camera.pedEdit.**runQueue**(): `Promise`<`void`\>
+AthenaClient.camera.pedEdit.**runQueue**(): `any`
 :::
 
 #### Returns
 
-`Promise`<`void`\>
+`any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:173](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/pedEdit.ts#L173)
+[client/camera/pedEdit.ts:201](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L201)
 
 ___
 
 ### setCamParams
 
 ::: tip Usage
-AthenaClient.camera.pedEdit.**setCamParams**(`_zpos?`, `_fov?`, `_easeTime?`): `void`
+AthenaClient.camera.pedEdit.**setCamParams**(`_zpos?`, `_fov?`, `_easeTime?`): `any`
 :::
 
 Set the Camera Field of View
@@ -183,18 +358,18 @@ Set the Camera Field of View
 
 #### Returns
 
-`void`
+`any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:161](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/pedEdit.ts#L161)
+[client/camera/pedEdit.ts:185](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L185)
 
 ___
 
 ### setCameraOffset
 
 ::: tip Usage
-AthenaClient.camera.pedEdit.**setCameraOffset**(`offset`): `void`
+AthenaClient.camera.pedEdit.**setCameraOffset**(`offset`): `any`
 :::
 
 Sets up the camera with the original position and a new offset.
@@ -209,18 +384,18 @@ Sets up the camera with the original position and a new offset.
 
 #### Returns
 
-`void`
+`any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:97](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/pedEdit.ts#L97)
+[client/camera/pedEdit.ts:105](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L105)
 
 ___
 
 ### update
 
 ::: tip Usage
-AthenaClient.camera.pedEdit.**update**(`id`): `void`
+AthenaClient.camera.pedEdit.**update**(`id`): `any`
 :::
 
 Update the ScriptID for who we should use to rotate.
@@ -235,8 +410,8 @@ Update the ScriptID for who we should use to rotate.
 
 #### Returns
 
-`void`
+`any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:224](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/pedEdit.ts#L224)
+[client/camera/pedEdit.ts:256](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/pedEdit.ts#L256)

@@ -12,33 +12,75 @@ order: 0
 ### disable
 
 ::: tip Usage
-AthenaClient.camera.gameplay.**disable**(): `void`
+AthenaClient.camera.gameplay.**disable**(): `any`
 :::
 
 Disable the gameplay camera from moving
 
 #### Returns
 
-`void`
+`any`
 
 #### Defined in
 
-[client/camera/gameplay.ts:24](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/gameplay.ts#L24)
+[client/camera/gameplay.ts:24](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/gameplay.ts#L24)
 
 ___
 
 ### enable
 
 ::: tip Usage
-AthenaClient.camera.gameplay.**enable**(): `void`
+AthenaClient.camera.gameplay.**enable**(): `any`
 :::
 
 Enable the gameplay camera
 
 #### Returns
 
-`void`
+`any`
 
 #### Defined in
 
-[client/camera/gameplay.ts:38](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/gameplay.ts#L38)
+[client/camera/gameplay.ts:42](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/gameplay.ts#L42)
+
+___
+
+### override
+
+::: tip Usage
+AthenaClient.camera.gameplay.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"enable"`` |
+| `callback` | () => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/gameplay.ts:62](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/gameplay.ts#L62)
+
+::: tip Usage
+AthenaClient.camera.gameplay.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"disable"`` |
+| `callback` | () => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/gameplay.ts:63](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/gameplay.ts#L63)

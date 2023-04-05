@@ -30,4 +30,4 @@ Get all vehicles in range of a position
 
 #### Defined in
 
-[server/getters/vehicles.ts:11](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/getters/vehicles.ts#L11)
+[server/getters/vehicles.ts:11](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/getters/vehicles.ts#L11)

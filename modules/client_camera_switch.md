@@ -9,6 +9,29 @@ order: 0
 
 ## Functions
 
+### override
+
+::: tip Usage
+AthenaClient.camera.switch.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"switchToMultiSecondpart"`` |
+| `callback` | (`timeInMs`: `number`, `switchType`: `SWITCHOUT_TYPES`) => `Promise`<`boolean`\> |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/switch.ts:38](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/switch.ts#L38)
+
+___
+
 ### switchToMultiSecondpart
 
 ::: tip Usage
@@ -30,4 +53,4 @@ Zoom all the way out. Then zoom all the way in from the sky.
 
 #### Defined in
 
-[client/camera/switch.ts:14](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/switch.ts#L14)
+[client/camera/switch.ts:14](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/switch.ts#L14)

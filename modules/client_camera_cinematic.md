@@ -16,7 +16,7 @@ order: 0
 ### addNode
 
 ::: tip Usage
-AthenaClient.camera.cinematic.**addNode**(`node`): `Promise`<`void`\>
+AthenaClient.camera.cinematic.**addNode**(`node`): `any`
 :::
 
 Add a camera node to the camera set.
@@ -29,11 +29,11 @@ Add a camera node to the camera set.
 
 #### Returns
 
-`Promise`<`void`\>
+`any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:319](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/cinematic.ts#L319)
+[client/camera/cinematic.ts:327](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/cinematic.ts#L327)
 
 ___
 
@@ -51,7 +51,7 @@ This function will destroy all camera instances
 
 #### Defined in
 
-[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/cinematic.ts#L305)
+[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/cinematic.ts#L305)
 
 ___
 
@@ -78,14 +78,113 @@ from the camera array. Allows for repeating camera movement over and over.
 
 #### Defined in
 
-[client/camera/cinematic.ts:345](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/cinematic.ts#L345)
+[client/camera/cinematic.ts:357](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/cinematic.ts#L357)
+
+___
+
+### override
+
+::: tip Usage
+AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"addNode"`` |
+| `callback` | (`node`: [`iCameraNode`](../interfaces/client_camera_cinematic_iCameraNode.md)) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/cinematic.ts:412](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/cinematic.ts#L412)
+
+::: tip Usage
+AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"destroy"`` |
+| `callback` | () => `Promise`<`void`\> |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/cinematic.ts:413](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/cinematic.ts#L413)
+
+::: tip Usage
+AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"overrideNodes"`` |
+| `callback` | (`_nodes`: [`iCameraNode`](../interfaces/client_camera_cinematic_iCameraNode.md)[]) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/cinematic.ts:414](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/cinematic.ts#L414)
+
+::: tip Usage
+AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"next"`` |
+| `callback` | (`removeFromArray?`: `boolean`) => `Promise`<`boolean`\> |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/cinematic.ts:415](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/cinematic.ts#L415)
+
+::: tip Usage
+AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"play"`` |
+| `callback` | () => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/camera/cinematic.ts:416](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/cinematic.ts#L416)
 
 ___
 
 ### overrideNodes
 
 ::: tip Usage
-AthenaClient.camera.cinematic.**overrideNodes**(`_nodes`): `Promise`<`void`\>
+AthenaClient.camera.cinematic.**overrideNodes**(`_nodes`): `any`
 :::
 
 #### Parameters
@@ -96,26 +195,26 @@ AthenaClient.camera.cinematic.**overrideNodes**(`_nodes`): `Promise`<`void`\>
 
 #### Returns
 
-`Promise`<`void`\>
+`any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:309](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/cinematic.ts#L309)
+[client/camera/cinematic.ts:313](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/cinematic.ts#L313)
 
 ___
 
 ### play
 
 ::: tip Usage
-AthenaClient.camera.cinematic.**play**(): `Promise`<`void`\>
+AthenaClient.camera.cinematic.**play**(): `any`
 :::
 
 Play all camera nodes, but do not clear the camera nodes array.
 
 #### Returns
 
-`Promise`<`void`\>
+`any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:374](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/camera/cinematic.ts#L374)
+[client/camera/cinematic.ts:390](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/camera/cinematic.ts#L390)

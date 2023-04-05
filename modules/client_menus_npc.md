@@ -33,7 +33,7 @@ AthenaClient.menus.npc.(`scriptID`, `ped`, `options`): [`player`](server_config.
 
 #### Defined in
 
-[client/menus/npc.ts:8](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/menus/npc.ts#L8)
+[client/menus/npc.ts:8](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/menus/npc.ts#L8)
 
 ## Functions
 
@@ -61,7 +61,7 @@ Must always return the original wheel menu options + your changes.
 
 #### Defined in
 
-[client/menus/npc.ts:21](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/menus/npc.ts#L21)
+[client/menus/npc.ts:21](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/menus/npc.ts#L21)
 
 ___
 
@@ -87,4 +87,4 @@ Opens the wheel menu against a target npc script id.
 
 #### Defined in
 
-[client/menus/npc.ts:33](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/menus/npc.ts#L33)
+[client/menus/npc.ts:33](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/menus/npc.ts#L33)

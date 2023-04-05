@@ -33,4 +33,4 @@ Request a scaleform by name.
 
 #### Defined in
 
-[client/screen/scaleform.ts:65](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/screen/scaleform.ts#L65)
+[client/screen/scaleform.ts:65](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/screen/scaleform.ts#L65)

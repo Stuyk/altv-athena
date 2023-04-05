@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/information/atms.ts:1](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/information/atms.ts#L1)
+[shared/information/atms.ts:1](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/shared/information/atms.ts#L1)
