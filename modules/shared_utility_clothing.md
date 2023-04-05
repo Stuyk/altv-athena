@@ -22,7 +22,7 @@ order: 0
 
 #### Defined in
 
-[shared/utility/clothing.ts:6](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/shared/utility/clothing.ts#L6)
+[shared/utility/clothing.ts:6](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/shared/utility/clothing.ts#L6)
 
 ## Functions
 
@@ -47,7 +47,7 @@ Converts a clothing component to the corresponding icon name that should be used
 
 #### Defined in
 
-[shared/utility/clothing.ts:43](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/shared/utility/clothing.ts#L43)
+[shared/utility/clothing.ts:43](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/shared/utility/clothing.ts#L43)
 
 ___
 
@@ -72,4 +72,4 @@ componentIdentifier-dlcHash-isProp?-isNotShared?-drawableID
 
 #### Defined in
 
-[shared/utility/clothing.ts:16](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/shared/utility/clothing.ts#L16)
+[shared/utility/clothing.ts:16](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/shared/utility/clothing.ts#L16)

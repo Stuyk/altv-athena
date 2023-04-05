@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/information/makeup.ts:1](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/shared/information/makeup.ts#L1)
+[shared/information/makeup.ts:1](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/shared/information/makeup.ts#L1)

@@ -16,16 +16,16 @@ order: 0
 ### cancel
 
 ::: tip Usage
-AthenaClient.rmlui.commands.**cancel**(): `Promise`<`void`\>
+AthenaClient.rmlui.commands.**cancel**(): `any`
 :::
 
 #### Returns
 
-`Promise`<`void`\>
+`any`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:277](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/rmlui/commands/index.ts#L277)
+[client/rmlui/commands/index.ts:318](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L318)
 
 ___
 
@@ -48,7 +48,7 @@ AthenaClient.rmlui.commands.**create**(`inputInfo`, `skipMenuCheck?`): `Promise`
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:247](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/rmlui/commands/index.ts#L247)
+[client/rmlui/commands/index.ts:284](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L284)
 
 ___
 
@@ -66,4 +66,217 @@ Returns whether or not this interface is open.
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:308](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/rmlui/commands/index.ts#L308)
+[client/rmlui/commands/index.ts:353](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L353)
+
+___
+
+### override
+
+::: tip Usage
+AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"autoFillCommand"`` |
+| `callback` | () => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/rmlui/commands/index.ts:386](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L386)
+
+::: tip Usage
+AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"browseHistory"`` |
+| `callback` | (`shouldIncrease`: `boolean`) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/rmlui/commands/index.ts:387](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L387)
+
+::: tip Usage
+AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"cancel"`` |
+| `callback` | () => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/rmlui/commands/index.ts:388](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L388)
+
+::: tip Usage
+AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"create"`` |
+| `callback` | (`inputInfo`: [`CommandInput`](../interfaces/client_rmlui_commands_Internal_CommandInput.md), `skipMenuCheck`: `boolean`) => `Promise`<`string` \| `undefined`\> |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/rmlui/commands/index.ts:389](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L389)
+
+::: tip Usage
+AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"focus"`` |
+| `callback` | (`inputInfo`: [`CommandInput`](../interfaces/client_rmlui_commands_Internal_CommandInput.md)) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/rmlui/commands/index.ts:390](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L390)
+
+::: tip Usage
+AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"getCurrentMessage"`` |
+| `callback` | () => `string` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/rmlui/commands/index.ts:391](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L391)
+
+::: tip Usage
+AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"handleKeyUp"`` |
+| `callback` | (`keycode`: `number`) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/rmlui/commands/index.ts:392](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L392)
+
+::: tip Usage
+AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"handleMessageUpdate"`` |
+| `callback` | () => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/rmlui/commands/index.ts:393](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L393)
+
+::: tip Usage
+AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"isOpen"`` |
+| `callback` | () => `boolean` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/rmlui/commands/index.ts:394](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L394)
+
+::: tip Usage
+AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"submit"`` |
+| `callback` | () => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/rmlui/commands/index.ts:395](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L395)
+
+::: tip Usage
+AthenaClient.rmlui.commands.**override**(`functionName`, `callback`): `any`
+:::
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"updateSuggestions"`` |
+| `callback` | (`suggestions`: [`Omit`](server_player_inventory_Internal.md#Omit)<`MessageCommand`<`Player`\>, ``"callback"``\>[]) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[client/rmlui/commands/index.ts:396](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/rmlui/commands/index.ts#L396)

@@ -36,7 +36,7 @@ Restrictions
 
 #### Defined in
 
-[server/utility/restrict.ts:37](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/utility/restrict.ts#L37)
+[server/utility/restrict.ts:37](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/utility/restrict.ts#L37)
 
 ___
 
@@ -48,7 +48,7 @@ What to tell the user if they are restricted
 
 #### Defined in
 
-[server/utility/restrict.ts:29](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/utility/restrict.ts#L29)
+[server/utility/restrict.ts:29](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/utility/restrict.ts#L29)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[server/utility/restrict.ts:11](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/utility/restrict.ts#L11)
+[server/utility/restrict.ts:11](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/utility/restrict.ts#L11)
 
 ___
 
@@ -78,4 +78,4 @@ hasAll - Expects all permissions to exist on character && account
 
 #### Defined in
 
-[server/utility/restrict.ts:22](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/utility/restrict.ts#L22)
+[server/utility/restrict.ts:22](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/utility/restrict.ts#L22)

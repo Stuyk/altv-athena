@@ -30,7 +30,7 @@ Create an account with default data.
 
 #### Defined in
 
-[server/systems/account.ts:66](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/account.ts#L66)
+[server/systems/account.ts:66](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/account.ts#L66)
 
 ___
 
@@ -55,7 +55,7 @@ Fetch account for a player based on key / value pair.
 
 #### Defined in
 
-[server/systems/account.ts:36](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/account.ts#L36)
+[server/systems/account.ts:36](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/account.ts#L36)
 
 ___
 
@@ -80,7 +80,7 @@ Used to override any account system functionality
 
 #### Defined in
 
-[server/systems/account.ts:109](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/account.ts#L109)
+[server/systems/account.ts:109](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/account.ts#L109)
 
 ::: tip Usage
 Athena.systems.account.**override**(`functionName`, `callback`): `any`
@@ -101,4 +101,4 @@ Used to override any account system functionality
 
 #### Defined in
 
-[server/systems/account.ts:110](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/account.ts#L110)
+[server/systems/account.ts:110](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/account.ts#L110)

@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[shared/interfaces/iStream.ts:24](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/shared/interfaces/iStream.ts#L24)
+[shared/interfaces/iStream.ts:24](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/shared/interfaces/iStream.ts#L24)
 
 ___
 
@@ -33,4 +33,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/iStream.ts:23](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/shared/interfaces/iStream.ts#L23)
+[shared/interfaces/iStream.ts:23](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/shared/interfaces/iStream.ts#L23)

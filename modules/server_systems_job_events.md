@@ -30,4 +30,4 @@ Used to override job objective checking functionality
 
 #### Defined in
 
-[server/systems/job/events.ts:52](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/events.ts#L52)
+[server/systems/job/events.ts:52](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/events.ts#L52)

@@ -26,4 +26,4 @@ order: 0
 
 #### Defined in
 
-[client/utility/raycast.ts:6](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/client/utility/raycast.ts#L6)
+[client/utility/raycast.ts:6](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/client/utility/raycast.ts#L6)

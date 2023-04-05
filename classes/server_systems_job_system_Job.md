@@ -56,7 +56,7 @@ This instance should be called each time to create new job instances.
 
 #### Defined in
 
-[server/systems/job/system.ts:68](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L68)
+[server/systems/job/system.ts:68](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L68)
 
 ## Properties
 
@@ -82,7 +82,7 @@ Athena.systems.job.system.Job.(`job`): `Promise`<`void`\>
 
 #### Defined in
 
-[server/systems/job/system.ts:56](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L56)
+[server/systems/job/system.ts:56](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L56)
 
 ___
 
@@ -94,7 +94,7 @@ The ID of the player.
 
 #### Defined in
 
-[server/systems/job/system.ts:51](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L51)
+[server/systems/job/system.ts:51](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L51)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[server/systems/job/system.ts:53](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L53)
+[server/systems/job/system.ts:53](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L53)
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 #### Defined in
 
-[server/systems/job/system.ts:52](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L52)
+[server/systems/job/system.ts:52](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L52)
 
 ___
 
@@ -141,7 +141,7 @@ Athena.systems.job.system.Job.(`job`, `reason`): `void`
 
 #### Defined in
 
-[server/systems/job/system.ts:57](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L57)
+[server/systems/job/system.ts:57](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L57)
 
 ___
 
@@ -151,7 +151,7 @@ ___
 
 #### Defined in
 
-[server/systems/job/system.ts:55](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L55)
+[server/systems/job/system.ts:55](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L55)
 
 ___
 
@@ -161,7 +161,7 @@ ___
 
 #### Defined in
 
-[server/systems/job/system.ts:54](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L54)
+[server/systems/job/system.ts:54](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L54)
 
 ## Methods
 
@@ -185,7 +185,7 @@ Inserts an objective to the beginning of the objectives array.
 
 #### Defined in
 
-[server/systems/job/system.ts:323](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L323)
+[server/systems/job/system.ts:323](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L323)
 
 ___
 
@@ -210,7 +210,7 @@ Use the objective interface to generate the objective information.
 
 #### Defined in
 
-[server/systems/job/system.ts:92](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L92)
+[server/systems/job/system.ts:92](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L92)
 
 ___
 
@@ -236,7 +236,7 @@ Ensure that this Job is initialized with new Job first.
 
 #### Defined in
 
-[server/systems/job/system.ts:78](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L78)
+[server/systems/job/system.ts:78](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L78)
 
 ___
 
@@ -271,7 +271,7 @@ Returns a vehicle with a 'uid'.
 
 #### Defined in
 
-[server/systems/job/system.ts:108](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L108)
+[server/systems/job/system.ts:108](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L108)
 
 ___
 
@@ -289,7 +289,7 @@ Get the current objective the player is completing.
 
 #### Defined in
 
-[server/systems/job/system.ts:303](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L303)
+[server/systems/job/system.ts:303](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L303)
 
 ___
 
@@ -307,7 +307,7 @@ Get the time since this job has started.
 
 #### Defined in
 
-[server/systems/job/system.ts:313](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L313)
+[server/systems/job/system.ts:313](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L313)
 
 ___
 
@@ -325,7 +325,7 @@ Get the current player that is utilizing this job instance.
 
 #### Defined in
 
-[server/systems/job/system.ts:253](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L253)
+[server/systems/job/system.ts:253](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L253)
 
 ___
 
@@ -343,7 +343,7 @@ Remove the first element of the objective list and move on to the next.
 
 #### Defined in
 
-[server/systems/job/system.ts:221](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L221)
+[server/systems/job/system.ts:221](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L221)
 
 ___
 
@@ -367,7 +367,7 @@ Appends a list of objectives into the Job Framework.
 
 #### Defined in
 
-[server/systems/job/system.ts:173](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L173)
+[server/systems/job/system.ts:173](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L173)
 
 ___
 
@@ -391,7 +391,7 @@ Call this to cleanup a job.
 
 #### Defined in
 
-[server/systems/job/system.ts:198](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L198)
+[server/systems/job/system.ts:198](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L198)
 
 ___
 
@@ -409,7 +409,7 @@ Remove all vehicles from this job.
 
 #### Defined in
 
-[server/systems/job/system.ts:138](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L138)
+[server/systems/job/system.ts:138](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L138)
 
 ___
 
@@ -427,7 +427,7 @@ Remove the current job attachable.
 
 #### Defined in
 
-[server/systems/job/system.ts:262](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L262)
+[server/systems/job/system.ts:262](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L262)
 
 ___
 
@@ -451,7 +451,7 @@ Remove a vehicle by unique identifier assigned when adding a vehicle.
 
 #### Defined in
 
-[server/systems/job/system.ts:153](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L153)
+[server/systems/job/system.ts:153](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L153)
 
 ___
 
@@ -475,7 +475,7 @@ Set the async callback that is called when a user completed a job.
 
 #### Defined in
 
-[server/systems/job/system.ts:335](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L335)
+[server/systems/job/system.ts:335](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L335)
 
 ___
 
@@ -499,7 +499,7 @@ Set the callback that is called when a user quits a job.
 
 #### Defined in
 
-[server/systems/job/system.ts:345](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L345)
+[server/systems/job/system.ts:345](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L345)
 
 ___
 
@@ -517,4 +517,4 @@ Emits data down to the player to start handling job information.
 
 #### Defined in
 
-[server/systems/job/system.ts:276](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/server/systems/job/system.ts#L276)
+[server/systems/job/system.ts:276](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/server/systems/job/system.ts#L276)

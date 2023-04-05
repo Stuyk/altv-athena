@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/information/doors.ts:3](https://github.com/Stuyk/altv-athena/blob/e54c59d/src/core/shared/information/doors.ts#L3)
+[shared/information/doors.ts:3](https://github.com/Stuyk/altv-athena/blob/8f61820/src/core/shared/information/doors.ts#L3)
