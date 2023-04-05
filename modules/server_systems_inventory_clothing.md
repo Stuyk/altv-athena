@@ -29,7 +29,7 @@ Clears a custom model on a player.
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:111](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L111)
+[server/systems/inventory/clothing.ts:111](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L111)
 
 ___
 
@@ -53,7 +53,7 @@ Used to clear a uniform on a player.
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:71](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L71)
+[server/systems/inventory/clothing.ts:71](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L71)
 
 ___
 
@@ -80,7 +80,7 @@ If you know the relative ids for dlc clothing; this is how you generate the item
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:129](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L129)
+[server/systems/inventory/clothing.ts:129](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L129)
 
 ___
 
@@ -112,7 +112,7 @@ Use the normal player.setClothes functions, and then call this function to gener
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:161](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L161)
+[server/systems/inventory/clothing.ts:161](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L161)
 
 ___
 
@@ -137,7 +137,7 @@ Used to override inventory clothing functionality
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:353](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L353)
+[server/systems/inventory/clothing.ts:353](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L353)
 
 ::: tip Usage
 Athena.systems.inventory.clothing.**override**(`functionName`, `callback`): `any`
@@ -158,7 +158,7 @@ Used to override inventory clothing functionality
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:354](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L354)
+[server/systems/inventory/clothing.ts:354](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L354)
 
 ::: tip Usage
 Athena.systems.inventory.clothing.**override**(`functionName`, `callback`): `any`
@@ -179,7 +179,7 @@ Used to override inventory clothing functionality
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:355](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L355)
+[server/systems/inventory/clothing.ts:355](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L355)
 
 ::: tip Usage
 Athena.systems.inventory.clothing.**override**(`functionName`, `callback`): `any`
@@ -200,7 +200,7 @@ Used to override inventory clothing functionality
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:356](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L356)
+[server/systems/inventory/clothing.ts:356](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L356)
 
 ::: tip Usage
 Athena.systems.inventory.clothing.**override**(`functionName`, `callback`): `any`
@@ -221,7 +221,7 @@ Used to override inventory clothing functionality
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:357](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L357)
+[server/systems/inventory/clothing.ts:357](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L357)
 
 ::: tip Usage
 Athena.systems.inventory.clothing.**override**(`functionName`, `callback`): `any`
@@ -242,7 +242,7 @@ Used to override inventory clothing functionality
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:358](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L358)
+[server/systems/inventory/clothing.ts:358](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L358)
 
 ::: tip Usage
 Athena.systems.inventory.clothing.**override**(`functionName`, `callback`): `any`
@@ -263,7 +263,7 @@ Used to override inventory clothing functionality
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:359](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L359)
+[server/systems/inventory/clothing.ts:359](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L359)
 
 ::: tip Usage
 Athena.systems.inventory.clothing.**override**(`functionName`, `callback`): `any`
@@ -284,7 +284,7 @@ Used to override inventory clothing functionality
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:360](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L360)
+[server/systems/inventory/clothing.ts:360](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L360)
 
 ___
 
@@ -324,7 +324,7 @@ Athena.systems.inventory.clothing.setDefaults('female', {
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:326](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L326)
+[server/systems/inventory/clothing.ts:326](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L326)
 
 ___
 
@@ -353,7 +353,7 @@ Uniforms are also ignored if a skin is set.
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:91](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L91)
+[server/systems/inventory/clothing.ts:91](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L91)
 
 ___
 
@@ -380,7 +380,7 @@ The uniform overrides all other clothing on a multiplayer ped model.
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:50](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L50)
+[server/systems/inventory/clothing.ts:50](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L50)
 
 ___
 
@@ -405,4 +405,4 @@ Loop through all isEquipped items; and synchronize appearance.
 
 #### Defined in
 
-[server/systems/inventory/clothing.ts:207](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/systems/inventory/clothing.ts#L207)
+[server/systems/inventory/clothing.ts:207](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/systems/inventory/clothing.ts#L207)

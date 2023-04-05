@@ -32,7 +32,7 @@ AthenaClient.menus.object.(`existingObject`, `options`): [`IWheelOptionExt`](../
 
 #### Defined in
 
-[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/client/menus/object.ts#L8)
+[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/menus/object.ts#L8)
 
 ## Functions
 
@@ -60,7 +60,7 @@ Must always return the original wheel menu options + your changes.
 
 #### Defined in
 
-[client/menus/object.ts:24](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/client/menus/object.ts#L24)
+[client/menus/object.ts:24](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/menus/object.ts#L24)
 
 ___
 
@@ -86,4 +86,4 @@ Opens the wheel menu against a target object created with the server-side object
 
 #### Defined in
 
-[client/menus/object.ts:36](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/client/menus/object.ts#L36)
+[client/menus/object.ts:36](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/client/menus/object.ts#L36)

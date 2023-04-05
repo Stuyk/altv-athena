@@ -9,6 +9,36 @@ order: 0
 
 ## Functions
 
+### applyMods
+
+::: tip Usage
+Athena.vehicle.tuning.**applyMods**(`vehicle`, `modkit`, `mods`): `any`
+:::
+
+Apply mods to a vehicle.
+
+Automatically saves data if vehicle is non-temporary.
+
+**`Export`**
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `vehicle` | `Vehicle` |
+| `modkit` | `number` |
+| `mods` | `IVehicleMod`[] |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/vehicle/tuning.ts:86](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/vehicle/tuning.ts#L86)
+
+___
+
 ### applyState
 
 ::: tip Usage
@@ -31,7 +61,7 @@ These match the alt:V API, and can be pulled from a database.
 
 #### Defined in
 
-[server/vehicle/tuning.ts:14](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/vehicle/tuning.ts#L14)
+[server/vehicle/tuning.ts:16](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/vehicle/tuning.ts#L16)
 
 ___
 
@@ -56,7 +86,33 @@ Apply tuning to the specified vehicle.
 
 #### Defined in
 
-[server/vehicle/tuning.ts:31](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/vehicle/tuning.ts#L31)
+[server/vehicle/tuning.ts:33](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/vehicle/tuning.ts#L33)
+
+___
+
+### getMods
+
+::: tip Usage
+Athena.vehicle.tuning.**getMods**(`vehicle`): [`player`](server_config.md#player)[]
+:::
+
+Return all mods that are currently applied to a vehicle.
+
+**`Export`**
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `vehicle` | `Vehicle` |
+
+#### Returns
+
+[`player`](server_config.md#player)[]
+
+#### Defined in
+
+[server/vehicle/tuning.ts:123](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/vehicle/tuning.ts#L123)
 
 ___
 
@@ -80,7 +136,7 @@ Get all mods of the specified vehicle.
 
 #### Defined in
 
-[server/vehicle/tuning.ts:58](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/vehicle/tuning.ts#L58)
+[server/vehicle/tuning.ts:60](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/vehicle/tuning.ts#L60)
 
 ___
 
@@ -105,7 +161,7 @@ Used to override vehicle tuning functionality
 
 #### Defined in
 
-[server/vehicle/tuning.ts:81](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/vehicle/tuning.ts#L81)
+[server/vehicle/tuning.ts:146](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/vehicle/tuning.ts#L146)
 
 ::: tip Usage
 Athena.vehicle.tuning.**override**(`functionName`, `callback`): `any`
@@ -126,7 +182,7 @@ Used to override vehicle tuning functionality
 
 #### Defined in
 
-[server/vehicle/tuning.ts:82](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/vehicle/tuning.ts#L82)
+[server/vehicle/tuning.ts:147](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/vehicle/tuning.ts#L147)
 
 ::: tip Usage
 Athena.vehicle.tuning.**override**(`functionName`, `callback`): `any`
@@ -147,4 +203,46 @@ Used to override vehicle tuning functionality
 
 #### Defined in
 
-[server/vehicle/tuning.ts:83](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/server/vehicle/tuning.ts#L83)
+[server/vehicle/tuning.ts:148](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/vehicle/tuning.ts#L148)
+
+::: tip Usage
+Athena.vehicle.tuning.**override**(`functionName`, `callback`): `any`
+:::
+
+Used to override vehicle tuning functionality
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"applyMods"`` |
+| `callback` | (`vehicle`: `Vehicle`, `modkit`: `number`, `mods`: `IVehicleMod`[]) => `any` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/vehicle/tuning.ts:149](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/vehicle/tuning.ts#L149)
+
+::: tip Usage
+Athena.vehicle.tuning.**override**(`functionName`, `callback`): `any`
+:::
+
+Used to override vehicle tuning functionality
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"getMods"`` |
+| `callback` | (`vehicle`: `Vehicle`) => [`player`](server_config.md#player)[] |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/vehicle/tuning.ts:150](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/server/vehicle/tuning.ts#L150)

@@ -25,7 +25,7 @@ An animation to associate with this objective.
 
 #### Defined in
 
-[shared/interfaces/job.ts:143](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L143)
+[shared/interfaces/job.ts:143](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L143)
 
 ___
 
@@ -37,7 +37,7 @@ An object to associate with this objective.
 
 #### Defined in
 
-[shared/interfaces/job.ts:150](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L150)
+[shared/interfaces/job.ts:150](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L150)
 
 ___
 
@@ -49,7 +49,7 @@ A local blip to associate with this objective.
 
 #### Defined in
 
-[shared/interfaces/job.ts:136](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L136)
+[shared/interfaces/job.ts:136](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L136)
 
 ___
 
@@ -75,7 +75,7 @@ AthenaShared.interfaces.job.Objective.(`player`): `Promise`<`boolean`\>
 
 #### Defined in
 
-[shared/interfaces/job.ts:195](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L195)
+[shared/interfaces/job.ts:195](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L195)
 
 ___
 
@@ -103,7 +103,7 @@ Server-side callback when objective is completed.
 
 #### Defined in
 
-[shared/interfaces/job.ts:201](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L201)
+[shared/interfaces/job.ts:201](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L201)
 
 ___
 
@@ -131,7 +131,7 @@ Server-side callback when objective is started.
 
 #### Defined in
 
-[shared/interfaces/job.ts:189](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L189)
+[shared/interfaces/job.ts:189](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L189)
 
 ___
 
@@ -143,7 +143,7 @@ An optional internal tracker for how much progress needs to be done to complete 
 
 #### Defined in
 
-[shared/interfaces/job.ts:108](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L108)
+[shared/interfaces/job.ts:108](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L108)
 
 ___
 
@@ -155,7 +155,7 @@ An optional internal tracker for how far this objective is along.
 
 #### Defined in
 
-[shared/interfaces/job.ts:101](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L101)
+[shared/interfaces/job.ts:101](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L101)
 
 ___
 
@@ -167,7 +167,7 @@ The criteria necessary to complete this Objective.
 
 #### Defined in
 
-[shared/interfaces/job.ts:65](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L65)
+[shared/interfaces/job.ts:65](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L65)
 
 ___
 
@@ -184,7 +184,7 @@ Do not add callbacks.
 
 #### Defined in
 
-[shared/interfaces/job.ts:183](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L183)
+[shared/interfaces/job.ts:183](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L183)
 
 ___
 
@@ -196,7 +196,7 @@ A description of what to do to complete this objective.
 
 #### Defined in
 
-[shared/interfaces/job.ts:94](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L94)
+[shared/interfaces/job.ts:94](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L94)
 
 ___
 
@@ -209,7 +209,7 @@ Useful for adding custom functionality to an objective.
 
 #### Defined in
 
-[shared/interfaces/job.ts:158](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L158)
+[shared/interfaces/job.ts:158](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L158)
 
 ___
 
@@ -221,7 +221,7 @@ A local marker to associate with this objective.
 
 #### Defined in
 
-[shared/interfaces/job.ts:122](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L122)
+[shared/interfaces/job.ts:122](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L122)
 
 ___
 
@@ -233,7 +233,7 @@ The time between captures. This should be left alone.
 
 #### Defined in
 
-[shared/interfaces/job.ts:115](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L115)
+[shared/interfaces/job.ts:115](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L115)
 
 ___
 
@@ -245,7 +245,7 @@ Turns off all other objective checks, and only does the `callbackOnCheck` callba
 
 #### Defined in
 
-[shared/interfaces/job.ts:174](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L174)
+[shared/interfaces/job.ts:174](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L174)
 
 ___
 
@@ -258,7 +258,7 @@ Useful to add some 'flavor' to your objective.
 
 #### Defined in
 
-[shared/interfaces/job.ts:166](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L166)
+[shared/interfaces/job.ts:166](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L166)
 
 ___
 
@@ -270,7 +270,7 @@ The 3D Position of this objective.
 
 #### Defined in
 
-[shared/interfaces/job.ts:79](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L79)
+[shared/interfaces/job.ts:79](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L79)
 
 ___
 
@@ -283,7 +283,7 @@ Usually set to around 2.
 
 #### Defined in
 
-[shared/interfaces/job.ts:87](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L87)
+[shared/interfaces/job.ts:87](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L87)
 
 ___
 
@@ -295,7 +295,7 @@ A local text label to associate with this objective.
 
 #### Defined in
 
-[shared/interfaces/job.ts:129](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L129)
+[shared/interfaces/job.ts:129](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L129)
 
 ___
 
@@ -307,7 +307,7 @@ An objective type that is unique to this objective.
 
 #### Defined in
 
-[shared/interfaces/job.ts:72](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L72)
+[shared/interfaces/job.ts:72](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L72)
 
 ___
 
@@ -319,4 +319,4 @@ A unique identifier that can be assigned to an objective to help identify it eas
 
 #### Defined in
 
-[shared/interfaces/job.ts:58](https://github.com/Stuyk/altv-athena/blob/e4e897f/src/core/shared/interfaces/job.ts#L58)
+[shared/interfaces/job.ts:58](https://github.com/Stuyk/altv-athena/blob/94d0bf7/src/core/shared/interfaces/job.ts#L58)
