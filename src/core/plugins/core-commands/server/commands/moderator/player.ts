@@ -16,17 +16,23 @@ Athena.systems.messenger.commands.register(
     'sethealth',
     '/sethealth [value] [id]',
     ['admin'],
-    (player: alt.Player, value: number = 100, id: string | null = null) => {
-        if (isNaN(value)) {
+    (player: alt.Player, value: string = '100', id: string | null = null) => {
+        if (isNaN(parseInt(value))) {
             Athena.player.emit.message(player, '/sethealth [value] [id]');
             return;
         }
 
-        if (value < 99) value = 99;
-        if (value > 199) value = 199;
+        let actualValue = parseInt(value);
+        if (actualValue < 99) {
+            actualValue = 99;
+        }
+
+        if (actualValue > 199) {
+            actualValue = 199;
+        }
 
         if (id === null || id === undefined) {
-            finishSetHealth(player, value);
+            finishSetHealth(player, actualValue);
             return;
         }
 
@@ -36,7 +42,7 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        finishSetHealth(target, value);
+        finishSetHealth(target, actualValue);
     },
 );
 
@@ -44,17 +50,22 @@ Athena.systems.messenger.commands.register(
     'setarmour',
     '/setarmour [value] [id]',
     ['admin'],
-    (player: alt.Player, value: number = 100, id: string | null = null) => {
-        if (isNaN(value)) {
+    (player: alt.Player, value: string = '100', id: string | null = null) => {
+        if (isNaN(parseInt(value))) {
             Athena.player.emit.message(player, '/setarmour [value] [id]');
             return;
         }
+        let actualValue = parseInt(value);
+        if (actualValue < 0) {
+            actualValue = 0;
+        }
 
-        if (value < 0) value = 0;
-        if (value > 100) value = 100;
+        if (actualValue > 100) {
+            actualValue = 100;
+        }
 
         if (id === null || id === undefined) {
-            finishSetArmour(player, value);
+            finishSetArmour(player, actualValue);
             return;
         }
 
@@ -64,7 +75,7 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        finishSetArmour(target, value);
+        finishSetArmour(target, actualValue);
     },
 );
 
