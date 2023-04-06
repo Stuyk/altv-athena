@@ -50,6 +50,8 @@ Athena.systems.inventory.convert.toBaseItem
 Athena.systems.inventory.convert.toItem
 Athena.systems.inventory.convert.toStoredItem
 
+Fix Various Weight Related Bugs
+
 --------------------------------------
 --- Everything Below is Before April 2
 --------------------------------------

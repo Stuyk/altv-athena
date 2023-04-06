@@ -329,7 +329,7 @@ export function add<CustomData = {}>(
     }
 
     if (item.quantity === 0) {
-        return data;
+        return Athena.systems.inventory.weight.update<CustomData>(data);
     }
 
     // Lookup the base item based on the dbName of the item.
@@ -377,12 +377,10 @@ export function add<CustomData = {}>(
             item.quantity -= 1;
         }
 
-        // Re-calculate item weight
-        itemClone = calculateItemWeight(baseItem, itemClone);
         copyOfData.push(itemClone);
 
         if (item.quantity === 0) {
-            return copyOfData;
+            return Athena.systems.inventory.weight.update<CustomData>(copyOfData);
         }
 
         return add(item, copyOfData, size);
@@ -463,9 +461,7 @@ export function sub<CustomData = {}>(
 
     // If the quantity of the found item is greater than; subtract necessary amount.
     copyOfData[existingItemIndex].quantity -= item.quantity;
-    copyOfData[existingItemIndex] = calculateItemWeight(baseItem, copyOfData[existingItemIndex]);
-
-    return copyOfData;
+    return Athena.systems.inventory.weight.update(copyOfData);
 }
 
 /**
@@ -528,10 +524,9 @@ export function splitAt<CustomData = {}>(
 
     // Remove quantity from existing item based on split count.
     copyOfData[index].quantity -= splitCount;
-    copyOfData[index] = calculateItemWeight<CustomData>(baseItem, copyOfData[index]);
     copyOfData.push(itemClone);
 
-    return copyOfData;
+    return Athena.systems.inventory.weight.update<CustomData>(copyOfData);
 }
 
 /**
@@ -584,19 +579,15 @@ export function combineAt<CustomData = {}>(
 
     if (copyOfData[fromIndex].quantity + copyOfData[toIndex].quantity <= baseItem.maxStack) {
         copyOfData[toIndex].quantity += copyOfData[fromIndex].quantity;
-        copyOfData[toIndex] = calculateItemWeight(baseItem, copyOfData[toIndex]);
         copyOfData.splice(fromIndex, 1);
-        return copyOfData;
+        return Athena.systems.inventory.weight.update<CustomData>(copyOfData);
     }
 
     const spaceAvailable = baseItem.maxStack - copyOfData[toIndex].quantity;
     copyOfData[fromIndex].quantity -= spaceAvailable;
     copyOfData[toIndex].quantity += spaceAvailable;
 
-    copyOfData[fromIndex] = calculateItemWeight(baseItem, copyOfData[fromIndex]);
-    copyOfData[toIndex] = calculateItemWeight(baseItem, copyOfData[toIndex]);
-
-    return copyOfData;
+    return Athena.systems.inventory.weight.update<CustomData>(copyOfData);
 }
 
 export function combineAtComplex(from: ComplexSwap, to: ComplexSwap): ComplexSwapReturn | undefined {
@@ -645,18 +636,19 @@ export function combineAtComplex(from: ComplexSwap, to: ComplexSwap): ComplexSwa
     // Simply move quantities; and return results.
     if (spaceAvailable > fromData[fromIndex].quantity) {
         toData[toIndex].quantity += fromData[fromIndex].quantity;
-        toData[toIndex] = calculateItemWeight(baseItem, toData[toIndex]);
         fromData.splice(fromIndex, 1);
-        return { from: fromData, to: toData };
+        return {
+            from: Athena.systems.inventory.weight.update(fromData),
+            to: Athena.systems.inventory.weight.update(toData),
+        };
     }
 
     fromData[fromIndex].quantity -= spaceAvailable;
     toData[toIndex].quantity += spaceAvailable;
-
-    fromData[fromIndex] = calculateItemWeight(baseItem, fromData[fromIndex]);
-    toData[toIndex] = calculateItemWeight(baseItem, toData[toIndex]);
-
-    return { from: fromData, to: toData };
+    return {
+        from: Athena.systems.inventory.weight.update(fromData),
+        to: Athena.systems.inventory.weight.update(toData),
+    };
 }
 
 /**
@@ -706,7 +698,7 @@ export function swap(
         copyOfData[endIndex].slot = fromSlot;
     }
 
-    return copyOfData;
+    return Athena.systems.inventory.weight.update(copyOfData);
 }
 
 /**
@@ -778,7 +770,10 @@ export function swapBetween(from: ComplexSwap, to: ComplexSwap): ComplexSwapRetu
 
     // Move the 'from' item to the other data set.
     toData.push(fromItem);
-    return { from: fromData, to: toData };
+    return {
+        from: Athena.systems.inventory.weight.update(fromData),
+        to: Athena.systems.inventory.weight.update(toData),
+    };
 }
 
 /**
