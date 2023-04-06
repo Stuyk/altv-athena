@@ -19,7 +19,7 @@ Commands to populate this Command Input with to show suggestions.
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:23](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/client/rmlui/commands/index.ts#L23)
+[client/rmlui/commands/index.ts:23](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/rmlui/commands/index.ts#L23)
 
 ___
 
@@ -32,4 +32,4 @@ Usually something like... 'Type a chat message, or command with (/)'
 
 #### Defined in
 
-[client/rmlui/commands/index.ts:15](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/client/rmlui/commands/index.ts#L15)
+[client/rmlui/commands/index.ts:15](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/rmlui/commands/index.ts#L15)

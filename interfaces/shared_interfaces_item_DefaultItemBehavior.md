@@ -25,7 +25,7 @@ Can this item be dropped.
 
 #### Defined in
 
-[shared/interfaces/item.ts:93](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L93)
+[shared/interfaces/item.ts:93](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/shared/interfaces/item.ts#L93)
 
 ___
 
@@ -37,7 +37,7 @@ Can the item be stacked
 
 #### Defined in
 
-[shared/interfaces/item.ts:101](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L101)
+[shared/interfaces/item.ts:101](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/shared/interfaces/item.ts#L101)
 
 ___
 
@@ -49,7 +49,7 @@ Can the item be traded
 
 #### Defined in
 
-[shared/interfaces/item.ts:109](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L109)
+[shared/interfaces/item.ts:109](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/shared/interfaces/item.ts#L109)
 
 ___
 
@@ -61,7 +61,7 @@ Destroy this item on drop.
 
 #### Defined in
 
-[shared/interfaces/item.ts:155](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L155)
+[shared/interfaces/item.ts:155](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/shared/interfaces/item.ts#L155)
 
 ___
 
@@ -75,7 +75,7 @@ DO NOT specify isEquippable with this; leave it as false.
 
 #### Defined in
 
-[shared/interfaces/item.ts:119](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L119)
+[shared/interfaces/item.ts:119](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/shared/interfaces/item.ts#L119)
 
 ___
 
@@ -88,7 +88,7 @@ Allows for specifying a custom icon instead.
 
 #### Defined in
 
-[shared/interfaces/item.ts:164](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L164)
+[shared/interfaces/item.ts:164](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/shared/interfaces/item.ts#L164)
 
 ___
 
@@ -102,7 +102,7 @@ Just only specify this one if doing custom equips.
 
 #### Defined in
 
-[shared/interfaces/item.ts:147](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L147)
+[shared/interfaces/item.ts:147](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/shared/interfaces/item.ts#L147)
 
 ___
 
@@ -114,7 +114,7 @@ Can this item be added to the toolbar.
 
 #### Defined in
 
-[shared/interfaces/item.ts:127](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L127)
+[shared/interfaces/item.ts:127](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/shared/interfaces/item.ts#L127)
 
 ___
 
@@ -128,4 +128,4 @@ DO NOT specify isEquippable with this; leave it as false.
 
 #### Defined in
 
-[shared/interfaces/item.ts:137](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L137)
+[shared/interfaces/item.ts:137](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/shared/interfaces/item.ts#L137)
