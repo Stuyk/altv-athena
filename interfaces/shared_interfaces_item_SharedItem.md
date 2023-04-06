@@ -39,7 +39,7 @@ Any custom data assigned to this item.
 
 #### Defined in
 
-[shared/interfaces/item.ts:204](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/item.ts#L204)
+[shared/interfaces/item.ts:204](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L204)
 
 ___
 
@@ -51,7 +51,7 @@ The matching database name for this item.
 
 #### Defined in
 
-[shared/interfaces/item.ts:196](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/item.ts#L196)
+[shared/interfaces/item.ts:196](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L196)
 
 ___
 
@@ -63,4 +63,4 @@ The version of this item it is based upon.
 
 #### Defined in
 
-[shared/interfaces/item.ts:212](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/item.ts#L212)
+[shared/interfaces/item.ts:212](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/interfaces/item.ts#L212)

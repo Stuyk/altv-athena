@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/information/props.ts:3](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/information/props.ts#L3)
+[shared/information/props.ts:3](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/shared/information/props.ts#L3)

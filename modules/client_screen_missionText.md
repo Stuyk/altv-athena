@@ -30,4 +30,4 @@ Draw mission text on the bottom of screen
 
 #### Defined in
 
-[client/screen/missionText.ts:13](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/client/screen/missionText.ts#L13)
+[client/screen/missionText.ts:13](https://github.com/Stuyk/altv-athena/blob/27ff03a/src/core/client/screen/missionText.ts#L13)
