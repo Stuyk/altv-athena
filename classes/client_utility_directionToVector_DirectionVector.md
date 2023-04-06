@@ -24,7 +24,7 @@ order: 0
 
 #### Defined in
 
-[client/utility/directionToVector.ts:7](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/utility/directionToVector.ts#L7)
+[client/utility/directionToVector.ts:7](https://github.com/Stuyk/altv-athena/blob/3dbae04/src/core/client/utility/directionToVector.ts#L7)
 
 ## Properties
 
@@ -34,7 +34,7 @@ order: 0
 
 #### Defined in
 
-[client/utility/directionToVector.ts:4](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/utility/directionToVector.ts#L4)
+[client/utility/directionToVector.ts:4](https://github.com/Stuyk/altv-athena/blob/3dbae04/src/core/client/utility/directionToVector.ts#L4)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[client/utility/directionToVector.ts:5](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/utility/directionToVector.ts#L5)
+[client/utility/directionToVector.ts:5](https://github.com/Stuyk/altv-athena/blob/3dbae04/src/core/client/utility/directionToVector.ts#L5)
 
 ## Methods
 
@@ -73,7 +73,7 @@ AthenaClient.utility.directionToVector.DirectionVector.**eulerToQuaternion**(`ro
 
 #### Defined in
 
-[client/utility/directionToVector.ts:12](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/utility/directionToVector.ts#L12)
+[client/utility/directionToVector.ts:12](https://github.com/Stuyk/altv-athena/blob/3dbae04/src/core/client/utility/directionToVector.ts#L12)
 
 ___
 
@@ -95,7 +95,7 @@ AthenaClient.utility.directionToVector.DirectionVector.**forward**(`distance`): 
 
 #### Defined in
 
-[client/utility/directionToVector.ts:42](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/utility/directionToVector.ts#L42)
+[client/utility/directionToVector.ts:42](https://github.com/Stuyk/altv-athena/blob/3dbae04/src/core/client/utility/directionToVector.ts#L42)
 
 ___
 
@@ -111,7 +111,7 @@ AthenaClient.utility.directionToVector.DirectionVector.**forwardVector**(): `IVe
 
 #### Defined in
 
-[client/utility/directionToVector.ts:33](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/utility/directionToVector.ts#L33)
+[client/utility/directionToVector.ts:33](https://github.com/Stuyk/altv-athena/blob/3dbae04/src/core/client/utility/directionToVector.ts#L33)
 
 ___
 
@@ -139,7 +139,7 @@ AthenaClient.utility.directionToVector.DirectionVector.**right**(`distance`): `O
 
 #### Defined in
 
-[client/utility/directionToVector.ts:62](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/utility/directionToVector.ts#L62)
+[client/utility/directionToVector.ts:62](https://github.com/Stuyk/altv-athena/blob/3dbae04/src/core/client/utility/directionToVector.ts#L62)
 
 ___
 
@@ -161,7 +161,7 @@ AthenaClient.utility.directionToVector.DirectionVector.**rightVector**(): `Objec
 
 #### Defined in
 
-[client/utility/directionToVector.ts:52](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/utility/directionToVector.ts#L52)
+[client/utility/directionToVector.ts:52](https://github.com/Stuyk/altv-athena/blob/3dbae04/src/core/client/utility/directionToVector.ts#L52)
 
 ___
 
@@ -189,7 +189,7 @@ AthenaClient.utility.directionToVector.DirectionVector.**up**(`distance`): `Obje
 
 #### Defined in
 
-[client/utility/directionToVector.ts:81](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/utility/directionToVector.ts#L81)
+[client/utility/directionToVector.ts:81](https://github.com/Stuyk/altv-athena/blob/3dbae04/src/core/client/utility/directionToVector.ts#L81)
 
 ___
 
@@ -211,4 +211,4 @@ AthenaClient.utility.directionToVector.DirectionVector.**upVector**(): `Object`
 
 #### Defined in
 
-[client/utility/directionToVector.ts:72](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/utility/directionToVector.ts#L72)
+[client/utility/directionToVector.ts:72](https://github.com/Stuyk/altv-athena/blob/3dbae04/src/core/client/utility/directionToVector.ts#L72)
