@@ -25,7 +25,7 @@ Should the marker be slightly animated.
 
 #### Defined in
 
-[shared/interfaces/marker.ts:65](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/marker.ts#L65)
+[shared/interfaces/marker.ts:65](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/marker.ts#L65)
 
 ___
 
@@ -37,7 +37,7 @@ The color of the marker. All values are 0 - 255.
 
 #### Defined in
 
-[shared/interfaces/marker.ts:30](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/marker.ts#L30)
+[shared/interfaces/marker.ts:30](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/marker.ts#L30)
 
 ___
 
@@ -49,7 +49,7 @@ The dimension to display this marker in.
 
 #### Defined in
 
-[shared/interfaces/marker.ts:58](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/marker.ts#L58)
+[shared/interfaces/marker.ts:58](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/marker.ts#L58)
 
 ___
 
@@ -61,7 +61,7 @@ Should the marker face the player's camera.
 
 #### Defined in
 
-[shared/interfaces/marker.ts:72](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/marker.ts#L72)
+[shared/interfaces/marker.ts:72](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/marker.ts#L72)
 
 ___
 
@@ -73,7 +73,7 @@ The max distance to render this marker.
 
 #### Defined in
 
-[shared/interfaces/marker.ts:44](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/marker.ts#L44)
+[shared/interfaces/marker.ts:44](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/marker.ts#L44)
 
 ___
 
@@ -85,7 +85,7 @@ Position of the Object in a 3D space.
 
 #### Defined in
 
-[shared/interfaces/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/marker.ts#L16)
+[shared/interfaces/marker.ts:16](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/marker.ts#L16)
 
 ___
 
@@ -97,7 +97,7 @@ Should the marker rotate to face the player.
 
 #### Defined in
 
-[shared/interfaces/marker.ts:79](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/marker.ts#L79)
+[shared/interfaces/marker.ts:79](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/marker.ts#L79)
 
 ___
 
@@ -109,7 +109,7 @@ The scale of this marker.
 
 #### Defined in
 
-[shared/interfaces/marker.ts:37](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/marker.ts#L37)
+[shared/interfaces/marker.ts:37](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/marker.ts#L37)
 
 ___
 
@@ -121,7 +121,7 @@ The Marker Type Associated with this Marker
 
 #### Defined in
 
-[shared/interfaces/marker.ts:23](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/marker.ts#L23)
+[shared/interfaces/marker.ts:23](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/marker.ts#L23)
 
 ___
 
@@ -133,4 +133,4 @@ The unique identifier for this marker.
 
 #### Defined in
 
-[shared/interfaces/marker.ts:51](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/marker.ts#L51)
+[shared/interfaces/marker.ts:51](https://github.com/Stuyk/altv-athena/blob/128b8a7/src/core/shared/interfaces/marker.ts#L51)
