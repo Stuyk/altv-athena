@@ -233,8 +233,8 @@ Athena.systems.messenger.commands.register(
 );
 
 Athena.systems.messenger.commands.register(
-    'tuneVehicle',
-    '/tuneVehicle [modID] [value] - Sets the specified Mod to the given value',
+    'tunevehicle',
+    '/tunevehicle [modID] [value] - Sets the specified Mod to the given value',
     ['admin'],
     (player: alt.Player, id: number, value: number) => {
         const vehicle = player.vehicle ? player.vehicle : Athena.utility.closest.getClosestVehicle(player.pos);
