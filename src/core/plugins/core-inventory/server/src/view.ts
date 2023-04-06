@@ -325,6 +325,7 @@ const Internal = {
             itemsToCheck = complexSwap.from;
 
             if ((Athena.systems.inventory.weight.isWeightExceeded([complexSwap.to]), config.weight.player)) {
+                // console.log('weight exceeded at 1');
                 InventoryView.storage.resync(player);
                 return;
             }
@@ -332,7 +333,8 @@ const Internal = {
 
         if (info.endType === 'custom' && config.weight.enabled) {
             itemsToCheck = complexSwap.to;
-            if ((Athena.systems.inventory.weight.isWeightExceeded([complexSwap.from]), config.weight.player)) {
+            if ((Athena.systems.inventory.weight.isWeightExceeded([complexSwap.from]), maxWeight)) {
+                // console.log('weight exceeded at 2');
                 InventoryView.storage.resync(player);
                 return;
             }
@@ -340,6 +342,7 @@ const Internal = {
 
         const isWeightExceeded = Athena.systems.inventory.weight.isWeightExceeded([itemsToCheck], maxWeight);
         if (isWeightExceeded) {
+            // console.log('weight exceeded at 3');
             InventoryView.storage.resync(player);
             return;
         }
