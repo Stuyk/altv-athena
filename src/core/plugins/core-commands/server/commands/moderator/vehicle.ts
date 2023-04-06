@@ -90,7 +90,7 @@ Athena.systems.messenger.commands.register(
     setLivery,
 );
 
-function setLivery(player: alt.Player, livery: number) {
+function setLivery(player: alt.Player, livery: string) {
     const vehicle = player.vehicle ? player.vehicle : Athena.utility.closest.getClosestVehicle(player.pos);
 
     if (!vehicle) {
@@ -112,7 +112,12 @@ function setLivery(player: alt.Player, livery: number) {
         return;
     }
 
-    Athena.vehicle.tuning.applyTuning(vehicle, { mods: [{ id: 48, value: livery }] });
+    if (isNaN(parseInt(livery))) {
+        Athena.player.emit.message(player, `Livery passed was not a number.`);
+        return;
+    }
+
+    Athena.vehicle.tuning.applyTuning(vehicle, { mods: [{ id: 48, value: parseInt(livery) }] });
     Athena.vehicle.controls.updateLastUsed(vehicle);
     Athena.vehicle.controls.update(vehicle);
 
@@ -141,7 +146,7 @@ Athena.systems.messenger.commands.register(
     setVehicleDirtlevel,
 );
 
-function setVehicleDirtlevel(player: alt.Player, dirtLevel: number) {
+function setVehicleDirtlevel(player: alt.Player, dirtLevel: string) {
     const vehicle = player.vehicle ? player.vehicle : Athena.utility.closest.getClosestVehicle(player.pos);
 
     if (!vehicle) {
@@ -154,7 +159,12 @@ function setVehicleDirtlevel(player: alt.Player, dirtLevel: number) {
         return;
     }
 
-    const dirtlevelState: Partial<VehicleState> = { dirtLevel };
+    if (isNaN(parseInt(dirtLevel))) {
+        Athena.player.emit.message(player, `Dirt level passed was not a number.`);
+        return;
+    }
+
+    const dirtlevelState: Partial<VehicleState> = { dirtLevel: parseInt(dirtLevel) };
 
     Athena.vehicle.tuning.applyState(vehicle, dirtlevelState);
     Athena.vehicle.controls.updateLastUsed(vehicle);
@@ -236,7 +246,7 @@ Athena.systems.messenger.commands.register(
     'tunevehicle',
     '/tunevehicle [modID] [value] - Sets the specified Mod to the given value',
     ['admin'],
-    (player: alt.Player, id: number, value: number) => {
+    (player: alt.Player, id: string, value: string) => {
         const vehicle = player.vehicle ? player.vehicle : Athena.utility.closest.getClosestVehicle(player.pos);
 
         if (!vehicle) {
@@ -258,7 +268,12 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        Athena.vehicle.tuning.applyTuning(vehicle, { mods: [{ id, value }] });
+        if (isNaN(parseInt(id)) || isNaN(parseInt(value))) {
+            Athena.player.emit.message(player, `Id, or value was not a number.`);
+            return;
+        }
+
+        Athena.vehicle.tuning.applyTuning(vehicle, { mods: [{ id: parseInt(id), value: parseInt(value) }] });
         Athena.vehicle.controls.updateLastUsed(vehicle);
         Athena.vehicle.controls.update(vehicle);
 

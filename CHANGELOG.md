@@ -51,6 +51,7 @@ Athena.systems.inventory.convert.toItem
 Athena.systems.inventory.convert.toStoredItem
 
 Fix Various Weight Related Bugs
+Fix commands using non-string types
 
 --------------------------------------
 --- Everything Below is Before April 2
