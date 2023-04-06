@@ -28,4 +28,4 @@ order: 0
 
 #### Defined in
 
-[shared/interfaces/adminControl.ts:1](https://github.com/Stuyk/altv-athena/blob/3dbae04/src/core/shared/interfaces/adminControl.ts#L1)
+[shared/interfaces/adminControl.ts:1](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/shared/interfaces/adminControl.ts#L1)

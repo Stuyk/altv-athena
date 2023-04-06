@@ -214,7 +214,6 @@
 - [server/systems/defaults/vehiclesSpawnOnJoin](modules/server_systems_defaults_vehiclesSpawnOnJoin.md)
 - [server/systems/defaults/weaponItems](modules/server_systems_defaults_weaponItems.md)
 - [server/systems/defaults/weather](modules/server_systems_defaults_weather.md)
-- [server/systems/dev](modules/server_systems_dev.md)
 - [server/systems/global](modules/server_systems_global.md)
 - [server/systems/identifier](modules/server_systems_identifier.md)
 - [server/systems/inventory](modules/server_systems_inventory.md)
