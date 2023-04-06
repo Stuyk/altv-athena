@@ -57,7 +57,7 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4) {
+        if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4 && !player.vehicle) {
             Athena.player.emit.message(player, 'No vehicle in range.');
             return;
         }
@@ -98,7 +98,7 @@ function setLivery(player: alt.Player, livery: number) {
         return;
     }
 
-    if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4) {
+    if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4 && !player.vehicle) {
         Athena.player.emit.message(player, 'No vehicle in range.');
         return;
     }
@@ -149,7 +149,7 @@ function setVehicleDirtlevel(player: alt.Player, dirtLevel: number) {
         return;
     }
 
-    if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4) {
+    if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4 && !player.vehicle) {
         Athena.player.emit.message(player, 'No vehicle in range.');
         return;
     }
@@ -198,7 +198,7 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4) {
+        if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4 && !player.vehicle) {
             Athena.player.emit.message(player, 'No vehicle in range.');
             return;
         }
@@ -244,7 +244,7 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4) {
+        if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4 && !player.vehicle) {
             Athena.player.emit.message(player, 'No vehicle in range.');
             return;
         }
