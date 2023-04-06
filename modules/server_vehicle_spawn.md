@@ -23,7 +23,7 @@ Spawn all vehicles from the database.
 
 #### Defined in
 
-[server/vehicle/spawn.ts:107](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/vehicle/spawn.ts#L107)
+[server/vehicle/spawn.ts:107](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/server/vehicle/spawn.ts#L107)
 
 ___
 
@@ -48,7 +48,7 @@ Used to override vehicle spawning functionality
 
 #### Defined in
 
-[server/vehicle/spawn.ts:131](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/vehicle/spawn.ts#L131)
+[server/vehicle/spawn.ts:131](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/server/vehicle/spawn.ts#L131)
 
 ::: tip Usage
 Athena.vehicle.spawn.**override**(`functionName`, `callback`): `any`
@@ -69,7 +69,7 @@ Used to override vehicle spawning functionality
 
 #### Defined in
 
-[server/vehicle/spawn.ts:132](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/vehicle/spawn.ts#L132)
+[server/vehicle/spawn.ts:132](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/server/vehicle/spawn.ts#L132)
 
 ::: tip Usage
 Athena.vehicle.spawn.**override**(`functionName`, `callback`): `any`
@@ -90,7 +90,7 @@ Used to override vehicle spawning functionality
 
 #### Defined in
 
-[server/vehicle/spawn.ts:133](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/vehicle/spawn.ts#L133)
+[server/vehicle/spawn.ts:133](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/server/vehicle/spawn.ts#L133)
 
 ::: tip Usage
 Athena.vehicle.spawn.**override**(`functionName`, `callback`): `any`
@@ -111,7 +111,7 @@ Used to override vehicle spawning functionality
 
 #### Defined in
 
-[server/vehicle/spawn.ts:134](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/vehicle/spawn.ts#L134)
+[server/vehicle/spawn.ts:134](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/server/vehicle/spawn.ts#L134)
 
 ___
 
@@ -136,7 +136,7 @@ Returns undefined if the vehicle is already spawned.
 
 #### Defined in
 
-[server/vehicle/spawn.ts:67](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/vehicle/spawn.ts#L67)
+[server/vehicle/spawn.ts:67](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/server/vehicle/spawn.ts#L67)
 
 ___
 
@@ -162,7 +162,7 @@ It is not owned by anyone.
 
 #### Defined in
 
-[server/vehicle/spawn.ts:15](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/vehicle/spawn.ts#L15)
+[server/vehicle/spawn.ts:15](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/server/vehicle/spawn.ts#L15)
 
 ___
 
@@ -189,4 +189,4 @@ Cannot be modified by the player.
 
 #### Defined in
 
-[server/vehicle/spawn.ts:42](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/vehicle/spawn.ts#L42)
+[server/vehicle/spawn.ts:42](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/server/vehicle/spawn.ts#L42)

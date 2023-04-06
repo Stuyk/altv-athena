@@ -29,7 +29,7 @@ A callback when this menu option is changed.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
+[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
 
 ___
 
@@ -45,7 +45,7 @@ A description of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
+[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
 
 ___
 
@@ -61,7 +61,7 @@ Only update when 'Enter' is pressed.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:62](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/menu/menuInterfaces.ts#L62)
+[client/rmlui/menu/menuInterfaces.ts:62](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/rmlui/menu/menuInterfaces.ts#L62)
 
 ___
 
@@ -73,7 +73,7 @@ The available values for this option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:46](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/menu/menuInterfaces.ts#L46)
+[client/rmlui/menu/menuInterfaces.ts:46](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/rmlui/menu/menuInterfaces.ts#L46)
 
 ___
 
@@ -89,7 +89,7 @@ The title of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
+[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:38](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/menu/menuInterfaces.ts#L38)
+[client/rmlui/menu/menuInterfaces.ts:38](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/rmlui/menu/menuInterfaces.ts#L38)
 
 ___
 
@@ -111,4 +111,4 @@ Current index of this selection.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:54](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/client/rmlui/menu/menuInterfaces.ts#L54)
+[client/rmlui/menu/menuInterfaces.ts:54](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/client/rmlui/menu/menuInterfaces.ts#L54)

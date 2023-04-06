@@ -37,7 +37,7 @@ If a vehicle has any group permissions, all access is denied to non-matching gro
 
 #### Defined in
 
-[server/vehicle/permissions.ts:59](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/vehicle/permissions.ts#L59)
+[server/vehicle/permissions.ts:59](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/server/vehicle/permissions.ts#L59)
 
 ___
 
@@ -66,7 +66,7 @@ Check if a vehicle has any matching permissions against another document.
 
 #### Defined in
 
-[server/vehicle/permissions.ts:32](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/vehicle/permissions.ts#L32)
+[server/vehicle/permissions.ts:32](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/server/vehicle/permissions.ts#L32)
 
 ___
 
@@ -94,4 +94,4 @@ Check if a vehicle has a group permission.
 
 #### Defined in
 
-[server/vehicle/permissions.ts:14](https://github.com/Stuyk/altv-athena/blob/8d1016e/src/core/server/vehicle/permissions.ts#L14)
+[server/vehicle/permissions.ts:14](https://github.com/Stuyk/altv-athena/blob/bde990b/src/core/server/vehicle/permissions.ts#L14)
