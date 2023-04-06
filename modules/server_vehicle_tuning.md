@@ -35,7 +35,7 @@ Automatically saves data if vehicle is non-temporary.
 
 #### Defined in
 
-[server/vehicle/tuning.ts:86](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/vehicle/tuning.ts#L86)
+[server/vehicle/tuning.ts:86](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/vehicle/tuning.ts#L86)
 
 ___
 
@@ -61,7 +61,7 @@ These match the alt:V API, and can be pulled from a database.
 
 #### Defined in
 
-[server/vehicle/tuning.ts:16](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/vehicle/tuning.ts#L16)
+[server/vehicle/tuning.ts:16](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/vehicle/tuning.ts#L16)
 
 ___
 
@@ -86,7 +86,7 @@ Apply tuning to the specified vehicle.
 
 #### Defined in
 
-[server/vehicle/tuning.ts:33](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/vehicle/tuning.ts#L33)
+[server/vehicle/tuning.ts:33](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/vehicle/tuning.ts#L33)
 
 ___
 
@@ -112,7 +112,7 @@ Return all mods that are currently applied to a vehicle.
 
 #### Defined in
 
-[server/vehicle/tuning.ts:123](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/vehicle/tuning.ts#L123)
+[server/vehicle/tuning.ts:123](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/vehicle/tuning.ts#L123)
 
 ___
 
@@ -136,7 +136,7 @@ Get all mods of the specified vehicle.
 
 #### Defined in
 
-[server/vehicle/tuning.ts:60](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/vehicle/tuning.ts#L60)
+[server/vehicle/tuning.ts:60](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/vehicle/tuning.ts#L60)
 
 ___
 
@@ -161,7 +161,7 @@ Used to override vehicle tuning functionality
 
 #### Defined in
 
-[server/vehicle/tuning.ts:146](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/vehicle/tuning.ts#L146)
+[server/vehicle/tuning.ts:146](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/vehicle/tuning.ts#L146)
 
 ::: tip Usage
 Athena.vehicle.tuning.**override**(`functionName`, `callback`): `any`
@@ -182,7 +182,7 @@ Used to override vehicle tuning functionality
 
 #### Defined in
 
-[server/vehicle/tuning.ts:147](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/vehicle/tuning.ts#L147)
+[server/vehicle/tuning.ts:147](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/vehicle/tuning.ts#L147)
 
 ::: tip Usage
 Athena.vehicle.tuning.**override**(`functionName`, `callback`): `any`
@@ -203,7 +203,7 @@ Used to override vehicle tuning functionality
 
 #### Defined in
 
-[server/vehicle/tuning.ts:148](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/vehicle/tuning.ts#L148)
+[server/vehicle/tuning.ts:148](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/vehicle/tuning.ts#L148)
 
 ::: tip Usage
 Athena.vehicle.tuning.**override**(`functionName`, `callback`): `any`
@@ -224,7 +224,7 @@ Used to override vehicle tuning functionality
 
 #### Defined in
 
-[server/vehicle/tuning.ts:149](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/vehicle/tuning.ts#L149)
+[server/vehicle/tuning.ts:149](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/vehicle/tuning.ts#L149)
 
 ::: tip Usage
 Athena.vehicle.tuning.**override**(`functionName`, `callback`): `any`
@@ -245,4 +245,4 @@ Used to override vehicle tuning functionality
 
 #### Defined in
 
-[server/vehicle/tuning.ts:150](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/vehicle/tuning.ts#L150)
+[server/vehicle/tuning.ts:150](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/vehicle/tuning.ts#L150)

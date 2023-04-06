@@ -32,7 +32,7 @@ Trigger a callback specific to Athena Player Events.
 
 #### Defined in
 
-[server/events/clientEvents.ts:23](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/events/clientEvents.ts#L23)
+[server/events/clientEvents.ts:23](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/events/clientEvents.ts#L23)
 
 ___
 
@@ -56,4 +56,4 @@ Athena.events.clientEvents.**trigger**(`eventName`, `player`, `...args`): `void`
 
 #### Defined in
 
-[server/events/clientEvents.ts:6](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/events/clientEvents.ts#L6)
+[server/events/clientEvents.ts:6](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/events/clientEvents.ts#L6)

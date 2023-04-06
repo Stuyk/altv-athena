@@ -25,7 +25,7 @@ A unique MongoDB identifier to identify the accoutn in the database.
 
 #### Defined in
 
-[shared/interfaces/iAccount.ts:12](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/shared/interfaces/iAccount.ts#L12)
+[shared/interfaces/iAccount.ts:12](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/iAccount.ts#L12)
 
 ___
 
@@ -37,7 +37,7 @@ Is this user banned?
 
 #### Defined in
 
-[shared/interfaces/iAccount.ts:69](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/shared/interfaces/iAccount.ts#L69)
+[shared/interfaces/iAccount.ts:69](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/iAccount.ts#L69)
 
 ___
 
@@ -49,7 +49,7 @@ Discord user ID. The one you get from developer mode.
 
 #### Defined in
 
-[shared/interfaces/iAccount.ts:26](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/shared/interfaces/iAccount.ts#L26)
+[shared/interfaces/iAccount.ts:26](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/iAccount.ts#L26)
 
 ___
 
@@ -61,7 +61,7 @@ Email bound to the discord account.
 
 #### Defined in
 
-[shared/interfaces/iAccount.ts:33](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/shared/interfaces/iAccount.ts#L33)
+[shared/interfaces/iAccount.ts:33](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/iAccount.ts#L33)
 
 ___
 
@@ -73,7 +73,7 @@ Hardware Identifiers associated with an account.
 
 #### Defined in
 
-[shared/interfaces/iAccount.ts:47](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/shared/interfaces/iAccount.ts#L47)
+[shared/interfaces/iAccount.ts:47](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/iAccount.ts#L47)
 
 ___
 
@@ -85,7 +85,7 @@ A incremented ID for individual accounts.
 
 #### Defined in
 
-[shared/interfaces/iAccount.ts:19](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/shared/interfaces/iAccount.ts#L19)
+[shared/interfaces/iAccount.ts:19](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/iAccount.ts#L19)
 
 ___
 
@@ -97,7 +97,7 @@ Last 5 IPs that have logged into an account.
 
 #### Defined in
 
-[shared/interfaces/iAccount.ts:40](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/shared/interfaces/iAccount.ts#L40)
+[shared/interfaces/iAccount.ts:40](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/iAccount.ts#L40)
 
 ___
 
@@ -109,7 +109,7 @@ Time in milliseconds when they last logged in since epoch.
 
 #### Defined in
 
-[shared/interfaces/iAccount.ts:54](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/shared/interfaces/iAccount.ts#L54)
+[shared/interfaces/iAccount.ts:54](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/iAccount.ts#L54)
 
 ___
 
@@ -121,7 +121,7 @@ A list of permissions assigned to this account.
 
 #### Defined in
 
-[shared/interfaces/iAccount.ts:62](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/shared/interfaces/iAccount.ts#L62)
+[shared/interfaces/iAccount.ts:62](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/iAccount.ts#L62)
 
 ___
 
@@ -133,4 +133,4 @@ Why are they banned?
 
 #### Defined in
 
-[shared/interfaces/iAccount.ts:76](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/shared/interfaces/iAccount.ts#L76)
+[shared/interfaces/iAccount.ts:76](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/shared/interfaces/iAccount.ts#L76)

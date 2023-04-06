@@ -31,7 +31,7 @@ Will invoke a callback or an event if accepted or declined.
 
 #### Defined in
 
-[server/systems/jobTrigger.ts:87](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/systems/jobTrigger.ts#L87)
+[server/systems/jobTrigger.ts:87](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/systems/jobTrigger.ts#L87)
 
 ___
 
@@ -56,4 +56,4 @@ Used to override job trigger functions.
 
 #### Defined in
 
-[server/systems/jobTrigger.ts:106](https://github.com/Stuyk/altv-athena/blob/6d21f39/src/core/server/systems/jobTrigger.ts#L106)
+[server/systems/jobTrigger.ts:106](https://github.com/Stuyk/altv-athena/blob/8499342/src/core/server/systems/jobTrigger.ts#L106)
