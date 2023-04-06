@@ -232,6 +232,48 @@ Athena.systems.messenger.commands.register(
     },
 );
 
+Athena.systems.messenger.commands.register(
+    'tunevehicle',
+    '/tunevehicle [modID] [value] - Sets the specified Mod to the given value',
+    ['admin'],
+    (player: alt.Player, id: number, value: number) => {
+        const vehicle = player.vehicle ? player.vehicle : Athena.utility.closest.getClosestVehicle(player.pos);
+
+        if (!vehicle) {
+            Athena.player.emit.message(player, 'No spawned vehicle.');
+            return;
+        }
+
+        if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4) {
+            Athena.player.emit.message(player, 'No vehicle in range.');
+            return;
+        }
+
+        if (vehicle.modKit == 0 && vehicle.modKitsCount > 0) {
+            Athena.vehicle.tuning.applyTuning(vehicle, { modkit: 1 });
+        }
+
+        if (vehicle.modKit == 0) {
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_HAS_NO_MOD_KIT));
+            return;
+        }
+
+        Athena.vehicle.tuning.applyTuning(vehicle, { mods: [{ id, value }] });
+        Athena.vehicle.controls.updateLastUsed(vehicle);
+        Athena.vehicle.controls.update(vehicle);
+
+        const tuningData: IVehicleTuning = Athena.vehicle.tuning.getTuning(vehicle);
+
+        Athena.document.vehicle.set(vehicle, 'tuning', tuningData);
+
+        const hash = typeof vehicle.model === 'number' ? vehicle.model : alt.hash(vehicle.model);
+
+        let vehInfo = Athena.utility.hashLookup.vehicle.hash(hash);
+
+        Athena.player.emit.message(player, `Mod ID: ${id} of ${vehInfo.displayName} was set to ${value}.`);
+    },
+);
+
 // import { command } from '@AthenaServer/decorators/commands';
 // import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 // import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
