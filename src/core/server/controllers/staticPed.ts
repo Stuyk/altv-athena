@@ -153,21 +153,21 @@ export function addToPlayer(player: alt.Player, pedData: IPed): string {
  *
  * #### Example
  * ```ts
- * Athena.controllers.staticPed.playAnimation('the-id-you-specified', playAnimation('test', [
+ * Athena.controllers.staticPed.playAnimation('the-id-you-specified', playAnimation('test',
  *      {
  *          dict: 'mp_ped_interaction',
  *          name: 'hugs_guy_a',
  *          duration: 2000,
  *          flags: 0,
  *      },
- * ]);
+ * );
  * ```
  *
  *
  * @param {string} uid A unique string
- * @param {Animation[]} animation
+ * @param {Animation} animation
  */
-export function playAnimation(uid: string, animation: Animation[]) {
+export function playAnimation(uid: string, animation: Animation) {
     alt.emitAllClients(SYSTEM_EVENTS.PLAY_ANIMATION_FOR_PED, uid, animation);
 }
 
