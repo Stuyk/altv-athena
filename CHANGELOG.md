@@ -53,6 +53,8 @@ Athena.systems.inventory.convert.toStoredItem
 Fix Various Weight Related Bugs
 Fix commands using non-string types
 
+Fix Escape on Menu Close for RMLUI Menu
+
 --------------------------------------
 --- Everything Below is Before April 2
 --------------------------------------
