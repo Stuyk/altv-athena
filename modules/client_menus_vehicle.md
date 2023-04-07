@@ -32,7 +32,7 @@ AthenaClient.menus.vehicle.(`target`, `options`): [`player`](server_config.md#pl
 
 #### Defined in
 
-[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/vehicle.ts#L8)
+[client/menus/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/vehicle.ts#L8)
 
 ## Functions
 
@@ -60,7 +60,7 @@ Must always return the original wheel menu options + your changes.
 
 #### Defined in
 
-[client/menus/vehicle.ts:22](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/vehicle.ts#L22)
+[client/menus/vehicle.ts:22](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/vehicle.ts#L22)
 
 ___
 
@@ -80,7 +80,7 @@ Disable the Vehicle Wheel Menu
 
 #### Defined in
 
-[client/menus/vehicle.ts:155](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/vehicle.ts#L155)
+[client/menus/vehicle.ts:155](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/vehicle.ts#L155)
 
 ___
 
@@ -102,7 +102,7 @@ AthenaClient.menus.vehicle.**open**(`vehicle`): `any`
 
 #### Defined in
 
-[client/menus/vehicle.ts:87](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/vehicle.ts#L87)
+[client/menus/vehicle.ts:87](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/vehicle.ts#L87)
 
 ___
 
@@ -128,7 +128,7 @@ Open an in-vehicle menu option and add injections relevant to in-vehicle.
 
 #### Defined in
 
-[client/menus/vehicle.ts:38](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/vehicle.ts#L38)
+[client/menus/vehicle.ts:38](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/vehicle.ts#L38)
 
 ___
 
@@ -151,7 +151,7 @@ AthenaClient.menus.vehicle.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/menus/vehicle.ts:167](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/vehicle.ts#L167)
+[client/menus/vehicle.ts:167](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/vehicle.ts#L167)
 
 ::: tip Usage
 AthenaClient.menus.vehicle.**override**(`functionName`, `callback`): `any`
@@ -170,7 +170,7 @@ AthenaClient.menus.vehicle.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/menus/vehicle.ts:168](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/vehicle.ts#L168)
+[client/menus/vehicle.ts:168](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/vehicle.ts#L168)
 
 ::: tip Usage
 AthenaClient.menus.vehicle.**override**(`functionName`, `callback`): `any`
@@ -189,4 +189,4 @@ AthenaClient.menus.vehicle.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/menus/vehicle.ts:169](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/vehicle.ts#L169)
+[client/menus/vehicle.ts:169](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/vehicle.ts#L169)

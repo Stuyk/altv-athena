@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/enums/timecycleTypes.ts:1](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/shared/enums/timecycleTypes.ts#L1)
+[shared/enums/timecycleTypes.ts:1](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/shared/enums/timecycleTypes.ts#L1)

@@ -32,7 +32,7 @@ AthenaClient.menus.object.(`existingObject`, `options`): [`IWheelOptionExt`](../
 
 #### Defined in
 
-[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/object.ts#L8)
+[client/menus/object.ts:8](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/object.ts#L8)
 
 ## Functions
 
@@ -60,7 +60,7 @@ Must always return the original wheel menu options + your changes.
 
 #### Defined in
 
-[client/menus/object.ts:25](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/object.ts#L25)
+[client/menus/object.ts:25](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/object.ts#L25)
 
 ___
 
@@ -80,7 +80,7 @@ Disable the Object Wheel Menu
 
 #### Defined in
 
-[client/menus/object.ts:98](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/object.ts#L98)
+[client/menus/object.ts:98](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/object.ts#L98)
 
 ___
 
@@ -106,7 +106,7 @@ Opens the wheel menu against a target object created with the server-side object
 
 #### Defined in
 
-[client/menus/object.ts:45](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/object.ts#L45)
+[client/menus/object.ts:45](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/object.ts#L45)
 
 ___
 
@@ -129,7 +129,7 @@ AthenaClient.menus.object.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/menus/object.ts:109](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/object.ts#L109)
+[client/menus/object.ts:109](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/object.ts#L109)
 
 ::: tip Usage
 AthenaClient.menus.object.**override**(`functionName`, `callback`): `any`
@@ -148,4 +148,4 @@ AthenaClient.menus.object.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/menus/object.ts:110](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/menus/object.ts#L110)
+[client/menus/object.ts:110](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/menus/object.ts#L110)

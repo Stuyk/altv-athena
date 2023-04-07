@@ -21,4 +21,4 @@ order: 0
 
 #### Defined in
 
-[shared/utility/complete.ts:1](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/shared/utility/complete.ts#L1)
+[shared/utility/complete.ts:1](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/shared/utility/complete.ts#L1)
