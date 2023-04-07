@@ -58,6 +58,9 @@ Fix Escape on Menu Close for RMLUI Menu
 Athena.systems.inventory.factory.getBaseItemsAsync
 Athena.systems.inventory.factory.getBaseItems
 
+AthenaClient.systems.playerConfig.get('account-data') : Returns Filtered Account Data
+AthenaClient.systems.playerConfig.get('character-data') : Returns Character Data
+
 --------------------------------------
 --- Everything Below is Before April 2
 --------------------------------------

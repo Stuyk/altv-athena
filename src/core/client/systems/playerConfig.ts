@@ -1,5 +1,7 @@
 import * as alt from 'alt-client';
 import { PlayerConfigKeys } from '@AthenaShared/enums/playerConfigKeys';
+import { Account } from '@AthenaShared/interfaces/iAccount';
+import { Character } from '@AthenaShared/interfaces/character';
 
 export type ConfigCallback = (value: any) => void;
 
@@ -17,6 +19,8 @@ const InternalFunctions = {
     },
 };
 
+export function get(key: 'character-data'): Character | undefined;
+export function get(key: 'account-data'): Account | undefined;
 /**
  * Get a value assigned by the server.
  *
@@ -24,7 +28,7 @@ const InternalFunctions = {
  * @param {string} key
  * @return {(ReturnType | undefined)}
  */
-export function get<ReturnType, CustomKeys>(key: PlayerConfigKeys | CustomKeys): ReturnType | undefined {
+export function get<ReturnType, CustomKeys = PlayerConfigKeys>(key: CustomKeys): ReturnType | undefined {
     return alt.getMeta(String(key)) as ReturnType;
 }
 

@@ -209,6 +209,8 @@ export async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(
     }
 
     Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, cache[player.id]);
+    Athena.config.player.set(player, 'character-data', cache[player.id]);
+
     if (typeof callbacks[typeSafeFieldName] === 'undefined') {
         return;
     }
@@ -251,7 +253,9 @@ export async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt
 
     cache[player.id] = Object.assign(cache[player.id], fields);
     await Database.updatePartialData(cache[player.id]._id, fields, Athena.database.collections.Characters);
+
     Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, cache[player.id]);
+    Athena.config.player.set(player, 'character-data', cache[player.id]);
 
     Object.keys(fields).forEach((key) => {
         if (typeof callbacks[key] === 'undefined') {

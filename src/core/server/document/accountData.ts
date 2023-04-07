@@ -52,9 +52,12 @@ export function bind(player: alt.Player, document: Account) {
     }
 
     cache[player.id] = document;
+
     try {
         const dataCopy = deepCloneObject<Account>(cache[player.id]);
-        Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, removeRestrictedFields(dataCopy));
+        const cleanedData = removeRestrictedFields(dataCopy);
+        Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, cleanedData);
+        Athena.config.player.set(player, 'account-data', cleanedData);
     } catch (err) {}
 }
 
@@ -153,7 +156,9 @@ export async function set<T = {}, Keys = keyof KnownKeys<Account & T>>(
 
     try {
         const dataCopy = deepCloneObject<Account>(cache[player.id]);
-        Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, removeRestrictedFields(dataCopy));
+        const cleanedData = removeRestrictedFields(dataCopy);
+        Athena.config.player.set(player, 'account-data', cleanedData);
+        Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, cleanedData);
     } catch (err) {}
 
     if (typeof callbacks[typeSafeFieldName] === 'undefined') {
@@ -190,7 +195,9 @@ export async function setBulk<T = {}, Keys = Partial<Account & T>>(player: alt.P
 
     try {
         const dataCopy = deepCloneObject<Account>(cache[player.id]);
-        Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, removeRestrictedFields(dataCopy));
+        const cleanedData = removeRestrictedFields(dataCopy);
+        Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, cleanedData);
+        Athena.config.player.set(player, 'account-data', cleanedData);
     } catch (err) {}
 
     Object.keys(fields).forEach((key) => {
