@@ -33,7 +33,7 @@ Athena.document.accountData.(`player`, `newValue`, `oldValue`): `void`
 
 #### Defined in
 
-[server/document/accountData.ts:10](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L10)
+[server/document/accountData.ts:10](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L10)
 
 ## Functions
 
@@ -60,7 +60,7 @@ This should be the first thing you do after having a user authenticate.
 
 #### Defined in
 
-[server/document/accountData.ts:40](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L40)
+[server/document/accountData.ts:40](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L40)
 
 ___
 
@@ -90,7 +90,7 @@ Return current player data and their associated account object.
 
 #### Defined in
 
-[server/document/accountData.ts:84](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L84)
+[server/document/accountData.ts:84](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L84)
 
 ___
 
@@ -123,7 +123,7 @@ Can be extended to obtain any value easily.
 
 #### Defined in
 
-[server/document/accountData.ts:101](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L101)
+[server/document/accountData.ts:101](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L101)
 
 ___
 
@@ -154,7 +154,7 @@ Listen for individual player document changes.
 
 #### Defined in
 
-[server/document/accountData.ts:221](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L221)
+[server/document/accountData.ts:221](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L221)
 
 ___
 
@@ -179,7 +179,7 @@ Used to override any account data document functionality
 
 #### Defined in
 
-[server/document/accountData.ts:255](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L255)
+[server/document/accountData.ts:255](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L255)
 
 ::: tip Usage
 Athena.document.accountData.**override**(`functionName`, `callback`): `any`
@@ -200,7 +200,7 @@ Used to override any account data document functionality
 
 #### Defined in
 
-[server/document/accountData.ts:256](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L256)
+[server/document/accountData.ts:256](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L256)
 
 ::: tip Usage
 Athena.document.accountData.**override**(`functionName`, `callback`): `any`
@@ -221,7 +221,7 @@ Used to override any account data document functionality
 
 #### Defined in
 
-[server/document/accountData.ts:257](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L257)
+[server/document/accountData.ts:257](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L257)
 
 ::: tip Usage
 Athena.document.accountData.**override**(`functionName`, `callback`): `any`
@@ -242,7 +242,7 @@ Used to override any account data document functionality
 
 #### Defined in
 
-[server/document/accountData.ts:258](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L258)
+[server/document/accountData.ts:258](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L258)
 
 ::: tip Usage
 Athena.document.accountData.**override**(`functionName`, `callback`): `any`
@@ -263,7 +263,7 @@ Used to override any account data document functionality
 
 #### Defined in
 
-[server/document/accountData.ts:259](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L259)
+[server/document/accountData.ts:259](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L259)
 
 ::: tip Usage
 Athena.document.accountData.**override**(`functionName`, `callback`): `any`
@@ -284,7 +284,7 @@ Used to override any account data document functionality
 
 #### Defined in
 
-[server/document/accountData.ts:260](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L260)
+[server/document/accountData.ts:260](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L260)
 
 ::: tip Usage
 Athena.document.accountData.**override**(`functionName`, `callback`): `any`
@@ -305,7 +305,7 @@ Used to override any account data document functionality
 
 #### Defined in
 
-[server/document/accountData.ts:261](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L261)
+[server/document/accountData.ts:261](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L261)
 
 ___
 
@@ -339,7 +339,7 @@ Automatically calls all callbacks associated with the field name.
 
 #### Defined in
 
-[server/document/accountData.ts:126](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L126)
+[server/document/accountData.ts:126](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L126)
 
 ___
 
@@ -372,7 +372,7 @@ Automatically calls all callbacks associated with the field name.
 
 #### Defined in
 
-[server/document/accountData.ts:182](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L182)
+[server/document/accountData.ts:182](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L182)
 
 ___
 
@@ -396,4 +396,4 @@ Unbind stored player character cache data.
 
 #### Defined in
 
-[server/document/accountData.ts:69](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/document/accountData.ts#L69)
+[server/document/accountData.ts:69](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/document/accountData.ts#L69)

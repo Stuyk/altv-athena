@@ -39,7 +39,7 @@ Athena.controllers.staticPed.addToPlayer(somePlayer, { uid: 'the-id-you-specifie
 
 #### Defined in
 
-[server/controllers/staticPed.ts:138](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/controllers/staticPed.ts#L138)
+[server/controllers/staticPed.ts:138](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/controllers/staticPed.ts#L138)
 
 ___
 
@@ -76,7 +76,7 @@ uid A unique string for the ped
 
 #### Defined in
 
-[server/controllers/staticPed.ts:53](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/controllers/staticPed.ts#L53)
+[server/controllers/staticPed.ts:53](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/controllers/staticPed.ts#L53)
 
 ___
 
@@ -101,7 +101,7 @@ Used to override any static ped streamer functionality.
 
 #### Defined in
 
-[server/controllers/staticPed.ts:180](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/controllers/staticPed.ts#L180)
+[server/controllers/staticPed.ts:180](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/controllers/staticPed.ts#L180)
 
 ::: tip Usage
 Athena.controllers.staticPed.**override**(`functionName`, `callback`): `any`
@@ -122,7 +122,7 @@ Used to override any static ped streamer functionality.
 
 #### Defined in
 
-[server/controllers/staticPed.ts:181](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/controllers/staticPed.ts#L181)
+[server/controllers/staticPed.ts:181](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/controllers/staticPed.ts#L181)
 
 ::: tip Usage
 Athena.controllers.staticPed.**override**(`functionName`, `callback`): `any`
@@ -143,7 +143,7 @@ Used to override any static ped streamer functionality.
 
 #### Defined in
 
-[server/controllers/staticPed.ts:182](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/controllers/staticPed.ts#L182)
+[server/controllers/staticPed.ts:182](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/controllers/staticPed.ts#L182)
 
 ::: tip Usage
 Athena.controllers.staticPed.**override**(`functionName`, `callback`): `any`
@@ -164,7 +164,7 @@ Used to override any static ped streamer functionality.
 
 #### Defined in
 
-[server/controllers/staticPed.ts:183](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/controllers/staticPed.ts#L183)
+[server/controllers/staticPed.ts:183](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/controllers/staticPed.ts#L183)
 
 ___
 
@@ -178,14 +178,14 @@ Make a pedestrian play a specific animation.
 
 #### Example
 ```ts
-Athena.controllers.staticPed.playAnimation('the-id-you-specified', playAnimation('test', [
+Athena.controllers.staticPed.playAnimation('the-id-you-specified', playAnimation('test',
      {
          dict: 'mp_ped_interaction',
          name: 'hugs_guy_a',
          duration: 2000,
          flags: 0,
      },
-]);
+);
 ```
 
 #### Parameters
@@ -193,7 +193,7 @@ Athena.controllers.staticPed.playAnimation('the-id-you-specified', playAnimation
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `uid` | `string` | A unique string |
-| `animation` | [`Animation`](../interfaces/shared_interfaces_animation_Animation.md)[] |  |
+| `animation` | [`Animation`](../interfaces/shared_interfaces_animation_Animation.md) |  |
 
 #### Returns
 
@@ -201,7 +201,7 @@ Athena.controllers.staticPed.playAnimation('the-id-you-specified', playAnimation
 
 #### Defined in
 
-[server/controllers/staticPed.ts:170](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/controllers/staticPed.ts#L170)
+[server/controllers/staticPed.ts:170](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/controllers/staticPed.ts#L170)
 
 ___
 
@@ -232,7 +232,7 @@ Athena.controllers.staticPed.remove('the-id-you-specified');
 
 #### Defined in
 
-[server/controllers/staticPed.ts:80](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/controllers/staticPed.ts#L80)
+[server/controllers/staticPed.ts:80](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/controllers/staticPed.ts#L80)
 
 ___
 
@@ -264,4 +264,4 @@ Athena.controllers.staticPed.removeFromPlayer(somePlayer, 'the-id-you-specified'
 
 #### Defined in
 
-[server/controllers/staticPed.ts:110](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/server/controllers/staticPed.ts#L110)
+[server/controllers/staticPed.ts:110](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/controllers/staticPed.ts#L110)

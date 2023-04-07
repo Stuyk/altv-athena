@@ -29,7 +29,7 @@ AthenaClient.views.audio.AudioView.`Static` **init**(): `void`
 
 #### Defined in
 
-[client/views/audio.ts:71](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/client/views/audio.ts#L71)
+[client/views/audio.ts:71](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/client/views/audio.ts#L71)
 
 ___
 
@@ -60,7 +60,7 @@ Do not add '.ogg'.
 
 #### Defined in
 
-[client/views/audio.ts:86](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/client/views/audio.ts#L86)
+[client/views/audio.ts:86](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/client/views/audio.ts#L86)
 
 ___
 
@@ -86,4 +86,4 @@ Stop current audio
 
 #### Defined in
 
-[client/views/audio.ts:99](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/client/views/audio.ts#L99)
+[client/views/audio.ts:99](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/client/views/audio.ts#L99)
