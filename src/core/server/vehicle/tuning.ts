@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 
 import VehicleTuning from '@AthenaShared/interfaces/vehicleTuning';
 import { VehicleState } from '@AthenaShared/interfaces/vehicleState';
+import VehicleExtra from '@AthenaShared/interfaces/vehicleExtra';
 
 /**
  * Applies specified properties to a vehicle in bulk.
@@ -19,6 +20,46 @@ export function applyState(vehicle: alt.Vehicle, state: Partial<VehicleState> | 
     Object.keys(state).forEach((key) => {
         vehicle[key] = state[key];
     });
+}
+
+/**
+ * Get all mods of the specified vehicle.
+ *
+ *
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
+ * @param {VehicleTuning } tuning
+ */
+export function getExtras(vehicle: alt.Vehicle): Array<VehicleExtra> {
+    if (Overrides.getExtras) {
+        return Overrides.getExtras(vehicle);
+    }
+
+    let extraData: Array<VehicleExtra> = [];
+
+    for (let id = 0; id < 15; ++id) {
+        let state: boolean = !vehicle.getExtra(id);
+        extraData.push({ id, state });
+    }
+
+    return extraData;
+}
+
+/**
+ * Applies specified properties to a vehicle in bulk.
+ * These match the alt:V API, and can be pulled from a database.
+ *
+ *
+ * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
+ * @param {VehicleState} data
+ */
+export function setExtra(vehicle: alt.Vehicle, extras: Array<VehicleExtra>) {
+    if (Overrides.setExtra) {
+        return Overrides.setExtra(vehicle, extras);
+    }
+
+    for (let extra of extras) {
+        vehicle.setExtra(extra.id, extra.state);
+    }
 }
 
 /**
@@ -53,7 +94,7 @@ export function applyTuning(vehicle: alt.Vehicle, tuning: VehicleTuning | Partia
  *
  *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
- * @param {VehicleTuning } tuning
+ * @returns
  */
 export function getTuning(vehicle: alt.Vehicle): VehicleTuning {
     if (Overrides.getTuning) {
@@ -72,6 +113,8 @@ export function getTuning(vehicle: alt.Vehicle): VehicleTuning {
 
 interface VehicleTuningFuncs {
     applyState: typeof applyState;
+    setExtra: typeof setExtra;
+    getExtras: typeof getExtras;
     applyTuning: typeof applyTuning;
     getTuning: typeof getTuning;
 }
@@ -79,6 +122,8 @@ interface VehicleTuningFuncs {
 const Overrides: Partial<VehicleTuningFuncs> = {};
 
 export function override(functionName: 'applyState', callback: typeof applyState);
+export function override(functionName: 'setExtra', callback: typeof setExtra);
+export function override(functionName: 'getExtras', callback: typeof getExtras);
 export function override(functionName: 'applyTuning', callback: typeof applyTuning);
 export function override(functionName: 'getTuning', callback: typeof getTuning);
 /**
