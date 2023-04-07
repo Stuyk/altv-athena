@@ -19,7 +19,7 @@ A custom `.ogg` file name for an audio clip.
 
 #### Defined in
 
-[server/systems/sound.ts:12](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/systems/sound.ts#L12)
+[server/systems/sound.ts:12](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/server/systems/sound.ts#L12)
 
 ___
 
@@ -31,7 +31,7 @@ A positional Vector3 on where to play the sound from.
 
 #### Defined in
 
-[server/systems/sound.ts:20](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/systems/sound.ts#L20)
+[server/systems/sound.ts:20](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/server/systems/sound.ts#L20)
 
 ___
 
@@ -43,7 +43,7 @@ If you want the audio 3D specify a target to play this audio from.
 
 #### Defined in
 
-[server/systems/sound.ts:38](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/systems/sound.ts#L38)
+[server/systems/sound.ts:38](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/server/systems/sound.ts#L38)
 
 ___
 
@@ -57,4 +57,4 @@ Recommended: `0.35`.
 
 #### Defined in
 
-[server/systems/sound.ts:30](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/systems/sound.ts#L30)
+[server/systems/sound.ts:30](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/server/systems/sound.ts#L30)

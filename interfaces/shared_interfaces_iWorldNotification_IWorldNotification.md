@@ -26,7 +26,7 @@ There are at least 30.
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:38](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/shared/interfaces/iWorldNotification.ts#L38)
+[shared/interfaces/iWorldNotification.ts:38](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/iWorldNotification.ts#L38)
 
 ___
 
@@ -38,7 +38,7 @@ The dimension to display this IWorldNotification in.
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:59](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/shared/interfaces/iWorldNotification.ts#L59)
+[shared/interfaces/iWorldNotification.ts:59](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/iWorldNotification.ts#L59)
 
 ___
 
@@ -50,7 +50,7 @@ The max distance to render this IWorldNotification.
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:45](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/shared/interfaces/iWorldNotification.ts#L45)
+[shared/interfaces/iWorldNotification.ts:45](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/iWorldNotification.ts#L45)
 
 ___
 
@@ -62,7 +62,7 @@ Position of the Object in a 3D space.
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:16](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/shared/interfaces/iWorldNotification.ts#L16)
+[shared/interfaces/iWorldNotification.ts:16](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/iWorldNotification.ts#L16)
 
 ___
 
@@ -74,7 +74,7 @@ Text to display for this world notification.
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:23](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/shared/interfaces/iWorldNotification.ts#L23)
+[shared/interfaces/iWorldNotification.ts:23](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/iWorldNotification.ts#L23)
 
 ___
 
@@ -86,7 +86,7 @@ The IWorldNotification Type Associated with this IWorldNotification
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:30](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/shared/interfaces/iWorldNotification.ts#L30)
+[shared/interfaces/iWorldNotification.ts:30](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/iWorldNotification.ts#L30)
 
 ___
 
@@ -98,4 +98,4 @@ The unique identifier for this IWorldNotification.
 
 #### Defined in
 
-[shared/interfaces/iWorldNotification.ts:52](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/shared/interfaces/iWorldNotification.ts#L52)
+[shared/interfaces/iWorldNotification.ts:52](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/iWorldNotification.ts#L52)

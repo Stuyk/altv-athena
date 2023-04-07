@@ -353,6 +353,7 @@
 - [shared/interfaces/taskTimeline](modules/shared_interfaces_taskTimeline.md)
 - [shared/interfaces/textLabel](modules/shared_interfaces_textLabel.md)
 - [shared/interfaces/vehicleBase](modules/shared_interfaces_vehicleBase.md)
+- [shared/interfaces/vehicleExtra](modules/shared_interfaces_vehicleExtra.md)
 - [shared/interfaces/vehicleHandling](modules/shared_interfaces_vehicleHandling.md)
 - [shared/interfaces/vehicleInfo](modules/shared_interfaces_vehicleInfo.md)
 - [shared/interfaces/vehicleMod](modules/shared_interfaces_vehicleMod.md)

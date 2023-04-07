@@ -28,7 +28,7 @@ Athena.systems.default.displayId.disable();
 
 #### Defined in
 
-[server/systems/defaults/displayId.ts:47](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/systems/defaults/displayId.ts#L47)
+[server/systems/defaults/displayId.ts:47](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/server/systems/defaults/displayId.ts#L47)
 
 ___
 
@@ -62,4 +62,4 @@ Athena.systems.default.displayId.setLocation(0.5, 0.5);
 
 #### Defined in
 
-[server/systems/defaults/displayId.ts:69](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/server/systems/defaults/displayId.ts#L69)
+[server/systems/defaults/displayId.ts:69](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/server/systems/defaults/displayId.ts#L69)

@@ -24,7 +24,7 @@ Make sure to wait for it to close before opening a new menu.
 
 #### Defined in
 
-[client/rmlui/menu/index.ts:377](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/client/rmlui/menu/index.ts#L377)
+[client/rmlui/menu/index.ts:377](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/rmlui/menu/index.ts#L377)
 
 ___
 
@@ -48,7 +48,7 @@ Create a menu similar to NativeUI.
 
 #### Defined in
 
-[client/rmlui/menu/index.ts:348](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/client/rmlui/menu/index.ts#L348)
+[client/rmlui/menu/index.ts:348](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/rmlui/menu/index.ts#L348)
 
 ___
 
@@ -79,4 +79,4 @@ Used like: `createOption<Range>({ ... })`;
 
 #### Defined in
 
-[client/rmlui/menu/index.ts:390](https://github.com/Stuyk/altv-athena/blob/d9ae327/src/core/client/rmlui/menu/index.ts#L390)
+[client/rmlui/menu/index.ts:390](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/rmlui/menu/index.ts#L390)
