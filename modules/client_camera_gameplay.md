@@ -23,7 +23,7 @@ Disable the gameplay camera from moving
 
 #### Defined in
 
-[client/camera/gameplay.ts:24](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/camera/gameplay.ts#L24)
+[client/camera/gameplay.ts:24](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/camera/gameplay.ts#L24)
 
 ___
 
@@ -41,7 +41,7 @@ Enable the gameplay camera
 
 #### Defined in
 
-[client/camera/gameplay.ts:42](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/camera/gameplay.ts#L42)
+[client/camera/gameplay.ts:42](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/camera/gameplay.ts#L42)
 
 ___
 
@@ -64,7 +64,7 @@ AthenaClient.camera.gameplay.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/gameplay.ts:62](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/camera/gameplay.ts#L62)
+[client/camera/gameplay.ts:62](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/camera/gameplay.ts#L62)
 
 ::: tip Usage
 AthenaClient.camera.gameplay.**override**(`functionName`, `callback`): `any`
@@ -83,4 +83,4 @@ AthenaClient.camera.gameplay.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/gameplay.ts:63](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/camera/gameplay.ts#L63)
+[client/camera/gameplay.ts:63](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/camera/gameplay.ts#L63)

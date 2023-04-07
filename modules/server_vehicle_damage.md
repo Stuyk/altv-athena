@@ -30,7 +30,7 @@ Apply vehicle damage to a vehicle.
 
 #### Defined in
 
-[server/vehicle/damage.ts:147](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/server/vehicle/damage.ts#L147)
+[server/vehicle/damage.ts:147](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/server/vehicle/damage.ts#L147)
 
 ___
 
@@ -54,7 +54,7 @@ Returns vehicle damage for individual parts.
 
 #### Defined in
 
-[server/vehicle/damage.ts:66](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/server/vehicle/damage.ts#L66)
+[server/vehicle/damage.ts:66](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/server/vehicle/damage.ts#L66)
 
 ___
 
@@ -78,4 +78,4 @@ Used to repair all vehicle damage, and save changes to the Database.
 
 #### Defined in
 
-[server/vehicle/damage.ts:187](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/server/vehicle/damage.ts#L187)
+[server/vehicle/damage.ts:187](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/server/vehicle/damage.ts#L187)

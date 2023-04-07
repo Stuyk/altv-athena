@@ -29,7 +29,7 @@ A callback when this menu option is changed.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
+[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
 
 ___
 
@@ -45,7 +45,7 @@ A description of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
+[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
 
 ___
 
@@ -57,7 +57,7 @@ Number to increment by
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:110](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/rmlui/menu/menuInterfaces.ts#L110)
+[client/rmlui/menu/menuInterfaces.ts:110](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/rmlui/menu/menuInterfaces.ts#L110)
 
 ___
 
@@ -69,7 +69,7 @@ Maximum Value
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:102](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/rmlui/menu/menuInterfaces.ts#L102)
+[client/rmlui/menu/menuInterfaces.ts:102](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/rmlui/menu/menuInterfaces.ts#L102)
 
 ___
 
@@ -81,7 +81,7 @@ Minimum Value
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:94](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/rmlui/menu/menuInterfaces.ts#L94)
+[client/rmlui/menu/menuInterfaces.ts:94](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/rmlui/menu/menuInterfaces.ts#L94)
 
 ___
 
@@ -97,7 +97,7 @@ Only update when 'Enter' is pressed.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:118](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/rmlui/menu/menuInterfaces.ts#L118)
+[client/rmlui/menu/menuInterfaces.ts:118](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/rmlui/menu/menuInterfaces.ts#L118)
 
 ___
 
@@ -113,7 +113,7 @@ The title of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
+[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:78](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/rmlui/menu/menuInterfaces.ts#L78)
+[client/rmlui/menu/menuInterfaces.ts:78](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/rmlui/menu/menuInterfaces.ts#L78)
 
 ___
 
@@ -135,4 +135,4 @@ The starting value of the range.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:86](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/client/rmlui/menu/menuInterfaces.ts#L86)
+[client/rmlui/menu/menuInterfaces.ts:86](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/client/rmlui/menu/menuInterfaces.ts#L86)

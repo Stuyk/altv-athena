@@ -30,7 +30,7 @@ Useful for using 'Athena API' at the top level of a document.
 
 #### Defined in
 
-[server/systems/plugins.ts:77](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/server/systems/plugins.ts#L77)
+[server/systems/plugins.ts:77](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/server/systems/plugins.ts#L77)
 
 ___
 
@@ -50,7 +50,7 @@ Returns a list of all plugin names that are currently being loaded.
 
 #### Defined in
 
-[server/systems/plugins.ts:65](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/server/systems/plugins.ts#L65)
+[server/systems/plugins.ts:65](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/server/systems/plugins.ts#L65)
 
 ___
 
@@ -68,7 +68,7 @@ Loads all plugins.
 
 #### Defined in
 
-[server/systems/plugins.ts:38](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/server/systems/plugins.ts#L38)
+[server/systems/plugins.ts:38](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/server/systems/plugins.ts#L38)
 
 ___
 
@@ -96,4 +96,4 @@ This ensures that your plugin is ALWAYS loaded last.
 
 #### Defined in
 
-[server/systems/plugins.ts:54](https://github.com/Stuyk/altv-athena/blob/e51302d/src/core/server/systems/plugins.ts#L54)
+[server/systems/plugins.ts:54](https://github.com/Stuyk/altv-athena/blob/4cfdacf/src/core/server/systems/plugins.ts#L54)
