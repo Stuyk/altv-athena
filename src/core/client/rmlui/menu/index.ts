@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import * as native from 'natives';
 import * as AthenaClient from '@AthenaClient/api';
 import { rgbaToHexAlpha } from '@AthenaShared/utility/color';
 import { Invoke, Toggle, Selection, Range, MenuInfo } from './menuInterfaces';
@@ -111,6 +112,9 @@ const InternalFunctions = {
             document.destroy();
             document = undefined;
         }
+
+        native.disableFrontendThisFrame();
+        native.setFrontendActive(false);
 
         menu = undefined;
         AthenaClient.systems.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
