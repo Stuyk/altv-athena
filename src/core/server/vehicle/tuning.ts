@@ -29,7 +29,6 @@ export function applyState(vehicle: alt.Vehicle, state: Partial<VehicleState> | 
  *
  *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
- * @param {VehicleTuning } tuning
  * @return {Array<VehicleExtra>}
  */
 export function getExtras(vehicle: alt.Vehicle): Array<VehicleExtra> {
@@ -53,7 +52,7 @@ export function getExtras(vehicle: alt.Vehicle): Array<VehicleExtra> {
  *
  *
  * @param {alt.Vehicle} vehicle An alt:V Vehicle Entity
- * @param {VehicleState} data
+ * @param {Array<VehicleExtra>} extras
  */
 export function setExtra(vehicle: alt.Vehicle, extras: Array<VehicleExtra>) {
     if (Overrides.setExtra) {
