@@ -39,7 +39,7 @@ Turns a buffer into a string.
 
 #### Defined in
 
-[shared/utility/buffer.ts:23](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/shared/utility/buffer.ts#L23)
+[shared/utility/buffer.ts:23](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/shared/utility/buffer.ts#L23)
 
 ___
 
@@ -67,4 +67,4 @@ Splits huge strings into a larger array.
 
 #### Defined in
 
-[shared/utility/buffer.ts:11](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/shared/utility/buffer.ts#L11)
+[shared/utility/buffer.ts:11](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/shared/utility/buffer.ts#L11)

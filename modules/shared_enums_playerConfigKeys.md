@@ -11,8 +11,8 @@ order: 0
 
 ### PlayerConfigKeys
 
-Ƭ **PlayerConfigKeys**: ``"inventory-size"`` \| ``"inventory-weight-enabled"`` \| ``"inventory-max-weight"``
+Ƭ **PlayerConfigKeys**: ``"inventory-size"`` \| ``"inventory-weight-enabled"`` \| ``"inventory-max-weight"`` \| ``"account-data"`` \| ``"character-data"``
 
 #### Defined in
 
-[shared/enums/playerConfigKeys.ts:1](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/shared/enums/playerConfigKeys.ts#L1)
+[shared/enums/playerConfigKeys.ts:1](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/shared/enums/playerConfigKeys.ts#L1)

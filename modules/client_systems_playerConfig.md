@@ -31,7 +31,7 @@ AthenaClient.systems.playerConfig.(`value`): `void`
 
 #### Defined in
 
-[client/systems/playerConfig.ts:4](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/systems/playerConfig.ts#L4)
+[client/systems/playerConfig.ts:6](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/client/systems/playerConfig.ts#L6)
 
 ## Functions
 
@@ -62,35 +62,48 @@ Add a custom callback to listen for config changes.
 
 #### Defined in
 
-[client/systems/playerConfig.ts:38](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/systems/playerConfig.ts#L38)
+[client/systems/playerConfig.ts:42](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/client/systems/playerConfig.ts#L42)
 
 ___
 
 ### get
 
 ::: tip Usage
-AthenaClient.systems.playerConfig.**get**<`ReturnType`, `CustomKeys`\>(`key`): `ReturnType` \| `undefined`
+AthenaClient.systems.playerConfig.**get**(`key`): [`player`](server_config.md#player) \| `undefined`
 :::
 
 Get a value assigned by the server.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `ReturnType` |
-| `CustomKeys` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `key` | `any` |
+| `key` | ``"character-data"`` |
 
 #### Returns
 
-`ReturnType` \| `undefined`
+[`player`](server_config.md#player) \| `undefined`
 
 #### Defined in
 
-[client/systems/playerConfig.ts:27](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/client/systems/playerConfig.ts#L27)
+[client/systems/playerConfig.ts:22](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/client/systems/playerConfig.ts#L22)
+
+::: tip Usage
+AthenaClient.systems.playerConfig.**get**(`key`): [`player`](server_config.md#player) \| `undefined`
+:::
+
+Get a value assigned by the server.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `key` | ``"account-data"`` |
+
+#### Returns
+
+[`player`](server_config.md#player) \| `undefined`
+
+#### Defined in
+
+[client/systems/playerConfig.ts:23](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/client/systems/playerConfig.ts#L23)

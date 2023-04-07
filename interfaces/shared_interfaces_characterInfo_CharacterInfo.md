@@ -26,7 +26,7 @@ Set as any just in case externals are changed for age.
 
 #### Defined in
 
-[shared/interfaces/characterInfo.ts:22](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/shared/interfaces/characterInfo.ts#L22)
+[shared/interfaces/characterInfo.ts:22](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/shared/interfaces/characterInfo.ts#L22)
 
 ___
 
@@ -39,4 +39,4 @@ Yes Athena is a progressive framework.
 
 #### Defined in
 
-[shared/interfaces/characterInfo.ts:14](https://github.com/Stuyk/altv-athena/blob/106130f/src/core/shared/interfaces/characterInfo.ts#L14)
+[shared/interfaces/characterInfo.ts:14](https://github.com/Stuyk/altv-athena/blob/f9f448a/src/core/shared/interfaces/characterInfo.ts#L14)
