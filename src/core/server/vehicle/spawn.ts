@@ -90,6 +90,10 @@ export function persistent(document: OwnedVehicle): alt.Vehicle | undefined {
         Athena.vehicle.tuning.applyTuning(vehicle, document.tuning);
     }
 
+    if (document.extras) {
+        Athena.vehicle.tuning.setExtra(vehicle, document.extras);
+    }
+
     if (document.damage) {
         Athena.vehicle.damage.apply(vehicle, document.damage);
     }
