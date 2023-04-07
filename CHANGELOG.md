@@ -55,6 +55,9 @@ Fix commands using non-string types
 
 Fix Escape on Menu Close for RMLUI Menu
 
+Athena.systems.inventory.factory.getBaseItemsAsync
+Athena.systems.inventory.factory.getBaseItems
+
 --------------------------------------
 --- Everything Below is Before April 2
 --------------------------------------

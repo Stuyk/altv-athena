@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
 import * as Athena from '@AthenaServer/api';
 
-import { BaseItem, StoredItem, Item, DefaultItemBehavior, ClothingComponent } from '@AthenaShared/interfaces/item';
+import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { sha256 } from '@AthenaServer/utility/hash';
 
@@ -414,6 +414,37 @@ export function fromBaseToStored<CustomData = {}>(
     return storedItem;
 }
 
+/**
+ * Waits for the database items to finish loading before returning data.
+ *
+ * @export
+ * @return {Promise<Array<BaseItem>>}
+ */
+export async function getBaseItems(): Promise<Array<BaseItem>> {
+    if (Overrides.getBaseItems) {
+        return getBaseItems();
+    }
+
+    await isDoneLoadingAsync();
+    return databaseItems;
+}
+
+/**
+ * Does not wait for items to load, returns what base items are in the array.
+ *
+ * Use this only during runtime; and not during startup.
+ *
+ * @export
+ * @return {Array<BaseItem>}
+ */
+export function getBaseItemsAsync(): Array<BaseItem> {
+    if (Overrides.getBaseItemsAsync) {
+        return getBaseItemsAsync();
+    }
+
+    return databaseItems;
+}
+
 interface FactoryFuncs {
     getBaseItemAsync: typeof getBaseItemAsync;
     upsertAsync: typeof upsertAsync;
@@ -423,6 +454,8 @@ interface FactoryFuncs {
     fromStoredItem: typeof fromStoredItem;
     toStoredItem: typeof toStoredItem;
     fromBaseToStored: typeof fromBaseToStored;
+    getBaseItemsAsync: typeof getBaseItemsAsync;
+    getBaseItems: typeof getBaseItems;
 }
 
 const Overrides: Partial<FactoryFuncs> = {};
@@ -435,6 +468,8 @@ export function override(functionName: 'getBaseItem', callback: typeof getBaseIt
 export function override(functionName: 'fromStoredItem', callback: typeof fromStoredItem);
 export function override(functionName: 'toStoredItem', callback: typeof toStoredItem);
 export function override(functionName: 'fromBaseToStored', callback: typeof fromBaseToStored);
+export function override(functionName: 'getBaseItems', callback: typeof getBaseItems);
+export function override(functionName: 'getBaseItemsAsync', callback: typeof getBaseItemsAsync);
 /**
  * Used to override inventory item factory functionality
  *
