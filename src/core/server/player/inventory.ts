@@ -54,8 +54,6 @@ export async function add(player: alt.Player, item: Omit<StoredItem, 'slot'>): P
     return true;
 }
 
-
-
 /**
  * Subtract a quantity of an item from a player's inventory.
  * Does not look into toolbar.
@@ -218,7 +216,7 @@ export function getItemData<CustomData = {}>(player: alt.Player, slot: number): 
  * @param {number} slot
  * @return {(StoredItem | undefined)}
  */
-export function getAt<CustomData = {}>(player: alt.Player, slot: number): StoredItem | undefined {
+export function getAt<CustomData = {}>(player: alt.Player, slot: number): StoredItem<CustomData> | undefined {
     if (Overrides.getAt) {
         return Overrides.getAt<CustomData>(player, slot);
     }

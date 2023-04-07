@@ -1,4 +1,5 @@
 import { Character } from '@AthenaShared/interfaces/character';
+import { Account } from '@AthenaShared/interfaces/iAccount';
 
 const state: { [key: string]: any } = {};
 
@@ -32,8 +33,55 @@ export function get<T>(key: string): T | undefined {
  *
  * @export
  * @template T
- * @return {*}  {(T | undefined)}
+ * @return {(T | undefined)}
  */
 export function getCharacterData<T = Character>(): T | undefined {
-    return state['data'];
+    return state['characterState'];
+}
+
+/**
+ * Returns account state when synchronized from server.
+ *
+ * @export
+ * @template T
+ * @return {(T | undefined)}
+ */
+export function getAccountData<T = Partial<Account>>(): T | undefined {
+    return state['accountState'];
+}
+
+/**
+ * Return a list of character permissions.
+ *
+ * @export
+ * @return {Array<string>}
+ */
+export function getCharacterPermissions(): Array<string> {
+    if (!state['characterState']) {
+        return [];
+    }
+
+    if (!state['characterState'].permissions) {
+        return [];
+    }
+
+    return state['characterState'].permissions;
+}
+
+/**
+ * Return a list of account permissions.
+ *
+ * @export
+ * @return {Array<string>}
+ */
+export function getAccountPermissions(): Array<string> {
+    if (!state['accountState']) {
+        return [];
+    }
+
+    if (!state['accountState'].permissions) {
+        return [];
+    }
+
+    return state['accountState'].permissions;
 }

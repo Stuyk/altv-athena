@@ -1,4 +1,5 @@
 import { Item, StoredItem } from '@AthenaShared/interfaces/item';
+import * as Athena from '@AthenaServer/api';
 import * as config from './config';
 
 /**
@@ -58,6 +59,27 @@ export function isWeightExceeded(dataSets: Array<Array<StoredItem | Item>>, amou
     }
 
     return false;
+}
+
+/**
+ * Update weight for a given data set, and all items.
+ *
+ * @export
+ * @template T
+ * @param {(Array<StoredItem<T> | Item>)} dataSet
+ * @return {(Array<StoredItem<T> | Item>)}
+ */
+export function update<T = {}>(dataSet: Array<StoredItem<T>>): Array<StoredItem<T>> {
+    for (let i = 0; i < dataSet.length; i++) {
+        const baseItem = Athena.systems.inventory.factory.getBaseItem(dataSet[i].dbName);
+        if (typeof baseItem === 'undefined') {
+            continue;
+        }
+
+        dataSet[i].totalWeight = baseItem.weight * dataSet[i].quantity;
+    }
+
+    return dataSet;
 }
 
 interface WeightFuncs {

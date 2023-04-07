@@ -11,6 +11,7 @@ export type ObjectMenuInjection = (
 ) => Array<IWheelOptionExt>;
 
 const Injections: Array<ObjectMenuInjection> = [];
+let disabled = false;
 
 /**
  * Allows the current Menu Options to be modified.
@@ -22,6 +23,14 @@ const Injections: Array<ObjectMenuInjection> = [];
  *
  */
 export function addInjection(callback: ObjectMenuInjection): void {
+    if (Overrides.addInjection) {
+        return Overrides.addInjection(callback);
+    }
+
+    if (disabled) {
+        return;
+    }
+
     Injections.push(callback);
 }
 
@@ -34,6 +43,14 @@ export function addInjection(callback: ObjectMenuInjection): void {
  *
  */
 export function open(object: CreatedObject): void {
+    if (Overrides.open) {
+        return Overrides.open(object);
+    }
+
+    if (disabled) {
+        return;
+    }
+
     if (AthenaClient.webview.isAnyMenuOpen()) {
         return;
     }
@@ -71,4 +88,26 @@ export function open(object: CreatedObject): void {
     }
 
     AthenaClient.systems.wheelMenu.open('Object', options);
+}
+
+/**
+ * Disable the Object Wheel Menu
+ *
+ * @export
+ */
+export function disable() {
+    disabled = true;
+}
+
+interface ObjectMenuFuncs {
+    addInjection: typeof addInjection;
+    open: typeof open;
+}
+
+const Overrides: Partial<ObjectMenuFuncs> = {};
+
+export function override(functionName: 'addInjection', callback: typeof addInjection);
+export function override(functionName: 'open', callback: typeof open);
+export function override(functionName: keyof ObjectMenuFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

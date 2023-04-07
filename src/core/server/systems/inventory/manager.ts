@@ -35,13 +35,16 @@ export type ComplexSwapReturn = { from: Array<StoredItem>; to: Array<StoredItem>
  * @param {StoredItem} storedItem
  * @returns {StoredItem}
  */
-export function calculateItemWeight(baseItem: BaseItem, storedItem: StoredItem): StoredItem {
+export function calculateItemWeight<CustomData = {}>(
+    baseItem: BaseItem,
+    storedItem: StoredItem<CustomData>,
+): StoredItem<CustomData> {
     if (Overrides.calculateItemWeight) {
         return Overrides.calculateItemWeight(baseItem, storedItem);
     }
 
     if (typeof baseItem.weight === 'number' && storedItem.quantity !== 0) {
-        const newItem = deepCloneObject<StoredItem>(storedItem);
+        const newItem = deepCloneObject<StoredItem<CustomData>>(storedItem);
         newItem.totalWeight = baseItem.weight * newItem.quantity;
         return newItem;
     }
@@ -284,15 +287,17 @@ export function clearData(item: Item | StoredItem) {
  * @param {Array<StoredItem<{}>>} data
  * @return {Array<Item<DefaultItemBehavior, {}>>}
  */
-export function convertFromStored(data: Array<StoredItem<{}>>): Array<Item<DefaultItemBehavior, {}>> {
+export function convertFromStored<CustomData = {}>(
+    data: Array<StoredItem<CustomData>>,
+): Array<Item<DefaultItemBehavior, CustomData>> {
     if (Overrides.convertFromStored) {
         return Overrides.convertFromStored(data);
     }
 
-    const convertedItemList: Array<Item<DefaultItemBehavior, {}>> = [];
+    const convertedItemList: Array<Item<DefaultItemBehavior, CustomData>> = [];
 
     for (let i = 0; i < data.length; i++) {
-        const convertedItem = Athena.systems.inventory.factory.fromStoredItem(data[i]);
+        const convertedItem = Athena.systems.inventory.factory.fromStoredItem<CustomData>(data[i]);
         convertedItemList.push(convertedItem);
     }
 
@@ -304,16 +309,16 @@ export function convertFromStored(data: Array<StoredItem<{}>>): Array<Item<Defau
  * Requires the basic version of a stored item to be added to a user.
  * Returns undefined if the data set could not be modified to include the quantity of items necessary.
  *
- * @param {Array<StoredItem>} data
+ * @param {Array<StoredItem<CustomData>>} data
  * @param {number} amount
  * @param {InventoryType | number} size The maximum slot size for this item group.
  * @return {Array<StoredItem>} Returns undefined or the new array of added items.
  */
 export function add<CustomData = {}>(
     item: Omit<StoredItem<CustomData>, 'slot'>,
-    data: Array<StoredItem>,
+    data: Array<StoredItem<CustomData>>,
     size: InventoryType | number = 256,
-): Array<StoredItem> | undefined {
+): Array<StoredItem<CustomData>> | undefined {
     if (Overrides.add) {
         return Overrides.add(item, data, size);
     }
@@ -324,7 +329,7 @@ export function add<CustomData = {}>(
     }
 
     if (item.quantity === 0) {
-        return data;
+        return Athena.systems.inventory.weight.update<CustomData>(data);
     }
 
     // Lookup the base item based on the dbName of the item.
@@ -335,7 +340,7 @@ export function add<CustomData = {}>(
     }
 
     const actualMaxStack = baseItem.maxStack ? baseItem.maxStack : 512;
-    const copyOfData = deepCloneArray<StoredItem>(data);
+    const copyOfData = deepCloneArray<StoredItem<CustomData>>(data);
     let availableStackIndex = -1;
     if (baseItem.behavior.canStack && actualMaxStack > 1) {
         availableStackIndex = copyOfData.findIndex(
@@ -360,7 +365,7 @@ export function add<CustomData = {}>(
             return undefined;
         }
 
-        let itemClone = deepCloneObject<StoredItem>(item);
+        let itemClone = deepCloneObject<StoredItem<CustomData>>(item);
         itemClone.slot = openSlot;
 
         // Use quantity to subtract from max stack size or use amount left
@@ -372,12 +377,10 @@ export function add<CustomData = {}>(
             item.quantity -= 1;
         }
 
-        // Re-calculate item weight
-        itemClone = calculateItemWeight(baseItem, itemClone);
         copyOfData.push(itemClone);
 
         if (item.quantity === 0) {
-            return copyOfData;
+            return Athena.systems.inventory.weight.update<CustomData>(copyOfData);
         }
 
         return add(item, copyOfData, size);
@@ -458,9 +461,7 @@ export function sub<CustomData = {}>(
 
     // If the quantity of the found item is greater than; subtract necessary amount.
     copyOfData[existingItemIndex].quantity -= item.quantity;
-    copyOfData[existingItemIndex] = calculateItemWeight(baseItem, copyOfData[existingItemIndex]);
-
-    return copyOfData;
+    return Athena.systems.inventory.weight.update(copyOfData);
 }
 
 /**
@@ -471,12 +472,12 @@ export function sub<CustomData = {}>(
  * @param {number} splitCount
  * @param {(InventoryType | number)} [size=DEFAULT_CONFIG.custom.size]
  */
-export function splitAt(
+export function splitAt<CustomData = {}>(
     slot: number,
-    data: Array<StoredItem>,
+    data: Array<StoredItem<CustomData>>,
     splitCount: number,
     dataSize: InventoryType | number = Athena.systems.inventory.config.get().custom.size,
-): Array<StoredItem> | undefined {
+): Array<StoredItem<CustomData>> | undefined {
     if (Overrides.splitAt) {
         return Overrides.splitAt(slot, data, splitCount, dataSize);
     }
@@ -485,7 +486,7 @@ export function splitAt(
         return undefined;
     }
 
-    let copyOfData = deepCloneArray<StoredItem>(data);
+    let copyOfData = deepCloneArray<StoredItem<CustomData>>(data);
     if (typeof dataSize === 'string') {
         dataSize = Athena.systems.inventory.config.get()[dataSize].size;
     }
@@ -516,17 +517,16 @@ export function splitAt(
     }
 
     // Create copy of item, set quantity to split count.
-    let itemClone = deepCloneObject<StoredItem>(copyOfData[index]);
+    let itemClone = deepCloneObject<StoredItem<CustomData>>(copyOfData[index]);
     itemClone.quantity = splitCount;
     itemClone.slot = openSlot;
     itemClone = calculateItemWeight(baseItem, itemClone);
 
     // Remove quantity from existing item based on split count.
     copyOfData[index].quantity -= splitCount;
-    copyOfData[index] = calculateItemWeight(baseItem, copyOfData[index]);
     copyOfData.push(itemClone);
 
-    return copyOfData;
+    return Athena.systems.inventory.weight.update<CustomData>(copyOfData);
 }
 
 /**
@@ -538,7 +538,11 @@ export function splitAt(
  * @param {Array<StoredItem>} data
  * @return {(Array<StoredItem> | undefined)}
  */
-export function combineAt(fromSlot: number, toSlot: number, data: Array<StoredItem>): Array<StoredItem> | undefined {
+export function combineAt<CustomData = {}>(
+    fromSlot: number,
+    toSlot: number,
+    data: Array<StoredItem<CustomData>>,
+): Array<StoredItem<CustomData>> | undefined {
     if (Overrides.combineAt) {
         return Overrides.combineAt(fromSlot, toSlot, data);
     }
@@ -568,26 +572,22 @@ export function combineAt(fromSlot: number, toSlot: number, data: Array<StoredIt
         return undefined;
     }
 
-    let copyOfData = deepCloneArray<StoredItem>(data);
+    let copyOfData = deepCloneArray<StoredItem<CustomData>>(data);
     if (copyOfData[toIndex].quantity === baseItem.maxStack) {
         return undefined;
     }
 
     if (copyOfData[fromIndex].quantity + copyOfData[toIndex].quantity <= baseItem.maxStack) {
         copyOfData[toIndex].quantity += copyOfData[fromIndex].quantity;
-        copyOfData[toIndex] = calculateItemWeight(baseItem, copyOfData[toIndex]);
         copyOfData.splice(fromIndex, 1);
-        return copyOfData;
+        return Athena.systems.inventory.weight.update<CustomData>(copyOfData);
     }
 
     const spaceAvailable = baseItem.maxStack - copyOfData[toIndex].quantity;
     copyOfData[fromIndex].quantity -= spaceAvailable;
     copyOfData[toIndex].quantity += spaceAvailable;
 
-    copyOfData[fromIndex] = calculateItemWeight(baseItem, copyOfData[fromIndex]);
-    copyOfData[toIndex] = calculateItemWeight(baseItem, copyOfData[toIndex]);
-
-    return copyOfData;
+    return Athena.systems.inventory.weight.update<CustomData>(copyOfData);
 }
 
 export function combineAtComplex(from: ComplexSwap, to: ComplexSwap): ComplexSwapReturn | undefined {
@@ -636,18 +636,19 @@ export function combineAtComplex(from: ComplexSwap, to: ComplexSwap): ComplexSwa
     // Simply move quantities; and return results.
     if (spaceAvailable > fromData[fromIndex].quantity) {
         toData[toIndex].quantity += fromData[fromIndex].quantity;
-        toData[toIndex] = calculateItemWeight(baseItem, toData[toIndex]);
         fromData.splice(fromIndex, 1);
-        return { from: fromData, to: toData };
+        return {
+            from: Athena.systems.inventory.weight.update(fromData),
+            to: Athena.systems.inventory.weight.update(toData),
+        };
     }
 
     fromData[fromIndex].quantity -= spaceAvailable;
     toData[toIndex].quantity += spaceAvailable;
-
-    fromData[fromIndex] = calculateItemWeight(baseItem, fromData[fromIndex]);
-    toData[toIndex] = calculateItemWeight(baseItem, toData[toIndex]);
-
-    return { from: fromData, to: toData };
+    return {
+        from: Athena.systems.inventory.weight.update(fromData),
+        to: Athena.systems.inventory.weight.update(toData),
+    };
 }
 
 /**
@@ -697,7 +698,7 @@ export function swap(
         copyOfData[endIndex].slot = fromSlot;
     }
 
-    return copyOfData;
+    return Athena.systems.inventory.weight.update(copyOfData);
 }
 
 /**
@@ -769,7 +770,10 @@ export function swapBetween(from: ComplexSwap, to: ComplexSwap): ComplexSwapRetu
 
     // Move the 'from' item to the other data set.
     toData.push(fromItem);
-    return { from: fromData, to: toData };
+    return {
+        from: Athena.systems.inventory.weight.update(fromData),
+        to: Athena.systems.inventory.weight.update(toData),
+    };
 }
 
 /**

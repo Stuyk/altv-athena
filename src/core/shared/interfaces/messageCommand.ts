@@ -1,4 +1,4 @@
-export type CommandCallback<T> = (player: T, ...args: any[]) => void;
+export type CommandCallback<T> = (player: T, ...args: string[]) => void;
 
 /**
  * Used to describe a command.

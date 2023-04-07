@@ -24,6 +24,10 @@ let isQueueReady = false;
  *
  */
 export async function create(_scriptID: number, offset: alt.IVector3 = null, _isLocalPlayer = false): Promise<void> {
+    if (Overrides.create) {
+        return Overrides.create(_scriptID, offset, _isLocalPlayer);
+    }
+
     scriptID = _scriptID;
     isLocalPlayer = _isLocalPlayer;
     startPosition = native.getEntityCoords(scriptID, false);
@@ -80,6 +84,10 @@ export async function create(_scriptID: number, offset: alt.IVector3 = null, _is
  *
  */
 export function calculateCamOffset(offset: alt.IVector3): alt.IVector3 {
+    if (Overrides.calculateCamOffset) {
+        return Overrides.calculateCamOffset(offset);
+    }
+
     return native.getOffsetFromEntityInWorldCoords(
         isLocalPlayer ? alt.Player.local.scriptID : scriptID,
         offset.x,
@@ -95,6 +103,10 @@ export function calculateCamOffset(offset: alt.IVector3): alt.IVector3 {
  *
  */
 export function setCameraOffset(offset: alt.IVector3) {
+    if (Overrides.setCameraOffset) {
+        return Overrides.setCameraOffset(offset);
+    }
+
     startPosition = calculateCamOffset(offset) as alt.Vector3;
     native.pointCamAtCoord(camera, startPosition.x, startPosition.y, startPosition.z);
     native.setCamActive(camera, true);
@@ -108,6 +120,10 @@ export function setCameraOffset(offset: alt.IVector3) {
  *
  */
 export function exists() {
+    if (Overrides.exists) {
+        return Overrides.exists();
+    }
+
     return camera !== null;
 }
 
@@ -117,6 +133,10 @@ export function exists() {
  *
  */
 export async function destroy() {
+    if (Overrides.destroy) {
+        return Overrides.destroy();
+    }
+
     if (cameraControlsInterval !== undefined && cameraControlsInterval !== null) {
         alt.clearInterval(cameraControlsInterval);
         cameraControlsInterval = null;
@@ -149,6 +169,10 @@ export async function destroy() {
  *
  */
 export function disableControls(status: boolean): void {
+    if (Overrides.disableControls) {
+        return Overrides.disableControls(status);
+    }
+
     controlStatus = status;
 }
 
@@ -159,6 +183,10 @@ export function disableControls(status: boolean): void {
  *
  */
 export function setCamParams(_zpos: number = null, _fov: number = null, _easeTime: number = 500) {
+    if (Overrides.setCamParams) {
+        return Overrides.setCamParams(_zpos, _fov, _easeTime);
+    }
+
     if (_zpos === null) {
         _zpos = zpos;
     }
@@ -171,6 +199,10 @@ export function setCamParams(_zpos: number = null, _fov: number = null, _easeTim
 }
 
 export async function runQueue() {
+    if (Overrides.runQueue) {
+        return Overrides.runQueue();
+    }
+
     if (camUpdateQueue.length <= 0) {
         return;
     }
@@ -222,10 +254,18 @@ export async function runQueue() {
  *
  */
 export function update(id: number) {
+    if (Overrides.update) {
+        return Overrides.update(id);
+    }
+
     scriptID = id;
 }
 
 export function handleControls() {
+    if (Overrides.handleControls) {
+        return Overrides.handleControls();
+    }
+
     native.hideHudAndRadarThisFrame();
     native.disableAllControlActions(0);
     native.disableAllControlActions(1);
@@ -365,3 +405,31 @@ alt.on('connectionComplete', () => {
 alt.on('disconnect', () => {
     destroy();
 });
+
+interface PedEditCamFuncs {
+    calculateCamOffset: typeof calculateCamOffset;
+    create: typeof create;
+    destroy: typeof destroy;
+    disableControls: typeof disableControls;
+    update: typeof update;
+    handleControls: typeof handleControls;
+    exists: typeof exists;
+    runQueue: typeof runQueue;
+    setCameraOffset: typeof setCameraOffset;
+    setCamParams: typeof setCamParams;
+}
+
+const Overrides: Partial<PedEditCamFuncs> = {};
+
+export function override(functionName: 'create', callback: typeof create);
+export function override(functionName: 'destroy', callback: typeof destroy);
+export function override(functionName: 'disableControls', callback: typeof disableControls);
+export function override(functionName: 'update', callback: typeof update);
+export function override(functionName: 'handleControls', callback: typeof handleControls);
+export function override(functionName: 'exists', callback: typeof exists);
+export function override(functionName: 'runQueue', callback: typeof runQueue);
+export function override(functionName: 'setCameraOffset', callback: typeof setCameraOffset);
+export function override(functionName: 'setCamParams', callback: typeof setCamParams);
+export function override(functionName: keyof PedEditCamFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}

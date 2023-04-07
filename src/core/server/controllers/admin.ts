@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { Account } from '../interface/iAccount';
+import { Account } from '../../shared/interfaces/iAccount';
 import { Collections } from '../database/collections';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';

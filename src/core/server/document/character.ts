@@ -42,6 +42,7 @@ export function bind(player: alt.Player, document: Character) {
     }
 
     cache[player.id] = document;
+    Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, cache[player.id]);
 }
 
 /**

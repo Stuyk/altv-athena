@@ -1,19 +1,15 @@
 <template>
-    <div class="stack" style="color: black">
+    <div class="stack" style="color: white; text-shadow: 1px 1px black">
         <div class="stack">
-            <div>Health: {{ state.hp ? state.hp : 'Not Defined' }}</div>
-            <div>Armour: {{ state.armour ? state.armour : 'Not Defined' }}</div>
-            <div>Random: {{ state.random ? state.random : 'Not Defined' }}</div>
-        </div>
-        <div class="stack">
-            <h2>Delayed Changes...</h2>
-            <div>Health: {{ hp ? hp : 'Not Defined' }}</div>
+            <p>{{ state }}</p>
+            <p>{{ accountState }}</p>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import * as state from '@ViewUtility/state';
 
 const ComponentName = 'StateTest';
 export default defineComponent({
@@ -29,22 +25,9 @@ export default defineComponent({
             type: Object,
             required: true,
         },
-    },
-    watch: {
-        'state.hp': {
-            handler(newValue) {
-                if (Date.now() < this.hpDebounce) {
-                    return;
-                }
-
-                this.hpDebounce = Date.now() + 500;
-                this.hp = newValue;
-            },
-        },
-    },
-    methods: {
-        test() {
-            this.hpDebounce;
+        accountState: {
+            type: Object,
+            required: true,
         },
     },
 });

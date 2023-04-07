@@ -158,6 +158,21 @@ export function next(player: alt.Player) {
     playerFlow[player.id].flow[index].callback(player);
 }
 
+/**
+ * Go straight to the final section of login flow. Which is a character select.
+ *
+ * @export
+ * @param {alt.Player} player
+ */
+export function goToEnd(player: alt.Player) {
+    if (!playerFlow[player.id]) {
+        register(player);
+    }
+
+    playerFlow[player.id].index = playerFlow[player.id].flow.length - 1;
+    playerFlow[player.id].flow[playerFlow[player.id].index].callback(player);
+}
+
 alt.on('playerDisconnect', (player: alt.Player) => {
     delete playerFlow[player.id];
 });

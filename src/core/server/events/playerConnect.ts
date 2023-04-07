@@ -2,7 +2,6 @@ import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import * as Athena from '../api';
-import { DevModeOverride } from '../systems/dev';
 import ConfigUtil from '../utility/config';
 
 /**
@@ -11,7 +10,7 @@ import ConfigUtil from '../utility/config';
  * @param  {alt.Player} player An alt:V Player Entity
  */
 async function handlePlayerConnect(player: alt.Player): Promise<void> {
-    const config = ConfigUtil.get();
+    const config = await ConfigUtil.get();
 
     if (!player || !player.valid) {
         return;
@@ -35,14 +34,6 @@ async function handlePlayerConnect(player: alt.Player): Promise<void> {
     player.visible = false;
 
     Athena.player.safe.setPosition(player, pos.x, pos.y, pos.z);
-
-    // ! - Allows Dev Mode to Use First Account or Accounts
-    if (typeof config !== 'undefined' && config.USE_DEV_MODE) {
-        alt.log(`~lc~Developer Mode: ~lg~Only one account will be used while using 'dev'`);
-        DevModeOverride.login(player);
-        return;
-    }
-
     Athena.systems.loginFlow.next(player);
 }
 

@@ -30,6 +30,7 @@ const offers: { [hash: string]: OfferInfo } = {};
 // Storages
 const openStorages: { [player_id: string]: Array<StoredItem> } = {};
 const openStorageSessions: { [player_id: string]: string } = {};
+const openStoragesWeight: { [player_id: string]: number } = {};
 
 // Callbacks
 const openCallbacks: Array<PlayerCallback> = [];
@@ -68,6 +69,7 @@ const Internal = {
 
             delete openStorageSessions[id];
             delete openStorages[id];
+            delete openStoragesWeight[id];
         },
     },
     disconnect(player: alt.Player) {
@@ -314,6 +316,19 @@ const Internal = {
             return;
         }
 
+        // Check Storage Capacity
+        const config = Athena.systems.inventory.config.get();
+
+        if (config.weight.enabled) {
+            const storageWeight = openStoragesWeight[player.id];
+            const maxWeight = info.endType === 'custom' ? storageWeight : config.weight.player;
+            if (Athena.systems.inventory.weight.isWeightExceeded([complexSwap.to], maxWeight)) {
+                InventoryView.storage.resync(player);
+                return;
+            }
+        }
+
+        // Assign Data
         if (info.startType === 'custom') {
             openStorages[player.id] = complexSwap.from;
         } else {
@@ -649,6 +664,7 @@ export const InventoryView = {
             items: Array<StoredItem>,
             storageSize: number,
             forceOpenInventory = false,
+            maxWeight: number = Number.MAX_SAFE_INTEGER,
         ) {
             if (forceOpenInventory) {
                 player.emit(INVENTORY_EVENTS.TO_CLIENT.OPEN);
@@ -666,6 +682,7 @@ export const InventoryView = {
 
             openStorages[player.id] = deepCloneArray<StoredItem>(items);
             openStorageSessions[player.id] = uid;
+            openStoragesWeight[player.id] = maxWeight;
             const fullStorageList = Athena.systems.inventory.manager.convertFromStored(openStorages[player.id]);
             Athena.webview.emit(player, INVENTORY_EVENTS.TO_WEBVIEW.SET_CUSTOM, fullStorageList, storageSize);
         },

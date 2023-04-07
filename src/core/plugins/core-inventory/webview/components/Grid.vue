@@ -103,8 +103,8 @@
             </div>
             <Context :contextTitle="context.title" :x="context.x" :y="context.y" v-if="context">
                 <div v-if="context.hasUseEffect" @click="contextAction('use')">Use</div>
-                <template v-for="(customAction) in context.customEvents">
-                    <div @click="contextAction('use',customAction.eventToCall)">{{customAction.name}}</div>
+                <template v-for="customAction in context.customEvents">
+                    <div @click="contextAction('use', customAction.eventToCall)">{{ customAction.name }}</div>
                 </template>
                 <div @click="contextAction('split')">Split</div>
                 <div @click="contextAction('drop')">Drop</div>
@@ -152,7 +152,16 @@ export default defineComponent({
                 toolbar: 5,
                 custom: 35,
             },
-            context: undefined as { x: number; y: number; title: string; slot: number; hasUseEffect: boolean, customEvents: Array<CustomContextAction>} | undefined,
+            context: undefined as
+                | {
+                      x: number;
+                      y: number;
+                      title: string;
+                      slot: number;
+                      hasUseEffect: boolean;
+                      customEvents: Array<CustomContextAction>;
+                  }
+                | undefined,
             itemSingleClick: undefined as { type: InventoryType; index: number },
             itemName: '',
             itemDescription: '',
@@ -256,7 +265,7 @@ export default defineComponent({
                 hasItem: false,
                 name: undefined,
                 quantity: 0,
-                weight: 0,
+                totalWeight: 0,
                 highlight: false,
                 slot,
             };
@@ -281,7 +290,7 @@ export default defineComponent({
             defaultTemplate.highlight = item.isEquipped;
             defaultTemplate.name = item.name;
             defaultTemplate.quantity = item.quantity;
-            defaultTemplate.weight = typeof item.weight === 'number' ? item.weight : 0;
+            defaultTemplate.totalWeight = typeof item.totalWeight === 'number' ? item.totalWeight : 0;
             return defaultTemplate;
         },
         /**
@@ -347,10 +356,11 @@ export default defineComponent({
             }
 
             const item = this.getItem('inventory', slot);
-            
+
             // Let's check, if this item can be used. This information is used to show/hide the "Use" context menu action.
-            const hasUseEffect: boolean = (typeof item.consumableEventToCall !== 'undefined' || 
-                (item.behavior && (item.behavior.isEquippable || item.behavior.isWeapon || item.behavior.isClothing)));
+            const hasUseEffect: boolean =
+                typeof item.consumableEventToCall !== 'undefined' ||
+                (item.behavior && (item.behavior.isEquippable || item.behavior.isWeapon || item.behavior.isClothing));
 
             this.context = {
                 title: item.name,

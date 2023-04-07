@@ -5,7 +5,7 @@ import * as PlayerEvents from '@AthenaServer/player/events';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { ActionMenu } from '@AthenaShared/interfaces/actions';
-import { Account } from '../interface/iAccount';
+import { Account } from '../../shared/interfaces/iAccount';
 import { Collections } from '../database/collections';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 import Database from '@stuyk/ezmongodb';
@@ -28,7 +28,7 @@ export async function account(player: alt.Player, accountData: Account): Promise
     alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, newToken);
 
     player.setSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID, accountData.id);
-    emit.meta(player, 'permissionLevel', accountData.permissionLevel);
+    emit.meta(player, 'permissions', accountData.permissions);
 
     Athena.document.account.bind(player, accountData);
     PlayerEvents.trigger('set-account-data', player);

@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import Database from '@stuyk/ezmongodb';
 import axios from 'axios';
-import { Account } from '@AthenaServer/interface/iAccount';
+import { Account } from '@AthenaShared/interfaces/iAccount';
 import { DiscordAuthConfig } from './config';
 import { DiscordAuthEvents } from '../shared/events';
 

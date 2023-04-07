@@ -4,6 +4,6 @@ export interface SlotInfo {
     hasItem: boolean;
     quantity: number;
     name: string;
-    weight: number;
+    totalWeight: number;
     highlight?: boolean;
 }

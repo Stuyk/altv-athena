@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import Database from '@stuyk/ezmongodb';
-import { Account } from '../interface/iAccount';
+import { Account } from '../../shared/interfaces/iAccount';
 import { Collections } from '../database/collections';
 
 const globalKey = 'accountId';

@@ -338,8 +338,8 @@ export function fromStoredItem<CustomData = {}, CustomBehavior = DefaultItemBeha
 
     const combinedItem = Object.assign(baseItem, item) as Item<CustomBehavior & DefaultItemBehavior, CustomData>;
 
-    if (typeof combinedItem.weight === 'number') {
-        combinedItem.totalWeight = combinedItem.weight * combinedItem.quantity;
+    if (typeof baseItem.weight === 'number') {
+        combinedItem.totalWeight = baseItem.weight * combinedItem.quantity;
     }
 
     return combinedItem;

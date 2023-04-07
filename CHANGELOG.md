@@ -13,6 +13,45 @@
 - Athena.player.appearance.clearSkin
 - Added automatic character document synchronization to WebViews
 --- Available as a prop, or from the "import * as state from '@utility/state';" export
+- Athena.player.inventory.getAt - Fixed Type Definition
+- Athena.player.toolbar.getAt - Fixed Type Definition
+- AthenaClient.systems.inventory.get
+- AthenaClient.systems.inventory.get.toolbar
+- AthenaClient.systems.inventory.get.inventory
+- AthenaClient.systems.inventory.get.totalWeight
+- AthenaClient.systems.inventory.get.onInventoryChange
+- AthenaClient.systems.inventory.get.onToolbarChange
+- AthenaClient.systems.inventory.get.onWeightChange
+
+- import * as state from '@ViewUtility/state'
+- This allows you to get character, or account info in the view easily.
+- Alternatively use a Vue Prop with 'state' or 'accountData'.
+- state.get
+- state.set
+- state.getAccountData
+- state.getAccountPermissions
+- state.getCharacterData
+- state.getCharacterPermissions
+
+- Athena.vehicle.tuning.getMods
+- Athena.vehicle.tuning.applyMods
+
+Overrides -> src/core/client/cameras/cinematic
+Overrides -> src/core/client/cameras/gameplay
+Overrides -> src/core/client/cameras/pedEdit
+Overrides -> src/core/client/cameras/switch
+Overrides -> src/core/client/rmlui/commands/index
+Overrides -> src/core/client/menus/npc
+Overrides -> src/core/client/menus/object
+Overrides -> src/core/client/menus/player
+Overrides -> src/core/client/menus/vehicle
+
+Athena.systems.inventory.convert.toBaseItem
+Athena.systems.inventory.convert.toItem
+Athena.systems.inventory.convert.toStoredItem
+
+Fix Various Weight Related Bugs
+Fix commands using non-string types
 
 --------------------------------------
 --- Everything Below is Before April 2

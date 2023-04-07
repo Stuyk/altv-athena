@@ -96,7 +96,7 @@ export const CharacterSystem = {
 
         // Eyes
         native.setHeadBlendEyeColor(ped, appearance.eyes);
-        native.clearAllPedProps(ped);
+        native.clearAllPedProps(ped, 0);
     },
 
     /**

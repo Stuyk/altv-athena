@@ -18,10 +18,14 @@ const Internal = {
 /**
  * Disable the gameplay camera from moving
  *
- * 
+ *
  * @return {void}
  */
 export function disable() {
+    if (Overrides.disable) {
+        return Overrides.disable();
+    }
+
     if (typeof interval !== 'undefined') {
         return;
     }
@@ -32,14 +36,31 @@ export function disable() {
 /**
  * Enable the gameplay camera
  *
- * 
+ *
  * @return {void}
  */
 export function enable() {
+    if (Overrides.enable) {
+        return Overrides.enable();
+    }
+
     if (typeof interval === 'undefined') {
         return;
     }
 
     alt.clearInterval(interval);
     interval = undefined;
+}
+
+interface GameplayCamFuncs {
+    enable: typeof enable;
+    disable: typeof disable;
+}
+
+const Overrides: Partial<GameplayCamFuncs> = {};
+
+export function override(functionName: 'enable', callback: typeof enable);
+export function override(functionName: 'disable', callback: typeof disable);
+export function override(functionName: keyof GameplayCamFuncs, callback: any): void {
+    Overrides[functionName] = callback;
 }

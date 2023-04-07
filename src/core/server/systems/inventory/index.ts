@@ -1,5 +1,6 @@
 export * as clothing from './clothing';
 export * as config from './config';
+export * as convert from './convert';
 export * as crafting from './crafting';
 export * as drops from './drops';
 export * as effects from './effects';

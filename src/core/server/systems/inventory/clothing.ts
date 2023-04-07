@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 
 import * as Athena from '@AthenaServer/api';
-import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { ClothingComponent, ClothingInfo, StoredItem } from '@AthenaShared/interfaces/item';
 import { isNullOrUndefined } from '@AthenaShared/utility/undefinedCheck';
 import { Character } from '@AthenaShared/interfaces/character';

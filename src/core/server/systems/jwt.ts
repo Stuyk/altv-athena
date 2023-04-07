@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
-import { Account } from '../interface/iAccount';
+import { Account } from '../../shared/interfaces/iAccount';
 import nJWT from 'njwt';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
