@@ -28,4 +28,4 @@ Athena.systems.default.vehiclesSpawnOnJoin.disable();
 
 #### Defined in
 
-[server/systems/defaults/vehiclesSpawnOnJoin.ts:63](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/server/systems/defaults/vehiclesSpawnOnJoin.ts#L63)
+[server/systems/defaults/vehiclesSpawnOnJoin.ts:63](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/defaults/vehiclesSpawnOnJoin.ts#L63)

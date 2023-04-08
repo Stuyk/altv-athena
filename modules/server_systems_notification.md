@@ -30,7 +30,7 @@ Emit a notification to all players.
 
 #### Defined in
 
-[server/systems/notification/index.ts:12](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/server/systems/notification/index.ts#L12)
+[server/systems/notification/index.ts:12](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/notification/index.ts#L12)
 
 ___
 
@@ -56,4 +56,4 @@ Emit a notification to a single client.
 
 #### Defined in
 
-[server/systems/notification/index.ts:29](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/server/systems/notification/index.ts#L29)
+[server/systems/notification/index.ts:29](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/notification/index.ts#L29)

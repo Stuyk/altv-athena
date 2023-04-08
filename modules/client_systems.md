@@ -57,6 +57,12 @@ Renames and re-exports [client/systems/playerConfig](client_systems_playerConfig
 
 ___
 
+### rpc
+
+Renames and re-exports [client/systems/rpc](client_systems_rpc.md)
+
+___
+
 ### sound
 
 Renames and re-exports [client/systems/sound](client_systems_sound.md)

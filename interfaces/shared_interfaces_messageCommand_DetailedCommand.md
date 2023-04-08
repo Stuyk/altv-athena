@@ -31,7 +31,7 @@ Omit.description
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:25](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/messageCommand.ts#L25)
+[shared/interfaces/messageCommand.ts:25](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/interfaces/messageCommand.ts#L25)
 
 ___
 
@@ -47,7 +47,7 @@ Omit.isCharacterPermission
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:41](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/messageCommand.ts#L41)
+[shared/interfaces/messageCommand.ts:41](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/interfaces/messageCommand.ts#L41)
 
 ___
 
@@ -63,7 +63,7 @@ Omit.name
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:17](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/messageCommand.ts#L17)
+[shared/interfaces/messageCommand.ts:17](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/interfaces/messageCommand.ts#L17)
 
 ___
 
@@ -75,7 +75,7 @@ An array of parameters that belong to this command
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:58](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/messageCommand.ts#L58)
+[shared/interfaces/messageCommand.ts:58](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/interfaces/messageCommand.ts#L58)
 
 ___
 
@@ -91,4 +91,4 @@ Omit.permissions
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:33](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/messageCommand.ts#L33)
+[shared/interfaces/messageCommand.ts:33](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/interfaces/messageCommand.ts#L33)

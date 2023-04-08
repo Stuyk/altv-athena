@@ -21,7 +21,7 @@ Re-exports [Page](../classes/client_webview_page_Page.md)
 
 #### Defined in
 
-[client/webview/index.ts:10](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L10)
+[client/webview/index.ts:10](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L10)
 
 ## Functions
 
@@ -47,7 +47,7 @@ Closes an overlay page or pages.
 
 #### Defined in
 
-[client/webview/index.ts:505](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L505)
+[client/webview/index.ts:505](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L505)
 
 ___
 
@@ -74,7 +74,7 @@ Close a group of pages that may or may not be open.
 
 #### Defined in
 
-[client/webview/index.ts:546](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L546)
+[client/webview/index.ts:546](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L546)
 
 ___
 
@@ -100,7 +100,7 @@ Sets the URL to use based on current deployment.
 
 #### Defined in
 
-[client/webview/index.ts:232](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L232)
+[client/webview/index.ts:232](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L232)
 
 ___
 
@@ -124,7 +124,7 @@ Register a page to ignore escape key presence.
 
 #### Defined in
 
-[client/webview/index.ts:660](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L660)
+[client/webview/index.ts:660](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L660)
 
 ___
 
@@ -144,7 +144,7 @@ Destroy the WebView
 
 #### Defined in
 
-[client/webview/index.ts:386](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L386)
+[client/webview/index.ts:386](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L386)
 
 ___
 
@@ -178,7 +178,7 @@ Ensures that there is a callback event on the other side.
 
 #### Defined in
 
-[client/webview/index.ts:626](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L626)
+[client/webview/index.ts:626](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L626)
 
 ___
 
@@ -198,7 +198,7 @@ Focus the WebView Instance
 
 #### Defined in
 
-[client/webview/index.ts:459](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L459)
+[client/webview/index.ts:459](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L459)
 
 ___
 
@@ -218,7 +218,7 @@ Get the current WebView instance.
 
 #### Defined in
 
-[client/webview/index.ts:355](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L355)
+[client/webview/index.ts:355](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L355)
 
 ___
 
@@ -242,7 +242,7 @@ Checks if any menu is currently open
 
 #### Defined in
 
-[client/webview/index.ts:675](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L675)
+[client/webview/index.ts:675](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L675)
 
 ___
 
@@ -260,7 +260,7 @@ Returns whether or not all pages are done closing / opening
 
 #### Defined in
 
-[client/webview/index.ts:650](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L650)
+[client/webview/index.ts:650](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L650)
 
 ___
 
@@ -284,7 +284,7 @@ Returns if a page is currently open.
 
 #### Defined in
 
-[client/webview/index.ts:641](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L641)
+[client/webview/index.ts:641](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L641)
 
 ___
 
@@ -317,7 +317,7 @@ Registers an event to call when a component is loaded.
 
 #### Defined in
 
-[client/webview/index.ts:606](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L606)
+[client/webview/index.ts:606](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L606)
 
 ___
 
@@ -346,7 +346,7 @@ Use a single page if you have closing callbacks.
 
 #### Defined in
 
-[client/webview/index.ts:401](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L401)
+[client/webview/index.ts:401](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L401)
 
 ___
 
@@ -373,7 +373,7 @@ Registers an event to call when a component is loaded.
 
 #### Defined in
 
-[client/webview/index.ts:594](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L594)
+[client/webview/index.ts:594](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L594)
 
 ___
 
@@ -400,7 +400,7 @@ Register a Page Overlay such as HUD elements.
 
 #### Defined in
 
-[client/webview/index.ts:316](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L316)
+[client/webview/index.ts:316](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L316)
 
 ___
 
@@ -426,7 +426,7 @@ Registers a page that never, ever closes. Ever.
 
 #### Defined in
 
-[client/webview/index.ts:298](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L298)
+[client/webview/index.ts:298](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L298)
 
 ___
 
@@ -453,7 +453,7 @@ Trigger this to hide/show a specific overlay
 
 #### Defined in
 
-[client/webview/index.ts:335](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L335)
+[client/webview/index.ts:335](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L335)
 
 ___
 
@@ -480,7 +480,7 @@ Trigger this to hide/show all overlays like Chat, HUD, etc.
 
 #### Defined in
 
-[client/webview/index.ts:268](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L268)
+[client/webview/index.ts:268](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L268)
 
 ___
 
@@ -506,7 +506,7 @@ Show or hide the cursor.
 
 #### Defined in
 
-[client/webview/index.ts:480](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L480)
+[client/webview/index.ts:480](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L480)
 
 ___
 
@@ -526,4 +526,4 @@ Focus the WebView Instance
 
 #### Defined in
 
-[client/webview/index.ts:469](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/webview/index.ts#L469)
+[client/webview/index.ts:469](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/webview/index.ts#L469)

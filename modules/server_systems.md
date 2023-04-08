@@ -105,6 +105,12 @@ Renames and re-exports [player](server_config.md#player)
 
 ___
 
+### rpc
+
+Renames and re-exports [player](server_config.md#player)
+
+___
+
 ### sound
 
 Renames and re-exports [player](server_config.md#player)

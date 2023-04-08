@@ -23,7 +23,7 @@ IVehicleMod
 
 #### Defined in
 
-[shared/interfaces/vehicleMod.ts:8](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/vehicleMod.ts#L8)
+[shared/interfaces/vehicleMod.ts:8](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/interfaces/vehicleMod.ts#L8)
 
 ___
 
@@ -33,4 +33,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleMod.ts:9](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/shared/interfaces/vehicleMod.ts#L9)
+[shared/interfaces/vehicleMod.ts:9](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/interfaces/vehicleMod.ts#L9)

@@ -29,4 +29,4 @@ Load a model based on string or hash
 
 #### Defined in
 
-[client/utility/model.ts:11](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/utility/model.ts#L11)
+[client/utility/model.ts:11](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/utility/model.ts#L11)

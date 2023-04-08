@@ -32,7 +32,7 @@ AthenaClient.menus.player.(`target`, `options`): [`player`](server_config.md#pla
 
 #### Defined in
 
-[client/menus/player.ts:5](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/menus/player.ts#L5)
+[client/menus/player.ts:5](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/menus/player.ts#L5)
 
 ## Functions
 
@@ -58,7 +58,7 @@ Must always return the original wheel menu options + your changes.
 
 #### Defined in
 
-[client/menus/player.ts:18](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/menus/player.ts#L18)
+[client/menus/player.ts:18](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/menus/player.ts#L18)
 
 ___
 
@@ -78,7 +78,7 @@ Disable the Player Wheel Menu
 
 #### Defined in
 
-[client/menus/player.ts:84](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/menus/player.ts#L84)
+[client/menus/player.ts:84](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/menus/player.ts#L84)
 
 ___
 
@@ -102,7 +102,7 @@ Opens the wheel menu against a target player.
 
 #### Defined in
 
-[client/menus/player.ts:37](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/menus/player.ts#L37)
+[client/menus/player.ts:37](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/menus/player.ts#L37)
 
 ___
 
@@ -125,7 +125,7 @@ AthenaClient.menus.player.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/menus/player.ts:95](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/menus/player.ts#L95)
+[client/menus/player.ts:95](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/menus/player.ts#L95)
 
 ::: tip Usage
 AthenaClient.menus.player.**override**(`functionName`, `callback`): `any`
@@ -144,4 +144,4 @@ AthenaClient.menus.player.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/menus/player.ts:96](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/menus/player.ts#L96)
+[client/menus/player.ts:96](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/menus/player.ts#L96)

@@ -27,4 +27,4 @@ AthenaClient.menus.animationMenus.waitAnims.**default**(`callback`): { `callback
 
 #### Defined in
 
-[client/menus/animationMenus/waitAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/6beb5a6/src/core/client/menus/animationMenus/waitAnims.ts#L3)
+[client/menus/animationMenus/waitAnims.ts:3](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/menus/animationMenus/waitAnims.ts#L3)
