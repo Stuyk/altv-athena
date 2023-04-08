@@ -1,4 +1,5 @@
 import { BaseVehicle } from './vehicleBase';
+import VehicleExtra from './vehicleExtra';
 import { VehicleState } from './vehicleState';
 import VehicleTuning from './vehicleTuning';
 
@@ -85,4 +86,12 @@ export interface OwnedVehicle extends BaseVehicle {
      *
      */
     damage?: VehicleDamage;
+
+    /**
+     * Damage to store / apply on a vehicle
+     *
+     * @type {VehicleDamage}
+     *
+     */
+    extras?: Array<VehicleExtra>;
 }
