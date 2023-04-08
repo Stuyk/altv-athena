@@ -14,6 +14,7 @@ export * as notification from '@AthenaServer/systems/notification';
 export * as permission from '@AthenaServer/systems/permission';
 export * as permissionGroup from '@AthenaServer/systems/permissionGroup';
 export * as plugins from '@AthenaServer/systems/plugins';
+export * as rpc from '@AthenaServer/systems/rpc';
 export * as sound from '@AthenaServer/systems/sound';
 export * as storage from '@AthenaServer/systems/storage';
 export * as streamer from '@AthenaServer/systems/streamer';

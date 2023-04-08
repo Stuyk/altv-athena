@@ -6,5 +6,6 @@ export * as interaction from './interaction';
 export * as inventory from './inventory';
 export * as messenger from './messenger';
 export * as playerConfig from './playerConfig';
+export * as rpc from './rpc';
 export * as sound from './sound';
 export * as wheelMenu from '../views/wheelMenu';

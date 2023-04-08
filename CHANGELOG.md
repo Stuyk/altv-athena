@@ -61,6 +61,9 @@ Athena.systems.inventory.factory.getBaseItems
 AthenaClient.systems.playerConfig.get('account-data') : Returns Filtered Account Data
 AthenaClient.systems.playerConfig.get('character-data') : Returns Character Data
 
+Athena.systems.rpc.invoke
+AthenaClient.systems.rpc.on
+
 --------------------------------------
 --- Everything Below is Before April 2
 --------------------------------------
