@@ -15,6 +15,7 @@ jobs:
             - name: Install and Build 🔧
               run: |
                   npm install
+                  npm i --save-dev typedoc typedoc-plugin-external-resolver typedoc-plugin-missing-exports typedoc-plugin-markdown
                   npm run docs
             - name: Deploy 🚀
               uses: JamesIves/github-pages-deploy-action@v4
