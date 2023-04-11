@@ -181,6 +181,7 @@ export function outfitFromPlayer(
         componentList.push({
             id: components[i].id,
             ...(components[i].isProp ? player.getDlcProp(components[i].id) : player.getDlcClothes(components[i].id)),
+            isProp: components[i].isProp ? true : false,
         });
     }
 
