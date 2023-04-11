@@ -420,9 +420,9 @@ export function fromBaseToStored<CustomData = {}>(
  * @export
  * @return {Promise<Array<BaseItem>>}
  */
-export async function getBaseItems(): Promise<Array<BaseItem>> {
-    if (Overrides.getBaseItems) {
-        return getBaseItems();
+export async function getBaseItemsAsync(): Promise<Array<BaseItem>> {
+    if (Overrides.getBaseItemsAsync) {
+        return getBaseItemsAsync();
     }
 
     await isDoneLoadingAsync();
@@ -437,9 +437,9 @@ export async function getBaseItems(): Promise<Array<BaseItem>> {
  * @export
  * @return {Array<BaseItem>}
  */
-export function getBaseItemsAsync(): Array<BaseItem> {
-    if (Overrides.getBaseItemsAsync) {
-        return getBaseItemsAsync();
+export function getBaseItems(): Array<BaseItem> {
+    if (Overrides.getBaseItems) {
+        return getBaseItems();
     }
 
     return databaseItems;
