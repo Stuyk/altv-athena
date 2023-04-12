@@ -119,7 +119,13 @@ export function criteria(player: alt.Player, objective: Objective): boolean {
         }
 
         let isInJobVehicle = false;
-        for (let itr of this.vehicles) {
+        const job = Athena.systems.job.instance.get(player);
+        if (typeof job === 'undefined') {
+            return false;
+        }
+
+        const vehicles = job.getVehicles();
+        for (let itr of vehicles) {
             if (!itr.vehicle || !itr.vehicle.valid) {
                 continue;
             }
@@ -138,18 +144,25 @@ export function criteria(player: alt.Player, objective: Objective): boolean {
 
     // Called when a job vehicle is destroyed.
     if (isFlagEnabled(objective.criteria, ObjectiveCriteria.FAIL_ON_JOB_VEHICLE_DESTROY)) {
+        const job = Athena.systems.job.instance.get(player);
+        if (typeof job === 'undefined') {
+            return false;
+        }
+
+        const vehicles = job.getVehicles();
+
         let allValid = true;
-        for (let i = 0; i < this.vehicles.length; i++) {
-            if (!this.vehicles[i].vehicle.valid) {
+        for (let i = 0; i < vehicles.length; i++) {
+            if (!vehicles[i].vehicle.valid) {
                 continue;
             }
 
-            if (this.vehicles[i].vehicle.engineHealth <= 50) {
+            if (vehicles[i].vehicle.engineHealth <= 50) {
                 allValid = false;
                 break;
             }
 
-            if (this.vehicles[i].vehicle.destroyed) {
+            if (vehicles[i].vehicle.destroyed) {
                 allValid = false;
                 break;
             }
@@ -162,13 +175,20 @@ export function criteria(player: alt.Player, objective: Objective): boolean {
 
     // Check if any vehicle is nearby.
     if (isFlagEnabled(objective.criteria, ObjectiveCriteria.JOB_VEHICLE_NEARBY)) {
+        const job = Athena.systems.job.instance.get(player);
+        if (typeof job === 'undefined') {
+            return false;
+        }
+
+        const vehicles = job.getVehicles();
+
         let foundValid = false;
-        for (let i = 0; i < this.vehicles.length; i++) {
-            if (!this.vehicles[i].vehicle.valid) {
+        for (let i = 0; i < vehicles.length; i++) {
+            if (!vehicles[i].vehicle.valid) {
                 continue;
             }
 
-            const dist = Athena.utility.vector.distance2d(this.vehicles[i].vehicle.pos, objective.pos);
+            const dist = Athena.utility.vector.distance2d(vehicles[i].vehicle.pos, objective.pos);
             if (dist >= 50) {
                 continue;
             }

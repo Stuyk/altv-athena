@@ -166,6 +166,16 @@ export class Job {
     }
 
     /**
+     * Return job instance vehicles
+     *
+     * @return
+     * @memberof Job
+     */
+    getVehicles() {
+        return this.vehicles;
+    }
+
+    /**
      * Appends a list of objectives into the Job Framework.
      * @param {Objective} objectiveData
      *

@@ -34,18 +34,16 @@ let maleClothes = {
     11: 91, // top
 };
 
-// There is a item that will exist.
-// Inside of the item's data it will contain information about how to equip an item
-// The equipped item will be sent to some form of clothing handler
-
 /**
- * Used to set a uniform on a player.
+ * This TypeScript function sets a uniform for a player in a game.
  *
- * The uniform overrides all other clothing on a multiplayer ped model.
+ * @param player - The player parameter is an instance of the alt.Player class, which represents a
+ * player in the game. It is used to identify the player for whom the uniform is being set.
  *
- * @param {alt.Player} player An alt:V Player Entity
- * @param {Array<ClothingComponent>} components
- * @return {Promise<boolean>}
+ * @param components - An array of ClothingComponent objects that represent the clothing items to be
+ * set as the player's uniform.
+ *
+ * @returns a Promise that resolves to a boolean value.
  */
 export async function setUniform(player: alt.Player, components: Array<ClothingComponent>): Promise<boolean> {
     if (Overrides.setUniform) {
@@ -63,10 +61,12 @@ export async function setUniform(player: alt.Player, components: Array<ClothingC
 }
 
 /**
- * Used to clear a uniform on a player.
+ * This function clears a player's uniform and triggers an event.
  *
- * @param {alt.Player} player An alt:V Player Entity
- * @return {Promise<void>}
+ * @param player - The "player" parameter is an instance of the alt.Player class, which represents a
+ * player in the game. It is used to identify which player's uniform should be cleared.
+ *
+ * @returns a Promise that resolves to void (i.e., nothing).
  */
 export async function clearUniform(player: alt.Player): Promise<void> {
     if (Overrides.clearUniform) {
@@ -200,10 +200,16 @@ export function outfitFromPlayer(
 }
 
 /**
- * Loop through all isEquipped items; and synchronize appearance.
+ * This function updates a player's appearance and clothing based on their character data.
  *
- * @param {alt.Player} player An alt:V Player Entity
- * @return {void}
+ * @param player - An object representing a player in the game.
+ * @param {Character} document - The `document` parameter is an optional parameter of type `Character`.
+ * If it is not provided, the function will retrieve the character data for the player from the
+ * `Athena.document.character` object. If it is provided, the function will use the provided
+ * `Character` object instead.
+ *
+ * @returns The function does not always return a value. It may return the result of the
+ * `Overrides.update` function if it exists and is called, but otherwise it may not return anything.
  */
 export function update(player: alt.Player, document: Character = undefined) {
     if (Overrides.update) {

@@ -64,6 +64,8 @@ AthenaClient.systems.playerConfig.get('character-data') : Returns Character Data
 Athena.systems.rpc.invoke
 AthenaClient.systems.rpc.on
 
+Fix Vehicle Checks for Jobs
+
 --------------------------------------
 --- Everything Below is Before April 2
 --------------------------------------
