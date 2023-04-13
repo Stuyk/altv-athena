@@ -310,6 +310,33 @@ export function rebind(keyOrIdentifier: string | number, keyCode: number) {
 }
 
 /**
+ * Fully overwrites a keybind.
+ *
+ * Call this function after `onTicksStart`
+ *
+ * You may need to set a small delay after as well.
+ *
+ * @export
+ * @param {(string | number)} keyOrIdentifier
+ * @param {number} keyCode
+ */
+export function overwrite(keyOrIdentifier: string | number, keyCode: number) {
+    let index: number;
+    if (typeof keyOrIdentifier === 'string') {
+        index = keyMappings.findIndex((x) => x && x.identifier === keyOrIdentifier);
+    } else {
+        index = keyMappings.findIndex((x) => x.key === keyOrIdentifier);
+    }
+
+    if (index <= -1) {
+        return;
+    }
+
+    alt.log(`Overwrote Keybind ${keyOrIdentifier} (${keyMappings[index].key}) with (${keyCode})`);
+    keyMappings[index].key = keyCode;
+}
+
+/**
  * Returns all hotkeys and their relevant information.
  *
  * @return {Array<KeyInfoDefault>}

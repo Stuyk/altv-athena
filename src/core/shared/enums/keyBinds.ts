@@ -28,3 +28,14 @@ export const KEY_BINDS = {
     // F1
     DEBUG_KEY: 112,
 };
+
+/**
+ * Use this to overwrite the default values.
+ *
+ * @export
+ * @param {keyof typeof KEY_BINDS} key
+ * @param {number} keyCode
+ */
+export function overwriteDefaultKeybind(key: keyof typeof KEY_BINDS, keyCode: number) {
+    KEY_BINDS[key] = keyCode;
+}

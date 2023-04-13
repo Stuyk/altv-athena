@@ -17,7 +17,10 @@ ColShapes
 - Added onEnterCallback to the interface. Triggers when player enters the ColShape.
 - This allows for dual functionality for Callbacks.
 
-
+Rebind Default Keybinds
+- In a shared plugin folder, you can overwrite a default keybind.
+- import { overwriteDefaultKeybind } from '@AthenaShared/enums/keyBinds';
+- overwriteDefaultKeybind('INTERACT', 76);
 ```
 
 ## 5.0.0
