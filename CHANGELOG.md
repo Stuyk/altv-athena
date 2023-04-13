@@ -7,6 +7,10 @@
 - Athena.systems.plugins.addAPI
 - AthenaClient.systems.plugins.useAPI
 - AthenaClient.systems.plugins.addAPI
+
+ColShapes
+- Added onEnterCallback to the interface. Triggers when player enters the ColShape.
+- This allows for dual functionality for Callbacks.
 ```
 
 ## 5.0.0
