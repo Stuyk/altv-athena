@@ -40,6 +40,10 @@ export interface StorageInstance<CustomData = {}> {
  * @return {Promise<string>}
  */
 export async function create(items: Array<StoredItem>): Promise<string> {
+    if (Overrides.create) {
+        return Overrides.create(items);
+    }
+
     const document = await Database.insertData<StorageInstance>(
         { items, lastUsed: Date.now() },
         Athena.database.collections.Storage,
@@ -58,6 +62,10 @@ export async function create(items: Array<StoredItem>): Promise<string> {
  * @returns {Promise<boolean>}
  */
 export async function set(id: string, items: Array<StoredItem>): Promise<boolean> {
+    if (Overrides.set) {
+        return Overrides.set(id, items);
+    }
+
     return await Database.updatePartialData(id, { items, lastUsed: Date.now() }, Athena.database.collections.Storage);
 }
 
@@ -70,6 +78,10 @@ export async function set(id: string, items: Array<StoredItem>): Promise<boolean
  * @return {Promise<Array<StoredItem<CustomData>>>}
  */
 export async function get<CustomData = {}>(id: string): Promise<Array<StoredItem<CustomData>>> {
+    if (Overrides.get) {
+        return Overrides.get<CustomData>(id);
+    }
+
     const document = await Database.fetchData<StorageInstance<CustomData>>(
         '_id',
         id,
@@ -89,6 +101,10 @@ export async function get<CustomData = {}>(id: string): Promise<Array<StoredItem
  * @return {boolean}
  */
 export function setAsOpen(id: string): boolean {
+    if (Overrides.setAsOpen) {
+        return Overrides.setAsOpen(id);
+    }
+
     const index = openIdentifiers.findIndex((x) => x === id);
     if (index >= 0) {
         return false;
@@ -106,6 +122,10 @@ export function setAsOpen(id: string): boolean {
  * @return {void}
  */
 export function isOpen(id: string): boolean {
+    if (Overrides.isOpen) {
+        return Overrides.isOpen(id);
+    }
+
     return openIdentifiers.findIndex((x) => x === id) >= 0;
 }
 
@@ -119,6 +139,10 @@ export function isOpen(id: string): boolean {
  * @returns {boolean}
  */
 export function removeAsOpen(id: string): boolean {
+    if (Overrides.removeAsOpen) {
+        return Overrides.removeAsOpen(id);
+    }
+
     let wasRemoved = false;
 
     for (let i = openIdentifiers.length - 1; i >= 0; i--) {
@@ -152,6 +176,10 @@ export function removeAsOpen(id: string): boolean {
  * @returns {boolean}
  */
 export function closeOnDisconnect(player: alt.Player, id: string): boolean {
+    if (Overrides.closeOnDisconnect) {
+        return Overrides.closeOnDisconnect(player, id);
+    }
+
     const index = boundIdentifiers.findIndex((x) => x.id === player.id);
     if (index >= 0) {
         return false;
@@ -171,3 +199,33 @@ alt.on('playerDisconnect', (player: alt.Player) => {
 });
 
 init();
+
+interface StorageFuncs {
+    create: typeof create;
+    set: typeof set;
+    get: typeof get;
+    setAsOpen: typeof setAsOpen;
+    removeAsOpen: typeof removeAsOpen;
+    isOpen: typeof isOpen;
+    closeOnDisconnect: typeof closeOnDisconnect;
+}
+
+const Overrides: Partial<StorageFuncs> = {};
+
+export function override(functionName: 'create', callback: typeof create);
+export function override(functionName: 'set', callback: typeof set);
+export function override(functionName: 'get', callback: typeof get);
+export function override(functionName: 'setAsOpen', callback: typeof setAsOpen);
+export function override(functionName: 'isOpen', callback: typeof isOpen);
+export function override(functionName: 'removeAsOpen', callback: typeof removeAsOpen);
+export function override(functionName: 'closeOnDisconnect', callback: typeof closeOnDisconnect);
+/**
+ * Used to override storage functions.
+ *
+ *
+ * @param {keyof StorageFuncs} functionName
+ * @param {*} callback
+ */
+export function override(functionName: keyof StorageFuncs, callback: any): void {
+    Overrides[functionName] = callback;
+}
