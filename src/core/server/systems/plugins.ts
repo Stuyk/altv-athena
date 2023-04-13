@@ -1,10 +1,17 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-// import { VehicleSystem } from './vehicle';
+import { ExtractStringKeys } from '@AthenaShared/utility/extractStringKeys';
 
 const pluginRegistration: Array<{ name: string; callback: Function }> = [];
+const pluginHooks: { [key: string]: Object } = {};
+
 let callbacks: Array<Function> = [];
 let hasInitialized = false;
+let hasFinishedLoading = false;
+
+declare global {
+    export interface ServerPluginAPI {}
+}
 
 async function loadPlugins() {
     const promises = [];
@@ -29,6 +36,7 @@ async function loadPlugins() {
         callback();
     }
 
+    hasFinishedLoading = true;
     alt.emit(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY);
 }
 
@@ -80,4 +88,65 @@ export function addCallback(callback: Function) {
     }
 
     callbacks.push(callback);
+}
+
+/**
+ * Verifies if all plugins are done loading.
+ *
+ * @return {Promise<void>}
+ */
+export async function isDoneLoading(): Promise<void> {
+    return new Promise((resolve: Function) => {
+        const interval = alt.setInterval(() => {
+            if (!hasFinishedLoading) {
+                return;
+            }
+
+            alt.clearInterval(interval);
+            resolve();
+        }, 100);
+    });
+}
+
+/**
+ * Injects a 'plugin' API into the runtime.
+ *
+ * The runtime injection can be obtained with `Athena.systems.plugins.use`.
+ *
+ * See that function for additional information.
+ *
+ * @export
+ * @param {string} pluginName
+ * @param {Object} functions
+ */
+export function addAPI(pluginName: string, functions: Object) {
+    if (pluginName.includes(' ')) {
+        throw new Error('Plugin name must be plain text and all lowercase. No spaces.');
+    }
+
+    pluginName = pluginName.toLowerCase();
+    pluginHooks[pluginName] = functions;
+}
+
+/**
+ * Used to obtain a runtime API and its valid functionality.
+ *
+ * This makes it so you can 'import' without knowing the plugin pathways.
+ *
+ * As long as you know the 'plugin name' you can import anything.
+ *
+ * @export
+ * @template K
+ * @param {K} apiName
+ * @return {Promise<ServerPluginAPI[K]>}
+ */
+export async function useAPI<K extends ExtractStringKeys<ServerPluginAPI>>(apiName: K): Promise<ServerPluginAPI[K]> {
+    await isDoneLoading();
+
+    if (!pluginHooks[apiName]) {
+        alt.logWarning(`Plugin hook for ${apiName} is not available.`);
+        return undefined;
+    }
+
+    return pluginHooks[apiName] as ServerPluginAPI[K];
 }

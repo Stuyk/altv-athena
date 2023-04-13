@@ -1,5 +1,14 @@
 # Changelog
 
+## 5.1.0
+
+```
+- Athena.systems.plugins.useAPI
+- Athena.systems.plugins.addAPI
+- AthenaClient.systems.plugins.useAPI
+- AthenaClient.systems.plugins.addAPI
+```
+
 ## 5.0.0
 
 ```
