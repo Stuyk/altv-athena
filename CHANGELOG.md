@@ -8,9 +8,16 @@
 - AthenaClient.systems.plugins.useAPI
 - AthenaClient.systems.plugins.addAPI
 
+- Athena.database.singleton.get
+- Athena.database.singleton.create
+- Athena.database.singleton.updateField
+- Athena.database.singleton.updateBulk
+
 ColShapes
 - Added onEnterCallback to the interface. Triggers when player enters the ColShape.
 - This allows for dual functionality for Callbacks.
+
+
 ```
 
 ## 5.0.0
