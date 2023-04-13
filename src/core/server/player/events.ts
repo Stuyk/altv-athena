@@ -286,6 +286,18 @@ export function on<T>(eventName: 'player-account-created', callback: (player: al
 export function on<T>(eventName: 'player-character-created', callback: (player: alt.Player) => void);
 
 /**
+ * Called when a player has set their account data.
+ *
+ * Called immediately after authentication.
+ *
+ * @export
+ * @template T
+ * @param {'set-account-data'} eventName
+ * @param {(player: alt.Player) => void} callback
+ */
+export function on<T>(eventName: 'set-account-data', callback: (player: alt.Player) => void);
+
+/**
  * Trigger a callback specific to Athena Player Events.
  * @param {AthenaPlayerEvents} eventName
  * @param {(player: alt.Player) => void} callback
