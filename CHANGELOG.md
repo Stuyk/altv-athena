@@ -13,6 +13,9 @@
 - Athena.database.singleton.updateField
 - Athena.database.singleton.updateBulk
 
+Bugs
+- Fix vehicles not spawning with dimension
+
 ColShapes
 - Added onEnterCallback to the interface. Triggers when player enters the ColShape.
 - This allows for dual functionality for Callbacks.
@@ -21,6 +24,13 @@ Rebind Default Keybinds
 - In a shared plugin folder, you can overwrite a default keybind.
 - import { overwriteDefaultKeybind } from '@AthenaShared/enums/keyBinds';
 - overwriteDefaultKeybind('INTERACT', 76);
+
+Dynamic Doors
+- Create a two way door for vehicles, or players.
+- Automatically moves passengers in a vehicle on vehicle teleport.
+- Dynamic doors can teleport to any dimension, or position.
+- Dynamic doors also have onEnter, or beforeEnter callbacks for additional door functionality.
+- Includes better handling of ytyp, and ipl loading; no more falling through map.
 ```
 
 ## 5.0.0

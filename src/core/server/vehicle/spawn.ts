@@ -98,6 +98,10 @@ export function persistent(document: OwnedVehicle): alt.Vehicle | undefined {
         Athena.vehicle.damage.apply(vehicle, document.damage);
     }
 
+    if (document.dimension) {
+        vehicle.dimension = document.dimension;
+    }
+
     Athena.document.vehicle.bind(vehicle, document);
     Athena.vehicle.events.trigger('vehicle-spawned', vehicle);
     return vehicle;
