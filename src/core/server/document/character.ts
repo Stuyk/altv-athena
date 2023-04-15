@@ -298,6 +298,26 @@ export function onChange<T = {}>(fieldName: keyof KnownKeys<Character & T>, call
     }
 }
 
+/**
+ * Return all available and online characters, and their associated alt:V player ids.
+ *
+ * The player can be fetched with alt.Player.all.find(x => x.id === someResult.id);
+ *
+ * @export
+ * @template T
+ * @return {(Array<{ id: number; document: Character & T }>)}
+ */
+export function getAllOnline<T = {}>(): Array<{ id: number; document: Character & T }> {
+    const dataSet: Array<{ id: number; document: Character & T }> = [];
+    const ids = Object.keys(cache);
+
+    for (let id of ids) {
+        dataSet.push({ id: parseInt(id), document: cache[id] as Character & T });
+    }
+
+    return dataSet;
+}
+
 alt.on('playerDisconnect', (player: alt.Player) => {
     if (typeof player.id === 'undefined' || player.id === null) {
         return;

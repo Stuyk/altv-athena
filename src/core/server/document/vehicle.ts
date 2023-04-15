@@ -194,6 +194,26 @@ export function onChange<T = {}>(fieldName: keyof KnownKeys<OwnedVehicle & T>, c
 }
 
 /**
+ * Return all available vehicles, and their associated alt:V vehicle ids.
+ *
+ * The vehicle can be fetched with alt.Vehicle.all.find(x => x.id === someResult.id);
+ *
+ * @export
+ * @template T
+ * @return {(Array<{ id: number; document: OwnedVehicle & T }>)}
+ */
+export function getAllOnline<T = {}>(): Array<{ id: number; document: OwnedVehicle & T }> {
+    const dataSet: Array<{ id: number; document: OwnedVehicle & T }> = [];
+    const ids = Object.keys(cache);
+
+    for (let id of ids) {
+        dataSet.push({ id: parseInt(id), document: cache[id] as OwnedVehicle & T });
+    }
+
+    return dataSet;
+}
+
+/**
  * Check if a vehicle document already exists and a vehicle is attached to it.
  *
  *

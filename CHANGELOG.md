@@ -13,6 +13,21 @@
 - Athena.database.singleton.updateField
 - Athena.database.singleton.updateBulk
 
+- Athena.document.character.getAllOnline
+- Athena.document.vehicle.getAllOnline
+
+- Athena.getters.players.asCharacters
+- Athena.getters.vehicles.asOwnedVehicles
+
+- Athena.vehicles.get.ownedVehicles -> vehiclesWithOwnership
+- Athena.vehicles.get.playerOwnedVehicles -> vehiclesSpawnedByPlayer
+- Athena.vehicles.get.spawnedVehicleByEntityID
+- Athena.vehicles.get.spawnedVehicleByDatabaseID
+- Athena.vehicles.get.spawnedVehicleByDocumentID
+- Athena.vehicles.get.ownedVehicleByDocumentID
+- Athena.vehicles.get.ownedVehicleByDatabaseID
+- Athena.vehicles.get.ownedVehiclesByPlayer
+
 Bugs
 - Fix vehicles not spawning with dimension
 
