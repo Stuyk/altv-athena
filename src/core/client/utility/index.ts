@@ -1,4 +1,3 @@
-export { DirectionVector } from './directionToVector';
 export * as math from './math';
 export * as model from './model';
 export * as pauseMenu from './pauseMenu';

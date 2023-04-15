@@ -28,6 +28,9 @@
 - Athena.vehicles.get.ownedVehicleByDatabaseID
 - Athena.vehicles.get.ownedVehiclesByPlayer
 
+- AthenaClient.utility.DirectionVector -> AthenaClient.utility.vector.DirectionVector
+- Athena.utility.vector.DirectionVector
+
 Bugs
 - Fix vehicles not spawning with dimension
 
@@ -50,6 +53,8 @@ Dynamic Doors
 Drop Tables
 - Create a drop table and pull random loot from it.
 - Athena.systems.dropTable.get
+
+
 ```
 
 ## 5.0.0

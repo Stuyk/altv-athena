@@ -1,10 +1,10 @@
-import * as alt from 'alt-client';
+import * as alt from 'alt-shared';
 
 export class DirectionVector {
     private position: alt.IVector3;
     private rotation: alt.IVector3;
 
-    constructor(position, rotation) {
+    constructor(position: alt.IVector3, rotation: alt.IVector3) {
         this.position = position;
         this.rotation = rotation;
     }
@@ -78,7 +78,7 @@ export class DirectionVector {
         return { x: uVectorX, y: uVectorY, z: uVectorZ };
     }
 
-    up(distance) {
+    up(distance: number) {
         const upVector = this.upVector();
 
         return {
