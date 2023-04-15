@@ -2,6 +2,7 @@ export * as appearance from '@AthenaServer/player/appearance';
 export * as currency from '@AthenaServer/player/currency';
 export * as emit from '@AthenaServer/player/emit';
 export * as events from '@AthenaServer/player/events';
+export * as get from '@AthenaServer/player/get';
 export * as inventory from '@AthenaServer/player/inventory';
 export * as permission from '@AthenaServer/player/permissions';
 export * as safe from '@AthenaServer/player/safe';

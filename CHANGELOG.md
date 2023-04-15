@@ -28,6 +28,19 @@
 - Athena.vehicles.get.ownedVehicleByDatabaseID
 - Athena.vehicles.get.ownedVehiclesByPlayer
 
+- Athena.player.get.accountPermissions
+- Athena.player.get.bank
+- Athena.player.get.cash
+- Athena.player.get.food
+- Athena.player.get.groups
+- Athena.player.get.inventory
+- Athena.player.get.isDead
+- Athena.player.get.job
+- Athena.player.get.name
+- Athena.player.get.permissions
+- Athena.player.get.toolbar
+- Athena.player.get.water
+
 - AthenaClient.utility.DirectionVector -> AthenaClient.utility.vector.DirectionVector
 - Athena.utility.vector.DirectionVector
 
