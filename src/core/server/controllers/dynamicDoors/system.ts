@@ -159,12 +159,15 @@ export async function goto(player: alt.Player, door: DoorInfo) {
         vehicle.pos = new alt.Vector3(door.pos);
         Athena.document.vehicle.setBulk(vehicle, { pos: vehicle.pos, dimension: door.dimension });
         const passengers = Athena.getters.vehicle.passengers(player.vehicle);
-        for (let i = 0; i < passengers.length; i++) {
-            const passenger = passengers[i];
-            passenger.dimension = door.dimension;
-            passenger.setIntoVehicle(vehicle, i);
-            Athena.document.character.setBulk(passenger, { pos: vehicle.pos, dimension: door.dimension });
-        }
+
+        alt.nextTick(() => {
+            for (let i = 0; i < passengers.length; i++) {
+                const passenger = passengers[i];
+                passenger.dimension = door.dimension;
+                passenger.setIntoVehicle(vehicle, i + 1);
+                Athena.document.character.setBulk(passenger, { pos: vehicle.pos, dimension: door.dimension });
+            }
+        });
     } else {
         player.pos = new alt.Vector3(door.pos);
         player.dimension = door.dimension;

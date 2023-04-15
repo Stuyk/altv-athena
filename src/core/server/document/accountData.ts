@@ -187,6 +187,11 @@ export async function setBulk<T = {}, Keys = Partial<Account & T>>(player: alt.P
     const oldValues = {};
 
     Object.keys(fields).forEach((key) => {
+        if (typeof cache[player.id][key] === 'undefined') {
+            oldValues[key] = undefined;
+            return;
+        }
+
         oldValues[key] = JSON.parse(JSON.stringify(cache[player.id][key]));
     });
 

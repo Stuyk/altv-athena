@@ -33,6 +33,8 @@
 
 Bugs
 - Fix vehicles not spawning with dimension
+- Fix JSON Parse error for all documents, when setting bulk with previous data being undefined
+---- Error: Unexpected token u in JSON at position 0
 
 ColShapes
 - Added onEnterCallback to the interface. Triggers when player enters the ColShape.

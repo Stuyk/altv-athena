@@ -155,6 +155,11 @@ export async function setBulk<T = {}, Keys = Partial<OwnedVehicle & T>>(vehicle:
     const oldValues = {};
 
     Object.keys(fields).forEach((key) => {
+        if (typeof cache[vehicle.id][key] === 'undefined') {
+            oldValues[key] = undefined;
+            return;
+        }
+
         oldValues[key] = JSON.parse(JSON.stringify(cache[vehicle.id][key]));
     });
 
