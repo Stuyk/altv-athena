@@ -41,6 +41,21 @@
 - Athena.player.get.toolbar
 - Athena.player.get.water
 
+Sessions
+- Sessions are a common key value pair mapping that are used across Athena.
+- Creating this wrapper will allow session data to be stored in memory.
+- This allows for small things to be checked against a player easily.
+- Athena.session.player.set
+- Athena.session.player.get
+- Athena.session.player.has
+- Athena.session.player.clearKey
+- Athena.session.player.clearAll
+- Athena.session.vehicle.set
+- Athena.session.vehicle.get
+- Athena.session.vehicle.has
+- Athena.session.vehicle.clearKey
+- Athena.session.vehicle.clearAll
+
 - AthenaClient.utility.DirectionVector -> AthenaClient.utility.vector.DirectionVector
 - Athena.utility.vector.DirectionVector
 
