@@ -19,7 +19,7 @@ Disable default id display on-screen for players.
 
 #### Example
 ```ts
-Athena.systems.default.displayId.disable();
+Athena.systems.defaults.displayId.disable();
 ```
 
 #### Returns
@@ -28,7 +28,7 @@ Athena.systems.default.displayId.disable();
 
 #### Defined in
 
-[server/systems/defaults/displayId.ts:47](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/defaults/displayId.ts#L47)
+[server/systems/defaults/displayId.ts:47](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/defaults/displayId.ts#L47)
 
 ___
 
@@ -46,7 +46,7 @@ Y as 1 = Bottom of Screen
 #### Example
 ```ts
 // Place in the very center of the screen. I'm sure everyone would love it.
-Athena.systems.default.displayId.setLocation(0.5, 0.5);
+Athena.systems.defaults.displayId.setLocation(0.5, 0.5);
 ```
 
 #### Parameters
@@ -62,4 +62,4 @@ Athena.systems.default.displayId.setLocation(0.5, 0.5);
 
 #### Defined in
 
-[server/systems/defaults/displayId.ts:69](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/defaults/displayId.ts#L69)
+[server/systems/defaults/displayId.ts:69](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/defaults/displayId.ts#L69)

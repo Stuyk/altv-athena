@@ -20,7 +20,7 @@ Does not remove them if they already exist in the database.
 
 #### Example
 ```ts
-Athena.systems.default.weaponItems.disable();
+Athena.systems.defaults.weaponItems.disable();
 ```
 
 #### Returns
@@ -29,4 +29,4 @@ Athena.systems.default.weaponItems.disable();
 
 #### Defined in
 
-[server/systems/defaults/weaponItems.ts:58](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/defaults/weaponItems.ts#L58)
+[server/systems/defaults/weaponItems.ts:58](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/defaults/weaponItems.ts#L58)

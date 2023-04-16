@@ -57,6 +57,12 @@ Renames and re-exports [client/systems/playerConfig](client_systems_playerConfig
 
 ___
 
+### plugins
+
+Renames and re-exports [client/systems/plugins](client_systems_plugins.md)
+
+___
+
 ### rpc
 
 Renames and re-exports [client/systems/rpc](client_systems_rpc.md)

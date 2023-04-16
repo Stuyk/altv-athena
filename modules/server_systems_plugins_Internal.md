@@ -1,5 +1,5 @@
 ---
-title: Athena.systems.inventory.crafting.Internal
+title: Athena.systems.plugins.Internal
 outline: [1,3]
 order: 0
 ---
@@ -9,7 +9,8 @@ order: 0
 
 ## Interfaces
 
-- [Object](../interfaces/server_systems_inventory_crafting_Internal_Object.md)
+- [Object](../interfaces/server_systems_plugins_Internal_Object.md)
+- [ServerPluginAPI](../interfaces/server_systems_plugins_Internal_ServerPluginAPI.md)
 
 ## Type Aliases
 
@@ -26,7 +27,7 @@ order: 0
 ### Object
 
 ::: tip Usage
-Athena.systems.inventory.crafting.Internal.**Object**(): `any`
+Athena.systems.plugins.Internal.**Object**(): `any`
 :::
 
 Provides functionality common to all JavaScript objects.
@@ -40,7 +41,7 @@ Provides functionality common to all JavaScript objects.
 ../../node_modules/typescript/lib/lib.es5.d.ts:156
 
 ::: tip Usage
-Athena.systems.inventory.crafting.Internal.**Object**(`value`): `any`
+Athena.systems.plugins.Internal.**Object**(`value`): `any`
 :::
 
 Provides functionality common to all JavaScript objects.

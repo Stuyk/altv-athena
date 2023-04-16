@@ -33,6 +33,12 @@ Renames and re-exports [player](server_config.md#player)
 
 ___
 
+### get
+
+Renames and re-exports [player](server_config.md#player)
+
+___
+
 ### inventory
 
 Renames and re-exports [player](server_config.md#player)

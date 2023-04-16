@@ -1,5 +1,5 @@
 ---
-title: Athena.systems.inventory.crafting.Internal.Object
+title: Athena.systems.plugins.Internal.Object
 outline: [1,3]
 order: 0
 ---
@@ -7,7 +7,7 @@ order: 0
 # {{ $frontmatter.title }}
 
 
-[server/systems/inventory/crafting](../modules/server_systems_inventory_crafting.md).[Internal](../modules/server_systems_inventory_crafting_Internal.md).Object
+[server/systems/plugins](../modules/server_systems_plugins.md).[Internal](../modules/server_systems_plugins_Internal.md).Object
 
 ## Properties
 
@@ -26,7 +26,7 @@ The initial value of Object.prototype.constructor is the standard built-in Objec
 ### hasOwnProperty
 
 ::: tip Usage
-Athena.systems.inventory.crafting.Internal.Object.**hasOwnProperty**(`v`): `boolean`
+Athena.systems.plugins.Internal.Object.**hasOwnProperty**(`v`): `boolean`
 :::
 
 Determines whether an object has a property with the specified name.
@@ -35,7 +35,7 @@ Determines whether an object has a property with the specified name.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `v` | [`PropertyKey`](../modules/server_systems_inventory_crafting_Internal.md#PropertyKey) | A property name. |
+| `v` | [`PropertyKey`](../modules/server_systems_plugins_Internal.md#PropertyKey) | A property name. |
 
 #### Returns
 
@@ -50,7 +50,7 @@ ___
 ### isPrototypeOf
 
 ::: tip Usage
-Athena.systems.inventory.crafting.Internal.Object.**isPrototypeOf**(`v`): `boolean`
+Athena.systems.plugins.Internal.Object.**isPrototypeOf**(`v`): `boolean`
 :::
 
 Determines whether an object exists in another object's prototype chain.
@@ -59,7 +59,7 @@ Determines whether an object exists in another object's prototype chain.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `v` | [`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object) | Another object whose prototype chain is to be checked. |
+| `v` | [`Object`](../modules/server_systems_plugins_Internal.md#Object) | Another object whose prototype chain is to be checked. |
 
 #### Returns
 
@@ -74,7 +74,7 @@ ___
 ### propertyIsEnumerable
 
 ::: tip Usage
-Athena.systems.inventory.crafting.Internal.Object.**propertyIsEnumerable**(`v`): `boolean`
+Athena.systems.plugins.Internal.Object.**propertyIsEnumerable**(`v`): `boolean`
 :::
 
 Determines whether a specified property is enumerable.
@@ -83,7 +83,7 @@ Determines whether a specified property is enumerable.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `v` | [`PropertyKey`](../modules/server_systems_inventory_crafting_Internal.md#PropertyKey) | A property name. |
+| `v` | [`PropertyKey`](../modules/server_systems_plugins_Internal.md#PropertyKey) | A property name. |
 
 #### Returns
 
@@ -98,7 +98,7 @@ ___
 ### toLocaleString
 
 ::: tip Usage
-Athena.systems.inventory.crafting.Internal.Object.**toLocaleString**(): `string`
+Athena.systems.plugins.Internal.Object.**toLocaleString**(): `string`
 :::
 
 Returns a date converted to a string using the current locale.
@@ -116,7 +116,7 @@ ___
 ### toString
 
 ::: tip Usage
-Athena.systems.inventory.crafting.Internal.Object.**toString**(): `string`
+Athena.systems.plugins.Internal.Object.**toString**(): `string`
 :::
 
 Returns a string representation of an object.
@@ -134,14 +134,14 @@ ___
 ### valueOf
 
 ::: tip Usage
-Athena.systems.inventory.crafting.Internal.Object.**valueOf**(): [`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object)
+Athena.systems.plugins.Internal.Object.**valueOf**(): [`Object`](../modules/server_systems_plugins_Internal.md#Object)
 :::
 
 Returns the primitive value of the specified object.
 
 #### Returns
 
-[`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object)
+[`Object`](../modules/server_systems_plugins_Internal.md#Object)
 
 #### Defined in
 

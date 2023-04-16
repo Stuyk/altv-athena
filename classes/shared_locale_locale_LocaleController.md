@@ -40,14 +40,14 @@ Get a locale based on its key value.
 
 #### Defined in
 
-[shared/locale/locale.ts:46](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/locale/locale.ts#L46)
+[shared/locale/locale.ts:46](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/locale/locale.ts#L46)
 
 ___
 
 ### getWebviewLocale
 
 ::: tip Usage
-AthenaShared.locale.locale.LocaleController.`Static` **getWebviewLocale**(`key`): [`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object)
+AthenaShared.locale.locale.LocaleController.`Static` **getWebviewLocale**(`key`): [`Object`](../modules/server_systems_plugins_Internal.md#Object)
 :::
 
 Returns an object of strings with labels for WebViews.
@@ -62,11 +62,11 @@ Returns an object of strings with labels for WebViews.
 
 #### Returns
 
-[`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object)
+[`Object`](../modules/server_systems_plugins_Internal.md#Object)
 
 #### Defined in
 
-[shared/locale/locale.ts:67](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/locale/locale.ts#L67)
+[shared/locale/locale.ts:67](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/locale/locale.ts#L67)
 
 ___
 
@@ -92,4 +92,4 @@ The ISO-639-1 Code to Utilize for Language
 
 #### Defined in
 
-[shared/locale/locale.ts:34](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/locale/locale.ts#L34)
+[shared/locale/locale.ts:34](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/locale/locale.ts#L34)

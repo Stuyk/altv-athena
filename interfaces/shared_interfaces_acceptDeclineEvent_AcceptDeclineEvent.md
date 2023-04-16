@@ -19,7 +19,7 @@ AcceptDeclineEvent
 
 | Name | Type |
 | :------ | :------ |
-| `T` | [`Object`](../modules/server_systems_inventory_crafting_Internal.md#Object) |
+| `T` | [`Object`](../modules/server_systems_plugins_Internal.md#Object) |
 
 ## Properties
 
@@ -29,7 +29,7 @@ AcceptDeclineEvent
 
 #### Defined in
 
-[shared/interfaces/acceptDeclineEvent.ts:14](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/interfaces/acceptDeclineEvent.ts#L14)
+[shared/interfaces/acceptDeclineEvent.ts:14](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/interfaces/acceptDeclineEvent.ts#L14)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/acceptDeclineEvent.ts:10](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/interfaces/acceptDeclineEvent.ts#L10)
+[shared/interfaces/acceptDeclineEvent.ts:10](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/interfaces/acceptDeclineEvent.ts#L10)
 
 ___
 
@@ -56,4 +56,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/acceptDeclineEvent.ts:9](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/interfaces/acceptDeclineEvent.ts#L9)
+[shared/interfaces/acceptDeclineEvent.ts:9](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/interfaces/acceptDeclineEvent.ts#L9)

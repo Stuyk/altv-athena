@@ -19,7 +19,7 @@ Disable default hospital blips from being created
 
 #### Example
 ```ts
-Athena.systems.default.hospitalBlips.disable();
+Athena.systems.defaults.hospitalBlips.disable();
 ```
 
 #### Returns
@@ -28,4 +28,4 @@ Athena.systems.default.hospitalBlips.disable();
 
 #### Defined in
 
-[server/systems/defaults/hospitalBlips.ts:57](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/defaults/hospitalBlips.ts#L57)
+[server/systems/defaults/hospitalBlips.ts:57](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/defaults/hospitalBlips.ts#L57)

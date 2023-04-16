@@ -27,6 +27,12 @@ Renames and re-exports [server/controllers/doors](server_controllers_doors.md)
 
 ___
 
+### dynamicDoors
+
+Renames and re-exports [server/controllers/dynamicDoors](server_controllers_dynamicDoors.md)
+
+___
+
 ### interaction
 
 Renames and re-exports [server/controllers/interaction](server_controllers_interaction.md)

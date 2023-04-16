@@ -9,6 +9,32 @@ order: 0
 
 ## Functions
 
+### asCharacters
+
+::: tip Usage
+Athena.getters.players.**asCharacters**<`T`\>(): `any`
+:::
+
+Get all online players as characters.
+
+**`Export`**
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `Character` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/getters/players.ts:209](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/players.ts#L209)
+
+___
+
 ### driving
 
 ::: tip Usage
@@ -23,7 +49,7 @@ Returns all players who are currently driving a vehicle.
 
 #### Defined in
 
-[server/getters/players.ts:124](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/getters/players.ts#L124)
+[server/getters/players.ts:132](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/players.ts#L132)
 
 ___
 
@@ -47,7 +73,7 @@ Return all online players driving a specific vehicle model.
 
 #### Defined in
 
-[server/getters/players.ts:156](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/getters/players.ts#L156)
+[server/getters/players.ts:164](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/players.ts#L164)
 
 ___
 
@@ -72,7 +98,7 @@ Gets all players around a specific position.
 
 #### Defined in
 
-[server/getters/players.ts:80](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/getters/players.ts#L80)
+[server/getters/players.ts:88](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/players.ts#L88)
 
 ___
 
@@ -98,7 +124,7 @@ Array is automatically sorted into ascending order.
 
 #### Defined in
 
-[server/getters/players.ts:47](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/getters/players.ts#L47)
+[server/getters/players.ts:55](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/players.ts#L55)
 
 ___
 
@@ -123,7 +149,7 @@ No specific order.
 
 #### Defined in
 
-[server/getters/players.ts:190](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/getters/players.ts#L190)
+[server/getters/players.ts:198](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/players.ts#L198)
 
 ___
 
@@ -141,7 +167,7 @@ Return all players currently online and logged into a character.
 
 #### Defined in
 
-[server/getters/players.ts:10](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/getters/players.ts#L10)
+[server/getters/players.ts:11](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/players.ts#L11)
 
 ___
 
@@ -151,13 +177,17 @@ ___
 Athena.getters.players.**onlineWithWeapons**(): `alt.Player`[]
 :::
 
+Return all players with weapons out.
+
+**`Export`**
+
 #### Returns
 
 `alt.Player`[]
 
 #### Defined in
 
-[server/getters/players.ts:21](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/getters/players.ts#L21)
+[server/getters/players.ts:28](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/players.ts#L28)
 
 ___
 
@@ -175,7 +205,7 @@ Return all players who are currently walking / on foot.
 
 #### Defined in
 
-[server/getters/players.ts:139](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/getters/players.ts#L139)
+[server/getters/players.ts:147](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/players.ts#L147)
 
 ___
 
@@ -199,4 +229,4 @@ Gets all online players with a given name.
 
 #### Defined in
 
-[server/getters/players.ts:103](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/getters/players.ts#L103)
+[server/getters/players.ts:111](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/players.ts#L111)

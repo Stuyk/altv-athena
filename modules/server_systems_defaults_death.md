@@ -19,7 +19,7 @@ Disable default death system from working.
 
 #### Example
 ```ts
-Athena.systems.default.death.disable();
+Athena.systems.defaults.death.disable();
 ```
 
 #### Returns
@@ -28,4 +28,4 @@ Athena.systems.default.death.disable();
 
 #### Defined in
 
-[server/systems/defaults/death.ts:122](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/defaults/death.ts#L122)
+[server/systems/defaults/death.ts:122](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/defaults/death.ts#L122)

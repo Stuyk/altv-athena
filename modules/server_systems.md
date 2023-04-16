@@ -33,6 +33,12 @@ Renames and re-exports [player](server_config.md#player)
 
 ___
 
+### dropTable
+
+Renames and re-exports [player](server_config.md#player)
+
+___
+
 ### global
 
 Renames and re-exports [player](server_config.md#player)

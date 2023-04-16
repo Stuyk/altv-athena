@@ -23,7 +23,7 @@ Disable the default GTA:V pause Menu
 
 #### Defined in
 
-[client/utility/pauseMenu.ts:25](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/utility/pauseMenu.ts#L25)
+[client/utility/pauseMenu.ts:25](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/utility/pauseMenu.ts#L25)
 
 ___
 
@@ -41,4 +41,4 @@ Enable the default GTA:V pause menu
 
 #### Defined in
 
-[client/utility/pauseMenu.ts:39](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/client/utility/pauseMenu.ts#L39)
+[client/utility/pauseMenu.ts:39](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/utility/pauseMenu.ts#L39)

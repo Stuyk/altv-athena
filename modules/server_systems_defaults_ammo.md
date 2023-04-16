@@ -19,7 +19,7 @@ Used to disable the default ammo system that comes with Athena.
 
 #### Example
 ```ts
-Athena.systems.default.ammo.disable();
+Athena.systems.defaults.ammo.disable();
 ```
 
 #### Returns
@@ -28,4 +28,4 @@ Athena.systems.default.ammo.disable();
 
 #### Defined in
 
-[server/systems/defaults/ammo.ts:132](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/defaults/ammo.ts#L132)
+[server/systems/defaults/ammo.ts:132](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/defaults/ammo.ts#L132)

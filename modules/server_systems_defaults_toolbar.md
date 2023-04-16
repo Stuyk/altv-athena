@@ -19,7 +19,7 @@ Disable the toolbar hotkeys / processing on server-side.
 
 #### Example
 ```ts
-Athena.systems.default.toolbar.disable();
+Athena.systems.defaults.toolbar.disable();
 ```
 
 #### Returns
@@ -28,4 +28,4 @@ Athena.systems.default.toolbar.disable();
 
 #### Defined in
 
-[server/systems/defaults/toolbar.ts:83](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/defaults/toolbar.ts#L83)
+[server/systems/defaults/toolbar.ts:83](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/defaults/toolbar.ts#L83)

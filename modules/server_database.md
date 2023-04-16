@@ -18,3 +18,9 @@ ___
 ### connection
 
 Renames and re-exports [default](server_database_connection.md#default)
+
+___
+
+### singleton
+
+Renames and re-exports [server/database/singleton](server_database_singleton.md)

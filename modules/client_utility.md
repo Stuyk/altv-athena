@@ -9,12 +9,6 @@ order: 0
 
 ## References
 
-### DirectionVector
-
-Re-exports [DirectionVector](../classes/client_utility_directionToVector_DirectionVector.md)
-
-___
-
 ### hashLookup
 
 Renames and re-exports [player](server_config.md#player)

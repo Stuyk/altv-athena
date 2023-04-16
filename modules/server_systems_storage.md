@@ -38,7 +38,7 @@ Returns false if a player binding is already present.
 
 #### Defined in
 
-[server/systems/storage.ts:154](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/storage.ts#L154)
+[server/systems/storage.ts:178](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L178)
 
 ___
 
@@ -64,7 +64,7 @@ Use the ID returned to fetch the data with the other storage functions.
 
 #### Defined in
 
-[server/systems/storage.ts:42](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/storage.ts#L42)
+[server/systems/storage.ts:42](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L42)
 
 ___
 
@@ -94,7 +94,7 @@ Fetches stored items from a storage array.
 
 #### Defined in
 
-[server/systems/storage.ts:72](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/storage.ts#L72)
+[server/systems/storage.ts:80](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L80)
 
 ___
 
@@ -118,7 +118,158 @@ Checks if a storage identifier is currently in use.
 
 #### Defined in
 
-[server/systems/storage.ts:108](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/storage.ts#L108)
+[server/systems/storage.ts:124](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L124)
+
+___
+
+### override
+
+::: tip Usage
+Athena.systems.storage.**override**(`functionName`, `callback`): `any`
+:::
+
+Used to override storage functions.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"create"`` |
+| `callback` | (`items`: `StoredItem`[]) => `Promise`<`string`\> |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/systems/storage.ts:215](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L215)
+
+::: tip Usage
+Athena.systems.storage.**override**(`functionName`, `callback`): `any`
+:::
+
+Used to override storage functions.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"set"`` |
+| `callback` | (`id`: `string`, `items`: `StoredItem`[]) => `Promise`<`boolean`\> |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/systems/storage.ts:216](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L216)
+
+::: tip Usage
+Athena.systems.storage.**override**(`functionName`, `callback`): `any`
+:::
+
+Used to override storage functions.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"get"`` |
+| `callback` | <CustomData\>(`id`: `string`) => `Promise`<[`player`](server_config.md#player)<`CustomData`\>[]\> |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/systems/storage.ts:217](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L217)
+
+::: tip Usage
+Athena.systems.storage.**override**(`functionName`, `callback`): `any`
+:::
+
+Used to override storage functions.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"setAsOpen"`` |
+| `callback` | (`id`: `string`) => `boolean` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/systems/storage.ts:218](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L218)
+
+::: tip Usage
+Athena.systems.storage.**override**(`functionName`, `callback`): `any`
+:::
+
+Used to override storage functions.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"isOpen"`` |
+| `callback` | (`id`: `string`) => `boolean` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/systems/storage.ts:219](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L219)
+
+::: tip Usage
+Athena.systems.storage.**override**(`functionName`, `callback`): `any`
+:::
+
+Used to override storage functions.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"removeAsOpen"`` |
+| `callback` | (`id`: `string`) => `boolean` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/systems/storage.ts:220](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L220)
+
+::: tip Usage
+Athena.systems.storage.**override**(`functionName`, `callback`): `any`
+:::
+
+Used to override storage functions.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `functionName` | ``"closeOnDisconnect"`` |
+| `callback` | (`player`: `Player`, `id`: `string`) => `boolean` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/systems/storage.ts:221](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L221)
 
 ___
 
@@ -144,7 +295,7 @@ Returns true if the value was successfully removed.
 
 #### Defined in
 
-[server/systems/storage.ts:121](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/storage.ts#L121)
+[server/systems/storage.ts:141](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L141)
 
 ___
 
@@ -169,7 +320,7 @@ Stores items into a database instance by providing the storage identifier, and t
 
 #### Defined in
 
-[server/systems/storage.ts:60](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/storage.ts#L60)
+[server/systems/storage.ts:64](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L64)
 
 ___
 
@@ -195,4 +346,4 @@ Returns true if the value was set to in-use, and didn't already exist.
 
 #### Defined in
 
-[server/systems/storage.ts:91](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/systems/storage.ts#L91)
+[server/systems/storage.ts:103](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/systems/storage.ts#L103)

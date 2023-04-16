@@ -33,7 +33,7 @@ Athena.document.vehicle.(`vehicle`, `newValue`, `oldValue`): `void`
 
 #### Defined in
 
-[server/document/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L8)
+[server/document/vehicle.ts:8](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L8)
 
 ## Functions
 
@@ -58,7 +58,7 @@ Used to bind a vehicle document to a vehicle entity
 
 #### Defined in
 
-[server/document/vehicle.ts:33](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L33)
+[server/document/vehicle.ts:41](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L41)
 
 ___
 
@@ -82,7 +82,7 @@ Check if a vehicle document already exists and a vehicle is attached to it.
 
 #### Defined in
 
-[server/document/vehicle.ts:203](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L203)
+[server/document/vehicle.ts:235](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L235)
 
 ___
 
@@ -112,7 +112,35 @@ Get a vehicle document attached to a vehicle
 
 #### Defined in
 
-[server/document/vehicle.ts:52](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L52)
+[server/document/vehicle.ts:60](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L60)
+
+___
+
+### getAllOnline
+
+::: tip Usage
+Athena.document.vehicle.**getAllOnline**<`T`\>(): { `document`: [`player`](server_config.md#player) & `T` ; `id`: `number`  }[]
+:::
+
+Return all available vehicles, and their associated alt:V vehicle ids.
+
+The vehicle can be fetched with alt.Vehicle.all.find(x => x.id === someResult.id);
+
+**`Export`**
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | {} |
+
+#### Returns
+
+{ `document`: [`player`](server_config.md#player) & `T` ; `id`: `number`  }[]
+
+#### Defined in
+
+[server/document/vehicle.ts:214](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L214)
 
 ___
 
@@ -144,7 +172,7 @@ Get a field directly for a vehicle document
 
 #### Defined in
 
-[server/document/vehicle.ts:69](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L69)
+[server/document/vehicle.ts:77](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L77)
 
 ___
 
@@ -175,7 +203,7 @@ Listen for individual vehicle document changes.
 
 #### Defined in
 
-[server/document/vehicle.ts:182](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L182)
+[server/document/vehicle.ts:191](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L191)
 
 ___
 
@@ -200,7 +228,7 @@ Used to override any vehicle document functionality
 
 #### Defined in
 
-[server/document/vehicle.ts:228](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L228)
+[server/document/vehicle.ts:261](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L261)
 
 ::: tip Usage
 Athena.document.vehicle.**override**(`functionName`, `callback`): `any`
@@ -221,7 +249,7 @@ Used to override any vehicle document functionality
 
 #### Defined in
 
-[server/document/vehicle.ts:229](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L229)
+[server/document/vehicle.ts:262](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L262)
 
 ::: tip Usage
 Athena.document.vehicle.**override**(`functionName`, `callback`): `any`
@@ -242,7 +270,7 @@ Used to override any vehicle document functionality
 
 #### Defined in
 
-[server/document/vehicle.ts:230](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L230)
+[server/document/vehicle.ts:263](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L263)
 
 ::: tip Usage
 Athena.document.vehicle.**override**(`functionName`, `callback`): `any`
@@ -263,7 +291,7 @@ Used to override any vehicle document functionality
 
 #### Defined in
 
-[server/document/vehicle.ts:231](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L231)
+[server/document/vehicle.ts:264](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L264)
 
 ::: tip Usage
 Athena.document.vehicle.**override**(`functionName`, `callback`): `any`
@@ -284,7 +312,7 @@ Used to override any vehicle document functionality
 
 #### Defined in
 
-[server/document/vehicle.ts:232](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L232)
+[server/document/vehicle.ts:265](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L265)
 
 ::: tip Usage
 Athena.document.vehicle.**override**(`functionName`, `callback`): `any`
@@ -305,7 +333,7 @@ Used to override any vehicle document functionality
 
 #### Defined in
 
-[server/document/vehicle.ts:233](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L233)
+[server/document/vehicle.ts:266](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L266)
 
 ::: tip Usage
 Athena.document.vehicle.**override**(`functionName`, `callback`): `any`
@@ -326,7 +354,7 @@ Used to override any vehicle document functionality
 
 #### Defined in
 
-[server/document/vehicle.ts:234](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L234)
+[server/document/vehicle.ts:267](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L267)
 
 ::: tip Usage
 Athena.document.vehicle.**override**(`functionName`, `callback`): `any`
@@ -347,7 +375,7 @@ Used to override any vehicle document functionality
 
 #### Defined in
 
-[server/document/vehicle.ts:235](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L235)
+[server/document/vehicle.ts:268](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L268)
 
 ___
 
@@ -381,7 +409,7 @@ Set vehicle data for a given field, automatically saves to database.
 
 #### Defined in
 
-[server/document/vehicle.ts:95](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L95)
+[server/document/vehicle.ts:103](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L103)
 
 ___
 
@@ -414,7 +442,7 @@ Automatically saves to database.
 
 #### Defined in
 
-[server/document/vehicle.ts:150](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L150)
+[server/document/vehicle.ts:152](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L152)
 
 ___
 
@@ -438,4 +466,4 @@ Used to unbind vehicle cache for an id once the vehicle is deleted
 
 #### Defined in
 
-[server/document/vehicle.ts:19](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/document/vehicle.ts#L19)
+[server/document/vehicle.ts:27](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/document/vehicle.ts#L27)

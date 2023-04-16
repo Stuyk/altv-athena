@@ -9,6 +9,32 @@ order: 0
 
 ## Functions
 
+### asOwnedVehicles
+
+::: tip Usage
+Athena.getters.vehicles.**asOwnedVehicles**<`T`\>(): `any`
+:::
+
+Get all owned vehicles.
+
+**`Export`**
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `OwnedVehicle` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[server/getters/vehicles.ts:28](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/vehicles.ts#L28)
+
+___
+
 ### inRange
 
 ::: tip Usage
@@ -30,4 +56,4 @@ Get all vehicles in range of a position
 
 #### Defined in
 
-[server/getters/vehicles.ts:11](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/server/getters/vehicles.ts#L11)
+[server/getters/vehicles.ts:12](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/getters/vehicles.ts#L12)

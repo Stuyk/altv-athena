@@ -7,35 +7,11 @@ order: 0
 # {{ $frontmatter.title }}
 
 
-## Variables
+## References
 
-### default
+### DirectionVector
 
-• **default**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `distance` | (`vector1`: `IVector3`, `vector2`: `IVector3`) => `number` |
-| `distance2d` | (`vector1`: `IVector2`, `vector2`: `IVector2`) => `number` |
-| `fwdX` | (`x`: `number`, `z`: `number`) => `number` |
-| `fwdY` | (`x`: `number`, `z`: `number`) => `number` |
-| `fwdZ` | (`x`: `number`) => `number` |
-| `getClosestEntity` | <T\>(`playerPosition`: `IVector3`, `rot`: `IVector3`, `entities`: { `pos`: `IVector3` ; `valid?`: `boolean`  }[], `dist`: `number`, `checkBackwards`: `boolean`) => `T` \| ``null`` |
-| `getClosestOfType` | <T\>(`pos`: `IVector3`, `elements`: readonly `T` & { `pos`: `IVector3`  }[], `lastDistance`: `number`) => `T` \| `undefined` |
-| `getClosestTypes` | <T\>(`pos`: `IVector3`, `elements`: `T`[], `maxDistance`: `number`, `mustHaveProperties`: `string`[], `positionName`: `string`) => `T`[] |
-| `getClosestVector` | (`pos`: `IVector3`, `arrayOfPositions`: `IVector3`[]) => `IVector3` |
-| `getClosestVectorByPos` | <T\>(`pos`: `IVector3`, `arrayOfPositions`: `T`[], `posVariable?`: `string`) => `T` |
-| `getForwardVector` | (`rot`: `IVector3`) => `alt.IVector3` |
-| `getVectorInFrontOfPlayer` | (`entity`: { `pos`: `IVector3` ; `rot`: `IVector3`  }, `distance`: `number`) => `alt.Vector3` |
-| `isBetweenVectors` | (`pos`: `IVector3`, `vector1`: `IVector3`, `vector2`: `IVector3`) => `boolean` |
-| `lerp` | (`a`: `number`, `b`: `number`, `t`: `number`) => `number` |
-| `vectorLerp` | (`start`: `IVector3`, `end`: `IVector3`, `l`: `number`, `clamp`: `boolean`) => `alt.IVector3` |
-
-#### Defined in
-
-[shared/utility/vector.ts:315](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L315)
+Re-exports [DirectionVector](../classes/shared_utility_directionVector_DirectionVector.md)
 
 ## Functions
 
@@ -60,7 +36,7 @@ Get the distance between two positions.
 
 #### Defined in
 
-[shared/utility/vector.ts:11](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L11)
+[shared/utility/vector.ts:12](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L12)
 
 ___
 
@@ -85,7 +61,7 @@ Get the distance between two positions. Excludes z
 
 #### Defined in
 
-[shared/utility/vector.ts:29](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L29)
+[shared/utility/vector.ts:30](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L30)
 
 ___
 
@@ -119,7 +95,7 @@ Get the closest server entity type. Server only.
 
 #### Defined in
 
-[shared/utility/vector.ts:208](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L208)
+[shared/utility/vector.ts:209](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L209)
 
 ___
 
@@ -151,7 +127,7 @@ Get the closest of a specific type of object with a `pos` property.
 
 #### Defined in
 
-[shared/utility/vector.ts:297](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L297)
+[shared/utility/vector.ts:298](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L298)
 
 ___
 
@@ -185,7 +161,7 @@ Gets an array of the closest types.
 
 #### Defined in
 
-[shared/utility/vector.ts:80](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L80)
+[shared/utility/vector.ts:81](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L81)
 
 ___
 
@@ -210,7 +186,7 @@ Get the closest vector given an array of positions.
 
 #### Defined in
 
-[shared/utility/vector.ts:45](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L45)
+[shared/utility/vector.ts:46](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L46)
 
 ___
 
@@ -242,7 +218,7 @@ Get the closest Vector by position.
 
 #### Defined in
 
-[shared/utility/vector.ts:63](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L63)
+[shared/utility/vector.ts:64](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L64)
 
 ___
 
@@ -267,7 +243,7 @@ Gets the direction the player is facing.
 
 #### Defined in
 
-[shared/utility/vector.ts:156](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L156)
+[shared/utility/vector.ts:157](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L157)
 
 ___
 
@@ -295,7 +271,7 @@ Return a position in front of a player based on distance.
 
 #### Defined in
 
-[shared/utility/vector.ts:172](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L172)
+[shared/utility/vector.ts:173](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L173)
 
 ___
 
@@ -321,7 +297,7 @@ Determine if a vector is between vectors.
 
 #### Defined in
 
-[shared/utility/vector.ts:193](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L193)
+[shared/utility/vector.ts:194](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L194)
 
 ___
 
@@ -345,7 +321,7 @@ AthenaShared.utility.vector.**lerp**(`a`, `b`, `t`): `number`
 
 #### Defined in
 
-[shared/utility/vector.ts:118](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L118)
+[shared/utility/vector.ts:119](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L119)
 
 ___
 
@@ -373,4 +349,4 @@ Returns a new position.
 
 #### Defined in
 
-[shared/utility/vector.ts:133](https://github.com/Stuyk/altv-athena/blob/b149a44/src/core/shared/utility/vector.ts#L133)
+[shared/utility/vector.ts:134](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/shared/utility/vector.ts#L134)
