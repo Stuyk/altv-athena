@@ -105,7 +105,7 @@ const Internal = {
  *
  * #### Example
  * ```ts
- * Athena.systems.defaults.ammo.disable();
+ * Athena.systems.defaults.inventorySync.disable();
  * ```
  *
  *
