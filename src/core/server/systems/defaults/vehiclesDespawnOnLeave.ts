@@ -6,7 +6,7 @@ import { Character } from '@AthenaShared/interfaces/character';
 /**
  * THIS IS A DEFAULT SYSTEM.
  * IF YOU WANT TO DISABLE IT, MAKE A PLUGIN AND DISABLE IT THROUGH:
- * `Athena.systems.default.x.disable()`
+ * `Athena.systems.defaults.x.disable()`
  *
  * DO NOT APPEND ANY ADDITIONAL DATA TO THIS SYSTEM.
  * COPY THE CODE AND REMAKE IT AS A PLUGIN IF YOU WANT TO MAKE CHANGES.
@@ -64,7 +64,7 @@ const Internal = {
  *
  * #### Example
  * ```ts
- * Athena.systems.default.vehiclesDespawnOnLeave.disable();
+ * Athena.systems.defaults.vehiclesDespawnOnLeave.disable();
  * ```
  *
  *
