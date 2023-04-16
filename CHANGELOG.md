@@ -79,11 +79,14 @@ Dynamic Doors
 - Dynamic doors can teleport to any dimension, or position.
 - Dynamic doors also have onEnter, or beforeEnter callbacks for additional door functionality.
 - Includes better handling of ytyp, and ipl loading; no more falling through map.
+- Utilizes Session Storage
 
 Drop Tables
 - Create a drop table and pull random loot from it.
 - Athena.systems.dropTable.get
 
+Documents (Account, Character, Vehicle)
+- Utilizes Session Storage
 
 ```
 
