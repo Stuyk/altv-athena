@@ -27,9 +27,9 @@ order: 0
 
 #### Defined in
 
-[server/controllers/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/controllers/shared.ts#L1)
+[server/controllers/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/controllers/shared.ts#L1)
 
-[server/controllers/shared.ts:4](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/controllers/shared.ts#L4)
+[server/controllers/shared.ts:4](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/controllers/shared.ts#L4)
 
 ___
 
@@ -39,9 +39,9 @@ ___
 
 #### Defined in
 
-[server/controllers/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/controllers/shared.ts#L1)
+[server/controllers/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/controllers/shared.ts#L1)
 
-[server/controllers/shared.ts:2](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/controllers/shared.ts#L2)
+[server/controllers/shared.ts:2](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/controllers/shared.ts#L2)
 
 ___
 
@@ -51,9 +51,9 @@ ___
 
 #### Defined in
 
-[server/controllers/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/controllers/shared.ts#L1)
+[server/controllers/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/controllers/shared.ts#L1)
 
-[server/controllers/shared.ts:3](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/controllers/shared.ts#L3)
+[server/controllers/shared.ts:3](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/controllers/shared.ts#L3)
 
 ___
 
@@ -63,9 +63,9 @@ ___
 
 #### Defined in
 
-[server/controllers/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/controllers/shared.ts#L1)
+[server/controllers/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/controllers/shared.ts#L1)
 
-[server/controllers/shared.ts:5](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/controllers/shared.ts#L5)
+[server/controllers/shared.ts:5](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/controllers/shared.ts#L5)
 
 ___
 
@@ -75,6 +75,6 @@ ___
 
 #### Defined in
 
-[server/controllers/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/controllers/shared.ts#L1)
+[server/controllers/shared.ts:1](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/controllers/shared.ts#L1)
 
-[server/controllers/shared.ts:6](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/controllers/shared.ts#L6)
+[server/controllers/shared.ts:6](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/controllers/shared.ts#L6)

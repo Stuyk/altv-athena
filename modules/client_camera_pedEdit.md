@@ -33,7 +33,7 @@ Calculates a camera offset.
 
 #### Defined in
 
-[client/camera/pedEdit.ts:86](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L86)
+[client/camera/pedEdit.ts:86](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L86)
 
 ___
 
@@ -61,7 +61,7 @@ Creates a Pedestrian Edit Camera
 
 #### Defined in
 
-[client/camera/pedEdit.ts:26](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L26)
+[client/camera/pedEdit.ts:26](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L26)
 
 ___
 
@@ -81,7 +81,7 @@ Destroy the Ped Edit Camera
 
 #### Defined in
 
-[client/camera/pedEdit.ts:135](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L135)
+[client/camera/pedEdit.ts:135](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L135)
 
 ___
 
@@ -107,7 +107,7 @@ Disable All Controls?
 
 #### Defined in
 
-[client/camera/pedEdit.ts:171](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L171)
+[client/camera/pedEdit.ts:171](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L171)
 
 ___
 
@@ -127,7 +127,7 @@ Check if a PedEditCamera exists.
 
 #### Defined in
 
-[client/camera/pedEdit.ts:122](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L122)
+[client/camera/pedEdit.ts:122](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L122)
 
 ___
 
@@ -143,7 +143,7 @@ AthenaClient.camera.pedEdit.**handleControls**(): `any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:264](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L264)
+[client/camera/pedEdit.ts:264](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L264)
 
 ___
 
@@ -166,7 +166,7 @@ AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:424](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L424)
+[client/camera/pedEdit.ts:424](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L424)
 
 ::: tip Usage
 AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
@@ -185,7 +185,7 @@ AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:425](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L425)
+[client/camera/pedEdit.ts:425](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L425)
 
 ::: tip Usage
 AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
@@ -204,7 +204,7 @@ AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:426](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L426)
+[client/camera/pedEdit.ts:426](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L426)
 
 ::: tip Usage
 AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
@@ -223,7 +223,7 @@ AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:427](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L427)
+[client/camera/pedEdit.ts:427](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L427)
 
 ::: tip Usage
 AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
@@ -242,7 +242,7 @@ AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:428](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L428)
+[client/camera/pedEdit.ts:428](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L428)
 
 ::: tip Usage
 AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
@@ -261,7 +261,7 @@ AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:429](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L429)
+[client/camera/pedEdit.ts:429](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L429)
 
 ::: tip Usage
 AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
@@ -280,7 +280,7 @@ AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:430](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L430)
+[client/camera/pedEdit.ts:430](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L430)
 
 ::: tip Usage
 AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
@@ -299,7 +299,7 @@ AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:431](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L431)
+[client/camera/pedEdit.ts:431](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L431)
 
 ::: tip Usage
 AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
@@ -318,7 +318,7 @@ AthenaClient.camera.pedEdit.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:432](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L432)
+[client/camera/pedEdit.ts:432](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L432)
 
 ___
 
@@ -334,7 +334,7 @@ AthenaClient.camera.pedEdit.**runQueue**(): `any`
 
 #### Defined in
 
-[client/camera/pedEdit.ts:201](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L201)
+[client/camera/pedEdit.ts:201](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L201)
 
 ___
 
@@ -362,7 +362,7 @@ Set the Camera Field of View
 
 #### Defined in
 
-[client/camera/pedEdit.ts:185](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L185)
+[client/camera/pedEdit.ts:185](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L185)
 
 ___
 
@@ -388,7 +388,7 @@ Sets up the camera with the original position and a new offset.
 
 #### Defined in
 
-[client/camera/pedEdit.ts:105](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L105)
+[client/camera/pedEdit.ts:105](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L105)
 
 ___
 
@@ -414,4 +414,4 @@ Update the ScriptID for who we should use to rotate.
 
 #### Defined in
 
-[client/camera/pedEdit.ts:256](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/client/camera/pedEdit.ts#L256)
+[client/camera/pedEdit.ts:256](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/client/camera/pedEdit.ts#L256)

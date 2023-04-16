@@ -35,7 +35,7 @@ Return a list of account permissions.
 
 #### Defined in
 
-[server/player/get.ts:144](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L144)
+[server/player/get.ts:144](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L144)
 
 ___
 
@@ -61,7 +61,7 @@ Get a characters current bank balance.
 
 #### Defined in
 
-[server/player/get.ts:36](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L36)
+[server/player/get.ts:36](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L36)
 
 ___
 
@@ -87,7 +87,7 @@ Get a characters current cash balance.
 
 #### Defined in
 
-[server/player/get.ts:24](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L24)
+[server/player/get.ts:24](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L24)
 
 ___
 
@@ -117,7 +117,7 @@ Returns a readable array, but cannot be modified.
 
 #### Defined in
 
-[server/player/get.ts:92](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L92)
+[server/player/get.ts:92](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L92)
 
 ___
 
@@ -143,7 +143,7 @@ Return a list of groups, with their dedicated group permissions for this charact
 
 #### Defined in
 
-[server/player/get.ts:120](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L120)
+[server/player/get.ts:120](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L120)
 
 ___
 
@@ -171,7 +171,7 @@ Returns a readable array, but cannot be modified.
 
 #### Defined in
 
-[server/player/get.ts:62](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L62)
+[server/player/get.ts:62](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L62)
 
 ___
 
@@ -197,7 +197,7 @@ Check if a character is dead.
 
 #### Defined in
 
-[server/player/get.ts:48](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L48)
+[server/player/get.ts:48](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L48)
 
 ___
 
@@ -225,7 +225,7 @@ Returns `undefined` if not on a job.
 
 #### Defined in
 
-[server/player/get.ts:158](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L158)
+[server/player/get.ts:158](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L158)
 
 ___
 
@@ -251,7 +251,7 @@ Get a characters full character name.
 
 #### Defined in
 
-[server/player/get.ts:12](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L12)
+[server/player/get.ts:12](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L12)
 
 ___
 
@@ -277,7 +277,7 @@ Return a list of character permissions.
 
 #### Defined in
 
-[server/player/get.ts:132](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L132)
+[server/player/get.ts:132](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L132)
 
 ___
 
@@ -305,7 +305,7 @@ Returns a readable array, but cannot be modified.
 
 #### Defined in
 
-[server/player/get.ts:76](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L76)
+[server/player/get.ts:76](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L76)
 
 ___
 
@@ -335,4 +335,4 @@ Returns a readable array, but cannot be modified.
 
 #### Defined in
 
-[server/player/get.ts:108](https://github.com/Stuyk/altv-athena/blob/a762ea7/src/core/server/player/get.ts#L108)
+[server/player/get.ts:108](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/server/player/get.ts#L108)
