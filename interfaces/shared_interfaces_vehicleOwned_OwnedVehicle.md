@@ -36,7 +36,7 @@ Also used to save to the database.
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:16](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L16)
+[shared/interfaces/vehicleBase.ts:16](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L16)
 
 ___
 
@@ -48,7 +48,7 @@ Damage to store / apply on a vehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:88](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleOwned.ts#L88)
+[shared/interfaces/vehicleOwned.ts:88](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleOwned.ts#L88)
 
 ___
 
@@ -64,7 +64,7 @@ Used to control what dimension this vehicle should spawn in / be found in
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:61](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L61)
+[shared/interfaces/vehicleBase.ts:61](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L61)
 
 ___
 
@@ -80,7 +80,7 @@ Flag this value to prevent this vehicle from ever being despawned
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:110](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L110)
+[shared/interfaces/vehicleBase.ts:110](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L110)
 
 ___
 
@@ -92,7 +92,7 @@ Damage to store / apply on a vehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:96](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleOwned.ts#L96)
+[shared/interfaces/vehicleOwned.ts:96](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleOwned.ts#L96)
 
 ___
 
@@ -108,7 +108,7 @@ The fuel level for this vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:93](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L93)
+[shared/interfaces/vehicleBase.ts:93](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L93)
 
 ___
 
@@ -125,7 +125,7 @@ If this value is set it means it will not be spawned when a player joins.
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:102](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L102)
+[shared/interfaces/vehicleBase.ts:102](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L102)
 
 ___
 
@@ -149,7 +149,7 @@ BaseVehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:126](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L126)
+[shared/interfaces/vehicleBase.ts:126](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L126)
 
 ___
 
@@ -165,7 +165,7 @@ The vehicle id for lookups.
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:23](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L23)
+[shared/interfaces/vehicleBase.ts:23](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L23)
 
 ___
 
@@ -181,7 +181,7 @@ A list of character ids that have access to this vehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:77](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L77)
+[shared/interfaces/vehicleBase.ts:77](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L77)
 
 ___
 
@@ -197,7 +197,7 @@ The last known timestamp when this vehicle was used.
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:118](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L118)
+[shared/interfaces/vehicleBase.ts:118](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L118)
 
 ___
 
@@ -213,7 +213,7 @@ The model of this vehicle.
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:40](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L40)
+[shared/interfaces/vehicleBase.ts:40](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L40)
 
 ___
 
@@ -231,7 +231,7 @@ Obviously permissions and keys should be used if no owner is set.
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:33](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L33)
+[shared/interfaces/vehicleBase.ts:33](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L33)
 
 ___
 
@@ -247,7 +247,7 @@ A list of character permissions that have access to this vehicle
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:85](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L85)
+[shared/interfaces/vehicleBase.ts:85](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L85)
 
 ___
 
@@ -264,7 +264,7 @@ Usually automatically generated.
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:69](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L69)
+[shared/interfaces/vehicleBase.ts:69](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L69)
 
 ___
 
@@ -280,7 +280,7 @@ The last position where this vehicle was last left.
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:47](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L47)
+[shared/interfaces/vehicleBase.ts:47](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L47)
 
 ___
 
@@ -296,7 +296,7 @@ The last rotation where this vehicle was last left.
 
 #### Defined in
 
-[shared/interfaces/vehicleBase.ts:54](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleBase.ts#L54)
+[shared/interfaces/vehicleBase.ts:54](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleBase.ts#L54)
 
 ___
 
@@ -308,7 +308,7 @@ Data that matches the alt.Vehicle API setters
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:80](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleOwned.ts#L80)
+[shared/interfaces/vehicleOwned.ts:80](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleOwned.ts#L80)
 
 ___
 
@@ -320,4 +320,4 @@ Vehicle Tuning Interface
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:72](https://github.com/Stuyk/altv-athena/blob/7805c27/src/core/shared/interfaces/vehicleOwned.ts#L72)
+[shared/interfaces/vehicleOwned.ts:72](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleOwned.ts#L72)
