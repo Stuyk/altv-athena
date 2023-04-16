@@ -11,6 +11,22 @@ order: 0
 
 ## Properties
 
+### callbackOnClose
+
+• `Optional` **callbackOnClose**: `Function`
+
+Function to call when the menu is closed through other means.
+
+**`Memberof`**
+
+MenuInfo
+
+#### Defined in
+
+[client/rmlui/menu/menuInterfaces.ts:168](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L168)
+
+___
+
 ### header
 
 • **header**: `Object`
@@ -24,16 +40,16 @@ order: 0
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:126](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/client/rmlui/menu/menuInterfaces.ts#L126)
+[client/rmlui/menu/menuInterfaces.ts:138](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L138)
 
 ___
 
 ### options
 
-• **options**: ([`Selection`](client_rmlui_menu_menuInterfaces_Selection.md) \| [`Range`](client_rmlui_menu_menuInterfaces_Range.md) \| [`Toggle`](client_rmlui_menu_menuInterfaces_Toggle.md) \| [`Invoke`](client_rmlui_menu_menuInterfaces_Invoke.md))[]
+• **options**: ([`Selection`](client_rmlui_menu_menuInterfaces_Selection.md) \| [`Range`](client_rmlui_menu_menuInterfaces_Range.md) \| [`Toggle`](client_rmlui_menu_menuInterfaces_Toggle.md) \| [`Invoke`](client_rmlui_menu_menuInterfaces_Invoke.md) \| [`Input`](client_rmlui_menu_menuInterfaces_Input.md))[]
 
 An array of available menu types to invoke.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:148](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/client/rmlui/menu/menuInterfaces.ts#L148)
+[client/rmlui/menu/menuInterfaces.ts:160](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L160)

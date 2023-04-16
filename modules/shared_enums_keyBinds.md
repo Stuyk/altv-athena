@@ -32,4 +32,4 @@ Use this to overwrite the default values.
 
 #### Defined in
 
-[shared/enums/keyBinds.ts:39](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/enums/keyBinds.ts#L39)
+[shared/enums/keyBinds.ts:39](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/enums/keyBinds.ts#L39)

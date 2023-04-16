@@ -17,7 +17,7 @@ IAttachable
 
 ## Hierarchy
 
-- [`default`](shared_interfaces_iAttachable_default.md)
+- [`IAttachable`](shared_interfaces_iAttachable_IAttachable.md)
 
   ↳ **`JobAttachable`**
 
@@ -31,7 +31,7 @@ Attach the object when the objective is loaded?
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:75](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/iAttachable.ts#L75)
+[shared/interfaces/iAttachable.ts:77](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/interfaces/iAttachable.ts#L77)
 
 ___
 
@@ -49,11 +49,11 @@ Use the PedBone enum provided in Athena for correct value
 
 #### Inherited from
 
-[default](shared_interfaces_iAttachable_default.md).[bone](shared_interfaces_iAttachable_default.md#bone)
+[IAttachable](shared_interfaces_iAttachable_IAttachable.md).[bone](shared_interfaces_iAttachable_IAttachable.md#bone)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:51](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/iAttachable.ts#L51)
+[shared/interfaces/iAttachable.ts:51](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/interfaces/iAttachable.ts#L51)
 
 ___
 
@@ -66,7 +66,7 @@ Set this to -1 for infinite.
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:68](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/iAttachable.ts#L68)
+[shared/interfaces/iAttachable.ts:70](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/interfaces/iAttachable.ts#L70)
 
 ___
 
@@ -78,11 +78,11 @@ Do not define this. Leave it alone.
 
 #### Inherited from
 
-[default](shared_interfaces_iAttachable_default.md).[entityID](shared_interfaces_iAttachable_default.md#entityID)
+[IAttachable](shared_interfaces_iAttachable_IAttachable.md).[entityID](shared_interfaces_iAttachable_IAttachable.md#entityID)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:58](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/iAttachable.ts#L58)
+[shared/interfaces/iAttachable.ts:58](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/interfaces/iAttachable.ts#L58)
 
 ___
 
@@ -94,11 +94,11 @@ The model or object of the attachable.
 
 #### Inherited from
 
-[default](shared_interfaces_iAttachable_default.md).[model](shared_interfaces_iAttachable_default.md#model)
+[IAttachable](shared_interfaces_iAttachable_IAttachable.md).[model](shared_interfaces_iAttachable_IAttachable.md#model)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:23](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/iAttachable.ts#L23)
+[shared/interfaces/iAttachable.ts:23](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/interfaces/iAttachable.ts#L23)
 
 ___
 
@@ -110,11 +110,11 @@ The position where the object should be attached.
 
 #### Inherited from
 
-[default](shared_interfaces_iAttachable_default.md).[pos](shared_interfaces_iAttachable_default.md#pos)
+[IAttachable](shared_interfaces_iAttachable_IAttachable.md).[pos](shared_interfaces_iAttachable_IAttachable.md#pos)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:30](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/iAttachable.ts#L30)
+[shared/interfaces/iAttachable.ts:30](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/interfaces/iAttachable.ts#L30)
 
 ___
 
@@ -126,11 +126,11 @@ The rotation where the object should be attached.
 
 #### Inherited from
 
-[default](shared_interfaces_iAttachable_default.md).[rot](shared_interfaces_iAttachable_default.md#rot)
+[IAttachable](shared_interfaces_iAttachable_IAttachable.md).[rot](shared_interfaces_iAttachable_IAttachable.md#rot)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:37](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/iAttachable.ts#L37)
+[shared/interfaces/iAttachable.ts:37](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/interfaces/iAttachable.ts#L37)
 
 ___
 
@@ -142,8 +142,8 @@ The unique identifier for this attachable.
 
 #### Inherited from
 
-[default](shared_interfaces_iAttachable_default.md).[uid](shared_interfaces_iAttachable_default.md#uid)
+[IAttachable](shared_interfaces_iAttachable_IAttachable.md).[uid](shared_interfaces_iAttachable_IAttachable.md#uid)
 
 #### Defined in
 
-[shared/interfaces/iAttachable.ts:16](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/iAttachable.ts#L16)
+[shared/interfaces/iAttachable.ts:16](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/interfaces/iAttachable.ts#L16)

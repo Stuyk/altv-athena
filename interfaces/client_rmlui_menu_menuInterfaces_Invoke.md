@@ -11,7 +11,7 @@ order: 0
 
 ## Hierarchy
 
-- [`MenuOptionBase`](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md)<() => `void`\>
+- [`MenuOptionBase`](client_rmlui_menu_menuInterfaces_Internal_MenuOptionBase.md)<(`result`: `string`) => `void`\>
 
   ↳ **`Invoke`**
 
@@ -19,7 +19,7 @@ order: 0
 
 ### callback
 
-• **callback**: `Function` \| () => `void`
+• **callback**: `Function` \| (...`args`: `any`[]) => `void` \| (`result`: `string`) => `void`
 
 A callback when this menu option is changed.
 
@@ -29,7 +29,7 @@ A callback when this menu option is changed.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
+[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
 
 ___
 
@@ -45,7 +45,7 @@ A description of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
+[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
 
 ___
 
@@ -61,7 +61,21 @@ Only for Range & Selection Types
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
+[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
+
+___
+
+### placeholder
+
+• **placeholder**: `string`
+
+**`Memberof`**
+
+Invoke
+
+#### Defined in
+
+[client/rmlui/menu/menuInterfaces.ts:134](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L134)
 
 ___
 
@@ -77,14 +91,14 @@ The title of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
+[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
 
 ___
 
 ### type
 
-• **type**: ``"Invoke"``
+• **type**: ``"Input"``
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:122](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/client/rmlui/menu/menuInterfaces.ts#L122)
+[client/rmlui/menu/menuInterfaces.ts:126](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L126)

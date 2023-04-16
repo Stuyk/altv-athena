@@ -13,6 +13,7 @@ order: 0
 
 ## Interfaces
 
+- [Input](../interfaces/client_rmlui_menu_menuInterfaces_Input.md)
 - [Invoke](../interfaces/client_rmlui_menu_menuInterfaces_Invoke.md)
 - [MenuInfo](../interfaces/client_rmlui_menu_menuInterfaces_MenuInfo.md)
 - [Range](../interfaces/client_rmlui_menu_menuInterfaces_Range.md)

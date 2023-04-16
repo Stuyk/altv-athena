@@ -9,5 +9,11 @@ order: 0
 
 ## Interfaces
 
+- [IAttachable](../interfaces/shared_interfaces_iAttachable_IAttachable.md)
 - [JobAttachable](../interfaces/shared_interfaces_iAttachable_JobAttachable.md)
-- [default](../interfaces/shared_interfaces_iAttachable_default.md)
+
+## References
+
+### default
+
+Renames and re-exports [IAttachable](../interfaces/shared_interfaces_iAttachable_IAttachable.md)

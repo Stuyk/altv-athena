@@ -25,19 +25,21 @@ order: 0
 
   ↳ [`Range`](client_rmlui_menu_menuInterfaces_Range.md)
 
+  ↳ [`Input`](client_rmlui_menu_menuInterfaces_Input.md)
+
   ↳ [`Invoke`](client_rmlui_menu_menuInterfaces_Invoke.md)
 
 ## Properties
 
 ### callback
 
-• **callback**: `Function` \| `T`
+• **callback**: `Function` \| `T` \| (...`args`: `any`[]) => `void`
 
 A callback when this menu option is changed.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
+[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
 
 ___
 
@@ -49,7 +51,7 @@ A description of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
+[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
 
 ___
 
@@ -61,7 +63,7 @@ Only for Range & Selection Types
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
+[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
 
 ___
 
@@ -73,4 +75,4 @@ The title of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
+[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
