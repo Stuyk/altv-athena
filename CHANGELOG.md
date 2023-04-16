@@ -63,6 +63,7 @@ Bugs
 - Fix vehicles not spawning with dimension
 - Fix JSON Parse error for all documents, when setting bulk with previous data being undefined
 ---- Error: Unexpected token u in JSON at position 0
+- Fix Clothing Crafting Removing Wrong Items
 
 ColShapes
 - Added onEnterCallback to the interface. Triggers when player enters the ColShape.
