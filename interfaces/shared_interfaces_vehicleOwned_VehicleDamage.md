@@ -29,7 +29,7 @@ What bumpers are damaged.
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:32](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleOwned.ts#L32)
+[shared/interfaces/vehicleOwned.ts:32](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/vehicleOwned.ts#L32)
 
 ___
 
@@ -41,7 +41,7 @@ What lights are damaged.
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:56](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleOwned.ts#L56)
+[shared/interfaces/vehicleOwned.ts:56](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/vehicleOwned.ts#L56)
 
 ___
 
@@ -57,7 +57,7 @@ What parts are damaged.
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:24](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleOwned.ts#L24)
+[shared/interfaces/vehicleOwned.ts:24](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/vehicleOwned.ts#L24)
 
 ___
 
@@ -69,7 +69,7 @@ What wheels are damaged.
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:48](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleOwned.ts#L48)
+[shared/interfaces/vehicleOwned.ts:48](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/vehicleOwned.ts#L48)
 
 ___
 
@@ -85,4 +85,4 @@ What windows are damaged.
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:40](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleOwned.ts#L40)
+[shared/interfaces/vehicleOwned.ts:40](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/vehicleOwned.ts#L40)

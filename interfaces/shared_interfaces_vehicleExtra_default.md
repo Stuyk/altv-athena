@@ -23,7 +23,7 @@ VehicleExtra
 
 #### Defined in
 
-[shared/interfaces/vehicleExtra.ts:8](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleExtra.ts#L8)
+[shared/interfaces/vehicleExtra.ts:8](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/vehicleExtra.ts#L8)
 
 ___
 
@@ -33,4 +33,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleExtra.ts:9](https://github.com/Stuyk/altv-athena/blob/85b158f/src/core/shared/interfaces/vehicleExtra.ts#L9)
+[shared/interfaces/vehicleExtra.ts:9](https://github.com/Stuyk/altv-athena/blob/27a8c87/src/core/shared/interfaces/vehicleExtra.ts#L9)
