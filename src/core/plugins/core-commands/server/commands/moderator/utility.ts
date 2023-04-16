@@ -1,7 +1,7 @@
 import alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'joaat',
     '/joaat [string]',
     ['admin'],

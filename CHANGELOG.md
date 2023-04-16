@@ -89,6 +89,10 @@ Drop Tables
 Documents (Account, Character, Vehicle)
 - Utilizes Session Storage
 
+Athena.commands
+- Just a wrapper of Athena.system.messenger.commands
+- Gives it a shorter pathway, for the sake of ease of use
+
 ```
 
 ## 5.0.0

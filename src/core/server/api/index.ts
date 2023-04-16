@@ -1,3 +1,4 @@
+export * as commands from '@AthenaServer/systems/messenger/commands';
 export * as config from '@AthenaServer/config/index';
 export * as controllers from '@AthenaServer/controllers/index';
 export * as data from './consts/constData';

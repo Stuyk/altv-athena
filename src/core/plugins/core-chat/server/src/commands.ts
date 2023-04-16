@@ -2,13 +2,13 @@ import alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import { CHAT_CONFIG } from '@AthenaPlugins/core-chat/shared/config';
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'do',
     '/do [...message] - Describe an action you are performing.',
     [],
     (player: alt.Player, ...args: string[]) => {
         if (args.length <= 0) {
-            const commandInfo = Athena.systems.messenger.commands.get('do');
+            const commandInfo = Athena.commands.get('do');
             Athena.player.emit.message(player, commandInfo.description);
             return;
         }
@@ -27,87 +27,72 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
-    'low',
-    '/low - Speak in a lower radius.',
-    [],
-    (player: alt.Player, ...args: string[]) => {
-        if (args.length <= 0) {
-            const commandInfo = Athena.systems.messenger.commands.get('low');
-            Athena.player.emit.message(player, commandInfo.description);
-            return;
-        }
+Athena.commands.register('low', '/low - Speak in a lower radius.', [], (player: alt.Player, ...args: string[]) => {
+    if (args.length <= 0) {
+        const commandInfo = Athena.commands.get('low');
+        Athena.player.emit.message(player, commandInfo.description);
+        return;
+    }
 
-        const fullMessage = args.join(' ');
-        const closestPlayers = Athena.getters.players.inRange(player.pos, CHAT_CONFIG.settings.commands.lowDistance);
-        const data = Athena.document.character.get(player);
-        if (typeof data === 'undefined') {
-            return;
-        }
+    const fullMessage = args.join(' ');
+    const closestPlayers = Athena.getters.players.inRange(player.pos, CHAT_CONFIG.settings.commands.lowDistance);
+    const data = Athena.document.character.get(player);
+    if (typeof data === 'undefined') {
+        return;
+    }
 
-        Athena.systems.messenger.messaging.sendToPlayers(
-            closestPlayers,
-            `${CHAT_CONFIG.settings.commands.lowColour}${data.name} ${fullMessage}`,
-        );
-    },
-);
+    Athena.systems.messenger.messaging.sendToPlayers(
+        closestPlayers,
+        `${CHAT_CONFIG.settings.commands.lowColour}${data.name} ${fullMessage}`,
+    );
+});
 
-Athena.systems.messenger.commands.register(
-    'me',
-    '/me - Describe what you are doing.',
-    [],
-    (player: alt.Player, ...args: string[]) => {
-        if (args.length <= 0) {
-            const commandInfo = Athena.systems.messenger.commands.get('me');
-            Athena.player.emit.message(player, commandInfo.description);
-            return;
-        }
+Athena.commands.register('me', '/me - Describe what you are doing.', [], (player: alt.Player, ...args: string[]) => {
+    if (args.length <= 0) {
+        const commandInfo = Athena.commands.get('me');
+        Athena.player.emit.message(player, commandInfo.description);
+        return;
+    }
 
-        const fullMessage = args.join(' ');
-        const closestPlayers = Athena.getters.players.inRange(player.pos, CHAT_CONFIG.settings.commands.meDistance);
-        const data = Athena.document.character.get(player);
-        if (typeof data === 'undefined') {
-            return;
-        }
+    const fullMessage = args.join(' ');
+    const closestPlayers = Athena.getters.players.inRange(player.pos, CHAT_CONFIG.settings.commands.meDistance);
+    const data = Athena.document.character.get(player);
+    if (typeof data === 'undefined') {
+        return;
+    }
 
-        Athena.systems.messenger.messaging.sendToPlayers(
-            closestPlayers,
-            `${CHAT_CONFIG.settings.commands.roleplayColour}${data.name} ${fullMessage}`,
-        );
-    },
-);
+    Athena.systems.messenger.messaging.sendToPlayers(
+        closestPlayers,
+        `${CHAT_CONFIG.settings.commands.roleplayColour}${data.name} ${fullMessage}`,
+    );
+});
 
-Athena.systems.messenger.commands.register(
-    'ooc',
-    '/ooc - Speak out of character.',
-    [],
-    (player: alt.Player, ...args: string[]) => {
-        if (args.length <= 0) {
-            const commandInfo = Athena.systems.messenger.commands.get('ooc');
-            Athena.player.emit.message(player, commandInfo.description);
-            return;
-        }
+Athena.commands.register('ooc', '/ooc - Speak out of character.', [], (player: alt.Player, ...args: string[]) => {
+    if (args.length <= 0) {
+        const commandInfo = Athena.commands.get('ooc');
+        Athena.player.emit.message(player, commandInfo.description);
+        return;
+    }
 
-        const fullMessage = args.join(' ');
-        const closestPlayers = Athena.getters.players.inRange(player.pos, CHAT_CONFIG.settings.commands.oocDistance);
-        const data = Athena.document.character.get(player);
-        if (typeof data === 'undefined') {
-            return;
-        }
+    const fullMessage = args.join(' ');
+    const closestPlayers = Athena.getters.players.inRange(player.pos, CHAT_CONFIG.settings.commands.oocDistance);
+    const data = Athena.document.character.get(player);
+    if (typeof data === 'undefined') {
+        return;
+    }
 
-        Athena.systems.messenger.messaging.sendToPlayers(
-            closestPlayers,
-            `${CHAT_CONFIG.settings.commands.oocColour}${data.name}: ((${fullMessage}))`,
-        );
-    },
-);
+    Athena.systems.messenger.messaging.sendToPlayers(
+        closestPlayers,
+        `${CHAT_CONFIG.settings.commands.oocColour}${data.name}: ((${fullMessage}))`,
+    );
+});
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'whisper',
     '/whisper [id] [...message] - Whisper to another player.',
     [],
     (player: alt.Player, id: string, ...args: string[]) => {
-        const commandInfo = Athena.systems.messenger.commands.get('whisper');
+        const commandInfo = Athena.commands.get('whisper');
         if (args.length <= 0) {
             Athena.player.emit.message(player, commandInfo.description);
             return;
@@ -148,12 +133,12 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'test123',
     '/test123 [id] [...message] - Whisper to another player.',
     [],
     (player: alt.Player, someString: string, someNumber: number) => {
-        const commands = Athena.systems.messenger.commands.getCommands(player);
+        const commands = Athena.commands.getCommands(player);
 
         console.log(commands);
     },

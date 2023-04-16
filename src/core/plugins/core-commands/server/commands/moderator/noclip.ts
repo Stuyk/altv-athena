@@ -5,7 +5,7 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
 
-Athena.systems.messenger.commands.register('noclip', '/noclip', ['admin'], (player: alt.Player) => {
+Athena.commands.register('noclip', '/noclip', ['admin'], (player: alt.Player) => {
     const isNoClipping: boolean | null = player.getSyncedMeta('NoClipping') as boolean;
     const data = Athena.document.character.get(player);
     if (typeof data === 'undefined') {

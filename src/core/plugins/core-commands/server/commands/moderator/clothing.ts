@@ -3,7 +3,7 @@ import * as Athena from '@AthenaServer/api';
 import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
 import { clothingComponentToIconName, clothingItemToIconName } from '@AthenaShared/utility/clothing';
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'setclothing',
     '/setclothing [id] [drawable] [texture] [?create]',
     ['admin'],
@@ -56,7 +56,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'getclothing',
     '/getclothing [id]',
     ['admin'],
@@ -88,7 +88,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'setprop',
     '/setprop [id] [drawable] [texture] [?create]',
     ['admin'],
@@ -141,35 +141,30 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
-    'getprop',
-    '/getprop [id]',
-    ['admin'],
-    (player: alt.Player, id: string | undefined) => {
-        if (typeof id === 'undefined') {
-            Athena.player.emit.message(player, `Must specify an id`);
-            return;
-        }
+Athena.commands.register('getprop', '/getprop [id]', ['admin'], (player: alt.Player, id: string | undefined) => {
+    if (typeof id === 'undefined') {
+        Athena.player.emit.message(player, `Must specify an id`);
+        return;
+    }
 
-        const idReal = parseInt(id);
+    const idReal = parseInt(id);
 
-        if (isNaN(idReal)) {
-            Athena.player.emit.message(player, `One of the specified parameters was not a number.`);
-            return;
-        }
+    if (isNaN(idReal)) {
+        Athena.player.emit.message(player, `One of the specified parameters was not a number.`);
+        return;
+    }
 
-        const dlcInfo = player.getDlcProp(idReal);
-        const componentInfo: ClothingComponent = {
-            id: idReal,
-            ...dlcInfo,
-            isProp: true,
-        };
+    const dlcInfo = player.getDlcProp(idReal);
+    const componentInfo: ClothingComponent = {
+        id: idReal,
+        ...dlcInfo,
+        isProp: true,
+    };
 
-        const data = Athena.document.character.get(player);
+    const data = Athena.document.character.get(player);
 
-        const stringData = JSON.stringify(componentInfo);
-        Athena.player.emit.message(player, stringData);
-        alt.log(stringData);
-        alt.log(`Create an Icon Named: ${clothingComponentToIconName(data.appearance.sex, [componentInfo])}`);
-    },
-);
+    const stringData = JSON.stringify(componentInfo);
+    Athena.player.emit.message(player, stringData);
+    alt.log(stringData);
+    alt.log(`Create an Icon Named: ${clothingComponentToIconName(data.appearance.sex, [componentInfo])}`);
+});
