@@ -31,7 +31,7 @@ Play the animation when the objective is loaded?
 
 #### Defined in
 
-[shared/interfaces/animation.ts:55](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/interfaces/animation.ts#L55)
+[shared/interfaces/animation.ts:55](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/animation.ts#L55)
 
 ___
 
@@ -43,7 +43,7 @@ When to play this animation after a certain amount of ms.
 
 #### Defined in
 
-[shared/interfaces/animation.ts:48](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/interfaces/animation.ts#L48)
+[shared/interfaces/animation.ts:48](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/animation.ts#L48)
 
 ___
 
@@ -59,7 +59,7 @@ The animation dictionary for the animation.
 
 #### Defined in
 
-[shared/interfaces/animation.ts:16](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/interfaces/animation.ts#L16)
+[shared/interfaces/animation.ts:16](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/animation.ts#L16)
 
 ___
 
@@ -76,7 +76,7 @@ Set this to -1 for infinite.
 
 #### Defined in
 
-[shared/interfaces/animation.ts:39](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/interfaces/animation.ts#L39)
+[shared/interfaces/animation.ts:39](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/animation.ts#L39)
 
 ___
 
@@ -93,7 +93,7 @@ Combine them with 'ANIMATION_FLAGS.X | ANIMATION_FLAGS.Y'
 
 #### Defined in
 
-[shared/interfaces/animation.ts:31](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/interfaces/animation.ts#L31)
+[shared/interfaces/animation.ts:31](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/animation.ts#L31)
 
 ___
 
@@ -109,7 +109,7 @@ The name of the animation.
 
 #### Defined in
 
-[shared/interfaces/animation.ts:23](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/interfaces/animation.ts#L23)
+[shared/interfaces/animation.ts:23](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/animation.ts#L23)
 
 ___
 
@@ -121,4 +121,4 @@ What direction to face when playing the animation.
 
 #### Defined in
 
-[shared/interfaces/animation.ts:62](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/interfaces/animation.ts#L62)
+[shared/interfaces/animation.ts:62](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/animation.ts#L62)

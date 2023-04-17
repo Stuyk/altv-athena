@@ -25,4 +25,4 @@ order: 0
 
 #### Defined in
 
-[shared/enums/messenger.ts:1](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/enums/messenger.ts#L1)
+[shared/enums/messenger.ts:1](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/enums/messenger.ts#L1)
