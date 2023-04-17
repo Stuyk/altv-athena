@@ -29,4 +29,4 @@ Create a simple GTA:V Notification.
 
 #### Defined in
 
-[client/screen/notification.ts:9](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/screen/notification.ts#L9)
+[client/screen/notification.ts:9](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/client/screen/notification.ts#L9)

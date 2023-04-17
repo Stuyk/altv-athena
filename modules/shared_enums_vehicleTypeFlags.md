@@ -33,4 +33,4 @@ AthenaShared.enums.vehicleTypeFlags.**isVehicleType**(`type`, `vehicleType`): `b
 
 #### Defined in
 
-[shared/enums/vehicleTypeFlags.ts:50](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/enums/vehicleTypeFlags.ts#L50)
+[shared/enums/vehicleTypeFlags.ts:50](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/enums/vehicleTypeFlags.ts#L50)

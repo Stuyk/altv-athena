@@ -45,6 +45,12 @@ Renames and re-exports [server/systems/inventory/effects](server_systems_invento
 
 ___
 
+### events
+
+Renames and re-exports [server/systems/inventory/events](server_systems_inventory_events.md)
+
+___
+
 ### factory
 
 Renames and re-exports [server/systems/inventory/factory](server_systems_inventory_factory.md)

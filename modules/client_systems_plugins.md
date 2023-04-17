@@ -40,7 +40,7 @@ See that function for additional information.
 
 #### Defined in
 
-[client/systems/plugins.ts:21](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/systems/plugins.ts#L21)
+[client/systems/plugins.ts:21](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/client/systems/plugins.ts#L21)
 
 ___
 
@@ -76,4 +76,4 @@ As long as you know the 'plugin name' you can import anything.
 
 #### Defined in
 
-[client/systems/plugins.ts:42](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/client/systems/plugins.ts#L42)
+[client/systems/plugins.ts:42](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/client/systems/plugins.ts#L42)

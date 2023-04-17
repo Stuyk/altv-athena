@@ -31,7 +31,7 @@ Get all owned vehicles.
 
 #### Defined in
 
-[server/getters/vehicles.ts:28](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/server/getters/vehicles.ts#L28)
+[server/getters/vehicles.ts:28](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/server/getters/vehicles.ts#L28)
 
 ___
 
@@ -56,4 +56,4 @@ Get all vehicles in range of a position
 
 #### Defined in
 
-[server/getters/vehicles.ts:12](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/server/getters/vehicles.ts#L12)
+[server/getters/vehicles.ts:12](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/server/getters/vehicles.ts#L12)

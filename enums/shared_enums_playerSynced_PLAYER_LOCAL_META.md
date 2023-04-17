@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[shared/enums/playerSynced.ts:27](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/enums/playerSynced.ts#L27)
+[shared/enums/playerSynced.ts:27](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/enums/playerSynced.ts#L27)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[shared/enums/playerSynced.ts:30](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/enums/playerSynced.ts#L30)
+[shared/enums/playerSynced.ts:30](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/enums/playerSynced.ts#L30)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[shared/enums/playerSynced.ts:28](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/enums/playerSynced.ts#L28)
+[shared/enums/playerSynced.ts:28](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/enums/playerSynced.ts#L28)
 
 ___
 
@@ -47,4 +47,4 @@ ___
 
 #### Defined in
 
-[shared/enums/playerSynced.ts:29](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/shared/enums/playerSynced.ts#L29)
+[shared/enums/playerSynced.ts:29](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/shared/enums/playerSynced.ts#L29)

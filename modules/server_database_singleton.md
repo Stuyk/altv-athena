@@ -42,7 +42,7 @@ Returns the existing singleton if already present.
 
 #### Defined in
 
-[server/database/singleton.ts:28](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/server/database/singleton.ts#L28)
+[server/database/singleton.ts:28](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/server/database/singleton.ts#L28)
 
 ___
 
@@ -74,7 +74,7 @@ Returns a singleton document if it exists.
 
 #### Defined in
 
-[server/database/singleton.ts:11](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/server/database/singleton.ts#L11)
+[server/database/singleton.ts:11](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/server/database/singleton.ts#L11)
 
 ___
 
@@ -113,7 +113,7 @@ Returns true if updated successfully
 
 #### Defined in
 
-[server/database/singleton.ts:77](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/server/database/singleton.ts#L77)
+[server/database/singleton.ts:77](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/server/database/singleton.ts#L77)
 
 ___
 
@@ -143,4 +143,4 @@ Only one document may ever exist for a collection.
 
 #### Defined in
 
-[server/database/singleton.ts:53](https://github.com/Stuyk/altv-athena/blob/e7d4753/src/core/server/database/singleton.ts#L53)
+[server/database/singleton.ts:53](https://github.com/Stuyk/altv-athena/blob/82f1bae/src/core/server/database/singleton.ts#L53)

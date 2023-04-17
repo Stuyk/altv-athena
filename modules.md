@@ -238,6 +238,7 @@
 - [server/systems/inventory/crafting](modules/server_systems_inventory_crafting.md)
 - [server/systems/inventory/drops](modules/server_systems_inventory_drops.md)
 - [server/systems/inventory/effects](modules/server_systems_inventory_effects.md)
+- [server/systems/inventory/events](modules/server_systems_inventory_events.md)
 - [server/systems/inventory/factory](modules/server_systems_inventory_factory.md)
 - [server/systems/inventory/manager](modules/server_systems_inventory_manager.md)
 - [server/systems/inventory/slot](modules/server_systems_inventory_slot.md)
