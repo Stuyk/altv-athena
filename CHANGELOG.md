@@ -63,6 +63,17 @@ Bugs
 - Fix vehicles not spawning with dimension
 - Fix JSON Parse error for all documents, when setting bulk with previous data being undefined
 ---- Error: Unexpected token u in JSON at position 0
+- Fix Clothing Crafting Removing Wrong Items
+- Fix Various rmlui Menu Bugs
+
+attachment editor plugin
+- Added an attachment editor plugin
+- Command '/attachmenteditor'
+
+rmlui Menu
+- Added new text 'input' option
+- Added various fixes
+- Fixed controls
 
 ColShapes
 - Added onEnterCallback to the interface. Triggers when player enters the ColShape.
@@ -79,11 +90,18 @@ Dynamic Doors
 - Dynamic doors can teleport to any dimension, or position.
 - Dynamic doors also have onEnter, or beforeEnter callbacks for additional door functionality.
 - Includes better handling of ytyp, and ipl loading; no more falling through map.
+- Utilizes Session Storage
 
 Drop Tables
 - Create a drop table and pull random loot from it.
 - Athena.systems.dropTable.get
 
+Documents (Account, Character, Vehicle)
+- Utilizes Session Storage
+
+Athena.commands
+- Just a wrapper of Athena.system.messenger.commands
+- Gives it a shorter pathway, for the sake of ease of use
 
 ```
 

@@ -1,7 +1,7 @@
 import alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'setdimension',
     '/setdimension [id] [dimension]',
     ['admin'],
@@ -19,7 +19,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'setinterior',
     '/setinterior [id] [interior]',
     ['admin'],

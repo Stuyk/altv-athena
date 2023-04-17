@@ -61,6 +61,13 @@ const Internal = {
                 continue;
             }
 
+            if (dataSet[i] instanceof alt.Object) {
+                const object = dataSet[i] as alt.Object;
+                if (object && native.isEntityAttached(object.scriptID)) {
+                    continue;
+                }
+            }
+
             const [_, min, max] = native.getModelDimensions(dataSet[i].model);
             const height = Math.abs(min.z) + Math.abs(max.z);
             const dist = AthenaClient.utility.vector.distance2d(alt.Player.local.pos, dataSet[i].pos);

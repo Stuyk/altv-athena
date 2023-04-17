@@ -7,7 +7,7 @@ import IVehicleTuning from '@AthenaShared/interfaces/vehicleTuning';
 import IVehicleMod from '@AthenaShared/interfaces/vehicleMod';
 import VehicleExtra from '@AthenaShared/interfaces/vehicleExtra';
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'tempvehicle',
     '/tempvehicle [model] - Adds a temporary vehicle to drive around. Despawns on exit.',
     ['admin'],
@@ -26,7 +26,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'addvehicle',
     '/addvehicle [model] - Adds an owned vehicle to self',
     ['admin'],
@@ -46,7 +46,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'vehiclerepair',
     '/vehiclerepair - Repairs the nearest vehicle',
     ['admin'],
@@ -77,14 +77,14 @@ Athena.systems.messenger.commands.register(
 
 // The setLivery command has two possible commands that call both the same function. This is needed since it's not possible anymore to declare more than one name like in V4.
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'setVehicleLivery',
     LocaleController.get(LOCALE_KEYS.COMMAND_SET_VEHICLE_LIVERY, '/setVehicleLivery'),
     ['admin'],
     setLivery,
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'svl',
     LocaleController.get(LOCALE_KEYS.COMMAND_SET_VEHICLE_LIVERY, '/svl'),
     ['admin'],
@@ -133,14 +133,14 @@ function setLivery(player: alt.Player, livery: string) {
     Athena.player.emit.message(player, `Livery of ${vehInfo.displayName} was set to ID ${livery}.`);
 }
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'setvehicledirtLevel',
     LocaleController.get(LOCALE_KEYS.COMMAND_SET_VEH_DIRT_LEVEL, '/setvehicledirtLevel'),
     ['admin'],
     setVehicleDirtlevel,
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'svdl',
     LocaleController.get(LOCALE_KEYS.COMMAND_SET_VEH_DIRT_LEVEL, '/svdl'),
     ['admin'],
@@ -178,7 +178,7 @@ function setVehicleDirtlevel(player: alt.Player, dirtLevel: string) {
     Athena.player.emit.message(player, `Dirtlevel of ${vehInfo.displayName} was set to ID ${dirtLevel}.`);
 }
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'sessionvehicle',
     LocaleController.get(LOCALE_KEYS.COMMAND_SESSION_VEHICLE, '/sessionvehicle'),
     ['admin'],
@@ -197,7 +197,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'fullTuneVehicle',
     LocaleController.get(LOCALE_KEYS.COMMAND_FULL_TUNE_VEHICLE, '/fullTuneVehicle'),
     ['admin'],
@@ -243,7 +243,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'tunevehicle',
     '/tunevehicle [modID] [value] - Sets the specified Mod to the given value',
     ['admin'],
@@ -290,81 +290,71 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
-    'activateExtra',
-    '/activateExtra [id]',
-    ['admin'],
-    (player: alt.Player, id: string) => {
-        const vehicle = player.vehicle ? player.vehicle : Athena.utility.closest.getClosestVehicle(player.pos);
+Athena.commands.register('activateExtra', '/activateExtra [id]', ['admin'], (player: alt.Player, id: string) => {
+    const vehicle = player.vehicle ? player.vehicle : Athena.utility.closest.getClosestVehicle(player.pos);
 
-        if (!vehicle) {
-            Athena.player.emit.message(player, 'No spawned vehicle.');
-            return;
-        }
+    if (!vehicle) {
+        Athena.player.emit.message(player, 'No spawned vehicle.');
+        return;
+    }
 
-        if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4 && !player.vehicle) {
-            Athena.player.emit.message(player, 'No vehicle in range.');
-            return;
-        }
+    if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4 && !player.vehicle) {
+        Athena.player.emit.message(player, 'No vehicle in range.');
+        return;
+    }
 
-        if (isNaN(parseInt(id))) {
-            Athena.player.emit.message(player, `Dirt level passed was not a number.`);
-            return;
-        }
+    if (isNaN(parseInt(id))) {
+        Athena.player.emit.message(player, `Dirt level passed was not a number.`);
+        return;
+    }
 
-        Athena.vehicle.tuning.setExtra(vehicle, [{ id: parseInt(id), state: true }]);
-        Athena.vehicle.controls.updateLastUsed(vehicle);
-        Athena.vehicle.controls.update(vehicle);
+    Athena.vehicle.tuning.setExtra(vehicle, [{ id: parseInt(id), state: true }]);
+    Athena.vehicle.controls.updateLastUsed(vehicle);
+    Athena.vehicle.controls.update(vehicle);
 
-        const extraData: Array<VehicleExtra> = Athena.vehicle.tuning.getExtras(vehicle);
+    const extraData: Array<VehicleExtra> = Athena.vehicle.tuning.getExtras(vehicle);
 
-        Athena.document.vehicle.set(vehicle, 'extras', extraData);
+    Athena.document.vehicle.set(vehicle, 'extras', extraData);
 
-        const hash = typeof vehicle.model === 'number' ? vehicle.model : alt.hash(vehicle.model);
+    const hash = typeof vehicle.model === 'number' ? vehicle.model : alt.hash(vehicle.model);
 
-        let vehInfo = Athena.utility.hashLookup.vehicle.hash(hash);
+    let vehInfo = Athena.utility.hashLookup.vehicle.hash(hash);
 
-        Athena.player.emit.message(player, `Extra ${id} of ${vehInfo.displayName} was activated.`);
-    },
-);
+    Athena.player.emit.message(player, `Extra ${id} of ${vehInfo.displayName} was activated.`);
+});
 
-Athena.systems.messenger.commands.register(
-    'deactivateExtra',
-    '/deactivateExtra [id]',
-    ['admin'],
-    (player: alt.Player, id: string) => {
-        const vehicle = player.vehicle ? player.vehicle : Athena.utility.closest.getClosestVehicle(player.pos);
+Athena.commands.register('deactivateExtra', '/deactivateExtra [id]', ['admin'], (player: alt.Player, id: string) => {
+    const vehicle = player.vehicle ? player.vehicle : Athena.utility.closest.getClosestVehicle(player.pos);
 
-        if (!vehicle) {
-            Athena.player.emit.message(player, 'No spawned vehicle.');
-            return;
-        }
+    if (!vehicle) {
+        Athena.player.emit.message(player, 'No spawned vehicle.');
+        return;
+    }
 
-        if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4 && !player.vehicle) {
-            Athena.player.emit.message(player, 'No vehicle in range.');
-            return;
-        }
+    if (Athena.utility.vector.distance(player.pos, vehicle.pos) > 4 && !player.vehicle) {
+        Athena.player.emit.message(player, 'No vehicle in range.');
+        return;
+    }
 
-        if (isNaN(parseInt(id))) {
-            Athena.player.emit.message(player, `Dirt level passed was not a number.`);
-            return;
-        }
+    if (isNaN(parseInt(id))) {
+        Athena.player.emit.message(player, `Dirt level passed was not a number.`);
+        return;
+    }
 
-        Athena.vehicle.tuning.setExtra(vehicle, [{ id: parseInt(id), state: false }]);
-        Athena.vehicle.controls.updateLastUsed(vehicle);
-        Athena.vehicle.controls.update(vehicle);
+    Athena.vehicle.tuning.setExtra(vehicle, [{ id: parseInt(id), state: false }]);
+    Athena.vehicle.controls.updateLastUsed(vehicle);
+    Athena.vehicle.controls.update(vehicle);
 
-        const extraData: Array<VehicleExtra> = Athena.vehicle.tuning.getExtras(vehicle);
+    const extraData: Array<VehicleExtra> = Athena.vehicle.tuning.getExtras(vehicle);
 
-        Athena.document.vehicle.set(vehicle, 'extras', extraData);
+    Athena.document.vehicle.set(vehicle, 'extras', extraData);
 
-        const hash = typeof vehicle.model === 'number' ? vehicle.model : alt.hash(vehicle.model);
+    const hash = typeof vehicle.model === 'number' ? vehicle.model : alt.hash(vehicle.model);
 
-        let vehInfo = Athena.utility.hashLookup.vehicle.hash(hash);
+    let vehInfo = Athena.utility.hashLookup.vehicle.hash(hash);
 
-        Athena.player.emit.message(player, `Extra ${id} of ${vehInfo.displayName} was deactivated.`);
-    },
-);
+    Athena.player.emit.message(player, `Extra ${id} of ${vehInfo.displayName} was deactivated.`);
+});
 
 // import { command } from '@AthenaServer/decorators/commands';
 // import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';

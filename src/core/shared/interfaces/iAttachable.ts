@@ -58,6 +58,8 @@ export default interface IAttachable {
     entityID?: number;
 }
 
+export { IAttachable };
+
 export interface JobAttachable extends IAttachable {
     /**
      * How long should this object be attached.

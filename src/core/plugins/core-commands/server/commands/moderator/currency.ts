@@ -2,7 +2,7 @@ import alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import { CurrencyTypes } from '@AthenaShared/enums/currency';
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'setcash',
     '/setcash [amount] [id]',
     ['admin'],
@@ -22,7 +22,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'addbank',
     '/addbank [amount] [id]',
     ['admin'],
@@ -42,7 +42,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'setbank',
     '/setbank [amount] [id]',
     ['admin'],
@@ -62,7 +62,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'addcash',
     '/addcash [amount] [id]',
     ['admin'],

@@ -65,7 +65,7 @@ export function has(vehicle: alt.Vehicle, key: string) {
         return false;
     }
 
-    return typeof sessionStorage[vehicle.id][key] ? true : false;
+    return typeof sessionStorage[vehicle.id][key] !== 'undefined' ? true : false;
 }
 
 /**
@@ -83,7 +83,7 @@ export function get<K extends keyof AthenaSession.Vehicle>(
         return undefined;
     }
 
-    if (!sessionStorage[vehicle.id]) {
+    if (typeof sessionStorage[vehicle.id] === 'undefined') {
         return undefined;
     }
 
@@ -97,16 +97,20 @@ export function get<K extends keyof AthenaSession.Vehicle>(
  * @param {alt.Vehicle} vehicle
  * @param {string} key
  */
-export function clearKey(vehicle: alt.Vehicle, key: keyof AthenaSession.Vehicle) {
-    if (!vehicle || !vehicle.valid) {
+export function clearKey(vehicle: alt.Vehicle | number, key: keyof AthenaSession.Vehicle) {
+    if (vehicle instanceof alt.Vehicle) {
+        if (!vehicle || !vehicle.valid) {
+            return;
+        }
+
+        vehicle = vehicle.id;
+    }
+
+    if (typeof sessionStorage[vehicle] === 'undefined') {
         return;
     }
 
-    if (!sessionStorage[vehicle.id]) {
-        return;
-    }
-
-    delete sessionStorage[vehicle.id][key];
+    delete sessionStorage[vehicle][key];
 }
 
 /**
@@ -120,11 +124,21 @@ export function clearAll(vehicle: alt.Vehicle) {
         return;
     }
 
-    if (!sessionStorage[vehicle.id]) {
+    if (typeof sessionStorage[vehicle.id] === 'undefined') {
         return;
     }
 
     delete sessionStorage[vehicle.id];
+}
+
+/**
+ * Get all vehicles's that have a specific key.
+ *
+ * @export
+ * @param {string} key
+ */
+export function getAll<K extends keyof AthenaSession.Vehicle>(key: K): Array<AthenaSession.Vehicle[K]> {
+    return Object.values(sessionStorage).filter((x) => x[key]) as Array<AthenaSession.Vehicle[K]>;
 }
 
 alt.on('vehicleDestroy', clearAll);

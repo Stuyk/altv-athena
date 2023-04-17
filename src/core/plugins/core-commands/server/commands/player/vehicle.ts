@@ -6,20 +6,15 @@ import { LocaleController } from '@AthenaShared/locale/locale';
 import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 
 const SeatbeltState: Array<{ id: number; vehicle_id: number; state: boolean }> = [];
-Athena.systems.messenger.commands.register(
-    'vehengine',
-    '/vehengine - Toggle Vehicle Engine',
-    [],
-    (player: alt.Player) => {
-        if (!player || !player.valid || !player.vehicle) {
-            return;
-        }
+Athena.commands.register('vehengine', '/vehengine - Toggle Vehicle Engine', [], (player: alt.Player) => {
+    if (!player || !player.valid || !player.vehicle) {
+        return;
+    }
 
-        Athena.vehicle.asPlayer.toggleEngine(player, player.vehicle);
-    },
-);
+    Athena.vehicle.asPlayer.toggleEngine(player, player.vehicle);
+});
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'vehdoor',
     '/vehdoor [0|1|2|3|4|5] - Open / Close a Vehicle Door',
     [],
@@ -51,30 +46,25 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
-    'vehlock',
-    '/vehlock - Toggle Vehicle Lock',
-    [],
-    async (player: alt.Player) => {
-        if (!player || !player.valid || !player.vehicle) {
-            return;
-        }
+Athena.commands.register('vehlock', '/vehlock - Toggle Vehicle Lock', [], async (player: alt.Player) => {
+    if (!player || !player.valid || !player.vehicle) {
+        return;
+    }
 
-        let closeVehicle = player.vehicle;
-        if (typeof closeVehicle === 'undefined') {
-            closeVehicle = await Athena.getters.vehicle.inFrontOf(player, 3);
-        }
+    let closeVehicle = player.vehicle;
+    if (typeof closeVehicle === 'undefined') {
+        closeVehicle = await Athena.getters.vehicle.inFrontOf(player, 3);
+    }
 
-        if (typeof closeVehicle === 'undefined') {
-            Athena.player.emit.notification(player, 'No vehicle in range.');
-            return;
-        }
+    if (typeof closeVehicle === 'undefined') {
+        Athena.player.emit.notification(player, 'No vehicle in range.');
+        return;
+    }
 
-        Athena.vehicle.asPlayer.toggleLock(player, closeVehicle);
-    },
-);
+    Athena.vehicle.asPlayer.toggleLock(player, closeVehicle);
+});
 
-Athena.systems.messenger.commands.register('seatbelt', '/seatbelt', [], (player: alt.Player) => {
+Athena.commands.register('seatbelt', '/seatbelt', [], (player: alt.Player) => {
     if (!player || !player.valid || !player.vehicle) {
         return;
     }

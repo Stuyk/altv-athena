@@ -1,6 +1,15 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 
-const cooldowns: { [id: string]: number } = {};
+const SessionKey = 'athena-dd-cooldown-instance';
+
+declare global {
+    namespace AthenaSession {
+        interface Player {
+            [SessionKey]: number;
+        }
+    }
+}
 
 /**
  * Register a cooldown, with predetermiend
@@ -9,7 +18,7 @@ const cooldowns: { [id: string]: number } = {};
  * @param {alt.Player} player
  */
 export function updateCooldown(player: alt.Player) {
-    cooldowns[player.id] = Date.now() + 2000;
+    Athena.session.player.set(player, SessionKey, Date.now() + 2000);
 }
 
 /**
@@ -20,11 +29,11 @@ export function updateCooldown(player: alt.Player) {
  * @return {*}
  */
 export function isCooldownDone(player: alt.Player) {
-    if (!cooldowns[player.id]) {
+    if (!Athena.session.player.has(player, SessionKey)) {
         return true;
     }
 
-    return Date.now() > cooldowns[player.id];
+    return Date.now() > Athena.session.player.get(player, SessionKey);
 }
 
 /**
@@ -34,7 +43,7 @@ export function isCooldownDone(player: alt.Player) {
  * @param {alt.Player} player
  */
 export function clearCooldown(player: alt.Player) {
-    delete cooldowns[player.id];
+    Athena.session.player.clearKey(player, SessionKey);
 }
 
 /**
@@ -45,11 +54,9 @@ export function clearCooldown(player: alt.Player) {
  * @return {*}
  */
 export function getExpiration(player: alt.Player) {
-    if (!cooldowns[player.id]) {
+    if (!Athena.session.player.has(player, SessionKey)) {
         return Date.now();
     }
 
-    return cooldowns[player.id];
+    return Athena.session.player.get(player, SessionKey);
 }
-
-alt.on('playerDisconnect', clearCooldown);

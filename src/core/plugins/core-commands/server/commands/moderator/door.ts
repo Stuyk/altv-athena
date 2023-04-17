@@ -2,7 +2,7 @@ import alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 import { Doors } from '@AthenaShared/information/doors';
 
-Athena.systems.messenger.commands.register('toggledoor', '/toggledoor', ['admin'], (player: alt.Player) => {
+Athena.commands.register('toggledoor', '/toggledoor', ['admin'], (player: alt.Player) => {
     const doorsByDistance = Doors.sort((a, b) => {
         const distA = Athena.utility.vector.distance(player.pos, a.pos);
         const distB = Athena.utility.vector.distance(player.pos, b.pos);

@@ -41,7 +41,7 @@ export function set<K extends keyof AthenaSession.Player>(
         return;
     }
 
-    if (!sessionStorage[player.id]) {
+    if (typeof sessionStorage[player.id] === 'undefined') {
         sessionStorage[player.id] = {};
     }
 
@@ -63,7 +63,7 @@ export function get<K extends keyof AthenaSession.Player>(
         return undefined;
     }
 
-    if (!sessionStorage[player.id]) {
+    if (typeof sessionStorage[player.id] === 'undefined') {
         return undefined;
     }
 
@@ -82,11 +82,11 @@ export function has(player: alt.Player, key: keyof AthenaSession.Player) {
         return false;
     }
 
-    if (!sessionStorage[player.id]) {
+    if (typeof sessionStorage[player.id] === 'undefined') {
         return false;
     }
 
-    return typeof sessionStorage[player.id][key] ? true : false;
+    return typeof sessionStorage[player.id][key] !== 'undefined' ? true : false;
 }
 
 /**
@@ -96,16 +96,20 @@ export function has(player: alt.Player, key: keyof AthenaSession.Player) {
  * @param {alt.Player} player
  * @param {string} key
  */
-export function clearKey(player: alt.Player, key: keyof AthenaSession.Player) {
-    if (!player || !player.valid) {
+export function clearKey(player: alt.Player | number, key: keyof AthenaSession.Player) {
+    if (player instanceof alt.Player) {
+        if (!player || !player.valid) {
+            return;
+        }
+
+        player = player.id;
+    }
+
+    if (typeof sessionStorage[player] === 'undefined') {
         return;
     }
 
-    if (!sessionStorage[player.id]) {
-        return;
-    }
-
-    delete sessionStorage[player.id][key];
+    delete sessionStorage[player][key];
 }
 
 /**
@@ -119,11 +123,21 @@ export function clearAll(player: alt.Player) {
         return;
     }
 
-    if (!sessionStorage[player.id]) {
+    if (typeof sessionStorage[player.id] === 'undefined') {
         return;
     }
 
     delete sessionStorage[player.id];
+}
+
+/**
+ * Get all player's that have a specific key.
+ *
+ * @export
+ * @param {string} key
+ */
+export function getAll<K extends keyof AthenaSession.Player>(key: K): Array<AthenaSession.Player[K]> {
+    return Object.values(sessionStorage).filter((x) => x[key]) as Array<AthenaSession.Player[K]>;
 }
 
 alt.on('playerDisconnect', clearAll);

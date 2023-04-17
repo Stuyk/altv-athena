@@ -1,6 +1,15 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 
-const playerLoadingInstance: { [id: string]: boolean } = {};
+const SessionKey = 'athena-dd-loading-instance';
+
+declare global {
+    namespace AthenaSession {
+        interface Player {
+            [SessionKey]: boolean;
+        }
+    }
+}
 
 /**
  * Unregister a player that is loading.
@@ -8,7 +17,7 @@ const playerLoadingInstance: { [id: string]: boolean } = {};
  * @param {alt.Player} player
  */
 export function unregister(player: alt.Player) {
-    delete playerLoadingInstance[player.id];
+    Athena.session.player.clearKey(player, SessionKey);
 }
 
 /**
@@ -18,7 +27,7 @@ export function unregister(player: alt.Player) {
  * @param {alt.Player} player
  */
 export function register(player: alt.Player) {
-    playerLoadingInstance[player.id] = true;
+    Athena.session.player.set(player, SessionKey, true);
 }
 
 /**
@@ -29,7 +38,5 @@ export function register(player: alt.Player) {
  * @return {*}
  */
 export function isLoading(player: alt.Player) {
-    return playerLoadingInstance[player.id] ? true : false;
+    return Athena.session.player.has(player, SessionKey);
 }
-
-alt.on('playerDisconnect', unregister);
