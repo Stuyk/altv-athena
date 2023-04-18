@@ -31,7 +31,7 @@ PropInfo
 
 #### Defined in
 
-[shared/interfaces/ipropInfo.ts:20](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/ipropInfo.ts#L20)
+[shared/interfaces/ipropInfo.ts:20](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/shared/interfaces/ipropInfo.ts#L20)
 
 ___
 
@@ -47,7 +47,7 @@ PropInfo
 
 #### Defined in
 
-[shared/interfaces/ipropInfo.ts:34](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/ipropInfo.ts#L34)
+[shared/interfaces/ipropInfo.ts:34](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/shared/interfaces/ipropInfo.ts#L34)
 
 ___
 
@@ -63,7 +63,7 @@ PropInfo
 
 #### Defined in
 
-[shared/interfaces/ipropInfo.ts:13](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/ipropInfo.ts#L13)
+[shared/interfaces/ipropInfo.ts:13](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/shared/interfaces/ipropInfo.ts#L13)
 
 ___
 
@@ -79,4 +79,4 @@ PropInfo
 
 #### Defined in
 
-[shared/interfaces/ipropInfo.ts:27](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/ipropInfo.ts#L27)
+[shared/interfaces/ipropInfo.ts:27](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/shared/interfaces/ipropInfo.ts#L27)

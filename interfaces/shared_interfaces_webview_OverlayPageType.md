@@ -41,7 +41,7 @@ Callback to re-toggle page visibility.
 
 #### Defined in
 
-[shared/interfaces/webview.ts:29](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/webview.ts#L29)
+[shared/interfaces/webview.ts:29](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/shared/interfaces/webview.ts#L29)
 
 ___
 
@@ -53,7 +53,7 @@ Is this overlay hidden?
 
 #### Defined in
 
-[shared/interfaces/webview.ts:22](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/webview.ts#L22)
+[shared/interfaces/webview.ts:22](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/shared/interfaces/webview.ts#L22)
 
 ___
 
@@ -65,4 +65,4 @@ The name of the page.
 
 #### Defined in
 
-[shared/interfaces/webview.ts:14](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/shared/interfaces/webview.ts#L14)
+[shared/interfaces/webview.ts:14](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/shared/interfaces/webview.ts#L14)

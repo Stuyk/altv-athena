@@ -33,7 +33,7 @@ Builds a numerical representation of the flags used to check job criteria.
 
 #### Defined in
 
-[server/systems/job/objective.ts:98](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/server/systems/job/objective.ts#L98)
+[server/systems/job/objective.ts:98](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/systems/job/objective.ts#L98)
 
 ___
 
@@ -62,7 +62,7 @@ Returns the objective instance; does not need to be added.
 
 #### Defined in
 
-[server/systems/job/objective.ts:81](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/server/systems/job/objective.ts#L81)
+[server/systems/job/objective.ts:81](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/systems/job/objective.ts#L81)
 
 ___
 
@@ -86,7 +86,7 @@ Returns the numerical representation of a default objective type.
 
 #### Defined in
 
-[server/systems/job/objective.ts:127](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/server/systems/job/objective.ts#L127)
+[server/systems/job/objective.ts:127](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/systems/job/objective.ts#L127)
 
 ___
 
@@ -111,7 +111,7 @@ Used to override job objective creation functionality
 
 #### Defined in
 
-[server/systems/job/objective.ts:143](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/server/systems/job/objective.ts#L143)
+[server/systems/job/objective.ts:143](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/systems/job/objective.ts#L143)
 
 ::: tip Usage
 Athena.systems.job.objective.**override**(`functionName`, `callback`): `any`
@@ -132,7 +132,7 @@ Used to override job objective creation functionality
 
 #### Defined in
 
-[server/systems/job/objective.ts:144](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/server/systems/job/objective.ts#L144)
+[server/systems/job/objective.ts:144](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/systems/job/objective.ts#L144)
 
 ::: tip Usage
 Athena.systems.job.objective.**override**(`functionName`, `callback`): `any`
@@ -153,4 +153,4 @@ Used to override job objective creation functionality
 
 #### Defined in
 
-[server/systems/job/objective.ts:145](https://github.com/Stuyk/altv-athena/blob/d68aa20/src/core/server/systems/job/objective.ts#L145)
+[server/systems/job/objective.ts:145](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/systems/job/objective.ts#L145)
