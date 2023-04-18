@@ -65,6 +65,7 @@ Bugs
 ---- Error: Unexpected token u in JSON at position 0
 - Fix Clothing Crafting Removing Wrong Items
 - Fix Various rmlui Menu Bugs
+- Fix Bug where if object.rot was not set, it would not spawn. Defaulted to 0,0,0
 
 attachment editor plugin
 - Added an attachment editor plugin
