@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[server/vehicle/shared.ts:15](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/vehicle/shared.ts#L15)
+[server/vehicle/shared.ts:15](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/vehicle/shared.ts#L15)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[server/vehicle/shared.ts:12](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/vehicle/shared.ts#L12)
+[server/vehicle/shared.ts:12](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/vehicle/shared.ts#L12)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[server/vehicle/shared.ts:13](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/vehicle/shared.ts#L13)
+[server/vehicle/shared.ts:13](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/vehicle/shared.ts#L13)
 
 ___
 
@@ -47,4 +47,4 @@ ___
 
 #### Defined in
 
-[server/vehicle/shared.ts:14](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/vehicle/shared.ts#L14)
+[server/vehicle/shared.ts:14](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/vehicle/shared.ts#L14)

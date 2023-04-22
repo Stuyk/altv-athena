@@ -19,4 +19,4 @@ order: 0
 
 #### Defined in
 
-[shared/interfaces/character.ts:200](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/shared/interfaces/character.ts#L200)
+[shared/interfaces/character.ts:200](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/shared/interfaces/character.ts#L200)

@@ -31,7 +31,7 @@ AthenaClient.systems.inventory.get.(`items`): `void`
 
 #### Defined in
 
-[client/systems/inventory/get.ts:4](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/client/systems/inventory/get.ts#L4)
+[client/systems/inventory/get.ts:4](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/client/systems/inventory/get.ts#L4)
 
 ___
 
@@ -57,7 +57,7 @@ AthenaClient.systems.inventory.get.(`weight`): `void`
 
 #### Defined in
 
-[client/systems/inventory/get.ts:5](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/client/systems/inventory/get.ts#L5)
+[client/systems/inventory/get.ts:5](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/client/systems/inventory/get.ts#L5)
 
 ## Functions
 
@@ -77,7 +77,7 @@ A list of the current items in the inventory.
 
 #### Defined in
 
-[client/systems/inventory/get.ts:31](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/client/systems/inventory/get.ts#L31)
+[client/systems/inventory/get.ts:31](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/client/systems/inventory/get.ts#L31)
 
 ___
 
@@ -103,7 +103,7 @@ Invoke the callback whenever inventory changes.
 
 #### Defined in
 
-[client/systems/inventory/get.ts:51](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/client/systems/inventory/get.ts#L51)
+[client/systems/inventory/get.ts:51](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/client/systems/inventory/get.ts#L51)
 
 ___
 
@@ -129,7 +129,7 @@ Invoke the callback whenever the toolbar changes.
 
 #### Defined in
 
-[client/systems/inventory/get.ts:61](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/client/systems/inventory/get.ts#L61)
+[client/systems/inventory/get.ts:61](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/client/systems/inventory/get.ts#L61)
 
 ___
 
@@ -155,7 +155,7 @@ Invoke the weight change whenever the total weight changes.
 
 #### Defined in
 
-[client/systems/inventory/get.ts:71](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/client/systems/inventory/get.ts#L71)
+[client/systems/inventory/get.ts:71](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/client/systems/inventory/get.ts#L71)
 
 ___
 
@@ -175,7 +175,7 @@ A list of the current items in the toolbar.
 
 #### Defined in
 
-[client/systems/inventory/get.ts:21](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/client/systems/inventory/get.ts#L21)
+[client/systems/inventory/get.ts:21](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/client/systems/inventory/get.ts#L21)
 
 ___
 
@@ -195,4 +195,4 @@ A list of the current total weight of inventory and toolbar.
 
 #### Defined in
 
-[client/systems/inventory/get.ts:41](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/client/systems/inventory/get.ts#L41)
+[client/systems/inventory/get.ts:41](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/client/systems/inventory/get.ts#L41)

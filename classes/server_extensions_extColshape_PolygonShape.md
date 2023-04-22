@@ -42,7 +42,7 @@ alt.ColshapePolygon.constructor
 
 #### Defined in
 
-[server/extensions/extColshape.ts:77](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L77)
+[server/extensions/extColshape.ts:77](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L77)
 
 ## Properties
 
@@ -52,7 +52,7 @@ alt.ColshapePolygon.constructor
 
 #### Defined in
 
-[server/extensions/extColshape.ts:64](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L64)
+[server/extensions/extColshape.ts:64](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L64)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:62](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L62)
+[server/extensions/extColshape.ts:62](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L62)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:59](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L59)
+[server/extensions/extColshape.ts:59](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L59)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:61](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L61)
+[server/extensions/extColshape.ts:61](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L61)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:60](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L60)
+[server/extensions/extColshape.ts:60](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L60)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:65](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L65)
+[server/extensions/extColshape.ts:65](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L65)
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:57](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L57)
+[server/extensions/extColshape.ts:57](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L57)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[server/extensions/extColshape.ts:58](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L58)
+[server/extensions/extColshape.ts:58](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L58)
 
 ## Methods
 
@@ -144,7 +144,7 @@ Athena.extensions.extColshape.PolygonShape.**addEnterCallback**(`callback`): `vo
 
 #### Defined in
 
-[server/extensions/extColshape.ts:98](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L98)
+[server/extensions/extColshape.ts:98](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L98)
 
 ___
 
@@ -166,7 +166,7 @@ Athena.extensions.extColshape.PolygonShape.**addLeaveCallback**(`callback`): `vo
 
 #### Defined in
 
-[server/extensions/extColshape.ts:102](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L102)
+[server/extensions/extColshape.ts:102](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L102)
 
 ___
 
@@ -188,7 +188,7 @@ Athena.extensions.extColshape.PolygonShape.**invokeEnterCallbacks**(`entity`): `
 
 #### Defined in
 
-[server/extensions/extColshape.ts:106](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L106)
+[server/extensions/extColshape.ts:106](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L106)
 
 ___
 
@@ -210,4 +210,4 @@ Athena.extensions.extColshape.PolygonShape.**invokeLeaveCallbacks**(`entity`): `
 
 #### Defined in
 
-[server/extensions/extColshape.ts:112](https://github.com/Stuyk/altv-athena/blob/492641c/src/core/server/extensions/extColshape.ts#L112)
+[server/extensions/extColshape.ts:112](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/extensions/extColshape.ts#L112)
