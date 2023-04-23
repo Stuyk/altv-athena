@@ -282,10 +282,18 @@ export function update(player: alt.Player, document: Character = undefined) {
         // Check if the data property is the correct format for the item.
         for (let component of item.data.components) {
             if (component.isProp) {
-                player.setDlcProp(component.dlc, component.id, component.drawable, component.texture);
+                if (component.dlc === 0) {
+                    player.setProp(component.id, component.drawable, component.texture);
+                } else {
+                    player.setDlcProp(component.dlc, component.id, component.drawable, component.texture);
+                }
             } else {
                 const palette = typeof component.palette === 'number' ? component.palette : 0;
-                player.setDlcClothes(component.dlc, component.id, component.drawable, component.texture, palette);
+                if (component.dlc === 0) {
+                    player.setClothes(component.id, component.drawable, component.texture, palette);
+                } else {
+                    player.setDlcClothes(component.dlc, component.id, component.drawable, component.texture, palette);
+                }
             }
         }
     }
@@ -300,10 +308,20 @@ export function update(player: alt.Player, document: Character = undefined) {
         // We look at the equipped item data sets; and find compatible clothing information in the 'data' field.
         // Check if the data property is the correct format for the item.
         if (component.isProp) {
-            player.setDlcProp(component.dlc, component.id, component.drawable, component.texture);
+            if (player) {
+                if (component.dlc === 0) {
+                    player.setProp(component.id, component.drawable, component.texture);
+                } else {
+                    player.setDlcProp(component.dlc, component.id, component.drawable, component.texture);
+                }
+            }
         } else {
             const palette = typeof component.palette === 'number' ? component.palette : 0;
-            player.setDlcClothes(component.dlc, component.id, component.drawable, component.texture, palette);
+            if (component.dlc === 0) {
+                player.setClothes(component.id, component.drawable, component.texture, palette);
+            } else {
+                player.setDlcClothes(component.dlc, component.id, component.drawable, component.texture, palette);
+            }
         }
     }
 }
