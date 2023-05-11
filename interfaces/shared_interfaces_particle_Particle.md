@@ -25,7 +25,7 @@ Time before the particle effect starts playing.
 
 #### Defined in
 
-[shared/interfaces/particle.ts:50](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/shared/interfaces/particle.ts#L50)
+[shared/interfaces/particle.ts:50](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/shared/interfaces/particle.ts#L50)
 
 ___
 
@@ -37,7 +37,7 @@ Core particle name.
 
 #### Defined in
 
-[shared/interfaces/particle.ts:22](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/shared/interfaces/particle.ts#L22)
+[shared/interfaces/particle.ts:22](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/shared/interfaces/particle.ts#L22)
 
 ___
 
@@ -49,7 +49,7 @@ How long to play this particle effect for.
 
 #### Defined in
 
-[shared/interfaces/particle.ts:36](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/shared/interfaces/particle.ts#L36)
+[shared/interfaces/particle.ts:36](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/shared/interfaces/particle.ts#L36)
 
 ___
 
@@ -61,7 +61,7 @@ The name inside of the dictionary for the particle.
 
 #### Defined in
 
-[shared/interfaces/particle.ts:29](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/shared/interfaces/particle.ts#L29)
+[shared/interfaces/particle.ts:29](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/shared/interfaces/particle.ts#L29)
 
 ___
 
@@ -73,7 +73,7 @@ Position in a 3D space to play this effect.
 
 #### Defined in
 
-[shared/interfaces/particle.ts:15](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/shared/interfaces/particle.ts#L15)
+[shared/interfaces/particle.ts:15](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/shared/interfaces/particle.ts#L15)
 
 ___
 
@@ -85,4 +85,4 @@ Size of the particle effect.
 
 #### Defined in
 
-[shared/interfaces/particle.ts:43](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/shared/interfaces/particle.ts#L43)
+[shared/interfaces/particle.ts:43](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/shared/interfaces/particle.ts#L43)

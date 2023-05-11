@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[server/interface/iOptions.ts:4](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/interface/iOptions.ts#L4)
+[server/interface/iOptions.ts:4](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/server/interface/iOptions.ts#L4)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-[server/interface/iOptions.ts:5](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/interface/iOptions.ts#L5)
+[server/interface/iOptions.ts:5](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/server/interface/iOptions.ts#L5)

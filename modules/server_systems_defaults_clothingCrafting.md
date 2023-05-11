@@ -28,4 +28,4 @@ Athena.systems.defaults.clothingCrafting.disable();
 
 #### Defined in
 
-[server/systems/defaults/clothingCrafting.ts:64](https://github.com/Stuyk/altv-athena/blob/4945ccd/src/core/server/systems/defaults/clothingCrafting.ts#L64)
+[server/systems/defaults/clothingCrafting.ts:64](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/server/systems/defaults/clothingCrafting.ts#L64)
