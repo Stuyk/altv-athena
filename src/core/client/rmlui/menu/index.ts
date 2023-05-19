@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import * as AthenaClient from '@AthenaClient/api';
 import { rgbaToHexAlpha } from '@AthenaShared/utility/color';
-import { Invoke, Toggle, Selection, Range, MenuInfo } from './menuInterfaces';
+import { Invoke, Toggle, Selection, Range, MenuInfo, MenuOptions } from './menuInterfaces';
 
 const KEYS = {
     ESCAPE_KEY: 27,
@@ -21,19 +21,18 @@ let nextDebounce = Date.now() + 0;
 let everyTick: number;
 
 const InternalFunctions = {
-    init(info: MenuInfo) {
-        menu = info;
-
-        // Header Background Setup
-        const header = document.getElementByID('header');
-        header.style['background'] = menu.header.color as string;
-
-        // Header Text Setup
-        const headerText = document.getElementByID('headertext');
-        headerText.innerRML = menu.header.title;
+    updateOptions(options: MenuOptions) {
+        menu.options = options;
 
         // Options Setup
-        const optionsElement = document.getElementByID('options');
+        // Clear previous entries if present
+        let optionsElement = document.getElementByID('options');
+
+        while (optionsElement.hasChildren) {
+            optionsElement = document.getElementByID('options');
+            optionsElement.removeChild(optionsElement.lastChild);
+        }
+
         for (let i = 0; i < menu.options.length; i++) {
             const option = menu.options[i];
 
@@ -67,6 +66,20 @@ const InternalFunctions = {
         optionIndex = 0;
         const element = document.getElementByID(`option-${optionIndex}`);
         element.addClass('selected');
+    },
+    init(info: MenuInfo) {
+        menu = info;
+
+        // Header Background Setup
+        const header = document.getElementByID('header');
+        header.style['background'] = menu.header.color as string;
+
+        // Header Text Setup
+        const headerText = document.getElementByID('headertext');
+        headerText.innerRML = menu.header.title;
+
+        InternalFunctions.updateOptions(menu.options);
+
         InternalFunctions.updateDescription();
         pauseControl = false;
     },
@@ -87,7 +100,14 @@ const InternalFunctions = {
         }
 
         if (option.type === 'Range') {
-            element.innerRML = `&lt; ${option.min} / ${option.value.toFixed(2)} / ${option.max} &gt;`;
+            let actualValue;
+            if (option.increment < 1) {
+                actualValue = option.value.toFixed(2);
+            } else {
+                actualValue = `${option.value}`;
+            }
+
+            element.innerRML = `&lt; ${actualValue} / ${option.max} &gt;`;
             return;
         }
 
@@ -129,6 +149,7 @@ const InternalFunctions = {
         }
 
         menu = undefined;
+        optionIndex = 0;
         AthenaClient.systems.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
 
         alt.Player.local.isMenuOpen = false;
@@ -177,7 +198,12 @@ const InternalFunctions = {
             }
 
             if (option.type === 'Selection') {
-                option.callback(option.options[option.value]);
+                const data = option.options[option.value];
+                if (typeof data === 'object') {
+                    option.callback(data.value);
+                } else {
+                    option.callback(data);
+                }
             }
 
             InternalFunctions.updateValue();
@@ -197,7 +223,12 @@ const InternalFunctions = {
                 option.callback(option.value);
                 return;
             case 'Selection':
-                option.callback(option.options[option.value]);
+                const data = option.options[option.value];
+                if (typeof data === 'object') {
+                    option.callback(data.value);
+                } else {
+                    option.callback(data);
+                }
                 return;
             case 'Toggle':
                 option.value = !option.value;
@@ -300,7 +331,12 @@ const InternalFunctions = {
 
         if (option.type === 'Selection') {
             if (!option.onlyUpdateOnEnter && option.callback) {
-                option.callback(option.options[option.value]);
+                const data = option.options[option.value];
+                if (typeof data === 'object') {
+                    option.callback(data.value);
+                } else {
+                    option.callback(data);
+                }
             }
         }
 
@@ -350,7 +386,12 @@ const InternalFunctions = {
 
         if (option.type === 'Selection') {
             if (!option.onlyUpdateOnEnter && option.callback) {
-                option.callback(option.options[option.value]);
+                const data = option.options[option.value];
+                if (typeof data === 'object') {
+                    option.callback(data.value);
+                } else {
+                    option.callback(data);
+                }
             }
         }
 
@@ -385,7 +426,7 @@ const InternalFunctions = {
 
             let debounceTime = 150;
             if (key === KEYS.RIGHT_KEY || key === KEYS.LEFT_KEY) {
-                debounceTime = 75;
+                debounceTime = 100;
             }
 
             nextDebounce = Date.now() + debounceTime;
@@ -422,6 +463,7 @@ export function create(info: MenuInfo): void {
         document.show();
     }
 
+    optionIndex = 0;
     pauseControl = false;
     alt.Player.local.isMenuOpen = true;
     everyTick = alt.everyTick(InternalFunctions.handleKeyHeld);
@@ -443,6 +485,11 @@ export function pauseControls() {
 
 export function unpauseControls() {
     pauseControl = false;
+}
+
+export function replaceOptions(options: MenuOptions) {
+    optionIndex = 0;
+    InternalFunctions.updateOptions(options);
 }
 
 /**

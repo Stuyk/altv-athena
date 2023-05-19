@@ -1,0 +1,12 @@
+files = [
+    'stream/taysclothpack_male_p.rpf/*',
+    'stream/taysclothpack_male.rpf/*',
+    'stream/taysclothpack_female_p.rpf/*',
+    'stream/taysclothpack_female.rpf/*',
+    'stream/creaturemetadata.rpf/*'
+]
+
+[meta]
+'stream/mp_m_freemode_01_mp_m_taysbusinesspack.meta' = 'SHOP_PED_APPAREL_META_FILE'
+'stream/mp_f_freemode_01_mp_f_taysbusinesspack.meta' = 'SHOP_PED_APPAREL_META_FILE'
+'stream/pedalternatevariations.meta' = 'ALTERNATE_VARIATIONS_FILE'

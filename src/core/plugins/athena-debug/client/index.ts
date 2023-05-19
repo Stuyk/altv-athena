@@ -5,6 +5,8 @@ import * as AthenaClient from '@AthenaClient/api';
 import { ATHENA_DEBUG_EVENTS } from '../shared/events';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
+alt.log(native.drawLine);
+
 const F1_KEY = 112;
 let page: AthenaClient.webview.Page;
 

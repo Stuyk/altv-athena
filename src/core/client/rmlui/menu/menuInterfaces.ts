@@ -43,7 +43,7 @@ export interface Selection extends MenuOptionBase<(value: string | number) => vo
      * @type {Array<string>}
      *
      */
-    options: Array<string | number>;
+    options: Array<string | number | { key: string; value: any }>;
 
     /**
      * Current index of this selection.
@@ -134,6 +134,9 @@ export interface Invoke extends MenuOptionBase<(result: string) => void> {
     placeholder: string;
 }
 
+export type MenuOption = Selection | Range | Toggle | Invoke | Input;
+export type MenuOptions = Array<MenuOption>;
+
 export interface MenuInfo {
     header: {
         /**
@@ -154,10 +157,10 @@ export interface MenuInfo {
     /**
      * An array of available menu types to invoke.
      *
-     * @type {(Array<Selection | Invoke | Range | Toggle>)}
+     * @type {(MenuOptions)}
      *
      */
-    options: Array<Selection | Range | Toggle | Invoke | Input>;
+    options: MenuOptions;
 
     /**
      * Function to call when the menu is closed through other means.

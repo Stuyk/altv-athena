@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CAlternateVariations>
+	<peds>
+        <Item>
+            <name>mp_m_freemode_01</name>
+            <switches>
+                 <Item>
+                    <dlcNameHash>mp_m_Heist3</dlcNameHash>
+                    <component value="5" />
+                    <index value="0" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_m_Heist3</dlcNameHash>
+                    <component value="5" />
+                    <index value="1" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_m_Heist3</dlcNameHash>
+                    <component value="5" />
+                    <index value="2" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_m_Heist3</dlcNameHash>
+                    <component value="5" />
+                    <index value="3" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_m_heist4</dlcNameHash>
+                    <component value="5" />
+                    <index value="0" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_m_heist4</dlcNameHash>
+                    <component value="5" />
+                    <index value="1" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_m_heist4</dlcNameHash>
+                    <component value="5" />
+                    <index value="2" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_m_heist4</dlcNameHash>
+                    <component value="5" />
+                    <index value="3" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>male_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="0" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>male_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="1" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>male_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="2" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>male_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="3" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>male_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="4" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>male_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="5" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>male_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="6" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>male_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="7" />
+                    <alt value="19" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_m_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+            </switches>
+        </Item>
+        <Item>
+            <name>mp_f_freemode_01</name>
+            <switches>
+                 <Item>
+                    <dlcNameHash>mp_f_heist4</dlcNameHash>
+                    <component value="5" />
+                    <index value="0" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_f_heist4</dlcNameHash>
+                    <component value="5" />
+                    <index value="1" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_f_heist4</dlcNameHash>
+                    <component value="5" />
+                    <index value="2" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_f_heist4</dlcNameHash>
+                    <component value="5" />
+                    <index value="3" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>Female_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="0" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>Female_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="1" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>Female_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="2" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>Female_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="3" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>Female_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="4" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>Female_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="5" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>Female_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="6" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>Female_heist</dlcNameHash>
+                    <component value="5" />
+                    <index value="7" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_f_Heist3</dlcNameHash>
+                    <component value="5" />
+                    <index value="0" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_f_Heist3</dlcNameHash>
+                    <component value="5" />
+                    <index value="1" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_f_Heist3</dlcNameHash>
+                    <component value="5" />
+                    <index value="2" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+                 <Item>
+                    <dlcNameHash>mp_f_Heist3</dlcNameHash>
+                    <component value="5" />
+                    <index value="3" />
+                    <alt value="8" />
+                    <sourceAssets>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="0" />
+                        </Item>
+                        <Item>
+                            <dlcNameHash>mp_f_taysbusinesspack</dlcNameHash>
+                            <component value="11" />
+                            <index value="1" />
+                        </Item>
+                    </sourceAssets>
+                </Item>
+            </switches>
+        </Item>
+	</peds>
+</CAlternateVariations>

@@ -48,6 +48,7 @@ export async function toggleEngine(vehicle: alt.Vehicle): Promise<boolean> {
     }
 
     await updateLastUsed(vehicle);
+    await alt.Utils.waitFor(() => vehicle.engineOn === nextState)
 
     return vehicle.engineOn;
 }
