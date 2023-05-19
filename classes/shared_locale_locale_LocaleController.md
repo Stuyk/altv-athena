@@ -40,7 +40,7 @@ Get a locale based on its key value.
 
 #### Defined in
 
-[shared/locale/locale.ts:46](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/shared/locale/locale.ts#L46)
+[shared/locale/locale.ts:46](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/shared/locale/locale.ts#L46)
 
 ___
 
@@ -66,7 +66,7 @@ Returns an object of strings with labels for WebViews.
 
 #### Defined in
 
-[shared/locale/locale.ts:67](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/shared/locale/locale.ts#L67)
+[shared/locale/locale.ts:67](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/shared/locale/locale.ts#L67)
 
 ___
 
@@ -92,4 +92,4 @@ The ISO-639-1 Code to Utilize for Language
 
 #### Defined in
 
-[shared/locale/locale.ts:34](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/shared/locale/locale.ts#L34)
+[shared/locale/locale.ts:34](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/shared/locale/locale.ts#L34)

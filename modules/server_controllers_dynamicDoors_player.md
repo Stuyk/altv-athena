@@ -31,7 +31,7 @@ Check if a player is loading a door currently.
 
 #### Defined in
 
-[server/controllers/dynamicDoors/player.ts:40](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/server/controllers/dynamicDoors/player.ts#L40)
+[server/controllers/dynamicDoors/player.ts:40](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/controllers/dynamicDoors/player.ts#L40)
 
 ___
 
@@ -57,7 +57,7 @@ Register a player to start loading a door.
 
 #### Defined in
 
-[server/controllers/dynamicDoors/player.ts:29](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/server/controllers/dynamicDoors/player.ts#L29)
+[server/controllers/dynamicDoors/player.ts:29](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/controllers/dynamicDoors/player.ts#L29)
 
 ___
 
@@ -81,4 +81,4 @@ Unregister a player that is loading.
 
 #### Defined in
 
-[server/controllers/dynamicDoors/player.ts:19](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/server/controllers/dynamicDoors/player.ts#L19)
+[server/controllers/dynamicDoors/player.ts:19](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/controllers/dynamicDoors/player.ts#L19)

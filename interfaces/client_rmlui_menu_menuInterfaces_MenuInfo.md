@@ -23,7 +23,7 @@ MenuInfo
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:168](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/client/rmlui/menu/menuInterfaces.ts#L168)
+[client/rmlui/menu/menuInterfaces.ts:171](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/rmlui/menu/menuInterfaces.ts#L171)
 
 ___
 
@@ -40,16 +40,16 @@ ___
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:138](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/client/rmlui/menu/menuInterfaces.ts#L138)
+[client/rmlui/menu/menuInterfaces.ts:141](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/rmlui/menu/menuInterfaces.ts#L141)
 
 ___
 
 ### options
 
-• **options**: ([`Selection`](client_rmlui_menu_menuInterfaces_Selection.md) \| [`Range`](client_rmlui_menu_menuInterfaces_Range.md) \| [`Toggle`](client_rmlui_menu_menuInterfaces_Toggle.md) \| [`Invoke`](client_rmlui_menu_menuInterfaces_Invoke.md) \| [`Input`](client_rmlui_menu_menuInterfaces_Input.md))[]
+• **options**: [`MenuOptions`](../modules/client_rmlui_menu_menuInterfaces.md#MenuOptions)
 
 An array of available menu types to invoke.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:160](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/client/rmlui/menu/menuInterfaces.ts#L160)
+[client/rmlui/menu/menuInterfaces.ts:163](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/rmlui/menu/menuInterfaces.ts#L163)

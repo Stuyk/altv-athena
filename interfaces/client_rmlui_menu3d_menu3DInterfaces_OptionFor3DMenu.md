@@ -29,7 +29,7 @@ What function to call when this item is selected.
 
 #### Defined in
 
-[client/rmlui/menu3d/menu3DInterfaces.ts:15](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/client/rmlui/menu3d/menu3DInterfaces.ts#L15)
+[client/rmlui/menu3d/menu3DInterfaces.ts:15](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/rmlui/menu3d/menu3DInterfaces.ts#L15)
 
 ___
 
@@ -41,4 +41,4 @@ The name to display on-screen.
 
 #### Defined in
 
-[client/rmlui/menu3d/menu3DInterfaces.ts:8](https://github.com/Stuyk/altv-athena/blob/b7faa35/src/core/client/rmlui/menu3d/menu3DInterfaces.ts#L8)
+[client/rmlui/menu3d/menu3DInterfaces.ts:8](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/rmlui/menu3d/menu3DInterfaces.ts#L8)
