@@ -33,7 +33,7 @@ Return a list of commands...
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:61](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/shared/utility/consoleCommander.ts#L61)
+[shared/utility/consoleCommander.ts:61](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/utility/consoleCommander.ts#L61)
 
 ___
 
@@ -56,7 +56,7 @@ AthenaShared.utility.consoleCommander.ConsoleCommander.`Static` **init**(`alt`):
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:25](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/shared/utility/consoleCommander.ts#L25)
+[shared/utility/consoleCommander.ts:25](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/utility/consoleCommander.ts#L25)
 
 ___
 
@@ -83,7 +83,7 @@ Allows a console command to be invoked through other means.
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:37](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/shared/utility/consoleCommander.ts#L37)
+[shared/utility/consoleCommander.ts:37](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/utility/consoleCommander.ts#L37)
 
 ___
 
@@ -111,4 +111,4 @@ Depends on the folder you are writing inside of.
 
 #### Defined in
 
-[shared/utility/consoleCommander.ts:50](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/shared/utility/consoleCommander.ts#L50)
+[shared/utility/consoleCommander.ts:50](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/utility/consoleCommander.ts#L50)

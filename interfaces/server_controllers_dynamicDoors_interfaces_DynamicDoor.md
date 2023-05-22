@@ -23,7 +23,7 @@ DynamicDoor
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:116](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/controllers/dynamicDoors/interfaces.ts#L116)
+[server/controllers/dynamicDoors/interfaces.ts:116](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/controllers/dynamicDoors/interfaces.ts#L116)
 
 ___
 
@@ -39,7 +39,7 @@ DynamicDoor
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:124](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/controllers/dynamicDoors/interfaces.ts#L124)
+[server/controllers/dynamicDoors/interfaces.ts:124](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/controllers/dynamicDoors/interfaces.ts#L124)
 
 ___
 
@@ -55,4 +55,4 @@ DynamicDoor
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:108](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/controllers/dynamicDoors/interfaces.ts#L108)
+[server/controllers/dynamicDoors/interfaces.ts:108](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/controllers/dynamicDoors/interfaces.ts#L108)

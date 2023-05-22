@@ -32,7 +32,7 @@ Teleport first player to second player.
 
 #### Defined in
 
-[server/player/teleport.ts:11](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/player/teleport.ts#L11)
+[server/player/teleport.ts:11](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/player/teleport.ts#L11)
 
 ___
 
@@ -59,7 +59,7 @@ Teleport many players to the a player.
 
 #### Defined in
 
-[server/player/teleport.ts:50](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/player/teleport.ts#L50)
+[server/player/teleport.ts:50](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/player/teleport.ts#L50)
 
 ___
 
@@ -86,7 +86,7 @@ Teleport second player to first player.
 
 #### Defined in
 
-[server/player/teleport.ts:31](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/player/teleport.ts#L31)
+[server/player/teleport.ts:31](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/player/teleport.ts#L31)
 
 ___
 
@@ -113,7 +113,7 @@ Teleport a player to a position.
 
 #### Defined in
 
-[server/player/teleport.ts:78](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/player/teleport.ts#L78)
+[server/player/teleport.ts:78](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/player/teleport.ts#L78)
 
 ___
 
@@ -140,4 +140,4 @@ Teleport a player to a vehicle.
 
 #### Defined in
 
-[server/player/teleport.ts:63](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/player/teleport.ts#L63)
+[server/player/teleport.ts:63](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/player/teleport.ts#L63)

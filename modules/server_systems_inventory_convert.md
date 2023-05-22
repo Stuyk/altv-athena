@@ -39,7 +39,7 @@ Does not perform any inventory changes.
 
 #### Defined in
 
-[server/systems/inventory/convert.ts:35](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/systems/inventory/convert.ts#L35)
+[server/systems/inventory/convert.ts:35](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/systems/inventory/convert.ts#L35)
 
 ___
 
@@ -75,7 +75,7 @@ Returns undefined if base item was not found.
 
 #### Defined in
 
-[server/systems/inventory/convert.ts:15](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/systems/inventory/convert.ts#L15)
+[server/systems/inventory/convert.ts:15](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/systems/inventory/convert.ts#L15)
 
 ___
 
@@ -110,4 +110,4 @@ Does not perform any inventory changes.
 
 #### Defined in
 
-[server/systems/inventory/convert.ts:50](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/systems/inventory/convert.ts#L50)
+[server/systems/inventory/convert.ts:50](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/systems/inventory/convert.ts#L50)
