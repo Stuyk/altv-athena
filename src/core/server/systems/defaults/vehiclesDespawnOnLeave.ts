@@ -25,8 +25,12 @@ const Internal = {
         Athena.player.events.on('player-disconnected', Internal.processPlayer);
         alt.log(`~lc~Default System: ~g~${SYSTEM_NAME}`);
     },
-    async processPlayer(player: alt.Player, id: number, document: Character) {
+    async processPlayer(player: alt.Player, document: Character) {
         let removedVehicles = 0;
+
+        if (typeof document === 'undefined') {
+            return;
+        }
 
         const owner = document._id.toString();
 

@@ -128,7 +128,14 @@ export function clearAll(player: alt.Player) {
         return;
     }
 
-    Athena.player.events.trigger('player-disconnected', player, player.id, sessionStorage[player.id]);
+    if (sessionStorage[player.id]['athena-document-character-data']) {
+        Athena.player.events.trigger(
+            'player-disconnected',
+            undefined,
+            sessionStorage[player.id]['athena-document-character-data'],
+        );
+    }
+
     delete sessionStorage[player.id];
 }
 
