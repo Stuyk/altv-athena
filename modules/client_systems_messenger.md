@@ -31,7 +31,7 @@ AthenaClient.systems.messenger.(`msgs`): `void`
 
 #### Defined in
 
-[client/systems/messenger.ts:9](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/systems/messenger.ts#L9)
+[client/systems/messenger.ts:9](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/systems/messenger.ts#L9)
 
 ___
 
@@ -57,7 +57,7 @@ AthenaClient.systems.messenger.(`msg`): `void`
 
 #### Defined in
 
-[client/systems/messenger.ts:8](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/systems/messenger.ts#L8)
+[client/systems/messenger.ts:8](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/systems/messenger.ts#L8)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[client/systems/messenger.ts:7](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/systems/messenger.ts#L7)
+[client/systems/messenger.ts:7](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/systems/messenger.ts#L7)
 
 ## Functions
 
@@ -98,7 +98,7 @@ Emits a message to all callbacks.
 
 #### Defined in
 
-[client/systems/messenger.ts:43](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/systems/messenger.ts#L43)
+[client/systems/messenger.ts:43](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/systems/messenger.ts#L43)
 
 ___
 
@@ -116,7 +116,7 @@ Get the commands that this client has permission for.
 
 #### Defined in
 
-[client/systems/messenger.ts:101](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/systems/messenger.ts#L101)
+[client/systems/messenger.ts:101](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/systems/messenger.ts#L101)
 
 ___
 
@@ -135,7 +135,7 @@ Newest message is always first element in array.
 
 #### Defined in
 
-[client/systems/messenger.ts:71](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/systems/messenger.ts#L71)
+[client/systems/messenger.ts:71](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/systems/messenger.ts#L71)
 
 ___
 
@@ -161,7 +161,7 @@ Useful for plugin creators.
 
 #### Defined in
 
-[client/systems/messenger.ts:34](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/systems/messenger.ts#L34)
+[client/systems/messenger.ts:34](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/systems/messenger.ts#L34)
 
 ___
 
@@ -187,7 +187,7 @@ Useful for plugin creators.
 
 #### Defined in
 
-[client/systems/messenger.ts:23](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/systems/messenger.ts#L23)
+[client/systems/messenger.ts:23](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/systems/messenger.ts#L23)
 
 ___
 
@@ -212,7 +212,7 @@ Commands must start with a forward slash. Such as '/'.
 
 #### Defined in
 
-[client/systems/messenger.ts:81](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/systems/messenger.ts#L81)
+[client/systems/messenger.ts:81](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/systems/messenger.ts#L81)
 
 ___
 
@@ -237,4 +237,4 @@ Which can be used to
 
 #### Defined in
 
-[client/systems/messenger.ts:91](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/systems/messenger.ts#L91)
+[client/systems/messenger.ts:91](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/systems/messenger.ts#L91)

@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/information/vendingMachines.ts:1](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/shared/information/vendingMachines.ts#L1)
+[shared/information/vendingMachines.ts:1](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/shared/information/vendingMachines.ts#L1)

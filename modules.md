@@ -324,7 +324,6 @@
 - [shared/flags/animationFlags](modules/shared_flags_animationFlags.md)
 - [shared/flags/pedflags](modules/shared_flags_pedflags.md)
 - [shared/information/atms](modules/shared_information_atms.md)
-- [shared/information/dlcs](modules/shared_information_dlcs.md)
 - [shared/information/doors](modules/shared_information_doors.md)
 - [shared/information/eyebrows](modules/shared_information_eyebrows.md)
 - [shared/information/facialHair](modules/shared_information_facialHair.md)

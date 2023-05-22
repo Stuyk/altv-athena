@@ -33,7 +33,7 @@ AthenaClient.menus.npc.(`scriptID`, `ped`, `options`): [`player`](server_config.
 
 #### Defined in
 
-[client/menus/npc.ts:8](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/menus/npc.ts#L8)
+[client/menus/npc.ts:8](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/menus/npc.ts#L8)
 
 ## Functions
 
@@ -61,7 +61,7 @@ Must always return the original wheel menu options + your changes.
 
 #### Defined in
 
-[client/menus/npc.ts:22](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/menus/npc.ts#L22)
+[client/menus/npc.ts:22](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/menus/npc.ts#L22)
 
 ___
 
@@ -81,7 +81,7 @@ Disable the NPC Wheel Menu
 
 #### Defined in
 
-[client/menus/npc.ts:93](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/menus/npc.ts#L93)
+[client/menus/npc.ts:93](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/menus/npc.ts#L93)
 
 ___
 
@@ -107,7 +107,7 @@ Opens the wheel menu against a target npc script id.
 
 #### Defined in
 
-[client/menus/npc.ts:42](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/menus/npc.ts#L42)
+[client/menus/npc.ts:42](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/menus/npc.ts#L42)
 
 ___
 
@@ -130,7 +130,7 @@ AthenaClient.menus.npc.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/menus/npc.ts:104](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/menus/npc.ts#L104)
+[client/menus/npc.ts:104](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/menus/npc.ts#L104)
 
 ::: tip Usage
 AthenaClient.menus.npc.**override**(`functionName`, `callback`): `any`
@@ -149,4 +149,4 @@ AthenaClient.menus.npc.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/menus/npc.ts:105](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/menus/npc.ts#L105)
+[client/menus/npc.ts:105](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/menus/npc.ts#L105)

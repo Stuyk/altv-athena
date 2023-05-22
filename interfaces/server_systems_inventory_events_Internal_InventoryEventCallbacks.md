@@ -37,4 +37,4 @@ InventoryEventCallbacks
 
 #### Defined in
 
-[server/systems/inventory/events.ts:12](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/systems/inventory/events.ts#L12)
+[server/systems/inventory/events.ts:12](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/systems/inventory/events.ts#L12)

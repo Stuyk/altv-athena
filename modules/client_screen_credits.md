@@ -23,7 +23,7 @@ Used to clear the last set spinner.
 
 #### Defined in
 
-[client/screen/credits.ts:18](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/screen/credits.ts#L18)
+[client/screen/credits.ts:18](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/screen/credits.ts#L18)
 
 ___
 
@@ -47,4 +47,4 @@ Creates on-screen text that looks like the GTA:V credits.
 
 #### Defined in
 
-[client/screen/credits.ts:41](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/screen/credits.ts#L41)
+[client/screen/credits.ts:41](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/screen/credits.ts#L41)

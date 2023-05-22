@@ -31,7 +31,7 @@ Handles IPL loading / unloading.
 
 #### Defined in
 
-[server/controllers/dynamicDoors/utility.ts:12](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/controllers/dynamicDoors/utility.ts#L12)
+[server/controllers/dynamicDoors/utility.ts:12](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/controllers/dynamicDoors/utility.ts#L12)
 
 ___
 
@@ -57,4 +57,4 @@ Handles IPL loading / unloading.
 
 #### Defined in
 
-[server/controllers/dynamicDoors/utility.ts:35](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/controllers/dynamicDoors/utility.ts#L35)
+[server/controllers/dynamicDoors/utility.ts:35](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/controllers/dynamicDoors/utility.ts#L35)

@@ -30,4 +30,4 @@ Play an animation for the local player.
 
 #### Defined in
 
-[client/utility/scenarios.ts:14](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/client/utility/scenarios.ts#L14)
+[client/utility/scenarios.ts:14](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/client/utility/scenarios.ts#L14)

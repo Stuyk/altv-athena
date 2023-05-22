@@ -43,7 +43,7 @@ Invoke an inventory event.
 
 #### Defined in
 
-[server/systems/inventory/events.ts:35](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/systems/inventory/events.ts#L35)
+[server/systems/inventory/events.ts:35](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/systems/inventory/events.ts#L35)
 
 ___
 
@@ -76,4 +76,4 @@ Listen for an invoked inventory event.
 
 #### Defined in
 
-[server/systems/inventory/events.ts:57](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/systems/inventory/events.ts#L57)
+[server/systems/inventory/events.ts:57](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/systems/inventory/events.ts#L57)

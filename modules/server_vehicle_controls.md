@@ -29,7 +29,7 @@ Returns true if the vehicle is currently locked.
 
 #### Defined in
 
-[server/vehicle/controls.ts:85](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/vehicle/controls.ts#L85)
+[server/vehicle/controls.ts:87](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/vehicle/controls.ts#L87)
 
 ___
 
@@ -54,7 +54,7 @@ Used to override vehicle control functionality
 
 #### Defined in
 
-[server/vehicle/controls.ts:169](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/vehicle/controls.ts#L169)
+[server/vehicle/controls.ts:171](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/vehicle/controls.ts#L171)
 
 ::: tip Usage
 Athena.vehicle.controls.**override**(`functionName`, `callback`): `any`
@@ -75,7 +75,7 @@ Used to override vehicle control functionality
 
 #### Defined in
 
-[server/vehicle/controls.ts:170](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/vehicle/controls.ts#L170)
+[server/vehicle/controls.ts:172](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/vehicle/controls.ts#L172)
 
 ::: tip Usage
 Athena.vehicle.controls.**override**(`functionName`, `callback`): `any`
@@ -96,7 +96,7 @@ Used to override vehicle control functionality
 
 #### Defined in
 
-[server/vehicle/controls.ts:171](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/vehicle/controls.ts#L171)
+[server/vehicle/controls.ts:173](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/vehicle/controls.ts#L173)
 
 ::: tip Usage
 Athena.vehicle.controls.**override**(`functionName`, `callback`): `any`
@@ -117,7 +117,7 @@ Used to override vehicle control functionality
 
 #### Defined in
 
-[server/vehicle/controls.ts:172](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/vehicle/controls.ts#L172)
+[server/vehicle/controls.ts:174](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/vehicle/controls.ts#L174)
 
 ::: tip Usage
 Athena.vehicle.controls.**override**(`functionName`, `callback`): `any`
@@ -138,7 +138,7 @@ Used to override vehicle control functionality
 
 #### Defined in
 
-[server/vehicle/controls.ts:173](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/vehicle/controls.ts#L173)
+[server/vehicle/controls.ts:175](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/vehicle/controls.ts#L175)
 
 ___
 
@@ -165,7 +165,7 @@ The new state of the door. true = open
 
 #### Defined in
 
-[server/vehicle/controls.ts:64](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/vehicle/controls.ts#L64)
+[server/vehicle/controls.ts:66](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/vehicle/controls.ts#L66)
 
 ___
 
@@ -191,7 +191,7 @@ The new state of the engine. true = on
 
 #### Defined in
 
-[server/vehicle/controls.ts:35](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/vehicle/controls.ts#L35)
+[server/vehicle/controls.ts:35](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/vehicle/controls.ts#L35)
 
 ___
 
@@ -217,7 +217,7 @@ The new state of the lock. true = locked
 
 #### Defined in
 
-[server/vehicle/controls.ts:13](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/vehicle/controls.ts#L13)
+[server/vehicle/controls.ts:13](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/vehicle/controls.ts#L13)
 
 ___
 
@@ -241,7 +241,7 @@ Update the given vehicle in the database.
 
 #### Defined in
 
-[server/vehicle/controls.ts:100](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/vehicle/controls.ts#L100)
+[server/vehicle/controls.ts:102](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/vehicle/controls.ts#L102)
 
 ___
 
@@ -265,4 +265,4 @@ Update the vehicle's last used value.
 
 #### Defined in
 
-[server/vehicle/controls.ts:150](https://github.com/Stuyk/altv-athena/blob/d9b1cbb/src/core/server/vehicle/controls.ts#L150)
+[server/vehicle/controls.ts:152](https://github.com/Stuyk/altv-athena/blob/16e0acc/src/core/server/vehicle/controls.ts#L152)
