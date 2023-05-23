@@ -26,7 +26,7 @@ Use -1 to set forever.
 
 #### Defined in
 
-[shared/interfaces/iShard.ts:14](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/interfaces/iShard.ts#L14)
+[shared/interfaces/iShard.ts:14](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/shared/interfaces/iShard.ts#L14)
 
 ___
 
@@ -38,7 +38,7 @@ The text below the title. Optional.
 
 #### Defined in
 
-[shared/interfaces/iShard.ts:28](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/interfaces/iShard.ts#L28)
+[shared/interfaces/iShard.ts:28](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/shared/interfaces/iShard.ts#L28)
 
 ___
 
@@ -50,4 +50,4 @@ The large text to display.
 
 #### Defined in
 
-[shared/interfaces/iShard.ts:21](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/interfaces/iShard.ts#L21)
+[shared/interfaces/iShard.ts:21](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/shared/interfaces/iShard.ts#L21)

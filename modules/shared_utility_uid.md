@@ -21,4 +21,4 @@ order: 0
 
 #### Defined in
 
-[shared/utility/uid.ts:1](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/utility/uid.ts#L1)
+[shared/utility/uid.ts:1](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/shared/utility/uid.ts#L1)

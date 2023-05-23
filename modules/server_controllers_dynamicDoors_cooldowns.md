@@ -31,7 +31,7 @@ Clear cooldown for triggering the door event.
 
 #### Defined in
 
-[server/controllers/dynamicDoors/cooldowns.ts:45](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/controllers/dynamicDoors/cooldowns.ts#L45)
+[server/controllers/dynamicDoors/cooldowns.ts:45](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/server/controllers/dynamicDoors/cooldowns.ts#L45)
 
 ___
 
@@ -57,7 +57,7 @@ Get expiration time of a cooldown
 
 #### Defined in
 
-[server/controllers/dynamicDoors/cooldowns.ts:56](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/controllers/dynamicDoors/cooldowns.ts#L56)
+[server/controllers/dynamicDoors/cooldowns.ts:56](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/server/controllers/dynamicDoors/cooldowns.ts#L56)
 
 ___
 
@@ -83,7 +83,7 @@ Check if a cooldown is completed.
 
 #### Defined in
 
-[server/controllers/dynamicDoors/cooldowns.ts:31](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/controllers/dynamicDoors/cooldowns.ts#L31)
+[server/controllers/dynamicDoors/cooldowns.ts:31](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/server/controllers/dynamicDoors/cooldowns.ts#L31)
 
 ___
 
@@ -109,4 +109,4 @@ Register a cooldown, with predetermiend
 
 #### Defined in
 
-[server/controllers/dynamicDoors/cooldowns.ts:20](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/controllers/dynamicDoors/cooldowns.ts#L20)
+[server/controllers/dynamicDoors/cooldowns.ts:20](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/server/controllers/dynamicDoors/cooldowns.ts#L20)

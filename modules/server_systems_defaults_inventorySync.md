@@ -28,4 +28,4 @@ Athena.systems.defaults.inventorySync.disable();
 
 #### Defined in
 
-[server/systems/defaults/inventorySync.ts:114](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/server/systems/defaults/inventorySync.ts#L114)
+[server/systems/defaults/inventorySync.ts:114](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/server/systems/defaults/inventorySync.ts#L114)

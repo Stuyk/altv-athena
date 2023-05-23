@@ -30,4 +30,4 @@ Returns an array of parameter names.
 
 #### Defined in
 
-[shared/utility/getParamNames.ts:12](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/utility/getParamNames.ts#L12)
+[shared/utility/getParamNames.ts:12](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/shared/utility/getParamNames.ts#L12)

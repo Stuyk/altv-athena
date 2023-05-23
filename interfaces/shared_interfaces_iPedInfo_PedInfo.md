@@ -31,7 +31,7 @@ PedInfo
 
 #### Defined in
 
-[shared/interfaces/iPedInfo.ts:22](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/interfaces/iPedInfo.ts#L22)
+[shared/interfaces/iPedInfo.ts:22](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/shared/interfaces/iPedInfo.ts#L22)
 
 ___
 
@@ -47,7 +47,7 @@ PedInfo
 
 #### Defined in
 
-[shared/interfaces/iPedInfo.ts:36](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/interfaces/iPedInfo.ts#L36)
+[shared/interfaces/iPedInfo.ts:36](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/shared/interfaces/iPedInfo.ts#L36)
 
 ___
 
@@ -63,7 +63,7 @@ PedInfo
 
 #### Defined in
 
-[shared/interfaces/iPedInfo.ts:15](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/interfaces/iPedInfo.ts#L15)
+[shared/interfaces/iPedInfo.ts:15](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/shared/interfaces/iPedInfo.ts#L15)
 
 ___
 
@@ -79,7 +79,7 @@ PedInfo
 
 #### Defined in
 
-[shared/interfaces/iPedInfo.ts:43](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/interfaces/iPedInfo.ts#L43)
+[shared/interfaces/iPedInfo.ts:43](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/shared/interfaces/iPedInfo.ts#L43)
 
 ___
 
@@ -95,4 +95,4 @@ PedInfo
 
 #### Defined in
 
-[shared/interfaces/iPedInfo.ts:29](https://github.com/Stuyk/altv-athena/blob/ed495cc/src/core/shared/interfaces/iPedInfo.ts#L29)
+[shared/interfaces/iPedInfo.ts:29](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/shared/interfaces/iPedInfo.ts#L29)
