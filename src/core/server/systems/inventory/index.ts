@@ -4,6 +4,7 @@ export * as convert from './convert';
 export * as crafting from './crafting';
 export * as drops from './drops';
 export * as effects from './effects';
+export * as equip from './equip';
 export * as events from './events';
 export * as factory from './factory';
 export * as manager from './manager';

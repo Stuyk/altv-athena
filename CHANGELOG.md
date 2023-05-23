@@ -104,6 +104,11 @@ Athena.commands
 - Just a wrapper of Athena.system.messenger.commands
 - Gives it a shorter pathway, for the sake of ease of use
 
+Equip Namespace
+- Used to listen to unequip / equip from specific item types
+Athena.systems.inventory.equip.on
+Athena.systems.invnetory.equip.invoke 
+
 ```
 
 ## 5.0.0
