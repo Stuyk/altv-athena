@@ -237,12 +237,9 @@ export function on(
  *
  * @template T
  * @param {'player-disconnected'} eventName
- * @param {((player: alt.Player, id: number, document: Character | T) => void)} callback
+ * @param {((document: Character | T) => void)} callback
  */
-export function on<T>(
-    eventName: 'player-disconnected',
-    callback: (player: alt.Player, id: number, document: Character | T) => void,
-);
+export function on<T>(eventName: 'player-disconnected', callback: (player: undefined, document: Character | T) => void);
 
 /**
  * Triggers when a player unequips a weapon.

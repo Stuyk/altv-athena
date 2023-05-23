@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 
 const sessionStorage: { [id: string]: { [key: string]: any } } = {};
 
@@ -119,12 +120,20 @@ export function clearKey(player: alt.Player | number, key: keyof AthenaSession.P
  * @param {alt.Player} player
  */
 export function clearAll(player: alt.Player) {
-    if (!player || !player.valid) {
+    if (!player || typeof player.id === 'undefined') {
         return;
     }
 
     if (typeof sessionStorage[player.id] === 'undefined') {
         return;
+    }
+
+    if (sessionStorage[player.id]['athena-document-character-data']) {
+        Athena.player.events.trigger(
+            'player-disconnected',
+            undefined,
+            sessionStorage[player.id]['athena-document-character-data'],
+        );
     }
 
     delete sessionStorage[player.id];
