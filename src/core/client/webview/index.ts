@@ -678,7 +678,7 @@ export function isAnyMenuOpen(excludeDead = false): boolean {
     }
 
     if (!excludeDead) {
-        if (alt.Player.local.meta.isDead) {
+        if (alt.Player.local.meta?.isDead) {
             return true;
         }
     }
