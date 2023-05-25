@@ -20,4 +20,4 @@ order: 0
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:127](https://github.com/Stuyk/altv-athena/blob/bc77fba/src/core/server/controllers/dynamicDoors/interfaces.ts#L127)
+[server/controllers/dynamicDoors/interfaces.ts:127](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L127)
