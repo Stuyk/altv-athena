@@ -39,7 +39,7 @@ A callback when this menu option is changed.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
+[client/rmlui/menu/menuInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/client/rmlui/menu/menuInterfaces.ts#L26)
 
 ___
 
@@ -51,7 +51,7 @@ A description of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
+[client/rmlui/menu/menuInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/client/rmlui/menu/menuInterfaces.ts#L18)
 
 ___
 
@@ -63,7 +63,7 @@ Only for Range & Selection Types
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
+[client/rmlui/menu/menuInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/client/rmlui/menu/menuInterfaces.ts#L34)
 
 ___
 
@@ -75,4 +75,4 @@ The title of this menu option.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/client/rmlui/menu/menuInterfaces.ts#L10)
+[client/rmlui/menu/menuInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/client/rmlui/menu/menuInterfaces.ts#L10)

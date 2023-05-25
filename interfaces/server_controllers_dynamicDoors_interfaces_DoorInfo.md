@@ -40,7 +40,7 @@ DoorInfo
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:98](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L98)
+[server/controllers/dynamicDoors/interfaces.ts:98](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/controllers/dynamicDoors/interfaces.ts#L98)
 
 ___
 
@@ -56,7 +56,7 @@ DynamicDoor
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:19](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L19)
+[server/controllers/dynamicDoors/interfaces.ts:19](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/controllers/dynamicDoors/interfaces.ts#L19)
 
 ___
 
@@ -93,7 +93,7 @@ DoorInfo
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:91](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L91)
+[server/controllers/dynamicDoors/interfaces.ts:91](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/controllers/dynamicDoors/interfaces.ts#L91)
 
 ___
 
@@ -113,7 +113,7 @@ DoorInfo
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:39](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L39)
+[server/controllers/dynamicDoors/interfaces.ts:39](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/controllers/dynamicDoors/interfaces.ts#L39)
 
 ___
 
@@ -129,7 +129,7 @@ DoorInfo
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:56](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L56)
+[server/controllers/dynamicDoors/interfaces.ts:56](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/controllers/dynamicDoors/interfaces.ts#L56)
 
 ___
 
@@ -145,7 +145,7 @@ DoorInfo
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:64](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L64)
+[server/controllers/dynamicDoors/interfaces.ts:64](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/controllers/dynamicDoors/interfaces.ts#L64)
 
 ___
 
@@ -161,7 +161,7 @@ DoorInfo
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:48](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L48)
+[server/controllers/dynamicDoors/interfaces.ts:48](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/controllers/dynamicDoors/interfaces.ts#L48)
 
 ___
 
@@ -177,7 +177,7 @@ DoorInfo
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:11](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L11)
+[server/controllers/dynamicDoors/interfaces.ts:11](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/controllers/dynamicDoors/interfaces.ts#L11)
 
 ___
 
@@ -193,7 +193,7 @@ DoorInfo
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:27](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L27)
+[server/controllers/dynamicDoors/interfaces.ts:27](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/controllers/dynamicDoors/interfaces.ts#L27)
 
 ___
 
@@ -209,7 +209,7 @@ DoorInfo
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:72](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L72)
+[server/controllers/dynamicDoors/interfaces.ts:72](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/controllers/dynamicDoors/interfaces.ts#L72)
 
 ___
 
@@ -225,4 +225,4 @@ DoorInfo
 
 #### Defined in
 
-[server/controllers/dynamicDoors/interfaces.ts:80](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/controllers/dynamicDoors/interfaces.ts#L80)
+[server/controllers/dynamicDoors/interfaces.ts:80](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/controllers/dynamicDoors/interfaces.ts#L80)

@@ -56,7 +56,7 @@ await Athena.document.character.set(somePlayer, 'groups', modifiedDocument.group
 
 #### Defined in
 
-[server/systems/permissionGroup.ts:28](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/permissionGroup.ts#L28)
+[server/systems/permissionGroup.ts:28](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/permissionGroup.ts#L28)
 
 ___
 
@@ -84,7 +84,7 @@ Check if a specific document has any of the listed permissions.
 
 #### Defined in
 
-[server/systems/permissionGroup.ts:168](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/permissionGroup.ts#L168)
+[server/systems/permissionGroup.ts:168](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/permissionGroup.ts#L168)
 
 ___
 
@@ -116,7 +116,7 @@ hasCommonPermission
 
 #### Defined in
 
-[server/systems/permissionGroup.ts:203](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/permissionGroup.ts#L203)
+[server/systems/permissionGroup.ts:203](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/permissionGroup.ts#L203)
 
 ___
 
@@ -143,7 +143,7 @@ Checks if the documet is part of a group.
 
 #### Defined in
 
-[server/systems/permissionGroup.ts:127](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/permissionGroup.ts#L127)
+[server/systems/permissionGroup.ts:127](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/permissionGroup.ts#L127)
 
 ___
 
@@ -171,7 +171,7 @@ Check if a document has a specific group permission.
 
 #### Defined in
 
-[server/systems/permissionGroup.ts:148](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/permissionGroup.ts#L148)
+[server/systems/permissionGroup.ts:148](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/permissionGroup.ts#L148)
 
 ___
 
@@ -204,7 +204,7 @@ Removes a group entirely from a document.
 
 #### Defined in
 
-[server/systems/permissionGroup.ts:110](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/permissionGroup.ts#L110)
+[server/systems/permissionGroup.ts:110](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/permissionGroup.ts#L110)
 
 ___
 
@@ -238,4 +238,4 @@ Remove a permission from a group key.
 
 #### Defined in
 
-[server/systems/permissionGroup.ts:67](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/permissionGroup.ts#L67)
+[server/systems/permissionGroup.ts:67](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/permissionGroup.ts#L67)

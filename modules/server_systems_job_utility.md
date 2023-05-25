@@ -29,7 +29,7 @@ Cleanly clones an objective and rebinds all callbacks.
 
 #### Defined in
 
-[server/systems/job/utility.ts:11](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/job/utility.ts#L11)
+[server/systems/job/utility.ts:11](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/job/utility.ts#L11)
 
 ___
 
@@ -54,4 +54,4 @@ Used to override job objective trigger functionality
 
 #### Defined in
 
-[server/systems/job/utility.ts:32](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/job/utility.ts#L32)
+[server/systems/job/utility.ts:32](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/job/utility.ts#L32)

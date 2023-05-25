@@ -29,7 +29,7 @@ typeof [`AdminControls`](client_systems_adminControl_Internal.md#AdminControls)
 
 #### Defined in
 
-[client/systems/adminControl.ts:24](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/client/systems/adminControl.ts#L24)
+[client/systems/adminControl.ts:24](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/client/systems/adminControl.ts#L24)
 
 ___
 
@@ -56,7 +56,7 @@ Invoke an admin control based on its uid.
 
 #### Defined in
 
-[client/systems/adminControl.ts:14](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/client/systems/adminControl.ts#L14)
+[client/systems/adminControl.ts:14](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/client/systems/adminControl.ts#L14)
 
 ___
 
@@ -78,4 +78,4 @@ AthenaClient.systems.adminControl.**onControlUpdate**(`callback`): `void`
 
 #### Defined in
 
-[client/systems/adminControl.ts:28](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/client/systems/adminControl.ts#L28)
+[client/systems/adminControl.ts:28](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/client/systems/adminControl.ts#L28)

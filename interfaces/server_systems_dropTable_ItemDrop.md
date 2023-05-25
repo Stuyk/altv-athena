@@ -25,7 +25,7 @@ ItemDrop
 
 #### Defined in
 
-[server/systems/dropTable.ts:54](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/dropTable.ts#L54)
+[server/systems/dropTable.ts:54](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/dropTable.ts#L54)
 
 ___
 
@@ -43,7 +43,7 @@ ItemDrop
 
 #### Defined in
 
-[server/systems/dropTable.ts:44](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/dropTable.ts#L44)
+[server/systems/dropTable.ts:44](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/dropTable.ts#L44)
 
 ___
 
@@ -59,7 +59,7 @@ ItemDropRatio
 
 #### Defined in
 
-[server/systems/dropTable.ts:10](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/dropTable.ts#L10)
+[server/systems/dropTable.ts:10](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/dropTable.ts#L10)
 
 ___
 
@@ -82,4 +82,4 @@ ItemDrop
 
 #### Defined in
 
-[server/systems/dropTable.ts:18](https://github.com/Stuyk/altv-athena/blob/16c490d/src/core/server/systems/dropTable.ts#L18)
+[server/systems/dropTable.ts:18](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/dropTable.ts#L18)
