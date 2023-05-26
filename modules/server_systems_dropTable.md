@@ -40,4 +40,4 @@ This can sometimes return `zero` items depending on the odds.
 
 #### Defined in
 
-[server/systems/dropTable.ts:68](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/dropTable.ts#L68)
+[server/systems/dropTable.ts:68](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/dropTable.ts#L68)

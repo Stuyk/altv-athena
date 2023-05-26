@@ -35,7 +35,7 @@ Otherwise, returns the original Vector3.
 
 #### Defined in
 
-[client/world/position.ts:21](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/client/world/position.ts#L21)
+[client/world/position.ts:21](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/client/world/position.ts#L21)
 
 ___
 
@@ -62,4 +62,4 @@ Should be used periodically and not in an every tick. Could be expensive.
 
 #### Defined in
 
-[client/world/position.ts:43](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/client/world/position.ts#L43)
+[client/world/position.ts:43](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/client/world/position.ts#L43)

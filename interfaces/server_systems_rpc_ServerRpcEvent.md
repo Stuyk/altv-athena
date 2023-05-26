@@ -23,7 +23,7 @@ ServerRpcEvent
 
 #### Defined in
 
-[server/systems/rpc.ts:21](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/rpc.ts#L21)
+[server/systems/rpc.ts:21](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/rpc.ts#L21)
 
 ___
 
@@ -39,7 +39,7 @@ ServerRpcEvent
 
 #### Defined in
 
-[server/systems/rpc.ts:13](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/rpc.ts#L13)
+[server/systems/rpc.ts:13](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/rpc.ts#L13)
 
 ___
 
@@ -57,7 +57,7 @@ ServerRpcEvent
 
 #### Defined in
 
-[server/systems/rpc.ts:31](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/rpc.ts#L31)
+[server/systems/rpc.ts:31](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/rpc.ts#L31)
 
 ___
 
@@ -73,4 +73,4 @@ ServerRpcEvent
 
 #### Defined in
 
-[server/systems/rpc.ts:39](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/rpc.ts#L39)
+[server/systems/rpc.ts:39](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/rpc.ts#L39)

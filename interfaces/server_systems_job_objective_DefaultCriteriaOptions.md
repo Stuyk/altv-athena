@@ -19,7 +19,7 @@ This job fails when the objective vehicle is destroyed.
 
 #### Defined in
 
-[server/systems/job/objective.ts:52](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/job/objective.ts#L52)
+[server/systems/job/objective.ts:52](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/job/objective.ts#L52)
 
 ___
 
@@ -31,7 +31,7 @@ This objective can only in a job vehicle
 
 #### Defined in
 
-[server/systems/job/objective.ts:44](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/job/objective.ts#L44)
+[server/systems/job/objective.ts:44](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/job/objective.ts#L44)
 
 ___
 
@@ -43,7 +43,7 @@ This objective can only be completed in any vehicle.
 
 #### Defined in
 
-[server/systems/job/objective.ts:36](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/job/objective.ts#L36)
+[server/systems/job/objective.ts:36](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/job/objective.ts#L36)
 
 ___
 
@@ -55,7 +55,7 @@ The job vehicle must be nearby to complete this objective.
 
 #### Defined in
 
-[server/systems/job/objective.ts:60](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/job/objective.ts#L60)
+[server/systems/job/objective.ts:60](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/job/objective.ts#L60)
 
 ___
 
@@ -67,7 +67,7 @@ This objective cannot be completed if the player has died.
 
 #### Defined in
 
-[server/systems/job/objective.ts:28](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/job/objective.ts#L28)
+[server/systems/job/objective.ts:28](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/job/objective.ts#L28)
 
 ___
 
@@ -79,7 +79,7 @@ This objective cannot be completed in a vehicle.
 
 #### Defined in
 
-[server/systems/job/objective.ts:12](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/job/objective.ts#L12)
+[server/systems/job/objective.ts:12](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/job/objective.ts#L12)
 
 ___
 
@@ -91,7 +91,7 @@ This objective cannot be completed with a weapon in-hand.
 
 #### Defined in
 
-[server/systems/job/objective.ts:20](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/job/objective.ts#L20)
+[server/systems/job/objective.ts:20](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/job/objective.ts#L20)
 
 ___
 
@@ -103,4 +103,4 @@ The vehicle engine must be off to complete this objective.
 
 #### Defined in
 
-[server/systems/job/objective.ts:68](https://github.com/Stuyk/altv-athena/blob/4bfd806/src/core/server/systems/job/objective.ts#L68)
+[server/systems/job/objective.ts:68](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/job/objective.ts#L68)
