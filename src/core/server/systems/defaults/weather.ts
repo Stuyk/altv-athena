@@ -13,19 +13,7 @@ import * as Athena from '@AthenaServer/api';
 
 const TIME_BETWEEN_UPDATES = 60000 * 5; // 5 Minutes
 // const TIME_BETWEEN_UPDATES = 30000; // 30s FOR TESTING
-let weathers: Array<WEATHER_KEY> = [
-    'ExtraSunny',
-    'ExtraSunny',
-    'Clear',
-    'Clouds',
-    'Overcast',
-    'Rain',
-    'Thunder',
-    'Rain',
-    'Foggy',
-    'Overcast',
-    'Clearing',
-];
+let weathers: Array<WEATHER_KEY> = ['ExtraSunny', 'ExtraSunny', 'Clear', 'Clouds', 'Overcast', 'Foggy', 'Overcast'];
 
 let enabled = true;
 let interval: number;
