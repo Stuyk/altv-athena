@@ -44,6 +44,10 @@ const Internal = {
                 continue;
             }
 
+            if (vehData.doNotDespawn) {
+                continue;
+            }
+
             await Athena.vehicle.controls.update(vehicle);
 
             const vehicleId = vehicle.id;

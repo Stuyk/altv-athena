@@ -234,7 +234,7 @@ export function getAllOnline<T = {}>(): Array<{ id: number; document: OwnedVehic
  */
 export function exists(_id: string): boolean {
     const sessions = Athena.session.vehicle.getAll(SessionKey);
-    return sessions.find((x) => x._id === _id) ? true : false;
+    return sessions.find((x) => x && x._id && x._id.toString() === _id) ? true : false;
 }
 
 alt.on('removeEntity', (entity: alt.Entity) => {

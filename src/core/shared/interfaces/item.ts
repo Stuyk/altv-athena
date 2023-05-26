@@ -275,6 +275,16 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
      *
      */
     disableCrafting?: boolean;
+
+    /**
+     * A new name to associate with this item.
+     *
+     * This is completely optional, and uses the base item name by default
+     *
+     * @type {string}
+     * @memberof StoredItem
+     */
+    name?: string;
 }
 
 /**
