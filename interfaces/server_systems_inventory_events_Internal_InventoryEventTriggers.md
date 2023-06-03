@@ -23,4 +23,4 @@ InventoryEventTriggers
 
 #### Defined in
 
-[server/systems/inventory/events.ts:22](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/server/systems/inventory/events.ts#L22)
+[server/systems/inventory/events.ts:22](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/server/systems/inventory/events.ts#L22)

@@ -205,4 +205,4 @@ order: 0
 
 #### Defined in
 
-[shared/locale/languages/keys.ts:1](https://github.com/Stuyk/altv-athena/blob/8d130a5/src/core/shared/locale/languages/keys.ts#L1)
+[shared/locale/languages/keys.ts:1](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/shared/locale/languages/keys.ts#L1)
