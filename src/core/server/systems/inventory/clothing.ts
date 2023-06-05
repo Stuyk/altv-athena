@@ -290,7 +290,7 @@ export function update(player: alt.Player, document: Character = undefined) {
         }
     }
 
-    if (typeof data.uniform === 'undefined') {
+    if (!Array.isArray(data.uniform)) {
         return;
     }
 
