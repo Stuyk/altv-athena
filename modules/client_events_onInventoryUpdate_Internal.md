@@ -33,4 +33,4 @@ AthenaClient.events.onInventoryUpdate.Internal.(`inventory`, `toolbar`, `totalWe
 
 #### Defined in
 
-[client/events/onInventoryUpdate.ts:5](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/client/events/onInventoryUpdate.ts#L5)
+[client/events/onInventoryUpdate.ts:5](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/client/events/onInventoryUpdate.ts#L5)

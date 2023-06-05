@@ -28,4 +28,4 @@ Athena.systems.defaults.vehiclesDespawnOnLeave.disable();
 
 #### Defined in
 
-[server/systems/defaults/vehiclesDespawnOnLeave.ts:80](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/server/systems/defaults/vehiclesDespawnOnLeave.ts#L80)
+[server/systems/defaults/vehiclesDespawnOnLeave.ts:80](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/defaults/vehiclesDespawnOnLeave.ts#L80)

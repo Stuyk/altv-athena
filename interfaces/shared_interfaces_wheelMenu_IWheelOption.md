@@ -32,7 +32,7 @@ Example: '/assets/icons/bullpuprifle.png'
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:93](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/shared/interfaces/wheelMenu.ts#L93)
+[shared/interfaces/wheelMenu.ts:93](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/wheelMenu.ts#L93)
 
 ___
 
@@ -46,7 +46,7 @@ ie. `red`, `green`, `yellow`, etc.
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:33](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/shared/interfaces/wheelMenu.ts#L33)
+[shared/interfaces/wheelMenu.ts:33](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/wheelMenu.ts#L33)
 
 ___
 
@@ -58,7 +58,7 @@ Any data that you want to pass through a callback or an event.
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:75](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/shared/interfaces/wheelMenu.ts#L75)
+[shared/interfaces/wheelMenu.ts:75](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/wheelMenu.ts#L75)
 
 ___
 
@@ -70,7 +70,7 @@ Do not close the wheel menu after executing this option.
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:51](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/shared/interfaces/wheelMenu.ts#L51)
+[shared/interfaces/wheelMenu.ts:51](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/wheelMenu.ts#L51)
 
 ___
 
@@ -82,7 +82,7 @@ From the client, emit a client event through alt.emit
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:67](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/shared/interfaces/wheelMenu.ts#L67)
+[shared/interfaces/wheelMenu.ts:67](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/wheelMenu.ts#L67)
 
 ___
 
@@ -94,7 +94,7 @@ From the client, call a specific server event through alt.emitServer
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:59](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/shared/interfaces/wheelMenu.ts#L59)
+[shared/interfaces/wheelMenu.ts:59](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/wheelMenu.ts#L59)
 
 ___
 
@@ -108,7 +108,7 @@ ie. `icon-home`
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:43](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/shared/interfaces/wheelMenu.ts#L43)
+[shared/interfaces/wheelMenu.ts:43](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/wheelMenu.ts#L43)
 
 ___
 
@@ -121,7 +121,7 @@ Example: '/assets/icons/bullpuprifle.png'
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:84](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/shared/interfaces/wheelMenu.ts#L84)
+[shared/interfaces/wheelMenu.ts:84](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/wheelMenu.ts#L84)
 
 ___
 
@@ -133,7 +133,7 @@ The name of this option.
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:14](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/shared/interfaces/wheelMenu.ts#L14)
+[shared/interfaces/wheelMenu.ts:14](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/wheelMenu.ts#L14)
 
 ___
 
@@ -147,4 +147,4 @@ If not specified one will automatically be created.
 
 #### Defined in
 
-[shared/interfaces/wheelMenu.ts:23](https://github.com/Stuyk/altv-athena/blob/068488b/src/core/shared/interfaces/wheelMenu.ts#L23)
+[shared/interfaces/wheelMenu.ts:23](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/wheelMenu.ts#L23)
