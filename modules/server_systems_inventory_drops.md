@@ -31,7 +31,7 @@ Add a dropped item.
 
 #### Defined in
 
-[server/systems/inventory/drops.ts:62](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/inventory/drops.ts#L62)
+[server/systems/inventory/drops.ts:62](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/inventory/drops.ts#L62)
 
 ___
 
@@ -55,7 +55,7 @@ Get the current item drop.
 
 #### Defined in
 
-[server/systems/inventory/drops.ts:105](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/inventory/drops.ts#L105)
+[server/systems/inventory/drops.ts:105](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/inventory/drops.ts#L105)
 
 ___
 
@@ -79,7 +79,7 @@ Check if an item is available by database id
 
 #### Defined in
 
-[server/systems/inventory/drops.ts:159](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/inventory/drops.ts#L159)
+[server/systems/inventory/drops.ts:159](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/inventory/drops.ts#L159)
 
 ___
 
@@ -104,7 +104,7 @@ Mark an item as being taken
 
 #### Defined in
 
-[server/systems/inventory/drops.ts:174](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/inventory/drops.ts#L174)
+[server/systems/inventory/drops.ts:174](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/inventory/drops.ts#L174)
 
 ___
 
@@ -129,7 +129,7 @@ Used to override inventory drop item functionality
 
 #### Defined in
 
-[server/systems/inventory/drops.ts:188](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/inventory/drops.ts#L188)
+[server/systems/inventory/drops.ts:188](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/inventory/drops.ts#L188)
 
 ::: tip Usage
 Athena.systems.inventory.drops.**override**(`functionName`, `callback`): `any`
@@ -150,7 +150,7 @@ Used to override inventory drop item functionality
 
 #### Defined in
 
-[server/systems/inventory/drops.ts:189](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/inventory/drops.ts#L189)
+[server/systems/inventory/drops.ts:189](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/inventory/drops.ts#L189)
 
 ::: tip Usage
 Athena.systems.inventory.drops.**override**(`functionName`, `callback`): `any`
@@ -171,7 +171,7 @@ Used to override inventory drop item functionality
 
 #### Defined in
 
-[server/systems/inventory/drops.ts:190](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/inventory/drops.ts#L190)
+[server/systems/inventory/drops.ts:190](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/inventory/drops.ts#L190)
 
 ::: tip Usage
 Athena.systems.inventory.drops.**override**(`functionName`, `callback`): `any`
@@ -192,7 +192,7 @@ Used to override inventory drop item functionality
 
 #### Defined in
 
-[server/systems/inventory/drops.ts:191](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/inventory/drops.ts#L191)
+[server/systems/inventory/drops.ts:191](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/inventory/drops.ts#L191)
 
 ::: tip Usage
 Athena.systems.inventory.drops.**override**(`functionName`, `callback`): `any`
@@ -213,7 +213,7 @@ Used to override inventory drop item functionality
 
 #### Defined in
 
-[server/systems/inventory/drops.ts:192](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/inventory/drops.ts#L192)
+[server/systems/inventory/drops.ts:192](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/inventory/drops.ts#L192)
 
 ___
 
@@ -237,4 +237,4 @@ Remove the dropped item based on identifier.
 
 #### Defined in
 
-[server/systems/inventory/drops.ts:118](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/inventory/drops.ts#L118)
+[server/systems/inventory/drops.ts:118](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/inventory/drops.ts#L118)

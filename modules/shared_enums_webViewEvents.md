@@ -30,4 +30,4 @@ order: 0
 
 #### Defined in
 
-[shared/enums/webViewEvents.ts:1](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/enums/webViewEvents.ts#L1)
+[shared/enums/webViewEvents.ts:1](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/shared/enums/webViewEvents.ts#L1)

@@ -31,7 +31,7 @@ Clear all keys, and remove all data for a session.
 
 #### Defined in
 
-[server/session/player.ts:122](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/session/player.ts#L122)
+[server/session/player.ts:122](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/session/player.ts#L122)
 
 ___
 
@@ -58,7 +58,7 @@ Clear a key from the player.
 
 #### Defined in
 
-[server/session/player.ts:100](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/session/player.ts#L100)
+[server/session/player.ts:100](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/session/player.ts#L100)
 
 ___
 
@@ -89,7 +89,7 @@ Retrieve data from a player's session storage.
 
 #### Defined in
 
-[server/session/player.ts:59](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/session/player.ts#L59)
+[server/session/player.ts:59](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/session/player.ts#L59)
 
 ___
 
@@ -121,7 +121,7 @@ Get all player's that have a specific key.
 
 #### Defined in
 
-[server/session/player.ts:148](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/session/player.ts#L148)
+[server/session/player.ts:148](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/session/player.ts#L148)
 
 ___
 
@@ -148,7 +148,7 @@ Returns true, if it has any value set for a given key.
 
 #### Defined in
 
-[server/session/player.ts:81](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/session/player.ts#L81)
+[server/session/player.ts:81](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/session/player.ts#L81)
 
 ___
 
@@ -195,4 +195,4 @@ Athena.session.player.set(somePlayer, 'myCustomValue', true);
 
 #### Defined in
 
-[server/session/player.ts:36](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/session/player.ts#L36)
+[server/session/player.ts:36](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/session/player.ts#L36)

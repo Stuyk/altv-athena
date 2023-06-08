@@ -40,7 +40,7 @@ See that function for additional information.
 
 #### Defined in
 
-[server/systems/plugins.ts:122](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/plugins.ts#L122)
+[server/systems/plugins.ts:122](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/plugins.ts#L122)
 
 ___
 
@@ -65,7 +65,7 @@ Useful for using 'Athena API' at the top level of a document.
 
 #### Defined in
 
-[server/systems/plugins.ts:85](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/plugins.ts#L85)
+[server/systems/plugins.ts:85](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/plugins.ts#L85)
 
 ___
 
@@ -85,7 +85,7 @@ Returns a list of all plugin names that are currently being loaded.
 
 #### Defined in
 
-[server/systems/plugins.ts:73](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/plugins.ts#L73)
+[server/systems/plugins.ts:73](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/plugins.ts#L73)
 
 ___
 
@@ -103,7 +103,7 @@ Loads all plugins.
 
 #### Defined in
 
-[server/systems/plugins.ts:46](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/plugins.ts#L46)
+[server/systems/plugins.ts:46](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/plugins.ts#L46)
 
 ___
 
@@ -121,7 +121,7 @@ Verifies if all plugins are done loading.
 
 #### Defined in
 
-[server/systems/plugins.ts:98](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/plugins.ts#L98)
+[server/systems/plugins.ts:98](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/plugins.ts#L98)
 
 ___
 
@@ -149,7 +149,7 @@ This ensures that your plugin is ALWAYS loaded last.
 
 #### Defined in
 
-[server/systems/plugins.ts:62](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/plugins.ts#L62)
+[server/systems/plugins.ts:62](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/plugins.ts#L62)
 
 ___
 
@@ -185,4 +185,4 @@ As long as you know the 'plugin name' you can import anything.
 
 #### Defined in
 
-[server/systems/plugins.ts:143](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/server/systems/plugins.ts#L143)
+[server/systems/plugins.ts:143](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/server/systems/plugins.ts#L143)

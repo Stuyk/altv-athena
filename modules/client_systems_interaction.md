@@ -23,7 +23,7 @@ Invoke an interaction
 
 #### Defined in
 
-[client/systems/interaction.ts:32](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/client/systems/interaction.ts#L32)
+[client/systems/interaction.ts:32](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/client/systems/interaction.ts#L32)
 
 ___
 
@@ -41,4 +41,4 @@ Check if an interaction is currently available to be invoked
 
 #### Defined in
 
-[client/systems/interaction.ts:44](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/client/systems/interaction.ts#L44)
+[client/systems/interaction.ts:44](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/client/systems/interaction.ts#L44)

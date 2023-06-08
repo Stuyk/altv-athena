@@ -25,7 +25,7 @@ Data to add to the menu to retrieve on option select.
 
 #### Defined in
 
-[shared/interfaces/actions.ts:27](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/actions.ts#L27)
+[shared/interfaces/actions.ts:27](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/shared/interfaces/actions.ts#L27)
 
 ___
 
@@ -37,7 +37,7 @@ Name of the event to call.
 
 #### Defined in
 
-[shared/interfaces/actions.ts:13](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/actions.ts#L13)
+[shared/interfaces/actions.ts:13](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/shared/interfaces/actions.ts#L13)
 
 ___
 
@@ -49,4 +49,4 @@ Is a server event?
 
 #### Defined in
 
-[shared/interfaces/actions.ts:20](https://github.com/Stuyk/altv-athena/blob/7cb341a/src/core/shared/interfaces/actions.ts#L20)
+[shared/interfaces/actions.ts:20](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/shared/interfaces/actions.ts#L20)
