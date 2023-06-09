@@ -109,6 +109,10 @@ Equip Namespace
 Athena.systems.inventory.equip.on
 Athena.systems.invnetory.equip.invoke 
 
+Basic Authentication
+- username/password based login
+- uses bip39 for recovery phrases
+
 ```
 
 ## 5.0.0

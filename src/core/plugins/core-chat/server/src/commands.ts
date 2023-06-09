@@ -132,14 +132,3 @@ Athena.commands.register(
         );
     },
 );
-
-Athena.commands.register(
-    'test123',
-    '/test123 [id] [...message] - Whisper to another player.',
-    [],
-    (player: alt.Player, someString: string, someNumber: number) => {
-        const commands = Athena.commands.getCommands(player);
-
-        console.log(commands);
-    },
-);
