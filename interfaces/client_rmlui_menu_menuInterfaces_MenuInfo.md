@@ -23,7 +23,7 @@ MenuInfo
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:168](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/rmlui/menu/menuInterfaces.ts#L168)
+[client/rmlui/menu/menuInterfaces.ts:168](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/client/rmlui/menu/menuInterfaces.ts#L168)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:138](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/rmlui/menu/menuInterfaces.ts#L138)
+[client/rmlui/menu/menuInterfaces.ts:138](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/client/rmlui/menu/menuInterfaces.ts#L138)
 
 ___
 
@@ -52,4 +52,4 @@ An array of available menu types to invoke.
 
 #### Defined in
 
-[client/rmlui/menu/menuInterfaces.ts:160](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/rmlui/menu/menuInterfaces.ts#L160)
+[client/rmlui/menu/menuInterfaces.ts:160](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/client/rmlui/menu/menuInterfaces.ts#L160)

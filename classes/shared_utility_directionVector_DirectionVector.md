@@ -24,7 +24,7 @@ order: 0
 
 #### Defined in
 
-[shared/utility/directionVector.ts:7](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/utility/directionVector.ts#L7)
+[shared/utility/directionVector.ts:7](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/utility/directionVector.ts#L7)
 
 ## Properties
 
@@ -34,7 +34,7 @@ order: 0
 
 #### Defined in
 
-[shared/utility/directionVector.ts:4](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/utility/directionVector.ts#L4)
+[shared/utility/directionVector.ts:4](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/utility/directionVector.ts#L4)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[shared/utility/directionVector.ts:5](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/utility/directionVector.ts#L5)
+[shared/utility/directionVector.ts:5](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/utility/directionVector.ts#L5)
 
 ## Methods
 
@@ -73,7 +73,7 @@ AthenaShared.utility.directionVector.DirectionVector.**eulerToQuaternion**(`rota
 
 #### Defined in
 
-[shared/utility/directionVector.ts:12](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/utility/directionVector.ts#L12)
+[shared/utility/directionVector.ts:12](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/utility/directionVector.ts#L12)
 
 ___
 
@@ -95,7 +95,7 @@ AthenaShared.utility.directionVector.DirectionVector.**forward**(`distance`): `I
 
 #### Defined in
 
-[shared/utility/directionVector.ts:42](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/utility/directionVector.ts#L42)
+[shared/utility/directionVector.ts:42](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/utility/directionVector.ts#L42)
 
 ___
 
@@ -111,7 +111,7 @@ AthenaShared.utility.directionVector.DirectionVector.**forwardVector**(): `IVect
 
 #### Defined in
 
-[shared/utility/directionVector.ts:33](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/utility/directionVector.ts#L33)
+[shared/utility/directionVector.ts:33](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/utility/directionVector.ts#L33)
 
 ___
 
@@ -133,7 +133,7 @@ AthenaShared.utility.directionVector.DirectionVector.**right**(`distance`): `any
 
 #### Defined in
 
-[shared/utility/directionVector.ts:62](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/utility/directionVector.ts#L62)
+[shared/utility/directionVector.ts:62](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/utility/directionVector.ts#L62)
 
 ___
 
@@ -149,7 +149,7 @@ AthenaShared.utility.directionVector.DirectionVector.**rightVector**(): `any`
 
 #### Defined in
 
-[shared/utility/directionVector.ts:52](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/utility/directionVector.ts#L52)
+[shared/utility/directionVector.ts:52](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/utility/directionVector.ts#L52)
 
 ___
 
@@ -171,7 +171,7 @@ AthenaShared.utility.directionVector.DirectionVector.**up**(`distance`): `any`
 
 #### Defined in
 
-[shared/utility/directionVector.ts:81](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/utility/directionVector.ts#L81)
+[shared/utility/directionVector.ts:81](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/utility/directionVector.ts#L81)
 
 ___
 
@@ -187,4 +187,4 @@ AthenaShared.utility.directionVector.DirectionVector.**upVector**(): `any`
 
 #### Defined in
 
-[shared/utility/directionVector.ts:72](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/utility/directionVector.ts#L72)
+[shared/utility/directionVector.ts:72](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/utility/directionVector.ts#L72)
