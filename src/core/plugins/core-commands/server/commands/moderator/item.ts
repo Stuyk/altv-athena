@@ -3,11 +3,11 @@ import * as Athena from '@AthenaServer/api';
 
 Athena.commands.register(
     'additem',
-    '/additem [dbName] [amount] [version?]',
+    '/additem [partialName] [amount] [version?]',
     ['admin'],
-    async (player: alt.Player, dbName: string, amount: string, version: string | undefined) => {
-        if (typeof dbName === 'undefined') {
-            Athena.player.emit.message(player, `Must specify a dbName to add an item.`);
+    async (player: alt.Player, partialName: string, amount: string, version: string | undefined) => {
+        if (typeof partialName === 'undefined') {
+            Athena.player.emit.message(player, `Must specify a partialName to add an item.`);
             return;
         }
 
@@ -31,8 +31,14 @@ Athena.commands.register(
             }
         }
 
+        const baseItem = Athena.systems.inventory.factory.getBaseItemByFuzzySearch(partialName);
+        if (typeof baseItem === 'undefined') {
+            Athena.player.emit.message(player, `Item '${partialName}' does not exist!`);
+            return;
+        }
+
         const result = await Athena.player.inventory.add(player, {
-            dbName,
+            dbName: baseItem.dbName,
             quantity: actualAmount,
             data: {},
             version: actualVersion,
