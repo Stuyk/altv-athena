@@ -29,7 +29,7 @@ Returns the total weight of a given data set.
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:11](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/systems/inventory/weight.ts#L11)
+[server/systems/inventory/weight.ts:11](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/inventory/weight.ts#L11)
 
 ___
 
@@ -53,7 +53,7 @@ Get the total weight for given data sets.
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:34](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/systems/inventory/weight.ts#L34)
+[server/systems/inventory/weight.ts:34](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/inventory/weight.ts#L34)
 
 ___
 
@@ -78,7 +78,7 @@ Determine if the weight is exceeded for a given data sets given the amount of we
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:51](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/systems/inventory/weight.ts#L51)
+[server/systems/inventory/weight.ts:51](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/inventory/weight.ts#L51)
 
 ___
 
@@ -103,7 +103,7 @@ Used to override inventory item weight functionality
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:93](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/systems/inventory/weight.ts#L93)
+[server/systems/inventory/weight.ts:93](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/inventory/weight.ts#L93)
 
 ::: tip Usage
 Athena.systems.inventory.weight.**override**(`functionName`, `callback`): `any`
@@ -124,7 +124,7 @@ Used to override inventory item weight functionality
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:94](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/systems/inventory/weight.ts#L94)
+[server/systems/inventory/weight.ts:94](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/inventory/weight.ts#L94)
 
 ::: tip Usage
 Athena.systems.inventory.weight.**override**(`functionName`, `callback`): `any`
@@ -145,7 +145,7 @@ Used to override inventory item weight functionality
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:95](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/systems/inventory/weight.ts#L95)
+[server/systems/inventory/weight.ts:95](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/inventory/weight.ts#L95)
 
 ___
 
@@ -177,4 +177,4 @@ Update weight for a given data set, and all items.
 
 #### Defined in
 
-[server/systems/inventory/weight.ts:72](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/systems/inventory/weight.ts#L72)
+[server/systems/inventory/weight.ts:72](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/inventory/weight.ts#L72)

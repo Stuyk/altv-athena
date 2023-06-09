@@ -23,7 +23,7 @@ ClothingComponent
 
 #### Defined in
 
-[shared/interfaces/item.ts:69](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/shared/interfaces/item.ts#L69)
+[shared/interfaces/item.ts:69](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L69)
 
 ___
 
@@ -35,7 +35,7 @@ The associated relative drawing id for a given dlc clothing component
 
 #### Defined in
 
-[shared/interfaces/item.ts:45](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/shared/interfaces/item.ts#L45)
+[shared/interfaces/item.ts:45](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L45)
 
 ___
 
@@ -47,7 +47,7 @@ The component identifier
 
 #### Defined in
 
-[shared/interfaces/item.ts:37](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/shared/interfaces/item.ts#L37)
+[shared/interfaces/item.ts:37](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L37)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/item.ts:77](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/shared/interfaces/item.ts#L77)
+[shared/interfaces/item.ts:77](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L77)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/item.ts:61](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/shared/interfaces/item.ts#L61)
+[shared/interfaces/item.ts:61](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L61)
 
 ___
 
@@ -77,4 +77,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/item.ts:53](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/shared/interfaces/item.ts#L53)
+[shared/interfaces/item.ts:53](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L53)

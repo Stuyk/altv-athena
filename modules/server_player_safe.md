@@ -32,7 +32,7 @@ Safely add armour to this player.
 
 #### Defined in
 
-[server/player/safe.ts:108](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L108)
+[server/player/safe.ts:108](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L108)
 
 ___
 
@@ -59,7 +59,7 @@ Safely add health to this player.
 
 #### Defined in
 
-[server/player/safe.ts:41](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L41)
+[server/player/safe.ts:41](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L41)
 
 ___
 
@@ -84,7 +84,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:196](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L196)
+[server/player/safe.ts:196](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L196)
 
 ::: tip Usage
 Athena.player.safe.**override**(`functionName`, `callback`): `any`
@@ -105,7 +105,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:197](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L197)
+[server/player/safe.ts:197](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L197)
 
 ::: tip Usage
 Athena.player.safe.**override**(`functionName`, `callback`): `any`
@@ -126,7 +126,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:198](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L198)
+[server/player/safe.ts:198](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L198)
 
 ::: tip Usage
 Athena.player.safe.**override**(`functionName`, `callback`): `any`
@@ -147,7 +147,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:199](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L199)
+[server/player/safe.ts:199](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L199)
 
 ::: tip Usage
 Athena.player.safe.**override**(`functionName`, `callback`): `any`
@@ -168,7 +168,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:200](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L200)
+[server/player/safe.ts:200](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L200)
 
 ::: tip Usage
 Athena.player.safe.**override**(`functionName`, `callback`): `any`
@@ -189,7 +189,7 @@ Used to override any internal safe setter functions
 
 #### Defined in
 
-[server/player/safe.ts:201](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L201)
+[server/player/safe.ts:201](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L201)
 
 ___
 
@@ -214,7 +214,7 @@ Set the player's dimension safely.
 
 #### Defined in
 
-[server/player/safe.ts:176](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L176)
+[server/player/safe.ts:176](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L176)
 
 ___
 
@@ -242,7 +242,7 @@ Safely set a player's position.
 
 #### Defined in
 
-[server/player/safe.ts:12](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L12)
+[server/player/safe.ts:12](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L12)
 
 ___
 
@@ -269,7 +269,7 @@ Safely subtracts armour to this player.
 
 #### Defined in
 
-[server/player/safe.ts:141](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L141)
+[server/player/safe.ts:141](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L141)
 
 ___
 
@@ -296,4 +296,4 @@ Safely subtract health to this player.
 
 #### Defined in
 
-[server/player/safe.ts:75](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/server/player/safe.ts#L75)
+[server/player/safe.ts:75](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/player/safe.ts#L75)
