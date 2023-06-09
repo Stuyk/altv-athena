@@ -23,7 +23,7 @@ interface MenuOptionBase<T = Function> {
      * @type {T | Function}
      *
      */
-    callback: T | Function;
+    callback: T | Function | ((...args: any[]) => void);
 
     /**
      * Only for Range & Selection Types
@@ -34,7 +34,7 @@ interface MenuOptionBase<T = Function> {
     onlyUpdateOnEnter?: boolean;
 }
 
-export interface Selection extends MenuOptionBase<(value: string) => void> {
+export interface Selection extends MenuOptionBase<(value: string | number) => void> {
     type: 'Selection';
 
     /**
@@ -43,7 +43,7 @@ export interface Selection extends MenuOptionBase<(value: string) => void> {
      * @type {Array<string>}
      *
      */
-    options: Array<string>;
+    options: Array<string | number>;
 
     /**
      * Current index of this selection.
@@ -118,8 +118,20 @@ export interface Range extends MenuOptionBase<(value: number) => void> {
     onlyUpdateOnEnter?: boolean;
 }
 
-export interface Invoke extends MenuOptionBase<() => void> {
+export interface Input extends MenuOptionBase<() => void> {
     type: 'Invoke';
+}
+
+export interface Invoke extends MenuOptionBase<(result: string) => void> {
+    type: 'Input';
+
+    /**
+     *
+     *
+     * @type {string}
+     * @memberof Invoke
+     */
+    placeholder: string;
 }
 
 export interface MenuInfo {
@@ -145,5 +157,13 @@ export interface MenuInfo {
      * @type {(Array<Selection | Invoke | Range | Toggle>)}
      *
      */
-    options: Array<Selection | Range | Toggle | Invoke>;
+    options: Array<Selection | Range | Toggle | Invoke | Input>;
+
+    /**
+     * Function to call when the menu is closed through other means.
+     *
+     * @type {Function}
+     * @memberof MenuInfo
+     */
+    callbackOnClose?: Function;
 }

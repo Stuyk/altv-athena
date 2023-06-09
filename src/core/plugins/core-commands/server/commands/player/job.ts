@@ -3,7 +3,7 @@ import * as Athena from '@AthenaServer/api';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
 
-Athena.systems.messenger.commands.register('quitjob', '/quitjob', [], (player: alt.Player) => {
+Athena.commands.register('quitjob', '/quitjob', [], (player: alt.Player) => {
     if (!player || !player.valid) {
         return;
     }

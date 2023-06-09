@@ -7,9 +7,17 @@ import Database from '@stuyk/ezmongodb';
 
 export type KeyChangeCallback = (vehicle: alt.Vehicle, newValue: any, oldValue: any) => void;
 
+const SessionKey = 'athena-document-vehicle-data';
+
+declare global {
+    namespace AthenaSession {
+        interface Vehicle {
+            [SessionKey]: OwnedVehicle;
+        }
+    }
+}
+
 const callbacks: { [key: string]: Array<KeyChangeCallback> } = {};
-const cache: { [id: string]: OwnedVehicle } = {};
-const DEBUG_MODE = false;
 
 /**
  * Used to unbind vehicle cache for an id once the vehicle is deleted
@@ -21,7 +29,7 @@ export function unbind(id: number) {
         return Overrides.unbind(id);
     }
 
-    delete cache[id];
+    Athena.session.vehicle.clearKey(id, SessionKey);
 }
 
 /**
@@ -39,7 +47,7 @@ export function bind(vehicle: alt.Vehicle, document: OwnedVehicle) {
         document._id = document._id.toString();
     }
 
-    cache[vehicle.id] = document;
+    Athena.session.vehicle.set(vehicle, SessionKey, document);
 }
 
 /**
@@ -54,7 +62,7 @@ export function get<T = OwnedVehicle>(vehicle: alt.Vehicle): T | undefined {
         return Overrides.get(vehicle);
     }
 
-    return cache[vehicle.id] as T;
+    return <T>Athena.session.vehicle.get(vehicle, SessionKey);
 }
 
 /**
@@ -74,11 +82,11 @@ export function getField<T = {}, ReturnType = any>(
         return Overrides.getField(vehicle, fieldName);
     }
 
-    if (!cache[vehicle.id]) {
+    if (!Athena.session.vehicle.has(vehicle, SessionKey)) {
         return undefined;
     }
 
-    return cache[vehicle.id][String(fieldName)];
+    return Athena.session.vehicle.get(vehicle, SessionKey)[String(fieldName)];
 }
 
 /**
@@ -102,28 +110,22 @@ export async function set<T = {}, Keys = keyof KnownKeys<OwnedVehicle & T>>(
         return Overrides.set(vehicle, fieldName, value, skipCallbacks);
     }
 
-    if (!cache[vehicle.id]) {
+    if (!Athena.session.vehicle.get(vehicle, SessionKey)) {
         return undefined;
     }
 
     const typeSafeFieldName = String(fieldName);
     let oldValue = undefined;
-    if (cache[vehicle.id][typeSafeFieldName]) {
-        oldValue = JSON.parse(JSON.stringify(cache[vehicle.id][typeSafeFieldName]));
+    let data = Athena.session.vehicle.get(vehicle, SessionKey);
+    if (data[typeSafeFieldName]) {
+        oldValue = JSON.parse(JSON.stringify(data[typeSafeFieldName]));
     }
 
     const newData = { [typeSafeFieldName]: value };
 
-    cache[vehicle.id] = Object.assign(cache[vehicle.id], newData);
-    await Database.updatePartialData(cache[vehicle.id]._id, newData, Athena.database.collections.Vehicles);
-
-    if (DEBUG_MODE) {
-        alt.logWarning(
-            `DEBUG: ${cache[vehicle.id]._id} state updated for ${typeSafeFieldName} with value: ${JSON.stringify(
-                newData,
-            )}`,
-        );
-    }
+    data = Object.assign(data, newData);
+    Athena.session.vehicle.set(vehicle, SessionKey, data);
+    await Database.updatePartialData(data._id, newData, Athena.database.collections.Vehicles);
 
     if (typeof callbacks[typeSafeFieldName] === 'undefined') {
         return;
@@ -153,13 +155,20 @@ export async function setBulk<T = {}, Keys = Partial<OwnedVehicle & T>>(vehicle:
     }
 
     const oldValues = {};
+    let data = Athena.session.vehicle.get(vehicle, SessionKey);
 
     Object.keys(fields).forEach((key) => {
-        oldValues[key] = JSON.parse(JSON.stringify(cache[vehicle.id][key]));
+        if (typeof data[key] === 'undefined') {
+            oldValues[key] = undefined;
+            return;
+        }
+
+        oldValues[key] = JSON.parse(JSON.stringify(data[key]));
     });
 
-    cache[vehicle.id] = Object.assign(cache[vehicle.id], fields);
-    await Database.updatePartialData(cache[vehicle.id]._id, fields, Athena.database.collections.Vehicles);
+    data = Object.assign(data, fields);
+    Athena.session.vehicle.set(vehicle, SessionKey, data);
+    await Database.updatePartialData(data._id, fields, Athena.database.collections.Vehicles);
 
     Object.keys(fields).forEach((key) => {
         if (typeof callbacks[key] === 'undefined') {
@@ -167,7 +176,7 @@ export async function setBulk<T = {}, Keys = Partial<OwnedVehicle & T>>(vehicle:
         }
 
         for (let cb of callbacks[key]) {
-            cb(vehicle, cache[vehicle.id][key], oldValues[key]);
+            cb(vehicle, data[key], oldValues[key]);
         }
     });
 }
@@ -194,14 +203,38 @@ export function onChange<T = {}>(fieldName: keyof KnownKeys<OwnedVehicle & T>, c
 }
 
 /**
- * Check if a vehicle document already exists and a vehicle is attached to it.
+ * Return all available vehicles, and their associated alt:V vehicle ids.
  *
+ * The vehicle can be fetched with alt.Vehicle.all.find(x => x.id === someResult.id);
+ *
+ * @export
+ * @template T
+ * @return {(Array<{ id: number; document: OwnedVehicle & T }>)}
+ */
+export function getAllOnline<T = {}>(): Array<{ id: number; document: OwnedVehicle & T }> {
+    const dataSet: Array<{ id: number; document: OwnedVehicle & T }> = [];
+
+    for (let vehicle of alt.Vehicle.all) {
+        const data = Athena.session.vehicle.get(vehicle, SessionKey);
+        if (typeof data === 'undefined') {
+            continue;
+        }
+
+        dataSet.push({ id: vehicle.id, document: data as OwnedVehicle & T });
+    }
+
+    return dataSet;
+}
+
+/**
+ * Check if a vehicle document already exists and a vehicle is attached to it.
  *
  * @param {string} _id
  * @return {boolean}
  */
 export function exists(_id: string): boolean {
-    return Object.values(cache).find((x) => x._id.toString() === _id.toString()) !== undefined;
+    const sessions = Athena.session.vehicle.getAll(SessionKey);
+    return sessions.find((x) => x && x._id && x._id.toString() === _id) ? true : false;
 }
 
 alt.on('removeEntity', (entity: alt.Entity) => {

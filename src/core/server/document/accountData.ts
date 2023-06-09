@@ -9,10 +9,17 @@ import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
 export type KeyChangeCallback = (player: alt.Player, newValue: any, oldValue: any) => void;
 
-const callbacks: { [key: string]: Array<KeyChangeCallback> } = {};
-const cache: { [id: string]: Account } = {};
-const DEBUG_MODE = false; // Use this to see what state is being set.
+const SessionKey = 'athena-document-account-data';
 
+declare global {
+    namespace AthenaSession {
+        interface Player {
+            [SessionKey]: Account;
+        }
+    }
+}
+
+const callbacks: { [key: string]: Array<KeyChangeCallback> } = {};
 const restrictedFields = ['username', 'password', 'salt', 'hardware', 'ips', 'banned'];
 
 /**
@@ -51,10 +58,10 @@ export function bind(player: alt.Player, document: Account) {
         return;
     }
 
-    cache[player.id] = document;
+    Athena.session.player.set(player, SessionKey, document);
 
     try {
-        const dataCopy = deepCloneObject<Account>(cache[player.id]);
+        const dataCopy = deepCloneObject<Account>(document);
         const cleanedData = removeRestrictedFields(dataCopy);
         Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, cleanedData);
         Athena.config.player.set(player, 'account-data', cleanedData);
@@ -71,7 +78,7 @@ export function unbind(id: number) {
         return Overrides.unbind(id);
     }
 
-    delete cache[id];
+    Athena.session.player.clearKey(id, SessionKey);
 }
 
 /**
@@ -86,8 +93,10 @@ export function get<T = Account>(player: alt.Player): T | undefined {
         return Overrides.get(player);
     }
 
-    return cache[player.id] as T;
+    return <T>Athena.session.player.get(player, SessionKey);
 }
+
+type Combine<A, B> = A & B;
 
 /**
  * Get the current value of a specific field inside of the player data object.
@@ -106,11 +115,11 @@ export function getField<T = {}, ReturnType = any>(
         return Overrides.getField(player, fieldName);
     }
 
-    if (!cache[player.id]) {
+    if (!Athena.session.player.has(player, SessionKey)) {
         return undefined;
     }
 
-    return cache[player.id][String(fieldName)];
+    return Athena.session.player.get(player, SessionKey)[String(fieldName)];
 }
 
 /**
@@ -132,30 +141,26 @@ export async function set<T = {}, Keys = keyof KnownKeys<Account & T>>(
         return Overrides.set(player, fieldName, value);
     }
 
-    if (!cache[player.id]) {
+    if (!Athena.session.player.has(player, SessionKey)) {
         return undefined;
     }
 
     const typeSafeFieldName = String(fieldName);
+    let data = Athena.session.player.get(player, SessionKey);
     let oldValue = undefined;
-    if (cache[player.id][typeSafeFieldName]) {
-        oldValue = JSON.parse(JSON.stringify(cache[player.id][typeSafeFieldName]));
+
+    if (data[typeSafeFieldName]) {
+        oldValue = JSON.parse(JSON.stringify(data[typeSafeFieldName]));
     }
+
     const newData = { [typeSafeFieldName]: value };
 
-    cache[player.id] = Object.assign(cache[player.id], newData);
-    await Database.updatePartialData(cache[player.id]._id, newData, Athena.database.collections.Accounts);
-
-    if (DEBUG_MODE) {
-        alt.logWarning(
-            `DEBUG: ${cache[player.id]._id} state updated for ${typeSafeFieldName} with value: ${JSON.stringify(
-                newData,
-            )}`,
-        );
-    }
+    data = Object.assign(data, newData);
+    Athena.session.player.set(player, SessionKey, data);
+    await Database.updatePartialData(data._id, newData, Athena.database.collections.Accounts);
 
     try {
-        const dataCopy = deepCloneObject<Account>(cache[player.id]);
+        const dataCopy = deepCloneObject<Account>(data);
         const cleanedData = removeRestrictedFields(dataCopy);
         Athena.config.player.set(player, 'account-data', cleanedData);
         Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, cleanedData);
@@ -184,17 +189,29 @@ export async function setBulk<T = {}, Keys = Partial<Account & T>>(player: alt.P
         return Overrides.setBulk(player, fields);
     }
 
+    if (!Athena.session.player.has(player, SessionKey)) {
+        return undefined;
+    }
+
+    let data = Athena.session.player.get(player, SessionKey);
+
     const oldValues = {};
 
     Object.keys(fields).forEach((key) => {
-        oldValues[key] = JSON.parse(JSON.stringify(cache[player.id][key]));
+        if (typeof data[key] === 'undefined') {
+            oldValues[key] = undefined;
+            return;
+        }
+
+        oldValues[key] = JSON.parse(JSON.stringify(data[key]));
     });
 
-    cache[player.id] = Object.assign(cache[player.id], fields);
-    await Database.updatePartialData(cache[player.id]._id, fields, Athena.database.collections.Accounts);
+    data = Object.assign(data, fields);
+    Athena.session.player.set(player, SessionKey, data);
+    await Database.updatePartialData(data._id, fields, Athena.database.collections.Accounts);
 
     try {
-        const dataCopy = deepCloneObject<Account>(cache[player.id]);
+        const dataCopy = deepCloneObject<Account>(data);
         const cleanedData = removeRestrictedFields(dataCopy);
         Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, cleanedData);
         Athena.config.player.set(player, 'account-data', cleanedData);
@@ -206,7 +223,7 @@ export async function setBulk<T = {}, Keys = Partial<Account & T>>(player: alt.P
         }
 
         for (let cb of callbacks[key]) {
-            cb(player, cache[player.id][key], oldValues[key]);
+            cb(player, data[key], oldValues[key]);
         }
     });
 }
@@ -231,14 +248,6 @@ export function onChange<T = {}>(fieldName: keyof KnownKeys<Account & T>, callba
         callbacks[actualFieldName].push(callback);
     }
 }
-
-alt.on('playerDisconnect', (player: alt.Player) => {
-    if (typeof player.id === 'undefined' || player.id === null) {
-        return;
-    }
-
-    unbind(player.id);
-});
 
 interface AccountDataDocFuncs {
     bind: typeof bind;

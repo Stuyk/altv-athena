@@ -66,6 +66,13 @@ export interface Interaction {
     onLeaveCallback?: (player: alt.Player, ...args: any[]) => void;
 
     /**
+     * Called when a player has entered an interaction point.
+     *
+     * @memberof Interaction
+     */
+    onEnterCallback?: (player: alt.Player, ...args: any[]) => void;
+
+    /**
      * Data to pass back through the callback.
      * Serves as a way to pass unique data through the callback.
      * @type {Array<any>}

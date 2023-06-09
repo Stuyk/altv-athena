@@ -10,6 +10,9 @@ import './camera/switch';
 // Commands
 import './commands/rmlui';
 
+// Controllers
+import './controllers/dynamicDoor';
+
 // Events
 import './events/connectionComplete';
 import './events/disconnect';

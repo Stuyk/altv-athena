@@ -1,7 +1,7 @@
 import alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'clearinventory',
     '/clearinventory [id]',
     ['admin'],
@@ -16,17 +16,12 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
-    'cleartoolbar',
-    '/cleartoolbar [id]',
-    ['admin'],
-    async (player: alt.Player, id: string) => {
-        const target = Athena.systems.identifier.getPlayer(id);
+Athena.commands.register('cleartoolbar', '/cleartoolbar [id]', ['admin'], async (player: alt.Player, id: string) => {
+    const target = Athena.systems.identifier.getPlayer(id);
 
-        if (!target || !target.valid || !id) {
-            return;
-        }
+    if (!target || !target.valid || !id) {
+        return;
+    }
 
-        Athena.document.character.set(target, 'toolbar', []);
-    },
-);
+    Athena.document.character.set(target, 'toolbar', []);
+});

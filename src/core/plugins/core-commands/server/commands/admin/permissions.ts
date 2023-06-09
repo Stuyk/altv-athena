@@ -1,7 +1,7 @@
 import alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'addperm',
     '/addperm [account or character] [ingame-id] [permission] - Add an account permission',
     ['admin'],
@@ -35,7 +35,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'removeperm',
     '/removeperm [account or character] [ingame-id] [permission] - Remove an account permission',
     ['admin'],
@@ -69,7 +69,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'getperms',
     '/getperms [account or character] [ingame-id] - Show current perms a player has',
     ['admin'],

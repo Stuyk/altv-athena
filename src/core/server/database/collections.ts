@@ -9,4 +9,5 @@ export enum Collections {
     Items = 'items',
     Doors = 'doorstates',
     Drops = 'itemdrops',
+    DynamicDoors = 'dynamicdoors',
 }

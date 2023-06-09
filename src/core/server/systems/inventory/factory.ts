@@ -445,6 +445,57 @@ export function getBaseItems(): Array<BaseItem> {
     return databaseItems;
 }
 
+/**
+ * Searches for a base item based on a fuzzy search.
+ * Specify either 'myitem', 'My_Item', or 'My Item'.
+ *
+ * Will try to find a match in the following order:
+ * - Exact dbname
+ * - Exact name
+ * - Partial name
+ * - Partial dbname
+ *
+ * @export
+ * @template CustomData
+ * @param {string} partialName
+ * @return {(BaseItem<DefaultItemBehavior, CustomData> | undefined)}
+ */
+export function getBaseItemByFuzzySearch<CustomData = {}>(
+    partialName: string,
+): BaseItem<DefaultItemBehavior, CustomData> | undefined {
+    partialName = partialName.replaceAll('_', ' ');
+
+    const index = databaseItems.findIndex((item) => {
+        // 'myitem' -> 'myitem'
+        if (item.dbName === partialName) {
+            return true;
+        }
+
+        // 'My_Item' -> 'My Item'
+        if (item.name === partialName) {
+            return true;
+        }
+
+        // 'My_It' -> 'My Item'
+        if (item.name.includes(partialName)) {
+            return true;
+        }
+
+        // 'myi' -> 'myitem'
+        if (item.dbName.includes(partialName)) {
+            return true;
+        }
+
+        return false;
+    });
+
+    if (index <= -1) {
+        return undefined;
+    }
+
+    return deepCloneObject<BaseItem<DefaultItemBehavior, CustomData>>(databaseItems[index]);
+}
+
 interface FactoryFuncs {
     getBaseItemAsync: typeof getBaseItemAsync;
     upsertAsync: typeof upsertAsync;
@@ -456,6 +507,7 @@ interface FactoryFuncs {
     fromBaseToStored: typeof fromBaseToStored;
     getBaseItemsAsync: typeof getBaseItemsAsync;
     getBaseItems: typeof getBaseItems;
+    getBaseItemByFuzzySearch: typeof getBaseItemByFuzzySearch;
 }
 
 const Overrides: Partial<FactoryFuncs> = {};
@@ -470,6 +522,7 @@ export function override(functionName: 'toStoredItem', callback: typeof toStored
 export function override(functionName: 'fromBaseToStored', callback: typeof fromBaseToStored);
 export function override(functionName: 'getBaseItems', callback: typeof getBaseItems);
 export function override(functionName: 'getBaseItemsAsync', callback: typeof getBaseItemsAsync);
+export function override(functionName: 'getBaseItemByFuzzySearch', callback: typeof getBaseItemByFuzzySearch);
 /**
  * Used to override inventory item factory functionality
  *

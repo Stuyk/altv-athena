@@ -94,6 +94,15 @@ const InternalFunctions = {
             return;
         }
 
+        if (colshape.interaction.onEnterCallback) {
+            InteractionBindings[entity.id] = colshape;
+            if (colshape.interaction.data) {
+                colshape.interaction.onEnterCallback(entity, ...colshape.interaction.data);
+            } else {
+                colshape.interaction.onEnterCallback(entity, null);
+            }
+        }
+
         if (colshape.interaction.triggerCallbackOnEnter) {
             InteractionBindings[entity.id] = colshape;
 

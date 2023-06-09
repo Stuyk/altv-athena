@@ -7,9 +7,17 @@ import Database from '@stuyk/ezmongodb';
 
 export type KeyChangeCallback = (player: alt.Player, newValue: any, oldValue: any) => void;
 
+const SessionKey = 'athena-document-character-data';
+
+declare global {
+    namespace AthenaSession {
+        interface Player {
+            [SessionKey]: Character;
+        }
+    }
+}
+
 const callbacks: { [key: string]: Array<KeyChangeCallback> } = {};
-const cache: { [id: string]: Character } = {};
-const DEBUG_MODE = false; // Use this to see what state is being set.
 
 /**
  * Binds a player identifier to a Character document.
@@ -41,8 +49,8 @@ export function bind(player: alt.Player, document: Character) {
         document._id = document._id.toString();
     }
 
-    cache[player.id] = document;
-    Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, cache[player.id]);
+    Athena.session.player.set(player, SessionKey, document);
+    Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, document);
 }
 
 /**
@@ -62,7 +70,7 @@ export function unbind(id: number) {
         return Overrides.unbind(id);
     }
 
-    delete cache[id];
+    Athena.session.player.clearKey(id, SessionKey);
 }
 
 /**
@@ -98,7 +106,7 @@ export function get<T = Character>(player: alt.Player): T | undefined {
         return Overrides.get(player);
     }
 
-    return cache[player.id] as T;
+    return <T>Athena.session.player.get(player, SessionKey);
 }
 
 /**
@@ -142,11 +150,11 @@ export function getField<T = {}, ReturnType = any>(
         return Overrides.getField(player, fieldName);
     }
 
-    if (!cache[player.id]) {
+    if (!Athena.session.player.has(player, SessionKey)) {
         return undefined;
     }
 
-    return cache[player.id][String(fieldName)];
+    return Athena.session.player.get(player, SessionKey)[String(fieldName)];
 }
 
 /**
@@ -185,31 +193,25 @@ export async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(
         return Overrides.set(player, fieldName, value, skipCallbacks);
     }
 
-    if (!cache[player.id]) {
+    if (!Athena.session.player.has(player, SessionKey)) {
         return undefined;
     }
 
     const typeSafeFieldName = String(fieldName);
     let oldValue = undefined;
-    if (cache[player.id][typeSafeFieldName]) {
-        oldValue = JSON.parse(JSON.stringify(cache[player.id][typeSafeFieldName]));
+    let data = Athena.session.player.get(player, SessionKey);
+    if (data[typeSafeFieldName]) {
+        oldValue = JSON.parse(JSON.stringify(data[typeSafeFieldName]));
     }
 
     const newData = { [typeSafeFieldName]: value };
 
-    cache[player.id] = Object.assign(cache[player.id], newData);
-    await Database.updatePartialData(cache[player.id]._id, newData, Athena.database.collections.Characters);
+    data = Object.assign(data, newData);
+    Athena.session.player.set(player, SessionKey, data);
+    await Database.updatePartialData(data._id, newData, Athena.database.collections.Characters);
 
-    if (DEBUG_MODE) {
-        alt.logWarning(
-            `DEBUG: ${cache[player.id].name} state updated for ${typeSafeFieldName} with value: ${JSON.stringify(
-                newData,
-            )}`,
-        );
-    }
-
-    Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, cache[player.id]);
-    Athena.config.player.set(player, 'character-data', cache[player.id]);
+    Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, data);
+    Athena.config.player.set(player, 'character-data', data);
 
     if (typeof callbacks[typeSafeFieldName] === 'undefined') {
         return;
@@ -247,15 +249,23 @@ export async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt
 
     const oldValues = {};
 
+    let data = Athena.session.player.get(player, SessionKey);
+
     Object.keys(fields).forEach((key) => {
-        oldValues[key] = JSON.parse(JSON.stringify(cache[player.id][key]));
+        if (typeof data[key] === 'undefined') {
+            oldValues[key] = undefined;
+            return;
+        }
+
+        oldValues[key] = JSON.parse(JSON.stringify(data[key]));
     });
 
-    cache[player.id] = Object.assign(cache[player.id], fields);
-    await Database.updatePartialData(cache[player.id]._id, fields, Athena.database.collections.Characters);
+    data = Object.assign(data, fields);
+    Athena.session.player.set(player, SessionKey, data);
+    await Database.updatePartialData(data._id, fields, Athena.database.collections.Characters);
 
-    Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, cache[player.id]);
-    Athena.config.player.set(player, 'character-data', cache[player.id]);
+    Athena.webview.emit(player, SYSTEM_EVENTS.PLAYER_EMIT_STATE, data);
+    Athena.config.player.set(player, 'character-data', data);
 
     Object.keys(fields).forEach((key) => {
         if (typeof callbacks[key] === 'undefined') {
@@ -263,7 +273,7 @@ export async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt
         }
 
         for (let cb of callbacks[key]) {
-            cb(player, cache[player.id][key], oldValues[key]);
+            cb(player, data[key], oldValues[key]);
         }
     });
 }
@@ -298,19 +308,29 @@ export function onChange<T = {}>(fieldName: keyof KnownKeys<Character & T>, call
     }
 }
 
-alt.on('playerDisconnect', (player: alt.Player) => {
-    if (typeof player.id === 'undefined' || player.id === null) {
-        return;
+/**
+ * Return all available and online characters, and their associated alt:V player ids.
+ *
+ * The player can be fetched with alt.Player.all.find(x => x.id === someResult.id);
+ *
+ * @export
+ * @template T
+ * @return {(Array<{ id: number; document: Character & T }>)}
+ */
+export function getAllOnline<T = {}>(): Array<{ id: number; document: Character & T }> {
+    const dataSet: Array<{ id: number; document: Character & T }> = [];
+
+    for (let player of alt.Player.all) {
+        const data = Athena.session.player.get(player, SessionKey);
+        if (typeof data === 'undefined') {
+            continue;
+        }
+
+        dataSet.push({ id: player.id, document: data as Character & T });
     }
 
-    const id = player.id;
-    if (!cache[id]) {
-        return;
-    }
-
-    Athena.player.events.trigger('player-disconnected', player, id, cache[id]);
-    unbind(id);
-});
+    return dataSet;
+}
 
 interface CharacterDocFuncs {
     bind: typeof bind;

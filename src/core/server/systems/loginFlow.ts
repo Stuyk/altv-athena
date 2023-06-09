@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 
 // Should be able to register a callback that applies to all players that join.
 // Should keep track of all players current login flow.
@@ -10,7 +11,14 @@ export interface FlowInfo {
     callback: (player: alt.Player) => void;
 }
 
-const playerFlow: { [id: string]: { index: number; flow: Array<FlowInfo> } } = {};
+declare global {
+    namespace AthenaSession {
+        interface Player {
+            'login-flow': { index: number; flow: Array<FlowInfo> };
+        }
+    }
+}
+
 let weightedFlow: Array<FlowInfo> = [];
 
 /**
@@ -99,7 +107,7 @@ export function getFlow(player: alt.Player): { index: number; flow: Array<FlowIn
         return Overrides.getFlow(player);
     }
 
-    return playerFlow[player.id];
+    return Athena.session.player.get(player, 'login-flow');
 }
 
 /**
@@ -113,8 +121,9 @@ export function register(player: alt.Player) {
         return Overrides.register(player);
     }
 
-    playerFlow[player.id] = { index: 0, flow: [...weightedFlow] };
-    playerFlow[player.id].flow[0].callback(player);
+    const initialData = { index: 0, flow: [...weightedFlow] };
+    Athena.session.player.set(player, 'login-flow', initialData);
+    initialData.flow[0].callback(player);
 }
 
 /**
@@ -127,7 +136,7 @@ export function unregister(player: alt.Player) {
         return Overrides.unregister(player);
     }
 
-    delete playerFlow[player.id];
+    Athena.session.player.clearKey(player, 'login-flow');
 }
 
 /**
@@ -142,20 +151,22 @@ export function next(player: alt.Player) {
         return Overrides.next(player);
     }
 
-    if (!playerFlow[player.id]) {
+    if (!Athena.session.player.has(player, 'login-flow')) {
         register(player);
         return;
     }
 
-    playerFlow[player.id].index += 1;
+    const loginFlow = Athena.session.player.get(player, 'login-flow');
+    loginFlow.index += 1;
+    Athena.session.player.set(player, 'login-flow', loginFlow);
 
-    const index = playerFlow[player.id].index;
-    if (!playerFlow[player.id].flow[index]) {
-        delete playerFlow[player.id];
+    const index = loginFlow.index;
+    if (!loginFlow.flow[index]) {
+        Athena.session.player.clearKey(player, 'login-flow');
         return;
     }
 
-    playerFlow[player.id].flow[index].callback(player);
+    loginFlow.flow[index].callback(player);
 }
 
 /**
@@ -165,17 +176,14 @@ export function next(player: alt.Player) {
  * @param {alt.Player} player
  */
 export function goToEnd(player: alt.Player) {
-    if (!playerFlow[player.id]) {
+    if (!Athena.session.player.has(player, 'login-flow')) {
         register(player);
     }
 
-    playerFlow[player.id].index = playerFlow[player.id].flow.length - 1;
-    playerFlow[player.id].flow[playerFlow[player.id].index].callback(player);
+    const loginFlow = Athena.session.player.get(player, 'login-flow');
+    loginFlow.index = loginFlow.flow.length - 1;
+    loginFlow.flow[loginFlow.index].callback(player);
 }
-
-alt.on('playerDisconnect', (player: alt.Player) => {
-    delete playerFlow[player.id];
-});
 
 interface LoginFlowFuncs {
     add: typeof add;

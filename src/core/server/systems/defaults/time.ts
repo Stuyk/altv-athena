@@ -5,7 +5,7 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 /**
  * THIS IS A DEFAULT SYSTEM.
  * IF YOU WANT TO DISABLE IT, MAKE A PLUGIN AND DISABLE IT THROUGH:
- * `Athena.systems.default.x.disable()`
+ * `Athena.systems.defaults.x.disable()`
  *
  * DO NOT APPEND ANY ADDITIONAL DATA TO THIS SYSTEM.
  * COPY THE CODE AND REMAKE IT AS A PLUGIN IF YOU WANT TO MAKE CHANGES.
@@ -77,7 +77,7 @@ export function updatePlayer(player: alt.Player) {
  *
  * #### Example
  * ```ts
- * Athena.systems.default.time.disable();
+ * Athena.systems.defaults.time.disable();
  * ```
  *
  *

@@ -12,7 +12,7 @@ function finishSetArmour(target: alt.Player, value: number) {
     Athena.player.emit.message(target, `Player armour was set to ${value}`);
 }
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'sethealth',
     '/sethealth [value] [id]',
     ['admin'],
@@ -46,7 +46,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'setarmour',
     '/setarmour [value] [id]',
     ['admin'],
@@ -79,42 +79,32 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
-    'freeze',
-    '/freeze [id]',
-    ['admin'],
-    (player: alt.Player, id: string | null = null) => {
-        const target = Athena.systems.identifier.getPlayer(id);
+Athena.commands.register('freeze', '/freeze [id]', ['admin'], (player: alt.Player, id: string | null = null) => {
+    const target = Athena.systems.identifier.getPlayer(id);
 
-        if (!target || !target.valid) {
-            return;
-        }
+    if (!target || !target.valid) {
+        return;
+    }
 
-        const data = Athena.document.character.get(target);
-        Athena.player.safe.setPosition(target, target.pos.x, target.pos.y, target.pos.z);
-        Athena.player.emit.notification(player, `Froze ${data.name} successfully!`);
-        target.frozen = true;
-    },
-);
+    const data = Athena.document.character.get(target);
+    Athena.player.safe.setPosition(target, target.pos.x, target.pos.y, target.pos.z);
+    Athena.player.emit.notification(player, `Froze ${data.name} successfully!`);
+    target.frozen = true;
+});
 
-Athena.systems.messenger.commands.register(
-    'unfreeze',
-    '/unfreeze [id]',
-    ['admin'],
-    (player: alt.Player, id: string | null = null) => {
-        const target = Athena.systems.identifier.getPlayer(id);
+Athena.commands.register('unfreeze', '/unfreeze [id]', ['admin'], (player: alt.Player, id: string | null = null) => {
+    const target = Athena.systems.identifier.getPlayer(id);
 
-        if (!target || !target.valid) {
-            return;
-        }
+    if (!target || !target.valid) {
+        return;
+    }
 
-        const data = Athena.document.character.get(target);
-        Athena.player.emit.notification(player, `Unfroze ${data.name} successfully!`);
-        target.frozen = false;
-    },
-);
+    const data = Athena.document.character.get(target);
+    Athena.player.emit.notification(player, `Unfroze ${data.name} successfully!`);
+    target.frozen = false;
+});
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'kick',
     '/kick [id] [...reason]',
     ['admin'],
@@ -135,7 +125,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'ban',
     '/ban [id] [...reason]',
     ['admin'],
@@ -163,7 +153,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'unban',
     '/unban [discord_identifier]',
     ['admin'],
@@ -184,7 +174,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'tempcomponent',
     '/tempcomponent [id] [value]',
     ['admin'],
@@ -203,7 +193,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'tempprop',
     '/tempprop [id] [value]',
     ['admin'],
@@ -222,7 +212,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register('hasitemcheck', '/hasitemcheck', ['admin'], async (player: alt.Player) => {
+Athena.commands.register('hasitemcheck', '/hasitemcheck', ['admin'], async (player: alt.Player) => {
     const result = await Athena.player.inventory.has(player, 'burger', 1);
     console.log(result);
 });

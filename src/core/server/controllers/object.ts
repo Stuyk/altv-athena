@@ -76,6 +76,10 @@ export function append(objectData: IObject): string {
         objectData.uid = sha256Random(JSON.stringify(objectData));
     }
 
+    if (!objectData.rot) {
+        objectData.rot = new alt.Vector3(0, 0, 0);
+    }
+
     globalObjects.push(objectData);
     InternalController.refresh();
     return objectData.uid;

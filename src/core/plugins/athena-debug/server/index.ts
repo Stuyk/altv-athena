@@ -31,7 +31,7 @@ Athena.systems.plugins.registerPlugin(PLUGIN_NAME, () => {
 
     alt.onClient(ATHENA_DEBUG_EVENTS.toServer.exec, restrictedFunction);
 
-    Athena.systems.messenger.commands.register('editor', '/editor', ['admin'], (player: alt.Player) => {
+    Athena.commands.register('editor', '/editor', ['admin'], (player: alt.Player) => {
         player.emit(ATHENA_DEBUG_EVENTS.toClient.openExec);
     });
 });

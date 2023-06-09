@@ -1,59 +1,44 @@
 import alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
-Athena.systems.messenger.commands.register(
-    'gethere',
-    '/gethere [id]',
-    ['admin'],
-    async (player: alt.Player, id: string | undefined) => {
-        const target = Athena.systems.identifier.getPlayer(id);
+Athena.commands.register('gethere', '/gethere [id]', ['admin'], async (player: alt.Player, id: string | undefined) => {
+    const target = Athena.systems.identifier.getPlayer(id);
 
-        if (!target || !target.valid || !id || target === player) {
-            return;
-        }
+    if (!target || !target.valid || !id || target === player) {
+        return;
+    }
 
-        const data = Athena.document.character.get(target);
+    const data = Athena.document.character.get(target);
 
-        Athena.player.safe.setPosition(target, player.pos.x + 1, player.pos.y, player.pos.z);
-        Athena.player.emit.notification(player, `Successfully teleported ${data.name} to your position!`);
-    },
-);
+    Athena.player.safe.setPosition(target, player.pos.x + 1, player.pos.y, player.pos.z);
+    Athena.player.emit.notification(player, `Successfully teleported ${data.name} to your position!`);
+});
 
-Athena.systems.messenger.commands.register(
-    'goto',
-    '/goto [id]',
-    ['admin'],
-    async (player: alt.Player, id: string | undefined) => {
-        const target = Athena.systems.identifier.getPlayer(id);
+Athena.commands.register('goto', '/goto [id]', ['admin'], async (player: alt.Player, id: string | undefined) => {
+    const target = Athena.systems.identifier.getPlayer(id);
 
-        if (!target || !target.valid || !id || target === player) {
-            return;
-        }
+    if (!target || !target.valid || !id || target === player) {
+        return;
+    }
 
-        Athena.player.safe.setPosition(player, target.pos.x + 1, target.pos.y, target.pos.z);
-    },
-);
+    Athena.player.safe.setPosition(player, target.pos.x + 1, target.pos.y, target.pos.z);
+});
 
-Athena.systems.messenger.commands.register(
-    'tpwp',
-    '/tpwp [id]',
-    ['admin'],
-    async (player: alt.Player, id: string | undefined) => {
-        if (!player.currentWaypoint) {
-            Athena.player.emit.message(player, `Set a waypoint first.`);
-            return;
-        }
+Athena.commands.register('tpwp', '/tpwp [id]', ['admin'], async (player: alt.Player, id: string | undefined) => {
+    if (!player.currentWaypoint) {
+        Athena.player.emit.message(player, `Set a waypoint first.`);
+        return;
+    }
 
-        Athena.player.safe.setPosition(
-            player,
-            player.currentWaypoint.x,
-            player.currentWaypoint.y,
-            player.currentWaypoint.z,
-        );
-    },
-);
+    Athena.player.safe.setPosition(
+        player,
+        player.currentWaypoint.x,
+        player.currentWaypoint.y,
+        player.currentWaypoint.z,
+    );
+});
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'coords',
     '/coords [x] [y] [z]',
     ['admin'],
@@ -61,42 +46,37 @@ Athena.systems.messenger.commands.register(
         try {
             Athena.player.safe.setPosition(player, parseFloat(x), parseFloat(y), parseFloat(z));
         } catch (err) {
-            const cmd = Athena.systems.messenger.commands.get('coords');
+            const cmd = Athena.commands.get('coords');
             Athena.player.emit.message(player, cmd.description);
         }
     },
 );
 
-Athena.systems.messenger.commands.register(
-    'getcar',
-    '/getcar [id]',
-    ['admin'],
-    async (player: alt.Player, id: string) => {
-        const tmpID = parseInt(id);
-        if (isNaN(tmpID)) {
-            return;
+Athena.commands.register('getcar', '/getcar [id]', ['admin'], async (player: alt.Player, id: string) => {
+    const tmpID = parseInt(id);
+    if (isNaN(tmpID)) {
+        return;
+    }
+
+    // Find the vehicle
+    const validVehicle = alt.Vehicle.all.find((veh) => {
+        if (!veh || !veh.valid) {
+            return false;
         }
 
-        // Find the vehicle
-        const validVehicle = alt.Vehicle.all.find((veh) => {
-            if (!veh || !veh.valid) {
-                return false;
-            }
+        return veh.id === tmpID;
+    });
 
-            return veh.id === tmpID;
-        });
+    // no spawned vehicle was found
+    if (!validVehicle || !validVehicle.valid) {
+        return;
+    }
 
-        // no spawned vehicle was found
-        if (!validVehicle || !validVehicle.valid) {
-            return;
-        }
+    // Move the vehicle to the player.
+    validVehicle.pos = player.pos;
+});
 
-        // Move the vehicle to the player.
-        validVehicle.pos = player.pos;
-    },
-);
-
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'tpto',
     '/tpto [partial_name]',
     ['admin'],
@@ -125,7 +105,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'tphere',
     '/tphere [partial_name]',
     ['admin'],
@@ -154,7 +134,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register('tpall', '/tpall', ['admin'], async (player: alt.Player) => {
+Athena.commands.register('tpall', '/tpall', ['admin'], async (player: alt.Player) => {
     const onlinePlayers = Athena.getters.players.online();
     for (let target of onlinePlayers) {
         if (!target || !target.valid) {

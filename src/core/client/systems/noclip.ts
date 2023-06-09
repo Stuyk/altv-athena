@@ -4,7 +4,6 @@ import * as AthenaClient from '@AthenaClient/api';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
-import { DirectionVector } from '@AthenaClient/utility/directionToVector';
 
 const timeBetweenPlayerUpdates = 250;
 let nextUpdate = Date.now() + 50;
@@ -87,7 +86,7 @@ const NoClip = {
         const pos = native.getCamCoord(noclipCam);
         const rot = native.getCamRot(noclipCam, 2);
 
-        const dir = new DirectionVector(pos, rot);
+        const dir = new AthenaClient.utility.vector.DirectionVector(pos, rot);
         const fwd = dir.forward(3.5);
         const sens = NoClip.getSensitivity();
 

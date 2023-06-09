@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'setskin',
     '/setskin [model] [?id]',
     ['admin'],
@@ -24,7 +24,7 @@ Athena.systems.messenger.commands.register(
     },
 );
 
-Athena.systems.messenger.commands.register(
+Athena.commands.register(
     'clearskin',
     '/clearskin [?id]',
     ['admin'],

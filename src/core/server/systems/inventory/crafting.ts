@@ -269,10 +269,14 @@ export function combineItems(
     // Remove quantities from original data set...
     let newData = deepCloneArray<StoredItem>(dataSet);
     for (let i = 0; i < recipe.combo.length; i++) {
-        newData = Athena.systems.inventory.manager.sub(
-            { dbName: recipe.combo[i], quantity: recipe.quantities[i] },
-            newData,
-        );
+        if (i === 0 ? item1.quantity : item2.quantity === recipe.quantities[i]) {
+            newData = Athena.systems.inventory.slot.removeAt(i === 0 ? slot1 : slot2, newData);
+        } else {
+            newData = Athena.systems.inventory.manager.sub(
+                { dbName: recipe.combo[i], quantity: recipe.quantities[i] },
+                newData,
+            );
+        }
 
         if (typeof newData === 'undefined') {
             return undefined;

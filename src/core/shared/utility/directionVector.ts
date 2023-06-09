@@ -1,10 +1,10 @@
-import * as alt from 'alt-client';
+import * as alt from 'alt-shared';
 
 export class DirectionVector {
     private position: alt.IVector3;
     private rotation: alt.IVector3;
 
-    constructor(position, rotation) {
+    constructor(position: alt.IVector3, rotation: alt.IVector3) {
         this.position = position;
         this.rotation = rotation;
     }
@@ -36,17 +36,17 @@ export class DirectionVector {
         const fVectorY = 1 - 2 * (quatRot.x * quatRot.x + quatRot.z * quatRot.z);
         const fVectorZ = 2 * (quatRot.y * quatRot.z + quatRot.w * quatRot.x);
 
-        return { x: fVectorX, y: fVectorY, z: fVectorZ };
+        return new alt.Vector3({ x: fVectorX, y: fVectorY, z: fVectorZ });
     }
 
     forward(distance: number): alt.IVector3 {
         const forwardVector = this.forwardVector();
 
-        return {
+        return new alt.Vector3({
             x: this.position.x + forwardVector.x * distance,
             y: this.position.y + forwardVector.y * distance,
             z: this.position.z + forwardVector.z * distance,
-        };
+        });
     }
 
     rightVector() {
@@ -56,17 +56,17 @@ export class DirectionVector {
         const rVectorY = 2 * (quatRot.x * quatRot.y + quatRot.w * quatRot.z);
         const rVectorZ = 2 * (quatRot.x * quatRot.z - quatRot.w * quatRot.y);
 
-        return { x: rVectorX, y: rVectorY, z: rVectorZ };
+        return new alt.Vector3({ x: rVectorX, y: rVectorY, z: rVectorZ });
     }
 
     right(distance: number) {
         const rightVector = this.rightVector();
 
-        return {
+        return new alt.Vector3({
             x: this.position.x + rightVector.x * distance,
             y: this.position.y + rightVector.y * distance,
             z: this.position.z + rightVector.z * distance,
-        };
+        });
     }
 
     upVector() {
@@ -75,16 +75,16 @@ export class DirectionVector {
         const uVectorY = 2 * (quatRot.y * quatRot.z - quatRot.w * quatRot.x);
         const uVectorZ = 1 - 2 * (quatRot.x * quatRot.x + quatRot.y * quatRot.y);
 
-        return { x: uVectorX, y: uVectorY, z: uVectorZ };
+        return new alt.Vector3({ x: uVectorX, y: uVectorY, z: uVectorZ });
     }
 
-    up(distance) {
+    up(distance: number) {
         const upVector = this.upVector();
 
-        return {
+        return new alt.Vector3({
             x: this.position.x + upVector.x * distance,
             y: this.position.y + upVector.y * distance,
             z: this.position.z + upVector.z * distance,
-        };
+        });
     }
 }
