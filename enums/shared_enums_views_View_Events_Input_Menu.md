@@ -17,4 +17,4 @@ order: 0
 
 #### Defined in
 
-[shared/enums/views.ts:9](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/enums/views.ts#L9)
+[shared/enums/views.ts:9](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/enums/views.ts#L9)

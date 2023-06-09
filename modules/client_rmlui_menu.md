@@ -24,7 +24,7 @@ Make sure to wait for it to close before opening a new menu.
 
 #### Defined in
 
-[client/rmlui/menu/index.ts:435](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/rmlui/menu/index.ts#L435)
+[client/rmlui/menu/index.ts:435](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/rmlui/menu/index.ts#L435)
 
 ___
 
@@ -48,7 +48,7 @@ Create a menu similar to NativeUI.
 
 #### Defined in
 
-[client/rmlui/menu/index.ts:405](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/rmlui/menu/index.ts#L405)
+[client/rmlui/menu/index.ts:405](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/rmlui/menu/index.ts#L405)
 
 ___
 
@@ -79,7 +79,7 @@ Used like: `createOption<Range>({ ... })`;
 
 #### Defined in
 
-[client/rmlui/menu/index.ts:456](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/rmlui/menu/index.ts#L456)
+[client/rmlui/menu/index.ts:456](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/rmlui/menu/index.ts#L456)
 
 ___
 
@@ -95,7 +95,7 @@ AthenaClient.rmlui.menu.**pauseControls**(): `void`
 
 #### Defined in
 
-[client/rmlui/menu/index.ts:440](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/rmlui/menu/index.ts#L440)
+[client/rmlui/menu/index.ts:440](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/rmlui/menu/index.ts#L440)
 
 ___
 
@@ -111,4 +111,4 @@ AthenaClient.rmlui.menu.**unpauseControls**(): `void`
 
 #### Defined in
 
-[client/rmlui/menu/index.ts:444](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/rmlui/menu/index.ts#L444)
+[client/rmlui/menu/index.ts:444](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/rmlui/menu/index.ts#L444)

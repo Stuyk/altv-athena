@@ -28,4 +28,4 @@ Athena.systems.defaults.toolbar.disable();
 
 #### Defined in
 
-[server/systems/defaults/toolbar.ts:83](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/defaults/toolbar.ts#L83)
+[server/systems/defaults/toolbar.ts:83](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/server/systems/defaults/toolbar.ts#L83)

@@ -31,7 +31,7 @@ The function to call when this command is executed by a player, or internal func
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:48](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/messageCommand.ts#L48)
+[shared/interfaces/messageCommand.ts:48](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/interfaces/messageCommand.ts#L48)
 
 ___
 
@@ -43,7 +43,7 @@ A description of this command.
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:25](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/messageCommand.ts#L25)
+[shared/interfaces/messageCommand.ts:25](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/interfaces/messageCommand.ts#L25)
 
 ___
 
@@ -55,7 +55,7 @@ Should this command use character permissions instead of account?
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:41](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/messageCommand.ts#L41)
+[shared/interfaces/messageCommand.ts:41](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/interfaces/messageCommand.ts#L41)
 
 ___
 
@@ -67,7 +67,7 @@ The plain text iteration of this command.
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:17](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/messageCommand.ts#L17)
+[shared/interfaces/messageCommand.ts:17](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/interfaces/messageCommand.ts#L17)
 
 ___
 
@@ -79,4 +79,4 @@ An array of individual permission strings required to run this command.
 
 #### Defined in
 
-[shared/interfaces/messageCommand.ts:33](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/messageCommand.ts#L33)
+[shared/interfaces/messageCommand.ts:33](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/shared/interfaces/messageCommand.ts#L33)

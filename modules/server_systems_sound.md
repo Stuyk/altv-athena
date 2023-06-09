@@ -34,7 +34,7 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:129](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/sound.ts#L129)
+[server/systems/sound.ts:129](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/server/systems/sound.ts#L129)
 
 ::: tip Usage
 Athena.systems.sound.**override**(`functionName`, `callback`): `any`
@@ -55,7 +55,7 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:130](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/sound.ts#L130)
+[server/systems/sound.ts:130](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/server/systems/sound.ts#L130)
 
 ::: tip Usage
 Athena.systems.sound.**override**(`functionName`, `callback`): `any`
@@ -76,7 +76,7 @@ Used to override sound trigger functions.
 
 #### Defined in
 
-[server/systems/sound.ts:131](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/sound.ts#L131)
+[server/systems/sound.ts:131](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/server/systems/sound.ts#L131)
 
 ___
 
@@ -103,7 +103,7 @@ Play a single sound for a player.
 
 #### Defined in
 
-[server/systems/sound.ts:51](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/sound.ts#L51)
+[server/systems/sound.ts:51](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/server/systems/sound.ts#L51)
 
 ___
 
@@ -129,7 +129,7 @@ Play a custom sound in a 3D position for all players in the area.
 
 #### Defined in
 
-[server/systems/sound.ts:100](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/sound.ts#L100)
+[server/systems/sound.ts:100](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/server/systems/sound.ts#L100)
 
 ___
 
@@ -157,4 +157,4 @@ Specify an entity to make the sound play from that specific entity.
 
 #### Defined in
 
-[server/systems/sound.ts:73](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/systems/sound.ts#L73)
+[server/systems/sound.ts:73](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/server/systems/sound.ts#L73)

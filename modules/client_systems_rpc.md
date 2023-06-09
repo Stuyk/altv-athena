@@ -47,4 +47,4 @@ AthenaClient.systems.rpc.on('returnPlayerLocalPosition', () => {
 
 #### Defined in
 
-[client/systems/rpc.ts:20](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/systems/rpc.ts#L20)
+[client/systems/rpc.ts:20](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/systems/rpc.ts#L20)

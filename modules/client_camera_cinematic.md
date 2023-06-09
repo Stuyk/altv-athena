@@ -33,7 +33,7 @@ Add a camera node to the camera set.
 
 #### Defined in
 
-[client/camera/cinematic.ts:327](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L327)
+[client/camera/cinematic.ts:327](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/camera/cinematic.ts#L327)
 
 ___
 
@@ -51,7 +51,7 @@ This function will destroy all camera instances
 
 #### Defined in
 
-[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L305)
+[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/camera/cinematic.ts#L305)
 
 ___
 
@@ -78,7 +78,7 @@ from the camera array. Allows for repeating camera movement over and over.
 
 #### Defined in
 
-[client/camera/cinematic.ts:357](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L357)
+[client/camera/cinematic.ts:357](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/camera/cinematic.ts#L357)
 
 ___
 
@@ -101,7 +101,7 @@ AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:412](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L412)
+[client/camera/cinematic.ts:412](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/camera/cinematic.ts#L412)
 
 ::: tip Usage
 AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
@@ -120,7 +120,7 @@ AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:413](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L413)
+[client/camera/cinematic.ts:413](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/camera/cinematic.ts#L413)
 
 ::: tip Usage
 AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
@@ -139,7 +139,7 @@ AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:414](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L414)
+[client/camera/cinematic.ts:414](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/camera/cinematic.ts#L414)
 
 ::: tip Usage
 AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
@@ -158,7 +158,7 @@ AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:415](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L415)
+[client/camera/cinematic.ts:415](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/camera/cinematic.ts#L415)
 
 ::: tip Usage
 AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
@@ -177,7 +177,7 @@ AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:416](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L416)
+[client/camera/cinematic.ts:416](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/camera/cinematic.ts#L416)
 
 ___
 
@@ -199,7 +199,7 @@ AthenaClient.camera.cinematic.**overrideNodes**(`_nodes`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:313](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L313)
+[client/camera/cinematic.ts:313](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/camera/cinematic.ts#L313)
 
 ___
 
@@ -217,4 +217,4 @@ Play all camera nodes, but do not clear the camera nodes array.
 
 #### Defined in
 
-[client/camera/cinematic.ts:390](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L390)
+[client/camera/cinematic.ts:390](https://github.com/Stuyk/altv-athena/blob/01dffad/src/core/client/camera/cinematic.ts#L390)
