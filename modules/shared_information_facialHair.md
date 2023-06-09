@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/information/facialHair.ts:1](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/shared/information/facialHair.ts#L1)
+[shared/information/facialHair.ts:1](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/shared/information/facialHair.ts#L1)

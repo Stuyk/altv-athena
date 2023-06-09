@@ -29,4 +29,4 @@ Used to describe vehicle part damage.
 
 #### Defined in
 
-[shared/interfaces/vehicleOwned.ts:9](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/shared/interfaces/vehicleOwned.ts#L9)
+[shared/interfaces/vehicleOwned.ts:9](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/shared/interfaces/vehicleOwned.ts#L9)

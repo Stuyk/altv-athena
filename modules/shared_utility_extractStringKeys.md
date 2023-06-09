@@ -25,4 +25,4 @@ order: 0
 
 #### Defined in
 
-[shared/utility/extractStringKeys.ts:1](https://github.com/Stuyk/altv-athena/blob/2435881/src/core/shared/utility/extractStringKeys.ts#L1)
+[shared/utility/extractStringKeys.ts:1](https://github.com/Stuyk/altv-athena/blob/380b7cf/src/core/shared/utility/extractStringKeys.ts#L1)
