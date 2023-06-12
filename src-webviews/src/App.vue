@@ -49,6 +49,7 @@ import * as state from '@utility/state';
 import IPageData from './interfaces/IPageData';
 import WebViewEvents from '@utility/webViewEvents';
 import { Account } from '@AthenaShared/interfaces/iAccount';
+import { DefaultInventory } from './exampleData/Inventory';
 
 const ALL_THE_COMPONENTS = {
     ...CORE_IMPORTS,
