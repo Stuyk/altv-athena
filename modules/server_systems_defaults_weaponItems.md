@@ -29,4 +29,4 @@ Athena.systems.defaults.weaponItems.disable();
 
 #### Defined in
 
-[server/systems/defaults/weaponItems.ts:58](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/defaults/weaponItems.ts#L58)
+[server/systems/defaults/weaponItems.ts:58](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/defaults/weaponItems.ts#L58)

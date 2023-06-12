@@ -25,4 +25,4 @@ x: 0-1.0, y: 0-1.0
 
 #### Defined in
 
-[client/screen/mouse.ts:10](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/client/screen/mouse.ts#L10)
+[client/screen/mouse.ts:10](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/client/screen/mouse.ts#L10)

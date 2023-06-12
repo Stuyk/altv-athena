@@ -35,7 +35,7 @@ Decrease the value of a key in the document by a given value
 
 #### Defined in
 
-[server/systems/global.ts:113](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/global.ts#L113)
+[server/systems/global.ts:113](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/global.ts#L113)
 
 ___
 
@@ -61,7 +61,7 @@ A promise of an IGlobal object.
 
 #### Defined in
 
-[server/systems/global.ts:80](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/global.ts#L80)
+[server/systems/global.ts:80](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/global.ts#L80)
 
 ___
 
@@ -93,7 +93,7 @@ The value of the key.
 
 #### Defined in
 
-[server/systems/global.ts:70](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/global.ts#L70)
+[server/systems/global.ts:70](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/global.ts#L70)
 
 ___
 
@@ -119,7 +119,7 @@ Increase the value of a key in a document by a given value
 
 #### Defined in
 
-[server/systems/global.ts:90](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/global.ts#L90)
+[server/systems/global.ts:90](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/global.ts#L90)
 
 ___
 
@@ -140,7 +140,7 @@ defined.
 
 #### Defined in
 
-[server/systems/global.ts:37](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/global.ts#L37)
+[server/systems/global.ts:37](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/global.ts#L37)
 
 ___
 
@@ -171,4 +171,4 @@ It sets and overrides the value of the key in the database.
 
 #### Defined in
 
-[server/systems/global.ts:60](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/global.ts#L60)
+[server/systems/global.ts:60](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/global.ts#L60)

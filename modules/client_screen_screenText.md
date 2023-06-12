@@ -35,7 +35,7 @@ Used as a utility for string length.
 
 #### Defined in
 
-[client/screen/screenText.ts:22](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/client/screen/screenText.ts#L22)
+[client/screen/screenText.ts:22](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/client/screen/screenText.ts#L22)
 
 ___
 
@@ -68,7 +68,7 @@ Draw text with a background and apply padding.
 
 #### Defined in
 
-[client/screen/screenText.ts:85](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/client/screen/screenText.ts#L85)
+[client/screen/screenText.ts:85](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/client/screen/screenText.ts#L85)
 
 ___
 
@@ -95,7 +95,7 @@ Get the height of text based on scale and font.
 
 #### Defined in
 
-[client/screen/screenText.ts:68](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/client/screen/screenText.ts#L68)
+[client/screen/screenText.ts:68](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/client/screen/screenText.ts#L68)
 
 ___
 
@@ -123,4 +123,4 @@ Get the float width of text. (0.1 - 1)
 
 #### Defined in
 
-[client/screen/screenText.ts:52](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/client/screen/screenText.ts#L52)
+[client/screen/screenText.ts:52](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/client/screen/screenText.ts#L52)

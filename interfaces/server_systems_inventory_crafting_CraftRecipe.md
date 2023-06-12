@@ -19,7 +19,7 @@ Two items that can be combined.
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:28](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/inventory/crafting.ts#L28)
+[server/systems/inventory/crafting.ts:28](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/inventory/crafting.ts#L28)
 
 ___
 
@@ -33,7 +33,7 @@ Second item overwrites matching property names.
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:83](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/inventory/crafting.ts#L83)
+[server/systems/inventory/crafting.ts:83](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/inventory/crafting.ts#L83)
 
 ___
 
@@ -45,7 +45,7 @@ The amount required to combine.
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:36](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/inventory/crafting.ts#L36)
+[server/systems/inventory/crafting.ts:36](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/inventory/crafting.ts#L36)
 
 ___
 
@@ -66,7 +66,7 @@ The crafting result.
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:44](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/inventory/crafting.ts#L44)
+[server/systems/inventory/crafting.ts:44](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/inventory/crafting.ts#L44)
 
 ___
 
@@ -78,7 +78,7 @@ The custom sound associated with this crafting recipe.
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:91](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/inventory/crafting.ts#L91)
+[server/systems/inventory/crafting.ts:91](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/inventory/crafting.ts#L91)
 
 ___
 
@@ -90,4 +90,4 @@ A unique identifier for this recipe.
 
 #### Defined in
 
-[server/systems/inventory/crafting.ts:20](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/server/systems/inventory/crafting.ts#L20)
+[server/systems/inventory/crafting.ts:20](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/inventory/crafting.ts#L20)

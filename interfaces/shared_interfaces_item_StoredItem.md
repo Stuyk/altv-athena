@@ -42,7 +42,7 @@ Any custom data assigned to this item.
 
 #### Defined in
 
-[shared/interfaces/item.ts:204](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/interfaces/item.ts#L204)
+[shared/interfaces/item.ts:204](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/shared/interfaces/item.ts#L204)
 
 ___
 
@@ -58,7 +58,7 @@ The matching database name for this item.
 
 #### Defined in
 
-[shared/interfaces/item.ts:196](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/interfaces/item.ts#L196)
+[shared/interfaces/item.ts:196](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/shared/interfaces/item.ts#L196)
 
 ___
 
@@ -70,7 +70,7 @@ Flag this item as uncraftable. Just in case it has a shared base.
 
 #### Defined in
 
-[shared/interfaces/item.ts:277](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/interfaces/item.ts#L277)
+[shared/interfaces/item.ts:277](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/shared/interfaces/item.ts#L277)
 
 ___
 
@@ -82,7 +82,7 @@ Specify an icon to override the default base item icon with.
 
 #### Defined in
 
-[shared/interfaces/item.ts:269](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/interfaces/item.ts#L269)
+[shared/interfaces/item.ts:269](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/shared/interfaces/item.ts#L269)
 
 ___
 
@@ -95,7 +95,7 @@ Equipped can mean anything in the code base; it's up to the user to define its e
 
 #### Defined in
 
-[shared/interfaces/item.ts:253](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/interfaces/item.ts#L253)
+[shared/interfaces/item.ts:253](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/shared/interfaces/item.ts#L253)
 
 ___
 
@@ -113,7 +113,7 @@ StoredItem
 
 #### Defined in
 
-[shared/interfaces/item.ts:287](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/interfaces/item.ts#L287)
+[shared/interfaces/item.ts:287](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/shared/interfaces/item.ts#L287)
 
 ___
 
@@ -125,7 +125,7 @@ The amount of this item the player has.
 
 #### Defined in
 
-[shared/interfaces/item.ts:236](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/interfaces/item.ts#L236)
+[shared/interfaces/item.ts:236](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/shared/interfaces/item.ts#L236)
 
 ___
 
@@ -137,7 +137,7 @@ Where this item should be displayed in a toolbar, equipment bar, or inventory ba
 
 #### Defined in
 
-[shared/interfaces/item.ts:244](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/interfaces/item.ts#L244)
+[shared/interfaces/item.ts:244](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/shared/interfaces/item.ts#L244)
 
 ___
 
@@ -149,7 +149,7 @@ The weight calculated for this item.
 
 #### Defined in
 
-[shared/interfaces/item.ts:261](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/interfaces/item.ts#L261)
+[shared/interfaces/item.ts:261](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/shared/interfaces/item.ts#L261)
 
 ___
 
@@ -165,4 +165,4 @@ The version of this item it is based upon.
 
 #### Defined in
 
-[shared/interfaces/item.ts:212](https://github.com/Stuyk/altv-athena/blob/0a4b65e/src/core/shared/interfaces/item.ts#L212)
+[shared/interfaces/item.ts:212](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/shared/interfaces/item.ts#L212)
