@@ -33,7 +33,7 @@ Invoke a specific event for listening to a specific item type being equipped / u
 
 #### Defined in
 
-[server/systems/inventory/equip.ts:22](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/inventory/equip.ts#L22)
+[server/systems/inventory/equip.ts:22](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/server/systems/inventory/equip.ts#L22)
 
 ___
 
@@ -67,4 +67,4 @@ Listen for a when a specific item is equipped or unequipped
 
 #### Defined in
 
-[server/systems/inventory/equip.ts:42](https://github.com/Stuyk/altv-athena/blob/fc54439/src/core/server/systems/inventory/equip.ts#L42)
+[server/systems/inventory/equip.ts:42](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/server/systems/inventory/equip.ts#L42)
