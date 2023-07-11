@@ -26,7 +26,7 @@ Events to call when the page is opened.
 
 #### Defined in
 
-[client/webview/page.ts:22](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/client/webview/page.ts#L22)
+[client/webview/page.ts:22](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/client/webview/page.ts#L22)
 
 ___
 
@@ -39,7 +39,7 @@ Set `useSameKeyToClose` to true to force the same key to close the interface.
 
 #### Defined in
 
-[client/webview/page.ts:171](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/client/webview/page.ts#L171)
+[client/webview/page.ts:171](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/client/webview/page.ts#L171)
 
 ___
 
@@ -51,7 +51,7 @@ The full name of the Vue file you are trying to load.
 
 #### Defined in
 
-[client/webview/page.ts:15](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/client/webview/page.ts#L15)
+[client/webview/page.ts:15](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/client/webview/page.ts#L15)
 
 ___
 
@@ -86,4 +86,4 @@ ___
 
 #### Defined in
 
-[client/webview/page.ts:34](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/client/webview/page.ts#L34)
+[client/webview/page.ts:34](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/client/webview/page.ts#L34)

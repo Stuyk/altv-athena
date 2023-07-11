@@ -24,7 +24,7 @@ Make sure to wait for it to close before opening a new menu.
 
 #### Defined in
 
-[client/rmlui/menu3d/index.ts:192](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/client/rmlui/menu3d/index.ts#L192)
+[client/rmlui/menu3d/index.ts:193](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/client/rmlui/menu3d/index.ts#L193)
 
 ___
 
@@ -50,4 +50,4 @@ Create an in-world 3D menu with maximum options.
 
 #### Defined in
 
-[client/rmlui/menu3d/index.ts:166](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/client/rmlui/menu3d/index.ts#L166)
+[client/rmlui/menu3d/index.ts:167](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/client/rmlui/menu3d/index.ts#L167)

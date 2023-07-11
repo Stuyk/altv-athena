@@ -31,7 +31,7 @@ Remove a Dynamic Door, but do not remove from the database.
 
 #### Defined in
 
-[server/controllers/dynamicDoors/system.ts:55](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/server/controllers/dynamicDoors/system.ts#L55)
+[server/controllers/dynamicDoors/system.ts:55](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/server/controllers/dynamicDoors/system.ts#L55)
 
 ___
 
@@ -59,7 +59,7 @@ Ignores already pre-created doors.
 
 #### Defined in
 
-[server/controllers/dynamicDoors/system.ts:198](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/server/controllers/dynamicDoors/system.ts#L198)
+[server/controllers/dynamicDoors/system.ts:198](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/server/controllers/dynamicDoors/system.ts#L198)
 
 ___
 
@@ -85,7 +85,7 @@ Delete a Dynamic Door from the Database & in-game
 
 #### Defined in
 
-[server/controllers/dynamicDoors/system.ts:221](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/server/controllers/dynamicDoors/system.ts#L221)
+[server/controllers/dynamicDoors/system.ts:221](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/server/controllers/dynamicDoors/system.ts#L221)
 
 ___
 
@@ -109,7 +109,7 @@ Generates a dynamic door based on its properties and builds it in both direction
 
 #### Defined in
 
-[server/controllers/dynamicDoors/system.ts:73](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/server/controllers/dynamicDoors/system.ts#L73)
+[server/controllers/dynamicDoors/system.ts:73](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/server/controllers/dynamicDoors/system.ts#L73)
 
 ___
 
@@ -138,4 +138,4 @@ The door is the place you are going to.
 
 #### Defined in
 
-[server/controllers/dynamicDoors/system.ts:97](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/server/controllers/dynamicDoors/system.ts#L97)
+[server/controllers/dynamicDoors/system.ts:97](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/server/controllers/dynamicDoors/system.ts#L97)

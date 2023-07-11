@@ -19,7 +19,7 @@ Maximum distance for viewing text.
 
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L34)
+[client/rmlui/staticText/staticTextInterfaces.ts:34](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L34)
 
 ___
 
@@ -31,7 +31,7 @@ The position on where to display this text.
 
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L26)
+[client/rmlui/staticText/staticTextInterfaces.ts:26](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L26)
 
 ___
 
@@ -43,7 +43,7 @@ The name to display on-screen.
 
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L18)
+[client/rmlui/staticText/staticTextInterfaces.ts:18](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L18)
 
 ___
 
@@ -55,4 +55,4 @@ The unique identifier for this drawable.
 
 #### Defined in
 
-[client/rmlui/staticText/staticTextInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L10)
+[client/rmlui/staticText/staticTextInterfaces.ts:10](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/client/rmlui/staticText/staticTextInterfaces.ts#L10)

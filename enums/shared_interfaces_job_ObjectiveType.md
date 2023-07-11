@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[shared/interfaces/job.ts:35](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/shared/interfaces/job.ts#L35)
+[shared/interfaces/job.ts:35](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/shared/interfaces/job.ts#L35)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/job.ts:36](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/shared/interfaces/job.ts#L36)
+[shared/interfaces/job.ts:36](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/shared/interfaces/job.ts#L36)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 #### Defined in
 
-[shared/interfaces/job.ts:34](https://github.com/Stuyk/altv-athena/blob/3dfaad7/src/core/shared/interfaces/job.ts#L34)
+[shared/interfaces/job.ts:34](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/shared/interfaces/job.ts#L34)
