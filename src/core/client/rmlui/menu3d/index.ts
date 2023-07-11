@@ -27,6 +27,7 @@ const InternalFunctions = {
         internalOptions = options;
         internalPos = pos;
         maxDistance = distance;
+        optionIndex = 0;
 
         // Options Setup
         const optionsElement = document.getElementByID('options');
