@@ -89,7 +89,7 @@ const Internal = {
             entityInfo.push({ dist, height: 1, id: -1, pos: latestInteraction.position, type: 'interaction' });
         }
 
-        entityInfo.sort((a, b) => {
+        entityInfo = entityInfo.sort((a, b) => {
             return a.dist - b.dist;
         });
 
