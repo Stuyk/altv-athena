@@ -383,6 +383,82 @@ export async function next(removeFromArray = true): Promise<boolean> {
 }
 
 /**
+ * Goes to the index specified camera.
+ *
+ * If `false` is passed in the function it will not remove a camera
+ * from the camera array. Allows for repeating camera movement over and over.
+ *
+ * @param {boolean} [removeFromArray=true]
+ * @return {Promise<boolean>}
+ *
+ */
+export async function switchNode(index: number, removeFromArray = true) {
+    if (Overrides.switchNode) {
+        return Overrides.switchNode;
+    }
+
+    if (nodes.length <= 0) {
+        return false;
+    }
+
+    await InternalFunctions.isCameraUpdating();
+
+    if (removeFromArray) {
+        const prevCam = nodes.pop();
+        await InternalFunctions.next(prevCam);
+    } else {
+        currentCamIndex -= 1;
+
+        if (currentCamIndex < 0) {
+            currentCamIndex = nodes.length - 1;
+        }
+
+        const prevCam = nodes[index];
+        await InternalFunctions.next(prevCam);
+    }
+
+    return true;
+}
+
+/**
+ * Goes to the previous camera.
+ *
+ * If `false` is passed in the function it will not remove a camera
+ * from the camera array. Allows for repeating camera movement over and over.
+ *
+ * @param {boolean} [removeFromArray=true]
+ * @return {Promise<boolean>}
+ *
+ */
+export async function previous(removeFromArray = true): Promise<boolean> {
+    if (Overrides.previous) {
+        return Overrides.previous(removeFromArray);
+    }
+
+    if (nodes.length <= 0) {
+        return false;
+    }
+
+    await InternalFunctions.isCameraUpdating();
+
+    if (removeFromArray) {
+        const prevCam = nodes.pop();
+        await InternalFunctions.next(prevCam);
+    } else {
+        currentCamIndex -= 1;
+
+        if (currentCamIndex < 0) {
+            currentCamIndex = nodes.length - 1;
+        }
+
+        const prevCam = nodes[currentCamIndex];
+        await InternalFunctions.next(prevCam);
+    }
+
+    return true;
+}
+
+/**
  * Play all camera nodes, but do not clear the camera nodes array.
  *
  *
@@ -404,6 +480,8 @@ interface CinematicCamFuncs {
     destroy: typeof destroy;
     overrideNodes: typeof overrideNodes;
     next: typeof next;
+    previous: typeof previous;
+    switchNode: typeof switchNode;
     play: typeof play;
 }
 
@@ -413,6 +491,8 @@ export function override(functionName: 'addNode', callback: typeof addNode);
 export function override(functionName: 'destroy', callback: typeof destroy);
 export function override(functionName: 'overrideNodes', callback: typeof overrideNodes);
 export function override(functionName: 'next', callback: typeof next);
+export function override(functionName: 'switchNode', callback: typeof switchNode);
+export function override(functionName: 'previous', callback: typeof previous);
 export function override(functionName: 'play', callback: typeof play);
 export function override(functionName: keyof CinematicCamFuncs, callback: any): void {
     Overrides[functionName] = callback;
