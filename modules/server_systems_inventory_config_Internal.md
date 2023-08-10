@@ -33,4 +33,4 @@ Use the config setter / getter in ItemManager system to modify.
 
 #### Defined in
 
-[server/systems/inventory/config.ts:10](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/server/systems/inventory/config.ts#L10)
+[server/systems/inventory/config.ts:10](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/inventory/config.ts#L10)

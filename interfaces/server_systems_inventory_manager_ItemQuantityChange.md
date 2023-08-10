@@ -19,7 +19,7 @@ The modified item after making qunatity modifications to it.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:16](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/server/systems/inventory/manager.ts#L16)
+[server/systems/inventory/manager.ts:16](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/inventory/manager.ts#L16)
 
 ___
 
@@ -31,4 +31,4 @@ The number of items that were not added to this stack.
 
 #### Defined in
 
-[server/systems/inventory/manager.ts:24](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/server/systems/inventory/manager.ts#L24)
+[server/systems/inventory/manager.ts:24](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/inventory/manager.ts#L24)

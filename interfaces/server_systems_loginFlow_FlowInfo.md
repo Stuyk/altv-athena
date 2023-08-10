@@ -33,7 +33,7 @@ Athena.systems.loginFlow.FlowInfo.(`player`): `void`
 
 #### Defined in
 
-[server/systems/loginFlow.ts:11](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/server/systems/loginFlow.ts#L11)
+[server/systems/loginFlow.ts:11](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L11)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[server/systems/loginFlow.ts:9](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/server/systems/loginFlow.ts#L9)
+[server/systems/loginFlow.ts:9](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L9)
 
 ___
 
@@ -53,4 +53,4 @@ ___
 
 #### Defined in
 
-[server/systems/loginFlow.ts:10](https://github.com/Stuyk/altv-athena/blob/92069ee/src/core/server/systems/loginFlow.ts#L10)
+[server/systems/loginFlow.ts:10](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L10)
