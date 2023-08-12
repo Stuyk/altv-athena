@@ -23,7 +23,7 @@ IVehicleHandling
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:8](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L8)
+[shared/interfaces/vehicleHandling.ts:8](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L8)
 
 ___
 
@@ -35,7 +35,7 @@ The bias between front and rear for the antiroll bar(0 front, 1 rear).
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:15](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L15)
+[shared/interfaces/vehicleHandling.ts:15](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L15)
 
 ___
 
@@ -47,7 +47,7 @@ This value modify the weight transmission during an acceleration between the lef
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:22](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L22)
+[shared/interfaces/vehicleHandling.ts:22](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L22)
 
 ___
 
@@ -59,7 +59,7 @@ The spring constant that is transmitted to the opposite wheel when under compres
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:29](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L29)
+[shared/interfaces/vehicleHandling.ts:29](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L29)
 
 ___
 
@@ -71,7 +71,7 @@ Determines the distribution of traction from front to rear.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:36](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L36)
+[shared/interfaces/vehicleHandling.ts:36](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L36)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:38](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L38)
+[shared/interfaces/vehicleHandling.ts:38](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L38)
 
 ___
 
@@ -93,7 +93,7 @@ Braking power for handbrake. Bigger number = harder braking.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:45](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L45)
+[shared/interfaces/vehicleHandling.ts:45](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L45)
 
 ___
 
@@ -105,7 +105,7 @@ This value modify the grip of the car when you're drifting and you release the g
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:52](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L52)
+[shared/interfaces/vehicleHandling.ts:52](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L52)
 
 ___
 
@@ -125,7 +125,7 @@ This value shifts the center of gravity in meters from side to side (when in veh
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:59](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L59)
+[shared/interfaces/vehicleHandling.ts:59](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L59)
 
 ___
 
@@ -137,7 +137,7 @@ Clutch speed multiplier on down shifts, bigger number = faster shifts.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:66](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L66)
+[shared/interfaces/vehicleHandling.ts:66](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L66)
 
 ___
 
@@ -149,7 +149,7 @@ Clutch speed multiplier on up shifts, bigger number = faster shifts.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:73](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L73)
+[shared/interfaces/vehicleHandling.ts:73](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L73)
 
 ___
 
@@ -161,7 +161,7 @@ Multiplies the game's calculation of damage to the vehicle through collision.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:80](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L80)
+[shared/interfaces/vehicleHandling.ts:80](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L80)
 
 ___
 
@@ -173,7 +173,7 @@ Multiplies the game's calculation of deformation damage.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:87](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L87)
+[shared/interfaces/vehicleHandling.ts:87](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L87)
 
 ___
 
@@ -185,7 +185,7 @@ No Description
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:94](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L94)
+[shared/interfaces/vehicleHandling.ts:94](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L94)
 
 ___
 
@@ -197,7 +197,7 @@ This value is used to determine whether a vehicle is front, rear, or four wheel 
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:101](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L101)
+[shared/interfaces/vehicleHandling.ts:101](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L101)
 
 ___
 
@@ -209,7 +209,7 @@ Describes how fast an engine will rev. For example an engine with a long stroke 
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:108](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L108)
+[shared/interfaces/vehicleHandling.ts:108](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L108)
 
 ___
 
@@ -219,7 +219,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:110](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L110)
+[shared/interfaces/vehicleHandling.ts:110](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L110)
 
 ___
 
@@ -231,7 +231,7 @@ Multiplies the game's calculation of damage to the engine, causing explosion or 
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:117](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L117)
+[shared/interfaces/vehicleHandling.ts:117](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L117)
 
 ___
 
@@ -243,7 +243,7 @@ Braking power for handbrake. Bigger number = harder braking.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:124](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L124)
+[shared/interfaces/vehicleHandling.ts:124](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L124)
 
 ___
 
@@ -256,7 +256,7 @@ No additional information on this property.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:132](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L132)
+[shared/interfaces/vehicleHandling.ts:132](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L132)
 
 ___
 
@@ -268,7 +268,7 @@ Sets the drag coefficient on the rage physics archetype of the vehicle (proporti
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:139](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L139)
+[shared/interfaces/vehicleHandling.ts:139](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L139)
 
 ___
 
@@ -280,7 +280,7 @@ This multiplier modifies the game's calculation of drive force (from the output 
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:146](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L146)
+[shared/interfaces/vehicleHandling.ts:146](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L146)
 
 ___
 
@@ -292,7 +292,7 @@ How many forward speeds a transmission contains.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:153](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L153)
+[shared/interfaces/vehicleHandling.ts:153](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L153)
 
 ___
 
@@ -304,7 +304,7 @@ Determines the speed at redline in top gear. Setting this value does not guarant
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:160](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L160)
+[shared/interfaces/vehicleHandling.ts:160](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L160)
 
 ___
 
@@ -316,7 +316,7 @@ How much traction is reduced at low speed, 0.0 means normal traction. It affects
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:167](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L167)
+[shared/interfaces/vehicleHandling.ts:167](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L167)
 
 ___
 
@@ -328,7 +328,7 @@ This value modify the weight transmission during an acceleration between the lef
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:174](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L174)
+[shared/interfaces/vehicleHandling.ts:174](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L174)
 
 ___
 
@@ -338,7 +338,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:176](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L176)
+[shared/interfaces/vehicleHandling.ts:176](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L176)
 
 ___
 
@@ -350,7 +350,7 @@ This value is a multiplier of the game's calculation of the angle a steer wheel 
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:183](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L183)
+[shared/interfaces/vehicleHandling.ts:183](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L183)
 
 ___
 
@@ -360,7 +360,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:185](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L185)
+[shared/interfaces/vehicleHandling.ts:185](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L185)
 
 ___
 
@@ -372,7 +372,7 @@ Force damping scale front/back. If more wheels at back (e.g. trucks) need front 
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:192](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L192)
+[shared/interfaces/vehicleHandling.ts:192](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L192)
 
 ___
 
@@ -382,7 +382,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:194](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L194)
+[shared/interfaces/vehicleHandling.ts:194](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L194)
 
 ___
 
@@ -394,7 +394,7 @@ Damping during strut compression. Bigger = stiffer.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:201](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L201)
+[shared/interfaces/vehicleHandling.ts:201](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L201)
 
 ___
 
@@ -406,7 +406,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:208](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L208)
+[shared/interfaces/vehicleHandling.ts:208](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L208)
 
 ___
 
@@ -418,7 +418,7 @@ Visual limit... how far can wheels move up / down from original position.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:215](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L215)
+[shared/interfaces/vehicleHandling.ts:215](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L215)
 
 ___
 
@@ -430,7 +430,7 @@ The amount that the suspension raises the body off the wheels. Recommend adjusti
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:222](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L222)
+[shared/interfaces/vehicleHandling.ts:222](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L222)
 
 ___
 
@@ -442,7 +442,7 @@ Damping during strut rebound. Bigger = stiffer.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:229](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L229)
+[shared/interfaces/vehicleHandling.ts:229](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L229)
 
 ___
 
@@ -454,7 +454,7 @@ Visual limit... how far can wheels move up / down from original position.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:236](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L236)
+[shared/interfaces/vehicleHandling.ts:236](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L236)
 
 ___
 
@@ -466,7 +466,7 @@ Determines the distribution of traction from front to rear.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:243](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L243)
+[shared/interfaces/vehicleHandling.ts:243](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L243)
 
 ___
 
@@ -476,7 +476,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:245](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L245)
+[shared/interfaces/vehicleHandling.ts:245](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L245)
 
 ___
 
@@ -488,7 +488,7 @@ Shape of lateral traction curve (peak traction position in degrees).
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:252](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L252)
+[shared/interfaces/vehicleHandling.ts:252](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L252)
 
 ___
 
@@ -498,7 +498,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:254](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L254)
+[shared/interfaces/vehicleHandling.ts:254](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L254)
 
 ___
 
@@ -510,7 +510,7 @@ Cornering grip of the vehicle as a multiplier of the tire surface friction.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:261](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L261)
+[shared/interfaces/vehicleHandling.ts:261](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L261)
 
 ___
 
@@ -520,7 +520,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:263](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L263)
+[shared/interfaces/vehicleHandling.ts:263](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L263)
 
 ___
 
@@ -532,7 +532,7 @@ Accelerating/braking grip of the vehicle as a multiplier of the tire surface fri
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:270](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L270)
+[shared/interfaces/vehicleHandling.ts:270](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L270)
 
 ___
 
@@ -542,7 +542,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:272](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L272)
+[shared/interfaces/vehicleHandling.ts:272](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L272)
 
 ___
 
@@ -554,7 +554,7 @@ How much is traction affected by material grip differences from 1.0. Basically i
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:279](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L279)
+[shared/interfaces/vehicleHandling.ts:279](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L279)
 
 ___
 
@@ -566,7 +566,7 @@ This value denotes at what distance above the ground the car will lose traction.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:286](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L286)
+[shared/interfaces/vehicleHandling.ts:286](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L286)
 
 ___
 
@@ -576,7 +576,7 @@ ___
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:288](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L288)
+[shared/interfaces/vehicleHandling.ts:288](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L288)
 
 ___
 
@@ -588,4 +588,4 @@ Multiplies the game's calculation of damage to the vehicle by weapons.
 
 #### Defined in
 
-[shared/interfaces/vehicleHandling.ts:295](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/shared/interfaces/vehicleHandling.ts#L295)
+[shared/interfaces/vehicleHandling.ts:295](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/shared/interfaces/vehicleHandling.ts#L295)

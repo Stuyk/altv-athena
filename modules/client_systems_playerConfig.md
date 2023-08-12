@@ -31,7 +31,7 @@ AthenaClient.systems.playerConfig.(`value`): `void`
 
 #### Defined in
 
-[client/systems/playerConfig.ts:6](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/client/systems/playerConfig.ts#L6)
+[client/systems/playerConfig.ts:6](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/systems/playerConfig.ts#L6)
 
 ## Functions
 
@@ -62,7 +62,7 @@ Add a custom callback to listen for config changes.
 
 #### Defined in
 
-[client/systems/playerConfig.ts:42](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/client/systems/playerConfig.ts#L42)
+[client/systems/playerConfig.ts:42](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/systems/playerConfig.ts#L42)
 
 ___
 
@@ -86,7 +86,7 @@ Get a value assigned by the server.
 
 #### Defined in
 
-[client/systems/playerConfig.ts:22](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/client/systems/playerConfig.ts#L22)
+[client/systems/playerConfig.ts:22](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/systems/playerConfig.ts#L22)
 
 ::: tip Usage
 AthenaClient.systems.playerConfig.**get**(`key`): [`player`](server_config.md#player) \| `undefined`
@@ -106,4 +106,4 @@ Get a value assigned by the server.
 
 #### Defined in
 
-[client/systems/playerConfig.ts:23](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/client/systems/playerConfig.ts#L23)
+[client/systems/playerConfig.ts:23](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/systems/playerConfig.ts#L23)

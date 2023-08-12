@@ -35,7 +35,7 @@ Adds a flow option to the login flow.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:32](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L32)
+[server/systems/loginFlow.ts:32](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L32)
 
 ___
 
@@ -64,7 +64,7 @@ Return the flow that a player is currently utilizing.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:105](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L105)
+[server/systems/loginFlow.ts:105](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L105)
 
 ___
 
@@ -82,7 +82,7 @@ Returns all currently registered flow information, their weight, name, and callb
 
 #### Defined in
 
-[server/systems/loginFlow.ts:91](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L91)
+[server/systems/loginFlow.ts:91](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L91)
 
 ___
 
@@ -108,7 +108,7 @@ Go straight to the final section of login flow. Which is a character select.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:178](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L178)
+[server/systems/loginFlow.ts:178](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L178)
 
 ___
 
@@ -134,7 +134,7 @@ It will spawn the player.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:149](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L149)
+[server/systems/loginFlow.ts:149](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L149)
 
 ___
 
@@ -159,7 +159,7 @@ Used to override login flow functions.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:200](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L200)
+[server/systems/loginFlow.ts:200](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L200)
 
 ::: tip Usage
 Athena.systems.loginFlow.**override**(`functionName`, `callback`): `any`
@@ -180,7 +180,7 @@ Used to override login flow functions.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:201](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L201)
+[server/systems/loginFlow.ts:201](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L201)
 
 ::: tip Usage
 Athena.systems.loginFlow.**override**(`functionName`, `callback`): `any`
@@ -201,7 +201,7 @@ Used to override login flow functions.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:202](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L202)
+[server/systems/loginFlow.ts:202](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L202)
 
 ::: tip Usage
 Athena.systems.loginFlow.**override**(`functionName`, `callback`): `any`
@@ -222,7 +222,7 @@ Used to override login flow functions.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:203](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L203)
+[server/systems/loginFlow.ts:203](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L203)
 
 ::: tip Usage
 Athena.systems.loginFlow.**override**(`functionName`, `callback`): `any`
@@ -243,7 +243,7 @@ Used to override login flow functions.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:204](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L204)
+[server/systems/loginFlow.ts:204](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L204)
 
 ::: tip Usage
 Athena.systems.loginFlow.**override**(`functionName`, `callback`): `any`
@@ -264,7 +264,7 @@ Used to override login flow functions.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:205](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L205)
+[server/systems/loginFlow.ts:205](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L205)
 
 ::: tip Usage
 Athena.systems.loginFlow.**override**(`functionName`, `callback`): `any`
@@ -285,7 +285,7 @@ Used to override login flow functions.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:206](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L206)
+[server/systems/loginFlow.ts:206](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L206)
 
 ___
 
@@ -310,7 +310,7 @@ Invokes the first callable function in the weighted flow.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:119](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L119)
+[server/systems/loginFlow.ts:119](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L119)
 
 ___
 
@@ -334,7 +334,7 @@ Removes weighted flow info by name.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:71](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L71)
+[server/systems/loginFlow.ts:71](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L71)
 
 ___
 
@@ -358,4 +358,4 @@ Unregister player flow information.
 
 #### Defined in
 
-[server/systems/loginFlow.ts:134](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/loginFlow.ts#L134)
+[server/systems/loginFlow.ts:134](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/loginFlow.ts#L134)

@@ -36,7 +36,7 @@ Athena.systems.rpc.(`player`, `...args`): `void`
 
 #### Defined in
 
-[server/systems/rpc.ts:4](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/rpc.ts#L4)
+[server/systems/rpc.ts:4](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/rpc.ts#L4)
 
 ## Functions
 
@@ -73,4 +73,4 @@ Athena.systems.rpc.invoke(somePlayer, 'getLocalPos', (player: alt.Player, pos: a
 
 #### Defined in
 
-[server/systems/rpc.ts:61](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/systems/rpc.ts#L61)
+[server/systems/rpc.ts:61](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/systems/rpc.ts#L61)

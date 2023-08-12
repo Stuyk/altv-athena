@@ -15,7 +15,7 @@ order: 0
 
 #### Defined in
 
-[client/systems/notification.ts:5](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/client/systems/notification.ts#L5)
+[client/systems/notification.ts:5](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/systems/notification.ts#L5)
 
 ## Functions
 
@@ -41,7 +41,7 @@ Good for overwriting the default notification system and handling it on your own
 
 #### Defined in
 
-[client/systems/notification.ts:42](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/client/systems/notification.ts#L42)
+[client/systems/notification.ts:42](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/systems/notification.ts#L42)
 
 ___
 
@@ -59,4 +59,4 @@ Disable the default notification handler
 
 #### Defined in
 
-[client/systems/notification.ts:30](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/client/systems/notification.ts#L30)
+[client/systems/notification.ts:30](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/systems/notification.ts#L30)

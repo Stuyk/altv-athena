@@ -32,7 +32,7 @@ Apply an appearance on a player, or use a selected character document to update.
 
 #### Defined in
 
-[server/player/sync.ts:36](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/player/sync.ts#L36)
+[server/player/sync.ts:36](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/sync.ts#L36)
 
 ___
 
@@ -56,7 +56,7 @@ Synchronize currency data like bank, cash, etc.
 
 #### Defined in
 
-[server/player/sync.ts:14](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/player/sync.ts#L14)
+[server/player/sync.ts:14](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/sync.ts#L14)
 
 ___
 
@@ -81,7 +81,7 @@ Used to override any sync functions
 
 #### Defined in
 
-[server/player/sync.ts:174](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/player/sync.ts#L174)
+[server/player/sync.ts:174](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/sync.ts#L174)
 
 ::: tip Usage
 Athena.player.sync.**override**(`functionName`, `callback`): `any`
@@ -102,7 +102,7 @@ Used to override any sync functions
 
 #### Defined in
 
-[server/player/sync.ts:175](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/player/sync.ts#L175)
+[server/player/sync.ts:175](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/sync.ts#L175)
 
 ::: tip Usage
 Athena.player.sync.**override**(`functionName`, `callback`): `any`
@@ -123,7 +123,7 @@ Used to override any sync functions
 
 #### Defined in
 
-[server/player/sync.ts:176](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/player/sync.ts#L176)
+[server/player/sync.ts:176](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/sync.ts#L176)
 
 ::: tip Usage
 Athena.player.sync.**override**(`functionName`, `callback`): `any`
@@ -144,7 +144,7 @@ Used to override any sync functions
 
 #### Defined in
 
-[server/player/sync.ts:177](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/player/sync.ts#L177)
+[server/player/sync.ts:177](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/sync.ts#L177)
 
 ___
 
@@ -166,7 +166,7 @@ Athena.player.sync.**playTime**(`player`): `void`
 
 #### Defined in
 
-[server/player/sync.ts:154](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/player/sync.ts#L154)
+[server/player/sync.ts:154](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/sync.ts#L154)
 
 ___
 
@@ -191,4 +191,4 @@ Basically updates data that may not be fully accessible everywhere.
 
 #### Defined in
 
-[server/player/sync.ts:145](https://github.com/Stuyk/altv-athena/blob/6c506bf/src/core/server/player/sync.ts#L145)
+[server/player/sync.ts:145](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/sync.ts#L145)
