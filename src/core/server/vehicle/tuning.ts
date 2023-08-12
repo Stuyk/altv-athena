@@ -86,7 +86,13 @@ export function applyTuning(vehicle: alt.Vehicle, tuning: VehicleTuning | Partia
 
     if (tuning.mods) {
         for (let mod of tuning.mods) {
-            vehicle.setMod(mod.id, mod.value);
+            if (mod.id === 23 && mod.value !== 0) {
+                vehicle.setWheels(23, mod.value);
+            } else if (mod.id === 24 && mod.value !== 0) {
+                vehicle.setWheels(24, mod.value);
+            } else {
+                vehicle.setMod(mod.id, mod.value);
+            }
         }
     }
 }
