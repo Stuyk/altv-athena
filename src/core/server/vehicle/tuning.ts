@@ -111,9 +111,15 @@ export function getTuning(vehicle: alt.Vehicle): VehicleTuning {
 
     let tuningData: VehicleTuning = { modkit: vehicle.modKit, mods: [] };
 
-    for (let id = 0; id < 70; ++id) {
+    for (let id = 0; id < 67; ++id) {
         let value = vehicle.getMod(id);
-        tuningData.mods.push({ id, value });
+        if (id === 23) {
+            value = vehicle.frontWheels;
+        } else if (id === 24) {
+            value = vehicle.rearWheels;
+        } else {
+            tuningData.mods.push({ id, value });
+        }
     }
 
     return tuningData;
@@ -172,8 +178,14 @@ export function getMods(vehicle: alt.Vehicle): Array<IVehicleMod> {
 
     for (let i = 0; i < 67; i++) {
         try {
-            const value = vehicle.getMod(i);
-            mods.push({ id: i, value });
+            let value = vehicle.getMod(i);
+            if (i === 23) {
+                value = vehicle.frontWheels;
+            } else if (i === 24) {
+                value = vehicle.rearWheels;
+            } else {
+                mods.push({ id: i, value });
+            }
         } catch (err) {}
     }
 
