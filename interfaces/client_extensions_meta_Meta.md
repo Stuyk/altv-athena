@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[client/extensions/meta.ts:26](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/extensions/meta.ts#L26)
+[client/extensions/meta.ts:26](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/extensions/meta.ts#L26)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[client/extensions/meta.ts:17](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/extensions/meta.ts#L17)
+[client/extensions/meta.ts:17](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/extensions/meta.ts#L17)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[client/extensions/meta.ts:19](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/extensions/meta.ts#L19)
+[client/extensions/meta.ts:19](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/extensions/meta.ts#L19)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[client/extensions/meta.ts:18](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/extensions/meta.ts#L18)
+[client/extensions/meta.ts:18](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/extensions/meta.ts#L18)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[client/extensions/meta.ts:22](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/extensions/meta.ts#L22)
+[client/extensions/meta.ts:22](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/extensions/meta.ts#L22)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[client/extensions/meta.ts:6](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/extensions/meta.ts#L6)
+[client/extensions/meta.ts:6](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/extensions/meta.ts#L6)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[client/extensions/meta.ts:5](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/extensions/meta.ts#L5)
+[client/extensions/meta.ts:5](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/extensions/meta.ts#L5)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[client/extensions/meta.ts:4](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/extensions/meta.ts#L4)
+[client/extensions/meta.ts:4](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/extensions/meta.ts#L4)
 
 ___
 
@@ -99,7 +99,7 @@ Check if in a voice channel.
 
 #### Defined in
 
-[client/extensions/meta.ts:14](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/extensions/meta.ts#L14)
+[client/extensions/meta.ts:14](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/extensions/meta.ts#L14)
 
 ___
 
@@ -109,4 +109,4 @@ ___
 
 #### Defined in
 
-[client/extensions/meta.ts:23](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/client/extensions/meta.ts#L23)
+[client/extensions/meta.ts:23](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/extensions/meta.ts#L23)

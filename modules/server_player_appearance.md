@@ -23,7 +23,7 @@ order: 0
 
 #### Defined in
 
-[server/player/appearance.ts:7](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L7)
+[server/player/appearance.ts:7](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L7)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[server/player/appearance.ts:5](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L5)
+[server/player/appearance.ts:5](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L5)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 #### Defined in
 
-[server/player/appearance.ts:6](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L6)
+[server/player/appearance.ts:6](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L6)
 
 ## Functions
 
@@ -86,7 +86,7 @@ Clear player custom model.
 
 #### Defined in
 
-[server/player/appearance.ts:142](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L142)
+[server/player/appearance.ts:142](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L142)
 
 ___
 
@@ -111,7 +111,7 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:254](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L254)
+[server/player/appearance.ts:254](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L254)
 
 ::: tip Usage
 Athena.player.appearance.**override**(`functionName`, `callback`): `any`
@@ -132,7 +132,7 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:255](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L255)
+[server/player/appearance.ts:255](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L255)
 
 ::: tip Usage
 Athena.player.appearance.**override**(`functionName`, `callback`): `any`
@@ -153,7 +153,7 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:256](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L256)
+[server/player/appearance.ts:256](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L256)
 
 ::: tip Usage
 Athena.player.appearance.**override**(`functionName`, `callback`): `any`
@@ -174,7 +174,7 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:257](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L257)
+[server/player/appearance.ts:257](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L257)
 
 ::: tip Usage
 Athena.player.appearance.**override**(`functionName`, `callback`): `any`
@@ -195,7 +195,7 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:258](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L258)
+[server/player/appearance.ts:258](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L258)
 
 ::: tip Usage
 Athena.player.appearance.**override**(`functionName`, `callback`): `any`
@@ -216,7 +216,7 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:259](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L259)
+[server/player/appearance.ts:259](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L259)
 
 ::: tip Usage
 Athena.player.appearance.**override**(`functionName`, `callback`): `any`
@@ -237,7 +237,7 @@ Used to override any appearance setter functions.
 
 #### Defined in
 
-[server/player/appearance.ts:260](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L260)
+[server/player/appearance.ts:260](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L260)
 
 ___
 
@@ -264,7 +264,7 @@ Automatically saves to database.
 
 #### Defined in
 
-[server/player/appearance.ts:156](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L156)
+[server/player/appearance.ts:156](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L156)
 
 ___
 
@@ -291,7 +291,7 @@ Automatically saves to the database.
 
 #### Defined in
 
-[server/player/appearance.ts:84](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L84)
+[server/player/appearance.ts:84](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L84)
 
 ___
 
@@ -318,7 +318,7 @@ Automatically saves to database.
 
 #### Defined in
 
-[server/player/appearance.ts:57](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L57)
+[server/player/appearance.ts:57](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L57)
 
 ___
 
@@ -345,7 +345,7 @@ Automatically saves it to Database.
 
 #### Defined in
 
-[server/player/appearance.ts:19](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L19)
+[server/player/appearance.ts:19](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L19)
 
 ___
 
@@ -378,7 +378,7 @@ Change the player's face
 
 #### Defined in
 
-[server/player/appearance.ts:185](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L185)
+[server/player/appearance.ts:185](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L185)
 
 ___
 
@@ -405,7 +405,7 @@ Automatically saves to database.
 
 #### Defined in
 
-[server/player/appearance.ts:111](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L111)
+[server/player/appearance.ts:111](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L111)
 
 ___
 
@@ -432,7 +432,7 @@ Set player appearance to a skin / model / ped.
 
 #### Defined in
 
-[server/player/appearance.ts:132](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L132)
+[server/player/appearance.ts:132](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L132)
 
 ___
 
@@ -458,4 +458,4 @@ Add the 'decorators' paramater to override player appearance.
 
 #### Defined in
 
-[server/player/appearance.ts:217](https://github.com/Stuyk/altv-athena/blob/41bbc82/src/core/server/player/appearance.ts#L217)
+[server/player/appearance.ts:217](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/player/appearance.ts#L217)
