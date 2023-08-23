@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/enums/playerConfigKeys.ts:1](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/shared/enums/playerConfigKeys.ts#L1)
+[shared/enums/playerConfigKeys.ts:1](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/shared/enums/playerConfigKeys.ts#L1)

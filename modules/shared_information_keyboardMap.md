@@ -15,4 +15,4 @@ order: 0
 
 #### Defined in
 
-[shared/information/keyboardMap.ts:1](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/shared/information/keyboardMap.ts#L1)
+[shared/information/keyboardMap.ts:1](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/shared/information/keyboardMap.ts#L1)

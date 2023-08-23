@@ -38,7 +38,7 @@ Adds text temporarily on the screen.
 
 #### Defined in
 
-[client/screen/text.ts:116](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/screen/text.ts#L116)
+[client/screen/text.ts:116](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/screen/text.ts#L116)
 
 ___
 
@@ -64,7 +64,7 @@ Draw a box at a 3D coordinate
 
 #### Defined in
 
-[client/screen/text.ts:52](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/screen/text.ts#L52)
+[client/screen/text.ts:52](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/screen/text.ts#L52)
 
 ___
 
@@ -90,7 +90,7 @@ Draw a box on-screen
 
 #### Defined in
 
-[client/screen/text.ts:71](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/screen/text.ts#L71)
+[client/screen/text.ts:71](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/screen/text.ts#L71)
 
 ___
 
@@ -119,7 +119,7 @@ Draw text on your screen in a 2D position with an every tick.
 
 #### Defined in
 
-[client/screen/text.ts:15](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/screen/text.ts#L15)
+[client/screen/text.ts:15](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/screen/text.ts#L15)
 
 ___
 
@@ -146,4 +146,4 @@ Draw stable text in a 3D position with an every tick.
 
 #### Defined in
 
-[client/screen/text.ts:83](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/client/screen/text.ts#L83)
+[client/screen/text.ts:83](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/screen/text.ts#L83)

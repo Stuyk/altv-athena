@@ -28,4 +28,4 @@ Athena.systems.defaults.ammo.disable();
 
 #### Defined in
 
-[server/systems/defaults/ammo.ts:132](https://github.com/Stuyk/altv-athena/blob/70801b3/src/core/server/systems/defaults/ammo.ts#L132)
+[server/systems/defaults/ammo.ts:132](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/systems/defaults/ammo.ts#L132)
