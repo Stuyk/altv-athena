@@ -271,6 +271,10 @@ export class Job {
      */
     removeAttachable() {
         const objective = this.getCurrentObjective();
+        if ( !objective ) {
+            return;
+        }
+        
         if (!objective.attachable) {
             return;
         }
