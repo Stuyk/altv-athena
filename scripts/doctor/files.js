@@ -1,4 +1,4 @@
-import { globSync } from '../shared/fileHelpers';
+import { globSync } from '../shared/fileHelpers.js';
 
 export async function fileChecker() {
     const fileList = await new Promise((resolve) => {
