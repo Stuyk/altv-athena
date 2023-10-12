@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
-import fsextra from 'fs-extra';
 import { glob } from 'glob';
+import { writeFile } from '../shared/fileHelpers.js';
 
 const docsPath = join(process.cwd(), './docs');
 const filesToRemove = ['.nojekyll', 'modules.md', 'README.md'];
@@ -89,5 +89,5 @@ for (let file of files) {
         i += 1; // Increment by 1 to prevent endless loop
     }
 
-    fsextra.writeFileSync(file, rows.join('\n'));
+    writeFile(file, rows.join('\n'));
 }
