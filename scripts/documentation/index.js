@@ -1,11 +1,10 @@
 import path from 'path';
 import fs from 'fs';
-import { glob } from 'glob';
-import { writeFile } from '../shared/fileHelpers.js';
+import { globSync, writeFile } from '../shared/fileHelpers.js';
 
 const docsPath = join(process.cwd(), './docs');
 const filesToRemove = ['.nojekyll', 'modules.md', 'README.md'];
-const files = glob.sync(join(docsPath, '/**/*.md'), { platform: 'linux' });
+const files = globSync(join(docsPath, '/**/*.md'));
 
 /**
  *

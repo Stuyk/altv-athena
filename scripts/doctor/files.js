@@ -1,8 +1,8 @@
-import { glob } from 'glob';
+import { globSync } from '../shared/fileHelpers';
 
 export async function fileChecker() {
     const fileList = await new Promise((resolve) => {
-        glob('./{src,src-webviews,resources}/**/*', (err, files) => {
+        globSync('./{src,src-webviews,resources}/**/*', (err, files) => {
             if (err) {
                 return resolve(files);
             }

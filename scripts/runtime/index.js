@@ -176,7 +176,7 @@ async function refreshFileWatching() {
     }
 
     // grab all new files
-    const files = globSync('./src/**/*.ts', { platform: 'linux' });
+    const files = globSync('./src/**/*.ts');
 
     // ignore `/athena/server` && `/athena/client` directories
     previousGlobFiles = files.filter((fileName) => {

@@ -39,7 +39,7 @@ export function moveAssetsToWebview(folderName, extensions) {
         }
 
         const fullPath = sanitizePath(path.join(pluginFolder, `${folderName}/**/*.+(${extensions.join('|')})`));
-        const allFiles = globSync(fullPath, { platform: 'linux' });
+        const allFiles = globSync(fullPath);
 
         for (let i = 0; i < allFiles.length; i++) {
             const filePath = allFiles[i];
