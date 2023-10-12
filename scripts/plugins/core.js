@@ -81,7 +81,6 @@ function run() {
 
     writeServerImports(serverImports);
     writeClientImports(clientImports);
-    console.log(`Plugin(s): ${enabledPlugins.length}`);
 }
 
 run();

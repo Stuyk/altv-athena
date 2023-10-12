@@ -122,7 +122,15 @@ async function handleViteDevServer() {
     await runFile(node, './scripts/plugins/webview.js');
     lastViteServer = spawn(
         npx,
-        ['vite', './src-webviews', '--clearScreen=false', '--debug=true', '--host=localhost', '--port=3000'],
+        [
+            'vite',
+            './src-webviews',
+            '--clearScreen=false',
+            '--debug=true',
+            '--host=localhost',
+            '--port=3000',
+            '--logLevel=silent',
+        ],
         {
             stdio: 'inherit',
         },
@@ -130,6 +138,10 @@ async function handleViteDevServer() {
 
     lastViteServer.once('close', (code) => {
         console.log(`Vite process exited with code ${code}`);
+    });
+
+    lastViteServer.on('spawn', () => {
+        console.log(`>>> Vue Pages Server: https://localhost:3000`);
     });
 
     return await new Promise((resolve) => {
@@ -244,8 +256,9 @@ async function coreBuildProcess() {
     await Promise.all(promises);
     mixedTime.stop();
 
+    const transformTime = createExecTime('>>> transform-time');
     await runFile(node, './scripts/transform/index');
-    console.log(`Build Time - ${Date.now() - start}ms`);
+    transformTime.stop();
 }
 
 async function devMode(firstRun = false) {

@@ -149,8 +149,6 @@ async function run() {
 
     const promises = filesToTranspile.map((file) => transpileFile(file));
     await Promise.all(promises);
-
-    console.log(`Compiled: ${filesToTranspile.length} || Copied: ${filesToCopy.length}`);
 }
 
 run();

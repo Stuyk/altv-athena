@@ -45,7 +45,6 @@ export function moveAssetsToWebview(folderName, extensions) {
             const filePath = allFiles[i];
             const regExp = new RegExp(`.*\/${folderName}\/`);
             const finalPath = sanitizePath(filePath.replace(regExp, `src-webviews/public/plugins/`));
-            console.log(finalPath);
             const folderPath = sanitizePath(path.dirname(finalPath));
             if (!fs.existsSync(folderPath)) {
                 fs.mkdirSync(folderPath, { recursive: true });

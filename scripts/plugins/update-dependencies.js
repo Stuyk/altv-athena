@@ -6,6 +6,9 @@ import { globSync } from '../shared/fileHelpers.js';
 
 const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable'];
 
+let dependencies = [];
+let devDependencies = [];
+
 function getInstalledDependencies() {
     const packageJsonPath = sanitizePath(path.join(process.cwd(), 'package.json'));
 
@@ -17,23 +20,19 @@ function getInstalledDependencies() {
         process.exit(1);
     }
 
-    const dependencies = [];
     for (const dependency in contents.dependencies) {
         dependencies.push(dependency);
     }
 
-    const devDependencies = [];
     for (const dependency in contents.devDependencies) {
         devDependencies.push(dependency);
     }
-
-    return { dependencies, devDependencies };
 }
 
 function getPluginDependencies(pluginName) {
     const pluginPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
 
-    const dependencies = {
+    const pluginDependencies = {
         dependencies: [],
         devDependencies: [],
     };
@@ -41,14 +40,14 @@ function getPluginDependencies(pluginName) {
     for (const disabler of viablePluginDisablers) {
         const disabledPath = sanitizePath(path.join(pluginPath, disabler));
         if (fs.existsSync(disabledPath)) {
-            return dependencies;
+            return pluginDependencies;
         }
     }
 
     const dependencyPath = sanitizePath(path.join(pluginPath, 'dependencies.json'));
 
     if (!fs.existsSync(dependencyPath)) {
-        return dependencies;
+        return pluginDependencies;
     }
 
     let contents;
@@ -60,22 +59,21 @@ function getPluginDependencies(pluginName) {
     }
 
     if (!contents) {
-        return dependencies;
+        return pluginDependencies;
     }
 
     for (const name of contents.dependencies ?? []) {
-        dependencies.dependencies.push(name);
+        pluginDependencies.dependencies.push(name);
     }
 
     for (const name of contents.devDependencies ?? []) {
-        dependencies.devDependencies.push(name);
+        pluginDependencies.devDependencies.push(name);
     }
 
-    return dependencies;
+    return pluginDependencies;
 }
 
 function checkPluginDependencies() {
-    const installedDependencies = getInstalledDependencies();
     const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
 
     const missingDepdendencies = [];
