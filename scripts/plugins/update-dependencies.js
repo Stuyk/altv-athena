@@ -91,7 +91,7 @@ function checkPluginDependencies() {
 
         if (pluginDependencies.dependencies.length > 0) {
             for (const dependency of pluginDependencies.dependencies) {
-                if (!dependencies.dependencies.includes(dependency)) {
+                if (!dependencies.includes(dependency)) {
                     missingDepdendencies.push(dependency);
                 }
             }
@@ -119,7 +119,7 @@ function checkPluginDevDependencies() {
 
         if (pluginDependencies.devDependencies.length > 0) {
             for (const dependency of pluginDependencies.devDependencies) {
-                if (!devDependencies.devDependencies.includes(dependency)) {
+                if (!devDependencies.includes(dependency)) {
                     missingDevDepdendencies.push(dependency);
                 }
             }
