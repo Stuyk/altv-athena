@@ -1,12 +1,9 @@
 import path from 'path';
-import fs from 'fs-extra';
-import glob from 'glob';
+import fs from 'node:fs';
+import { sanitizePath } from '../shared/path.js';
+import { copySync, globSync } from '../shared/fileHelpers.js';
 
 const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable', 'disabled'];
-
-export function sanitizePath(p) {
-    return p.replace(/\\/g, '/');
-}
 
 export function clearPluginsWebViewFolder() {
     const pluginsFolder = sanitizePath(path.join(process.cwd(), `src-webviews/public/plugins`));
@@ -42,7 +39,7 @@ export function moveAssetsToWebview(folderName, extensions) {
         }
 
         const fullPath = sanitizePath(path.join(pluginFolder, `${folderName}/**/*.+(${extensions.join('|')})`));
-        const allFiles = glob.sync(fullPath);
+        const allFiles = globSync(fullPath, { platform: 'linux' });
 
         for (let i = 0; i < allFiles.length; i++) {
             const filePath = allFiles[i];
@@ -54,7 +51,7 @@ export function moveAssetsToWebview(folderName, extensions) {
                 fs.mkdirSync(folderPath, { recursive: true });
             }
 
-            fs.copyFileSync(filePath, finalPath);
+            copySync(filePath, finalPath);
             amountCopied += 1;
         }
     }
@@ -67,11 +64,11 @@ export function movePluginFilesToWebview(folderName, extensions, isSrc = false) 
     let oldFiles;
 
     if (!isSrc) {
-        oldFiles = glob.sync(
+        oldFiles = globSync(
             sanitizePath(path.join(`src-webviews/public/plugins/${normalizedName}/**/*.+(${extensions.join('|')})`)),
         );
     } else {
-        oldFiles = glob.sync(
+        oldFiles = globSync(
             sanitizePath(path.join(`src-webviews/src/plugins/${normalizedName}/**/*.+(${extensions.join('|')})`)),
         );
     }
@@ -100,7 +97,7 @@ export function movePluginFilesToWebview(folderName, extensions, isSrc = false) 
             continue;
         }
 
-        const allFiles = glob.sync(
+        const allFiles = globSync(
             sanitizePath(path.join(pluginFolder, `${folderName}/**/*.+(${extensions.join('|')})`)),
         );
         for (let i = 0; i < allFiles.length; i++) {
@@ -124,7 +121,7 @@ export function movePluginFilesToWebview(folderName, extensions, isSrc = false) 
                     fs.mkdirSync(folderPath, { recursive: true });
                 }
 
-                fs.copyFileSync(filePath, finalPath);
+                copySync(filePath, finalPath);
                 amountCopied += 1;
             }
         }

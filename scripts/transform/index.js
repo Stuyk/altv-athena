@@ -1,10 +1,11 @@
 import path from 'path';
-import glob from 'glob';
 import fs from 'fs';
+import { globSync, writeFile } from '../shared/fileHelpers.js';
+import { sanitizePath } from '../shared/path.js';
 
 const startTime = Date.now();
-const resourcePath = path.join(process.cwd(), 'resources/core/**/*.js').replace(/\\/gm, '/');
-const filePaths = glob.sync(resourcePath);
+const resourcePath = sanitizePath(path.join(process.cwd(), 'resources/core/**/*.js'));
+const filePaths = globSync(resourcePath);
 
 const funcsToIgnore = [
     //
@@ -74,6 +75,6 @@ for (let filePath of filePaths) {
     }
 
     const finalFile = splitContents.join('\r\n');
-    fs.writeFileSync(filePath, finalFile, { encoding: 'utf-8' });
+    writeFile(filePath, finalFile);
     count += 1;
 }

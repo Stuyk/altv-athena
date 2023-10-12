@@ -1,8 +1,8 @@
-import fs from 'fs-extra';
-import glob from 'glob';
 import path from 'path';
+import { sanitizePath } from '../shared/path.js';
+import { globSync, writeFile } from '../shared/fileHelpers.js';
 
-const scriptPath = path.join(process.cwd(), '/scripts/buildresource/resource.json');
+const scriptPath = sanitizePath(path.join(process.cwd(), '/scripts/buildresource/resource.json'));
 const defaults = {
     type: 'js',
     main: 'server/startup.js',
@@ -13,33 +13,20 @@ const defaults = {
 };
 
 async function getClientPluginFolders() {
-    let folders = [];
+    const removalPath = sanitizePath(path.join(process.cwd(), 'src/core/'));
+    const results = globSync(sanitizePath(path.join(process.cwd(), `src/core/plugins/**/@(client|shared)`))).map(
+        (fileName) => {
+            return fileName.replace(removalPath, '') + `/*`;
+        },
+    );
 
-    const removalPath = path.join(process.cwd(), 'src/core/').replace(/\\/gm, '/');
-    const results = await new Promise((resolve) => {
-        glob(path.join(process.cwd(), `src/core/plugins/**/@(client|shared)`).replace(/\\/g, '/'), (err, files) => {
-            if (err) {
-                resolve([]);
-                return;
-            }
-
-            files = files.map((fileName) => {
-                return fileName.replace(removalPath, '') + `/*`;
-            });
-
-            resolve(files);
-        });
-    });
-
-    folders = folders.concat(results);
-    return folders;
+    return results;
 }
 
 async function start() {
     const folders = await getClientPluginFolders();
     defaults['client-files'] = [...defaults['client-files'], ...folders];
-
-    fs.outputFileSync(scriptPath, JSON.stringify(defaults, null, '\t'));
+    writeFile(scriptPath, JSON.stringify(defaults, null, '\t'));
 }
 
 start();

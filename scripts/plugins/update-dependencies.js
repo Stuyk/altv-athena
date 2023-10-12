@@ -1,17 +1,10 @@
 import { exec } from 'child_process';
-import fs from "fs";
-import glob from 'glob';
+import fs from 'fs';
 import * as path from 'path';
+import { sanitizePath } from '../shared/path.js';
+import { globSync } from '../shared/fileHelpers.js';
 
-const viablePluginDisablers = [
-    'disable.plugin',
-    'disabled.plugin',
-    'disable',
-]
-
-function sanitizePath(p) {
-    return p.replace(/\\/g, '/');
-}
+const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable'];
 
 function getInstalledDependencies() {
     const packageJsonPath = sanitizePath(path.join(process.cwd(), 'package.json'));
@@ -42,8 +35,8 @@ function getPluginDependencies(pluginName) {
 
     const dependencies = {
         dependencies: [],
-        devDependencies: []
-    }
+        devDependencies: [],
+    };
 
     for (const disabler of viablePluginDisablers) {
         const disabledPath = sanitizePath(path.join(pluginPath, disabler));
@@ -58,7 +51,8 @@ function getPluginDependencies(pluginName) {
         return dependencies;
     }
 
-    let contents = null;
+    let contents;
+
     try {
         contents = JSON.parse(fs.readFileSync(dependencyPath, 'utf8'));
     } catch (error) {
@@ -69,11 +63,11 @@ function getPluginDependencies(pluginName) {
         return dependencies;
     }
 
-    for (const name of (contents.dependencies ?? [])) {
+    for (const name of contents.dependencies ?? []) {
         dependencies.dependencies.push(name);
     }
 
-    for (const name of (contents.devDependencies ?? [])) {
+    for (const name of contents.devDependencies ?? []) {
         dependencies.devDependencies.push(name);
     }
 
@@ -82,7 +76,7 @@ function getPluginDependencies(pluginName) {
 
 function checkPluginDependencies() {
     const installedDependencies = getInstalledDependencies();
-    const plugins = glob.sync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
+    const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
 
     const missingDepdendencies = [];
 
@@ -91,10 +85,11 @@ function checkPluginDependencies() {
 
         const pluginDependencies = getPluginDependencies(pluginName);
 
-        if (pluginDependencies.dependencies.length === 0)
-            continue;
+        if (pluginDependencies.dependencies.length === 0) continue;
 
-        console.log(`Checking dependencies for plugin '${pluginName}': ${pluginDependencies.dependencies.length} dependencies`);
+        console.log(
+            `Checking dependencies for plugin '${pluginName}': ${pluginDependencies.dependencies.length} dependencies`,
+        );
 
         if (pluginDependencies.dependencies.length > 0) {
             for (const dependency of pluginDependencies.dependencies) {
@@ -110,7 +105,7 @@ function checkPluginDependencies() {
 
 function checkPluginDevDependencies() {
     const installedDependencies = getInstalledDependencies();
-    const plugins = glob.sync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
+    const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
 
     const missingDevDepdendencies = [];
 
@@ -119,10 +114,11 @@ function checkPluginDevDependencies() {
 
         const pluginDependencies = getPluginDependencies(pluginName);
 
-        if (pluginDependencies.devDependencies.length === 0)
-            continue;
+        if (pluginDependencies.devDependencies.length === 0) continue;
 
-        console.log(`Checking development dependencies for plugin '${pluginName}': ${pluginDependencies.devDependencies.length} dependencies`);
+        console.log(
+            `Checking development dependencies for plugin '${pluginName}': ${pluginDependencies.devDependencies.length} dependencies`,
+        );
 
         if (pluginDependencies.devDependencies.length > 0) {
             for (const dependency of pluginDependencies.devDependencies) {

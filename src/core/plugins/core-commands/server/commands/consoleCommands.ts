@@ -13,7 +13,7 @@
 //     const path = `${process.cwd()}/screenshots/${player.data.name}.jpg`;
 //     const data = base64Image.replace(/^data:image\/\w+;base64,/, '');
 //     const buf = Buffer.from(data, 'base64');
-//     fs.writeFileSync(path, buf);
+//     fs.fsextra.writeFileSync(path, buf);
 //     alt.log(path);
 // }
 

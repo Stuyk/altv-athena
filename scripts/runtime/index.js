@@ -1,8 +1,8 @@
 import { ChildProcess, spawn } from 'child_process';
 import fkill from 'fkill';
-import glob from 'glob';
 import fs from 'fs';
 import crypto from 'crypto';
+import { globSync } from '../shared/fileHelpers.js';
 
 const NO_SPECIAL_CHARACTERS = new RegExp(/^[ A-Za-z0-9_-]*$/gm);
 
@@ -176,7 +176,7 @@ async function refreshFileWatching() {
     }
 
     // grab all new files
-    const files = glob.sync('./src/**/*.ts');
+    const files = globSync('./src/**/*.ts', { platform: 'linux' });
 
     // ignore `/athena/server` && `/athena/client` directories
     previousGlobFiles = files.filter((fileName) => {

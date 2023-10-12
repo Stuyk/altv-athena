@@ -1,5 +1,5 @@
 import fs from 'fs';
-import glob from 'glob';
+import { glob } from 'glob';
 import path from 'path';
 import { fileChecker } from './files.js';
 import { verifyFileNames } from '../fileChecker/index.js';
@@ -37,13 +37,13 @@ async function cleanup() {
         fs.rmSync('athena-cache', { recursive: true, force: true });
     }
 
-    const coreResourcesPath = sanitizePath(path.join('resources', 'core'))
+    const coreResourcesPath = sanitizePath(path.join('resources', 'core'));
     if (fs.existsSync(coreResourcesPath)) {
         console.log(`Removing resources/core`);
         fs.rmSync(coreResourcesPath, { recursive: true, force: true });
     }
 
-    const coreWebviewsPath = sanitizePath(path.join('resources', 'webviews'))
+    const coreWebviewsPath = sanitizePath(path.join('resources', 'webviews'));
     if (fs.existsSync(coreWebviewsPath)) {
         console.log(`Removing resources/webviews`);
         fs.rmSync(coreWebviewsPath, { recursive: true, force: true });
@@ -72,7 +72,7 @@ async function cleanup() {
         }
     }
 
-    const badFileTypeDefs = glob.sync('./src/**/*.d.ts');
+    const badFileTypeDefs = glob.sync('./src/**/*.d.ts', { platform: 'linux' });
     for (const file of badFileTypeDefs) {
         if (fs.existsSync(file)) {
             console.log(`Removed File: ${file}`);
