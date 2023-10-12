@@ -89,7 +89,6 @@ async function handleConfiguration() {
         configName = 'devtest';
     }
 
-    const start = Date.now();
     let promises = [];
 
     if (!passedArguments.includes('dev')) {
@@ -215,10 +214,17 @@ async function refreshFileWatching() {
 
 async function coreBuildProcess() {
     const start = Date.now();
+
     await runFile(node, './scripts/compiler/core');
     await runFile(node, './scripts/plugins/core');
-    await runFile(node, './scripts/plugins/webview');
-    await runFile(node, './scripts/plugins/files');
+
+    const promises = [
+        runFile(node, './scripts/plugins/webview'),
+        runFile(node, './scripts/transform/index'),
+        runFile(node, './scripts/plugins/files'),
+    ];
+
+    await Promise.all(promises);
     await runFile(node, './scripts/transform/index');
     console.log(`Build Time - ${Date.now() - start}ms`);
 }
@@ -252,7 +258,7 @@ async function runServer() {
     await runFile(node, './scripts/plugins/update-dependencies');
 
     if (isDev) {
-        await handleViteDevServer();
+        handleViteDevServer();
     }
 
     // Has to build first before building the rest.
@@ -282,22 +288,4 @@ if (passedArguments.includes('start')) {
     }
 
     runServer();
-
-    // process.stdin.on('data', (data) => {
-    //     const result = data.toString().trim();
-    //     if (result.charAt(0) !== '+' && result.charAt(0) !== '/') {
-    //         console.log(`Use +help to see server maintenance commands. (This Console)`);
-    //         console.log(`Use /commands to see server magagement commands. (The Game Console)`);
-    //         if (!lastServerProcess.killed) {
-    //             return;
-    //         }
-
-    //         lastServerProcess.send(data);
-    //         return;
-    //     }
-
-    //     const inputs = result.split(' ');
-    //     const cmdName = inputs.shift();
-    //     console.log(cmdName, ...inputs);
-    // });
 }
