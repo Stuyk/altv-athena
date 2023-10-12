@@ -102,7 +102,6 @@ function checkPluginDependencies() {
 }
 
 function checkPluginDevDependencies() {
-    const installedDependencies = getInstalledDependencies();
     const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
 
     const missingDevDepdendencies = [];
@@ -131,6 +130,8 @@ function checkPluginDevDependencies() {
 }
 
 function updatePluginDependencies() {
+    getInstalledDependencies();
+
     const missingDepdendencies = checkPluginDependencies();
     const missingDevDependencies = checkPluginDevDependencies();
 
