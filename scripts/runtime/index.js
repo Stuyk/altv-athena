@@ -4,6 +4,8 @@ import fs from 'fs';
 import crypto from 'crypto';
 import { globSync } from '../shared/fileHelpers.js';
 
+const DEBUG = true;
+
 const NO_SPECIAL_CHARACTERS = new RegExp(/^[ A-Za-z0-9_-]*$/gm);
 
 const ports = [7788, 'altv-server', 'altv-server.exe', 3399, 3001];
@@ -45,6 +47,15 @@ let lastViteServer;
 let previousGlobFiles = [];
 
 let fileWatchTimeout = Date.now() + 1000;
+
+function createExecTime(name) {
+    const startTime = Date.now();
+    return {
+        stop: () => {
+            console.log(`${name} - ${Date.now() - startTime}ms`);
+        },
+    };
+}
 
 async function sleep(ms) {
     return new Promise((resolve) => {
@@ -215,9 +226,15 @@ async function refreshFileWatching() {
 async function coreBuildProcess() {
     const start = Date.now();
 
+    const coreCompilerTime = createExecTime('>>> core-compiler');
     await runFile(node, './scripts/compiler/core');
-    await runFile(node, './scripts/plugins/core');
+    coreCompilerTime.stop();
 
+    const pluginBuildTime = createExecTime('>>> core-plugins');
+    await runFile(node, './scripts/plugins/core');
+    pluginBuildTime.stop();
+
+    const mixedTime = createExecTime('>>> plugin webview, tranform, files');
     const promises = [
         runFile(node, './scripts/plugins/webview'),
         runFile(node, './scripts/transform/index'),
@@ -225,6 +242,8 @@ async function coreBuildProcess() {
     ];
 
     await Promise.all(promises);
+    mixedTime.stop();
+
     await runFile(node, './scripts/transform/index');
     console.log(`Build Time - ${Date.now() - start}ms`);
 }
@@ -255,15 +274,22 @@ async function runServer() {
     const isDev = passedArguments.includes('dev');
 
     //Update dependencies for all the things
+    const updateTime = createExecTime('>>> update-dependencies');
     await runFile(node, './scripts/plugins/update-dependencies');
+    updateTime.stop();
 
     if (isDev) {
         handleViteDevServer();
     }
 
     // Has to build first before building the rest.
+    const coreBuildTime = createExecTime('>>> core-build-time');
     await coreBuildProcess();
+    coreBuildTime.stop();
+
+    const configurationTime = createExecTime('>>> handle-configuration-time');
     await handleConfiguration();
+    configurationTime.stop();
 
     if (passedArguments.includes('dev')) {
         await sleep(50);
