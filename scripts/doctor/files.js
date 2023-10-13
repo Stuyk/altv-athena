@@ -1,8 +1,8 @@
-import glob from 'glob';
+import { globSync } from '../shared/fileHelpers.js';
 
 export async function fileChecker() {
     const fileList = await new Promise((resolve) => {
-        glob('./{src,src-webviews,resources}/**/*', (err, files) => {
+        globSync('./{src,src-webviews,resources}/**/*', (err, files) => {
             if (err) {
                 return resolve(files);
             }
@@ -14,7 +14,7 @@ export async function fileChecker() {
     console.log(`Verifying ${fileList.length} Files`);
     let validated = 0;
     for (let filePath of fileList) {
-        let isValid = /^[a-zA-Z 0-9\-._\/\\]+$/g.test(filePath)
+        let isValid = /^[a-zA-Z 0-9\-._\/\\]+$/g.test(filePath);
 
         if (isValid) {
             validated += 1;
@@ -23,5 +23,5 @@ export async function fileChecker() {
         }
     }
 
-    console.log(`${validated}/${fileList.length} Validated`)
+    console.log(`${validated}/${fileList.length} Validated`);
 }

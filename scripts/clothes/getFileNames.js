@@ -1,13 +1,13 @@
-import glob from 'glob';
-import fs from 'fs'
+import { globSync, writeFile } from '../shared/fileHelpers.js';
 
 async function start() {
-    const files = glob.sync(`./src-webviews/public/assets/images/clothing/**/*.png`)
+    let files = globSync(`./src-webviews/public/assets/images/clothing/**/*.png`);
+
     for (let i = 0; i < files.length; i++) {
         files[i] = files[i].split(`/`).pop();
     }
 
-    const componentsList = files.filter(f => {
+    const componentsList = files.filter((f) => {
         if (f.includes('prop')) {
             return false;
         }
@@ -19,7 +19,7 @@ async function start() {
         return true;
     });
 
-    fs.writeFileSync('clothes.json', JSON.stringify(componentsList, null, '\t'));
+    writeFile('clothes.json', JSON.stringify(componentsList, null, '\t'));
 }
 
 start();

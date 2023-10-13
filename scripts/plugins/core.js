@@ -1,8 +1,8 @@
-import fs from 'fs-extra';
-import glob from 'glob';
+import fs from 'node:fs';
 import path from 'path';
-import { getEnabledPlugins, sanitizePath } from './shared.js';
-
+import { getEnabledPlugins } from './shared.js';
+import { globSync, writeFile } from '../shared/fileHelpers.js';
+import { sanitizePath } from '../shared/path.js';
 /**
  *
  * @param {*} pluginName
@@ -10,8 +10,7 @@ import { getEnabledPlugins, sanitizePath } from './shared.js';
  */
 function copyPluginFiles(pluginName) {
     const pluginFolder = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
-
-    const files = glob.sync(sanitizePath(path.join(pluginFolder, '@(client|server)/index.ts')));
+    const files = globSync(path.join(pluginFolder, '@(client|server)/index.ts'));
 
     const hasClientFiles = !!files.find((file) => file.includes('client/index.ts'));
     const hasServerFiles = !!files.find((file) => file.includes('server/index.ts'));
@@ -42,7 +41,7 @@ function writeServerImports(plugins) {
     content = content + `\n\nplugins.init();\n`;
 
     const importPath = sanitizePath(path.join(process.cwd(), 'resources/core/plugins/athena/server/imports.js'));
-    fs.outputFileSync(importPath, content);
+    writeFile(importPath, content);
 }
 
 function writeClientImports(plugins) {
@@ -59,7 +58,7 @@ function writeClientImports(plugins) {
             .join('\n');
 
     const importPath = sanitizePath(path.join(process.cwd(), 'resources/core/plugins/athena/client/imports.js'));
-    fs.outputFileSync(importPath, content + '\n');
+    writeFile(importPath, content + '\n');
 }
 
 function run() {
@@ -82,7 +81,6 @@ function run() {
 
     writeServerImports(serverImports);
     writeClientImports(clientImports);
-    console.log(`Plugin(s): ${enabledPlugins.length}`);
 }
 
 run();

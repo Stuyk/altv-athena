@@ -1,40 +1,20 @@
 import swc from '@swc/core';
-import fs from 'fs-extra';
-import glob from 'glob';
 import path from 'path';
+import fs from 'node:fs';
+import { copySync, getAllPluginFolders, getPluginFolder, globSync, writeFile } from '../shared/fileHelpers.js';
+import { sanitizePath } from '../shared/path.js';
 
 const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable'];
 
-/** @type {import('@swc/core').Config} */
-const SWC_CONFIG = {
-    jsc: {
-        parser: {
-            syntax: 'typescript',
-            dynamicImport: true,
-            decorators: true,
-        },
-        transform: {
-            legacyDecorator: true,
-            decoratorMetadata: true,
-        },
-        target: 'es2020',
-    },
-    sourceMaps: false,
-};
-
-function sanitizePath(p) {
-    return p.replace(/\\/g, path.sep);
-}
-
 function getEnabledPlugins() {
-    const rootPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins')).replace(/\\/g, '/');
-    const pluginFolders = fs.readdirSync(rootPath);
+    const pluginFolder = getPluginFolder();
+    const pluginFolders = getAllPluginFolders();
 
     return pluginFolders.filter((pluginName) => {
-        const pluginPath = sanitizePath(path.join(rootPath, pluginName)).replace(/\\/g, '/');
+        const pluginPath = sanitizePath(path.join(pluginFolder, pluginName));
 
         for (const fileName of viablePluginDisablers) {
-            const disabledPath = sanitizePath(path.join(pluginPath, fileName)).replace(/\\/g, '/');
+            const disabledPath = sanitizePath(path.join(pluginPath, fileName));
 
             if (fs.existsSync(disabledPath)) {
                 return false;
@@ -47,7 +27,7 @@ function getEnabledPlugins() {
 
 function getFilesForTranspilation(enabledPlugins) {
     const rootPath = sanitizePath(path.join(process.cwd(), 'src/**/*.ts').replace(/\\/g, '/'));
-    const files = glob.sync(rootPath, {
+    const files = globSync(rootPath, {
         nodir: true,
         ignore: [
             '**/node_modules/**',
@@ -57,7 +37,7 @@ function getFilesForTranspilation(enabledPlugins) {
 
     for (const pluginName of enabledPlugins) {
         const pluginPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName).replace(/\\/g, '/'));
-        const pluginFiles = glob.sync(path.join(pluginPath, '**/*.ts').replace(/\\/g, '/'), {
+        const pluginFiles = globSync(path.join(pluginPath, '**/*.ts').replace(/\\/g, '/'), {
             nodir: true,
             ignore: ['**/imports.ts', '**/webview/**'],
         });
@@ -72,8 +52,7 @@ function getFilesForTranspilation(enabledPlugins) {
 
 function getFilesToCopy(enabledPlugins) {
     const filePath = sanitizePath(path.join(process.cwd(), 'src', '**/*.!(ts|vue)').replace(/\\/g, '/'));
-
-    return glob.sync(filePath, {
+    return globSync(filePath, {
         nodir: true,
         ignore: ['**/tsconfig.json', '**/dependencies.json', `**/core/plugins/!(${enabledPlugins.join('|')})/**`],
     });
@@ -103,35 +82,50 @@ function resolvePaths(file, rawCode) {
     return rawCode;
 }
 
+/**
+ * Transpile / compile a typescript file
+ *
+ * @param {Promise<void>} file
+ */
 async function transpileFile(file) {
     const targetPath = file.replace('src/', 'resources/').replace('.ts', '.js');
-
-    return new Promise(async (resolve) => {
-        const result = await swc.transformFile(file, SWC_CONFIG);
-        if (!result) {
-            console.warn(`Failed to compile: ${targetPath}`);
-        }
-
-        // The path resolvers are really awful, so writing a custom one here.
-        if (result.code.includes('@Athena')) {
-            result.code = resolvePaths(file, result.code);
-        }
-
-        const finalFile = `// YOU ARE EDITING COMPILED FILES. DO NOT EDIT THESE FILES \r\n` + result.code;
-        fs.outputFileSync(targetPath, finalFile);
-        resolve();
+    const result = await swc.transformFile(file, {
+        jsc: {
+            parser: {
+                syntax: 'typescript',
+                dynamicImport: true,
+                decorators: true,
+            },
+            transform: {
+                legacyDecorator: true,
+                decoratorMetadata: true,
+            },
+            target: 'es2020',
+        },
+        sourceMaps: false,
     });
+
+    if (!result) {
+        console.warn(`Failed to compile: ${targetPath}`);
+    }
+
+    // The path resolvers are really awful, so writing a custom one here.
+    if (result.code.includes('@Athena')) {
+        result.code = resolvePaths(file, result.code);
+    }
+
+    const finalFile = `// YOU ARE EDITING COMPILED FILES. DO NOT EDIT THESE FILES \r\n` + result.code;
+    writeFile(targetPath, finalFile);
 }
 
 async function run() {
-    const startTime = +new Date();
     const enabledPlugins = getEnabledPlugins();
 
     const filesToTranspile = getFilesForTranspilation(enabledPlugins);
     const filesToCopy = getFilesToCopy(enabledPlugins);
 
     const resourcesFolder = sanitizePath(path.join(process.cwd(), 'resources')).replace(/\\/g, '/');
-    const filesAndDirectories = await fs.readdir(resourcesFolder);
+    const filesAndDirectories = await fs.readdirSync(resourcesFolder);
 
     for (const fileOrDirectory of filesAndDirectories) {
         const fullPath = sanitizePath(path.join(resourcesFolder, fileOrDirectory)).replace(/\\/g, '/');
@@ -146,13 +140,15 @@ async function run() {
 
     for (const file of filesToCopy) {
         const targetPath = file.replace('src/', 'resources/');
-        fs.copy(file, targetPath, { overwrite: true });
+        if (file === targetPath) {
+            continue;
+        }
+
+        copySync(file, targetPath);
     }
 
     const promises = filesToTranspile.map((file) => transpileFile(file));
     await Promise.all(promises);
-
-    console.log(`Compiled: ${filesToTranspile.length} || Copied: ${filesToCopy.length}`);
 }
 
 run();

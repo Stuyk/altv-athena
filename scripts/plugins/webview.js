@@ -1,7 +1,8 @@
-import fs from 'fs-extra';
-import glob from 'glob';
+import fs from 'node:fs';
 import path from 'path';
-import { getEnabledPlugins, sanitizePath } from './shared.js';
+import { getEnabledPlugins } from './shared.js';
+import { globSync, writeFile } from '../shared/fileHelpers.js';
+import { sanitizePath } from '../shared/path.js';
 
 function getWebviewFiles(pluginName) {
     const pluginFolder = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
@@ -15,7 +16,7 @@ function writeWebViewPlugins(plugins) {
     for (const pluginName of plugins) {
         const pluginPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
 
-        const files = glob.sync(sanitizePath(path.join(pluginPath, 'webview/*.vue')));
+        const files = globSync(sanitizePath(path.join(pluginPath, 'webview/*.vue')));
 
         for (const file of files) {
             const componentName = path.basename(file, '.vue');
@@ -47,7 +48,7 @@ function writeWebViewPlugins(plugins) {
         '\n};\n';
 
     const importPath = sanitizePath(path.join(process.cwd(), 'src-webviews/src/plugins/imports.ts'));
-    fs.outputFileSync(importPath, content);
+    writeFile(importPath, content);
 
     return Object.keys(vueFiles).length;
 }
@@ -58,7 +59,7 @@ function writeVuePlugins(plugins) {
     for (const pluginName of plugins) {
         const pluginPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
 
-        const files = glob.sync(sanitizePath(path.join(pluginPath, 'webview/plugins/*.ts')));
+        const files = globSync(sanitizePath(path.join(pluginPath, 'webview/plugins/*.ts')));
 
         for (const file of files) {
             const componentName = path.basename(file, '.ts');
@@ -90,14 +91,13 @@ function writeVuePlugins(plugins) {
         '\n];\n';
 
     const importPath = sanitizePath(path.join(process.cwd(), 'src-webviews/src/plugins/vue-plugin-imports.ts'));
-    fs.outputFileSync(importPath, content);
+    writeFile(importPath, content);
 
     return Object.keys(vueFiles).length;
 }
 
 function run() {
     const enabledPlugins = getEnabledPlugins();
-
     const webviewImports = [];
 
     for (const pluginName of enabledPlugins) {

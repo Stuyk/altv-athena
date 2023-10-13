@@ -1,8 +1,10 @@
 import { ChildProcess, spawn } from 'child_process';
 import fkill from 'fkill';
-import glob from 'glob';
 import fs from 'fs';
 import crypto from 'crypto';
+import { globSync } from '../shared/fileHelpers.js';
+
+const DEBUG = true;
 
 const NO_SPECIAL_CHARACTERS = new RegExp(/^[ A-Za-z0-9_-]*$/gm);
 
@@ -45,6 +47,15 @@ let lastViteServer;
 let previousGlobFiles = [];
 
 let fileWatchTimeout = Date.now() + 1000;
+
+function createExecTime(name) {
+    const startTime = Date.now();
+    return {
+        stop: () => {
+            console.log(`${name} - ${Date.now() - startTime}ms`);
+        },
+    };
+}
 
 async function sleep(ms) {
     return new Promise((resolve) => {
@@ -89,7 +100,6 @@ async function handleConfiguration() {
         configName = 'devtest';
     }
 
-    const start = Date.now();
     let promises = [];
 
     if (!passedArguments.includes('dev')) {
@@ -112,7 +122,15 @@ async function handleViteDevServer() {
     await runFile(node, './scripts/plugins/webview.js');
     lastViteServer = spawn(
         npx,
-        ['vite', './src-webviews', '--clearScreen=false', '--debug=true', '--host=localhost', '--port=3000'],
+        [
+            'vite',
+            './src-webviews',
+            '--clearScreen=false',
+            '--debug=true',
+            '--host=localhost',
+            '--port=3000',
+            '--logLevel=silent',
+        ],
         {
             stdio: 'inherit',
         },
@@ -120,6 +138,10 @@ async function handleViteDevServer() {
 
     lastViteServer.once('close', (code) => {
         console.log(`Vite process exited with code ${code}`);
+    });
+
+    lastViteServer.on('spawn', () => {
+        console.log(`>>> Vue Pages Server: https://localhost:3000`);
     });
 
     return await new Promise((resolve) => {
@@ -176,7 +198,7 @@ async function refreshFileWatching() {
     }
 
     // grab all new files
-    const files = glob.sync('./src/**/*.ts');
+    const files = globSync('./src/**/*.ts');
 
     // ignore `/athena/server` && `/athena/client` directories
     previousGlobFiles = files.filter((fileName) => {
@@ -215,12 +237,28 @@ async function refreshFileWatching() {
 
 async function coreBuildProcess() {
     const start = Date.now();
+
+    const coreCompilerTime = createExecTime('>>> core-compiler');
     await runFile(node, './scripts/compiler/core');
+    coreCompilerTime.stop();
+
+    const pluginBuildTime = createExecTime('>>> core-plugins');
     await runFile(node, './scripts/plugins/core');
-    await runFile(node, './scripts/plugins/webview');
-    await runFile(node, './scripts/plugins/files');
+    pluginBuildTime.stop();
+
+    const mixedTime = createExecTime('>>> plugin webview, tranform, files');
+    const promises = [
+        runFile(node, './scripts/plugins/webview'),
+        runFile(node, './scripts/transform/index'),
+        runFile(node, './scripts/plugins/files'),
+    ];
+
+    await Promise.all(promises);
+    mixedTime.stop();
+
+    const transformTime = createExecTime('>>> transform-time');
     await runFile(node, './scripts/transform/index');
-    console.log(`Build Time - ${Date.now() - start}ms`);
+    transformTime.stop();
 }
 
 async function devMode(firstRun = false) {
@@ -249,15 +287,22 @@ async function runServer() {
     const isDev = passedArguments.includes('dev');
 
     //Update dependencies for all the things
+    const updateTime = createExecTime('>>> update-dependencies');
     await runFile(node, './scripts/plugins/update-dependencies');
+    updateTime.stop();
 
     if (isDev) {
-        await handleViteDevServer();
+        handleViteDevServer();
     }
 
     // Has to build first before building the rest.
+    const coreBuildTime = createExecTime('>>> core-build-time');
     await coreBuildProcess();
+    coreBuildTime.stop();
+
+    const configurationTime = createExecTime('>>> handle-configuration-time');
     await handleConfiguration();
+    configurationTime.stop();
 
     if (passedArguments.includes('dev')) {
         await sleep(50);
@@ -282,22 +327,4 @@ if (passedArguments.includes('start')) {
     }
 
     runServer();
-
-    // process.stdin.on('data', (data) => {
-    //     const result = data.toString().trim();
-    //     if (result.charAt(0) !== '+' && result.charAt(0) !== '/') {
-    //         console.log(`Use +help to see server maintenance commands. (This Console)`);
-    //         console.log(`Use /commands to see server magagement commands. (The Game Console)`);
-    //         if (!lastServerProcess.killed) {
-    //             return;
-    //         }
-
-    //         lastServerProcess.send(data);
-    //         return;
-    //     }
-
-    //     const inputs = result.split(' ');
-    //     const cmdName = inputs.shift();
-    //     console.log(cmdName, ...inputs);
-    // });
 }

@@ -1,10 +1,10 @@
 import path from 'path';
 import fs from 'fs';
-import glob from 'glob';
+import { globSync, writeFile } from '../shared/fileHelpers.js';
 
 const docsPath = join(process.cwd(), './docs');
 const filesToRemove = ['.nojekyll', 'modules.md', 'README.md'];
-const files = glob.sync(join(docsPath, '/**/*.md'));
+const files = globSync(join(docsPath, '/**/*.md'));
 
 /**
  *
@@ -88,5 +88,5 @@ for (let file of files) {
         i += 1; // Increment by 1 to prevent endless loop
     }
 
-    fs.writeFileSync(file, rows.join('\n'));
+    writeFile(file, rows.join('\n'));
 }
