@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.2.0
+
+```
+- Startup time performance improvements
+- Upgrade dependencies
+- Patch upgraded dependencies
+```
+
 ## 5.1.0
 
 ```
