@@ -33,7 +33,7 @@ Add a camera node to the camera set.
 
 #### Defined in
 
-[client/camera/cinematic.ts:327](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L327)
+[client/camera/cinematic.ts:327](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L327)
 
 ___
 
@@ -51,7 +51,7 @@ This function will destroy all camera instances
 
 #### Defined in
 
-[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L305)
+[client/camera/cinematic.ts:305](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L305)
 
 ___
 
@@ -78,7 +78,7 @@ from the camera array. Allows for repeating camera movement over and over.
 
 #### Defined in
 
-[client/camera/cinematic.ts:357](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L357)
+[client/camera/cinematic.ts:357](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L357)
 
 ___
 
@@ -101,7 +101,7 @@ AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:490](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L490)
+[client/camera/cinematic.ts:412](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L412)
 
 ::: tip Usage
 AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
@@ -120,7 +120,7 @@ AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:491](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L491)
+[client/camera/cinematic.ts:413](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L413)
 
 ::: tip Usage
 AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
@@ -139,7 +139,7 @@ AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:492](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L492)
+[client/camera/cinematic.ts:414](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L414)
 
 ::: tip Usage
 AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
@@ -158,45 +158,7 @@ AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:493](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L493)
-
-::: tip Usage
-AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
-:::
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `functionName` | ``"switchNode"`` |
-| `callback` | (`index`: `number`, `removeFromArray?`: `boolean`) => `Promise`<`boolean` \| (index: number, removeFromArray?: boolean) =\> Promise<boolean \| typeof switchNode\>\> |
-
-#### Returns
-
-`any`
-
-#### Defined in
-
-[client/camera/cinematic.ts:494](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L494)
-
-::: tip Usage
-AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
-:::
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `functionName` | ``"previous"`` |
-| `callback` | (`removeFromArray?`: `boolean`) => `Promise`<`boolean`\> |
-
-#### Returns
-
-`any`
-
-#### Defined in
-
-[client/camera/cinematic.ts:495](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L495)
+[client/camera/cinematic.ts:415](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L415)
 
 ::: tip Usage
 AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
@@ -215,7 +177,7 @@ AthenaClient.camera.cinematic.**override**(`functionName`, `callback`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:496](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L496)
+[client/camera/cinematic.ts:416](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L416)
 
 ___
 
@@ -237,7 +199,7 @@ AthenaClient.camera.cinematic.**overrideNodes**(`_nodes`): `any`
 
 #### Defined in
 
-[client/camera/cinematic.ts:313](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L313)
+[client/camera/cinematic.ts:313](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L313)
 
 ___
 
@@ -255,59 +217,4 @@ Play all camera nodes, but do not clear the camera nodes array.
 
 #### Defined in
 
-[client/camera/cinematic.ts:466](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L466)
-
-___
-
-### previous
-
-::: tip Usage
-AthenaClient.camera.cinematic.**previous**(`removeFromArray?`): `Promise`<`boolean`\>
-:::
-
-Goes to the previous camera.
-
-If `false` is passed in the function it will not remove a camera
-from the camera array. Allows for repeating camera movement over and over.
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `removeFromArray?` | `boolean` | `true` |
-
-#### Returns
-
-`Promise`<`boolean`\>
-
-#### Defined in
-
-[client/camera/cinematic.ts:433](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L433)
-
-___
-
-### switchNode
-
-::: tip Usage
-AthenaClient.camera.cinematic.**switchNode**(`index`, `removeFromArray?`): `Promise`<`boolean` \| (`index`: `number`, `removeFromArray?`: `boolean`) => `Promise`<`boolean` \| (index: number, removeFromArray?: boolean) =\> Promise<boolean \| typeof switchNode\>\>\>
-:::
-
-Goes to the index specified camera.
-
-If `false` is passed in the function it will not remove a camera
-from the camera array. Allows for repeating camera movement over and over.
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `index` | `number` | `undefined` |
-| `removeFromArray?` | `boolean` | `true` |
-
-#### Returns
-
-`Promise`<`boolean` \| (`index`: `number`, `removeFromArray?`: `boolean`) => `Promise`<`boolean` \| (index: number, removeFromArray?: boolean) =\> Promise<boolean \| typeof switchNode\>\>\>
-
-#### Defined in
-
-[client/camera/cinematic.ts:395](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/client/camera/cinematic.ts#L395)
+[client/camera/cinematic.ts:390](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/client/camera/cinematic.ts#L390)

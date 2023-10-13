@@ -31,7 +31,7 @@ Clear all keys, and remove all data for a session.
 
 #### Defined in
 
-[server/session/vehicle.ts:122](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/session/vehicle.ts#L122)
+[server/session/vehicle.ts:122](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/session/vehicle.ts#L122)
 
 ___
 
@@ -58,7 +58,7 @@ Clear a key from the vehicle.
 
 #### Defined in
 
-[server/session/vehicle.ts:100](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/session/vehicle.ts#L100)
+[server/session/vehicle.ts:100](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/session/vehicle.ts#L100)
 
 ___
 
@@ -91,7 +91,7 @@ Any type of value, can be specified with a generic type.
 
 #### Defined in
 
-[server/session/vehicle.ts:78](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/session/vehicle.ts#L78)
+[server/session/vehicle.ts:78](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/session/vehicle.ts#L78)
 
 ___
 
@@ -123,7 +123,7 @@ Get all vehicles's that have a specific key.
 
 #### Defined in
 
-[server/session/vehicle.ts:140](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/session/vehicle.ts#L140)
+[server/session/vehicle.ts:140](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/session/vehicle.ts#L140)
 
 ___
 
@@ -150,7 +150,7 @@ Returns true, if it has any value set for a given key.
 
 #### Defined in
 
-[server/session/vehicle.ts:59](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/session/vehicle.ts#L59)
+[server/session/vehicle.ts:59](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/session/vehicle.ts#L59)
 
 ___
 
@@ -199,4 +199,4 @@ Any type of value, can be specified with a generic type.
 
 #### Defined in
 
-[server/session/vehicle.ts:36](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/session/vehicle.ts#L36)
+[server/session/vehicle.ts:36](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/session/vehicle.ts#L36)

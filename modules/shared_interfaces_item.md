@@ -32,7 +32,7 @@ Apply a generic type to a base item's data set.
 
 #### Defined in
 
-[shared/interfaces/item.ts:293](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/shared/interfaces/item.ts#L293)
+[shared/interfaces/item.ts:293](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L293)
 
 ___
 
@@ -51,7 +51,7 @@ Default Clothing Information
 
 #### Defined in
 
-[shared/interfaces/item.ts:22](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/shared/interfaces/item.ts#L22)
+[shared/interfaces/item.ts:22](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L22)
 
 ___
 
@@ -72,7 +72,7 @@ A stored item is merged into the base item to create this
 
 #### Defined in
 
-[shared/interfaces/item.ts:395](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/shared/interfaces/item.ts#L395)
+[shared/interfaces/item.ts:395](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L395)
 
 ___
 
@@ -84,7 +84,7 @@ An Item Drop that is represented on server s ide and client side.
 
 #### Defined in
 
-[shared/interfaces/item.ts:11](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/shared/interfaces/item.ts#L11)
+[shared/interfaces/item.ts:11](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L11)
 
 ___
 
@@ -106,7 +106,7 @@ This one allows for custom data.
 
 #### Defined in
 
-[shared/interfaces/item.ts:405](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/shared/interfaces/item.ts#L405)
+[shared/interfaces/item.ts:405](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L405)
 
 ___
 
@@ -124,7 +124,7 @@ Apply a generic type to a custom item's data set
 
 #### Defined in
 
-[shared/interfaces/item.ts:218](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/shared/interfaces/item.ts#L218)
+[shared/interfaces/item.ts:218](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L218)
 
 ___
 
@@ -144,4 +144,4 @@ Default Weapon Data Information
 
 #### Defined in
 
-[shared/interfaces/item.ts:6](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/shared/interfaces/item.ts#L6)
+[shared/interfaces/item.ts:6](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/shared/interfaces/item.ts#L6)

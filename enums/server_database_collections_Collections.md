@@ -17,7 +17,7 @@ order: 0
 
 #### Defined in
 
-[server/database/collections.ts:2](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/database/collections.ts#L2)
+[server/database/collections.ts:2](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/database/collections.ts#L2)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[server/database/collections.ts:3](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/database/collections.ts#L3)
+[server/database/collections.ts:3](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/database/collections.ts#L3)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[server/database/collections.ts:10](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/database/collections.ts#L10)
+[server/database/collections.ts:10](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/database/collections.ts#L10)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[server/database/collections.ts:11](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/database/collections.ts#L11)
+[server/database/collections.ts:11](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/database/collections.ts#L11)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[server/database/collections.ts:12](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/database/collections.ts#L12)
+[server/database/collections.ts:12](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/database/collections.ts#L12)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[server/database/collections.ts:8](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/database/collections.ts#L8)
+[server/database/collections.ts:8](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/database/collections.ts#L8)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[server/database/collections.ts:4](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/database/collections.ts#L4)
+[server/database/collections.ts:4](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/database/collections.ts#L4)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[server/database/collections.ts:9](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/database/collections.ts#L9)
+[server/database/collections.ts:9](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/database/collections.ts#L9)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[server/database/collections.ts:5](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/database/collections.ts#L5)
+[server/database/collections.ts:5](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/database/collections.ts#L5)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Defined in
 
-[server/database/collections.ts:7](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/database/collections.ts#L7)
+[server/database/collections.ts:7](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/database/collections.ts#L7)
 
 ___
 
@@ -117,4 +117,4 @@ ___
 
 #### Defined in
 
-[server/database/collections.ts:6](https://github.com/Stuyk/altv-athena/blob/55b6185/src/core/server/database/collections.ts#L6)
+[server/database/collections.ts:6](https://github.com/Stuyk/altv-athena/blob/90cd63d/src/core/server/database/collections.ts#L6)
