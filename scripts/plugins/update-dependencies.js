@@ -1,4 +1,4 @@
-import { exec } from 'child_process';
+import { exec, execSync } from 'child_process';
 import fs from 'fs';
 import * as path from 'path';
 import { sanitizePath } from '../shared/path.js';
@@ -8,6 +8,7 @@ const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable'];
 
 let dependencies = [];
 let devDependencies = [];
+let githubDependencies = [];
 
 function getInstalledDependencies() {
     const packageJsonPath = sanitizePath(path.join(process.cwd(), 'package.json'));
@@ -37,6 +38,7 @@ function getPluginDependencies(pluginName) {
     const pluginDependencies = {
         dependencies: [],
         devDependencies: [],
+        githubDependencies: [],
     };
 
     for (const disabler of viablePluginDisablers) {
@@ -72,7 +74,43 @@ function getPluginDependencies(pluginName) {
         pluginDependencies.devDependencies.push(name);
     }
 
+    for (const name of contents.githubDependencies ?? []) {
+        pluginDependencies.githubDependencies.push(name);
+    }
+
     return pluginDependencies;
+}
+
+function getGithubDependencies() {
+    const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
+
+    for (const plugin of plugins) {
+        const pluginName = path.basename(plugin);
+        const pluginDependencies = getPluginDependencies(pluginName);
+
+        if (pluginDependencies.githubDependencies.length === 0) continue;
+
+        console.log(`Github Dependencies => ${pluginDependencies.githubDependencies}`);
+
+        for (const githubDependency of pluginDependencies.githubDependencies) {
+            const dependencyName = githubDependency.split('/').pop();
+
+            const targetPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins/', dependencyName));
+
+            if (fs.existsSync(targetPath)) {
+                console.log(`Dependency folder "${dependencyName}" already exists. Skipping.`);
+            } else {
+                const cloneCommand = `git clone ${githubDependency}.git ${targetPath}`;
+
+                try {
+                    execSync(cloneCommand, { stdio: 'inherit' });
+                    console.log(`Cloned "${dependencyName}" from GitHub.`);
+                } catch (error) {
+                    console.error(`Failed to clone "${dependencyName}" from GitHub: ${error.message}`);
+                }
+            }
+        }
+    }
 }
 
 function checkPluginDependencies() {
@@ -173,3 +211,4 @@ function updatePluginDependencies() {
 }
 
 updatePluginDependencies();
+getGithubDependencies();
