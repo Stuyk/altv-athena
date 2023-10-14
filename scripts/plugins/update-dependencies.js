@@ -27,6 +27,8 @@ function getInstalledDependencies() {
     for (const dependency in contents.devDependencies) {
         devDependencies.push(dependency);
     }
+
+    return dependencies;
 }
 
 function getPluginDependencies(pluginName) {
@@ -129,11 +131,26 @@ function checkPluginDevDependencies() {
     return missingDevDepdendencies;
 }
 
-function updatePluginDependencies() {
-    getInstalledDependencies();
+function checkIfDependencyFolderExists(dependencyName) {
+    const nodeModulesPath = path.join(process.cwd(), 'node_modules', dependencyName);
+    return fs.existsSync(nodeModulesPath);
+}
 
+function updatePluginDependencies() {
+    const installedDependencies = getInstalledDependencies();
     const missingDepdendencies = checkPluginDependencies();
     const missingDevDependencies = checkPluginDevDependencies();
+
+    const sanitizedMissingDependencies = missingDepdendencies.map((dependency) => dependency.replace(/@latest$/, ''));
+
+    if (
+        sanitizedMissingDependencies.some(
+            (dep) => installedDependencies.includes(dep) && checkIfDependencyFolderExists(dep),
+        )
+    ) {
+        console.log(`All dependencies are already included and their folders exist. Skipping update...`);
+        return;
+    }
 
     if (missingDepdendencies.length > 0) {
         exec(`npm install ${missingDepdendencies.join(' ')}`, (error, _stdout, stderr) => {
@@ -142,7 +159,8 @@ function updatePluginDependencies() {
                 console.error(stderr);
             }
         });
-    }
+        console.log(`Dependencie installing... ${missingDepdendencies}`);
+    } else console.log(`Dependencies already installed. Skipping...`);
 
     if (missingDevDependencies.length > 0) {
         exec(`npm install -D ${missingDevDependencies.join(' ')}`, (error, _stdout, stderr) => {
