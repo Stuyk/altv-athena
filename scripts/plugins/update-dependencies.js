@@ -29,7 +29,11 @@ function getInstalledDependencies() {
         devDependencies.push(dependency);
     }
 
-    return dependencies;
+    for (const dependency in contents.githubDependencies) {
+        githubDependencies.push(dependency);
+    }
+
+    return { dependencies, devDependencies };
 }
 
 function getPluginDependencies(pluginName) {
@@ -81,38 +85,6 @@ function getPluginDependencies(pluginName) {
     return pluginDependencies;
 }
 
-function getGithubDependencies() {
-    const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
-
-    for (const plugin of plugins) {
-        const pluginName = path.basename(plugin);
-        const pluginDependencies = getPluginDependencies(pluginName);
-
-        if (pluginDependencies.githubDependencies.length === 0) continue;
-
-        console.log(`Github Dependencies => ${pluginDependencies.githubDependencies}`);
-
-        for (const githubDependency of pluginDependencies.githubDependencies) {
-            const dependencyName = githubDependency.split('/').pop();
-
-            const targetPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins/', dependencyName));
-
-            if (fs.existsSync(targetPath)) {
-                console.log(`Dependency folder "${dependencyName}" already exists. Skipping.`);
-            } else {
-                const cloneCommand = `git clone ${githubDependency}.git ${targetPath}`;
-
-                try {
-                    execSync(cloneCommand, { stdio: 'inherit' });
-                    console.log(`Cloned "${dependencyName}" from GitHub.`);
-                } catch (error) {
-                    console.error(`Failed to clone "${dependencyName}" from GitHub: ${error.message}`);
-                }
-            }
-        }
-    }
-}
-
 function checkPluginDependencies() {
     const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
 
@@ -126,7 +98,7 @@ function checkPluginDependencies() {
         if (pluginDependencies.dependencies.length === 0) continue;
 
         console.log(
-            `Checking dependencies for plugin '${pluginName}': ${pluginDependencies.dependencies.length} dependencies`,
+            `>>> Checking dependencies for plugin '${pluginName}': ${pluginDependencies.dependencies.length} dependencies`,
         );
 
         if (pluginDependencies.dependencies.length > 0) {
@@ -154,7 +126,7 @@ function checkPluginDevDependencies() {
         if (pluginDependencies.devDependencies.length === 0) continue;
 
         console.log(
-            `Checking development dependencies for plugin '${pluginName}': ${pluginDependencies.devDependencies.length} dependencies`,
+            `>>> Checking development dependencies for plugin '${pluginName}': ${pluginDependencies.devDependencies.length} dependencies`,
         );
 
         if (pluginDependencies.devDependencies.length > 0) {
@@ -169,46 +141,112 @@ function checkPluginDevDependencies() {
     return missingDevDepdendencies;
 }
 
-function checkIfDependencyFolderExists(dependencyName) {
+function existsInModules(dependencyName) {
     const nodeModulesPath = path.join(process.cwd(), 'node_modules', dependencyName);
     return fs.existsSync(nodeModulesPath);
 }
 
 function updatePluginDependencies() {
-    const installedDependencies = getInstalledDependencies();
-    const missingDepdendencies = checkPluginDependencies();
-    const missingDevDependencies = checkPluginDevDependencies();
+    const installedDepsObj = getInstalledDependencies();
+    const installedDeps = installedDepsObj.dependencies;
+    const installedDevDeps = installedDepsObj.devDependencies;
 
-    const sanitizedMissingDependencies = missingDepdendencies.map((dependency) => dependency.replace(/@latest$/, ''));
+    const missingDeps = checkPluginDependencies();
+    const missingDevDeps = checkPluginDevDependencies();
 
-    if (
-        sanitizedMissingDependencies.some(
-            (dep) => installedDependencies.includes(dep) && checkIfDependencyFolderExists(dep),
-        )
-    ) {
-        console.log(`All dependencies are already included and their folders exist. Skipping update...`);
-        return;
+    const sanitizeDependencies = (dependencies) => dependencies.map((dep) => dep.replace(/@.*$/, ''));
+
+    const sanitizedMissingDeps = sanitizeDependencies(missingDeps);
+    const sanitizedMissingDevDeps = sanitizeDependencies(missingDevDeps);
+
+    if (sanitizedMissingDeps.some((dep) => !installedDeps.includes(dep) || !existsInModules(dep))) {
+        const missingRegularDeps = missingDeps.filter((dep) => !installedDeps.includes(dep));
+        if (missingRegularDeps.length > 0) {
+            console.log(`>>> Installing regular dependencies...`);
+            missingRegularDeps.forEach((dep) => {
+                console.log(`- ${dep}`);
+            });
+            exec(`npm install ${missingRegularDeps.join(' ')}`, (error, _stdout, stderr) => {
+                if (error) {
+                    console.error(`>>> Failed to install regular dependencies: ${error}`);
+                    console.error(stderr);
+                } else {
+                    installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps);
+                }
+            });
+        } else {
+            console.log(
+                `>>> All regular dependencies are already included, and their folders exist. Skipping regular dependencies update...`,
+            );
+            installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps);
+        }
+    } else {
+        console.log(
+            `>>> All regular dependencies are already included, and their folders exist. Skipping regular dependencies update...`,
+        );
+        installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps);
     }
+}
 
-    if (missingDepdendencies.length > 0) {
-        exec(`npm install ${missingDepdendencies.join(' ')}`, (error, _stdout, stderr) => {
-            if (error) {
-                console.error(`Failed to install dependencies: ${error}`);
-                console.error(stderr);
-            }
-        });
-        console.log(`Dependencie installing... ${missingDepdendencies}`);
-    } else console.log(`Dependencies already installed. Skipping...`);
+function installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps) {
+    if (sanitizedMissingDevDeps.some((dep) => !installedDevDeps.includes(dep) || !existsInModules(dep))) {
+        const missingDevDepsToAdd = missingDevDeps.filter((dep) => !installedDevDeps.includes(dep));
+        if (missingDevDepsToAdd.length > 0) {
+            console.log(`>>> Installing dev dependencies...`);
+            missingDevDepsToAdd.forEach((dep) => {
+                console.log(`- ${dep}`);
+            });
+            exec(`npm install -D ${missingDevDepsToAdd.join(' ')}`, (error, _stdout, stderr) => {
+                if (error) {
+                    console.error(`Failed to install dev dependencies: ${error}`);
+                    console.error(stderr);
+                }
+            });
+        } else {
+            console.log(
+                `>>> All dev dependencies are already included, and their folders exist. Skipping dev dependencies update...`,
+            );
+        }
+    } else {
+        console.log(
+            `>>> All dev dependencies are already included, and their folders exist. Skipping dev dependencies update...`,
+        );
+    }
+}
 
-    if (missingDevDependencies.length > 0) {
-        exec(`npm install -D ${missingDevDependencies.join(' ')}`, (error, _stdout, stderr) => {
-            if (error) {
-                console.error(`Failed to install dev dependencies: ${error}`);
-                console.error(stderr);
-            }
+function installGithubDependencies() {
+    const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
+
+    for (const plugin of plugins) {
+        const pluginName = path.basename(plugin);
+        const pluginDependencies = getPluginDependencies(pluginName);
+
+        if (pluginDependencies.githubDependencies.length === 0) continue;
+
+        console.log(`>>> GitHub Dependencies for plugin "${pluginName}":`);
+        pluginDependencies.githubDependencies.forEach((githubDependency) => {
+            console.log(`- ${githubDependency}`);
         });
+
+        for (const githubDependency of pluginDependencies.githubDependencies) {
+            const dependencyName = githubDependency.split('/').pop();
+            const targetPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins/', dependencyName));
+
+            if (fs.existsSync(targetPath)) {
+                console.log(`>>> Dependency folder "${dependencyName}" already exists. Skipping.`);
+            } else {
+                const cloneCommand = `git clone ${githubDependency}.git ${targetPath}`;
+
+                try {
+                    execSync(cloneCommand, { stdio: 'inherit' });
+                    console.log(`>>> Cloned "${dependencyName}" from GitHub.`);
+                } catch (error) {
+                    console.error(`>>> Failed to clone "${dependencyName}" from GitHub: ${error.message}`);
+                }
+            }
+        }
     }
 }
 
 updatePluginDependencies();
-getGithubDependencies();
+installGithubDependencies();
