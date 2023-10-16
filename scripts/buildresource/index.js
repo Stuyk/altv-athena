@@ -28,7 +28,7 @@ async function start() {
     }
 
     defaultToml += ']';
-    writeFile(scriptPath, defaultToml);
+    await writeFile(scriptPath, defaultToml);
 }
 
 start();
