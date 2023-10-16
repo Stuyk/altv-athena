@@ -129,27 +129,31 @@ function checkPluginDevDependencies() {
     return missingDevDepdendencies;
 }
 
-function updatePluginDependencies() {
+export async function updatePluginDependencies() {
     getInstalledDependencies();
 
     const missingDepdendencies = checkPluginDependencies();
     const missingDevDependencies = checkPluginDevDependencies();
 
     if (missingDepdendencies.length > 0) {
-        exec(`npm install ${missingDepdendencies.join(' ')}`, (error, _stdout, stderr) => {
-            if (error) {
-                console.error(`Failed to install dependencies: ${error}`);
-                console.error(stderr);
-            }
+        await new Promise((resolve) => {
+            exec(`npm install ${missingDepdendencies.join(' ')}`, (error, _stdout, stderr) => {
+                if (error) {
+                    console.error(`Failed to install dependencies: ${error}`);
+                    console.error(stderr);
+                }
+            });
         });
     }
 
     if (missingDevDependencies.length > 0) {
-        exec(`npm install -D ${missingDevDependencies.join(' ')}`, (error, _stdout, stderr) => {
-            if (error) {
-                console.error(`Failed to install dev dependencies: ${error}`);
-                console.error(stderr);
-            }
+        await new Promise((resolve) => {
+            exec(`npm install -D ${missingDepdendencies.join(' ')}`, (error, _stdout, stderr) => {
+                if (error) {
+                    console.error(`Failed to install dev dependencies: ${error}`);
+                    console.error(stderr);
+                }
+            });
         });
     }
 }

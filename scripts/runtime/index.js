@@ -9,6 +9,7 @@ import { runPluginsCompiler } from '../plugins/core.js';
 import { copyPluginFiles } from '../plugins/files.js';
 import { transformFileImportPaths } from '../transform/index.js';
 import { compileWebviewPlugins } from '../plugins/webview.js';
+import { updatePluginDependencies } from '../plugins/update-dependencies.js';
 
 const DEBUG = true;
 
@@ -16,9 +17,12 @@ const NO_SPECIAL_CHARACTERS = new RegExp(/^[ A-Za-z0-9_-]*$/gm);
 
 const ports = [7788, 'altv-server', 'altv-server.exe', 3399, 3001];
 const node = 'node';
-const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx';
-const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-const serverBinary = process.platform === 'win32' ? 'altv-server.exe' : './altv-server';
+
+const isLinux = process.platform === 'win32' ? false : true;
+
+const npx = !isLinux ? 'npx.cmd' : 'npx';
+const npm = !isLinux ? 'npm.cmd' : 'npm';
+const serverBinary = !isLinux ? 'altv-server.exe' : './altv-server';
 
 const passedArguments = process.argv.slice(2).map((arg) => arg.replace('--', ''));
 const fileNameHashes = {};
@@ -177,21 +181,30 @@ async function handleServerProcess(shouldAutoRestart = false) {
     await areKeyResourcesReady();
 
     if (passedArguments.includes('cdn')) {
-        lastServerProcess = spawn(serverBinary, ['--justpack'], { stdio: 'inherit' });
+        lastServerProcess = spawn(serverBinary, ['--justpack'], {
+            stdio: 'inherit',
+            detached: !isLinux,
+            shell: !isLinux,
+        });
+
         lastServerProcess.once('exit', () => {
             const finalDestination = `${process.cwd()}/cdn_upload`.replace(/\\/g, '/');
             console.log(`Files were packed for a CDN. ${finalDestination}`);
             process.exit(0);
         });
     } else {
-        lastServerProcess = spawn(serverBinary, { stdio: 'inherit' });
+        lastServerProcess = spawn(serverBinary, { stdio: 'inherit', detached: !isLinux, shell: !isLinux });
     }
 
     lastServerProcess.once('close', (code) => {
         console.log(`Server process exited with code ${code}`);
         if (shouldAutoRestart) {
             handleServerProcess(shouldAutoRestart);
+            return;
         }
+
+        console.log(`Auto restart not enabled. Shutting off server.`);
+        process.exit(1);
     });
 }
 
@@ -240,19 +253,13 @@ async function refreshFileWatching() {
 }
 
 async function coreBuildProcess() {
-    const coreCompilerTime = createExecTime('>>> core-compiler');
+    const timer = createExecTime('>>> Core Build Time');
     await runCoreCompiler();
-    coreCompilerTime.stop();
-
-    const pluginBuildTime = createExecTime('>>> core-plugins');
     await runPluginsCompiler();
-    pluginBuildTime.stop();
-
-    const mixedTime = createExecTime('>>> plugin webview, tranform, files');
     compileWebviewPlugins();
     transformFileImportPaths();
     copyPluginFiles();
-    mixedTime.stop();
+    timer.stop();
 }
 
 async function devMode(firstRun = false) {
@@ -275,23 +282,16 @@ async function devMode(firstRun = false) {
 async function runServer() {
     const isDev = passedArguments.includes('dev');
 
-    //Update dependencies for all the things
-    const updateTime = createExecTime('>>> update-dependencies');
-    await runFile(node, './scripts/plugins/update-dependencies');
-    updateTime.stop();
+    // Update dependencies for all the things
+    await updatePluginDependencies();
 
     if (isDev) {
         handleViteDevServer();
     }
 
     // Has to build first before building the rest.
-    const coreBuildTime = createExecTime('>>> core-build-time');
     await coreBuildProcess();
-    coreBuildTime.stop();
-
-    const configurationTime = createExecTime('>>> handle-configuration-time');
     await handleConfiguration();
-    configurationTime.stop();
 
     if (passedArguments.includes('dev')) {
         await sleep(50);

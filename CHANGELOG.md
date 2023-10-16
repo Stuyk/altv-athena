@@ -5,6 +5,7 @@
 - Update configs, and resource builder to toml only
 - Upgrade item drops to use alt.Object
 - Increase boot times
+- Patch CTRL+C Issue
 ```
 
 ## 5.2.0
