@@ -1,8 +1,10 @@
-export * as math from './math';
-export * as model from './model';
-export * as pauseMenu from './pauseMenu';
-export * as random from '@AthenaShared/utility/random';
-export * as scene from './scene';
-export * as scenarios from './scenarios';
-export * as vector from '@AthenaShared/utility/vector';
-export * as hashLookup from '@AthenaShared/utility/hashLookup';
+import * as math from './math';
+import * as model from './model';
+import * as pauseMenu from './pauseMenu';
+import * as random from '@AthenaShared/utility/random';
+import * as scene from './scene';
+import * as scenarios from './scenarios';
+import * as vector from '@AthenaShared/utility/vector';
+import * as hashLookup from '@AthenaShared/utility/hashLookup';
+
+export { math, model, pauseMenu, random, scene, scenarios, vector, hashLookup };
