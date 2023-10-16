@@ -6,9 +6,9 @@ import { globSync } from '../shared/fileHelpers.js';
 
 const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable'];
 
-let dependencies = [];
-let devDependencies = [];
-let githubDependencies = [];
+const dependencies = [];
+const devDependencies = [];
+const githubDependencies = [];
 
 function getInstalledDependencies() {
     const packageJsonPath = sanitizePath(path.join(process.cwd(), 'package.json'));
@@ -33,7 +33,7 @@ function getInstalledDependencies() {
         githubDependencies.push(dependency);
     }
 
-    return { dependencies, devDependencies };
+    return { dependencies, devDependencies, githubDependencies };
 }
 
 function getPluginDependencies(pluginName) {
@@ -48,6 +48,7 @@ function getPluginDependencies(pluginName) {
     for (const disabler of viablePluginDisablers) {
         const disabledPath = sanitizePath(path.join(pluginPath, disabler));
         if (fs.existsSync(disabledPath)) {
+            console.log(`>>> Disabled Plugin => ${pluginName}`);
             return pluginDependencies;
         }
     }
