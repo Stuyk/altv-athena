@@ -2,7 +2,7 @@ import { ChildProcess, spawn } from 'child_process';
 import fkill from 'fkill';
 import fs from 'fs';
 import crypto from 'crypto';
-import { globSync } from '../shared/fileHelpers.js';
+import { copySync, globSync } from '../shared/fileHelpers.js';
 
 const DEBUG = true;
 
@@ -106,11 +106,8 @@ async function handleConfiguration() {
         promises.push(runFile(npx, 'vite', 'build', './src-webviews'));
     }
 
-    promises.push(runFile(npx, 'altv-config', `./configs/${configName}.json`));
+    promises.push(copySync(`./configs/${configName}.toml`, `server.toml`));
     await runFile(node, './scripts/buildresource/index.js');
-    promises.push(
-        runFile(npx, 'altv-config', './scripts/buildresource/resource.json', './resources/core/resource.toml'),
-    );
     return await Promise.all(promises);
 }
 

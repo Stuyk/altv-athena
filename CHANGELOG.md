@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.3.0
+```
+- Update configs, and resource builder to toml only
+```
+
 ## 5.2.0
 
 ```
