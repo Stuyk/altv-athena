@@ -2,7 +2,6 @@ import * as Athena from '@AthenaServer/api';
 import * as alt from 'alt-server';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { View_Events_Input_Menu } from '@AthenaShared/enums/views';
 import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
 import IAttachable from '@AthenaShared/interfaces/iAttachable';
 import ICredit from '@AthenaShared/interfaces/iCredit';

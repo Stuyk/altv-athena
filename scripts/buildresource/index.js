@@ -10,6 +10,9 @@ const defaults = {
     'client-files': ['client/*', 'shared/*'],
     deps: [],
     'required-permissions': ['Screen Capture'],
+    'config.js-module-v2': {
+        compatabilityEnabled: true,
+    },
 };
 
 async function getClientPluginFolders() {
