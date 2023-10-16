@@ -61,7 +61,7 @@ function writeClientImports(plugins) {
     writeFile(importPath, content + '\n');
 }
 
-function run() {
+export function runPluginsCompiler() {
     const enabledPlugins = getEnabledPlugins();
 
     const clientImports = [];
@@ -82,5 +82,3 @@ function run() {
     writeServerImports(serverImports);
     writeClientImports(clientImports);
 }
-
-run();

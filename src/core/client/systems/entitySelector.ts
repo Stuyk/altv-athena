@@ -9,7 +9,14 @@ import { Interaction } from '@AthenaShared/interfaces/interaction';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 
 export type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle' | 'interaction';
-export type TargetInfo = { id: number; pos: alt.IVector3; type: ValidEntityTypes; dist: number; height: number };
+export type TargetInfo = {
+    id: number;
+    pos: alt.IVector3;
+    type: ValidEntityTypes;
+    dist: number;
+    height: number;
+    entity: alt.Entity;
+};
 
 let MAX_TARGETS = 50;
 let everyTick: number;
@@ -22,7 +29,7 @@ let showMarker = true;
 let color: alt.RGBA = new alt.RGBA(255, 255, 255, 200);
 let size = new alt.Vector3(0.1, 0.05, 0.1);
 let latestInteraction: Interaction;
-let autoMode = false;
+let autoMode = true;
 
 const Internal = {
     init() {
@@ -55,9 +62,8 @@ const Internal = {
     },
     convert(dataSet: Array<alt.Entity>, type: ValidEntityTypes): Array<TargetInfo> {
         let entityInfo: Array<TargetInfo> = [];
-
         for (let i = 0; i < dataSet.length; i++) {
-            if (type === 'player' && dataSet[i].id === alt.Player.local.scriptID) {
+            if (type === 'player' && dataSet[i].remoteID === alt.Player.local.remoteID) {
                 continue;
             }
 
@@ -71,22 +77,48 @@ const Internal = {
             const [_, min, max] = native.getModelDimensions(dataSet[i].model);
             const height = Math.abs(min.z) + Math.abs(max.z);
             const dist = AthenaClient.utility.vector.distance2d(alt.Player.local.pos, dataSet[i].pos);
-            entityInfo.push({ id: dataSet[i].scriptID, dist, type, pos: dataSet[i].pos, height });
+            entityInfo.push({ id: dataSet[i].scriptID, dist, type, pos: dataSet[i].pos, height, entity: dataSet[i] });
         }
 
         return entityInfo;
     },
+    getClosestNearby(dataSet: Array<alt.Entity>, distance = 25) {
+        const closest = dataSet.filter((x) => {
+            if (x.pos.x === 0 && x.pos.y === 0) {
+                return false;
+            }
+
+            const dist = AthenaClient.utility.vector.distance(x.pos, alt.Player.local.pos);
+            if (dist > distance) {
+                return false;
+            }
+
+            return true;
+        });
+
+        return closest;
+    },
     updateSelectionList() {
-        const players = [...alt.Player.streamedIn];
-        const vehicles = [...alt.Vehicle.streamedIn];
-        const objects = [...alt.Object.all];
+        const players = Internal.getClosestNearby([...alt.Player.all]);
+        const vehicles = Internal.getClosestNearby([...alt.Vehicle.streamedIn]);
+        const objects = Internal.getClosestNearby([...alt.Object.all]);
 
         let entityInfo: Array<TargetInfo> = Internal.convert(players, 'player');
         entityInfo = entityInfo.concat(Internal.convert(vehicles, 'vehicle'));
-        entityInfo = entityInfo.concat(Internal.convert(objects, 'object'));
+
+        const objectInfo = entityInfo.concat(Internal.convert(objects, 'object'));
+        entityInfo = objectInfo;
+
         if (latestInteraction) {
             const dist = AthenaClient.utility.vector.distance2d(alt.Player.local.pos, latestInteraction.position);
-            entityInfo.push({ dist, height: 1, id: -1, pos: latestInteraction.position, type: 'interaction' });
+            entityInfo.push({
+                dist,
+                height: 1,
+                id: -1,
+                pos: latestInteraction.position,
+                type: 'interaction',
+                entity: null,
+            });
         }
 
         entityInfo.sort((a, b) => {
@@ -131,7 +163,6 @@ const Internal = {
             selectionIndex = 0;
         }
 
-        lastSelection = selections[selectionIndex];
         AthenaClient.systems.sound.frontend('SKIP', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
     },
     invokeSelection() {
@@ -171,7 +202,7 @@ const Internal = {
                     break;
                 }
 
-                const droppedItem = AthenaClient.streamers.item.getDropped(object.scriptID);
+                const droppedItem = AthenaClient.streamers.item.getDropped(object.remoteID);
                 if (typeof droppedItem !== 'undefined') {
                     if (alt.Player.local.vehicle) {
                         return;

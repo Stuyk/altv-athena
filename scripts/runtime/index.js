@@ -2,7 +2,13 @@ import { ChildProcess, spawn } from 'child_process';
 import fkill from 'fkill';
 import fs from 'fs';
 import crypto from 'crypto';
-import { copySync, globSync } from '../shared/fileHelpers.js';
+import { copySync, globSync, areKeyResourcesReady } from '../shared/fileHelpers.js';
+import { buildResources } from '../buildresource/index.js';
+import { runCoreCompiler } from '../compiler/core.js';
+import { runPluginsCompiler } from '../plugins/core.js';
+import { copyPluginFiles } from '../plugins/files.js';
+import { transformFileImportPaths } from '../transform/index.js';
+import { compileWebviewPlugins } from '../plugins/webview.js';
 
 const DEBUG = true;
 
@@ -106,9 +112,8 @@ async function handleConfiguration() {
         promises.push(runFile(npx, 'vite', 'build', './src-webviews'));
     }
 
-    promises.push(copySync(`./configs/${configName}.toml`, `server.toml`));
-    await runFile(node, './scripts/buildresource/index.js');
-    return await Promise.all(promises);
+    copySync(`./configs/${configName}.toml`, `server.toml`);
+    await buildResources();
 }
 
 async function handleViteDevServer() {
@@ -168,6 +173,8 @@ async function handleServerProcess(shouldAutoRestart = false) {
     if (process.platform !== 'win32') {
         await runFile('chmod', '+x', `./altv-server`);
     }
+
+    await areKeyResourcesReady();
 
     if (passedArguments.includes('cdn')) {
         lastServerProcess = spawn(serverBinary, ['--justpack'], { stdio: 'inherit' });
@@ -233,29 +240,19 @@ async function refreshFileWatching() {
 }
 
 async function coreBuildProcess() {
-    const start = Date.now();
-
     const coreCompilerTime = createExecTime('>>> core-compiler');
-    await runFile(node, './scripts/compiler/core');
+    await runCoreCompiler();
     coreCompilerTime.stop();
 
     const pluginBuildTime = createExecTime('>>> core-plugins');
-    await runFile(node, './scripts/plugins/core');
+    await runPluginsCompiler();
     pluginBuildTime.stop();
 
     const mixedTime = createExecTime('>>> plugin webview, tranform, files');
-    const promises = [
-        runFile(node, './scripts/plugins/webview'),
-        runFile(node, './scripts/transform/index'),
-        runFile(node, './scripts/plugins/files'),
-    ];
-
-    await Promise.all(promises);
+    compileWebviewPlugins();
+    transformFileImportPaths();
+    copyPluginFiles();
     mixedTime.stop();
-
-    const transformTime = createExecTime('>>> transform-time');
-    await runFile(node, './scripts/transform/index');
-    transformTime.stop();
 }
 
 async function devMode(firstRun = false) {
@@ -268,13 +265,8 @@ async function devMode(firstRun = false) {
     promises.push(killChildProcess(lastStreamerProcess));
     promises.push(killChildProcess(lastServerProcess));
 
-    await Promise.all(promises);
-    promises = [];
-
-    promises.push(coreBuildProcess());
-    promises.push(handleConfiguration());
-
-    await Promise.all(promises);
+    await coreBuildProcess();
+    await handleConfiguration();
 
     handleStreamerProcess(false);
     handleServerProcess(false);

@@ -3,6 +3,8 @@
 ## 5.3.0
 ```
 - Update configs, and resource builder to toml only
+- Upgrade item drops to use alt.Object
+- Increase boot times
 ```
 
 ## 5.2.0

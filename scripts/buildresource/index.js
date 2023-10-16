@@ -3,12 +3,6 @@ import { sanitizePath } from '../shared/path.js';
 import { globSync, writeFile } from '../shared/fileHelpers.js';
 
 const scriptPath = sanitizePath(path.join(process.cwd(), './resources/core/resource.toml'));
-let defaultToml =
-    "type = 'js' \r\n" +
-    "main = 'server/startup.js' \r\n" +
-    "client-main = 'client/startup.js' \r\n" +
-    "required-permissions = ['Screen Capture'] \r\n" +
-    "client-files = ['client/*', 'shared/*', \r\n";
 
 async function getClientPluginFolders() {
     const removalPath = sanitizePath(path.join(process.cwd(), 'src/core/'));
@@ -21,14 +15,21 @@ async function getClientPluginFolders() {
     return results;
 }
 
-async function start() {
+export async function buildResources() {
+    let defaultToml =
+        "type = 'js' \r\n" +
+        "main = 'server/startup.js' \r\n" +
+        "client-main = 'client/startup.js' \r\n" +
+        "required-permissions = ['Screen Capture'] \r\n" +
+        "client-files = ['client/*', 'shared/*', \r\n";
+
     const folders = await getClientPluginFolders();
+
     for (let folder of folders) {
         defaultToml += `"${folder}", \r\n`;
     }
 
     defaultToml += ']';
+
     await writeFile(scriptPath, defaultToml);
 }
-
-start();

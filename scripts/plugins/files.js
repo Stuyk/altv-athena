@@ -1,6 +1,6 @@
 import { moveAssetsToWebview, movePluginFilesToWebview, clearPluginsWebViewFolder } from './shared.js';
 
-function run() {
+export function copyPluginFiles() {
     clearPluginsWebViewFolder();
     movePluginFilesToWebview('icons', ['png']);
     movePluginFilesToWebview('webview/images', ['jpg', 'png', 'svg', 'jpeg', 'gif']);
@@ -25,5 +25,3 @@ function run() {
         'ttf',
     ]);
 }
-
-run();

@@ -1,14 +1,12 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
 import * as AthenaClient from '@AthenaClient/api';
-
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { ItemDrop } from '@AthenaShared/interfaces/item';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { ITEM_SYNCED_META } from '@AthenaShared/enums/syncedMeta';
 
 export type CreatedDrop = ItemDrop & { createdObject?: alt.Object };
 
 let maxDistance = 5;
-let defaultProp = 'prop_cs_cardbox_01';
 let items: Array<CreatedDrop> = [];
 let closestItems: Array<CreatedDrop> = [];
 let interval: number;
@@ -28,58 +26,11 @@ const InternalFunctions = {
 
         alt.clearInterval(interval);
     },
-    populate(itemDrops: Array<ItemDrop>) {
-        // First Loop Clears Uncommon Values
-        for (let i = items.length - 1; i >= 0; i--) {
-            if (itemDrops.findIndex((x) => x._id === items[i]._id) >= 0) {
-                continue;
-            }
-
-            if (items[i].createdObject) {
-                items[i].createdObject.destroy();
-            }
-
-            items.splice(i, 1);
-        }
-
-        // Second loop pushes items that do not exist and creates items that have not been created
-        for (let i = 0; i < itemDrops.length; i++) {
-            let existingIndex = items.findIndex((x) => x._id === itemDrops[i]._id);
-            if (existingIndex <= -1) {
-                items.push(itemDrops[i]);
-                existingIndex = items.length - 1;
-            }
-
-            if (items[existingIndex].createdObject) {
-                continue;
-            }
-
-            const model = items[existingIndex].model ? items[existingIndex].model : defaultProp;
-            const [_, min, max] = native.getModelDimensions(alt.hash(model));
-            const itemHeight = (Math.abs(min.z) + Math.abs(max.z)) / 2;
-            const modifiedPosition = AthenaClient.world.position.getGroundZ(items[existingIndex].pos);
-            const itemPosition = new alt.Vector3(
-                modifiedPosition.x,
-                modifiedPosition.y,
-                modifiedPosition.z + itemHeight,
-            );
-
-            items[existingIndex].createdObject = new alt.Object(
-                model,
-                itemPosition,
-                new alt.Vector3(0, 0, 0),
-                true,
-                false,
-            );
-            items[existingIndex].createdObject.toggleCollision(false, false);
-            items[existingIndex].createdObject.setPositionFrozen(true);
-        }
-
+    start() {
         if (!interval) {
             interval = alt.setInterval(InternalFunctions.handleDrawItems, 0);
         }
     },
-
     handleDrawItems() {
         if (alt.Player.local.isWheelMenuOpen) {
             return;
@@ -122,6 +73,56 @@ const InternalFunctions = {
     },
 };
 
+function onEntityCreate(entity: alt.Entity) {
+    if (!(entity instanceof alt.Object)) {
+        return;
+    }
+
+    if (!entity.hasStreamSyncedMeta(ITEM_SYNCED_META.ITEM_DROP_INFO)) {
+        return;
+    }
+
+    const info = entity.getStreamSyncedMeta(ITEM_SYNCED_META.ITEM_DROP_INFO) as ItemDrop;
+    if (!info) {
+        return;
+    }
+
+    const index = items.findIndex((x) => x._id === info._id);
+    if (index >= 1) {
+        return;
+    }
+
+    items.push({ ...info, createdObject: entity });
+}
+
+function onEntityRemoved(entity: alt.Entity) {
+    if (!(entity instanceof alt.Object)) {
+        return;
+    }
+
+    if (!entity.hasStreamSyncedMeta(ITEM_SYNCED_META.ITEM_DROP_INFO)) {
+        return;
+    }
+
+    const info = entity.getStreamSyncedMeta(ITEM_SYNCED_META.ITEM_DROP_INFO) as ItemDrop;
+    if (!info) {
+        return;
+    }
+
+    for (let i = items.length - 1; i >= 0; i--) {
+        if (items[i]._id !== info._id) {
+            continue;
+        }
+
+        items.splice(i, 1);
+        break;
+    }
+}
+
+alt.on('gameEntityCreate', onEntityCreate);
+alt.on('gameEntityDestroy', onEntityRemoved);
+alt.on('baseObjectRemove', onEntityRemoved);
+
 /**
  * Return an array of items that are closest to the player.
  *
@@ -131,16 +132,6 @@ const InternalFunctions = {
  */
 export function getClosest(): Array<ItemDrop> {
     return closestItems;
-}
-
-/**
- * Overrides the default model for item drops.
- * By default it is a cardboard box.
- *
- * @param {string} model
- */
-export function setDefaultDropModel(model: string) {
-    defaultProp = model;
 }
 
 /**
@@ -159,9 +150,9 @@ export function setDefaultMaxDistance(distance = 5) {
  * @return {(CreatedDrop | undefined)}
  */
 export function getDropped(id: number): CreatedDrop | undefined {
-    return closestItems.find((x) => x.createdObject && x.createdObject.scriptID === id);
+    return closestItems.find((x) => x.createdObject && x.createdObject.remoteID === id);
 }
 
 alt.on('connectionComplete', InternalFunctions.init);
 alt.on('disconnect', InternalFunctions.stop);
-alt.onServer(SYSTEM_EVENTS.POPULATE_ITEM_DROPS, InternalFunctions.populate);
+onTicksStart.add(InternalFunctions.start);
