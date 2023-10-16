@@ -48,7 +48,6 @@ function getPluginDependencies(pluginName) {
     for (const disabler of viablePluginDisablers) {
         const disabledPath = sanitizePath(path.join(pluginPath, disabler));
         if (fs.existsSync(disabledPath)) {
-            console.log(`>>> Disabled Plugin => ${pluginName}`);
             return pluginDependencies;
         }
     }
