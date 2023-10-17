@@ -46,7 +46,7 @@ const InternalFunctions = {
             dataRef[uid].createdObject.destroy();
         }
 
-        const createdObject = new alt.Object(
+        const createdObject = new alt.LocalObject(
             model,
             new alt.Vector3(dataRef[uid].pos),
             new alt.Vector3(dataRef[uid].rot),
@@ -58,7 +58,7 @@ const InternalFunctions = {
             createdObject.toggleCollision(false, false);
         }
 
-        createdObject.setPositionFrozen(true);
+        createdObject.positionFrozen = true;
         dataRef[uid].createdObject = createdObject;
     },
     populate(newObjects: Array<IObject>) {
@@ -87,7 +87,7 @@ const InternalFunctions = {
                 delete serverObjects[objRef.uid];
             }
 
-            const createdObject = new alt.Object(
+            const createdObject = new alt.LocalObject(
                 objRef.model,
                 new alt.Vector3(objRef.pos),
                 new alt.Vector3(objRef.rot),
@@ -99,7 +99,7 @@ const InternalFunctions = {
                 createdObject.toggleCollision(false, false);
             }
 
-            createdObject.setPositionFrozen(true);
+            createdObject.positionFrozen = true;
 
             serverObjects[objRef.uid] = {
                 ...objRef,
@@ -135,7 +135,7 @@ export function addObject(newObject: IObject) {
         throw new Error(`Object with ${newObject.uid} already exists! Use a unique identifier.`);
     }
 
-    const createdObject = new alt.Object(
+    const createdObject = new alt.LocalObject(
         newObject.model,
         new alt.Vector3(newObject.pos),
         new alt.Vector3(newObject.rot),
@@ -147,7 +147,7 @@ export function addObject(newObject: IObject) {
         createdObject.toggleCollision(false, false);
     }
 
-    createdObject.setPositionFrozen(true);
+    createdObject.positionFrozen = true;
     clientObjects[newObject.uid] = {
         ...newObject,
         createdObject,
@@ -212,7 +212,6 @@ export function getFromScriptId(scriptId: number): CreatedObject | undefined {
 }
 
 alt.on('disconnect', InternalFunctions.stop);
-alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, InternalFunctions.populate);
 alt.onServer(SYSTEM_EVENTS.MOVE_OBJECT, InternalFunctions.moveObject);
 alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, addObject);
 alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, removeObject);

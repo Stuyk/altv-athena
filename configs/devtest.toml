@@ -14,3 +14,4 @@ migrationDistance = 150
 modules = ["js-module"]
 resources = ["webviews", "core"]
 tags = ["athena","framework","version","5"]
+log-streams = ["console", "file", "stdconsole"]

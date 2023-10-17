@@ -110,6 +110,7 @@ export async function areKeyResourcesReady() {
         sanitizePath(path.join(process.cwd(), './resources/core/resource.toml')),
         sanitizePath(path.join(process.cwd(), './resources/core/plugins/athena/server/imports.js')),
         sanitizePath(path.join(process.cwd(), './resources/core/plugins/athena/client/imports.js')),
+        sanitizePath(path.join(process.cwd(), './resources/core/server/systems/plugins.js')),
     ];
 
     for (let keyFile of keyFiles) {
@@ -117,7 +118,7 @@ export async function areKeyResourcesReady() {
             const result = await fs.promises.open(keyFile, fs.constants.O_RDONLY);
             result.close();
         } catch (err) {
-            return areKeyResourcesReady();
+            return await areKeyResourcesReady();
         }
     }
 }

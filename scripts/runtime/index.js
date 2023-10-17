@@ -173,6 +173,9 @@ async function handleServerProcess(shouldAutoRestart = false) {
     }
 
     await areKeyResourcesReady();
+    await new Promise((resolve) => {
+        setTimeout(resolve, 500);
+    });
 
     if (passedArguments.includes('cdn')) {
         lastServerProcess = spawn(serverBinary, ['--justpack'], { stdio: 'inherit' });
@@ -186,10 +189,10 @@ async function handleServerProcess(shouldAutoRestart = false) {
         lastServerProcess = spawn(serverBinary, { stdio: 'inherit' });
     }
 
-    lastServerProcess.once('close', (code) => {
+    lastServerProcess.once('close', async (code) => {
         console.log(`Server process exited with code ${code}`);
         if (shouldAutoRestart) {
-            handleServerProcess(shouldAutoRestart);
+            await handleServerProcess(shouldAutoRestart);
         }
     });
 }
@@ -261,8 +264,8 @@ async function devMode(firstRun = false) {
     await coreBuildProcess();
     await handleConfiguration();
 
-    handleStreamerProcess(false);
-    handleServerProcess(false);
+    await handleStreamerProcess(false);
+    await handleServerProcess(false);
 }
 
 async function runServer() {
@@ -282,14 +285,14 @@ async function runServer() {
     if (passedArguments.includes('dev')) {
         await sleep(50);
         await devMode(true);
-        handleStreamerProcess(false);
-        handleServerProcess(false);
+        await handleStreamerProcess(false);
+        await handleServerProcess(false);
         return;
     }
 
     await sleep(50);
-    handleStreamerProcess(true);
-    handleServerProcess(true);
+    await handleStreamerProcess(true);
+    await handleServerProcess(true);
 }
 
 if (passedArguments.includes('start')) {

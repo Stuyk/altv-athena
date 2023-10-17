@@ -6,6 +6,8 @@
 - Upgrade item drops to use alt.Object
 - Increase boot times
 - Patch CTRL+C Issue
+- Update global objects to use alt.Object
+- Update client-side objects to use alt.LocalObject
 ```
 
 ## 5.2.0

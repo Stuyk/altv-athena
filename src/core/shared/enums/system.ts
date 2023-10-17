@@ -125,7 +125,6 @@ export enum SYSTEM_EVENTS {
     QUICK_TOKEN_UPDATE = 'quicktoken:update',
     QUICK_TOKEN_FETCH = 'quicktoken:fetch',
     //
-    REMOVE_GLOBAL_OBJECT = 'remove:Global:Object',
     REMOVE_OBJECT = 'remove:Object',
     REMOVE_GLOBAL_PED = 'remove:Global:Object',
     REMOVE_PED = 'remove:Object',
