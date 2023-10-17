@@ -8,5 +8,18 @@ import * as ped from './ped';
 import * as textLabel from './textlabel';
 import * as textLabelVirtual from './textLabelVirtual';
 import * as worldNotifications from './worldNotifications';
+import * as worldNotificationsVirtual from './worldNotificationsVirtual';
 
-export { blip, doors, item, marker, markerVirtual, object, ped, textLabel, textLabelVirtual, worldNotifications };
+export {
+    blip,
+    doors,
+    item,
+    marker,
+    markerVirtual,
+    object,
+    ped,
+    textLabel,
+    textLabelVirtual,
+    worldNotifications,
+    worldNotificationsVirtual,
+};

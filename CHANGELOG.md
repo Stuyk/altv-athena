@@ -11,6 +11,7 @@
 - Update Blips to Global Blip API
 - Update TextLabels to Virtual Entities
 - Update Markers to Virtual Entities
+- Update World Notifications to Virtual Entities
 ```
 
 ## 5.2.0

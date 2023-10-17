@@ -71,6 +71,7 @@ import './streamers/ped';
 import './streamers/textlabel';
 import './streamers/textLabelVirtual';
 import './streamers/worldNotifications';
+import './streamers/worldNotificationsVirtual';
 
 // Systems Default
 import './systems/defaults/ammo';
