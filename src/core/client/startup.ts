@@ -65,6 +65,7 @@ import './streamers/blip';
 import './streamers/doors';
 import './streamers/item';
 import './streamers/marker';
+import './streamers/markerVirtual';
 import './streamers/object';
 import './streamers/ped';
 import './streamers/textlabel';

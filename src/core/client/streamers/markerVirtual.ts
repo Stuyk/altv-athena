@@ -1,9 +1,9 @@
 import * as AthenaClient from '@AthenaClient/api';
-import { TextLabel } from '@AthenaShared/interfaces/textLabel';
+import { Marker } from '@AthenaShared/interfaces/marker';
 import * as alt from 'alt-client';
 
 let interval: number;
-let textDraws: (TextLabel & { entity: alt.Entity })[] = [];
+let markers: (Marker & { entity: alt.Entity })[] = [];
 
 function draw() {
     if (alt.Player.local.isWheelMenuOpen) {
@@ -14,8 +14,20 @@ function draw() {
         return;
     }
 
-    for (let textDraw of textDraws) {
-        AthenaClient.screen.text.drawText3D(textDraw.text, textDraw.entity.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
+    for (let marker of markers) {
+        if (!marker.scale) {
+            marker.scale = new alt.Vector3(1, 1, 1);
+        }
+
+        AthenaClient.screen.marker.draw(
+            marker.type,
+            marker.entity.pos,
+            marker.scale,
+            marker.color,
+            marker.bobUpAndDown,
+            marker.faceCamera,
+            marker.rotate,
+        );
     }
 }
 
@@ -33,11 +45,11 @@ function onStreamEnter(entity: alt.Object) {
         return;
     }
 
-    const index = textDraws.findIndex((x) => x.uid === data.uid);
+    const index = markers.findIndex((x) => x.uid === data.uid);
     if (index !== -1) {
-        textDraws[index] = { ...data, entity };
+        markers[index] = { ...data, entity };
     } else {
-        textDraws.push({ ...data, entity });
+        markers.push({ ...data, entity });
     }
 }
 
@@ -51,15 +63,15 @@ function onStreamExit(entity: alt.Object) {
         return;
     }
 
-    for (let i = textDraws.length - 1; i >= 0; i--) {
-        if (textDraws[i].uid !== data.uid) {
+    for (let i = markers.length - 1; i >= 0; i--) {
+        if (markers[i].uid !== data.uid) {
             continue;
         }
 
-        textDraws.splice(i, 1);
+        markers.splice(i, 1);
     }
 
-    if (textDraws.length <= 0) {
+    if (markers.length <= 0) {
         alt.clearInterval(interval);
         interval = undefined;
     }
@@ -75,16 +87,16 @@ function onStreamSyncedMetaChanged(entity: alt.Object, key: string, value: any) 
         return;
     }
 
-    const index = textDraws.findIndex((x) => x.uid === data.uid);
+    const index = markers.findIndex((x) => x.uid === data.uid);
     if (index <= -1) {
         return;
     }
 
-    textDraws[index] = { ...data, entity };
+    markers[index] = { ...data, entity };
 }
 
-function getData(object: alt.Object): TextLabel {
-    return object.getStreamSyncedMeta('label') as TextLabel;
+function getData(object: alt.Object): Marker {
+    return object.getStreamSyncedMeta('marker') as Marker;
 }
 
 function isTextLabel(object: alt.Object) {
@@ -92,7 +104,7 @@ function isTextLabel(object: alt.Object) {
         return false;
     }
 
-    return object.getStreamSyncedMeta('type') === 'textlabel';
+    return object.getStreamSyncedMeta('type') === 'marker';
 }
 
 alt.on('worldObjectStreamIn', onStreamEnter);

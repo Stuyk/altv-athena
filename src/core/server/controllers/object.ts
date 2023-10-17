@@ -1,6 +1,4 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import '@AthenaServer/systems/streamer';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IObject } from '../../shared/interfaces/iObject';

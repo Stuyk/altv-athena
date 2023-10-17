@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { ItemDrop } from '@AthenaShared/interfaces/item';
-import '@AthenaServer/systems/streamer';
 import { ITEM_SYNCED_META } from '@AthenaShared/enums/syncedMeta';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
