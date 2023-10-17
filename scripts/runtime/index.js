@@ -128,19 +128,13 @@ async function handleViteDevServer() {
     await runFile(node, './scripts/plugins/webview.js');
     lastViteServer = spawn(
         npx,
-        [
-            'vite',
-            './src-webviews',
-            '--clearScreen=false',
-            '--debug=true',
-            '--host=localhost',
-            '--port=3000',
-            '--logLevel=silent',
-        ],
-        {
-            stdio: 'inherit',
-        },
+        ['vite', './src-webviews', '--clearScreen', '--debug=true', '--host=localhost', '--port=3000'],
+        { stdio: 'pipe' },
     );
+
+    lastViteServer.stdout.on('data', (dat) => {
+        console.log(dat.toString());
+    });
 
     lastViteServer.once('close', (code) => {
         console.log(`Vite process exited with code ${code}`);
@@ -181,11 +175,7 @@ async function handleServerProcess(shouldAutoRestart = false) {
     await areKeyResourcesReady();
 
     if (passedArguments.includes('cdn')) {
-        lastServerProcess = spawn(serverBinary, ['--justpack'], {
-            stdio: 'inherit',
-            detached: !isLinux,
-            shell: !isLinux,
-        });
+        lastServerProcess = spawn(serverBinary, ['--justpack'], { stdio: 'inherit' });
 
         lastServerProcess.once('exit', () => {
             const finalDestination = `${process.cwd()}/cdn_upload`.replace(/\\/g, '/');
@@ -193,18 +183,14 @@ async function handleServerProcess(shouldAutoRestart = false) {
             process.exit(0);
         });
     } else {
-        lastServerProcess = spawn(serverBinary, { stdio: 'inherit', detached: !isLinux, shell: !isLinux });
+        lastServerProcess = spawn(serverBinary, { stdio: 'inherit' });
     }
 
     lastServerProcess.once('close', (code) => {
         console.log(`Server process exited with code ${code}`);
         if (shouldAutoRestart) {
             handleServerProcess(shouldAutoRestart);
-            return;
         }
-
-        console.log(`Auto restart not enabled. Shutting off server.`);
-        process.exit(1);
     });
 }
 
