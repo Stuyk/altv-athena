@@ -128,12 +128,8 @@ async function handleViteDevServer() {
             '--clearScreen=false',
             '--debug=true',
             '--host=localhost',
-            '--port=3000',
-            '--logLevel=silent',
-        ],
-        {
-            stdio: 'inherit',
-        },
+            '--port=3000'
+        ]
     );
 
     lastViteServer.once('close', (code) => {
