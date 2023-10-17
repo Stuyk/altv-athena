@@ -5,6 +5,7 @@ import * as marker from './marker';
 import * as object from './object';
 import * as ped from './ped';
 import * as textLabel from './textlabel';
+import * as textLabelVirtual from './textLabelVirtual';
 import * as worldNotifications from './worldNotifications';
 
-export { blip, doors, item, marker, object, ped, textLabel, worldNotifications };
+export { blip, doors, item, marker, object, ped, textLabel, textLabelVirtual, worldNotifications };

@@ -9,6 +9,7 @@
 - Update global objects to use alt.Object
 - Update client-side objects to use alt.LocalObject
 - Update Blips to Global Blip API
+- Update TextLabels to Virtual Entities
 ```
 
 ## 5.2.0

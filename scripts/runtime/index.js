@@ -246,8 +246,8 @@ async function coreBuildProcess() {
     await runCoreCompiler();
     await runPluginsCompiler();
     compileWebviewPlugins();
-    transformFileImportPaths();
     copyPluginFiles();
+    transformFileImportPaths();
     timer.stop();
 }
 
