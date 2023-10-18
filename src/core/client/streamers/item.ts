@@ -4,7 +4,7 @@ import { ItemDrop } from '@AthenaShared/interfaces/item';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 import { ITEM_SYNCED_META } from '@AthenaShared/enums/syncedMeta';
 
-export type CreatedDrop = ItemDrop & { createdObject?: alt.Object };
+export type CreatedDrop = ItemDrop & { createdObject?: alt.Entity };
 
 let maxDistance = 5;
 let items: Array<CreatedDrop> = [];
@@ -74,7 +74,7 @@ const InternalFunctions = {
 };
 
 function onEntityCreate(entity: alt.Entity) {
-    if (!(entity instanceof alt.Object)) {
+    if (!(entity instanceof alt.Entity)) {
         return;
     }
 
@@ -96,7 +96,7 @@ function onEntityCreate(entity: alt.Entity) {
 }
 
 function onEntityRemoved(entity: alt.Entity) {
-    if (!(entity instanceof alt.Object)) {
+    if (!(entity instanceof alt.Entity)) {
         return;
     }
 
