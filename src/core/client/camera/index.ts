@@ -1,4 +1,6 @@
-export * as cinematic from './cinematic';
-export * as gameplay from './gameplay';
-export * as pedEdit from './pedEdit';
-export * as switch from './switch';
+import * as cinematic from './cinematic';
+import * as gameplay from './gameplay';
+import * as pedEdit from './pedEdit';
+import * as switchCamera from './switch';
+
+export { cinematic, gameplay, pedEdit, switchCamera };

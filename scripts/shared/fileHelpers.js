@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import { glob } from 'glob';
 import { sanitizePath } from './path.js';
+import path from 'node:path';
 
 const PLUGIN_FOLDER = 'src/core/plugins';
 
@@ -73,6 +74,10 @@ export function writeFile(filePath, data) {
         fs.mkdirSync(directory, { recursive: true });
     }
 
+    if (fs.existsSync(filePath)) {
+        fs.rmSync(filePath, { force: true, maxRetries: 999 });
+    }
+
     fs.writeFileSync(filePath, data);
 }
 
@@ -98,4 +103,22 @@ export function copySync(path, destination) {
     }
 
     fs.cpSync(path, destination, { force: true, recursive: true });
+}
+
+export async function areKeyResourcesReady() {
+    const keyFiles = [
+        sanitizePath(path.join(process.cwd(), './resources/core/resource.toml')),
+        sanitizePath(path.join(process.cwd(), './resources/core/plugins/athena/server/imports.js')),
+        sanitizePath(path.join(process.cwd(), './resources/core/plugins/athena/client/imports.js')),
+        sanitizePath(path.join(process.cwd(), './resources/core/server/systems/plugins.js')),
+    ];
+
+    for (let keyFile of keyFiles) {
+        try {
+            const result = await fs.promises.open(keyFile, fs.constants.O_RDONLY);
+            result.close();
+        } catch (err) {
+            return await areKeyResourcesReady();
+        }
+    }
 }

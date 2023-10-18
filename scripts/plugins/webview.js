@@ -96,7 +96,7 @@ function writeVuePlugins(plugins) {
     return Object.keys(vueFiles).length;
 }
 
-function run() {
+export function compileWebviewPlugins() {
     const enabledPlugins = getEnabledPlugins();
     const webviewImports = [];
 
@@ -111,5 +111,3 @@ function run() {
     writeWebViewPlugins(webviewImports);
     writeVuePlugins(webviewImports);
 }
-
-run();

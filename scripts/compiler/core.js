@@ -118,7 +118,7 @@ async function transpileFile(file) {
     writeFile(targetPath, finalFile);
 }
 
-async function run() {
+export async function runCoreCompiler() {
     const enabledPlugins = getEnabledPlugins();
 
     const filesToTranspile = getFilesForTranspilation(enabledPlugins);
@@ -150,5 +150,3 @@ async function run() {
     const promises = filesToTranspile.map((file) => transpileFile(file));
     await Promise.all(promises);
 }
-
-run();

@@ -560,7 +560,7 @@ const Internal = {
         }
 
         if (!Athena.systems.inventory.drops.isItemAvailable(_id)) {
-            Athena.player.emit.notification(player, `Item is unavailable. Try again in a moment.`);
+            Athena.player.emit.notification(player, `[0x01] Item is unavailable. Try again in a moment.`);
             return;
         }
 
@@ -568,7 +568,7 @@ const Internal = {
 
         const originalItem = Athena.systems.inventory.drops.get(_id);
         if (typeof originalItem === 'undefined') {
-            Athena.player.emit.notification(player, `Item is unavailable. Try again in a moment.`);
+            Athena.player.emit.notification(player, `[0x02] Item is unavailable. Try again in a moment.`);
             Athena.systems.inventory.drops.markForTaken(_id, false);
             return;
         }

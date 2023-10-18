@@ -65,13 +65,16 @@ import './streamers/blip';
 import './streamers/doors';
 import './streamers/item';
 import './streamers/marker';
+import './streamers/markerVirtual';
 import './streamers/object';
 import './streamers/ped';
+import './streamers/pedVirtual';
 import './streamers/textlabel';
+import './streamers/textLabelVirtual';
 import './streamers/worldNotifications';
+import './streamers/worldNotificationsVirtual';
 
 // Systems Default
-import './systems/defaults/ammo';
 import './systems/defaults/displayId';
 import './systems/defaults/time';
 import './systems/defaults/toolbar';

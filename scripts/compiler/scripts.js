@@ -123,7 +123,7 @@ async function compileFiles(files) {
     return coreFiles;
 }
 
-async function beginCompilation() {
+export async function runScriptsCompiler() {
     const start = Date.now();
     const files = await getFiles();
     await cleanFolders();
@@ -139,5 +139,3 @@ async function beginCompilation() {
         }ms`,
     );
 }
-
-beginCompilation();

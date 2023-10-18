@@ -1,5 +1,27 @@
 # Changelog
 
+## 5.3.0
+```
+- Update configs, and resource builder to toml only
+- Upgrade item drops to use alt.Object
+- Increase boot times
+- Patch CTRL+C Issue
+- Update global objects to use alt.Object
+- Update client-side objects to use alt.LocalObject
+- Update Blips to Global Blip API
+- Update TextLabels to Virtual Entities
+- Update Markers to Virtual Entities
+- Update World Notifications to Virtual Entities
+- Update StaticPeds with additional functionality
+--- Peds Follow Player
+--- Peds Unfollow Player
+--- Peds Get Into Vehicle
+--- Peds Exit Vehicle
+--- Peds Animate
+--- Peds Goto Position
+- Update Ammo System to New APIs with Persistent Ammo Solution
+```
+
 ## 5.2.0
 
 ```

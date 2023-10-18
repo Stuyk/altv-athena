@@ -187,7 +187,6 @@ export async function select(player: alt.Player, character: Character) {
 
         // Propagation
         // Athena.controllers.chat.populateCommands(player);
-        Athena.controllers.blip.populateGlobalBlips(player);
         Athena.systems.inventory.weapons.update(player);
         player.frozen = false;
         player.visible = true;

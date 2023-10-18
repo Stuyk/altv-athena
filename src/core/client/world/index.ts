@@ -1,2 +1,4 @@
-export * as position from './position';
-export * as weather from './weather';
+import * as position from './position';
+import * as weather from './weather';
+
+export { position, weather };

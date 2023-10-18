@@ -1,4 +1,6 @@
-export * as npc from './npc';
-export * as object from './object';
-export * as player from './player';
-export * as vehicle from './vehicle';
+import * as npc from './npc';
+import * as object from './object';
+import * as player from './player';
+import * as vehicle from './vehicle';
+
+export { npc, object, player, vehicle };

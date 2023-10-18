@@ -1,8 +1,27 @@
-export * as blip from './blip';
-export * as doors from './doors';
-export * as item from './item';
-export * as marker from './marker';
-export * as object from './object';
-export * as ped from './ped';
-export * as textLabel from './textlabel';
-export * as worldNotifications from './worldNotifications';
+import * as blip from './blip';
+import * as doors from './doors';
+import * as item from './item';
+import * as marker from './marker';
+import * as markerVirtual from './markerVirtual';
+import * as object from './object';
+import * as ped from './ped';
+import * as pedVirtual from './ped';
+import * as textLabel from './textlabel';
+import * as textLabelVirtual from './textLabelVirtual';
+import * as worldNotifications from './worldNotifications';
+import * as worldNotificationsVirtual from './worldNotificationsVirtual';
+
+export {
+    blip,
+    doors,
+    item,
+    marker,
+    markerVirtual,
+    object,
+    ped,
+    pedVirtual,
+    textLabel,
+    textLabelVirtual,
+    worldNotifications,
+    worldNotificationsVirtual,
+};

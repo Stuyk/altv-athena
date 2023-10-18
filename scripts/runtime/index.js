@@ -2,7 +2,14 @@ import { ChildProcess, spawn } from 'child_process';
 import fkill from 'fkill';
 import fs from 'fs';
 import crypto from 'crypto';
-import { globSync } from '../shared/fileHelpers.js';
+import { copySync, globSync, areKeyResourcesReady } from '../shared/fileHelpers.js';
+import { buildResources } from '../buildresource/index.js';
+import { runCoreCompiler } from '../compiler/core.js';
+import { runPluginsCompiler } from '../plugins/core.js';
+import { copyPluginFiles } from '../plugins/files.js';
+import { transformFileImportPaths } from '../transform/index.js';
+import { compileWebviewPlugins } from '../plugins/webview.js';
+import { updatePluginDependencies } from '../plugins/update-dependencies.js';
 
 const DEBUG = true;
 
@@ -10,9 +17,12 @@ const NO_SPECIAL_CHARACTERS = new RegExp(/^[ A-Za-z0-9_-]*$/gm);
 
 const ports = [7788, 'altv-server', 'altv-server.exe', 3399, 3001];
 const node = 'node';
-const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx';
-const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-const serverBinary = process.platform === 'win32' ? 'altv-server.exe' : './altv-server';
+
+const isLinux = process.platform === 'win32' ? false : true;
+
+const npx = !isLinux ? 'npx.cmd' : 'npx';
+const npm = !isLinux ? 'npm.cmd' : 'npm';
+const serverBinary = !isLinux ? 'altv-server.exe' : './altv-server';
 
 const passedArguments = process.argv.slice(2).map((arg) => arg.replace('--', ''));
 const fileNameHashes = {};
@@ -106,12 +116,8 @@ async function handleConfiguration() {
         promises.push(runFile(npx, 'vite', 'build', './src-webviews'));
     }
 
-    promises.push(runFile(npx, 'altv-config', `./configs/${configName}.json`));
-    await runFile(node, './scripts/buildresource/index.js');
-    promises.push(
-        runFile(npx, 'altv-config', './scripts/buildresource/resource.json', './resources/core/resource.toml'),
-    );
-    return await Promise.all(promises);
+    copySync(`./configs/${configName}.toml`, `server.toml`);
+    await buildResources();
 }
 
 async function handleViteDevServer() {
@@ -122,19 +128,13 @@ async function handleViteDevServer() {
     await runFile(node, './scripts/plugins/webview.js');
     lastViteServer = spawn(
         npx,
-        [
-            'vite',
-            './src-webviews',
-            '--clearScreen=false',
-            '--debug=true',
-            '--host=localhost',
-            '--port=3000',
-            '--logLevel=silent',
-        ],
-        {
-            stdio: 'inherit',
-        },
+        ['vite', './src-webviews', '--clearScreen', '--debug=true', '--host=localhost', '--port=3000'],
+        { stdio: 'pipe' },
     );
+
+    lastViteServer.stdout.on('data', (dat) => {
+        console.log(dat.toString());
+    });
 
     lastViteServer.once('close', (code) => {
         console.log(`Vite process exited with code ${code}`);
@@ -172,8 +172,14 @@ async function handleServerProcess(shouldAutoRestart = false) {
         await runFile('chmod', '+x', `./altv-server`);
     }
 
+    await areKeyResourcesReady();
+    await new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+    });
+
     if (passedArguments.includes('cdn')) {
         lastServerProcess = spawn(serverBinary, ['--justpack'], { stdio: 'inherit' });
+
         lastServerProcess.once('exit', () => {
             const finalDestination = `${process.cwd()}/cdn_upload`.replace(/\\/g, '/');
             console.log(`Files were packed for a CDN. ${finalDestination}`);
@@ -183,10 +189,10 @@ async function handleServerProcess(shouldAutoRestart = false) {
         lastServerProcess = spawn(serverBinary, { stdio: 'inherit' });
     }
 
-    lastServerProcess.once('close', (code) => {
+    lastServerProcess.once('close', async (code) => {
         console.log(`Server process exited with code ${code}`);
         if (shouldAutoRestart) {
-            handleServerProcess(shouldAutoRestart);
+            await handleServerProcess(shouldAutoRestart);
         }
     });
 }
@@ -236,29 +242,13 @@ async function refreshFileWatching() {
 }
 
 async function coreBuildProcess() {
-    const start = Date.now();
-
-    const coreCompilerTime = createExecTime('>>> core-compiler');
-    await runFile(node, './scripts/compiler/core');
-    coreCompilerTime.stop();
-
-    const pluginBuildTime = createExecTime('>>> core-plugins');
-    await runFile(node, './scripts/plugins/core');
-    pluginBuildTime.stop();
-
-    const mixedTime = createExecTime('>>> plugin webview, tranform, files');
-    const promises = [
-        runFile(node, './scripts/plugins/webview'),
-        runFile(node, './scripts/transform/index'),
-        runFile(node, './scripts/plugins/files'),
-    ];
-
-    await Promise.all(promises);
-    mixedTime.stop();
-
-    const transformTime = createExecTime('>>> transform-time');
-    await runFile(node, './scripts/transform/index');
-    transformTime.stop();
+    const timer = createExecTime('>>> Core Build Time');
+    await runCoreCompiler();
+    await runPluginsCompiler();
+    compileWebviewPlugins();
+    copyPluginFiles();
+    transformFileImportPaths();
+    timer.stop();
 }
 
 async function devMode(firstRun = false) {
@@ -271,50 +261,38 @@ async function devMode(firstRun = false) {
     promises.push(killChildProcess(lastStreamerProcess));
     promises.push(killChildProcess(lastServerProcess));
 
-    await Promise.all(promises);
-    promises = [];
+    await coreBuildProcess();
+    await handleConfiguration();
 
-    promises.push(coreBuildProcess());
-    promises.push(handleConfiguration());
-
-    await Promise.all(promises);
-
-    handleStreamerProcess(false);
-    handleServerProcess(false);
+    await handleStreamerProcess(false);
+    await handleServerProcess(false);
 }
 
 async function runServer() {
     const isDev = passedArguments.includes('dev');
 
-    //Update dependencies for all the things
-    const updateTime = createExecTime('>>> update-dependencies');
-    await runFile(node, './scripts/plugins/update-dependencies');
-    updateTime.stop();
+    // Update dependencies for all the things
+    await updatePluginDependencies();
 
     if (isDev) {
         handleViteDevServer();
     }
 
     // Has to build first before building the rest.
-    const coreBuildTime = createExecTime('>>> core-build-time');
     await coreBuildProcess();
-    coreBuildTime.stop();
-
-    const configurationTime = createExecTime('>>> handle-configuration-time');
     await handleConfiguration();
-    configurationTime.stop();
 
     if (passedArguments.includes('dev')) {
         await sleep(50);
         await devMode(true);
-        handleStreamerProcess(false);
-        handleServerProcess(false);
+        await handleStreamerProcess(false);
+        await handleServerProcess(false);
         return;
     }
 
     await sleep(50);
-    handleStreamerProcess(true);
-    handleServerProcess(true);
+    await handleStreamerProcess(true);
+    await handleServerProcess(true);
 }
 
 if (passedArguments.includes('start')) {
