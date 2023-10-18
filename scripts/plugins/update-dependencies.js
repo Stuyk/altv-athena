@@ -1,9 +1,12 @@
-import { exec, execSync } from 'child_process';
-import fs from 'fs';
 import * as path from 'path';
+import fs from 'fs';
+
+import { promisify } from 'util';
+import { exec as execCallback } from 'child_process';
 import { sanitizePath } from '../shared/path.js';
 import { globSync } from '../shared/fileHelpers.js';
 
+const exec = promisify(execCallback);
 const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable'];
 
 const dependencies = [];
@@ -141,20 +144,14 @@ function checkPluginDevDependencies() {
     return missingDevDepdendencies;
 }
 
-<<<<<<< HEAD
-function updatePluginDependencies() {
+export async function updatePluginDependencies() {
     const installedDepsObj = getInstalledDependencies();
     const installedDeps = installedDepsObj.dependencies;
     const installedDevDeps = installedDepsObj.devDependencies;
-=======
-export async function updatePluginDependencies() {
-    getInstalledDependencies();
->>>>>>> 966fe076ada7cd679a87c3a42b01bdaaa12c55d5
 
     const missingDeps = checkPluginDependencies();
     const missingDevDeps = checkPluginDevDependencies();
 
-<<<<<<< HEAD
     const sanitizeDependencies = (dependencies) => dependencies.map((dep) => dep.replace(/@.*$/, ''));
 
     const sanitizedMissingDeps = sanitizeDependencies(missingDeps);
@@ -167,41 +164,31 @@ export async function updatePluginDependencies() {
             missingRegularDeps.forEach((dep) => {
                 console.log(`- ${dep}`);
             });
-            exec(`npm install ${missingRegularDeps.join(' ')}`, (error, _stdout, stderr) => {
-                if (error) {
-                    console.error(`>>> Failed to install regular dependencies: ${error}`);
-                    console.error(stderr);
-                } else {
-                    installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps);
-                }
-            });
+
+            try {
+                const { stdout } = await exec(`npm install ${missingRegularDeps.join(' ')}`);
+                console.log(stdout);
+
+                await installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps);
+            } catch (error) {
+                console.error(`>>> Failed to install regular dependencies: ${error}`);
+                console.error(error.stderr);
+            }
         } else {
             console.log(
                 `>>> All regular dependencies are already included, and their folders exist. Skipping regular dependencies update...`,
             );
-            installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps);
+            await installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps);
         }
     } else {
         console.log(
             `>>> All regular dependencies are already included, and their folders exist. Skipping regular dependencies update...`,
         );
-        installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps);
-=======
-    if (missingDepdendencies.length > 0) {
-        await new Promise((resolve) => {
-            exec(`npm install ${missingDepdendencies.join(' ')}`, (error, _stdout, stderr) => {
-                if (error) {
-                    console.error(`Failed to install dependencies: ${error}`);
-                    console.error(stderr);
-                }
-            });
-        });
->>>>>>> 966fe076ada7cd679a87c3a42b01bdaaa12c55d5
+        await installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps);
     }
 }
 
-<<<<<<< HEAD
-function installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps) {
+async function installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps) {
     if (sanitizedMissingDevDeps.some((dep) => !installedDevDeps.includes(dep) || !existsInModules(dep))) {
         const missingDevDepsToAdd = missingDevDeps.filter((dep) => !installedDevDeps.includes(dep));
         if (missingDevDepsToAdd.length > 0) {
@@ -209,31 +196,31 @@ function installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missi
             missingDevDepsToAdd.forEach((dep) => {
                 console.log(`- ${dep}`);
             });
-            exec(`npm install -D ${missingDevDepsToAdd.join(' ')}`, (error, _stdout, stderr) => {
-=======
-    if (missingDevDependencies.length > 0) {
-        await new Promise((resolve) => {
-            exec(`npm install -D ${missingDepdendencies.join(' ')}`, (error, _stdout, stderr) => {
->>>>>>> 966fe076ada7cd679a87c3a42b01bdaaa12c55d5
-                if (error) {
-                    console.error(`Failed to install dev dependencies: ${error}`);
-                    console.error(stderr);
-                }
-            });
-<<<<<<< HEAD
+
+            try {
+                const { stdout } = await exec(`npm install -D ${missingDevDepsToAdd.join(' ')}`);
+                console.log(stdout);
+
+                await installGithubDependencies();
+            } catch (error) {
+                console.error(`Failed to install dev dependencies: ${error}`);
+                console.error(error.stderr);
+            }
         } else {
             console.log(
                 `>>> All dev dependencies are already included, and their folders exist. Skipping dev dependencies update...`,
             );
+            await installGithubDependencies();
         }
     } else {
         console.log(
             `>>> All dev dependencies are already included, and their folders exist. Skipping dev dependencies update...`,
         );
+        await installGithubDependencies();
     }
 }
 
-function installGithubDependencies() {
+async function installGithubDependencies() {
     const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
 
     for (const plugin of plugins) {
@@ -249,7 +236,7 @@ function installGithubDependencies() {
             console.log(`- ${githubDependency}`);
         });
 
-        githubDependencies.forEach((githubDependency) => {
+        for (const githubDependency of githubDependencies) {
             const dependencyName = githubDependency.split('/').pop();
             const targetPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins/', dependencyName));
 
@@ -259,15 +246,13 @@ function installGithubDependencies() {
                 const cloneCommand = `git clone ${githubDependency}.git ${targetPath}`;
 
                 try {
-                    execSync(cloneCommand, { stdio: 'inherit' });
-                    console.log(`>>> Cloned "${dependencyName}" from GitHub.`);
+                    const { stdout } = await exec(cloneCommand);
+                    console.log(`>>> Cloned "${dependencyName}" from GitHub:\n${stdout}`);
                 } catch (error) {
                     console.error(`>>> Failed to clone "${dependencyName}" from GitHub: ${error.message}`);
                 }
             }
-=======
->>>>>>> 966fe076ada7cd679a87c3a42b01bdaaa12c55d5
-        });
+        }
     }
 }
 
@@ -286,6 +271,3 @@ function isValidGitHubRepoURL(url) {
 
     return isValid;
 }
-
-updatePluginDependencies();
-installGithubDependencies();

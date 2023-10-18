@@ -271,8 +271,10 @@ async function devMode(firstRun = false) {
 async function runServer() {
     const isDev = passedArguments.includes('dev');
 
-    // Update dependencies for all the things
+    // Await updating all the dependencies
+    const dependencieTimer = createExecTime(`>>> Update Plugin Dependencies`);
     await updatePluginDependencies();
+    dependencieTimer.stop();
 
     if (isDev) {
         handleViteDevServer();
