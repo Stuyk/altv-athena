@@ -1,10 +1,11 @@
 import * as alt from 'alt-server';
-import connection from './database/connection';
-import reconnect from './utility/reconnect';
-import serverConfig from './utility/config';
 import Database from '@stuyk/ezmongodb';
-import { SYSTEM_EVENTS } from '../shared/enums/system';
-import { IConfig } from './interface/iConfig';
+
+import connection from './database/connection.js';
+import reconnect from './utility/reconnect.js';
+import serverConfig from './utility/config.js';
+import { SYSTEM_EVENTS } from '../shared/enums/system.js';
+import { IConfig } from './interface/iConfig.js';
 
 const startTime = Date.now();
 let config: IConfig | undefined;

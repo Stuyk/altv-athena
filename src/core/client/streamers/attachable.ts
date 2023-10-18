@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
-import IAttachable from '@AthenaShared/interfaces/iAttachable';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced.js';
+import IAttachable from '@AthenaShared/interfaces/iAttachable.js';
 
 const cache: { [key: string]: Array<IAttachable> } = {};
 
@@ -123,7 +123,7 @@ const ClientAttachableSystem = {
         cache[player.id] = [];
 
         for (let i = 0; i < attachables.length; i++) {
-            const newObject = new alt.Object(
+            const newObject = new alt.LocalObject(
                 attachables[i].model,
                 new alt.Vector3(attachables[i].pos),
                 new alt.Vector3(attachables[i].rot),

@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { Account } from '@AthenaShared/interfaces/iAccount';
-import { Character } from '@AthenaShared/interfaces/character';
+import * as Athena from '@AthenaServer/api/index.js';
+import { Account } from '@AthenaShared/interfaces/iAccount.js';
+import { Character } from '@AthenaShared/interfaces/character.js';
 import Database from '@stuyk/ezmongodb';
 
 export type DefaultPerms = 'admin' | 'moderator';

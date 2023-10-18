@@ -1,1 +1,1 @@
-import '../utility/config';
+import '../utility/config.js';

@@ -1,7 +1,8 @@
 import * as alt from 'alt-server';
-import { ItemDrop } from '@AthenaShared/interfaces/item';
-import { ITEM_SYNCED_META } from '@AthenaShared/enums/syncedMeta';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { ItemDrop } from '@AthenaShared/interfaces/item.js';
+import { ITEM_SYNCED_META } from '@AthenaShared/enums/syncedMeta.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
+import { ControllerFuncs } from './shared.js';
 
 const drops: { [uid: string]: alt.Object } = {};
 

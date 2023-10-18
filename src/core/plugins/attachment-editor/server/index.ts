@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { Events } from '../shared/events';
+import * as Athena from '@AthenaServer/api/index.js';
+import { Events } from '../shared/events.js';
 
 Athena.systems.plugins.registerPlugin('attachment-editor', () => {
     Athena.commands.register('attachmenteditor', '/attachmenteditor', ['admin'], (player: alt.Player) => {

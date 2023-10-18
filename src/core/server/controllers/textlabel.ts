@@ -1,9 +1,10 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { TextLabel } from '../../shared/interfaces/textLabel';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { TextLabel } from '../../shared/interfaces/textLabel.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
+import { ControllerFuncs } from './shared.js';
 
 const MAX_TEXT_LABELS_TO_DRAW = 10;
 

@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
-import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu.js';
 
 export type PlayerMenuInjection = (target: alt.Player, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 

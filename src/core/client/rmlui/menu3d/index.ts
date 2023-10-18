@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
-import { OptionFor3DMenu } from './menu3DInterfaces';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { OptionFor3DMenu } from './menu3DInterfaces.js';
 
 const KEYS = {
     ESCAPE_KEY: 27,

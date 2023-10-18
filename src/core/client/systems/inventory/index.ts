@@ -1,3 +1,3 @@
-import * as get from './get';
+import * as get from './get.js';
 
 export { get };

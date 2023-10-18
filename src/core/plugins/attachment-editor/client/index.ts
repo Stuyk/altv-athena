@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
-import { Bones } from './bones';
-import { Events } from '../shared/events';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { Bones } from './bones.js';
+import { Events } from '../shared/events.js';
 
-let object: alt.Object;
+let object: alt.LocalObject;
 
 let currentBone = 0;
 let currentModel = 'prop_alien_egg_01';
@@ -26,7 +26,7 @@ async function attachObject(model: string, pos: alt.IVector3, rot: alt.IVector3)
     await alt.Utils.waitFor(() => typeof object === 'undefined');
 
     currentModel = model;
-    object = new alt.Object(currentModel, new alt.Vector3(pos), new alt.Vector3(rot), true, false);
+    object = new alt.LocalObject(currentModel, new alt.Vector3(pos), new alt.Vector3(rot), true, false);
     object.attachToEntity(
         alt.Player.local,
         currentBone,

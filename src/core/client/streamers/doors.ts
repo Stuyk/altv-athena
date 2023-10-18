@@ -1,6 +1,6 @@
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import * as AthenaClient from '@AthenaClient/api';
-import { Door } from '@AthenaShared/interfaces/door';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { Door } from '@AthenaShared/interfaces/door.js';
 import * as alt from 'alt-client';
 import * as native from 'natives';
 

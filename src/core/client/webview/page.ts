@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
-import { BaseKeyInfo } from '@AthenaClient/interface/hotkeys';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { BaseKeyInfo } from '@AthenaClient/interface/hotkeys.js';
 
 type AnyCallback = ((...args: any[]) => void) | ((...args: any[]) => Promise<void>) | Function;
 

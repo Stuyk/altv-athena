@@ -1,6 +1,6 @@
-import * as Athena from '@AthenaServer/api';
-import { Objective, ObjectiveCriteria, ObjectiveType } from '@AthenaShared/interfaces/job';
-import { Job } from './system';
+import * as Athena from '@AthenaServer/api/index.js';
+import { Objective, ObjectiveCriteria, ObjectiveType } from '@AthenaShared/interfaces/job.js';
+import { Job } from './system.js';
 
 export interface DefaultCriteriaOptions {
     /**

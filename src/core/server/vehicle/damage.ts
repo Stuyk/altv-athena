@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { VehicleDamage } from '@AthenaShared/interfaces/vehicleOwned';
+import * as Athena from '@AthenaServer/api/index.js';
+import { VehicleDamage } from '@AthenaShared/interfaces/vehicleOwned.js';
 
 function getDamageLevel(level: string): number {
     switch (level) {

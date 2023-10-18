@@ -1,11 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { IPed } from '@AthenaShared/interfaces/iPed';
-import { Animation } from '@AthenaShared/interfaces/animation';
-import { playPedAnimation } from '@AthenaClient/systems/animations';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { IPed } from '@AthenaShared/interfaces/iPed.js';
+import { Animation } from '@AthenaShared/interfaces/animation.js';
+import { playPedAnimation } from '@AthenaClient/systems/animations.js';
 
 let localPeds: Array<IPed> = [];
 let addedPeds: Array<IPed> = [];

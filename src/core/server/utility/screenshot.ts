@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { AthenaBuffer } from '../../shared/utility/buffer';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { AthenaBuffer } from '../../shared/utility/buffer.js';
 
 const MAX_TRIES = 1000;
 const pendingScreenshots: {

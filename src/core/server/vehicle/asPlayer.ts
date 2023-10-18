@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
+import * as Athena from '@AthenaServer/api/index.js';
+import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle.js';
 
 function sharedOwnershipChecks(player: alt.Player, vehicle: alt.Vehicle) {
     if (!vehicle || !vehicle.valid) {

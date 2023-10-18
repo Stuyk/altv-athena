@@ -1,4 +1,4 @@
-import { StoredItem } from '@AthenaShared/interfaces/item';
+import { StoredItem } from '@AthenaShared/interfaces/item.js';
 
 export interface ItemDrop {
     /**

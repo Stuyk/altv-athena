@@ -1,4 +1,4 @@
-import { ClothingComponent, DefaultItemBehavior, Item } from '@AthenaShared/interfaces/item';
+import { ClothingComponent, DefaultItemBehavior, Item } from '@AthenaShared/interfaces/item.js';
 
 /**
  *

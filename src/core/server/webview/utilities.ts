@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { WebViewEventNames } from '../../shared/enums/webViewEvents';
+import { WebViewEventNames } from '../../shared/enums/webViewEvents.js';
 
 /**
  * Emits an event directly to the client's WebView.
@@ -26,4 +26,3 @@ export function closePages(player: alt.Player, pages: Array<string> = []) {
 
     player.emit(WebViewEventNames.CLOSE_PAGES, pages);
 }
-

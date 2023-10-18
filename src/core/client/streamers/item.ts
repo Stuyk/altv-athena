@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
-import { ItemDrop } from '@AthenaShared/interfaces/item';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
-import { ITEM_SYNCED_META } from '@AthenaShared/enums/syncedMeta';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { ItemDrop } from '@AthenaShared/interfaces/item.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
+import { ITEM_SYNCED_META } from '@AthenaShared/enums/syncedMeta.js';
 
 export type CreatedDrop = ItemDrop & { createdObject?: alt.Entity };
 

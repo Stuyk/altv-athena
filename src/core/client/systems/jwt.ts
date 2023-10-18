@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 
 const TOKEN_KEY_VALUE = 'jwt';
 

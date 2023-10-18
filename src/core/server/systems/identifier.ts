@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import * as Athena from '@AthenaServer/api/index.js';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced.js';
 
 export type IdentifierStrategy = 'account_id' | 'character_id' | 'server_id';
 

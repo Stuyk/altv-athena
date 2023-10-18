@@ -1,4 +1,4 @@
-import { SPINNER_TYPE } from '../enums/spinnerType';
+import { SPINNER_TYPE } from '../enums/spinnerType.js';
 
 /**
  * Used to show a spinner in the bottom right corner of the screen.

@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
-import { VehicleSpawnInfo } from './shared';
+import * as Athena from '@AthenaServer/api/index.js';
+import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned.js';
+import { VehicleSpawnInfo } from './shared.js';
 import Database from '@stuyk/ezmongodb';
 
 /**

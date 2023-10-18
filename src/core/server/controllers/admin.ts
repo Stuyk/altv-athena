@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { Account } from '../../shared/interfaces/iAccount';
-import { Collections } from '../database/collections';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import * as Athena from '@AthenaServer/api';
+import { Account } from '../../shared/interfaces/iAccount.js';
+import { Collections } from '../database/collections.js';
+import { LocaleController } from '../../shared/locale/locale.js';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys.js';
+import * as Athena from '@AthenaServer/api/index.js';
 
 /**
  * Used to ban a player from the server.

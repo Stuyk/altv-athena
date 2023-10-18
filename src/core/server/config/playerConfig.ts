@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { PlayerConfigKeys } from '@AthenaShared/enums/playerConfigKeys';
+import { PlayerConfigKeys } from '@AthenaShared/enums/playerConfigKeys.js';
 
 /**
  * Set a value to auto-sync to client.

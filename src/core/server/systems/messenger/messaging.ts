@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import * as commands from './commands';
+import * as Athena from '@AthenaServer/api/index.js';
+import * as commands from './commands.js';
 
-import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 
 export type MessageCallback = (player: alt.Player, msg: string) => void;
 

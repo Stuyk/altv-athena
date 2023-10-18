@@ -6,6 +6,8 @@ import { sanitizePath } from '../shared/path.js';
 
 const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable'];
 
+let filesFailedToCompile = [];
+
 function getEnabledPlugins() {
     const pluginFolder = getPluginFolder();
     const pluginFolders = getAllPluginFolders();
@@ -89,24 +91,35 @@ function resolvePaths(file, rawCode) {
  */
 async function transpileFile(file) {
     const targetPath = file.replace('src/', 'resources/').replace('.ts', '.js');
-    const result = await swc.transformFile(file, {
-        jsc: {
-            parser: {
-                syntax: 'typescript',
-                dynamicImport: true,
-                decorators: true,
+    let result;
+
+    try {
+        result = await swc.transformFile(file, {
+            jsc: {
+                parser: {
+                    syntax: 'typescript',
+                    dynamicImport: true,
+                    decorators: true,
+                },
+                transform: {
+                    legacyDecorator: true,
+                    decoratorMetadata: true,
+                },
+                target: 'es2020',
             },
-            transform: {
-                legacyDecorator: true,
-                decoratorMetadata: true,
-            },
-            target: 'es2020',
-        },
-        sourceMaps: false,
-    });
+            sourceMaps: false,
+        });
+    } catch (err) {
+        console.log(err);
+        filesFailedToCompile.push(file);
+    }
 
     if (!result) {
         console.warn(`Failed to compile: ${targetPath}`);
+    }
+
+    if (!result || !result.code) {
+        return;
     }
 
     // The path resolvers are really awful, so writing a custom one here.
@@ -118,7 +131,15 @@ async function transpileFile(file) {
     writeFile(targetPath, finalFile);
 }
 
+/**
+ * Returns `true` if code is compliant and can be transpiled fully
+ *
+ * @returns {string[]}
+ * @export
+ */
 export async function runCoreCompiler() {
+    filesFailedToCompile = [];
+
     const enabledPlugins = getEnabledPlugins();
 
     const filesToTranspile = getFilesForTranspilation(enabledPlugins);
@@ -149,4 +170,6 @@ export async function runCoreCompiler() {
 
     const promises = filesToTranspile.map((file) => transpileFile(file));
     await Promise.all(promises);
+
+    return filesFailedToCompile;
 }

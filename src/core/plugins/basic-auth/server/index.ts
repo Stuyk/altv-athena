@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 import bip39 from 'bip39';
-import { AuthEvents } from '../shared/events';
-import { AccountEx } from './interfaces/AccountEx';
+import { AuthEvents } from '../shared/events.js';
+import { AccountEx } from './interfaces/AccountEx.js';
 import Database from '@stuyk/ezmongodb';
 
 const TWENTY_FOUR_WORDS = 256; // 24 words

@@ -1,11 +1,10 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import '@AthenaServer/systems/streamer';
-
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IPed } from '../../shared/interfaces/iPed';
-import { Animation } from '../../shared/interfaces/animation';
-import { NET_OWNER_PED } from '@AthenaShared/enums/netOwner';
+import * as Athena from '@AthenaServer/api/index.js';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { IPed } from '../../shared/interfaces/iPed.js';
+import { Animation } from '../../shared/interfaces/animation.js';
+import { NET_OWNER_PED } from '@AthenaShared/enums/netOwner.js';
+import { ControllerFuncs } from './shared.js';
 
 const globalPeds: Array<IPed & { ped: alt.Ped }> = [];
 

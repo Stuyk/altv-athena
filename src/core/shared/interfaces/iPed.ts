@@ -1,5 +1,5 @@
 import * as alt from 'alt-shared';
-import { Animation } from './animation';
+import { Animation } from './animation.js';
 
 /**
  * Used to pass static ped information from server to client.

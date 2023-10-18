@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
-import * as Athena from '@AthenaServer/api';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced.js';
+import * as Athena from '@AthenaServer/api/index.js';
 
 /**
  * Safely set a player's position.

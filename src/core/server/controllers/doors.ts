@@ -1,12 +1,13 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import '@AthenaServer/systems/streamer';
+import * as Athena from '@AthenaServer/api/index.js';
+import '@AthenaServer/systems/streamer.js';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Door } from '@AthenaShared/interfaces/door';
-import { Doors } from '@AthenaShared/information/doors';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { Door } from '@AthenaShared/interfaces/door.js';
+import { Doors } from '@AthenaShared/information/doors.js';
 import Database from '@stuyk/ezmongodb';
-import { Collections } from '@AthenaServer/database/collections';
+import { Collections } from '@AthenaServer/database/collections.js';
+import { ControllerFuncs } from './shared.js';
 
 type DoorDocument = Door & { _id?: unknown };
 

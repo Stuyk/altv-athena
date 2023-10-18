@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Job } from './system';
+import { Job } from './system.js';
 
 const JobInstances: { [key: string]: Job } = {};
 

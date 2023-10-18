@@ -1,4 +1,4 @@
-import { Appearance } from '@AthenaShared/interfaces/appearance';
+import { Appearance } from '@AthenaShared/interfaces/appearance.js';
 
 export interface Meta {
     permissionLevel: number; // Used to determine the player's current permissionLevel as a player..

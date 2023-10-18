@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { RecommendedTimecycleTypes } from '@AthenaShared/enums/timecycleTypes';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { RecommendedTimecycleTypes } from '@AthenaShared/enums/timecycleTypes.js';
 
 let timeout: number;
 

@@ -1,6 +1,6 @@
 import alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { Doors } from '@AthenaShared/information/doors';
+import * as Athena from '@AthenaServer/api/index.js';
+import { Doors } from '@AthenaShared/information/doors.js';
 
 Athena.commands.register('toggledoor', '/toggledoor', ['admin'], (player: alt.Player) => {
     const doorsByDistance = Doors.sort((a, b) => {

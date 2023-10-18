@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import * as Athena from '@AthenaServer/api/index.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 
 export type Decorator = { overlay: string; collection: string };
 export type HairStyle = { hair: number; dlc?: string | number; color1: number; color2: number; decorator: Decorator };

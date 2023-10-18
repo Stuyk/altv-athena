@@ -81,7 +81,7 @@ export function movePluginFilesToWebview(folderName, extensions, isSrc = false) 
         if (fs.existsSync(directory)) {
             const files = fs.readdirSync(directory);
             if (files.length <= 0) {
-                fs.rmdirSync(directory);
+                fs.rmdirSync(directory, { maxRetries: 999, retryDelay: 100 });
             }
         }
     }

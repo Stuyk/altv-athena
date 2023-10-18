@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 import Database from '@stuyk/ezmongodb';
 import axios from 'axios';
-import { Account } from '@AthenaShared/interfaces/iAccount';
-import { DiscordAuthConfig } from './config';
-import { DiscordAuthEvents } from '../shared/events';
+import { Account } from '@AthenaShared/interfaces/iAccount.js';
+import { DiscordAuthConfig } from './config.js';
+import { DiscordAuthEvents } from '../shared/events.js';
 
 const PLUGIN_NAME = 'Discord Authentication';
 const sessions: Array<{ id: number; expiration: number; finished?: boolean }> = [];

@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
 
-import * as Athena from '@AthenaServer/api';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
-import { LocaleController } from '@AthenaShared/locale/locale';
+import * as Athena from '@AthenaServer/api/index.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys.js';
+import { LocaleController } from '@AthenaShared/locale/locale.js';
 
 Athena.commands.register('noclip', '/noclip', ['admin'], (player: alt.Player) => {
     const isNoClipping: boolean | null = player.getSyncedMeta('NoClipping') as boolean;

@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
-import * as AthenaClient from '@AthenaClient/api';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
 export const DebugController = {
     registerKeybinds() {

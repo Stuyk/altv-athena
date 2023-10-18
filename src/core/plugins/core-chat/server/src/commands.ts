@@ -1,6 +1,6 @@
 import alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { CHAT_CONFIG } from '@AthenaPlugins/core-chat/shared/config';
+import * as Athena from '@AthenaServer/api/index.js';
+import { CHAT_CONFIG } from '@AthenaPlugins/core-chat/shared/config.js';
 
 Athena.commands.register(
     'do',

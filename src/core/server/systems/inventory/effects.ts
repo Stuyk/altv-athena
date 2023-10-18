@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
 export type InventoryType = 'inventory' | 'toolbar';
 export type EffectCallback = (player: alt.Player, slot: number, type: 'inventory' | 'toolbar') => void;

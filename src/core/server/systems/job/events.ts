@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import { ObjectiveEvents } from '@AthenaShared/interfaces/job';
+import { ObjectiveEvents } from '@AthenaShared/interfaces/job.js';
 
 let isVerifying: { [key: string]: boolean } = {};
 

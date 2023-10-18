@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import VehicleTuning from '@AthenaShared/interfaces/vehicleTuning';
-import { VehicleState } from '@AthenaShared/interfaces/vehicleState';
-import VehicleExtra from '@AthenaShared/interfaces/vehicleExtra';
-import IVehicleMod from '@AthenaShared/interfaces/vehicleMod';
+import VehicleTuning from '@AthenaShared/interfaces/vehicleTuning.js';
+import { VehicleState } from '@AthenaShared/interfaces/vehicleState.js';
+import VehicleExtra from '@AthenaShared/interfaces/vehicleExtra.js';
+import IVehicleMod from '@AthenaShared/interfaces/vehicleMod.js';
 
 /**
  * Applies specified properties to a vehicle in bulk.

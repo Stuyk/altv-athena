@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import * as vehicle from './vehicle';
-import { Character } from '@AthenaShared/interfaces/character';
+import * as Athena from '@AthenaServer/api/index.js';
+import * as vehicle from './vehicle.js';
+import { Character } from '@AthenaShared/interfaces/character.js';
 
 /**
  * Return all players currently online and logged into a character.

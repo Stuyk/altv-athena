@@ -1,5 +1,5 @@
-import * as AthenaClient from '@AthenaClient/api';
-import { Marker } from '@AthenaShared/interfaces/marker';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { Marker } from '@AthenaShared/interfaces/marker.js';
 import * as alt from 'alt-client';
 
 let interval: number;

@@ -1,13 +1,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { CharacterSystem } from '@AthenaClient/systems/character';
-import { PedCharacter } from '@AthenaClient/utility/characterPed';
-import { disableAllControls } from '@AthenaClient/utility/disableControls';
-import { Appearance } from '@AthenaShared/interfaces/appearance';
-import { CHARACTER_CREATOR_EVENTS, CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../../shared/events';
+import { CharacterSystem } from '@AthenaClient/systems/character.js';
+import { PedCharacter } from '@AthenaClient/utility/characterPed.js';
+import { disableAllControls } from '@AthenaClient/utility/disableControls.js';
+import { Appearance } from '@AthenaShared/interfaces/appearance.js';
+import { CHARACTER_CREATOR_EVENTS, CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../../shared/events.js';
 
 const PAGE_NAME = 'CharacterCreator';
 const fModel = alt.hash('mp_f_freemode_01');

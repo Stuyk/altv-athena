@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Appearance } from '@AthenaShared/interfaces/appearance';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Item } from '@AthenaShared/interfaces/item';
+import { Appearance } from '@AthenaShared/interfaces/appearance.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { Item } from '@AthenaShared/interfaces/item.js';
 
 export const CharacterSystem = {
     /**

@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
-import { Character } from '@AthenaShared/interfaces/character';
-import { getPage, open } from './page';
-import { CharSelectEvents } from '../shared/events';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { Character } from '@AthenaShared/interfaces/character.js';
+import { getPage, open } from './page.js';
+import { CharSelectEvents } from '../shared/events.js';
 
 const CAM_POS = { x: -1355.8013916015625, y: -1182.136962890625, z: 4.85 };
 

@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { CREDIT_ALIGN } from '@AthenaShared/enums/creditAlign';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import ICredit from '@AthenaShared/interfaces/iCredit';
-import { requestScaleForm, Scaleform } from './scaleform';
+import { CREDIT_ALIGN } from '@AthenaShared/enums/creditAlign.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import ICredit from '@AthenaShared/interfaces/iCredit.js';
+import { requestScaleForm, Scaleform } from './scaleform.js';
 
 let scaleform: Scaleform;
 let interval: number;

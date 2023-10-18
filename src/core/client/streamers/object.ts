@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { IObject } from '@AthenaShared/interfaces/iObject';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { IObject } from '@AthenaShared/interfaces/iObject.js';
 
 export type CreatedObject = IObject & { createdObject?: alt.Object };
 

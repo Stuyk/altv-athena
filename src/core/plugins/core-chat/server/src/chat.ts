@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
-import * as Athena from '@AthenaServer/api';
-import { CHAT_CONFIG } from '../../shared/config';
+import * as Athena from '@AthenaServer/api/index.js';
+import { CHAT_CONFIG } from '../../shared/config.js';
 
 function handleMessage(player: alt.Player, msg: string) {
     const data = Athena.document.character.get(player);

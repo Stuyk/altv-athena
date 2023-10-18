@@ -1,11 +1,9 @@
 import * as alt from 'alt-server';
 
-import * as Athena from '@AthenaServer/api';
-import { getWeaponMap } from '@AthenaShared/information/weaponList';
-import { StoredItem, StoredItemEx, WeaponInfo } from '@AthenaShared/interfaces/item';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
-import { InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
+import * as Athena from '@AthenaServer/api/index.js';
+import { getWeaponMap } from '@AthenaShared/information/weaponList.js';
+import { StoredItem, StoredItemEx, WeaponInfo } from '@AthenaShared/interfaces/item.js';
+import { InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces.js';
 
 /**
  * THIS IS A DEFAULT SYSTEM.

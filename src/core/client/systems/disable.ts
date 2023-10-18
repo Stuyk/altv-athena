@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
-import { VehicleController } from './vehicle';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { SHARED_CONFIG } from '@AthenaShared/configurations/shared.js';
+import { VehicleController } from './vehicle.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
 
 let interval: number | undefined;
 

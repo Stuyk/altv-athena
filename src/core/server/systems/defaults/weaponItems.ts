@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import { getWeaponMap } from '@AthenaShared/information/weaponList';
+import { getWeaponMap } from '@AthenaShared/information/weaponList.js';
 
 /**
  * THIS IS A DEFAULT SYSTEM.

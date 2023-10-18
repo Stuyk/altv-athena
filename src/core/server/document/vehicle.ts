@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import { KnownKeys } from '@AthenaShared/utility/knownKeys';
-import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
+import { KnownKeys } from '@AthenaShared/utility/knownKeys.js';
+import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned.js';
 import Database from '@stuyk/ezmongodb';
 
 export type KeyChangeCallback = (vehicle: alt.Vehicle, newValue: any, oldValue: any) => void;

@@ -1,1 +1,1 @@
-export { InteractionShape, PolygonShape } from '../../extensions/extColshape';
+export { InteractionShape, PolygonShape } from '../../extensions/extColshape.js';

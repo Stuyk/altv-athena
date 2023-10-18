@@ -1,6 +1,7 @@
-import * as AthenaClient from '@AthenaClient/api';
-import { TextLabel } from '@AthenaShared/interfaces/textLabel';
 import * as alt from 'alt-client';
+
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { TextLabel } from '@AthenaShared/interfaces/textLabel.js';
 
 let interval: number;
 let textDraws: (TextLabel & { entity: alt.Entity })[] = [];

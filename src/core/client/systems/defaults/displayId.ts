@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced.js';
 
 let screenPoint: { x: number; y: number };
 let id = -1;

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { ExtractStringKeys } from '@AthenaShared/utility/extractStringKeys';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { ExtractStringKeys } from '@AthenaShared/utility/extractStringKeys.js';
 
 const pluginRegistration: Array<{ name: string; callback: Function }> = [];
 const pluginHooks: { [key: string]: Object } = {};

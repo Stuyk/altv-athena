@@ -1,8 +1,9 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Marker } from '../../shared/interfaces/marker';
-import { sha256Random } from '../utility/hash';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { Marker } from '../../shared/interfaces/marker.js';
+import { sha256Random } from '../utility/hash.js';
+import { ControllerFuncs } from './shared.js';
 
 const MAX_MARKERS_TO_DRAW = 10;
 const markerGroup = new alt.VirtualEntityGroup(MAX_MARKERS_TO_DRAW);

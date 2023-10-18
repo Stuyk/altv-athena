@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { AdminControl, AdminControlEvents } from '@AthenaShared/interfaces/adminControl';
+import * as Athena from '@AthenaServer/api/index.js';
+import { AdminControl, AdminControlEvents } from '@AthenaShared/interfaces/adminControl.js';
 
 type PlayerCallback = (player: alt.Player, ...args: any[]) => void;
 

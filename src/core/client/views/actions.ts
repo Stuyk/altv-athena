@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Action, ActionMenu } from '@AthenaShared/interfaces/actions';
-import ViewModel from '@AthenaClient/models/viewModel';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { Action, ActionMenu } from '@AthenaShared/interfaces/actions.js';
+import ViewModel from '@AthenaClient/models/viewModel.js';
 
 const PAGE_NAME = 'Actions';
 

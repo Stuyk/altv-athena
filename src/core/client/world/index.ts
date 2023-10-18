@@ -1,4 +1,4 @@
-import * as position from './position';
-import * as weather from './weather';
+import * as position from './position.js';
+import * as weather from './weather.js';
 
 export { position, weather };

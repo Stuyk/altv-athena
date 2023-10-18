@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { Character } from '@AthenaShared/interfaces/character';
+import * as Athena from '@AthenaServer/api/index.js';
+import { Character } from '@AthenaShared/interfaces/character.js';
 import Database from '@stuyk/ezmongodb';
-import { CharSelectEvents } from '../shared/events';
+import { CharSelectEvents } from '../shared/events.js';
 
 const PLUGIN_NAME = 'Character Select';
 const Characters: { [player_id: string]: Array<Character> } = {};

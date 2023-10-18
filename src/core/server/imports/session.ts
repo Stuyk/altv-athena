@@ -1,2 +1,2 @@
-import '@AthenaServer/session/player';
-import '@AthenaServer/session/vehicle';
+import '@AthenaServer/session/player.js';
+import '@AthenaServer/session/vehicle.js';

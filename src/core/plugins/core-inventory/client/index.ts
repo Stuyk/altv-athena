@@ -1,14 +1,14 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import * as AthenaClient from '@AthenaClient/api';
-import { Item } from '@AthenaShared/interfaces/item';
-import { INVENTORY_EVENTS } from '../shared/events';
-import { INVENTORY_CONFIG } from '../shared/config';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
-import { onInventoryUpdate } from '@AthenaClient/events/onInventoryUpdate';
-import { Page } from '@AthenaClient/webview/page';
-import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { Item } from '@AthenaShared/interfaces/item.js';
+import { INVENTORY_EVENTS } from '../shared/events.js';
+import { INVENTORY_CONFIG } from '../shared/config.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
+import { onInventoryUpdate } from '@AthenaClient/events/onInventoryUpdate.js';
+import { Page } from '@AthenaClient/webview/page.js';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced.js';
 
 let page: Page;
 

@@ -1,11 +1,11 @@
 import * as alt from 'alt-shared';
-import { Blip } from './blip';
-import { EventCall } from './eventCall';
-import { Marker } from './marker';
-import { TextLabel } from './textLabel';
-import { JobAnimation } from './animation';
-import { Particle } from './particle';
-import { JobAttachable } from './iAttachable';
+import { Blip } from './blip.js';
+import { EventCall } from './eventCall.js';
+import { Marker } from './marker.js';
+import { TextLabel } from './textLabel.js';
+import { JobAnimation } from './animation.js';
+import { Particle } from './particle.js';
+import { JobAttachable } from './iAttachable.js';
 
 /**
  *

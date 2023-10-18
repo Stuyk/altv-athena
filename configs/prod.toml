@@ -1,6 +1,6 @@
 name = "Athena"
 host = "0.0.0.0"
-env = "devtest"
+env = "prod"
 port = 7788
 players = 512
 announce = false

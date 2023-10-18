@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { DebugKeys } from './system/keys';
-import { RestService } from './system/rest';
-import { ATHENA_DEBUG_EVENTS } from '../shared/events';
+import * as Athena from '@AthenaServer/api/index.js';
+import { DebugKeys } from './system/keys.js';
+import { RestService } from './system/rest.js';
 
 const PLUGIN_NAME = 'athena-debug';
 

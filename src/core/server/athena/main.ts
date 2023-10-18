@@ -1,5 +1,5 @@
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import StreamConfiguration from './stream/config';
+import { SHARED_CONFIG } from '../../shared/configurations/shared.js';
+import StreamConfiguration from './stream/config.js';
 
 export const DEFAULT_CONFIG = {
     // Character Selection View

@@ -1,3 +1,3 @@
-import './job';
-import './player';
-import './vehicle';
+import './job.js';
+import './player.js';
+import './vehicle.js';

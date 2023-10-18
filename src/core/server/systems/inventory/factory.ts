@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
-import { sha256 } from '@AthenaServer/utility/hash';
+import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
+import { sha256 } from '@AthenaServer/utility/hash.js';
 
 let databaseItems: Array<BaseItem<DefaultItemBehavior, {}>> = [];
 let isDoneLoading = false;

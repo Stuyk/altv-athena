@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER_CLIENT } from '../../shared/enums/athenaEvents';
+import { ATHENA_EVENTS_PLAYER_CLIENT } from '../../shared/enums/athenaEvents.js';
 
 const clientEvents: Array<{ eventName: string; callback: (player: alt.Player, ...args: any[]) => void }> = [];
 

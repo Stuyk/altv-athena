@@ -1,5 +1,5 @@
-import { VehicleData } from '@AthenaShared/information/vehicles';
-import { VehicleInfo } from '@AthenaShared/interfaces/vehicleInfo';
+import { VehicleData } from '@AthenaShared/information/vehicles.js';
+import { VehicleInfo } from '@AthenaShared/interfaces/vehicleInfo.js';
 
 /**
  * Get the VehicleInfo corresponding to a hash.

@@ -7,7 +7,6 @@ import { buildResources } from '../buildresource/index.js';
 import { runCoreCompiler } from '../compiler/core.js';
 import { runPluginsCompiler } from '../plugins/core.js';
 import { copyPluginFiles } from '../plugins/files.js';
-import { transformFileImportPaths } from '../transform/index.js';
 import { compileWebviewPlugins } from '../plugins/webview.js';
 import { updatePluginDependencies } from '../plugins/update-dependencies.js';
 
@@ -78,6 +77,10 @@ async function sleep(ms) {
  * @param {ChildProcess} process
  */
 async function killChildProcess(process) {
+    if (!process) {
+        return;
+    }
+
     while (process.killed === false) {
         process.kill();
 
@@ -241,14 +244,26 @@ async function refreshFileWatching() {
     }
 }
 
+/**
+ *
+ * @returns {boolean}
+ */
 async function coreBuildProcess() {
     const timer = createExecTime('>>> Core Build Time');
-    await runCoreCompiler();
+    const filesUncompiled = await runCoreCompiler();
+    if (filesUncompiled.length >= 1) {
+        for (let uncompiledFilePath of filesUncompiled) {
+            console.log(uncompiledFilePath);
+        }
+
+        return false;
+    }
+
     await runPluginsCompiler();
     compileWebviewPlugins();
     copyPluginFiles();
-    transformFileImportPaths();
     timer.stop();
+    return true;
 }
 
 async function devMode(firstRun = false) {
@@ -260,8 +275,13 @@ async function devMode(firstRun = false) {
     let promises = [];
     promises.push(killChildProcess(lastStreamerProcess));
     promises.push(killChildProcess(lastServerProcess));
+    await Promise.all(promises);
 
-    await coreBuildProcess();
+    const didCoreBuild = await coreBuildProcess();
+    if (!didCoreBuild) {
+        return;
+    }
+
     await handleConfiguration();
 
     await handleStreamerProcess(false);

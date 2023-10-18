@@ -1,14 +1,14 @@
 // Do Not Change Order
-import './imports/configs';
-import './systems/plugins';
-import './systems/streamer';
-import './api';
-import './imports/events';
-import './extensions/extPlayer';
-import './extensions/extColshape';
-import './imports/commands';
-import './imports/systems';
-import './imports/controllers';
-import './imports/vehicle';
-import './imports/utilities';
-import '../plugins/athena/server/imports';
+import './imports/configs.js';
+import './systems/plugins.js';
+import './systems/streamer.js';
+import './api/index.js';
+import './imports/events.js';
+import './extensions/extPlayer.js';
+import './extensions/extColshape.js';
+import './imports/commands.js';
+import './imports/systems.js';
+import './imports/controllers.js';
+import './imports/vehicle.js';
+import './imports/utilities.js';
+import '../plugins/athena/server/imports.js';

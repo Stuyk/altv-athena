@@ -1,5 +1,5 @@
-import * as Athena from '@AthenaServer/api';
-import { CharacterCreatorView } from './src/view';
+import * as Athena from '@AthenaServer/api/index.js';
+import { CharacterCreatorView } from './src/view.js';
 
 const PLUGIN_NAME = 'character-creator';
 Athena.systems.plugins.registerPlugin(PLUGIN_NAME, () => {

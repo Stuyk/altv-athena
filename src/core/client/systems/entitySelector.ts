@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { MARKER_TYPE } from '@AthenaShared/enums/markerTypes';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Interaction } from '@AthenaShared/interfaces/interaction';
-import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
+import { MARKER_TYPE } from '@AthenaShared/enums/markerTypes.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { Interaction } from '@AthenaShared/interfaces/interaction.js';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds.js';
 
 export type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle' | 'interaction';
 export type TargetInfo = {

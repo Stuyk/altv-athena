@@ -1,8 +1,9 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IObject } from '../../shared/interfaces/iObject';
-import { sha256Random } from '../utility/hash';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { IObject } from '../../shared/interfaces/iObject.js';
+import { sha256Random } from '../utility/hash.js';
+import { ControllerFuncs } from './shared.js';
 
 const globalObjects: Array<IObject & { object: alt.Object }> = [];
 

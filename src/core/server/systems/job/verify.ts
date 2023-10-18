@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { Objective, ObjectiveCriteria, ObjectiveEvents, ObjectiveType } from '@AthenaShared/interfaces/job';
-import { isFlagEnabled } from '@AthenaShared/utility/flags';
-import { Job } from './system';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import * as Athena from '@AthenaServer/api/index.js';
+import { Objective, ObjectiveCriteria, ObjectiveEvents, ObjectiveType } from '@AthenaShared/interfaces/job.js';
+import { isFlagEnabled } from '@AthenaShared/utility/flags.js';
+import { Job } from './system.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
 
 const criteriaAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];
 const typeAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];

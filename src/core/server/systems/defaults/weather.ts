@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { getWeatherFromString, WEATHER_KEY } from '@AthenaShared/utility/weather';
-import * as Athena from '@AthenaServer/api';
+import { getWeatherFromString, WEATHER_KEY } from '@AthenaShared/utility/weather.js';
+import * as Athena from '@AthenaServer/api/index.js';
 
 /**
  * THIS IS A DEFAULT SYSTEM.

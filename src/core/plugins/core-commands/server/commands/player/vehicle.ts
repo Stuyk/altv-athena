@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
 
-import * as Athena from '@AthenaServer/api';
-import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
-import { LocaleController } from '@AthenaShared/locale/locale';
-import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
+import * as Athena from '@AthenaServer/api/index.js';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys.js';
+import { LocaleController } from '@AthenaShared/locale/locale.js';
+import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle.js';
 
 const SeatbeltState: Array<{ id: number; vehicle_id: number; state: boolean }> = [];
 Athena.commands.register('vehengine', '/vehengine - Toggle Vehicle Engine', [], (player: alt.Player) => {

@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
 const DEFAULT_DRAW_DISTANCE = 20;
 const TOUCH_DISTANCE = 2;
@@ -104,7 +104,7 @@ const InternalFunctions = {
         element.addClass('image');
         element.setAttribute('width', `${elements[index].width}px`);
         element.setAttribute('height', `${elements[index].height}px`);
-        element.id = uid;
+        element.rmlId = uid;
         elements[index].element = element;
         document.appendChild(element);
     },

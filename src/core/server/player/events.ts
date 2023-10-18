@@ -1,6 +1,6 @@
-import { InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
-import { Character } from '@AthenaShared/interfaces/character';
-import { StoredItem } from '@AthenaShared/interfaces/item';
+import { InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces.js';
+import { Character } from '@AthenaShared/interfaces/character.js';
+import { StoredItem } from '@AthenaShared/interfaces/item.js';
 import * as alt from 'alt-server';
 
 export type AthenaPlayerEvents =

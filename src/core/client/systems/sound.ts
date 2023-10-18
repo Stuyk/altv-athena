@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { distance } from '@AthenaShared/utility/vector';
-import { AudioView } from '@AthenaClient/views/audio';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { distance } from '@AthenaShared/utility/vector.js';
+import { AudioView } from '@AthenaClient/views/audio.js';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, frontend);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, play3d);

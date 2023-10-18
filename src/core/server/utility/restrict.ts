@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
 /**
  * Used to build a restricted function.

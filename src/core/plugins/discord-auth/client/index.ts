@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { DiscordAuthEvents } from '../shared/events';
+import { DiscordAuthEvents } from '../shared/events.js';
 
 async function getDiscordToken(applicationIdentifier: string) {
     let bearerToken: string;

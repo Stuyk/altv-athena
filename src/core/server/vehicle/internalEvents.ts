@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
 /**
  * Called when a player has sat down in a seat in a vehicle.

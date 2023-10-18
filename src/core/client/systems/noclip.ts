@@ -1,9 +1,9 @@
 import alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
-import { LocaleController } from '@AthenaShared/locale/locale';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys.js';
+import { LocaleController } from '@AthenaShared/locale/locale.js';
 
 const timeBetweenPlayerUpdates = 250;
 let nextUpdate = Date.now() + 50;

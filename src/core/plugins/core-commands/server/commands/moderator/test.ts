@@ -1,13 +1,13 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { WORLD_NOTIFICATION_TYPE } from '@AthenaShared/enums/worldNotificationTypes';
-import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
-import { Action } from '@AthenaShared/interfaces/actions';
-import { Animation } from '@AthenaShared/interfaces/animation';
-import IAttachable from '@AthenaShared/interfaces/iAttachable';
-import { PedBone } from '@AthenaShared/enums/boneIds';
-import { IPed } from '@AthenaShared/interfaces/iPed';
-import { JobTrigger } from '@AthenaShared/interfaces/jobTrigger';
+import * as Athena from '@AthenaServer/api/index.js';
+import { WORLD_NOTIFICATION_TYPE } from '@AthenaShared/enums/worldNotificationTypes.js';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags.js';
+import { Action } from '@AthenaShared/interfaces/actions.js';
+import { Animation } from '@AthenaShared/interfaces/animation.js';
+import IAttachable from '@AthenaShared/interfaces/iAttachable.js';
+import { PedBone } from '@AthenaShared/enums/boneIds.js';
+import { IPed } from '@AthenaShared/interfaces/iPed.js';
+import { JobTrigger } from '@AthenaShared/interfaces/jobTrigger.js';
 
 Athena.commands.register(
     'timecycle',
@@ -126,7 +126,7 @@ Athena.commands.register(
 
         const attachable: IAttachable = {
             model: 'prop_tool_fireaxe',
-            bone: 57005,
+            bone: PedBone.IK_R_Hand,
             pos: {
                 x: 0.1,
                 y: -0.1,

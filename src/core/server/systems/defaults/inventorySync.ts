@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import { StoredItem } from '@AthenaShared/interfaces/item';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { StoredItem } from '@AthenaShared/interfaces/item.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 
 /**
  * THIS IS A DEFAULT SYSTEM.

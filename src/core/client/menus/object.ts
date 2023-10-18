@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
-import { CreatedObject } from '@AthenaClient/streamers/object';
+import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu.js';
+import { CreatedObject } from '@AthenaClient/streamers/object.js';
 
 export type ObjectMenuInjection = (
     existingObject: CreatedObject,

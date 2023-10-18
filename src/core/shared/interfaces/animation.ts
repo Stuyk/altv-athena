@@ -1,5 +1,5 @@
 import * as alt from 'alt-shared';
-import { ANIMATION_FLAGS } from '../flags/animationFlags';
+import { ANIMATION_FLAGS } from '../flags/animationFlags.js';
 
 /**
  * Used to pass animation information from server-side to client-side.

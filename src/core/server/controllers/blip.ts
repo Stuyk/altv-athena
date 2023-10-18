@@ -1,8 +1,9 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Blip } from '../../shared/interfaces/blip';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { Blip } from '../../shared/interfaces/blip.js';
+import { ControllerFuncs } from './shared.js';
 
 const globalBlips: Array<Blip & { pointBlip: alt.PointBlip }> = [];
 

@@ -1,5 +1,5 @@
-import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
-import * as AthenaClient from '@AthenaClient/api';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags.js';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
 const getLeanMenu2 = (callback: (...args: any[]) => void) => {
     return [

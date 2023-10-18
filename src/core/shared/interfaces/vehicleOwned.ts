@@ -1,7 +1,7 @@
-import { BaseVehicle } from './vehicleBase';
-import VehicleExtra from './vehicleExtra';
-import { VehicleState } from './vehicleState';
-import VehicleTuning from './vehicleTuning';
+import { BaseVehicle } from './vehicleBase.js';
+import VehicleExtra from './vehicleExtra.js';
+import { VehicleState } from './vehicleState.js';
+import VehicleTuning from './vehicleTuning.js';
 
 /**
  * Used to describe vehicle part damage.

@@ -1,11 +1,10 @@
 import * as alt from 'alt-server';
-import { CurrencyTypes } from '../../shared/enums/currency';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import * as emit from './emit';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { Appearance } from '../../shared/interfaces/appearance';
-import * as Athena from '@AthenaServer/api';
-import { Character } from '@AthenaShared/interfaces/character';
+import { CurrencyTypes } from '../../shared/enums/currency.js';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import * as emit from './emit.js';
+import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced.js';
+import * as Athena from '@AthenaServer/api/index.js';
+import { Character } from '@AthenaShared/interfaces/character.js';
 
 /**
  * Synchronize currency data like bank, cash, etc.

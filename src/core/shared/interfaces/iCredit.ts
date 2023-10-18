@@ -1,4 +1,4 @@
-import { CREDIT_ALIGN } from '../enums/creditAlign';
+import { CREDIT_ALIGN } from '../enums/creditAlign.js';
 
 /**
  * Used when passing custom 'credit' overlays from server to client.

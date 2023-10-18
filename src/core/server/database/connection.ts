@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { Collections } from './collections';
-import { IConfig } from '../interface/iConfig';
+import { Collections } from './collections.js';
+import { IConfig } from '../interface/iConfig.js';
 
 // All of these are default values and should not be changed.
 const DEFAULT_DATABASE_NAME = 'athena';

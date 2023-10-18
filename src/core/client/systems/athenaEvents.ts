@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { ATHENA_EVENTS_PLAYER_CLIENT } from '@AthenaShared/enums/athenaEvents';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { ATHENA_EVENTS_PLAYER_CLIENT } from '@AthenaShared/enums/athenaEvents.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
 
 let interval: number;
 let isUpdatingWaypoint = false;

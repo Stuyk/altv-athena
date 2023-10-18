@@ -1,8 +1,8 @@
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 import * as alt from 'alt-server';
 import SockJS from 'sockjs-client';
-import { IStream, IStreamMessage } from '../../shared/interfaces/iStream';
-import { DEFAULT_CONFIG } from '../athena/main';
+import { IStream, IStreamMessage } from '../../shared/interfaces/iStream.js';
+import { DEFAULT_CONFIG } from '../athena/main.js';
 
 const Routes = {
     pong: pong,

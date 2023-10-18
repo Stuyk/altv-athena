@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
-import { rgbaToHexAlpha } from '@AthenaShared/utility/color';
-import { Invoke, Toggle, Selection, Range, MenuInfo } from './menuInterfaces';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { rgbaToHexAlpha } from '@AthenaShared/utility/color.js';
+import { Invoke, Toggle, Selection, Range, MenuInfo } from './menuInterfaces.js';
 
 const KEYS = {
     ESCAPE_KEY: 27,

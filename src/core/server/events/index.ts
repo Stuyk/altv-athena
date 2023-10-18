@@ -1,1 +1,1 @@
-export * as vehicle from '../vehicle/events';
+export * as vehicle from '../vehicle/events.js';

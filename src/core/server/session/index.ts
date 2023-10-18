@@ -1,2 +1,2 @@
-export * as player from './player';
-export * as vehicle from './vehicle';
+export * as player from './player.js';
+export * as vehicle from './vehicle.js';

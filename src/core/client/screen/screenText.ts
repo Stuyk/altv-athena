@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { drawRectangle2D, drawText2D } from './text';
+import { drawRectangle2D, drawText2D } from './text.js';
 
 export interface TextProperties {
     paddingLeft?: number;

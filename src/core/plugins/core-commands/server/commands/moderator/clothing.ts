@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
-import { clothingComponentToIconName, clothingItemToIconName } from '@AthenaShared/utility/clothing';
+import * as Athena from '@AthenaServer/api/index.js';
+import { ClothingComponent } from '@AthenaShared/interfaces/item.js';
+import { clothingComponentToIconName } from '@AthenaShared/utility/clothing.js';
 
 Athena.commands.register(
     'setclothing',

@@ -1,8 +1,9 @@
-import { playPedAnimation } from '@AthenaClient/systems/animations';
-import { NET_OWNER_PED } from '@AthenaShared/enums/netOwner';
-import { Animation } from '@AthenaShared/interfaces/animation';
 import * as alt from 'alt-client';
 import * as native from 'natives';
+
+import { playPedAnimation } from '@AthenaClient/systems/animations.js';
+import { NET_OWNER_PED } from '@AthenaShared/enums/netOwner.js';
+import { Animation } from '@AthenaShared/interfaces/animation.js';
 
 alt.onServer(NET_OWNER_PED.ANIMATE, (ped: alt.Ped, animation: Animation) => {
     playPedAnimation(ped.scriptID, animation.dict, animation.name, animation.flags, animation.duration);

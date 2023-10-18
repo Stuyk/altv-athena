@@ -1,7 +1,8 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IWorldNotification } from '../../shared/interfaces/iWorldNotification';
+import * as Athena from '@AthenaServer/api/index.js';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { IWorldNotification } from '../../shared/interfaces/iWorldNotification.js';
+import { ControllerFuncs } from './shared.js';
 
 const MAX_MARKERS_TO_DRAW = 10;
 const markerGroup = new alt.VirtualEntityGroup(MAX_MARKERS_TO_DRAW);

@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
 
-import * as Athena from '@AthenaServer/api';
-import { INVENTORY_EVENTS } from '@AthenaPlugins/core-inventory/shared/events';
-import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
-import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
-import { ItemDrop, StoredItem } from '@AthenaShared/interfaces/item';
-import { INVENTORY_CONFIG } from '@AthenaPlugins/core-inventory/shared/config';
-import { ComplexSwapReturn } from '@AthenaServer/systems/inventory/manager';
+import * as Athena from '@AthenaServer/api/index.js';
+import { INVENTORY_EVENTS } from '@AthenaPlugins/core-inventory/shared/events.js';
+import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces.js';
+import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
+import { ItemDrop, StoredItem } from '@AthenaShared/interfaces/item.js';
+import { INVENTORY_CONFIG } from '@AthenaPlugins/core-inventory/shared/config.js';
+import { ComplexSwapReturn } from '@AthenaServer/systems/inventory/manager.js';
 
 type PlayerCallback = (player: alt.Player) => void;
 type PlayerCloseCallback = (uid: string, items: Array<StoredItem>, player: alt.Player | undefined) => void;

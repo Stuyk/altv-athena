@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { StoredItem, StoredItemEx, WeaponInfo } from '@AthenaShared/interfaces/item';
+import * as Athena from '@AthenaServer/api/index.js';
+import { StoredItem, StoredItemEx, WeaponInfo } from '@AthenaShared/interfaces/item.js';
 
 /**
  * Get a characters full character name.

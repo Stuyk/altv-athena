@@ -1,5 +1,5 @@
-import { PED_TYPE } from '@AthenaShared/enums/pedInformationFlags';
-import { PedInfo } from '@AthenaShared/interfaces/iPedInfo';
+import { PED_TYPE } from '@AthenaShared/enums/pedInformationFlags.js';
+import { PedInfo } from '@AthenaShared/interfaces/iPedInfo.js';
 
 export const pedData: Array<PedInfo> = [
     {

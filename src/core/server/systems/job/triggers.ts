@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { JobAttachable } from '@AthenaShared/interfaces/iAttachable';
-import { Objective } from '@AthenaShared/interfaces/job';
+import * as Athena from '@AthenaServer/api/index.js';
+import { JobAttachable } from '@AthenaShared/interfaces/iAttachable.js';
+import { Objective } from '@AthenaShared/interfaces/job.js';
 
 /**
  * Calls any events attached to the current job objective that is being finished.

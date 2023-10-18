@@ -1,5 +1,5 @@
-import * as Athena from '@AthenaServer/api';
-import { BaseItemEx, ItemEx, StoredItemEx } from '@AthenaShared/interfaces/item';
+import * as Athena from '@AthenaServer/api/index.js';
+import { BaseItemEx, ItemEx, StoredItemEx } from '@AthenaShared/interfaces/item.js';
 
 /**
  * Converts a stored item into a full item.
@@ -50,4 +50,3 @@ export function toBaseItem<CustomData = {}>(storedItem: StoredItemEx<CustomData>
 export function toStoredItem<CustomData = {}>(baseItem: BaseItemEx<CustomData>, quantity: number) {
     return Athena.systems.inventory.factory.fromBaseToStored(baseItem, quantity);
 }
-

@@ -1,8 +1,8 @@
-import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import * as Athena from '../api';
-import ConfigUtil from '../utility/config';
+import { DEFAULT_CONFIG } from '@AthenaServer/athena/main.js';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import * as Athena from '../api/index.js';
+import ConfigUtil from '../utility/config.js';
 
 /**
  * Called when a player connects to the server.

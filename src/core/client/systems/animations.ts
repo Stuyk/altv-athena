@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags.js';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, playAnimation);
 
@@ -51,7 +51,7 @@ export async function loadAnimation(dict: string, count: number = 0): Promise<bo
 export async function playAnimation(
     dict: string,
     name: string,
-    flags: ANIMATION_FLAGS = ANIMATION_FLAGS.CANCELABLE,
+    flags: ANIMATION_FLAGS | number = ANIMATION_FLAGS.CANCELABLE,
     duration: number = -1,
 ): Promise<void> {
     const isReadyToPlay = await loadAnimation(dict);

@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 
 let isTransitioning = false;
 let prevWeather = 'Clear';

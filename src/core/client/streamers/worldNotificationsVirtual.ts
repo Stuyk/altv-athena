@@ -1,4 +1,4 @@
-import { IWorldNotification } from '@AthenaShared/interfaces/iWorldNotification';
+import { IWorldNotification } from '@AthenaShared/interfaces/iWorldNotification.js';
 import * as alt from 'alt-client';
 import * as native from 'natives';
 

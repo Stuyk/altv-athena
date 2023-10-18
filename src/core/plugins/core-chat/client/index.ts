@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
-import { CHAT_WEBVIEW_EVENTS } from '../shared/events';
-import { MessageInfo } from '@AthenaClient/systems/messenger';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { CHAT_WEBVIEW_EVENTS } from '../shared/events.js';
+import { MessageInfo } from '@AthenaClient/systems/messenger.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
 
 const THE_LETTER_T = 84;
 const PAGE_NAME = 'Chat';
