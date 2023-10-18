@@ -141,11 +141,6 @@ function checkPluginDevDependencies() {
     return missingDevDepdendencies;
 }
 
-function existsInModules(dependencyName) {
-    const nodeModulesPath = path.join(process.cwd(), 'node_modules', dependencyName);
-    return fs.existsSync(nodeModulesPath);
-}
-
 function updatePluginDependencies() {
     const installedDepsObj = getInstalledDependencies();
     const installedDeps = installedDepsObj.dependencies;
@@ -221,14 +216,16 @@ function installGithubDependencies() {
         const pluginName = path.basename(plugin);
         const pluginDependencies = getPluginDependencies(pluginName);
 
-        if (pluginDependencies.githubDependencies.length === 0) continue;
+        const githubDependencies = pluginDependencies.githubDependencies.filter(isValidGitHubRepoURL);
+
+        if (githubDependencies.length === 0) continue;
 
         console.log(`>>> GitHub Dependencies for plugin "${pluginName}":`);
-        pluginDependencies.githubDependencies.forEach((githubDependency) => {
+        githubDependencies.forEach((githubDependency) => {
             console.log(`- ${githubDependency}`);
         });
 
-        for (const githubDependency of pluginDependencies.githubDependencies) {
+        githubDependencies.forEach((githubDependency) => {
             const dependencyName = githubDependency.split('/').pop();
             const targetPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins/', dependencyName));
 
@@ -244,8 +241,24 @@ function installGithubDependencies() {
                     console.error(`>>> Failed to clone "${dependencyName}" from GitHub: ${error.message}`);
                 }
             }
-        }
+        });
     }
+}
+
+function existsInModules(dependencyName) {
+    const nodeModulesPath = path.join(process.cwd(), 'node_modules', dependencyName);
+    return fs.existsSync(nodeModulesPath);
+}
+
+function isValidGitHubRepoURL(url) {
+    const githubRepoURLPattern = /^https:\/\/github\.com\/([A-Za-z0-9-_.]+)\/([A-Za-z0-9-_.]+)\/?$/;
+    const isValid = githubRepoURLPattern.test(url);
+
+    if (!isValid) {
+        console.log(`${url} is not an valid GitHub URL!`);
+    }
+
+    return isValid;
 }
 
 updatePluginDependencies();
