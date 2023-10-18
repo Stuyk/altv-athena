@@ -175,15 +175,9 @@ export async function updatePluginDependencies() {
                 console.error(error.stderr);
             }
         } else {
-            console.log(
-                `>>> All regular dependencies are already included, and their folders exist. Skipping regular dependencies update...`,
-            );
             await installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps);
         }
     } else {
-        console.log(
-            `>>> All regular dependencies are already included, and their folders exist. Skipping regular dependencies update...`,
-        );
         await installDevDependencies(installedDevDeps, sanitizedMissingDevDeps, missingDevDeps);
     }
 }
@@ -207,15 +201,9 @@ async function installDevDependencies(installedDevDeps, sanitizedMissingDevDeps,
                 console.error(error.stderr);
             }
         } else {
-            console.log(
-                `>>> All dev dependencies are already included, and their folders exist. Skipping dev dependencies update...`,
-            );
             await installGithubDependencies();
         }
     } else {
-        console.log(
-            `>>> All dev dependencies are already included, and their folders exist. Skipping dev dependencies update...`,
-        );
         await installGithubDependencies();
     }
 }
