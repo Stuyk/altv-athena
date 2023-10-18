@@ -75,7 +75,6 @@ import './streamers/worldNotifications';
 import './streamers/worldNotificationsVirtual';
 
 // Systems Default
-import './systems/defaults/ammo';
 import './systems/defaults/displayId';
 import './systems/defaults/time';
 import './systems/defaults/toolbar';

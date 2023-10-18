@@ -19,6 +19,7 @@
 --- Peds Exit Vehicle
 --- Peds Animate
 --- Peds Goto Position
+- Update Ammo System to New APIs with Persistent Ammo Solution
 ```
 
 ## 5.2.0

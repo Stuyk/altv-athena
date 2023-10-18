@@ -900,8 +900,12 @@ export async function toggleItem(player: alt.Player, slot: number, type: Invento
     await Athena.document.character.set(player, type, dataCopy);
 
     const baseItem = Athena.systems.inventory.factory.getBaseItem(dataCopy[index].dbName, dataCopy[index].version);
-    if (baseItem && baseItem.behavior && baseItem.behavior.isWeapon && dataCopy[index].isEquipped === false) {
-        Athena.player.events.trigger('player-weapon-unequipped', player, dataCopy[index].slot, type);
+    if (baseItem && baseItem.behavior && baseItem.behavior.isWeapon) {
+        if (!dataCopy[index].isEquipped) {
+            Athena.player.events.trigger('player-weapon-unequipped', player, dataCopy[index].slot, type);
+        } else {
+            Athena.player.events.trigger('player-weapon-equipped', player, dataCopy[index].slot, type);
+        }
     }
 
     const eventToTrigger = dataCopy[index].isEquipped ? 'item-equipped' : 'item-unequipped';
