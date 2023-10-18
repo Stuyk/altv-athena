@@ -45,6 +45,8 @@ export function append(marker: Marker): string {
     }
 
     const entity = new alt.VirtualEntity(markerGroup, new alt.Vector3(marker.pos), 25, { marker, type: 'marker' });
+    entity.dimension = marker.dimension ? marker.dimension : 0;
+
     globalMarkers.push({ ...marker, entity });
     return marker.uid;
 }

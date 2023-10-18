@@ -26,6 +26,7 @@ export function append(notification: IWorldNotification): string {
         notification,
         type: 'worldnotification',
     });
+    entity.dimension = notification.dimension ? notification.dimension : 0;
     globalNotifications.push({ ...notification, entity });
 
     return notification.uid;

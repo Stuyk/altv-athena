@@ -41,6 +41,7 @@ export function append(label: TextLabel): string {
     }
 
     const entity = new alt.VirtualEntity(textLabelGroup, new alt.Vector3(label.pos), 20, { label, type: 'textlabel' });
+    entity.dimension = label.dimension ? label.dimension : 0;
     globalTextLabels.push({ ...label, entity });
     return label.uid;
 }

@@ -52,6 +52,8 @@ export function append(objectData: IObject): string {
     };
 
     newObject.object.frozen = true;
+    newObject.object.dimension = objectData.dimension ? objectData.dimension : 0;
+
     if (objectData.noCollision) {
         newObject.object.collision = false;
     }
