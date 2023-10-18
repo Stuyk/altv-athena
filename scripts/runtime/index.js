@@ -174,7 +174,7 @@ async function handleServerProcess(shouldAutoRestart = false) {
 
     await areKeyResourcesReady();
     await new Promise((resolve) => {
-        setTimeout(resolve, 500);
+        setTimeout(resolve, 1000);
     });
 
     if (passedArguments.includes('cdn')) {

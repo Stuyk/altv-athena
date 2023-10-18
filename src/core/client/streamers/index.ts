@@ -5,6 +5,7 @@ import * as marker from './marker';
 import * as markerVirtual from './markerVirtual';
 import * as object from './object';
 import * as ped from './ped';
+import * as pedVirtual from './ped';
 import * as textLabel from './textlabel';
 import * as textLabelVirtual from './textLabelVirtual';
 import * as worldNotifications from './worldNotifications';
@@ -18,6 +19,7 @@ export {
     markerVirtual,
     object,
     ped,
+    pedVirtual,
     textLabel,
     textLabelVirtual,
     worldNotifications,

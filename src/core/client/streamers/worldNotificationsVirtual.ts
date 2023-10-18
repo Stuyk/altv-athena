@@ -29,7 +29,7 @@ function draw() {
 }
 
 function onStreamEnter(entity: alt.Object) {
-    if (!isTextLabel(entity)) {
+    if (!isWorldNotification(entity)) {
         return;
     }
 
@@ -51,7 +51,7 @@ function onStreamEnter(entity: alt.Object) {
 }
 
 function onStreamExit(entity: alt.Object) {
-    if (!isTextLabel(entity)) {
+    if (!isWorldNotification(entity)) {
         return;
     }
 
@@ -75,7 +75,7 @@ function onStreamExit(entity: alt.Object) {
 }
 
 function onStreamSyncedMetaChanged(entity: alt.Object, key: string, value: any) {
-    if (!isTextLabel(entity)) {
+    if (!isWorldNotification(entity)) {
         return;
     }
 
@@ -96,7 +96,7 @@ function getData(object: alt.Object): IWorldNotification {
     return object.getStreamSyncedMeta('notification') as IWorldNotification;
 }
 
-function isTextLabel(object: alt.Object) {
+function isWorldNotification(object: alt.Object) {
     if (!(object instanceof alt.VirtualEntity)) {
         return false;
     }

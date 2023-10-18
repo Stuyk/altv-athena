@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
-import '@AthenaServer/systems/streamer';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Blip } from '../../shared/interfaces/blip';

@@ -12,6 +12,13 @@
 - Update TextLabels to Virtual Entities
 - Update Markers to Virtual Entities
 - Update World Notifications to Virtual Entities
+- Update StaticPeds with additional functionality
+--- Peds Follow Player
+--- Peds Unfollow Player
+--- Peds Get Into Vehicle
+--- Peds Exit Vehicle
+--- Peds Animate
+--- Peds Goto Position
 ```
 
 ## 5.2.0

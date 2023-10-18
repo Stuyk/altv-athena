@@ -32,7 +32,7 @@ function draw() {
 }
 
 function onStreamEnter(entity: alt.Object) {
-    if (!isTextLabel(entity)) {
+    if (!isMarker(entity)) {
         return;
     }
 
@@ -54,7 +54,7 @@ function onStreamEnter(entity: alt.Object) {
 }
 
 function onStreamExit(entity: alt.Object) {
-    if (!isTextLabel(entity)) {
+    if (!isMarker(entity)) {
         return;
     }
 
@@ -78,7 +78,7 @@ function onStreamExit(entity: alt.Object) {
 }
 
 function onStreamSyncedMetaChanged(entity: alt.Object, key: string, value: any) {
-    if (!isTextLabel(entity)) {
+    if (!isMarker(entity)) {
         return;
     }
 
@@ -99,7 +99,7 @@ function getData(object: alt.Object): Marker {
     return object.getStreamSyncedMeta('marker') as Marker;
 }
 
-function isTextLabel(object: alt.Object) {
+function isMarker(object: alt.Object) {
     if (!(object instanceof alt.VirtualEntity)) {
         return false;
     }

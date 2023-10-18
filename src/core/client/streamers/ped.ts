@@ -153,9 +153,15 @@ function handleDrawPeds() {
             native.setPedAsEnemy(pedInfo[pedData.uid], false);
             native.setEntityInvincible(pedInfo[pedData.uid], true);
 
-            const heading = pedData.heading ? pedData.heading : 0;
             alt.nextTick(() => {
-                native.setEntityHeading(pedInfo[pedData.uid], heading);
+                native.setEntityRotation(
+                    pedInfo[pedData.uid],
+                    pedData.rotation.x,
+                    pedData.rotation.y,
+                    pedData.rotation.z,
+                    0,
+                    true,
+                );
 
                 if (pedData.randomizeAppearance) {
                     native.setPedRandomProps(pedInfo[pedData.uid]);

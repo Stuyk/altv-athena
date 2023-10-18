@@ -68,6 +68,7 @@ import './streamers/marker';
 import './streamers/markerVirtual';
 import './streamers/object';
 import './streamers/ped';
+import './streamers/pedVirtual';
 import './streamers/textlabel';
 import './streamers/textLabelVirtual';
 import './streamers/worldNotifications';
