@@ -20,6 +20,7 @@
 --- Peds Animate
 --- Peds Goto Position
 - Update Ammo System to New APIs with Persistent Ammo Solution
+- Remove automatic import transformer, require .js extensions in all imports now
 ```
 
 ## 5.2.0
