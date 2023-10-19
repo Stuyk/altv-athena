@@ -113,10 +113,8 @@ async function handleConfiguration() {
         configName = 'devtest';
     }
 
-    let promises = [];
-
     if (!passedArguments.includes('dev')) {
-        promises.push(runFile(npx, 'vite', 'build', './src-webviews'));
+        await runFile(npx, 'vite', 'build', './src-webviews');
     }
 
     copySync(`./configs/${configName}.toml`, `server.toml`);
