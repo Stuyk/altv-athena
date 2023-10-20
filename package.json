@@ -30,7 +30,6 @@
         "@altv/types-webview": "^1.0.7",
         "@altv/types-worker": "1.0.7",
         "@babel/types": "^7.17.0",
-        "@stuyk/altv-config": "^4.0.2",
         "@swc/cli": "0.1.62",
         "@swc/core": "1.3.92",
         "@types/minimatch": "^3.0.5",
