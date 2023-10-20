@@ -1,16 +1,12 @@
-import { moveAssetsToWebview, movePluginFilesToWebview, clearPluginsWebViewFolder } from './shared.js';
+import { movePluginFilesToWebview } from './shared.js';
 
 export async function copyPluginFiles() {
-    const promises = [];
-
-    clearPluginsWebViewFolder();
-
-    promises.push(movePluginFilesToWebview('icons', ['png']));
-    promises.push(movePluginFilesToWebview('webview/images', ['jpg', 'png', 'svg', 'jpeg', 'gif']));
-    promises.push(movePluginFilesToWebview('webview/videos', ['webm', 'avi']));
-    promises.push(movePluginFilesToWebview('sounds', ['ogg']));
-    promises.push(
-        moveAssetsToWebview('webview/assets', [
+    const extensions = {
+        icons: ['png'],
+        'webview/images': ['jpg', 'png', 'svg', 'jpeg', 'gif'],
+        'webview/videos': ['webm', 'avi'],
+        sounds: ['ogg'],
+        'webview/assets': [
             'jpg',
             'png',
             'svg',
@@ -27,7 +23,11 @@ export async function copyPluginFiles() {
             'ico',
             'otf',
             'ttf',
-        ]),
+        ],
+    };
+
+    const promises = Object.keys(extensions).map((folderName) =>
+        movePluginFilesToWebview(folderName, extensions[folderName])
     );
 
     await Promise.all(promises);
