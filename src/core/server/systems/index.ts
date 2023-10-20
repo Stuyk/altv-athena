@@ -18,5 +18,4 @@ export * as plugins from '@AthenaServer/systems/plugins.js';
 export * as rpc from '@AthenaServer/systems/rpc.js';
 export * as sound from '@AthenaServer/systems/sound.js';
 export * as storage from '@AthenaServer/systems/storage.js';
-export * as streamer from '@AthenaServer/systems/streamer.js';
 export * as tick from '@AthenaServer/systems/tick.js';

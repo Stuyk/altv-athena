@@ -22,6 +22,10 @@
 - Update Ammo System to New APIs with Persistent Ammo Solution
 - Remove automatic import transformer, require .js extensions in all imports now
 - Shaved over 300ms off startup time
+- Update Doors to Virtual Entities
+- Removed Streaming Service (Bye Bye)
+- Removed Streaming Service Scripts
+- Removed Streaming Service Process
 ```
 
 ## 5.2.0

@@ -20,7 +20,6 @@ import '../systems/job/verify.js';
 import '../systems/jobTrigger.js';
 import '../systems/messenger/messaging.js';
 import '../systems/plugins.js';
-import '../systems/streamer.js';
 import '../systems/tick.js';
 
 // Defaults Systems - With Toggleable Configs

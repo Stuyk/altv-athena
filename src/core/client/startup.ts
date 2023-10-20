@@ -62,7 +62,7 @@ import './screen/timecycle.js';
 // Streamers
 import './streamers/attachable.js';
 import './streamers/blip.js';
-import './streamers/doors.js';
+import './streamers/doorsVirtual.js';
 import './streamers/item.js';
 import './streamers/marker.js';
 import './streamers/markerVirtual.js';

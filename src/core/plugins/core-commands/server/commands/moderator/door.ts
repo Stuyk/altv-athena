@@ -1,9 +1,8 @@
 import alt from 'alt-server';
 import * as Athena from '@AthenaServer/api/index.js';
-import { Doors } from '@AthenaShared/information/doors.js';
 
 Athena.commands.register('toggledoor', '/toggledoor', ['admin'], (player: alt.Player) => {
-    const doorsByDistance = Doors.sort((a, b) => {
+    const doorsByDistance = Athena.controllers.doors.getDoors().sort((a, b) => {
         const distA = Athena.utility.vector.distance(player.pos, a.pos);
         const distB = Athena.utility.vector.distance(player.pos, b.pos);
 
@@ -21,6 +20,11 @@ Athena.commands.register('toggledoor', '/toggledoor', ['admin'], (player: alt.Pl
         return;
     }
 
-    Athena.controllers.doors.update(closestDoor.uid, !closestDoor.isUnlocked);
+    const result = Athena.controllers.doors.update(closestDoor.uid, !closestDoor.isUnlocked);
+    if (!result) {
+        Athena.player.emit.message(player, `Failed to toggle door ${closestDoor.uid}`);
+        return;
+    }
+
     Athena.player.emit.message(player, `Toggling Door ${closestDoor.uid}. Unlocked: ${closestDoor.isUnlocked}`);
 });

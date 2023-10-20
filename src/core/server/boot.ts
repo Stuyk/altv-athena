@@ -1,7 +1,6 @@
 // Do Not Change Order
 import './imports/configs.js';
 import './systems/plugins.js';
-import './systems/streamer.js';
 import './api/index.js';
 import './imports/events.js';
 import './extensions/extPlayer.js';

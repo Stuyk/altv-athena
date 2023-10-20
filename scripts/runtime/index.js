@@ -41,11 +41,6 @@ if (NO_SPECIAL_CHARACTERS.test(process.cwd())) {
 let lastServerProcess;
 
 /**
- * This is the Streamer Server Process
- * @type {ChildProcess} */
-let lastStreamerProcess;
-
-/**
  * This is the WebView Dev Server Process
  * Runs on localhost:3000;
  * @type {ChildProcess} */
@@ -137,20 +132,6 @@ async function handleViteDevServer() {
 
     return await new Promise((resolve) => {
         setTimeout(resolve, 2000);
-    });
-}
-
-function handleStreamerProcess(shouldAutoRestart = false) {
-    if (lastStreamerProcess && !lastStreamerProcess.killed) {
-        lastStreamerProcess.kill();
-    }
-
-    lastStreamerProcess = spawn(node, ['./scripts/streamer/dist/index.js'], { stdio: 'inherit' });
-    lastStreamerProcess.once('close', (code) => {
-        console.log(`Streamer process exited with code ${code}`);
-        if (shouldAutoRestart) {
-            handleStreamerProcess(shouldAutoRestart);
-        }
     });
 }
 
@@ -261,10 +242,7 @@ async function devMode(firstRun = false) {
         return;
     }
 
-    let promises = [];
-    promises.push(killChildProcess(lastStreamerProcess));
-    promises.push(killChildProcess(lastServerProcess));
-    await Promise.all(promises);
+    await killChildProcess(lastServerProcess);
 
     const didCoreBuild = await coreBuildProcess();
     if (!didCoreBuild) {
@@ -274,7 +252,6 @@ async function devMode(firstRun = false) {
     await compileWebViewPages();
     handleConfiguration();
 
-    await handleStreamerProcess(false);
     await handleServerProcess(false);
 }
 
@@ -298,13 +275,11 @@ async function runServer() {
     if (passedArguments.includes('dev')) {
         await sleep(50);
         await devMode(true);
-        await handleStreamerProcess(false);
         await handleServerProcess(false);
         return;
     }
 
     await sleep(50);
-    await handleStreamerProcess(true);
     await handleServerProcess(true);
 }
 

@@ -1,5 +1,5 @@
 import * as blip from './blip.js';
-import * as doors from './doors.js';
+import * as doorsVirtual from './doorsVirtual.js';
 import * as item from './item.js';
 import * as marker from './marker.js';
 import * as markerVirtual from './markerVirtual.js';
@@ -13,7 +13,7 @@ import * as worldNotificationsVirtual from './worldNotificationsVirtual.js';
 
 export {
     blip,
-    doors,
+    doorsVirtual,
     item,
     marker,
     markerVirtual,
