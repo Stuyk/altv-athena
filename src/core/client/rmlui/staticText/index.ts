@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
-import { StaticTextInfo } from './staticTextInterfaces';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { StaticTextInfo } from './staticTextInterfaces.js';
 
 type StaticTextExt = StaticTextInfo & { delete?: boolean; element?: alt.RmlElement };
 

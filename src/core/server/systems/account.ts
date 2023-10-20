@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 import Database from '@stuyk/ezmongodb';
-import { Account } from '../../shared/interfaces/iAccount';
-import { Collections } from '../database/collections';
+import { Account } from '../../shared/interfaces/iAccount.js';
+import { Collections } from '../database/collections.js';
 
 const globalKey = 'accountId';
 let adminAccountCreated = false;

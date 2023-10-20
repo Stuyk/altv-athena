@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import { PlayerConfigKeys } from '@AthenaShared/enums/playerConfigKeys';
-import { Account } from '@AthenaShared/interfaces/iAccount';
-import { Character } from '@AthenaShared/interfaces/character';
+import { PlayerConfigKeys } from '@AthenaShared/enums/playerConfigKeys.js';
+import { Account } from '@AthenaShared/interfaces/iAccount.js';
+import { Character } from '@AthenaShared/interfaces/character.js';
 
 export type ConfigCallback = (value: any) => void;
 

@@ -1,4 +1,4 @@
-import { VehicleState } from '@AthenaShared/interfaces/vehicleState';
+import { VehicleState } from '@AthenaShared/interfaces/vehicleState.js';
 import * as alt from 'alt-shared';
 
 export const SEAT = {

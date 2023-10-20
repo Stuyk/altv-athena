@@ -1,7 +1,7 @@
 import alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Particle } from '@AthenaShared/interfaces/particle';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { Particle } from '@AthenaShared/interfaces/particle.js';
 
 function loadParticleDictionary(dictionary: string): Promise<boolean> {
     return new Promise((resolve: Function): void => {

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { StoredItem } from '@AthenaShared/interfaces/item';
+import * as Athena from '@AthenaServer/api/index.js';
+import { StoredItem, StoredItemEx, WeaponInfo } from '@AthenaShared/interfaces/item.js';
 
 /**
  * Get a characters full character name.
@@ -157,4 +157,29 @@ export function accountPermissions(player: alt.Player): Array<string> {
  */
 export function job(player: alt.Player): Athena.systems.job.builder {
     return Athena.systems.job.instance.get(player);
+}
+
+/**
+ * Get the currently equipped toolbar weapon slot
+ *
+ * @export
+ * @param {alt.Player} player
+ * @return {StoredItemEx<WeaponInfo> | undefined}
+ */
+export function getEquippedToolbarWeapon(player: alt.Player): StoredItemEx<WeaponInfo> | undefined {
+    const items = Athena.document.character.getField<{}, StoredItemEx<WeaponInfo>[]>(player, 'toolbar');
+    for (let item of items) {
+        if (!item.isEquipped) {
+            continue;
+        }
+
+        const baseItem = Athena.systems.inventory.convert.toBaseItem(item);
+        if (!baseItem.behavior || !baseItem.behavior.isWeapon) {
+            continue;
+        }
+
+        return item;
+    }
+
+    return undefined;
 }

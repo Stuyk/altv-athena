@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import * as config from './config';
+import * as config from './config.js';
 import axios from 'axios';
 
 export async function invoke() {

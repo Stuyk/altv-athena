@@ -1,4 +1,4 @@
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 import * as alt from 'alt-server';
 
 /**

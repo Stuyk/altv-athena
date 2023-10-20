@@ -1,0 +1,22 @@
+name = "Athena"
+host = "0.0.0.0"
+env = "prod"
+port = 7788
+players = 512
+announce = false
+gamemode = "Roleplay"
+website = "athenaframework.com"
+language = "en"
+description = "With Reconnect On - Vue Debug - 1 Player Only"
+debug = false
+useCdn = false
+useEarlyAuth = false
+streamingDistance = 400
+migrationDistance = 150
+modules = ["js-module"]
+resources = ["webviews", "core"]
+tags = ["athena","framework","version","5"]
+log-streams = ["console", "file", "stdconsole"]
+
+[voice]
+bitrate = 64000

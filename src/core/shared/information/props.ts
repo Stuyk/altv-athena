@@ -1,4 +1,4 @@
-import { PropInfo } from '@AthenaShared/interfaces/ipropInfo';
+import { PropInfo } from '@AthenaShared/interfaces/ipropInfo.js';
 
 export const propData: Array<PropInfo> = [
     {

@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 
 alt.onServer(SYSTEM_EVENTS.ENTITYSET_ACTIVATE, (interior: number, entitySetName: string) => {
     native.activateInteriorEntitySet(interior, entitySetName);

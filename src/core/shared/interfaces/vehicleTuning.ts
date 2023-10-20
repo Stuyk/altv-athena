@@ -1,4 +1,4 @@
-import IVehicleMod from './vehicleMod';
+import IVehicleMod from './vehicleMod.js';
 
 /**
  * Tuning to apply to an owned vehicle.

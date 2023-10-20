@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { StoredItem, StoredItemEx } from '@AthenaShared/interfaces/item';
+import { StoredItem, StoredItemEx } from '@AthenaShared/interfaces/item.js';
 
 type StoredItemCallbacks = ((player: alt.Player, item: StoredItem) => void)[];
 

@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 
 export type NotificationCallback = ((message: string, ...args: any[]) => void) | Function;
 

@@ -1,17 +1,37 @@
-export * as credits from './credits';
-export * as errorScreen from './errorScreen';
-export * as marker from './marker';
-export * as minimap from './minimap';
-export * as missionText from './missionText';
-export * as notification from './notification';
-export * as particle from './particle';
-export * as progressBar from './progressBar';
-export * as scaleform from './scaleform';
-export * as screenEffect from './screenEffect';
-export * as screenFade from './screenFade';
-export * as screenText from './screenText';
-export * as shard from './shard';
-export * as spinner from './spinner';
-export * as text from './text';
-export * as texture from './texture';
-export * as timecycle from './timecycle';
+import * as credits from './credits.js';
+import * as errorScreen from './errorScreen.js';
+import * as marker from './marker.js';
+import * as minimap from './minimap.js';
+import * as missionText from './missionText.js';
+import * as notification from './notification.js';
+import * as particle from './particle.js';
+import * as progressBar from './progressBar.js';
+import * as scaleform from './scaleform.js';
+import * as screenEffect from './screenEffect.js';
+import * as screenFade from './screenFade.js';
+import * as screenText from './screenText.js';
+import * as shard from './shard.js';
+import * as spinner from './spinner.js';
+import * as text from './text.js';
+import * as texture from './texture.js';
+import * as timecycle from './timecycle.js';
+
+export {
+    credits,
+    errorScreen,
+    marker,
+    minimap,
+    missionText,
+    notification,
+    particle,
+    progressBar,
+    scaleform,
+    screenEffect,
+    screenFade,
+    screenText,
+    shard,
+    spinner,
+    text,
+    texture,
+    timecycle,
+};

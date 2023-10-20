@@ -1,4 +1,4 @@
-import { FUEL_TYPE, VEHICLE_CLASS, VEHICLE_TYPE } from '../enums/vehicleTypeFlags';
+import { FUEL_TYPE, VEHICLE_CLASS, VEHICLE_TYPE } from '../enums/vehicleTypeFlags.js';
 
 /**
  * Interface for working with / using vehicles.

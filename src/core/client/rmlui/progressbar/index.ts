@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
-import { ProgressBar as ProgressBarType } from '@AthenaShared/interfaces/progressBar';
-import { rgbaToHexAlpha } from '@AthenaShared/utility/color';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { ProgressBar as ProgressBarType } from '@AthenaShared/interfaces/progressBar.js';
+import { rgbaToHexAlpha } from '@AthenaShared/utility/color.js';
 
 const DEFAULT_DIMENSIONS = {
     width: 200,
@@ -41,20 +41,20 @@ const InternalFunctions = {
 
         const backgroundBar = document.createElement('div');
         backgroundBar.addClass('bar-wrapper');
-        backgroundBar.id = uid;
+        backgroundBar.rmlId = uid;
         elements[index].element = backgroundBar;
         document.appendChild(backgroundBar);
 
         const frontBar = document.createElement('div');
         frontBar.addClass('bar');
-        frontBar.id = `bar-${uid}`;
+        frontBar.rmlId = `bar-${uid}`;
         elements[index].innerElement = frontBar;
         backgroundBar.appendChild(frontBar);
 
         if (elements[index].percentageEnabled) {
             const innerText = document.createElement('div');
             innerText.addClass('inner-text');
-            innerText.id = `text-${uid}`;
+            innerText.rmlId = `text-${uid}`;
             elements[index].innerText = innerText;
             backgroundBar.appendChild(innerText);
         }

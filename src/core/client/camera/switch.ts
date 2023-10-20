@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SWITCHOUT_TYPES } from '@AthenaShared/enums/switchOutTypes';
+import { SWITCHOUT_TYPES } from '@AthenaShared/enums/switchOutTypes.js';
 
 /**
  * Zoom all the way out. Then zoom all the way in from the sky.

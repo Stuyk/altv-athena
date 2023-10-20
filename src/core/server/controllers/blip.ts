@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import '@AthenaServer/systems/streamer';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Blip } from '../../shared/interfaces/blip';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { Blip } from '../../shared/interfaces/blip.js';
+import { ControllerFuncs } from './shared.js';
 
-const globalBlips: Array<Blip> = [];
+const globalBlips: Array<Blip & { pointBlip: alt.PointBlip }> = [];
 
 /**
  * Adds a global blip the player loads when they join.
@@ -39,14 +39,25 @@ export function append(blip: Blip): string {
         blip.uid = Athena.utility.hash.sha256Random(JSON.stringify(blip));
     }
 
-    const index = globalBlips.findIndex((existing) => existing && existing.uid === blip.uid);
-    if (index >= 0) {
-        globalBlips[index] = blip;
-    } else {
-        globalBlips.push(blip);
+    const pointBlip = new alt.PointBlip(blip.pos.x, blip.pos.y, blip.pos.z, true);
+    pointBlip.scale = blip.scale;
+
+    if (blip.category) {
+        pointBlip.category = blip.category;
     }
 
-    alt.emitAllClients(SYSTEM_EVENTS.APPEND_BLIP, blip);
+    pointBlip.sprite = blip.sprite;
+    pointBlip.color = blip.color;
+    pointBlip.shortRange = blip.shortRange;
+    pointBlip.name = blip.text;
+
+    const index = globalBlips.findIndex((existing) => existing && existing.uid === blip.uid);
+    if (index >= 0) {
+        globalBlips[index] = { ...blip, pointBlip };
+    } else {
+        globalBlips.push({ ...blip, pointBlip });
+    }
+
     return blip.uid;
 }
 
@@ -80,7 +91,10 @@ export function remove(uid: string): boolean {
         return false;
     }
 
-    alt.emitAllClients(SYSTEM_EVENTS.REMOVE_BLIP, uid);
+    try {
+        globalBlips[index].pointBlip.destroy();
+    } catch (err) {}
+
     globalBlips.splice(index, 1);
     return true;
 }
@@ -155,30 +169,8 @@ export function addToPlayer(player: alt.Player, blipData: Blip) {
     alt.emitClient(player, SYSTEM_EVENTS.APPEND_BLIP, blipData);
 }
 
-/**
- * Used to load all blips on client-side for a player.
- * This is already called when the gamemode starts. Not necessary to call twice.
- *
- * #### Example
- * ```ts
- * Athena.controllers.blip.populateGlobalBlips(somePlayer);
- * ```
- *
- *
- * @param {alt.Player} player An alt:V Player Entity
- */
-export function populateGlobalBlips(player: alt.Player) {
-    if (Overrides.populateGlobalBlips) {
-        return Overrides.populateGlobalBlips(player);
-    }
-
-    alt.emitClient(player, SYSTEM_EVENTS.POPULATE_BLIPS, globalBlips);
-}
-
 interface BlipControllerFuncs
-    extends ControllerFuncs<typeof append, typeof remove, typeof addToPlayer, typeof removeFromPlayer> {
-    populateGlobalBlips: typeof populateGlobalBlips;
-}
+    extends ControllerFuncs<typeof append, typeof remove, typeof addToPlayer, typeof removeFromPlayer> {}
 
 const Overrides: Partial<BlipControllerFuncs> = {};
 
@@ -186,7 +178,6 @@ export function override(functionName: 'append', callback: typeof append);
 export function override(functionName: 'remove', callback: typeof remove);
 export function override(functionName: 'addToPlayer', callback: typeof addToPlayer);
 export function override(functionName: 'removeFromPlayer', callback: typeof removeFromPlayer);
-export function override(functionName: 'populateGlobalBlips', callback: typeof populateGlobalBlips);
 /**
  * Used to override any blip controller function.
  *

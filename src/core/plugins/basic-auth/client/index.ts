@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
-import { AuthEvents } from '../shared/events';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { AuthEvents } from '../shared/events.js';
 
 let page: AthenaClient.webview.Page;
 

@@ -1,17 +1,17 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
-import { playAnimation } from '@AthenaClient/systems/animations';
-import commonAnims from './animationMenus/commonAnims';
-import danceAnims from './animationMenus/danceAnims';
-import emoteAnims from './animationMenus/emoteAnims';
-import funAnims from './animationMenus/funAnims';
-import idleAnims from './animationMenus/idleAnims';
-import leanAnims from './animationMenus/leanAnims';
-import waitAnims from './animationMenus/waitAnims';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds.js';
+import { playAnimation } from '@AthenaClient/systems/animations.js';
+import commonAnims from './animationMenus/commonAnims.js';
+import danceAnims from './animationMenus/danceAnims.js';
+import emoteAnims from './animationMenus/emoteAnims.js';
+import funAnims from './animationMenus/funAnims.js';
+import idleAnims from './animationMenus/idleAnims.js';
+import leanAnims from './animationMenus/leanAnims.js';
+import waitAnims from './animationMenus/waitAnims.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
 
 function callback(dict: string, name: string, flags: number) {
     console.log(dict, name, flags);

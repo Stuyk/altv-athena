@@ -1,4 +1,4 @@
-import { Account } from '@AthenaShared/interfaces/iAccount';
+import { Account } from '@AthenaShared/interfaces/iAccount.js';
 
 export interface AccountEx extends Account {
     /**

@@ -1,5 +1,5 @@
-import * as Athena from '@AthenaServer/api';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import * as Athena from '@AthenaServer/api/index.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 import * as alt from 'alt-server';
 
 /**

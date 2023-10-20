@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { DiscordUser } from '../interface/iDiscordUser';
-import IAttachable from '../../shared/interfaces/iAttachable';
+import { DiscordUser } from '../interface/iDiscordUser.js';
+import IAttachable from '../../shared/interfaces/iAttachable.js';
 
 declare module 'alt-server' {
     export interface Player {

@@ -1,25 +1,12 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { ItemDrop } from '@AthenaShared/interfaces/item';
-import '@AthenaServer/systems/streamer';
+import { ItemDrop } from '@AthenaShared/interfaces/item.js';
+import { ITEM_SYNCED_META } from '@AthenaShared/enums/syncedMeta.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
+import { ControllerFuncs } from './shared.js';
 
-const KEY = 'item-drops';
-const globalDrops: Array<ItemDrop> = [];
-const MAX_DISTANCE = 25;
+const drops: { [uid: string]: alt.Object } = {};
 
-const InternalController = {
-    async init() {
-        Athena.systems.streamer.registerCallback(KEY, InternalController.update, MAX_DISTANCE);
-        InternalController.refresh();
-    },
-    refresh() {
-        Athena.systems.streamer.updateData(KEY, globalDrops);
-    },
-    update(player: alt.Player, drops: Array<ItemDrop>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_ITEM_DROPS, drops);
-    },
-};
+let defaultModel = 'prop_cs_cardbox_01';
 
 /**
  * Append item drop information to the server.
@@ -30,7 +17,6 @@ const InternalController = {
  *
  * Returns a uid or generates one if not specified.
  *
- *
  * @param {ItemDrop} itemDrop
  * @return {string}
  */
@@ -39,8 +25,11 @@ export function append(itemDrop: ItemDrop): string {
         return Overrides.append(itemDrop);
     }
 
-    globalDrops.push(itemDrop);
-    InternalController.refresh();
+    const object = new alt.Object(itemDrop.model ? itemDrop.model : defaultModel, itemDrop.pos, alt.Vector3.zero);
+    object.frozen = true;
+    object.collision = false;
+    object.setStreamSyncedMeta(ITEM_SYNCED_META.ITEM_DROP_INFO, deepCloneObject(itemDrop));
+    drops[String(itemDrop._id)] = object;
     return String(itemDrop._id);
 }
 
@@ -55,17 +44,26 @@ export function remove(id: string): boolean {
         return Overrides.remove(id);
     }
 
-    const index = globalDrops.findIndex((label) => label._id === id);
-    if (index <= -1) {
+    if (!drops[id]) {
         return false;
     }
 
-    globalDrops.splice(index, 1);
-    InternalController.refresh();
+    try {
+        drops[id].destroy();
+    } catch (err) {}
+
     return true;
 }
 
-Athena.systems.plugins.addCallback(InternalController.init);
+/**
+ * Overrides the default model for item drops.
+ * By default it is a cardboard box.
+ *
+ * @param {string} model
+ */
+export function setDefaultDropModel(model: string) {
+    defaultModel = model;
+}
 
 type ItemDropFuncs = ControllerFuncs<typeof append, typeof remove>;
 

@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Marker } from '@AthenaShared/interfaces/marker';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { Marker } from '@AthenaShared/interfaces/marker.js';
 
 let addedMarkers: Array<Marker> = [];
 let localMarkers: Array<Marker> = [];

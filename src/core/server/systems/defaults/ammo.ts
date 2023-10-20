@@ -1,10 +1,9 @@
 import * as alt from 'alt-server';
 
-import * as Athena from '@AthenaServer/api';
-import { getWeaponMap } from '@AthenaShared/information/weaponList';
-import { StoredItem, WeaponInfo } from '@AthenaShared/interfaces/item';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
+import * as Athena from '@AthenaServer/api/index.js';
+import { getWeaponMap } from '@AthenaShared/information/weaponList.js';
+import { StoredItem, StoredItemEx, WeaponInfo } from '@AthenaShared/interfaces/item.js';
+import { InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces.js';
 
 /**
  * THIS IS A DEFAULT SYSTEM.
@@ -16,44 +15,25 @@ import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
  */
 
 const SYSTEM_NAME = 'Ammunition Items';
-const hashes = {};
 
 let enabled = true;
 
 const Internal = {
-    handleUpdate(player: alt.Player, uid: string, hash: number, ammo: number) {
-        if (!hashes[player.id] || hashes[player.id] !== uid) {
-            return;
-        }
-
-        const data = Athena.document.character.get(player);
-        if (typeof data === 'undefined') {
-            return;
-        }
-
-        const toolbar = deepCloneArray<StoredItem<WeaponInfo>>(data.toolbar);
-        const toolbarIndex = toolbar.findIndex((x) => x.isEquipped && x.data.hash && x.data.hash === hash);
-        if (toolbarIndex <= -1) {
-            return;
-        }
-
-        if (toolbar[toolbarIndex].data.ammo === ammo) {
-            return;
-        }
-
-        toolbar[toolbarIndex].data.ammo = ammo;
-        Athena.document.character.set(player, 'toolbar', toolbar, true);
-    },
-    weaponUpdateTick() {
-        const players = Athena.getters.players.onlineWithWeapons();
-        for (let armedPlayer of players) {
-            if (!armedPlayer || !armedPlayer.valid) {
+    update() {
+        const armedPlayers = Athena.getters.players.onlineWithWeapons();
+        for (let armedPlayer of armedPlayers) {
+            const toolbarWeapon = Athena.player.get.getEquippedToolbarWeapon(armedPlayer);
+            if (!toolbarWeapon) {
                 continue;
             }
 
-            const uid = Athena.utility.uid.generate();
-            hashes[armedPlayer.id] = uid;
-            armedPlayer.emit(SYSTEM_EVENTS.PLAYER_EMIT_AMMUNITION_UPDATE, uid, armedPlayer.currentWeapon);
+            try {
+                const ammo = armedPlayer.getWeaponAmmo(armedPlayer.currentWeapon);
+                Athena.player.toolbar.modifyItemData(armedPlayer, toolbarWeapon.slot, {
+                    ...toolbarWeapon.data,
+                    ammo: ammo >= 2 ? ammo : 0,
+                });
+            } catch (err) {}
         }
     },
     combineData(item1: StoredItem<WeaponInfo>, item2: StoredItem<WeaponInfo>): Required<WeaponInfo> {
@@ -113,8 +93,16 @@ const Internal = {
             });
         });
 
-        alt.setInterval(Internal.weaponUpdateTick, 500);
-        alt.onClient(SYSTEM_EVENTS.PLAYER_EMIT_AMMUNITION_UPDATE, Internal.handleUpdate);
+        Athena.player.events.on('item-equipped', (player: alt.Player, slot: number, type: InventoryType) => {
+            const weaponItem = Athena.player[type].getAt(player, slot) as StoredItemEx<WeaponInfo>;
+            if (!weaponItem) {
+                return;
+            }
+
+            player.setWeaponAmmo(player.currentWeapon, weaponItem.data.ammo);
+        });
+
+        alt.setInterval(Internal.update, 1000);
         alt.log(`~lc~Default System: ~g~${SYSTEM_NAME}`);
     },
 };

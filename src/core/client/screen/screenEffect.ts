@@ -1,5 +1,5 @@
 import * as natives from 'natives';
-import { SCREEN_EFFECTS } from '@AthenaShared/enums/screenEffects';
+import { SCREEN_EFFECTS } from '@AthenaShared/enums/screenEffects.js';
 
 /**
  * Check whether the specific screen effect is running.

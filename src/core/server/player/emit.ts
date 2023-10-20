@@ -1,22 +1,21 @@
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 import * as alt from 'alt-server';
-import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { View_Events_Input_Menu } from '@AthenaShared/enums/views';
-import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
-import IAttachable from '@AthenaShared/interfaces/iAttachable';
-import ICredit from '@AthenaShared/interfaces/iCredit';
-import IErrorScreen from '@AthenaShared/interfaces/iErrorScreen';
-import IShard from '@AthenaShared/interfaces/iShard';
-import ISpinner from '@AthenaShared/interfaces/iSpinner';
-import { Particle } from '@AthenaShared/interfaces/particle';
-import { ProgressBar } from '@AthenaShared/interfaces/progressBar';
-import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline';
-import { IWheelOption } from '@AthenaShared/interfaces/wheelMenu';
-import { sha256Random } from '../utility/hash';
-import { AcceptDeclineEvent } from '@AthenaShared/interfaces/acceptDeclineEvent';
-import { RecommendedTimecycleTypes } from '@AthenaShared/enums/timecycleTypes';
-import { WEATHER_KEY } from '@AthenaShared/utility/weather';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags.js';
+import IAttachable from '@AthenaShared/interfaces/iAttachable.js';
+import ICredit from '@AthenaShared/interfaces/iCredit.js';
+import IErrorScreen from '@AthenaShared/interfaces/iErrorScreen.js';
+import IShard from '@AthenaShared/interfaces/iShard.js';
+import ISpinner from '@AthenaShared/interfaces/iSpinner.js';
+import { Particle } from '@AthenaShared/interfaces/particle.js';
+import { ProgressBar } from '@AthenaShared/interfaces/progressBar.js';
+import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline.js';
+import { IWheelOption } from '@AthenaShared/interfaces/wheelMenu.js';
+import { sha256Random } from '../utility/hash.js';
+import { AcceptDeclineEvent } from '@AthenaShared/interfaces/acceptDeclineEvent.js';
+import { RecommendedTimecycleTypes } from '@AthenaShared/enums/timecycleTypes.js';
+import { WEATHER_KEY } from '@AthenaShared/utility/weather.js';
 
 /**
  * Play an alarm on this player.

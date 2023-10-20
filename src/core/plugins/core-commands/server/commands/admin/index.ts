@@ -1,1 +1,1 @@
-import './permissions';
+import './permissions.js';

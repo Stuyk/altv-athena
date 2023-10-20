@@ -1,5 +1,5 @@
-import { propData } from '@AthenaShared/information/props';
-import { PropInfo } from '@AthenaShared/interfaces/ipropInfo';
+import { propData } from '@AthenaShared/information/props.js';
+import { PropInfo } from '@AthenaShared/interfaces/ipropInfo.js';
 
 /**
  * Get the PropInfo corresponding to a hash.

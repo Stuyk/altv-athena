@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { Appearance } from '@AthenaShared/interfaces/appearance';
-import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo';
-import { CHARACTER_CREATOR_CONFIG } from '../../shared/config';
-import { CHARACTER_CREATOR_EVENTS } from '../../shared/events';
+import * as Athena from '@AthenaServer/api/index.js';
+import { Appearance } from '@AthenaShared/interfaces/appearance.js';
+import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo.js';
+import { CHARACTER_CREATOR_CONFIG } from '../../shared/config.js';
+import { CHARACTER_CREATOR_EVENTS } from '../../shared/events.js';
 
 const CreatorList: { [key: string]: number } = {};
 

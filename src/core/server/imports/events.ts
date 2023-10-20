@@ -1,7 +1,7 @@
-import '../events/clientEvents';
-import '../events/onAppearance';
-import '../events/pickupItemEvent';
-import '../events/playerConnect';
-import '../events/playerDeath';
-import '../vehicle/events';
-import '../events/waypointEvent';
+import '../events/clientEvents.js';
+import '../events/onAppearance.js';
+import '../events/pickupItemEvent.js';
+import '../events/playerConnect.js';
+import '../events/playerDeath.js';
+import '../vehicle/events.js';
+import '../events/waypointEvent.js';

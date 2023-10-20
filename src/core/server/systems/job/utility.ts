@@ -1,5 +1,5 @@
-import { Objective } from '@AthenaShared/interfaces/job';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { Objective } from '@AthenaShared/interfaces/job.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
 
 /**
  * Cleanly clones an objective and rebinds all callbacks.

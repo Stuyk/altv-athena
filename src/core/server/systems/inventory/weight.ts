@@ -1,6 +1,6 @@
-import { Item, StoredItem } from '@AthenaShared/interfaces/item';
-import * as Athena from '@AthenaServer/api';
-import * as config from './config';
+import { Item, StoredItem } from '@AthenaShared/interfaces/item.js';
+import * as Athena from '@AthenaServer/api/index.js';
+import * as config from './config.js';
 
 /**
  * Returns the total weight of a given data set.

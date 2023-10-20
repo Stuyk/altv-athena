@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 import Database from '@stuyk/ezmongodb';
-import { DoorInfo, DynamicDoor, dDynamicDoor } from './interfaces';
+import { DoorInfo, DynamicDoor, dDynamicDoor } from './interfaces.js';
 
 let areDoorsLoading = false;
 

@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 
-import * as Athena from '@AthenaServer/api';
-import { StoredItem } from '@AthenaShared/interfaces/item';
-import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import * as Athena from '@AthenaServer/api/index.js';
+import { StoredItem } from '@AthenaShared/interfaces/item.js';
+import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
 
 export type dbName = string;
 

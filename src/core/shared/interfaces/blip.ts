@@ -1,5 +1,5 @@
 import * as alt from 'alt-shared';
-import { BLIP_COLOR } from '../enums/blipColor';
+import { BLIP_COLOR } from '../enums/blipColor.js';
 
 /**
  * Used when passing a blip from server-side to client-side.

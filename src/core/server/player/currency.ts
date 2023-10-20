@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { CurrencyTypes } from '@AthenaShared/enums/currency';
+import * as Athena from '@AthenaServer/api/index.js';
+import { CurrencyTypes } from '@AthenaShared/enums/currency.js';
 
 export type DefaultCurrency = 'bank' | 'cash';
 
@@ -52,9 +52,6 @@ export function add<CustomCurrency>(
         return false;
     }
 }
-
-
-
 
 /**
  * Remove currency type from the player.

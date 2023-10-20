@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import * as Athena from '@AthenaServer/api';
-import { ItemDrop, StoredItem } from '@AthenaShared/interfaces/item';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import * as Athena from '@AthenaServer/api/index.js';
+import { ItemDrop, StoredItem } from '@AthenaShared/interfaces/item.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
 
 type UnpushedItemDrop = Omit<ItemDrop, '_id'>;
 

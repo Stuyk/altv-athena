@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 import Database from '@stuyk/ezmongodb';
-import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
-import { VehicleState } from '@AthenaShared/interfaces/vehicleState';
-import IVehicleTuning from '@AthenaShared/interfaces/vehicleTuning';
+import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned.js';
+import { VehicleState } from '@AthenaShared/interfaces/vehicleState.js';
+import IVehicleTuning from '@AthenaShared/interfaces/vehicleTuning.js';
 
 export interface AddOptions {
     /**

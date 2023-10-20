@@ -1,14 +1,15 @@
 import * as alt from 'alt-server';
-import * as Athena from '../api';
 import Database from '@stuyk/ezmongodb';
-import { DEFAULT_CONFIG } from '../athena/main';
-import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Character, CharacterDefaults } from '@AthenaShared/interfaces/character';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
-import { Appearance } from '@AthenaShared/interfaces/appearance';
-import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo';
 import { ObjectId } from 'mongodb';
+
+import * as Athena from '../api/index.js';
+import { DEFAULT_CONFIG } from '../athena/main.js';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { Character, CharacterDefaults } from '@AthenaShared/interfaces/character.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
+import { Appearance } from '@AthenaShared/interfaces/appearance.js';
+import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo.js';
 
 const Callbacks: { [key: string]: (player: alt.Player, ...args: any[]) => void } = {
     creator: null,
@@ -187,7 +188,6 @@ export async function select(player: alt.Player, character: Character) {
 
         // Propagation
         // Athena.controllers.chat.populateCommands(player);
-        Athena.controllers.blip.populateGlobalBlips(player);
         Athena.systems.inventory.weapons.update(player);
         player.frozen = false;
         player.visible = true;

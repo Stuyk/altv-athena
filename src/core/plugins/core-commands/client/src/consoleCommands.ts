@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
-import { ConsoleCommander } from '@AthenaShared/utility/consoleCommander';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced.js';
+import { ConsoleCommander } from '@AthenaShared/utility/consoleCommander.js';
 
 class ClientPlugin {
     static async init() {

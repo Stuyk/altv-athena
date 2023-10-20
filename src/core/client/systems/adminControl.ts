@@ -1,4 +1,4 @@
-import { AdminControl, AdminControlEvents } from '@AthenaShared/interfaces/adminControl';
+import { AdminControl, AdminControlEvents } from '@AthenaShared/interfaces/adminControl.js';
 import * as alt from 'alt-client';
 
 let AdminControls: Array<AdminControl> = [];

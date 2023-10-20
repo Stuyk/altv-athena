@@ -1,1 +1,1 @@
-import './src/consoleCommands';
+import './src/consoleCommands.js';

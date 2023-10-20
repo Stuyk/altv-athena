@@ -1,8 +1,9 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { Account } from '../../shared/interfaces/iAccount';
 import nJWT from 'njwt';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+
+import * as Athena from '@AthenaServer/api/index.js';
+import { Account } from '../../shared/interfaces/iAccount.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 
 // Do not change; it is just a key to lookup in the database.
 const JWT_SECRET_KEY = 'jwtSecret';

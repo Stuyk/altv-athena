@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { IConfig } from '../interface/iConfig';
+import { IConfig } from '../interface/iConfig.js';
 import fs from 'fs';
 
 const DefaultServerCFGName = 'server.toml';

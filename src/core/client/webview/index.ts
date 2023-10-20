@@ -1,11 +1,11 @@
-export { Page } from './page';
+export { Page } from './page.js';
 import * as native from 'natives';
 import * as alt from 'alt-client';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
-import { OverlayPageType } from '@AthenaShared/interfaces/webview';
-import { AudioView } from '@AthenaClient/views/audio';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents.js';
+import { OverlayPageType } from '@AthenaShared/interfaces/webview.js';
+import { AudioView } from '@AthenaClient/views/audio.js';
 
 export type AnyCallback = ((...args: any[]) => void) | ((...args: any[]) => Promise<void>) | Function;
 

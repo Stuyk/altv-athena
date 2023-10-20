@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
 
-import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
-import * as Athena from '@AthenaServer/api';
-import { CommandCallback, DetailedCommand, MessageCommand } from '@AthenaShared/interfaces/messageCommand';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { getParamNames } from '@AthenaShared/utility/getParamNames';
+import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger.js';
+import * as Athena from '@AthenaServer/api/index.js';
+import { CommandCallback, DetailedCommand, MessageCommand } from '@AthenaShared/interfaces/messageCommand.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { getParamNames } from '@AthenaShared/utility/getParamNames.js';
 
 const commands: { [command_name: string]: Omit<MessageCommand<alt.Player>, 'name'> } = {};
 

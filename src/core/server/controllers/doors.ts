@@ -1,49 +1,42 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import '@AthenaServer/systems/streamer';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Door } from '@AthenaShared/interfaces/door';
-import { Doors } from '@AthenaShared/information/doors';
+import { Door } from '@AthenaShared/interfaces/door.js';
+import { Doors } from '@AthenaShared/information/doors.js';
 import Database from '@stuyk/ezmongodb';
-import { Collections } from '@AthenaServer/database/collections';
+import { Collections } from '@AthenaServer/database/collections.js';
+import { ControllerFuncs } from './shared.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
 
 type DoorDocument = Door & { _id?: unknown };
 
-const KEY = 'doors';
-const globalDoors: Array<Door> = [];
+const MAX_MARKERS_TO_DRAW = 10;
+const doorGroup = new alt.VirtualEntityGroup(MAX_MARKERS_TO_DRAW);
+const globalDoors: (Door & { entity: alt.VirtualEntity })[] = [];
 
 const InternalController = {
+    create(door: Door) {
+        const entity = new alt.VirtualEntity(doorGroup, new alt.Vector3(door.pos), 15, { door, type: 'door' });
+        globalDoors.push({ ...door, entity });
+    },
     async init() {
-        Athena.systems.streamer.registerCallback(KEY, InternalController.update, 25);
-
         for (let door of Doors) {
-            globalDoors.push(door);
+            InternalController.create(door);
         }
 
         await Database.createCollection(Collections.Doors, false);
         const savedDoors = await Database.fetchAllData<DoorDocument>(Collections.Doors);
-        if (savedDoors.length <= 0) {
-            InternalController.refresh();
-            return;
-        }
 
         for (let door of savedDoors) {
             const index = globalDoors.findIndex((x) => x.uid === door.uid);
             if (index <= -1) {
+                InternalController.create(door);
                 continue;
             }
 
             globalDoors[index].isUnlocked = door.isUnlocked;
+            globalDoors[index].entity.setStreamSyncedMeta('door', deepCloneObject(globalDoors[index]));
         }
-
-        InternalController.refresh();
-    },
-    refresh() {
-        Athena.systems.streamer.updateData(KEY, globalDoors);
-    },
-    update(player: alt.Player, doors: Array<Door>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_DOORS, doors);
     },
 };
 
@@ -77,9 +70,18 @@ export function append(door: Door): string {
         door.uid = Athena.utility.hash.sha256Random(JSON.stringify(door));
     }
 
-    globalDoors.push(door);
-    InternalController.refresh();
+    InternalController.create(door);
     return door.uid;
+}
+
+/**
+ * Get all available doors registered in the world currently
+ *
+ * @export
+ * @return {(Array<Door & { entity: alt.VirtualEntity }>)}
+ */
+export function getDoors(): Array<Door & { entity: alt.VirtualEntity }> {
+    return globalDoors;
 }
 
 /**
@@ -104,8 +106,11 @@ export function remove(uid: string): boolean {
         return false;
     }
 
+    try {
+        globalDoors[index].entity.destroy();
+    } catch (err) {}
+
     globalDoors.splice(index, 1);
-    InternalController.refresh();
     return true;
 }
 
@@ -129,13 +134,13 @@ export async function update(uid: string, isUnlocked: boolean): Promise<boolean>
         return Overrides.update(uid, isUnlocked);
     }
 
-    const index = globalDoors.findIndex((label) => label.uid === uid);
+    const index = globalDoors.findIndex((door) => door.uid === uid);
     if (index <= -1) {
         return false;
     }
 
     globalDoors[index].isUnlocked = isUnlocked;
-    InternalController.refresh();
+    globalDoors[index].entity.setStreamSyncedMeta('door', deepCloneObject(globalDoors[index]));
 
     const existingDoor = await Database.fetchData<DoorDocument>('uid', uid, Collections.Doors);
 

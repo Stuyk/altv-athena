@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline.js';
 
 let timeline: Array<Task | TaskCallback> = [];
 let vehicle;

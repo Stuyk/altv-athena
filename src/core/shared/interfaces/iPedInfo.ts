@@ -1,4 +1,4 @@
-import { PED_TYPE } from '@AthenaShared/enums/pedInformationFlags';
+import { PED_TYPE } from '@AthenaShared/enums/pedInformationFlags.js';
 
 /**
  * Interface for working with / using peds.

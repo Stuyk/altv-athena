@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { AcceptDeclineEvent } from '@AthenaShared/interfaces/acceptDeclineEvent';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { AcceptDeclineEvent } from '@AthenaShared/interfaces/acceptDeclineEvent.js';
 
 let lastEvent: AcceptDeclineEvent;
 

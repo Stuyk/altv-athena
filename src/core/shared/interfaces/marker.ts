@@ -1,5 +1,5 @@
 import * as alt from 'alt-shared';
-import { MARKER_TYPE } from '../enums/markerTypes';
+import { MARKER_TYPE } from '../enums/markerTypes.js';
 
 /**
  * Used to pass marker information from server to client.

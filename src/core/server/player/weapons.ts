@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { StoredItem } from '@AthenaShared/interfaces/item';
+import * as Athena from '@AthenaServer/api/index.js';
+import { StoredItem } from '@AthenaShared/interfaces/item.js';
 
 /**
  * Return all weapons the player currently has in their inventory, and toolbar.

@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import IShard from '@AthenaShared/interfaces/iShard';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import IShard from '@AthenaShared/interfaces/iShard.js';
 
 let scaleform: AthenaClient.screen.scaleform.Scaleform;
 let interval: number;

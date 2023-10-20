@@ -1,5 +1,5 @@
-import { pedData } from '@AthenaShared/information/peds';
-import { PedInfo } from '@AthenaShared/interfaces/iPedInfo';
+import { pedData } from '@AthenaShared/information/peds.js';
+import { PedInfo } from '@AthenaShared/interfaces/iPedInfo.js';
 
 /**
  * Get the PedInfo corresponding to a hash.

@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
 
 const pingEvery = 5000;
 

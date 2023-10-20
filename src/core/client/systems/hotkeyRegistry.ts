@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import * as AthenaClient from '@AthenaClient/api';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
-import { KeyBindRestrictions, KeyInfo } from '@AthenaClient/interface/hotkeys';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
+import { KeyBindRestrictions, KeyInfo } from '@AthenaClient/interface/hotkeys.js';
 
 export type KeyInfoDefault = KeyInfo & { default: number };
 

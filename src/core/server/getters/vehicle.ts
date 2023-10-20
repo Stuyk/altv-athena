@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import * as players from './players';
+import * as Athena from '@AthenaServer/api/index.js';
+import * as players from './players.js';
 
 /**
  * Get a vehicle by their alt:V ID

@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { Character } from '@AthenaShared/interfaces/character';
-import { KnownKeys } from '@AthenaShared/utility/knownKeys';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import * as Athena from '@AthenaServer/api/index.js';
+import { Character } from '@AthenaShared/interfaces/character.js';
+import { KnownKeys } from '@AthenaShared/utility/knownKeys.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 import Database from '@stuyk/ezmongodb';
 
 export type KeyChangeCallback = (player: alt.Player, newValue: any, oldValue: any) => void;

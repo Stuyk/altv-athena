@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
 const HOSPITALS = [
     { x: -248.01309204101562, y: 6332.01513671875, z: 33.0750732421875 },

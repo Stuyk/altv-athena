@@ -1,44 +1,11 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import '@AthenaServer/systems/streamer';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IObject } from '../../shared/interfaces/iObject';
-import { sha256Random } from '../utility/hash';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { IObject } from '../../shared/interfaces/iObject.js';
+import { sha256Random } from '../utility/hash.js';
+import { ControllerFuncs } from './shared.js';
 
-const globalObjects: Array<IObject> = [];
-const KEY = 'objects';
-
-const InternalController = {
-    /**
-     * Initialize the Object Controller Streamer
-     * @static
-     *
-     */
-    init() {
-        Athena.systems.streamer.registerCallback(KEY, InternalController.update);
-    },
-
-    /**
-     * Internal function to refresh all global objects in the streamer service.
-     * @static
-     *
-     */
-    refresh() {
-        Athena.systems.streamer.updateData(KEY, globalObjects);
-    },
-
-    /**
-     * Updates objects through the streamer service.
-     * @static
-     * @param {alt.Player} player An alt:V Player Entity
-     * @param {Array<IObject>} objects
-     *
-     */
-    update(player: alt.Player, objects: Array<IObject>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_OBJECTS, objects);
-    },
-};
+const globalObjects: Array<IObject & { object: alt.Object }> = [];
 
 /**
  * Add an object to the global world.
@@ -80,8 +47,19 @@ export function append(objectData: IObject): string {
         objectData.rot = new alt.Vector3(0, 0, 0);
     }
 
-    globalObjects.push(objectData);
-    InternalController.refresh();
+    const newObject = {
+        ...objectData,
+        object: new alt.Object(objectData.model, objectData.pos, objectData.rot ? objectData.rot : alt.Vector3.zero),
+    };
+
+    newObject.object.frozen = true;
+    newObject.object.dimension = objectData.dimension ? objectData.dimension : 0;
+
+    if (objectData.noCollision) {
+        newObject.object.collision = false;
+    }
+
+    globalObjects.push(newObject);
     return objectData.uid;
 }
 
@@ -112,16 +90,19 @@ export function remove(uid: string): boolean {
             continue;
         }
 
+        try {
+            globalObjects[i].object.destroy();
+        } catch (err) {}
+
         globalObjects.splice(i, 1);
         wasFound = true;
+        break;
     }
 
     if (!wasFound) {
         return false;
     }
 
-    InternalController.refresh();
-    alt.emitAllClients(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, uid);
     return true;
 }
 
@@ -174,6 +155,10 @@ export function addToPlayer(player: alt.Player, objectData: IObject): string {
         objectData.uid = sha256Random(JSON.stringify(objectData));
     }
 
+    if (!objectData.rot) {
+        objectData.rot = alt.Vector3.zero;
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.APPEND_OBJECT, objectData);
     return objectData.uid;
 }
@@ -209,11 +194,12 @@ export function updatePosition(uid: string, pos: alt.IVector3, player: alt.Playe
     if (typeof player === 'undefined') {
         const index = globalObjects.findIndex((x) => x.uid === uid);
         if (index === -1) {
+            console.log('could not find');
             return false;
         }
 
         globalObjects[index].pos = pos;
-        InternalController.refresh();
+        globalObjects[index].object.pos = new alt.Vector3(pos);
         return true;
     }
 
@@ -229,15 +215,13 @@ export function updateModel(uid: string, model: string, player: alt.Player = und
         }
 
         globalObjects[index].model = model;
-        InternalController.refresh();
+        globalObjects[index].object.model = model;
         return true;
     }
 
     alt.emitClient(player, SYSTEM_EVENTS.UPDATE_OBJECT_MODEL, uid, model);
     return true;
 }
-
-Athena.systems.plugins.addCallback(InternalController.init);
 
 interface ObjectControllerFuncs
     extends ControllerFuncs<typeof append, typeof remove, typeof addToPlayer, typeof removeFromPlayer> {

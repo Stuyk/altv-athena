@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { playAnimation } from './animations';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { playAnimation } from './animations.js';
 
 let interval: number;
 let cuffer: alt.Player;

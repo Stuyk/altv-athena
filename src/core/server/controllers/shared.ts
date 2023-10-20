@@ -1,4 +1,4 @@
-interface ControllerFuncs<append, remove, addToPlayer = void, removeFromPlayer = void, update = void> {
+export interface ControllerFuncs<append, remove, addToPlayer = void, removeFromPlayer = void, update = void> {
     append: append;
     remove: remove;
     addToPlayer?: addToPlayer;

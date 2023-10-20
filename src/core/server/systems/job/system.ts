@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import { Objective, ObjectiveEvents } from '@AthenaShared/interfaces/job';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { Objective, ObjectiveEvents } from '@AthenaShared/interfaces/job.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
 
 /**
  * Create a Job Instance
@@ -271,10 +271,10 @@ export class Job {
      */
     removeAttachable() {
         const objective = this.getCurrentObjective();
-        if ( !objective ) {
+        if (!objective) {
             return;
         }
-        
+
         if (!objective.attachable) {
             return;
         }

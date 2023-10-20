@@ -1,8 +1,8 @@
 import * as alt from 'alt-shared';
-import { DEFAULT_CONFIG } from '../../server/athena/main';
-import { Appearance } from './appearance';
-import { CharacterInfo } from './characterInfo';
-import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
+import { DEFAULT_CONFIG } from '../../server/athena/main.js';
+import { Appearance } from './appearance.js';
+import { CharacterInfo } from './characterInfo.js';
+import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item.js';
 
 /**
  * Used as the main interface for storing character data.

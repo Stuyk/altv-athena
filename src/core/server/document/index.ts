@@ -1,3 +1,3 @@
-export * as account from './accountData';
-export * as character from './character';
-export * as vehicle from './vehicle';
+export * as account from './accountData.js';
+export * as character from './character.js';
+export * as vehicle from './vehicle.js';

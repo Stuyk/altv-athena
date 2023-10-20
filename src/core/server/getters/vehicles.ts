@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
+import * as Athena from '@AthenaServer/api/index.js';
+import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned.js';
 
 /**
  * Get all vehicles in range of a position

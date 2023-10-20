@@ -1,122 +1,125 @@
 // Client Plugins
-import '../plugins/athena/client/imports';
+import '../plugins/athena/client/imports.js';
 
 // Camera
-import './camera/cinematic';
-import './camera/gameplay';
-import './camera/pedEdit';
-import './camera/switch';
+import './camera/cinematic.js';
+import './camera/gameplay.js';
+import './camera/pedEdit.js';
+import './camera/switch.js';
 
 // Commands
-import './commands/rmlui';
+import './commands/rmlui.js';
 
 // Controllers
-import './controllers/dynamicDoor';
+import './controllers/dynamicDoor.js';
 
 // Events
-import './events/connectionComplete';
-import './events/disconnect';
-import './events/meta';
-import './events/onInventoryUpdate';
-import './events/onTicksStart';
+import './events/connectionComplete.js';
+import './events/disconnect.js';
+import './events/meta.js';
+import './events/onInventoryUpdate.js';
+import './events/onTicksStart.js';
 
 // Interfaces - Always Load First
-import './extensions/meta';
-import './extensions/player';
+import './extensions/meta.js';
+import './extensions/player.js';
 
 // Menus
-import './menus/animation';
-import './menus/player';
-import './menus/object';
-import './menus/vehicle';
+import './menus/animation.js';
+import './menus/player.js';
+import './menus/object.js';
+import './menus/vehicle.js';
 
 // rmlui
-import './rmlui/fonts/index'; // Always load first...
-import './rmlui/input/index';
-import './rmlui/menu/index';
-import './rmlui/menu3d/index';
-import './rmlui/progressbar/index';
-import './rmlui/question/index';
-import './rmlui/sprites/index';
-import './rmlui/staticText/index';
+import './rmlui/fonts/index.js'; // Always load first...
+import './rmlui/input/index.js';
+import './rmlui/menu/index.js';
+import './rmlui/menu3d/index.js';
+import './rmlui/progressbar/index.js';
+import './rmlui/question/index.js';
+import './rmlui/sprites/index.js';
+import './rmlui/staticText/index.js';
 
-import './screen/credits';
-import './screen/errorScreen';
-import './screen/missionText';
-import './screen/marker';
-import './screen/minimap';
-import './screen/missionText';
-import './screen/mouse';
-import './screen/notification';
-import './screen/particle';
-import './screen/progressBar';
-import './screen/scaleform';
-import './screen/screenEffect';
-import './screen/screenFade';
-import './screen/shard';
-import './screen/spinner';
-import './screen/text';
-import './screen/texture';
-import './screen/timecycle';
+import './screen/credits.js';
+import './screen/errorScreen.js';
+import './screen/missionText.js';
+import './screen/marker.js';
+import './screen/minimap.js';
+import './screen/missionText.js';
+import './screen/mouse.js';
+import './screen/notification.js';
+import './screen/particle.js';
+import './screen/progressBar.js';
+import './screen/scaleform.js';
+import './screen/screenEffect.js';
+import './screen/screenFade.js';
+import './screen/shard.js';
+import './screen/spinner.js';
+import './screen/text.js';
+import './screen/texture.js';
+import './screen/timecycle.js';
 
 // Streamers
-import './streamers/attachable';
-import './streamers/blip';
-import './streamers/doors';
-import './streamers/item';
-import './streamers/marker';
-import './streamers/object';
-import './streamers/ped';
-import './streamers/textlabel';
-import './streamers/worldNotifications';
+import './streamers/attachable.js';
+import './streamers/blip.js';
+import './streamers/doorsVirtual.js';
+import './streamers/item.js';
+import './streamers/marker.js';
+import './streamers/markerVirtual.js';
+import './streamers/object.js';
+import './streamers/ped.js';
+import './streamers/pedVirtual.js';
+import './streamers/textlabel.js';
+import './streamers/textLabelVirtual.js';
+import './streamers/worldNotifications.js';
+import './streamers/worldNotificationsVirtual.js';
 
 // Systems Default
-import './systems/defaults/ammo';
-import './systems/defaults/displayId';
-import './systems/defaults/time';
-import './systems/defaults/toolbar';
+import './systems/defaults/displayId.js';
+import './systems/defaults/time.js';
+import './systems/defaults/toolbar.js';
 
 // Systems
-import './systems/acceptDeclineEvent';
-import './systems/adminControl';
-import './systems/animations';
-import './systems/arrest';
-import './systems/athenaEvents';
-import './systems/character';
-import './systems/debug';
-import './systems/disable';
-import './systems/entitySelector';
-import './systems/hotkeyRegistry';
-import './systems/interaction';
-import './systems/interiors';
-import './systems/job';
-import './systems/jwt';
-import './systems/messenger';
-import './systems/noclip';
-import './systems/notification';
-import './systems/playerConfig';
-import './systems/sound';
-import './systems/tasks';
-import './systems/tick';
-import './systems/vehicle';
+import './systems/acceptDeclineEvent.js';
+import './systems/adminControl.js';
+import './systems/animations.js';
+import './systems/arrest.js';
+import './systems/athenaEvents.js';
+import './systems/character.js';
+import './systems/debug.js';
+import './systems/disable.js';
+import './systems/entitySelector.js';
+import './systems/hotkeyRegistry.js';
+import './systems/interaction.js';
+import './systems/interiors.js';
+import './systems/job.js';
+import './systems/jwt.js';
+import './systems/messenger.js';
+import './systems/noclip.js';
+import './systems/notification.js';
+import './systems/playerConfig.js';
+import './systems/sound.js';
+import './systems/tasks.js';
+import './systems/tick.js';
+import './systems/vehicle.js';
 
 // Utility
-import './utility/entitySets';
-import './utility/ipl';
-import './utility/lerp';
-import './utility/polygonShape';
-import './utility/screenshot';
-import './utility/scenarios';
+import './utility/entitySets.js';
+import './utility/ipl.js';
+import './utility/lerp.js';
+import './utility/polygonShape.js';
+import './utility/screenshot.js';
+import './utility/scenarios.js';
 
 // Webview
-import './webview/index';
-import './webview/page';
+import './webview/index.js';
+import './webview/page.js';
 
 // Views
-import './views/actions';
-import './views/audio';
-import './views/job';
-import './views/wheelMenu';
+import './views/actions.js';
+import './views/audio.js';
+import './views/job.js';
+import './views/wheelMenu.js';
 
 // World
-import './world/weather';
+import './world/weather.js';

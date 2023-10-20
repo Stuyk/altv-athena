@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
-import { IPed } from '@AthenaShared/interfaces/iPed';
+import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu.js';
+import { IPed } from '@AthenaShared/interfaces/iPed.js';
 
 export type NpcMenuInjection = (scriptID: number, ped: IPed, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 

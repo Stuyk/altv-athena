@@ -1,4 +1,4 @@
-import { GLOBAL_SYNCED } from '@AthenaShared/enums/globalSynced';
+import { GLOBAL_SYNCED } from '@AthenaShared/enums/globalSynced.js';
 import * as alt from 'alt-server';
 
 /**

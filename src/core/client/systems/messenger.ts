@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 
-import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
-import { MessageCommand } from '@AthenaShared/interfaces/messageCommand';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger.js';
+import { MessageCommand } from '@AthenaShared/interfaces/messageCommand.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
 
 export type MessageInfo = { timestamp: number; msg: string };
 export type MessageCallback = (msg: string) => void;

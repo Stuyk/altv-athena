@@ -1,4 +1,4 @@
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 import * as alt from 'alt-client';
 
 const callbacks: Array<Function> = [];

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { distance2d } from '../../shared/utility/vector';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { distance2d } from '../../shared/utility/vector.js';
 
 export interface CustomSoundInfo {
     /**

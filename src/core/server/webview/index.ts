@@ -1,1 +1,1 @@
-export { emit, closePages } from './utilities';
+export { emit, closePages } from './utilities.js';

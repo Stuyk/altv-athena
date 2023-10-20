@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { TextLabel } from '@AthenaShared/interfaces/textLabel';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { TextLabel } from '@AthenaShared/interfaces/textLabel.js';
 
 let labels: Array<TextLabel> = [];
 let interval: number;

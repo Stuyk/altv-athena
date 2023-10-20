@@ -1,41 +1,13 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import '@AthenaServer/systems/streamer';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Marker } from '../../shared/interfaces/marker';
-import { sha256Random } from '../utility/hash';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { Marker } from '../../shared/interfaces/marker.js';
+import { sha256Random } from '../utility/hash.js';
+import { ControllerFuncs } from './shared.js';
 
-const KEY = 'markers';
-const globalMarkers: Array<Marker> = [];
-
-const InternalController = {
-    /**
-     * Initialize this Marker Stream Service
-     *
-     */
-    init() {
-        Athena.systems.streamer.registerCallback(KEY, InternalController.update);
-    },
-
-    /**
-     * Internal function to refresh all global markers in the streamer service.
-     *
-     */
-    refresh() {
-        Athena.systems.streamer.updateData(KEY, globalMarkers);
-    },
-
-    /**
-     * Updates marker labels through the streamer service.
-     * @param {alt.Player} player An alt:V Player Entity
-     * @param {Array<Marker>} markers
-     *
-     */
-    update(player: alt.Player, markers: Array<Marker>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_MARKERS, markers);
-    },
-};
+const MAX_MARKERS_TO_DRAW = 10;
+const markerGroup = new alt.VirtualEntityGroup(MAX_MARKERS_TO_DRAW);
+const globalMarkers: (Marker & { entity: alt.VirtualEntity })[] = [];
 
 /**
  * Adds a global marker for all players.
@@ -73,8 +45,10 @@ export function append(marker: Marker): string {
         marker.uid = sha256Random(JSON.stringify(marker));
     }
 
-    globalMarkers.push(marker);
-    InternalController.refresh();
+    const entity = new alt.VirtualEntity(markerGroup, new alt.Vector3(marker.pos), 25, { marker, type: 'marker' });
+    entity.dimension = marker.dimension ? marker.dimension : 0;
+
+    globalMarkers.push({ ...marker, entity });
     return marker.uid;
 }
 
@@ -101,8 +75,11 @@ export function remove(uid: string): boolean {
         return false;
     }
 
+    try {
+        globalMarkers[index].entity.destroy();
+    } catch (err) {}
+
     globalMarkers.splice(index, 1);
-    InternalController.refresh();
     return true;
 }
 
@@ -159,8 +136,6 @@ export function addToPlayer(player: alt.Player, marker: Marker): string {
     alt.emitClient(player, SYSTEM_EVENTS.APPEND_MARKER, marker);
     return marker.uid;
 }
-
-Athena.systems.plugins.addCallback(InternalController.init);
 
 type MarkerControllerFuncs = ControllerFuncs<typeof append, typeof remove, typeof addToPlayer, typeof removeFromPlayer>;
 

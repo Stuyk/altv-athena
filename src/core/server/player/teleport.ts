@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
 /**
  * Teleport first player to second player.
@@ -14,6 +14,10 @@ export function goto(player: alt.Player, target: alt.Player | string | number) {
     }
 
     if (typeof target === 'undefined') {
+        return;
+    }
+
+    if (!(target instanceof alt.Player)) {
         return;
     }
 
@@ -34,6 +38,10 @@ export function toMe(player: alt.Player, target: alt.Player | string | number) {
     }
 
     if (typeof target === 'undefined') {
+        return;
+    }
+
+    if (!(target instanceof alt.Player)) {
         return;
     }
 

@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
-import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
+import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle.js';
+import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu.js';
 
 export type VehicleMenuInjection = (target: alt.Vehicle, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 

@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { ExtractStringKeys } from '@AthenaShared/utility/extractStringKeys';
+import { ExtractStringKeys } from '@AthenaShared/utility/extractStringKeys.js';
 
 const pluginHooks: { [key: string]: Object } = {};
 

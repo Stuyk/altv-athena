@@ -1,11 +1,11 @@
 import * as alt from 'alt-client';
 import * as natives from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import JobEnums, { Objective } from '@AthenaShared/interfaces/job';
-import { isFlagEnabled } from '@AthenaShared/utility/flags';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
-import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
+import JobEnums, { Objective } from '@AthenaShared/interfaces/job.js';
+import { isFlagEnabled } from '@AthenaShared/utility/flags.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds.js';
 
 let objective: Objective | null;
 let interval: number;

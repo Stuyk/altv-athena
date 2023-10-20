@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Interaction } from '@AthenaShared/interfaces/interaction';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { Interaction } from '@AthenaShared/interfaces/interaction.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
 
 let interaction: Interaction = null;
 let interactionTemporary: string = null;

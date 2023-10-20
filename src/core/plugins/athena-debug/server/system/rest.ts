@@ -1,7 +1,7 @@
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 import * as alt from 'alt-server';
 import http from 'http';
-import { DebugKeys } from './keys';
+import { DebugKeys } from './keys.js';
 
 const port = 7790;
 

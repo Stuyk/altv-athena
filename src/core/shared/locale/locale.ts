@@ -1,6 +1,6 @@
-import { LocaleFormat } from '../interfaces/localeFormat';
-import en from './languages/en'; // Importing the English Locale
-import de from './languages/de'; // Importing the German Locale
+import { LocaleFormat } from '../interfaces/localeFormat.js';
+import en from './languages/en.js'; // Importing the English Locale
+import de from './languages/de.js'; // Importing the German Locale
 export const placeholder = `_%_`;
 
 let defaultLanguage = 'en'; // Change to 'de' to set the default language to German

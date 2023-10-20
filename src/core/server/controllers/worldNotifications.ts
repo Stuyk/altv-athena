@@ -1,30 +1,12 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import '@AthenaServer/systems/streamer';
+import * as Athena from '@AthenaServer/api/index.js';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { IWorldNotification } from '../../shared/interfaces/iWorldNotification.js';
+import { ControllerFuncs } from './shared.js';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IWorldNotification } from '../../shared/interfaces/iWorldNotification';
-
-const KEY = 'world-notifications';
-const globalNotifications: Array<IWorldNotification> = [];
-
-const InternalFunctions = {
-    /**
-     * Initialize this WorldNotification Stream Service
-     *
-     */
-    init() {
-        Athena.systems.streamer.registerCallback(KEY, update);
-    },
-
-    /**
-     * Internal function to refresh all global world notifications in the streamer service.
-     *
-     */
-    refresh() {
-        Athena.systems.streamer.updateData(KEY, globalNotifications);
-    },
-};
+const MAX_MARKERS_TO_DRAW = 10;
+const markerGroup = new alt.VirtualEntityGroup(MAX_MARKERS_TO_DRAW);
+const globalNotifications: (IWorldNotification & { entity: alt.VirtualEntity })[] = [];
 
 /**
  * Adds a global world notification for all players.
@@ -41,8 +23,13 @@ export function append(notification: IWorldNotification): string {
         notification.uid = Athena.utility.hash.sha256Random(JSON.stringify(notification));
     }
 
-    globalNotifications.push(notification);
-    InternalFunctions.refresh();
+    const entity = new alt.VirtualEntity(markerGroup, new alt.Vector3(notification.pos), 10, {
+        notification,
+        type: 'worldnotification',
+    });
+    entity.dimension = notification.dimension ? notification.dimension : 0;
+    globalNotifications.push({ ...notification, entity });
+
     return notification.uid;
 }
 
@@ -62,8 +49,11 @@ export function remove(uid: string): boolean {
         return false;
     }
 
+    try {
+        globalNotifications[index].entity.destroy();
+    } catch (err) {}
+
     globalNotifications.splice(index, 1);
-    InternalFunctions.refresh();
     return true;
 }
 
@@ -115,8 +105,6 @@ export function update(player: alt.Player, notifications: Array<IWorldNotificati
 
     alt.emitClient(player, SYSTEM_EVENTS.POPULATE_WORLD_NOTIFICATIONS, notifications);
 }
-
-Athena.systems.plugins.addCallback(InternalFunctions.init);
 
 type WorldNotificationFuncs = ControllerFuncs<
     typeof append,

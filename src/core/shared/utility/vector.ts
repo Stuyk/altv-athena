@@ -1,5 +1,5 @@
 import * as alt from 'alt-shared';
-export { DirectionVector } from './directionVector';
+export { DirectionVector } from './directionVector.js';
 
 /**
  * Get the distance between two positions.

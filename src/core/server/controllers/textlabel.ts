@@ -1,44 +1,15 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import '@AthenaServer/systems/streamer';
+import * as Athena from '@AthenaServer/api/index.js';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { TextLabel } from '../../shared/interfaces/textLabel';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import { TextLabel } from '../../shared/interfaces/textLabel.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
+import { ControllerFuncs } from './shared.js';
 
-const globalTextLabels: Array<TextLabel> = [];
-const KEY = 'labels';
+const MAX_TEXT_LABELS_TO_DRAW = 10;
 
-/**
- * Should not be exported. Do not export.
- * @class InternalController
- */
-const InternalController = {
-    /**
-     * Initialize the TextLabel Streamer Service
-     *
-     */
-    init() {
-        Athena.systems.streamer.registerCallback(KEY, InternalController.update);
-    },
-
-    /**
-     * Internal function to refresh all global text labels in the streamer service.
-     *
-     */
-    refresh() {
-        Athena.systems.streamer.updateData(KEY, globalTextLabels);
-    },
-
-    /**
-     * Updates text labels through the streamer service.
-     * @param {alt.Player} player An alt:V Player Entity
-     * @param {Array<TextLabel>} labels
-     *
-     */
-    update(player: alt.Player, labels: Array<TextLabel>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_TEXTLABELS, labels);
-    },
-};
+const globalTextLabels: Array<TextLabel & { entity: alt.VirtualEntity }> = [];
+const textLabelGroup = new alt.VirtualEntityGroup(MAX_TEXT_LABELS_TO_DRAW);
 
 /**
  * Adds a text label to the global streamer.
@@ -70,9 +41,9 @@ export function append(label: TextLabel): string {
         return undefined;
     }
 
-    label.isServerWide = true;
-    globalTextLabels.push(label);
-    InternalController.refresh();
+    const entity = new alt.VirtualEntity(textLabelGroup, new alt.Vector3(label.pos), 20, { label, type: 'textlabel' });
+    entity.dimension = label.dimension ? label.dimension : 0;
+    globalTextLabels.push({ ...label, entity });
     return label.uid;
 }
 
@@ -111,7 +82,13 @@ export function update(uid: string, label: Partial<TextLabel>, player: alt.Playe
         }
 
         globalTextLabels[index] = { ...globalTextLabels[index], ...label, uid };
-        InternalController.refresh();
+        const data = deepCloneObject(globalTextLabels[index]);
+
+        if (label.pos) {
+            globalTextLabels[index].entity.pos = new alt.Vector3(label.pos);
+        }
+
+        globalTextLabels[index].entity.setStreamSyncedMeta('label', data);
         return true;
     }
 
@@ -143,8 +120,11 @@ export function remove(uid: string): boolean {
         return false;
     }
 
+    try {
+        globalTextLabels[index].entity.destroy();
+    } catch (err) {}
+
     globalTextLabels.splice(index, 1);
-    InternalController.refresh();
     return true;
 }
 
@@ -200,8 +180,6 @@ export function addToPlayer(player: alt.Player, textLabel: TextLabel): string {
     alt.emitClient(player, SYSTEM_EVENTS.APPEND_TEXTLABELS, textLabel);
     return textLabel.uid;
 }
-
-Athena.systems.plugins.addCallback(InternalController.init);
 
 type TextLabelFuncs = ControllerFuncs<
     typeof append,

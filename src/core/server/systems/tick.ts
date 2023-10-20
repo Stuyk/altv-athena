@@ -1,8 +1,9 @@
-import { Character } from '@AthenaShared/interfaces/character';
 import * as alt from 'alt-server';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import * as Athena from '../api';
+
+import { Character } from '@AthenaShared/interfaces/character.js';
+import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced.js';
+import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
+import * as Athena from '../api/index.js';
 
 const timeBetweenPings = 4950;
 

@@ -1,4 +1,4 @@
-import { Door } from '@AthenaShared/interfaces/door';
+import { Door } from '@AthenaShared/interfaces/door.js';
 
 export const Doors: Array<Door> = [
     {

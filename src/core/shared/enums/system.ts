@@ -63,7 +63,6 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_ALARM_STOP = 'alarm:Stop',
     PLAYER_EMIT_ALARM_STOP_ALL = 'alarm:StopAll',
     PLAYER_EMIT_ANIMATION = 'animation:Play',
-    PLAYER_EMIT_AMMUNITION_UPDATE = 'player:emit:ammunition:update',
     PLAYER_EMIT_SCENARIO = 'scenario:Play',
     PLAYER_EMIT_AUDIO_STREAM = 'audio:Stream',
     PLAYER_EMIT_CREDITS = 'credits:Create',
@@ -120,13 +119,11 @@ export enum SYSTEM_EVENTS {
     POPULATE_OBJECTS = 'objects:Populate',
     POPULATE_PEDS = 'peds:Populate',
     POPULATE_WORLD_NOTIFICATIONS = 'worldNotifications:Populate',
-    POPULATE_ITEM_DROPS = 'item:drops:Populate',
     POPULATE_POLYGONS = 'polygons:Populate',
     //
     QUICK_TOKEN_UPDATE = 'quicktoken:update',
     QUICK_TOKEN_FETCH = 'quicktoken:fetch',
     //
-    REMOVE_GLOBAL_OBJECT = 'remove:Global:Object',
     REMOVE_OBJECT = 'remove:Object',
     REMOVE_GLOBAL_PED = 'remove:Global:Object',
     REMOVE_PED = 'remove:Object',

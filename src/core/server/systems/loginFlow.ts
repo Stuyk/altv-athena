@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
 // Should be able to register a callback that applies to all players that join.
 // Should keep track of all players current login flow.

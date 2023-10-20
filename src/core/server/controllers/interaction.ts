@@ -1,14 +1,14 @@
 import * as alt from 'alt-server';
-import * as Athena from '../api';
-import { DEFAULT_CONFIG } from '../athena/main';
-import { InteractionShape } from '../extensions/extColshape';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { distance2d } from '@AthenaShared/utility/vector';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
-import { Interaction } from '@AthenaShared/interfaces/interaction';
-import { LocaleController } from '@AthenaShared/locale/locale';
-import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
-import { WORLD_NOTIFICATION_TYPE } from '@AthenaShared/enums/worldNotificationTypes';
+import * as Athena from '../api/index.js';
+import { DEFAULT_CONFIG } from '../athena/main.js';
+import { InteractionShape } from '../extensions/extColshape.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { distance2d } from '@AthenaShared/utility/vector.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
+import { Interaction } from '@AthenaShared/interfaces/interaction.js';
+import { LocaleController } from '@AthenaShared/locale/locale.js';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys.js';
+import { WORLD_NOTIFICATION_TYPE } from '@AthenaShared/enums/worldNotificationTypes.js';
 
 const interactions: Array<InteractionShape> = [];
 const InteractionBindings: { [player_id: string]: InteractionShape } = {};

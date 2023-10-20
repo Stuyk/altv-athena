@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import ViewModel from '@AthenaClient/models/viewModel';
-import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
+import ViewModel from '@AthenaClient/models/viewModel.js';
+import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents.js';
 
 const PAGE_NAME = 'Audio';
 let interval;

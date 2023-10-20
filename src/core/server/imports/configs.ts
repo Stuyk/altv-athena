@@ -1,1 +1,1 @@
-import '../athena/main';
+import '../athena/main.js';

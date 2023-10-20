@@ -1,4 +1,4 @@
-import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags.js';
 
 export default (callback: (...args: any[]) => void) => {
     return [

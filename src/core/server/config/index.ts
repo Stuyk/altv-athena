@@ -1,1 +1,1 @@
-export { default as player } from '@AthenaServer/config/playerConfig';
+export { default as player } from '@AthenaServer/config/playerConfig.js';

@@ -1,4 +1,4 @@
-import { Meta } from './meta';
+import { Meta } from './meta.js';
 
 declare module 'alt-client' {
     export interface Player {

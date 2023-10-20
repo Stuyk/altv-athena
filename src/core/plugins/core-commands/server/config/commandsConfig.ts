@@ -1,4 +1,4 @@
-import { IRoleplayCmds } from '../../shared/iRoleplayCmds';
+import { IRoleplayCmds } from '../../shared/iRoleplayCmds.js';
 
 export const RoleplayCmdsConfig: IRoleplayCmds = {
     COMMAND_OOC_DISTANCE: 35,

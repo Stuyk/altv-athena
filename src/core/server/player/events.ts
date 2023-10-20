@@ -1,6 +1,6 @@
-import { InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
-import { Character } from '@AthenaShared/interfaces/character';
-import { StoredItem } from '@AthenaShared/interfaces/item';
+import { InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces.js';
+import { Character } from '@AthenaShared/interfaces/character.js';
+import { StoredItem } from '@AthenaShared/interfaces/item.js';
 import * as alt from 'alt-server';
 
 export type AthenaPlayerEvents =
@@ -23,6 +23,7 @@ export type AthenaPlayerEvents =
     | 'player-uniform-cleared'
     | 'player-uniform-set'
     | 'player-weapon-unequipped'
+    | 'player-weapon-equipped'
     | 'respawned'
     | 'selected-character'
     | 'set-account-data'
@@ -251,6 +252,19 @@ export function on<T>(eventName: 'player-disconnected', callback: (player: undef
  */
 export function on<T>(
     eventName: 'player-weapon-unequipped',
+    callback: (player: alt.Player, slot: number, type: InventoryType) => void,
+);
+
+/**
+ * Triggers when a player unequips a weapon.
+ *
+ *
+ * @template T
+ * @param {'player-weapon-unequipped'} eventName
+ * @param {(player: alt.Player, slot: number, type: InventoryType) => void} callback
+ */
+export function on<T>(
+    eventName: 'player-weapon-equipped',
     callback: (player: alt.Player, slot: number, type: InventoryType) => void,
 );
 

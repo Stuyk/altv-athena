@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 
-import * as Athena from '@AthenaServer/api';
-import { StoredItem, WeaponInfo } from '@AthenaShared/interfaces/item';
-import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
+import * as Athena from '@AthenaServer/api/index.js';
+import { StoredItem, WeaponInfo } from '@AthenaShared/interfaces/item.js';
+import { deepCloneArray } from '@AthenaShared/utility/deepCopy.js';
 
 /**
  * Return all weapons from a given data set.

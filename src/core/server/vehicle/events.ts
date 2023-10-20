@@ -1,4 +1,4 @@
-import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
+import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned.js';
 import * as alt from 'alt-server';
 
 export type AthenaVehicleEvents =

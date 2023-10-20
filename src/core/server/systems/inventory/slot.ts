@@ -1,7 +1,7 @@
-import { InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
-import { StoredItem } from '@AthenaShared/interfaces/item';
-import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
-import * as config from './config';
+import { InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces.js';
+import { StoredItem } from '@AthenaShared/interfaces/item.js';
+import { deepCloneArray } from '@AthenaShared/utility/deepCopy.js';
+import * as config from './config.js';
 
 /**
  * Find an open slot that is available within a dataset.

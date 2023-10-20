@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
-import { PED_CONFIG_FLAG } from '@AthenaShared/flags/pedflags';
-import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle.js';
+import { PED_CONFIG_FLAG } from '@AthenaShared/flags/pedflags.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
 
 const Internal = {
     init() {

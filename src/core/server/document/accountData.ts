@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
 import Database from '@stuyk/ezmongodb';
-import { KnownKeys } from '@AthenaShared/utility/knownKeys';
-import { Account } from '@AthenaShared/interfaces/iAccount';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { KnownKeys } from '@AthenaShared/utility/knownKeys.js';
+import { Account } from '@AthenaShared/interfaces/iAccount.js';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
 
 export type KeyChangeCallback = (player: alt.Player, newValue: any, oldValue: any) => void;
 

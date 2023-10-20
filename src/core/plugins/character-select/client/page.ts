@@ -1,7 +1,5 @@
-import * as alt from 'alt-client';
-import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
-import { Page } from '@AthenaClient/webview/page';
+import * as AthenaClient from '@AthenaClient/api/index.js';
+import { Page } from '@AthenaClient/webview/page.js';
 
 let page: Page;
 

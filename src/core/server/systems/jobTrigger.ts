@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { VIEW_EVENTS_JOB_TRIGGER } from '@AthenaShared/enums/views';
-import { JobTrigger } from '@AthenaShared/interfaces/jobTrigger';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { VIEW_EVENTS_JOB_TRIGGER } from '@AthenaShared/enums/views.js';
+import { JobTrigger } from '@AthenaShared/interfaces/jobTrigger.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
 
 const LastTriggers: { [id: string]: JobTrigger } = {};
 

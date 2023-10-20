@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { IWorldNotification } from '@AthenaShared/interfaces/iWorldNotification';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { IWorldNotification } from '@AthenaShared/interfaces/iWorldNotification.js';
 
 let addedNotifications: Array<IWorldNotification> = [];
 let localNotifications: Array<IWorldNotification> = [];

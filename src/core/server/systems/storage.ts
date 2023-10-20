@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import * as Athena from '@AthenaServer/api';
-import { StoredItem } from '@AthenaShared/interfaces/item';
+import * as Athena from '@AthenaServer/api/index.js';
+import { StoredItem } from '@AthenaShared/interfaces/item.js';
 
 const openIdentifiers = [];
 const boundIdentifiers: Array<{ id: number; storage: string }> = [];

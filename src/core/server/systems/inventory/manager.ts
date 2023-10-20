@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
-import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
-import { GLOBAL_SYNCED } from '@AthenaShared/enums/globalSynced';
+import * as Athena from '@AthenaServer/api/index.js';
+import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item.js';
+import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
+import { GLOBAL_SYNCED } from '@AthenaShared/enums/globalSynced.js';
 
 alt.setSyncedMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, true);
 
@@ -488,7 +488,7 @@ export function splitAt<CustomData = {}>(
 
     let copyOfData = deepCloneArray<StoredItem<CustomData>>(data);
     if (typeof dataSize === 'string') {
-        dataSize = Athena.systems.inventory.config.get()[dataSize].size;
+        dataSize = Athena.systems.inventory.config.get()[dataSize].size as number;
     }
 
     if (data.length >= dataSize) {
@@ -675,7 +675,7 @@ export function swap(
 
     // Force data set sizing based on configuration.
     if (typeof dataSize === 'string') {
-        dataSize = Athena.systems.inventory.config.get()[dataSize].size;
+        dataSize = Athena.systems.inventory.config.get()[dataSize].size as number;
     }
 
     if (toSlot > dataSize) {
@@ -714,11 +714,11 @@ export function swapBetween(from: ComplexSwap, to: ComplexSwap): ComplexSwapRetu
     }
 
     if (typeof from.size === 'string') {
-        from.size = Athena.systems.inventory.config.get()[from.size].size;
+        from.size = Athena.systems.inventory.config.get()[from.size].size as number;
     }
 
     if (typeof to.size === 'string') {
-        to.size = Athena.systems.inventory.config.get()[to.size].size;
+        to.size = Athena.systems.inventory.config.get()[to.size].size as number;
     }
 
     const fromIndex = from.data.findIndex((x) => x.slot === from.slot);
@@ -900,8 +900,12 @@ export async function toggleItem(player: alt.Player, slot: number, type: Invento
     await Athena.document.character.set(player, type, dataCopy);
 
     const baseItem = Athena.systems.inventory.factory.getBaseItem(dataCopy[index].dbName, dataCopy[index].version);
-    if (baseItem && baseItem.behavior && baseItem.behavior.isWeapon && dataCopy[index].isEquipped === false) {
-        Athena.player.events.trigger('player-weapon-unequipped', player, dataCopy[index].slot, type);
+    if (baseItem && baseItem.behavior && baseItem.behavior.isWeapon) {
+        if (!dataCopy[index].isEquipped) {
+            Athena.player.events.trigger('player-weapon-unequipped', player, dataCopy[index].slot, type);
+        } else {
+            Athena.player.events.trigger('player-weapon-equipped', player, dataCopy[index].slot, type);
+        }
     }
 
     const eventToTrigger = dataCopy[index].isEquipped ? 'item-equipped' : 'item-unequipped';

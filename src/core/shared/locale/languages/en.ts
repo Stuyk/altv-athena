@@ -1,4 +1,4 @@
-import { LOCALE_KEYS } from './keys';
+import { LOCALE_KEYS } from './keys.js';
 
 /**
  * Locales are written with a key and value type.

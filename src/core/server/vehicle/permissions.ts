@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { PermissionGroup } from '@AthenaServer/systems/permissionGroup';
+import * as Athena from '@AthenaServer/api/index.js';
+import { PermissionGroup } from '@AthenaServer/systems/permissionGroup.js';
 
 /**
  * Check if a vehicle has a group permission.

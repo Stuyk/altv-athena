@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
-import * as Athena from '@AthenaServer/api';
-import { ClothingInfo, StoredItem } from '@AthenaShared/interfaces/item';
+import * as Athena from '@AthenaServer/api/index.js';
+import { ClothingInfo, StoredItem } from '@AthenaShared/interfaces/item.js';
 
 /**
  * THIS IS A DEFAULT SYSTEM.

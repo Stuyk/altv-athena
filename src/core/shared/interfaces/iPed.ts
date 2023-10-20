@@ -1,5 +1,5 @@
 import * as alt from 'alt-shared';
-import { Animation } from './animation';
+import { Animation } from './animation.js';
 
 /**
  * Used to pass static ped information from server to client.
@@ -27,7 +27,23 @@ export interface IPed {
      * @type {number}
      *
      */
-    heading?: number;
+    rotation?: alt.Vector3;
+
+    /**
+     * Freeze this ped
+     *
+     * @type {boolean}
+     * @memberof IPed
+     */
+    frozen?: boolean;
+
+    /**
+     * Remove collision for this ped?
+     *
+     * @type {boolean}
+     * @memberof IPed
+     */
+    collision?: boolean;
 
     /**
      * The max distance this Ped should render at.

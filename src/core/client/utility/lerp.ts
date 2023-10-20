@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { distance, vectorLerp } from '@AthenaShared/utility/vector';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { distance, vectorLerp } from '@AthenaShared/utility/vector.js';
 
 const LerpObject = {
     /**

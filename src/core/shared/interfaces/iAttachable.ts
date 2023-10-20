@@ -1,4 +1,4 @@
-import { PedBone } from '@AthenaShared/enums/boneIds';
+import { PedBone } from '@AthenaShared/enums/boneIds.js';
 import * as alt from 'alt-shared';
 
 /**

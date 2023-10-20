@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 import * as native from 'natives';
 
 AthenaClient.systems.rpc.on('load-ipl', (iplName: string) => {

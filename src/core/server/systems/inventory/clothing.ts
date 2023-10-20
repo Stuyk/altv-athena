@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
 
-import * as Athena from '@AthenaServer/api';
-import { ClothingComponent, ClothingInfo, StoredItem } from '@AthenaShared/interfaces/item';
-import { isNullOrUndefined } from '@AthenaShared/utility/undefinedCheck';
-import { Character } from '@AthenaShared/interfaces/character';
+import * as Athena from '@AthenaServer/api/index.js';
+import { ClothingComponent, ClothingInfo, StoredItem } from '@AthenaShared/interfaces/item.js';
+import { isNullOrUndefined } from '@AthenaShared/utility/undefinedCheck.js';
+import { Character } from '@AthenaShared/interfaces/character.js';
 
 const fModel = alt.hash('mp_f_freemode_01');
 const mModel = alt.hash(`mp_m_freemode_01`);

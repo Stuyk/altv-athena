@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
-import * as AthenaClient from '@AthenaClient/api';
+import * as AthenaClient from '@AthenaClient/api/index.js';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { ProgressBar } from '@AthenaShared/interfaces/progressBar';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { ProgressBar } from '@AthenaShared/interfaces/progressBar.js';
 
 const barWidth = 0.08; // Based on percentages of screen.
 const barHeight = 0.02;

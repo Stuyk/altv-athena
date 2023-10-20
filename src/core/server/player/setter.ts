@@ -1,14 +1,12 @@
 import * as alt from 'alt-server';
-import * as Athena from '../api';
-import * as emit from './emit';
-import * as PlayerEvents from '@AthenaServer/player/events';
+import * as Athena from '../api/index.js';
+import * as emit from './emit.js';
+import * as PlayerEvents from '@AthenaServer/player/events.js';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { ActionMenu } from '@AthenaShared/interfaces/actions';
-import { Account } from '../../shared/interfaces/iAccount';
-import { Collections } from '../database/collections';
-import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
-import Database from '@stuyk/ezmongodb';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
+import { ActionMenu } from '@AthenaShared/interfaces/actions.js';
+import { Account } from '../../shared/interfaces/iAccount.js';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced.js';
 
 /**
  * Set the current account data for this player.

@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
+import * as Athena from '@AthenaServer/api/index.js';
 
 import Database from '@stuyk/ezmongodb';
-import { Character } from '@AthenaShared/interfaces/character';
-import { Account } from '@AthenaShared/interfaces/iAccount';
-import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned';
+import { Character } from '@AthenaShared/interfaces/character.js';
+import { Account } from '@AthenaShared/interfaces/iAccount.js';
+import { OwnedVehicle } from '@AthenaShared/interfaces/vehicleOwned.js';
 
 /**
  * Gets an online player by account identifier based on their MongoDB account _id.

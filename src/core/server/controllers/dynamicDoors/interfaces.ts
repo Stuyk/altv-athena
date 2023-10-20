@@ -1,4 +1,4 @@
-import { Marker } from '@AthenaShared/interfaces/marker';
+import { Marker } from '@AthenaShared/interfaces/marker.js';
 import * as alt from 'alt-server';
 
 export interface DoorInfo {

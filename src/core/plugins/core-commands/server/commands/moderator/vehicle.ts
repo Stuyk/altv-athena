@@ -1,11 +1,10 @@
 import alt from 'alt-server';
-import * as Athena from '@AthenaServer/api';
-import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
-import { LocaleController } from '@AthenaShared/locale/locale';
-import { VehicleState } from '@AthenaShared/interfaces/vehicleState';
-import IVehicleTuning from '@AthenaShared/interfaces/vehicleTuning';
-import IVehicleMod from '@AthenaShared/interfaces/vehicleMod';
-import VehicleExtra from '@AthenaShared/interfaces/vehicleExtra';
+import * as Athena from '@AthenaServer/api/index.js';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys.js';
+import { LocaleController } from '@AthenaShared/locale/locale.js';
+import { VehicleState } from '@AthenaShared/interfaces/vehicleState.js';
+import IVehicleTuning from '@AthenaShared/interfaces/vehicleTuning.js';
+import VehicleExtra from '@AthenaShared/interfaces/vehicleExtra.js';
 
 Athena.commands.register(
     'tempvehicle',

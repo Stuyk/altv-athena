@@ -1,0 +1,17 @@
+name = "Development Mode - No Vue - 32 Players"
+host = "0.0.0.0"
+env = "devtest"
+port = 7788
+players = 2
+announce = false
+gamemode = "Roleplay"
+website = "athenaframework.com"
+language = "en"
+description = "With Reconnect On - 32 Players"
+debug = true
+streamingDistance = 400
+migrationDistance = 150
+modules = ["js-module"]
+resources = ["webviews", "core"]
+tags = ["athena","framework","version","5"]
+log-streams = ["console", "file", "stdconsole"]
