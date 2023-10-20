@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'node:fs';
 import { sanitizePath } from '../shared/path.js';
-import { copySync, globSync } from '../shared/fileHelpers.js';
+import { copyAsync, globSync } from '../shared/fileHelpers.js';
 
 const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable', 'disabled'];
 
@@ -29,9 +29,11 @@ export function getEnabledPlugins() {
     });
 }
 
-export function moveAssetsToWebview(folderName, extensions) {
+export async function moveAssetsToWebview(folderName, extensions) {
     const enabledPlugins = getEnabledPlugins();
     let amountCopied = 0;
+
+    const promises = [];
     for (const pluginName of enabledPlugins) {
         const pluginFolder = sanitizePath(path.join(process.cwd(), `src/core/plugins/`, pluginName));
         if (!fs.existsSync(sanitizePath(path.join(pluginFolder, folderName)))) {
@@ -50,13 +52,15 @@ export function moveAssetsToWebview(folderName, extensions) {
                 fs.mkdirSync(folderPath, { recursive: true });
             }
 
-            copySync(filePath, finalPath);
+            promises.push(copyAsync(filePath, finalPath));
             amountCopied += 1;
         }
     }
+
+    await Promise.all(promises);
 }
 
-export function movePluginFilesToWebview(folderName, extensions, isSrc = false) {
+export async function movePluginFilesToWebview(folderName, extensions, isSrc = false) {
     const normalizedName = `${folderName}`.replace('webview/', '');
 
     // First Perform Extension & Sub Directory Cleanup
@@ -89,7 +93,9 @@ export function movePluginFilesToWebview(folderName, extensions, isSrc = false) 
     // Next Scan Available Plugins
     const enabledPlugins = getEnabledPlugins();
 
+    const promises = [];
     let amountCopied = 0;
+
     for (const pluginName of enabledPlugins) {
         const pluginFolder = sanitizePath(path.join(process.cwd(), `src/core/plugins/`, pluginName));
         if (!fs.existsSync(sanitizePath(path.join(pluginFolder, folderName)))) {
@@ -120,9 +126,11 @@ export function movePluginFilesToWebview(folderName, extensions, isSrc = false) 
                     fs.mkdirSync(folderPath, { recursive: true });
                 }
 
-                copySync(filePath, finalPath);
+                promises.push(copyAsync(filePath, finalPath));
                 amountCopied += 1;
             }
         }
     }
+
+    await Promise.all(promises);
 }

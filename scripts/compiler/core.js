@@ -132,9 +132,9 @@ async function transpileFile(file) {
 }
 
 /**
- * Returns `true` if code is compliant and can be transpiled fully
+ * Transpiles all files and plugins
  *
- * @returns {string[]}
+ * @returns {Promise<void>}
  * @export
  */
 export async function runCoreCompiler() {
@@ -146,7 +146,7 @@ export async function runCoreCompiler() {
     const filesToCopy = getFilesToCopy(enabledPlugins);
 
     const resourcesFolder = sanitizePath(path.join(process.cwd(), 'resources')).replace(/\\/g, '/');
-    const filesAndDirectories = await fs.readdirSync(resourcesFolder);
+    const filesAndDirectories = fs.readdirSync(resourcesFolder);
 
     for (const fileOrDirectory of filesAndDirectories) {
         const fullPath = sanitizePath(path.join(resourcesFolder, fileOrDirectory)).replace(/\\/g, '/');
@@ -155,7 +155,7 @@ export async function runCoreCompiler() {
         }
 
         if (fs.statSync(fullPath).isDirectory()) {
-            await fs.rmSync(fullPath, { recursive: true, force: true });
+            fs.rmSync(fullPath, { recursive: true, force: true });
         }
     }
 
@@ -171,5 +171,11 @@ export async function runCoreCompiler() {
     const promises = filesToTranspile.map((file) => transpileFile(file));
     await Promise.all(promises);
 
-    return filesFailedToCompile;
+    if (filesFailedToCompile.length >= 1) {
+        for (let uncompiledFilePath of filesFailedToCompile) {
+            console.log(uncompiledFilePath);
+        }
+
+        throw new Error(`Failed to transpile ${filesFailedToCompile.length} files`);
+    }
 }

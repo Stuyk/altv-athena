@@ -4,7 +4,7 @@ import { globSync, writeFile } from '../shared/fileHelpers.js';
 
 const scriptPath = sanitizePath(path.join(process.cwd(), './resources/core/resource.toml'));
 
-async function getClientPluginFolders() {
+function getClientPluginFolders() {
     const removalPath = sanitizePath(path.join(process.cwd(), 'src/core/'));
     const results = globSync(sanitizePath(path.join(process.cwd(), `src/core/plugins/**/@(client|shared)`))).map(
         (fileName) => {
@@ -15,7 +15,7 @@ async function getClientPluginFolders() {
     return results;
 }
 
-export async function buildResources() {
+export function buildResources() {
     let defaultToml =
         "type = 'js' \r\n" +
         "main = 'server/startup.js' \r\n" +
@@ -23,7 +23,7 @@ export async function buildResources() {
         "required-permissions = ['Screen Capture'] \r\n" +
         "client-files = ['client/*', 'shared/*', \r\n";
 
-    const folders = await getClientPluginFolders();
+    const folders = getClientPluginFolders();
 
     for (let folder of folders) {
         defaultToml += `"${folder}", \r\n`;
@@ -31,5 +31,5 @@ export async function buildResources() {
 
     defaultToml += ']';
 
-    await writeFile(scriptPath, defaultToml);
+    writeFile(scriptPath, defaultToml);
 }

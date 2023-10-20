@@ -26,6 +26,8 @@ const serverBinary = !isLinux ? 'altv-server.exe' : './altv-server';
 const passedArguments = process.argv.slice(2).map((arg) => arg.replace('--', ''));
 const fileNameHashes = {};
 
+let configName = 'prod';
+
 if (NO_SPECIAL_CHARACTERS.test(process.cwd())) {
     console.warn(`Hey! A folder in your Athena path has special characters in it.`);
     console.warn(`Please rename your folder, or folders to a name that doesn't have special characters in it.`);
@@ -104,21 +106,9 @@ async function runFile(processName, ...args) {
     });
 }
 
-async function handleConfiguration() {
-    let configName = 'prod';
-
-    if (passedArguments.includes('dev')) {
-        configName = 'dev';
-    } else if (passedArguments.includes('devtest')) {
-        configName = 'devtest';
-    }
-
-    if (!passedArguments.includes('dev')) {
-        await runFile(npx, 'vite', 'build', './src-webviews');
-    }
-
+function handleConfiguration() {
     copySync(`./configs/${configName}.toml`, `server.toml`);
-    await buildResources();
+    buildResources();
 }
 
 async function handleViteDevServer() {
@@ -174,9 +164,6 @@ async function handleServerProcess(shouldAutoRestart = false) {
     }
 
     await areKeyResourcesReady();
-    await new Promise((resolve) => {
-        setTimeout(resolve, 1000);
-    });
 
     if (passedArguments.includes('cdn')) {
         lastServerProcess = spawn(serverBinary, ['--justpack'], { stdio: 'inherit' });
@@ -248,20 +235,24 @@ async function refreshFileWatching() {
  */
 async function coreBuildProcess() {
     const timer = createExecTime('>>> Core Build Time');
-    const filesUncompiled = await runCoreCompiler();
-    if (filesUncompiled.length >= 1) {
-        for (let uncompiledFilePath of filesUncompiled) {
-            console.log(uncompiledFilePath);
-        }
 
-        return false;
-    }
+    const promises = [runCoreCompiler(), runPluginsCompiler(), compileWebviewPlugins(), copyPluginFiles()];
 
-    await runPluginsCompiler();
-    compileWebviewPlugins();
-    copyPluginFiles();
+    await Promise.all(promises);
     timer.stop();
     return true;
+}
+
+async function compileWebViewPages() {
+    if (passedArguments.includes('dev')) {
+        configName = 'dev';
+    } else if (passedArguments.includes('devtest')) {
+        configName = 'devtest';
+    }
+
+    if (!passedArguments.includes('dev')) {
+        await runFile(npx, 'vite', 'build', './src-webviews');
+    }
 }
 
 async function devMode(firstRun = false) {
@@ -280,7 +271,8 @@ async function devMode(firstRun = false) {
         return;
     }
 
-    await handleConfiguration();
+    await compileWebViewPages();
+    handleConfiguration();
 
     await handleStreamerProcess(false);
     await handleServerProcess(false);
@@ -300,7 +292,8 @@ async function runServer() {
 
     // Has to build first before building the rest.
     await coreBuildProcess();
-    await handleConfiguration();
+    await compileWebViewPages();
+    handleConfiguration();
 
     if (passedArguments.includes('dev')) {
         await sleep(50);

@@ -38,6 +38,23 @@ export function globSync(path, options = {}) {
 }
 
 /**
+ * Read all files / folders based on a path and return paths async
+ *
+ * @export
+ * @param {string} path
+ * @param {GlobOptionsWithFileTypesFalse} options
+ * @return {Promise<string[]>}
+ */
+export async function globAsync(path, options = {}) {
+    path = sanitizePath(path);
+
+    const results = await glob.glob(path, { ...options });
+    return results.map((filePath) => {
+        return sanitizePath(filePath);
+    });
+}
+
+/**
  * Returns all plugin folders
  *
  * @export
@@ -103,6 +120,31 @@ export function copySync(path, destination) {
     }
 
     fs.cpSync(path, destination, { force: true, recursive: true });
+}
+
+/**
+ * Copy a file or directory asynchronously
+ *
+ * @export
+ * @param {string} path
+ * @param {string} destination
+ * @returns {Promise<void>}
+ */
+export async function copyAsync(path, destination) {
+    path = sanitizePath(path);
+    destination = sanitizePath(destination);
+
+    if (path.includes('.')) {
+        const splitPath = path.split('/');
+        splitPath.pop();
+
+        const directory = splitPath.join('/');
+        if (!fs.existsSync(directory)) {
+            fs.mkdirSync(directory, { recursive: true });
+        }
+    }
+
+    await fs.promises.cp(path, destination, { force: true, recursive: true });
 }
 
 export async function areKeyResourcesReady() {

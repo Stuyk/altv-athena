@@ -1,16 +1,16 @@
 import fs from 'node:fs';
 import path from 'path';
 import { getEnabledPlugins } from './shared.js';
-import { globSync, writeFile } from '../shared/fileHelpers.js';
+import { globAsync, writeFile } from '../shared/fileHelpers.js';
 import { sanitizePath } from '../shared/path.js';
 /**
  *
  * @param {*} pluginName
  * @return {{ client: Array<string>, server: Array<string>, shared: Array<string> }}
  */
-function copyPluginFiles(pluginName) {
+async function copyPluginFiles(pluginName) {
     const pluginFolder = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
-    const files = globSync(path.join(pluginFolder, '@(client|server)/index.ts'));
+    const files = await globAsync(path.join(pluginFolder, '@(client|server)/index.ts'));
 
     const hasClientFiles = !!files.find((file) => file.includes('client/index.ts'));
     const hasServerFiles = !!files.find((file) => file.includes('server/index.ts'));
@@ -67,7 +67,7 @@ export async function runPluginsCompiler() {
     const serverImports = [];
 
     for (const pluginName of enabledPlugins) {
-        const result = copyPluginFiles(pluginName);
+        const result = await copyPluginFiles(pluginName);
 
         if (result.client) {
             clientImports.push(pluginName);
