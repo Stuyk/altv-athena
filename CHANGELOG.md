@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.4.0
+```
+- Fix imports for WebViews
+- Move components to load through non-async methods
+- Default Athena components now load automatically
+```
+
 ## 5.3.0
 ```
 - Update configs, and resource builder to toml only

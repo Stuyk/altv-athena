@@ -3,7 +3,7 @@
     "compilerOptions": {
         "typeRoots": ["../node_modules/@altv"],
         "target": "es5",
-        "module": "commonjs",
+        "module": "NodeNext",
         "jsx": "preserve",
         "esModuleInterop": true,
         "lib": ["esnext", "dom"]

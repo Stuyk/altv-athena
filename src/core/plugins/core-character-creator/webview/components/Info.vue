@@ -139,9 +139,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
-
-import { CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../../shared/events';
+import { defineComponent } from 'vue';
+import { CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../../shared/events.js';
 
 const ComponentName = 'Info';
 export default defineComponent({
@@ -151,11 +150,6 @@ export default defineComponent({
         locales: Object,
         infodata: Object,
         emit: Function,
-    },
-    components: {
-        Button: defineAsyncComponent(() => import('@ViewComponents/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
-        Input: defineAsyncComponent(() => import('@ViewComponents/Input.vue')),
     },
     data() {
         return {

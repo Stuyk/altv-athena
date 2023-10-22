@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import * as state from '@ViewUtility/state';
+import * as state from '@ViewUtility/state.js';
 
 const ComponentName = 'StateTest';
 export default defineComponent({

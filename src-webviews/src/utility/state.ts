@@ -1,5 +1,5 @@
-import { Character } from '@AthenaShared/interfaces/character';
-import { Account } from '@AthenaShared/interfaces/iAccount';
+import { Character } from '@AthenaShared/interfaces/character.js';
+import { Account } from '@AthenaShared/interfaces/iAccount.js';
 
 const state: { [key: string]: any } = {};
 

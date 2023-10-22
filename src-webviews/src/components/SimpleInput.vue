@@ -10,14 +10,10 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import Icon from './Icon.vue';
 
 const ComponentName = 'Input';
 export default defineComponent({
     name: ComponentName,
-    components: {
-        Icon,
-    },
     data() {
         return {
             text: '',

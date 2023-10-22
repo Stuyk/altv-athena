@@ -23,8 +23,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { INVENTORY_CONFIG } from '../../shared/config';
-import { SlotInfo } from '../utility/slotInfo';
+import { INVENTORY_CONFIG } from '../../shared/config.js';
+import { SlotInfo } from '../utility/slotInfo.js';
 
 export default defineComponent({
     name: 'Slot',

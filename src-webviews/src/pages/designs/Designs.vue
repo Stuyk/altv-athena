@@ -75,10 +75,6 @@ Helpful for seeing what default components look like.
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Input from '../../components/Input.vue';
-import Button from '../../components/Button.vue';
-import Icon from '../../components/Icon.vue';
-import RangeInput from '../../components/RangeInput.vue';
 
 const ComponentName = 'Designs';
 export default defineComponent({
@@ -88,12 +84,6 @@ export default defineComponent({
             ageValid: false,
             rangeValues: ['Head', 'Mouth', 'Shoulders', 'Knees', 'Toes'],
         };
-    },
-    components: {
-        Button,
-        Icon,
-        Input,
-        RangeInput,
     },
     methods: {
         doSomething() {

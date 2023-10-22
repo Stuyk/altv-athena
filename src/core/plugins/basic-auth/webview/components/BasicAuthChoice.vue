@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts" setup>
-import { AuthEvents } from '@AthenaPlugins/basic-auth/shared/events';
-import WebViewEvents from '@utility/webViewEvents';
+import { AuthEvents } from '@AthenaPlugins/basic-auth/shared/events.js';
+import WebViewEvents from '@utility/webViewEvents.js';
 
 const emit = defineEmits<{ (e: 'select-option', selection: string): void }>();
 

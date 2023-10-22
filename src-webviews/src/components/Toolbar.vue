@@ -26,15 +26,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { WebViewEventNames } from '../../../src/core/shared/enums/webViewEvents';
-import Icon from './Icon.vue';
+import { WebViewEventNames } from '../../../src/core/shared/enums/webViewEvents.js';
 
 const ComponentName = 'Toolbar';
 export default defineComponent({
     name: ComponentName,
-    components: {
-        Icon,
-    },
     props: {
         pageName: {
             type: String,

@@ -1,63 +1,46 @@
 <template>
-    <div class="stack menu" v-if="active">
-        <div class="header">Developer Menu - Hotkey: SHIFT + F</div>
-        <sub>
-            <button @click="active = !active">Hide</button>
-            <button @click="forceHide">Hide on Refresh</button>
-        </sub>
-        <sub>Selecting a page, will toggle it.</sub>
-        <div class="dev-pages" v-if="pages">
-            <div class="dev-page-info" v-for="page in currentPages" @click="togglePage(page.name)">
-                {{ page.enabled ? '-' : '+' }} {{ page.name }}
+    <div @click="active = !active" class="fixed right-0 bottom-0 z-50 mr-4 mb-2 p-4 bg-gray-800 active:bg-gray-600 hover:bg-gray-700 cursor-pointer text-cyan-400 rounded-md select-none">
+        Pages
+    </div>
+    <div class="fixed z-40 w-screen flex justify-center backdrop-blur-sm mt-4" v-if="active">
+        <div class="bg-gray-800 w-1/2 rounded-md text-gray-300 p-4">
+            <p class="text-center font-bold border-b pb-2 border-gray-700">Click to Preview</p>
+            <div v-if="pages" class="mt-4 bg-gray-700 border-gray-600 border rounded p-4 overflow-y-auto max-h-96">
+                <div v-for="page in currentPages" @click="togglePage(page.name)" class="flex items-center justify-between pt-2 pb-2 mb-2 cursor-pointer hover:bg-gray-600 rounded-sm p-4 select-none">
+                    <span>{{ page.name }}</span>
+                    <Icon :size="16" :icon="page.enabled ? 'icon-checkmark' : 'icon-times-circle'" />
+                </div>
             </div>
         </div>
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import Button from './Button.vue';
-import Icon from './Icon.vue';
+<script lang="ts" setup>
+import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import IPageData from '../interfaces/IPageData.js';
 
-const ComponentName = 'VueDevMenu';
-export default defineComponent({
-    name: ComponentName,
-    components: {
-        Button,
-        Icon,
-    },
-    props: {
-        pages: {
-            type: Array,
-            required: true,
-        },
-        previousPages: {
-            type: Array,
-            required: true,
-        },
-    },
-    data() {
-        return {
-            active: true,
-            update: 1,
-            enabledPages: {},
-            currentPages: [],
-            KEYS: {
-                LEFT_SHIFT: 16,
-                F: 70,
-            },
-            MODIFIERS: {
-                LEFT_SHIFT_DOWN: false,
-            },
-        };
-    },
-    methods: {
-        updatePages() {
-            const sortedPages = this.pages.sort();
+const props = defineProps<{ pages: string[], previousPages: IPageData[] }>();
+const emit = defineEmits<{ (e: 'dev-update-pages', pageName: string, active: boolean ): void }>();
+
+const KEYS = {
+    LEFT_SHIFT: 16,
+    F: 70
+}
+
+const MODIFIERS = {
+    LEFT_SHIFT_DOWN: false,
+}
+
+let active = ref<boolean>(true);
+let enabledPages = ref<{ [pageName: string]: boolean }>({});
+let currentPages = ref<{ name: string, enabled: boolean }[]>([]);
+
+function updatePages() {
+            const sortedPages = props.pages.sort();
             const newPageList = [];
 
             for (let pageName of sortedPages) {
-                if (this.enabledPages[pageName]) {
+                if (enabledPages[pageName]) {
                     newPageList.push({ name: pageName, enabled: true });
                     continue;
                 }
@@ -65,99 +48,60 @@ export default defineComponent({
                 newPageList.push({ name: pageName, enabled: false });
             }
 
-            this.currentPages = newPageList;
-        },
-        handleKeyUp(e: KeyboardEvent) {
-            if (e.keyCode === this.KEYS.LEFT_SHIFT) {
-                this.MODIFIERS.LEFT_SHIFT_DOWN = false;
-            }
-        },
-        handleKeyDown(e: KeyboardEvent) {
-            if (e.keyCode === this.KEYS.LEFT_SHIFT) {
-                this.MODIFIERS.LEFT_SHIFT_DOWN = true;
-            }
-
-            if (this.MODIFIERS.LEFT_SHIFT_DOWN && e.keyCode === this.KEYS.F) {
-                this.active = !this.active;
-            }
-        },
-        togglePage(pageName: string) {
-            if (this.enabledPages[pageName]) {
-                this.enabledPages[pageName] = false;
-                this.$emit('dev-update-pages', pageName, false);
-            } else {
-                this.enabledPages[pageName] = true;
-                this.$emit('dev-update-pages', pageName, true);
-            }
-
-            this.updatePages();
-        },
-        forceHide() {
-            this.active = false;
-            localStorage.setItem('hide-pages-on-setup', 'true');
-        },
-    },
-    mounted() {
-        document.addEventListener('keyup', this.handleKeyUp);
-        document.addEventListener('keydown', this.handleKeyDown);
-        this.updatePages();
-        this.$nextTick(() => {
-            for (let pageInfo of this.previousPages) {
-                this.togglePage(pageInfo.name);
-            }
-        });
-
-        const autoHide = localStorage.getItem('hide-pages-on-setup');
-        if (autoHide && typeof autoHide !== 'undefined' && autoHide === 'true') {
-            this.active = false;
+            currentPages.value = newPageList;
         }
-    },
-    unmounted() {
-        document.removeEventListener('keyup', this.handleKeyUp);
-        document.removeEventListener('keydown', this.handleKeyDown);
-    },
+
+function handleKeyUp(e: KeyboardEvent) {
+    if (e.keyCode === KEYS.LEFT_SHIFT) {
+        MODIFIERS.LEFT_SHIFT_DOWN = false;
+    }
+}
+
+function handleKeyDown(e: KeyboardEvent) {
+    if (e.keyCode === KEYS.LEFT_SHIFT) {
+        MODIFIERS.LEFT_SHIFT_DOWN = true;
+    }
+
+    if (MODIFIERS.LEFT_SHIFT_DOWN && e.keyCode === KEYS.F) {
+        active.value = !active;
+    }
+}
+
+function togglePage(pageName: string) {
+    if (enabledPages[pageName]) {
+        enabledPages[pageName] = false;
+        emit('dev-update-pages', pageName, false);
+    } else {
+        enabledPages[pageName] = true;
+        emit('dev-update-pages', pageName, true);
+    }
+
+    updatePages();
+}
+
+function forceHide() {
+    active.value = false;
+    localStorage.setItem('hide-pages-on-setup', 'true');
+}
+
+onMounted(() => {
+    document.addEventListener('keyup', handleKeyUp);
+    document.addEventListener('keydown', handleKeyDown);
+    updatePages();
+    nextTick(() => {
+        for (let pageInfo of props.previousPages) {
+            togglePage(pageInfo.name);
+        }
+    });
+
+    const autoHide = localStorage.getItem('hide-pages-on-setup');
+    if (autoHide && typeof autoHide !== 'undefined' && autoHide === 'true') {
+        active.value = false;
+    }
+})
+
+onUnmounted(() => {
+    document.removeEventListener('keyup', handleKeyUp);
+    document.removeEventListener('keydown', handleKeyDown);
 });
 </script>
-
-<style scoped>
-.menu {
-    background: rgb(40, 50, 50);
-    min-width: 600px;
-    max-width: 600px;
-    padding: 12px;
-    box-sizing: border-box;
-    z-index: 99999;
-    position: fixed;
-    box-shadow: 0px 0px 10px 3px black;
-    border: 4px solid rgba(240, 255, 255, 0.3);
-}
-
-.header {
-    font-size: 16px;
-    padding-bottom: 12px;
-}
-
-.menu .dev-pages {
-    min-height: 600px;
-    max-height: 600px;
-    overflow-y: auto;
-    padding: 12px;
-    box-sizing: border-box;
-}
-
-.menu .dev-pages .dev-page-info {
-    display: flex;
-    align-content: center;
-    padding: 6px;
-    box-sizing: border-box;
-    margin-bottom: 12px;
-    margin-top: 3px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-}
-
-.dev-page-info:hover {
-    background: rgb(57, 71, 71) !important;
-    cursor: pointer;
-}
-</style>

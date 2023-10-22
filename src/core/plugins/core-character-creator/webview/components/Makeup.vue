@@ -88,8 +88,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
-import MakeupList from '../utility/makeupList';
+import { defineComponent } from 'vue';
+import MakeupList from '../utility/makeupList.js';
 
 const ComponentName = 'Makeup';
 export default defineComponent({
@@ -97,12 +97,6 @@ export default defineComponent({
     props: {
         data: Object,
         locales: Object,
-    },
-    components: {
-        Button: defineAsyncComponent(() => import('@ViewComponents/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
-        Module: defineAsyncComponent(() => import('@ViewComponents/Module.vue')),
-        RangeInput: defineAsyncComponent(() => import('@ViewComponents/RangeInput.vue')),
     },
     data() {
         return {

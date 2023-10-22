@@ -22,8 +22,8 @@
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
-import WebViewEvents from '@utility/webViewEvents';
-import { AuthEvents } from '@AthenaPlugins/basic-auth/shared/events';
+import WebViewEvents from '@utility/webViewEvents.js';
+import { AuthEvents } from '@AthenaPlugins/basic-auth/shared/events.js';
 
 const emit = defineEmits<{ (e: 'select-option', selection: string): void }>();
 

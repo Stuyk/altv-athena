@@ -46,8 +46,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
-import OverlaysList from '../utility/overlaysList';
+import { defineComponent } from 'vue';
+import OverlaysList from '../utility/overlaysList.js';
 
 const ComponentName = 'Overlays';
 export default defineComponent({
@@ -55,12 +55,6 @@ export default defineComponent({
     props: {
         data: Object,
         locales: Object,
-    },
-    components: {
-        Button: defineAsyncComponent(() => import('@ViewComponents/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
-        Module: defineAsyncComponent(() => import('@ViewComponents/Module.vue')),
-        RangeInput: defineAsyncComponent(() => import('@ViewComponents/RangeInput.vue')),
     },
     data() {
         return {

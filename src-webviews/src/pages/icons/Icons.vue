@@ -35,10 +35,7 @@ Helpful for seeing what default components look like.
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Icons from '../../exampleData/Icons';
-import Input from '@components/Input.vue';
-import Button from '@components/Button.vue';
-import Icon from '@components/Icon.vue';
+import Icons from '../../exampleData/Icons.js';
 
 const ComponentName = 'Icons';
 export default defineComponent({
@@ -60,11 +57,6 @@ export default defineComponent({
         getPlaceholder() {
             return `Search ${this.icons.length} icons...`;
         },
-    },
-    components: {
-        Button,
-        Icon,
-        Input,
     },
     methods: {
         searchTerm(value: string) {

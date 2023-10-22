@@ -42,22 +42,17 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 
-import MakeupList from './utility/makeupList';
-import OverlaysList from './utility/overlaysList';
-import { MaleHairOverlays, FemaleHairOverlays } from './utility/hairOverlays';
-import { MalePresets, FemalePresets } from './utility/presets';
-import { CHARACTER_CREATOR_LOCALE } from '../shared/locale';
-import { CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../shared/events';
+import MakeupList from './utility/makeupList.js';
+import OverlaysList from './utility/overlaysList.js';
+import { MaleHairOverlays, FemaleHairOverlays } from './utility/hairOverlays.js';
+import { MalePresets, FemalePresets } from './utility/presets.js';
+import { CHARACTER_CREATOR_LOCALE } from '../shared/locale.js';
+import { CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../shared/events.js';
 
 const ComponentName = 'CharacterCreator';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button: defineAsyncComponent(() => import('@ViewComponents/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
-        Modal: defineAsyncComponent(() => import('@ViewComponents/Modal.vue')),
-        Toolbar: defineAsyncComponent(() => import('@ViewComponents/Toolbar.vue')),
-        Frame: defineAsyncComponent(() => import('@ViewComponents/Frame.vue')),
         Appearance: defineAsyncComponent(() => import('./components/Appearance.vue')),
         Structure: defineAsyncComponent(() => import('./components/Structure.vue')),
         Hair: defineAsyncComponent(() => import('./components/Hair.vue')),

@@ -248,17 +248,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent } from 'vue';
 
 const ComponentName = 'Hair';
 export default defineComponent({
     name: ComponentName,
-    components: {
-        Button: defineAsyncComponent(() => import('@ViewComponents/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
-        Module: defineAsyncComponent(() => import('@ViewComponents/Module.vue')),
-        RangeInput: defineAsyncComponent(() => import('@ViewComponents/RangeInput.vue')),
-    },
     props: {
         data: Object,
         locales: Object,

@@ -117,15 +117,15 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-import { CustomContextAction, Item } from '@AthenaShared/interfaces/item';
-import { makeDraggable } from '@ViewUtility/drag';
-import WebViewEvents from '@ViewUtility/webViewEvents';
-import { INVENTORY_EVENTS } from '../../shared/events';
-import { getImagePath } from '../utility/inventoryIcon';
-import { INVENTORY_CONFIG } from '../../shared/config';
-import { debounceReady } from '../utility/debounce';
-import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
-import { SlotInfo } from '../utility/slotInfo';
+import { CustomContextAction, Item } from '@AthenaShared/interfaces/item.js';
+import { makeDraggable } from '@ViewUtility/drag.js';
+import WebViewEvents from '@ViewUtility/webViewEvents.js';
+import { INVENTORY_EVENTS } from '../../shared/events.js';
+import { getImagePath } from '../utility/inventoryIcon.js';
+import { INVENTORY_CONFIG } from '../../shared/config.js';
+import { debounceReady } from '../utility/debounce.js';
+import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces.js';
+import { SlotInfo } from '../utility/slotInfo.js';
 
 export default defineComponent({
     name: 'Inventory',
@@ -134,7 +134,6 @@ export default defineComponent({
         Split: defineAsyncComponent(() => import('./Split.vue')),
         Give: defineAsyncComponent(() => import('./Give.vue')),
         Context: defineAsyncComponent(() => import('./ContextCustom.vue')),
-        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
     },
     props: {
         offclick: {

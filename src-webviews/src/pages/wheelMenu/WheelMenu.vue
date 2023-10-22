@@ -50,19 +50,16 @@
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from 'vue';
-import { VIEW_EVENTS_WHEEL_MENU } from '../../../../src/core/shared/enums/views';
-import { WebViewEventNames } from '../../../../src/core/shared/enums/webViewEvents';
-import { IWheelOption } from '../../../../src/core/shared/interfaces/wheelMenu';
-import ResolvePath from '../../utility/pathResolver';
+import { VIEW_EVENTS_WHEEL_MENU } from '../../../../src/core/shared/enums/views.js';
+import { WebViewEventNames } from '../../../../src/core/shared/enums/webViewEvents.js';
+import { IWheelOption } from '../../../../src/core/shared/interfaces/wheelMenu.js';
+import ResolvePath from '../../utility/pathResolver.js';
 
 const TIME_BETWEEN_SCROLLS = 50;
 
 const ComponentName = 'WheelMenu';
 export default defineComponent({
     name: ComponentName,
-    components: {
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-    },
     data() {
         return {
             label: '',

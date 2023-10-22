@@ -10,8 +10,8 @@
 
 <script lang="ts" setup>
 import { ref, defineAsyncComponent, onMounted } from 'vue';
-import WebViewEvents from '@utility/webViewEvents';
-import { AuthEvents } from '../shared/events';
+import WebViewEvents from '@utility/webViewEvents.js';
+import { AuthEvents } from '../shared/events.js';
 
 // Never actually use this, it's just an example pulled from NPM.
 const ExampleSeedPhrase =

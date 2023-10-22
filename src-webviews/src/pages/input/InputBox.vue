@@ -75,26 +75,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Icon from '../../components/Icon.vue';
-import Button from '../../components/Button.vue';
-import Toolbar from '../../components/Toolbar.vue';
-import Frame from '../../components/Frame.vue';
-import Input from '../../components/Input.vue';
-import Choice from '../../components/Choice.vue';
-import TestData from './utility/testData';
+import TestData from './utility/testData.js';
 import Template from '../template/Template.vue';
-import { WebViewEventNames } from '../../../../src/core/shared/enums/webViewEvents';
+import { WebViewEventNames } from '../../../../src/core/shared/enums/webViewEvents.js';
 
 export const ComponentName = 'InputBox';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button,
-        Frame,
-        Icon,
-        Input,
-        Choice,
-        Toolbar,
         Template,
     },
     props: {

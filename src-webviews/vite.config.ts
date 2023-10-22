@@ -23,5 +23,5 @@ export default defineConfig({
             { find: '@AthenaPlugins', replacement: path.resolve(__dirname, '../src/core/plugins') },
             { find: '@AthenaShared', replacement: path.resolve(__dirname, '../src/core/shared') },
         ],
-    },
+    }
 });

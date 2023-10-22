@@ -1,4 +1,4 @@
-import { WebViewEventNames } from '../../../src/core/shared/enums/webViewEvents';
+import { WebViewEventNames } from '../../../src/core/shared/enums/webViewEvents.js';
 
 const OnEvents: { [key: string]: (...args: any[]) => void } = {};
 

@@ -7,12 +7,12 @@
 </template>
 
 <script lang="ts">
-import WebViewEvents from '@utility/webViewEvents';
 import { defineComponent } from 'vue';
-import { CHAT_CONFIG } from '../shared/config';
-import { CHAT_WEBVIEW_EVENTS } from '../shared/events';
-import { generateBytes } from './utility/generateBytes';
-import { padNumber } from './utility/padNumber';
+import WebViewEvents from '@utility/webViewEvents.js';
+import { CHAT_CONFIG } from '../shared/config.js';
+import { CHAT_WEBVIEW_EVENTS } from '../shared/events.js';
+import { generateBytes } from './utility/generateBytes.js';
+import { padNumber } from './utility/padNumber.js';
 
 const PAGE_UP = 33;
 const PAGE_DOWN = 34;

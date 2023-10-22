@@ -26,8 +26,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import IAction from './interfaces/IAction';
-import DefaultData from './utility/defaultData';
+import IAction from './interfaces/IAction.js';
+import DefaultData from './utility/defaultData.js';
 
 const ComponentName = 'Actions';
 export default defineComponent({

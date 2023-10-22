@@ -19,18 +19,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
-import WebViewEvents from '@ViewUtility/webViewEvents';
-import { INVENTORY_EVENTS } from '@AthenaPlugins/core-inventory/shared/events';
+import { defineComponent } from 'vue';
+import WebViewEvents from '@ViewUtility/webViewEvents.js';
+import { INVENTORY_EVENTS } from '@AthenaPlugins/core-inventory/shared/events.js';
 
 type PlayerList = Array<{ id: number; name: string }>;
 
 export default defineComponent({
     name: 'Give',
-    components: {
-        Button: defineAsyncComponent(() => import('@ViewComponents/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
-    },
     data() {
         return {
             players: [] as PlayerList,

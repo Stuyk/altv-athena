@@ -23,16 +23,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Button from './Button.vue';
-import Icon from './Icon.vue';
 
 const ComponentName = 'Module';
 export default defineComponent({
     name: ComponentName,
-    components: {
-        Button,
-        Icon,
-    },
     props: {
         name: {
             type: String,

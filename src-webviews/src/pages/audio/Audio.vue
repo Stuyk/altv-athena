@@ -2,7 +2,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ResolvePath from '../../utility/pathResolver';
+import ResolvePath from '../../utility/pathResolver.js';
 
 const ComponentName = 'Audio';
 
