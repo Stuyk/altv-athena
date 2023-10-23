@@ -55,8 +55,7 @@
         "njwt": "^2.0.0",
         "sjcl": "1.0.8",
         "sockjs": "0.3.21",
-        "sockjs-client": "1.5.2",
-        "vue3-colorpicker": "^2.2.2"
+        "sockjs-client": "1.5.2"
     },
     "prettier": {
         "tabWidth": 4,
