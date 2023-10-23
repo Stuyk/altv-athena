@@ -9,7 +9,6 @@ import { runPluginsCompiler } from '../plugins/core.js';
 import { copyPluginFiles } from '../plugins/files.js';
 import { compileWebviewPlugins } from '../plugins/webview.js';
 import { updatePluginDependencies } from '../plugins/update-dependencies.js';
-import { doesSettingJsonExist } from '../plugins/update-plugins.js';
 
 const DEBUG = true;
 
