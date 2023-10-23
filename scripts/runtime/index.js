@@ -9,6 +9,7 @@ import { runPluginsCompiler } from '../plugins/core.js';
 import { copyPluginFiles } from '../plugins/files.js';
 import { compileWebviewPlugins } from '../plugins/webview.js';
 import { updatePluginDependencies } from '../plugins/update-dependencies.js';
+import { doesSettingJsonExist } from '../plugins/update-plugins.js';
 
 const DEBUG = true;
 
@@ -257,6 +258,11 @@ async function devMode(firstRun = false) {
 
 async function runServer() {
     const isDev = passedArguments.includes('dev');
+
+    // Check if there are any new updates to be pulled due to plugin-settings.json configuration
+    const settingCheckTimer = createExecTime(`>>> Check Plugin-Settings`);
+    await doesSettingJsonExist();
+    settingCheckTimer.stop();
 
     // Await updating all the dependencies
     const dependencieTimer = createExecTime(`>>> Update Plugin Dependencies`);
