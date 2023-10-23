@@ -15,6 +15,7 @@
         "update": "npx altv-pkg d release",
         "check": "tsc -p ./tsconfig.json | node ./scripts/fileChecker/index.js",
         "fix": "node ./scripts/doctor/index.js",
+        "update-plugins": "node ./scripts/plugins/update-plugins.js",
         "[-] Vue WebView Deployment": "",
         "vue-dev": "node ./scripts/plugins/webview.js && node ./scripts/plugins/files.js && npx vite ./src-webviews --clearScreen=false --host=localhost --port=3000",
         "[-] Utility": "",
@@ -54,7 +55,8 @@
         "njwt": "^2.0.0",
         "sjcl": "1.0.8",
         "sockjs": "0.3.21",
-        "sockjs-client": "1.5.2"
+        "sockjs-client": "1.5.2",
+        "vue3-colorpicker": "^2.2.2"
     },
     "prettier": {
         "tabWidth": 4,

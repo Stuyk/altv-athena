@@ -18,19 +18,33 @@ export async function doesSettingJsonExist() {
         if (!fs.existsSync(settingPath)) continue;
 
         contents = JSON.parse(fs.readFileSync(settingPath, 'utf8'));
-        console.log(`>>> Valid Configuration (plugin-settings.json) found!`);
-        console.log(`>>> Plugin-Url: ${contents.url} | Plugin-Branch: ${contents.branch}`);
         await updatePlugins(contents.url, contents.branch, pluginPath);
     }
 }
 
 async function updatePlugins(url, branch, targetDirectory) {
-    const gitPullCommand = `git -C ${targetDirectory} pull --allow-unrelated-histories ${url} ${branch}`;
-
     try {
-        const { stdout } = await exec(gitPullCommand);
-        console.log(`>>> Pulled "${url}" from GitHub into ${targetDirectory}:\n${stdout}`);
+        const { stdout: currentBranch } = await exec(`git -C ${targetDirectory} rev-parse --abbrev-ref HEAD`);
+
+        if (currentBranch.trim() === branch) {
+            console.log(
+                `>>> Git Pull is valid! [Current Plugin Branch]: ${currentBranch.trim()} | [Update-Branch]: ${branch}`,
+            );
+
+            const gitPullCommand = `git -C ${targetDirectory} pull --allow-unrelated-histories ${url} ${branch}`;
+
+            try {
+                const { stdout } = await exec(gitPullCommand);
+                console.log(`>>> Pulled "${url}" from GitHub\n${stdout}`);
+            } catch (e) {
+                console.error(`Error pulling from GitHub: ${e}`);
+            }
+        } else {
+            console.log(`Branches are not similar. Skipping the update.`);
+        }
     } catch (e) {
-        console.log(e);
+        console.error(`Error executing Git command: ${e}`);
     }
 }
+
+doesSettingJsonExist();

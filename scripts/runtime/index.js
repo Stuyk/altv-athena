@@ -259,11 +259,6 @@ async function devMode(firstRun = false) {
 async function runServer() {
     const isDev = passedArguments.includes('dev');
 
-    // Check if there are any new updates to be pulled due to plugin-settings.json configuration
-    const settingCheckTimer = createExecTime(`>>> Check Plugin-Settings`);
-    await doesSettingJsonExist();
-    settingCheckTimer.stop();
-
     // Await updating all the dependencies
     const dependencieTimer = createExecTime(`>>> Update Plugin Dependencies`);
     await updatePluginDependencies();
