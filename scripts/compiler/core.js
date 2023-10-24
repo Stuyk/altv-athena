@@ -146,6 +146,10 @@ export async function runCoreCompiler() {
     const filesToCopy = getFilesToCopy(enabledPlugins);
 
     const resourcesFolder = sanitizePath(path.join(process.cwd(), 'resources')).replace(/\\/g, '/');
+    if (!fs.existsSync(resourcesFolder)) {
+        fs.mkdirSync(resourcesFolder, { recursive: true });
+    }
+    
     const filesAndDirectories = fs.readdirSync(resourcesFolder);
 
     for (const fileOrDirectory of filesAndDirectories) {
