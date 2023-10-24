@@ -132,7 +132,7 @@ async function transpileFile(file) {
         console.warn(`Failed to compile: ${targetPath}`);
     }
 
-    if (!result || !result.code) {
+    if (!result?.code) {
         return;
     }
 
