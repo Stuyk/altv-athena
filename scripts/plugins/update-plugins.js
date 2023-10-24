@@ -4,21 +4,22 @@ import fs from 'fs';
 import { promisify } from 'util';
 import { exec as execCallback } from 'child_process';
 import { sanitizePath } from '../shared/path.js';
-import { globSync } from '../shared/fileHelpers.js';
 
 const exec = promisify(execCallback);
 
 export async function doesSettingJsonExist() {
-    let contents = [];
-    const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
-    for (const plugin of plugins) {
-        const pluginPath = sanitizePath(path.join(plugin));
-        const settingPath = sanitizePath(path.join(plugin, 'plugin-settings.json'));
+    const pluginConfigs = JSON.parse(
+        fs.readFileSync(sanitizePath(path.join(process.cwd(), 'plugin-settings.json'), 'utf8')),
+    );
 
-        if (!fs.existsSync(settingPath)) continue;
+    for (const [pluginName, config] of Object.entries(pluginConfigs)) {
+        if (config.disabled) {
+            continue;
+        }
 
-        contents = JSON.parse(fs.readFileSync(settingPath, 'utf8'));
-        await updatePlugins(contents.url, contents.branch, pluginPath);
+        const pluginPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
+
+        await updatePlugins(config.url, config.branch, pluginPath);
     }
 }
 

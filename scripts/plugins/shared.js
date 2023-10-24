@@ -1,9 +1,7 @@
 import path from 'path';
 import fs from 'node:fs';
 import { sanitizePath } from '../shared/path.js';
-import { copyAsync, globSync } from '../shared/fileHelpers.js';
-
-const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable', 'disabled'];
+import { copyAsync, globSync, getAllPluginFolders } from '../shared/fileHelpers.js';
 
 export function clearPluginsWebViewFolder() {
     const pluginsFolder = sanitizePath(path.join(process.cwd(), `src-webviews/public/plugins`));
@@ -14,19 +12,30 @@ export function clearPluginsWebViewFolder() {
 }
 
 export function getEnabledPlugins() {
-    const pluginsFolder = sanitizePath(path.join(process.cwd(), 'src/core/plugins'));
-    const plugins = fs.readdirSync(pluginsFolder);
+    const rootPath = sanitizePath(process.cwd());
+    const pluginSettingsPath = sanitizePath(path.join(rootPath, 'plugin-settings.json'));
 
-    return plugins.filter((plugin) => {
-        for (const disabler of viablePluginDisablers) {
-            const filePath = sanitizePath(path.join(pluginsFolder, plugin, disabler));
-            if (fs.existsSync(filePath)) {
-                return false;
-            }
+    let pluginConfigs;
+
+    try {
+        pluginConfigs = JSON.parse(fs.readFileSync(pluginSettingsPath, 'utf8'));
+    } catch (error) {
+        console.error('Error reading plugin-settings.json:', error);
+        pluginConfigs = {};
+    }
+
+    const enabledPlugins = [];
+    const pluginFolders = getAllPluginFolders();
+
+    pluginFolders.forEach((pluginName) => {
+        const config = pluginConfigs[pluginName];
+
+        if ((config && !config.disabled) || !config) {
+            enabledPlugins.push(pluginName);
         }
-
-        return true;
     });
+
+    return enabledPlugins;
 }
 
 export async function moveAssetsToWebview(folderName, extensions) {
@@ -81,21 +90,25 @@ export async function movePluginFilesToWebview(folderName, extensions, isSrc = f
 
         const allFiles = globSync(sanitizePath(path.join(pluginFolder, folderName, `**/*.+(${extensions.join('|')})`)));
 
-        await Promise.all(allFiles.map(async (filePath) => {
-            const finalPath = filePath.replace(new RegExp(`.*\/${folderName}\/`), isSrc
-                ? `src-webviews/src/plugins/${normalizedName}/${pluginName}/`
-                : `src-webviews/public/plugins/${normalizedName}/${pluginName}/`
-            );
+        await Promise.all(
+            allFiles.map(async (filePath) => {
+                const finalPath = filePath.replace(
+                    new RegExp(`.*\/${folderName}\/`),
+                    isSrc
+                        ? `src-webviews/src/plugins/${normalizedName}/${pluginName}/`
+                        : `src-webviews/public/plugins/${normalizedName}/${pluginName}/`,
+                );
 
-            if (!fs.existsSync(filePath)) return;
+                if (!fs.existsSync(filePath)) return;
 
-            const folderPath = path.dirname(finalPath);
-            if (!fs.existsSync(folderPath)) {
-                fs.mkdirSync(folderPath, { recursive: true });
-            }
+                const folderPath = path.dirname(finalPath);
+                if (!fs.existsSync(folderPath)) {
+                    fs.mkdirSync(folderPath, { recursive: true });
+                }
 
-            await copyAsync(filePath, finalPath);
-        }));
+                await copyAsync(filePath, finalPath);
+            }),
+        );
     }
 }
 
