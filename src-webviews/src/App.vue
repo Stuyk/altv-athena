@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { CORE_IMPORTS } from './pages/components.js';
 import { PLUGIN_IMPORTS } from './plugins/imports.js';
 import { WebViewEventNames } from '../../src/core/shared/enums/webViewEvents.js';
@@ -63,6 +63,10 @@ function componentsToArray() {
 
     return componentList;
 }
+
+
+
+
 
 export default defineComponent({
     name: 'App',

@@ -5,7 +5,7 @@ import { Character } from '@AthenaShared/interfaces/character.js';
 import { getPage, open } from './page.js';
 import { CharSelectEvents } from '../shared/events.js';
 
-const CAM_POS = { x: -1355.8013916015625, y: -1182.136962890625, z: 4.85 };
+const CAM_POS = { x: -1357, y: -1181.0, z: 4.85 };
 
 let currentCharacter: Character;
 let characterCount: number;
@@ -54,7 +54,7 @@ async function updatePreview(character: Character, count: number) {
         native.setCamFarDof(newCam, 3.5);
         native.setCamDofStrength(newCam, 1);
         native.setCamActive(newCam, true);
-        native.pointCamAtEntity(newCam, alt.Player.local.scriptID, -0.5, 0, 0, false);
+        native.pointCamAtEntity(newCam, alt.Player.local.scriptID, -0.1, 0, 0, false);
         native.renderScriptCams(true, true, 1000, false, false, 0);
 
         if (typeof everyTick === 'undefined') {

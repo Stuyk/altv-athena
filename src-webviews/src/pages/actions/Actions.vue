@@ -1,24 +1,14 @@
 <template>
-    <div class="actionsWrapper">
-        <div class="actionMenu pa-3" v-if="getActions() && getActions().length >= 1">
+    <div class="z-45 fixed flex justify-center bottom-1/4 w-screen pointer-events-none">
+        <div v-if="getActions() && getActions().length >= 1" class="bg-neutral-900 w-1/3 rounded-md p-4 drop-shadow-lg">
             <div
-                class="action pt-2 pb-2 pl-4 pr-4"
                 v-for="(action, index) in getActions()"
                 :key="index"
-                :class="selection === index ? { active: true } : {}"
+                class="flex gap-8 p-2 text-neutral-200 rounded-md font-semibold"
+                :class="selection === index ? ['bg-neutral-800 border border-neutral-700 shadow-lg'] : []"
             >
-                <template v-if="selection === index">
-                    <span class="amber--text text--lighten-2"> {{ index + 1 }}. </span>
-                    <span class="amber--text text--lighten-2">
-                        {{ action.menuName }}
-                    </span>
-                </template>
-                <template v-else>
-                    <span> {{ index + 1 }}. </span>
-                    <span>
-                        {{ action.menuName }}
-                    </span>
-                </template>
+                <span>{{ index + 1 }}</span>
+                <span>{{ action.menuName }}</span>
             </div>
         </div>
     </div>
@@ -30,6 +20,7 @@ import IAction from './interfaces/IAction.js';
 import DefaultData from './utility/defaultData.js';
 
 const ComponentName = 'Actions';
+
 export default defineComponent({
     name: ComponentName,
     components: {},
@@ -69,6 +60,7 @@ export default defineComponent({
                 return;
             }
 
+            console.log(this.actions);
             this.actions = menuStructure;
         },
         populateActions(actionObject) {
