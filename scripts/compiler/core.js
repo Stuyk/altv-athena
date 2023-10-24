@@ -24,12 +24,13 @@ export function getEnabledPlugins() {
     const pluginFolders = getAllPluginFolders();
 
     pluginFolders.forEach((pluginName) => {
-        const config = pluginConfigs[pluginName];
-
-        if ((config && !config.disabled) || !config) {
-            enabledPlugins.push(pluginName);
-        } else {
-            disabledPlugins.push(pluginName);
+        if (pluginName !== 'plugin-settings.json') {
+            const config = pluginConfigs[pluginName];
+            if ((config && !config.disabled) || !config) {
+                enabledPlugins.push(pluginName);
+            } else {
+                disabledPlugins.push(pluginName);
+            }
         }
     });
 
