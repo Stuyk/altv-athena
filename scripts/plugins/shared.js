@@ -12,8 +12,8 @@ export function clearPluginsWebViewFolder() {
 }
 
 export function getEnabledPlugins() {
-    const rootPath = sanitizePath(process.cwd());
-    const pluginSettingsPath = sanitizePath(path.join(rootPath, 'plugin-settings.json'));
+    const pluginPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins'));
+    const pluginSettingsPath = sanitizePath(path.join(pluginPath, 'plugin-settings.json'));
 
     let pluginConfigs;
 

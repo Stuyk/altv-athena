@@ -9,7 +9,7 @@ const exec = promisify(execCallback);
 
 export async function doesSettingJsonExist() {
     const pluginConfigs = JSON.parse(
-        fs.readFileSync(sanitizePath(path.join(process.cwd(), 'plugin-settings.json'), 'utf8')),
+        fs.readFileSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/plugin-settings.json'), 'utf8')),
     );
 
     for (const [pluginName, config] of Object.entries(pluginConfigs)) {
@@ -56,7 +56,7 @@ async function updatePlugins(url, branch, targetDirectory) {
 }
 
 function isValidGitHubRepoURL(url) {
-    if (url !== '') {
+    if (url !== '' && url !== undefined) {
         const githubRepoURLPattern = /^https:\/\/github\.com\/([A-Za-z0-9-_.]+)\/([A-Za-z0-9-_.]+)\/?$/;
         const isValid = githubRepoURLPattern.test(url);
 

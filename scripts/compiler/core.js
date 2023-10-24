@@ -8,8 +8,8 @@ let filesFailedToCompile = [];
 const disabledPlugins = [];
 
 export function getEnabledPlugins() {
-    const rootPath = sanitizePath(process.cwd());
-    const pluginSettingsPath = sanitizePath(path.join(rootPath, 'plugin-settings.json'));
+    const pluginPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins'));
+    const pluginSettingsPath = sanitizePath(path.join(pluginPath, 'plugin-settings.json'));
 
     let pluginConfigs;
 
@@ -132,7 +132,7 @@ async function transpileFile(file) {
         console.warn(`Failed to compile: ${targetPath}`);
     }
 
-    if (!result?.code) {
+    if (!result.code) {
         return;
     }
 
