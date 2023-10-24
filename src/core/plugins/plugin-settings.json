@@ -1,0 +1,32 @@
+{
+    "athena": {
+        "disabled": false
+    },
+    "athena-debug": {
+        "disabled": false
+    },
+    "attachment-editor": {
+        "disabled": false
+    },
+    "basic-auth": {
+        "disabled": true
+    },
+    "character-select": {
+        "disabled": false
+    },
+    "core-character-creator": {
+        "disabled": false
+    },
+    "core-chat": {
+        "disabled": false
+    },
+    "core-commands": {
+        "disabled": false
+    },
+    "core-inventory": {
+        "disabled": false
+    },
+    "discord-auth": {
+        "disabled": false
+    }
+}
