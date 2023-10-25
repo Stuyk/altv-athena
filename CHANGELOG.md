@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.3.1
+```
+- Fix Object Entity Selection
+```
+
 ## 5.3.0
 ```
 - Update configs, and resource builder to toml only

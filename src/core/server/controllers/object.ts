@@ -4,6 +4,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system.js';
 import { IObject } from '../../shared/interfaces/iObject.js';
 import { sha256Random } from '../utility/hash.js';
 import { ControllerFuncs } from './shared.js';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy.js';
 
 const globalObjects: Array<IObject & { object: alt.Object }> = [];
 
@@ -59,6 +60,7 @@ export function append(objectData: IObject): string {
         newObject.object.collision = false;
     }
 
+    newObject.object.setStreamSyncedMeta('object', objectData);
     globalObjects.push(newObject);
     return objectData.uid;
 }
@@ -200,6 +202,7 @@ export function updatePosition(uid: string, pos: alt.IVector3, player: alt.Playe
 
         globalObjects[index].pos = pos;
         globalObjects[index].object.pos = new alt.Vector3(pos);
+        globalObjects[index].object.setStreamSyncedMeta('object', deepCloneObject(globalObjects[index]));
         return true;
     }
 
@@ -216,6 +219,7 @@ export function updateModel(uid: string, model: string, player: alt.Player = und
 
         globalObjects[index].model = model;
         globalObjects[index].object.model = model;
+        globalObjects[index].object.setStreamSyncedMeta('object', deepCloneObject(globalObjects[index]));
         return true;
     }
 

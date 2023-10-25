@@ -3,7 +3,7 @@ import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 import { IObject } from '@AthenaShared/interfaces/iObject.js';
 
-export type CreatedObject = IObject & { createdObject?: alt.Object };
+export type CreatedObject = IObject & { createdObject?: alt.LocalObject | alt.Object };
 
 const clientObjects: { [uid: string]: CreatedObject } = {};
 const serverObjects: { [uid: string]: CreatedObject } = {};

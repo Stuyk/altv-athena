@@ -7,6 +7,7 @@ import { MARKER_TYPE } from '@AthenaShared/enums/markerTypes.js';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 import { Interaction } from '@AthenaShared/interfaces/interaction.js';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds.js';
+import { CreatedObject } from '@AthenaClient/streamers/object.js';
 
 export type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle' | 'interaction';
 export type TargetInfo = {
@@ -197,7 +198,18 @@ const Internal = {
                 AthenaClient.menu.vehicle.open(targetVehicle);
                 break;
             case 'object':
-                const object = alt.Object.all.find((x) => x.scriptID === selection.id);
+                let object = alt.Object.all.find((x) => x.scriptID === selection.id);
+                let createdObject;
+
+                if (!object) {
+                    const localObject = AthenaClient.streamers.object.getFromScriptId(selection.id);
+                    if (localObject.createdObject) {
+                        createdObject = localObject.createdObject
+                    }
+                } else {
+                    createdObject = {...object.getStreamSyncedMeta('object') as Object, createdObject: object };
+                }
+                
                 if (typeof object === 'undefined') {
                     break;
                 }
@@ -224,12 +236,11 @@ const Internal = {
                     break;
                 }
 
-                const objectInstance = AthenaClient.streamers.object.getFromScriptId(selection.id);
-                if (typeof objectInstance === 'undefined') {
-                    break;
+                if (!createdObject) {
+                    return;
                 }
 
-                AthenaClient.menu.object.open(objectInstance);
+                AthenaClient.menu.object.open(createdObject);
                 break;
             case 'pos':
                 break;
