@@ -79,7 +79,7 @@ export interface Appearance {
      * @type {number}
      *
      */
-    hairDlc: number;
+    hairDlc?: number;
 
     /**
      * The color of the hair.
@@ -204,8 +204,8 @@ export interface ColorInfo {
     id: number;
     value: number;
     color1: number;
-    color2: number;
-    opacity: number;
+    color2?: number;
+    opacity?: number;
 }
 
 /**
@@ -217,6 +217,6 @@ export interface AppearanceInfo {
     value: number;
     opacity: number;
     id: number;
-    collection: string;
-    overlay: string;
+    collection?: string;
+    overlay?: string;
 }

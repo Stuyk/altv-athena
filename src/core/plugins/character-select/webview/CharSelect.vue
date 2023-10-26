@@ -1,47 +1,56 @@
 <template>
     <div
-        class="flex flex-col fixed left-0 bottom-0 ml-4 mb-4 bg-neutral-900 w-1/5 rounded-md box-border text-neutral-400 font-semibold z-20"
+        class="flex flex-col fixed right-0 bottom-0 mr-4 mb-4 bg-neutral-900 w-1/6 rounded-md box-border text-neutral-400 font-semibold z-20"
     >
         <div v-if="isDeleting" class="flex flex-col select-none flex-grow rounded m-2 text-center gap-2">
+            <div
+                @click="deleteCharacterForSure"
+                class="transition-all active:scale-95 flex flex-row justify-between items-cente border text-red-400 border-red-400 hover:text-red-400 cursor-pointer bg-neutral-800 hover:bg-neutral-700 rounded-sm p-4 pt-2 pb-2"
+            >
+                <span>Delete '{{ characterName }}'</span>
+            </div>
             <div
                 @click="doNotDelete"
                 class="transition-all hover:text-neutral-200 active:scale-95 flex flex-row justify-between items-center border border-neutral-700 cursor-pointer bg-neutral-800 hover:bg-neutral-700 rounded-sm p-4 pt-2 pb-2"
             >
-                <span>Nevermind</span>
-            </div>
-            <div
-                @click="deleteCharacterForSure"
-                class="transition-all hover:text-neutral-200 active:scale-95 flex flex-row justify-between items-cente border border-neutral-700 cursor-pointer bg-neutral-800 hover:bg-neutral-700 rounded-sm p-4 pt-2 pb-2"
-            >
-                <span>Delete '{{ characterName }}'</span>
+                <Icon :size="18" icon="icon-chevron-left" />
+                <span>Go Back</span>
             </div>
         </div>
+
         <div v-else class="flex flex-col select-none flex-grow rounded m-2 text-center gap-2">
-            <div
-                @click="newCharacter"
-                class="transition-all hover:text-neutral-200 active:scale-95 flex flex-row justify-between items-center border border-neutral-700 cursor-pointer bg-neutral-800 hover:bg-neutral-700 rounded-sm p-4 pt-2 pb-2"
-            >
-                <span>New</span>
-                <Icon :size="12" icon="icon-plus" />
-            </div>
             <div
                 @click="deleteCharacter"
                 class="transition-all hover:text-neutral-200 active:scale-95 flex flex-row justify-between items-center border border-neutral-700 cursor-pointer bg-neutral-800 hover:bg-neutral-700 rounded-sm p-4 pt-2 pb-2"
             >
                 <span>Delete</span>
-                <Icon :size="12" icon="icon-trash" />
+                <Icon :size="18" icon="icon-remove" />
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="flex flex-col fixed left-0 bottom-0 ml-4 mb-4 bg-neutral-900 w-1/6 rounded-md box-border text-neutral-400 font-semibold z-20"
+    >
+        <div class="flex flex-col select-none flex-grow rounded m-2 text-center gap-2">
+            <div
+                @click="newCharacter"
+                class="transition-all hover:text-neutral-200 active:scale-95 flex flex-row justify-between items-center border border-neutral-700 cursor-pointer bg-neutral-800 hover:bg-neutral-700 rounded-sm p-4 pt-2 pb-2"
+            >
+                <span>New</span>
+                <Icon :size="18" icon="icon-plus" />
             </div>
             <div
                 @click="selectCharacter"
                 class="transition-all hover:text-neutral-200 active:scale-95 flex flex-row justify-between items-center border border-neutral-700 cursor-pointer bg-neutral-800 hover:bg-neutral-700 rounded-sm p-4 pt-2 pb-2"
             >
                 <span>Select</span>
-                <Icon :size="12" icon="icon-checkmark" />
+                <Icon :size="18" icon="icon-select" />
             </div>
         </div>
     </div>
     <div
-        class="flex justify-center gap-8 fixed w-screen bottom-0 mb-4 rounded-md box-border z-10 text-neutral-300 hover:text-neutral-100"
+        class="flex justify-center gap-3 fixed w-screen bottom-0 mb-4 rounded-md box-border z-10 text-neutral-300 hover:text-neutral-100"
         v-if="characterCount >= 2"
     >
         <div @click="prev" class="bg-neutral-900 p-2 rounded-md active:scale-95">

@@ -1,7 +1,7 @@
 <template>
-    <div class="fixed z-50 mt-4 w-screen flex justify-center">
+    <div class="fixed top-0 w-1/3 mt-2">
         <div
-            class="bg-neutral-900 w-1/3 rounded-md text-neutral-300 transition-all"
+            class="bg-neutral-900 rounded-md text-neutral-300 transition-all"
             :class="active ? ['opacity-100'] : ['opacity-0 hover:opacity-50']"
         >
             <p
@@ -14,7 +14,7 @@
             <p v-else @click="active = !active" class="text-center font-bold p-4 cursor-pointer">Pages</p>
             <div
                 v-if="active && pages"
-                class="flex flex-col m-4 p-4 overflow-y-auto max-h-96 scrollbar scrollbar-thumb-blue-600 scrollbar-thumb-rounded gap-2"
+                class="flex flex-col m-4 p-4 border rounded-md border-neutral-700 overflow-y-auto max-h-96 gap-2"
             >
                 <div
                     v-for="page in currentPages"

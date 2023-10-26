@@ -64,10 +64,6 @@ function componentsToArray() {
     return componentList;
 }
 
-
-
-
-
 export default defineComponent({
     name: 'App',
     components: {
@@ -195,6 +191,14 @@ export default defineComponent({
 </script>
 
 <style>
+.page {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
 
 .fade-in {
     animation: FadeIn 0.5s;
