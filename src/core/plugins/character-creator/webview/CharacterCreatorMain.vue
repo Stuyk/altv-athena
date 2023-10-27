@@ -1,6 +1,12 @@
 <template>
     <div class="flex flex-col fixed left-0 top-0 p-2 min-w-content w-96">
-        <component :is="pages[pageName]" :character="character" @set-menu="setMenu" @go-back="goBack" />
+        <component
+            :is="pages[pageName]"
+            :character="character"
+            @set-menu="setMenu"
+            @go-back="goBack"
+            @update-character="updateCharacter"
+        />
     </div>
 </template>
 
@@ -8,7 +14,10 @@
 import { ref } from 'vue';
 import CCMain from './pages/CCMain.vue';
 import CCBody from './pages/CCBody.vue';
+import { hairOverlay } from './dataset/hairOverlays.js';
 import { Appearance } from '@AthenaShared/interfaces/appearance.js';
+import WebViewEvents from '@utility/webViewEvents.js';
+import { MAIN_CHARACTER_CREATOR_EVENTS } from '../shared/events.js';
 
 const pages = {
     main: CCMain,
@@ -103,6 +112,13 @@ function setMenu(menu: keyof typeof pages) {
     }
 
     pageName.value = menu;
+}
+
+function updateCharacter() {
+    character.value.hairOverlay = hairOverlay[character.value.sex][character.value.hair];
+
+    const data = JSON.parse(JSON.stringify(character.value)) as Appearance;
+    WebViewEvents.emitServer(MAIN_CHARACTER_CREATOR_EVENTS.UPDATE, data);
 }
 
 function goBack() {

@@ -32,12 +32,12 @@ export function currencyData(player: alt.Player): void {
  * @param {Character} [document=undefined]
  * @return {*}
  */
-export function appearance(player: alt.Player, document: Character = undefined) {
+export function appearance(player: alt.Player, document: Partial<Character> = undefined) {
     if (Overrides.appearance) {
         return Overrides.appearance(player);
     }
 
-    let data: Character;
+    let data: Partial<Character>;
     if (typeof document === 'undefined') {
         data = Athena.document.character.get(player);
     } else {
