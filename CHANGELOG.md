@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.0.0
+```
+- Move to TailWind, deprecate all old CSS
+- Update DevMenu to New Design
+- Update Action Menu to New Design
+- Update Wheel Menu to New Design
+- Update Character Selection to New Design
+```
+
 ## 5.4.0
 ```
 - Fix imports for WebViews

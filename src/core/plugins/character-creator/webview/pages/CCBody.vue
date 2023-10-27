@@ -1,9 +1,14 @@
 <template>
-    <div class="flex flex-col bg-neutral-900 rounded-md box-border text-neutral-400 font-semibold z-20">
+    <div class="flex flex-col bg-neutral-900 rounded-md box-border text-neutral-200 font-semibold z-20">
+        <div class="flex flex-col select-none flex-grow rounded m-2 text-center gap-2">
+            <div class="text-xs p-1">Body & Face</div>
+        </div>
+    </div>
+    <div class="flex flex-col bg-neutral-900 rounded-md box-border text-neutral-200 font-semibold z-20 mt-2">
         <div class="flex flex-col select-none flex-grow rounded m-2 text-center gap-2">
             <!-- Body Type / Sex -->
-            <div class="flex flex-row justify-between items-center p-2 border border-neutral-700 rounded-md">
-                <div class="w-24 pr-4 text-left text-sm">Body</div>
+            <div class="flex flex-row justify-between items-center p-1 border-b pb-3 border-neutral-700">
+                <div class="w-24 pr-4 text-left text-xs">Body</div>
                 <div class="flex flex-row justify-between items-center flex-grow">
                     <MenuButton @click="updateSex">
                         <Icon icon="icon-chevron-left" :size="12" />
@@ -15,97 +20,123 @@
                 </div>
             </div>
             <!-- Mother -->
-            <div class="flex flex-row justify-between items-center p-2 border border-neutral-700 rounded-md">
-                <div class="w-24 pr-4 text-left text-sm">Mother</div>
-                <div class="flex flex-row justify-between items-center flex-grow">
+            <div class="flex flex-row justify-between items-center p-1 border-b pb-3 border-neutral-700">
+                <div class="w-24 pr-4 text-left text-xs">Mother</div>
+                <div class="flex flex-row justify-between items-center flex-grow h-7">
                     <MenuButton @click="updateFace('faceMother', -1)">
                         <Icon icon="icon-chevron-left" :size="12" />
                     </MenuButton>
-                    <span class="font text-xs">{{ props.character.faceMother }}</span>
+                    <input
+                        :value="props.character.faceMother"
+                        @input="(e: Event) => updateFaceInput(e, 'faceMother')"
+                        class="w-12 text-center border-neutral-800 bg-neutral-950 text-xs rounded-sm border flex-grow ml-4 mr-4 h-full font-mono"
+                    />
                     <MenuButton @click="updateFace('faceMother', 1)">
                         <Icon icon="icon-chevron-right" :size="12" />
                     </MenuButton>
                 </div>
             </div>
             <!-- Father -->
-            <div class="flex flex-row justify-between items-center p-2 border border-neutral-700 rounded-md">
-                <div class="w-24 pr-4 text-left text-sm">Father</div>
-                <div class="flex flex-row justify-between items-center flex-grow">
+            <div class="flex flex-row justify-between items-center p-1 border-b pb-3 border-neutral-700">
+                <div class="w-24 pr-4 text-left text-xs">Father</div>
+                <div class="flex flex-row justify-between items-center flex-grow h-7">
                     <MenuButton @click="updateFace('faceFather', -1)">
                         <Icon icon="icon-chevron-left" :size="12" />
                     </MenuButton>
-                    <span class="font text-xs">{{ props.character.faceFather }}</span>
+                    <input
+                        :value="props.character.faceFather"
+                        @input="(e: Event) => updateFaceInput(e, 'faceFather')"
+                        class="w-12 text-center border-neutral-800 bg-neutral-950 text-xs rounded-sm border flex-grow ml-4 mr-4 h-full font-mono"
+                    />
                     <MenuButton @click="updateFace('faceFather', 1)">
                         <Icon icon="icon-chevron-right" :size="12" />
                     </MenuButton>
                 </div>
             </div>
             <!-- Mother Skin -->
-            <div class="flex flex-row justify-between items-center p-2 border border-neutral-700 rounded-md">
-                <div class="w-24 pr-4 text-left text-sm">Mother Skin</div>
-                <div class="flex flex-row justify-between items-center flex-grow">
+            <div class="flex flex-row justify-between items-center p-1 border-b pb-3 border-neutral-700">
+                <div class="w-24 pr-4 text-left text-xs">Mother Skin</div>
+                <div class="flex flex-row justify-between items-center flex-grow h-7">
                     <MenuButton @click="updateFace('skinMother', -1)">
                         <Icon icon="icon-chevron-left" :size="12" />
                     </MenuButton>
-                    <span class="font text-xs">{{ props.character.skinMother }}</span>
+                    <input
+                        :value="props.character.skinMother"
+                        @input="(e: Event) => updateFaceInput(e, 'skinMother')"
+                        class="w-12 text-center border-neutral-800 bg-neutral-950 text-xs rounded-sm border flex-grow ml-4 mr-4 h-full font-mono"
+                    />
                     <MenuButton @click="updateFace('skinMother', 1)">
                         <Icon icon="icon-chevron-right" :size="12" />
                     </MenuButton>
                 </div>
             </div>
             <!-- Father Skin -->
-            <div class="flex flex-row justify-between items-center p-2 border border-neutral-700 rounded-md">
-                <div class="w-24 pr-4 text-left text-sm">Father Skin</div>
-                <div class="flex flex-row justify-between items-center flex-grow">
+            <div class="flex flex-row justify-between items-center p-1 border-b pb-3 border-neutral-700">
+                <div class="w-24 pr-4 text-left text-xs">Father Skin</div>
+                <div class="flex flex-row justify-between items-center flex-grow h-7">
                     <MenuButton @click="updateFace('skinFather', -1)">
                         <Icon icon="icon-chevron-left" :size="12" />
                     </MenuButton>
-                    <span class="font text-xs">{{ props.character.skinFather }}</span>
+                    <input
+                        :value="props.character.skinFather"
+                        @input="(e: Event) => updateFaceInput(e, 'skinFather')"
+                        class="w-12 text-center border-neutral-800 bg-neutral-950 text-xs rounded-sm border flex-grow ml-4 mr-4 h-full font-mono"
+                    />
                     <MenuButton @click="updateFace('skinFather', 1)">
                         <Icon icon="icon-chevron-right" :size="12" />
                     </MenuButton>
                 </div>
             </div>
             <!-- Face Blend -->
-            <div class="flex flex-row justify-between items-center p-2 border border-neutral-700 rounded-md">
-                <div class="w-24 pr-4 text-left text-sm">Face Mix</div>
-                <div class="flex flex-row justify-between items-center flex-grow">
+            <div class="flex flex-row justify-between items-center p-1 border-b pb-3 border-neutral-700">
+                <div class="w-24 pr-4 text-left text-xs">Face Mix</div>
+                <div class="flex flex-row justify-between items-center flex-grow h-7">
                     <MenuButton @click="updateBlend('faceMix', -0.1)">
                         <Icon icon="icon-chevron-left" :size="12" />
                     </MenuButton>
-                    <span class="font text-xs">{{ props.character.faceMix.toFixed(1) }}</span>
+                    <input
+                        :value="props.character.faceMix.toFixed(1)"
+                        @input="(e: Event) => updateBlendInput(e, 'faceMix')"
+                        class="w-12 text-center border-neutral-800 bg-neutral-950 text-xs rounded-sm border flex-grow ml-4 mr-4 h-full font-mono"
+                    />
                     <MenuButton @click="updateBlend('faceMix', 0.1)">
                         <Icon icon="icon-chevron-right" :size="12" />
                     </MenuButton>
                 </div>
             </div>
             <!-- Skin Blend -->
-            <div class="flex flex-row justify-between items-center p-2 border border-neutral-700 rounded-md">
-                <div class="w-24 pr-4 text-left text-sm">Skin Mix</div>
-                <div class="flex flex-row justify-between items-center flex-grow">
+            <div class="flex flex-row justify-between items-center p-1 border-b pb-3 border-neutral-700">
+                <div class="w-24 pr-4 text-left text-xs">Skin Mix</div>
+                <div class="flex flex-row justify-between items-center flex-grow h-7">
                     <MenuButton @click="updateBlend('skinMix', -0.1)">
                         <Icon icon="icon-chevron-left" :size="12" />
                     </MenuButton>
-                    <span class="font text-xs">{{ props.character.skinMix.toFixed(1) }}</span>
+                    <input
+                        :value="props.character.skinMix.toFixed(1)"
+                        @input="(e: Event) => updateBlendInput(e, 'skinMix')"
+                        class="w-12 text-center border-neutral-800 bg-neutral-950 text-xs rounded-sm border flex-grow ml-4 mr-4 h-full font-mono"
+                    />
                     <MenuButton @click="updateBlend('skinMix', 0.1)">
                         <Icon icon="icon-chevron-right" :size="12" />
                     </MenuButton>
                 </div>
             </div>
+
             <!-- Randomize All -->
-            <div class="flex flex-row select-none flex-grow rounded m-2 text-center gap-2">
-                <MenuButton @click="randomizeFace('masculine')" class="flex-grow text-sm">
-                    <Icon icon="icon-dice" :size="12" />
-                    <span class="pl-2">Masculine</span>
-                </MenuButton>
-                <MenuButton @click="randomizeFace('feminine')" class="flex-grow text-sm">
-                    <Icon icon="icon-dice" :size="12" />
-                    <span class="pl-2">Feminine</span>
-                </MenuButton>
+            <div class="flex flex-row justify-between items-center p-1 border-b pb-3 border-neutral-700">
+                <div class="flex flex-row justify-between items-center flex-grow h-7">
+                    <MenuButton @click="randomizeFace('masculine')">
+                        <Icon icon="icon-male1" :size="14" />
+                    </MenuButton>
+                    <h2 class="text-xs">Randomize</h2>
+                    <MenuButton @click="randomizeFace('feminine')">
+                        <Icon icon="icon-female1" :size="14" />
+                    </MenuButton>
+                </div>
             </div>
         </div>
     </div>
-    <div class="flex flex-col bg-neutral-900 rounded-md box-border text-neutral-400 font-semibold z-20 mt-2">
+    <div class="flex flex-col bg-neutral-900 rounded-md box-border text-neutral-200 font-semibold z-20 mt-2">
         <div class="flex flex-col select-none flex-grow rounded m-2 text-center gap-2">
             <MenuButton @click="emit('go-back')">
                 <Icon icon="icon-chevron-left" :size="12" />
@@ -132,6 +163,8 @@ const emit = defineEmits<{
 function randomizeFace(type: 'masculine' | 'feminine') {
     const dataSet = type === 'masculine' ? masculineFaces : feminineFaces;
 
+    props.character.sex = type === 'feminine' ? 0 : 1;
+
     props.character.faceMother = dataSet[Math.floor(Math.random() * dataSet.length)];
     props.character.faceFather = dataSet[Math.floor(Math.random() * dataSet.length)];
 
@@ -146,21 +179,28 @@ function randomizeFace(type: 'masculine' | 'feminine') {
 
 function updateSex() {
     props.character.sex = props.character.sex ? 0 : 1;
+    emit('update-character');
+}
 
-    if (props.character.sex === 0) {
-        props.character.faceMother = 45;
-        props.character.faceFather = 21;
-        props.character.skinFather = Math.floor(Math.random() * 45);
-        props.character.skinMother = Math.floor(Math.random() * 45);
-        props.character.skinMix = 0.5;
-        props.character.faceMix = 0.5;
-    } else {
-        props.character.faceMother = 0;
-        props.character.faceFather = 0;
-        props.character.skinFather = Math.floor(Math.random() * 45);
-        props.character.skinMother = Math.floor(Math.random() * 45);
-        props.character.skinMix = 0.5;
-        props.character.faceMix = 0.5;
+function updateFaceInput(
+    e: Event,
+    type: 'faceMother' | 'faceFather' | 'skinMother' | 'skinFather',
+    parseAsFloat = false,
+) {
+    const valueAsString: string = e.target['value'];
+    if (typeof valueAsString === 'undefined' || valueAsString == '') {
+        props.character[type] = 0;
+        return;
+    }
+
+    props.character[type] = parseAsFloat ? parseFloat(valueAsString) : parseInt(valueAsString);
+
+    if (props.character[type] < 0) {
+        props.character[type] = 45;
+    }
+
+    if (props.character[type] > 45) {
+        props.character[type] = 0;
     }
 
     emit('update-character');
@@ -175,6 +215,26 @@ function updateFace(type: 'faceMother' | 'faceFather' | 'skinMother' | 'skinFath
 
     if (props.character[type] > 45) {
         props.character[type] = 0;
+    }
+
+    emit('update-character');
+}
+
+function updateBlendInput(e: Event, type: 'faceMix' | 'skinMix') {
+    const valueAsString: string = e.target['value'];
+    if (typeof valueAsString === 'undefined' || valueAsString == '') {
+        props.character[type] = 0;
+        return;
+    }
+
+    props.character[type] = parseFloat(valueAsString);
+
+    if (props.character[type] < 0) {
+        props.character[type] = 0;
+    }
+
+    if (props.character[type] > 1.0) {
+        props.character[type] = 1;
     }
 
     emit('update-character');

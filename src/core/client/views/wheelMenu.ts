@@ -11,6 +11,7 @@ const PAGE_NAME = 'WheelMenu';
 let _label = '';
 let _options: Array<IWheelOptionExt> = [];
 let _interval: number;
+let _opened = false;
 
 /**
  * Do Not Export Internal Only
@@ -78,12 +79,7 @@ class InternalFunctions implements ViewModel {
         }
 
         const view = await AthenaClient.webview.get();
-        view.off(VIEW_EVENTS_WHEEL_MENU.READY, InternalFunctions.ready);
-        view.off(VIEW_EVENTS_WHEEL_MENU.EXECUTE, InternalFunctions.execute);
-
-        if (closePage) {
-            await AthenaClient.webview.closePages([PAGE_NAME], true);
-        }
+        view.emit(VIEW_EVENTS_WHEEL_MENU.SHOW, false);
 
         AthenaClient.webview.unfocus();
         AthenaClient.webview.showCursor(false);
@@ -96,6 +92,10 @@ class InternalFunctions implements ViewModel {
     static async ready() {
         const view = await AthenaClient.webview.get();
         view.emit(VIEW_EVENTS_WHEEL_MENU.ADD_OPTIONS, _label, JSON.parse(JSON.stringify(_options)));
+
+        // This is where we open the page and show the cursor.
+        AthenaClient.webview.focus();
+        AthenaClient.webview.showCursor(true);
     }
 }
 
@@ -124,19 +124,27 @@ export async function open(label: string, options: Array<IWheelOptionExt>, setMo
 
     // This is where we bind our received events from the WebView to
     // the functions in our WebView.
-    const view = await AthenaClient.webview.get();
-    view.on(VIEW_EVENTS_WHEEL_MENU.READY, InternalFunctions.ready);
-    view.on(VIEW_EVENTS_WHEEL_MENU.EXECUTE, InternalFunctions.execute);
 
     if (setMouseToCenter) {
         const [_nothing, _x, _y] = native.getActualScreenResolution(0, 0);
         alt.setCursorPos({ x: _x / 2, y: _y / 2 });
     }
 
-    // This is where we open the page and show the cursor.
-    AthenaClient.webview.openPages(PAGE_NAME, true, InternalFunctions.close);
-    AthenaClient.webview.focus();
-    AthenaClient.webview.showCursor(true);
+    const view = await AthenaClient.webview.get();
+    if (!_opened) {
+        _opened = true;
+        AthenaClient.webview.registerOverlay(PAGE_NAME, (isVisible) => {
+            if (!isVisible) {
+                view.emit(VIEW_EVENTS_WHEEL_MENU.SHOW, false);
+                native.triggerScreenblurFadeOut(0);
+                return;
+            }
+        });
+
+        view.on(VIEW_EVENTS_WHEEL_MENU.READY, InternalFunctions.ready);
+        view.on(VIEW_EVENTS_WHEEL_MENU.EXECUTE, InternalFunctions.execute);
+        view.on(VIEW_EVENTS_WHEEL_MENU.CLOSE, InternalFunctions.close);
+    }
 
     // Let the rest of the script know this menu is open.
     alt.Player.local.isMenuOpen = true;
@@ -148,6 +156,7 @@ export async function open(label: string, options: Array<IWheelOptionExt>, setMo
 
     native.triggerScreenblurFadeIn(250);
     _interval = alt.setInterval(InternalFunctions.tick, 0);
+    view.emit(VIEW_EVENTS_WHEEL_MENU.SHOW, true);
 }
 
 /**

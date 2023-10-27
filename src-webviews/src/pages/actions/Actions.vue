@@ -1,15 +1,16 @@
 <template>
-    <div class="z-45 fixed flex justify-center bottom-1/4 w-screen pointer-events-none">
-        <div v-if="getActions() && getActions().length >= 1" class="bg-neutral-900 w-1/3 rounded-md p-4 drop-shadow-lg">
-            <div
-                v-for="(action, index) in getActions()"
-                :key="index"
-                class="flex gap-8 p-2 text-neutral-200 rounded-md font-semibold"
-                :class="selection === index ? ['bg-neutral-800 border border-neutral-700 shadow-lg'] : []"
-            >
-                <span>{{ index + 1 }}</span>
-                <span>{{ action.menuName }}</span>
-            </div>
+    <div
+        v-if="getActions() && getActions().length >= 1"
+        class="fixed bg-neutral-900 w-1/3 rounded-md p-4 drop-shadow-lg opacity-90 bottom-1/4 text-xs"
+    >
+        <div
+            v-for="(action, index) in getActions()"
+            :key="index"
+            class="flex gap-8 p-2 text-neutral-200 rounded-md font-semibold"
+            :class="selection === index ? ['bg-neutral-800 border border-neutral-700 shadow-lg'] : []"
+        >
+            <span>{{ index + 1 }}</span>
+            <span>{{ action.menuName }}</span>
         </div>
     </div>
 </template>

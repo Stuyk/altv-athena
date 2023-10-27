@@ -1,7 +1,7 @@
 <template>
-    <div class="fixed top-0 w-1/3 mt-2">
+    <div class="fixed top-0 w-1/3 mt-2 opacity-90 largest-z-index">
         <div
-            class="bg-neutral-900 rounded-md text-neutral-300 transition-all"
+            class="bg-neutral-900 rounded-md text-neutral-200 transition-all text-xs"
             :class="active ? ['opacity-100'] : ['opacity-0 hover:opacity-50']"
         >
             <p
@@ -14,12 +14,12 @@
             <p v-else @click="active = !active" class="text-center font-bold p-4 cursor-pointer">Pages</p>
             <div
                 v-if="active && pages"
-                class="flex flex-col m-4 p-4 border rounded-md border-neutral-700 overflow-y-auto max-h-96 gap-2"
+                class="flex flex-col m-4 p-2 border rounded-md bg-neutral-950 border-neutral-700 overflow-y-auto max-h-96 gap-2"
             >
                 <div
                     v-for="page in currentPages"
                     @click="togglePage(page.name)"
-                    class="flex font-semibold items-center justify-between pt-2 pb-2 mb-2 cursor-pointer bg-neutral-800 hover:bg-neutral-700 rounded-sm p-4 select-none border border-neutral-700"
+                    class="flex font-semibold items-center justify-between pt-2 pb-2 cursor-pointer bg-neutral-800 hover:bg-neutral-700 rounded-sm p-4 select-none border border-neutral-700"
                 >
                     <span>{{ page.name }}</span>
                     <Icon :size="16" :icon="page.enabled ? 'icon-checkmark' : 'icon-times-circle'" />
@@ -124,12 +124,16 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.largest-z-index {
+    z-index: 999;
+}
+
 .overflow-y-auto::-webkit-scrollbar {
     width: 0.6rem;
 }
 
 .overflow-y-auto::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb {

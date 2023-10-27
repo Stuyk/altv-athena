@@ -9,4 +9,5 @@ export const VIEW_EVENTS_WHEEL_MENU = {
     READY: 'wheelMenu:Ready',
     CLOSE: 'wheelMenu:Close',
     EXECUTE: 'wheelMenu:Execute',
+    SHOW: 'wheelMenu:Show',
 };

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col fixed left-0 top-0 p-2 min-w-content w-96">
+    <div class="flex flex-col fixed left-0 top-0 p-2 min-w-content w-96 opacity-90">
         <component
             :is="pages[pageName]"
             :character="character"

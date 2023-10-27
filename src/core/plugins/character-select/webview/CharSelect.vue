@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex flex-col fixed right-0 bottom-0 mr-4 mb-4 bg-neutral-900 w-1/6 rounded-md box-border text-neutral-400 font-semibold z-20"
+        class="flex flex-col fixed right-0 bottom-0 mr-4 mb-4 bg-neutral-900 w-1/6 rounded-md box-border text-neutral-200 font-semibold z-20 text-xs opacity-90"
     >
         <div v-if="isDeleting" class="flex flex-col select-none flex-grow rounded m-2 text-center gap-2">
             <div
@@ -30,7 +30,7 @@
     </div>
 
     <div
-        class="flex flex-col fixed left-0 bottom-0 ml-4 mb-4 bg-neutral-900 w-1/6 rounded-md box-border text-neutral-400 font-semibold z-20"
+        class="flex flex-col fixed left-0 bottom-0 ml-4 mb-4 bg-neutral-900 w-1/6 rounded-md box-border text-neutral-200 font-semibold z-20 text-xs opacity-90"
     >
         <div class="flex flex-col select-none flex-grow rounded m-2 text-center gap-2">
             <div
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div
-        class="flex justify-center gap-3 fixed w-screen bottom-0 mb-4 rounded-md box-border z-10 text-neutral-300 hover:text-neutral-100"
+        class="flex justify-center gap-3 fixed w-1/3 bottom-0 mb-4 rounded-md box-border z-10 text-neutral-300 hover:text-neutral-100 text-xs opacity-90"
         v-if="characterCount >= 2"
     >
         <div @click="prev" class="bg-neutral-900 p-2 rounded-md active:scale-95">
@@ -61,7 +61,7 @@
             />
         </div>
         <p
-            class="flex justify-center select-none items-center w-1/4 font-bold border-neutral-700 bg-neutral-900 rounded-md"
+            class="flex flex-grow justify-center select-none items-center w-1/4 font-bold border-neutral-700 bg-neutral-900 rounded-md"
         >
             {{ characterName }}
         </p>

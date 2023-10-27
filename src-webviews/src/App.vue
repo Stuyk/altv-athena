@@ -191,6 +191,8 @@ export default defineComponent({
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900');
+
 .page {
     display: flex;
     width: 100vw;
@@ -198,6 +200,7 @@ export default defineComponent({
     overflow: hidden;
     align-items: center;
     justify-content: center;
+    font-family: 'Inter', 'Arial';
 }
 
 .fade-in {
