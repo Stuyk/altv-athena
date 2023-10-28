@@ -85,6 +85,8 @@ class InternalFunctions implements ViewModel {
     }
 
     static async close(hideOnClose = false) {
+        alt.off('keydown', handleKeyPressEvents);
+
         _isOpen = false;
 
         if (_interval) {
@@ -94,7 +96,7 @@ class InternalFunctions implements ViewModel {
 
         const view = await AthenaClient.webview.get();
 
-        if (!hideOnClose) {
+        if (hideOnClose) {
             view.emit(VIEW_EVENTS_WHEEL_MENU.SHOW, false);
         }
 
@@ -109,6 +111,22 @@ class InternalFunctions implements ViewModel {
     static async ready() {
         const view = await AthenaClient.webview.get();
         view.emit(VIEW_EVENTS_WHEEL_MENU.ADD_OPTIONS, _label, JSON.parse(JSON.stringify(_options)));
+    }
+}
+
+function handleKeyPressEvents(key: alt.KeyCode) {
+    if (key >= 49 && key <= 56) {
+        const index = key - 49;
+        if (!_options[index]) {
+            return;
+        }
+
+        InternalFunctions.execute(_options[index].uid);
+        return;
+    }
+
+    if (key === 27) {
+        InternalFunctions.close(true);
     }
 }
 
@@ -165,6 +183,8 @@ export async function open(label: string, options: Array<IWheelOptionExt>, setMo
     native.triggerScreenblurFadeIn(250);
     _interval = alt.setInterval(InternalFunctions.tick, 0);
     view.emit(VIEW_EVENTS_WHEEL_MENU.SHOW, true);
+
+    alt.on('keydown', handleKeyPressEvents);
 
     // This is where we open the page and show the cursor.
     AthenaClient.webview.focus();
