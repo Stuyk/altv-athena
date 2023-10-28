@@ -1,5 +1,6 @@
 import { Character } from '@AthenaShared/interfaces/character.js';
 import { Account } from '@AthenaShared/interfaces/iAccount.js';
+import { WebViewPlayerState } from '@AthenaShared/interfaces/webviewPlayerState.js';
 
 const state: { [key: string]: any } = {};
 
@@ -94,4 +95,14 @@ export function getAccountPermissions(): Array<string> {
  */
 export function getId(): number {
     return state['id'] ? state['id'] : -1;
+}
+
+/**
+ *  Get information about the current player, their position, health, etc.
+ *
+ * @export
+ * @return {(WebViewPlayerState | undefined)}
+ */
+export function getPlayerState(): WebViewPlayerState | undefined {
+    return state['playerState'];
 }

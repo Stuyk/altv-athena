@@ -16,6 +16,9 @@
 - Added Core HUD Plugin
 - Move Display ID to HUD Plugin
 - Remove Default Display ID
+- Added getPlayerState to WebView state functions
+--- Has health, armour, speed, micLevel, isTalking, isDriving, isAiming, etc.
+--- Mainly adding this to ease the pain while writing HUDs
 ```
 
 ## 5.4.0

@@ -89,6 +89,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_ID = 'playerEmit:state:id',
     PLAYER_EMIT_STATE = 'playerEmit:state:character',
     PLAYER_EMIT_ACCOUNT_STATE = 'playerEmit:state:account',
+    PLAYER_EMIT_PLAYER_STATE = 'playerEmit:state:player',
     //
     PLAYER_SET_FREEZE = 'freeze:Set',
     PLAYER_SET_DEATH = 'death:Toggle',

@@ -29,7 +29,7 @@ class InternalFunctions {
      */
     static handleEmits(eventName: string, ...args: any[]) {
         if (!OnEvents[eventName]) {
-            console.warn(`[WebView] Evetn ${eventName} had emit invoked, but has no callback.`);
+            console.warn(`[WebView] Event ${eventName} had emit invoked, but has no callback.`);
             return;
         }
 

@@ -22,6 +22,7 @@ import { WebViewEventNames } from '../../src/core/shared/enums/webViewEvents.js'
 import VueDevMenu from './components/VueDevMenu.vue';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 import { Character } from '@AthenaShared/interfaces/character.js';
+import { WebViewPlayerState } from '@AthenaShared/interfaces/webviewPlayerState.js';
 import * as state from '@utility/state.js';
 
 // Interfaces
@@ -139,11 +140,15 @@ export default defineComponent({
         setIdentifier(id: number) {
             state.set('id', id);
         },
+        setPlayerState(playerState: WebViewPlayerState) {
+            state.set('playerState', playerState);
+        },
     },
     mounted() {
         WebViewEvents.on(SYSTEM_EVENTS.PLAYER_EMIT_ID, this.setIdentifier);
         WebViewEvents.on(SYSTEM_EVENTS.PLAYER_EMIT_STATE, this.setCharacterState);
         WebViewEvents.on(SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, this.setAccountState);
+        WebViewEvents.on(SYSTEM_EVENTS.PLAYER_EMIT_PLAYER_STATE, this.setPlayerState);
 
         // What to show when 'alt' is not present.
         // Basically if alt:V isn't running with this page present inside of it.

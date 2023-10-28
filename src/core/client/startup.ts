@@ -98,6 +98,7 @@ import './systems/noclip.js';
 import './systems/notification.js';
 import './systems/playerConfig.js';
 import './systems/sound.js';
+import './systems/stateHelper.js';
 import './systems/tasks.js';
 import './systems/tick.js';
 import './systems/vehicle.js';
