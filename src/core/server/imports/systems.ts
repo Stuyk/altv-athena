@@ -28,7 +28,6 @@ import '../systems/tick.js';
 import '../systems/defaults/ammo.js';
 import '../systems/defaults/clothingCrafting.js';
 import '../systems/defaults/death.js';
-import '../systems/defaults/displayId.js';
 import '../systems/defaults/inventorySync.js';
 import '../systems/defaults/time.js';
 import '../systems/defaults/toolbar.js';

@@ -85,3 +85,13 @@ export function getAccountPermissions(): Array<string> {
 
     return state['accountState'].permissions;
 }
+
+/**
+ * Returns the alt:V ID for the player
+ *
+ * @export
+ * @return {number}
+ */
+export function getId(): number {
+    return state['id'] ? state['id'] : -1;
+}

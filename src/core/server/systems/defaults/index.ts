@@ -1,7 +1,6 @@
 export * as ammo from './ammo.js';
 export * as clothingCrafting from './clothingCrafting.js';
 export * as death from './death.js';
-export * as displayId from './displayId.js';
 export * as hospitalBlips from './hospitalBlips.js';
 export * as inventorySync from './inventorySync.js';
 export * as time from './time.js';

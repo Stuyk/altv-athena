@@ -86,6 +86,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_TEMP_OBJECT_LERP = 'temp:Object:Lerp',
     PLAYER_EMIT_WHEEL_MENU = 'wheelMenu:Dynamic',
     PLAYER_EMIT_MISSION_TEXT = 'missionText:Create',
+    PLAYER_EMIT_ID = 'playerEmit:state:id',
     PLAYER_EMIT_STATE = 'playerEmit:state:character',
     PLAYER_EMIT_ACCOUNT_STATE = 'playerEmit:state:account',
     //
@@ -140,7 +141,6 @@ export enum SYSTEM_EVENTS {
     SCREEN_TIMECYCLE_EFFECT = 'screen:timecycle:effect',
     SCREEN_FADE_TO_BLACK = 'screen:fade:to:black',
     SCREEN_FADE_FROM_BLACK = 'screen:fade:from:black',
-    SHOW_SCREEN_PLAYER_ID = 'screen:player:id',
     //
     SCREENSHOT_POPULATE_DATA = 'screenshot:Populate:Data',
     SCREENSHOT_CREATE = 'screenshot:Create',

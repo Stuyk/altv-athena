@@ -10,6 +10,12 @@
 - Update Character Selection to New Design
 - Added Key Bindings to Wheel Menu
 - Added Escape Key to Wheel Menu
+- Removed Account State & Character State from Main App.vue
+--- You can just get state on an interval inside of your own vue files if you really need it
+--- See the 'core-hud' plugin for more information
+- Added Core HUD Plugin
+- Move Display ID to HUD Plugin
+- Remove Default Display ID
 ```
 
 ## 5.4.0

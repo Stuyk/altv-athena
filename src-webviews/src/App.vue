@@ -136,8 +136,12 @@ export default defineComponent({
         setAccountState(accountData: Account) {
             state.set('accountState', accountData);
         },
+        setIdentifier(id: number) {
+            state.set('id', id);
+        },
     },
     mounted() {
+        WebViewEvents.on(SYSTEM_EVENTS.PLAYER_EMIT_ID, this.setIdentifier);
         WebViewEvents.on(SYSTEM_EVENTS.PLAYER_EMIT_STATE, this.setCharacterState);
         WebViewEvents.on(SYSTEM_EVENTS.PLAYER_EMIT_ACCOUNT_STATE, this.setAccountState);
 
