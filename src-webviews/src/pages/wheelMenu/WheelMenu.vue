@@ -80,7 +80,7 @@ function close() {
         return;
     }
 
-    alt.emit(VIEW_EVENTS_WHEEL_MENU.CLOSE);
+    alt.emit(VIEW_EVENTS_WHEEL_MENU.CLOSE, true);
 }
 
 function show(value: boolean) {

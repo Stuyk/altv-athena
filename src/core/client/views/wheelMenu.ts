@@ -126,7 +126,9 @@ function handleKeyPressEvents(key: alt.KeyCode) {
     }
 
     if (key === 27) {
-        InternalFunctions.close(true);
+        alt.nextTick(() => {
+            InternalFunctions.close(true);
+        });
     }
 }
 
@@ -184,7 +186,7 @@ export async function open(label: string, options: Array<IWheelOptionExt>, setMo
     _interval = alt.setInterval(InternalFunctions.tick, 0);
     view.emit(VIEW_EVENTS_WHEEL_MENU.SHOW, true);
 
-    alt.on('keydown', handleKeyPressEvents);
+    alt.on('keyup', handleKeyPressEvents);
 
     // This is where we open the page and show the cursor.
     AthenaClient.webview.focus();
