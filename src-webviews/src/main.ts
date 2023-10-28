@@ -17,7 +17,7 @@ import SimpleInput from './components/SimpleInput.vue';
 import Toolbar from './components/Toolbar.vue';
 import VueDevMenu from './components/VueDevMenu.vue';
 
-import './main.css'
+import './main.css';
 
 const MOUNT_DIV_ID = '#app';
 let app: App<Element>;
@@ -43,6 +43,7 @@ export class ComponentRegistration {
         for (let i = 0; i < VUE_PLUGIN_IMPORTS.length; i++) {
             app.use(VUE_PLUGIN_IMPORTS[i]);
         }
+
         app.mount(MOUNT_DIV_ID);
     }
 }

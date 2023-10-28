@@ -8,30 +8,9 @@
             v-if="isDevMenu()"
         />
         <!-- Displays Individual Pages -->
-        <component
-            v-for="(page, index) in pages"
-            :key="index"
-            :is="page.component"
-            :id="'page-' + page.name"
-            :state="state"
-            :accountState="accountState"
-        />
-        <component
-            v-for="(page, index) in overlays"
-            :key="index"
-            :is="page.component"
-            :id="'page-' + page.name"
-            :state="state"
-            :accountState="accountState"
-        />
-        <component
-            v-for="(page, index) in persistent"
-            :key="index"
-            :is="page.component"
-            :id="'page-' + page.name"
-            :state="state"
-            :accountState="accountState"
-        />
+        <component v-for="(page, index) in pages" :key="index" :is="page.component" />
+        <component v-for="(page, index) in overlays" :key="index" :is="page.component" />
+        <component v-for="(page, index) in persistent" :key="index" :is="page.component" />
     </div>
 </template>
 
@@ -153,11 +132,9 @@ export default defineComponent({
         },
         setCharacterState(characterData: Character) {
             state.set('characterState', characterData);
-            this.state = characterData;
         },
         setAccountState(accountData: Account) {
             state.set('accountState', accountData);
-            this.accountState = accountData;
         },
     },
     mounted() {
