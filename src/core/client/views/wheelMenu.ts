@@ -6,12 +6,14 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system.js';
 import { VIEW_EVENTS_WHEEL_MENU } from '@AthenaShared/enums/views.js';
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu.js';
 import ViewModel from '@AthenaClient/models/viewModel.js';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart.js';
 
 const PAGE_NAME = 'WheelMenu';
 let _label = '';
 let _options: Array<IWheelOptionExt> = [];
 let _interval: number;
-let _opened = false;
+let _openedOnce = false;
+let _isOpen = false;
 
 /**
  * Do Not Export Internal Only
@@ -72,19 +74,34 @@ class InternalFunctions implements ViewModel {
         }
     }
 
-    static async close(closePage = false) {
+    static isShowing() {
+        if (!AthenaClient.webview.isCursorShown()) {
+            AthenaClient.webview.showCursor(true);
+        }
+
+        if (!AthenaClient.webview.isFocused()) {
+            AthenaClient.webview.focus();
+        }
+    }
+
+    static async close(hideOnClose = false) {
+        _isOpen = false;
+
         if (_interval) {
             alt.clearInterval(_interval);
             _interval = null;
         }
 
         const view = await AthenaClient.webview.get();
-        view.emit(VIEW_EVENTS_WHEEL_MENU.SHOW, false);
+
+        if (!hideOnClose) {
+            view.emit(VIEW_EVENTS_WHEEL_MENU.SHOW, false);
+        }
 
         AthenaClient.webview.unfocus();
         AthenaClient.webview.showCursor(false);
 
-        alt.Player.local.isMenuOpen = false;
+        alt.Player.local.isWheelMenuOpen = false;
 
         native.triggerScreenblurFadeOut(250);
     }
@@ -92,10 +109,6 @@ class InternalFunctions implements ViewModel {
     static async ready() {
         const view = await AthenaClient.webview.get();
         view.emit(VIEW_EVENTS_WHEEL_MENU.ADD_OPTIONS, _label, JSON.parse(JSON.stringify(_options)));
-
-        // This is where we open the page and show the cursor.
-        AthenaClient.webview.focus();
-        AthenaClient.webview.showCursor(true);
     }
 }
 
@@ -113,8 +126,12 @@ export async function open(label: string, options: Array<IWheelOptionExt>, setMo
         return;
     }
 
+    // Let the rest of the script know this menu is open.
+    alt.Player.local.isWheelMenuOpen = true;
+
     _label = label;
     _options = options;
+    _isOpen = true;
 
     for (let i = 0; i < _options.length; i++) {
         if (!_options[i].uid) {
@@ -131,23 +148,14 @@ export async function open(label: string, options: Array<IWheelOptionExt>, setMo
     }
 
     const view = await AthenaClient.webview.get();
-    if (!_opened) {
-        _opened = true;
-        AthenaClient.webview.registerOverlay(PAGE_NAME, (isVisible) => {
-            if (!isVisible) {
-                view.emit(VIEW_EVENTS_WHEEL_MENU.SHOW, false);
-                native.triggerScreenblurFadeOut(0);
-                return;
-            }
-        });
+    if (!_openedOnce) {
+        _openedOnce = true;
 
+        view.on(VIEW_EVENTS_WHEEL_MENU.IS_SHOWING, InternalFunctions.isShowing);
         view.on(VIEW_EVENTS_WHEEL_MENU.READY, InternalFunctions.ready);
         view.on(VIEW_EVENTS_WHEEL_MENU.EXECUTE, InternalFunctions.execute);
         view.on(VIEW_EVENTS_WHEEL_MENU.CLOSE, InternalFunctions.close);
     }
-
-    // Let the rest of the script know this menu is open.
-    alt.Player.local.isMenuOpen = true;
 
     if (_interval) {
         alt.clearInterval(_interval);
@@ -157,6 +165,10 @@ export async function open(label: string, options: Array<IWheelOptionExt>, setMo
     native.triggerScreenblurFadeIn(250);
     _interval = alt.setInterval(InternalFunctions.tick, 0);
     view.emit(VIEW_EVENTS_WHEEL_MENU.SHOW, true);
+
+    // This is where we open the page and show the cursor.
+    AthenaClient.webview.focus();
+    AthenaClient.webview.showCursor(true);
 }
 
 /**
@@ -185,4 +197,7 @@ export function update(label: string, options: Array<IWheelOptionExt>, setMouseT
     InternalFunctions.ready();
 }
 
-InternalFunctions.init();
+onTicksStart.add(() => {
+    InternalFunctions.init();
+    AthenaClient.webview.registerPersistentPage(PAGE_NAME);
+});

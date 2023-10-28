@@ -495,6 +495,26 @@ export async function showCursor(state: boolean) {
 }
 
 /**
+ * Check if the cursor is shown
+ *
+ * @export
+ * @return {boolean}
+ */
+export async function isCursorShown() {
+    return _cursorCount >= 1;
+}
+
+/**
+ * Returns if the WebView is focused
+ *
+ * @export
+ * @return {boolean}
+ */
+export async function isFocused() {
+    return _webview.focused;
+}
+
+/**
  * Closes an overlay page or pages.
  *
  * @static

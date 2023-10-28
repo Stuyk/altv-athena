@@ -83,6 +83,8 @@ const getKeybindClass = computed(() => {
             return 'absolute text-neutral-200 translate-x-28 translate-y-28 bg-neutral-800 p-2 pl-4 pr-4 rounded-full pointer-events-none opacity-80';
         }
     }
+
+    return '';
 });
 
 const getColor = computed(() => {

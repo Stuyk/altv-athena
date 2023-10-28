@@ -1,9 +1,9 @@
 <template>
-    <div class="grid grid-cols-3 gap-2 opacity-90" v-if="showMenu && this.options.length >= 1">
+    <div class="grid grid-cols-3 gap-2 opacity-90" v-if="showMenu && options.length >= 1">
         <!-- Renders 1 - 4 -->
         <WheelOption
             v-for="n in 4"
-            :option="this.options[n - 1] ? this.options[n - 1] : undefined"
+            :option="options[n - 1] ? options[n - 1] : undefined"
             :index="n - 1"
             @click="selectOption(n - 1)"
         />
@@ -26,162 +26,153 @@
         <!-- Bottom Row -->
         <WheelOption
             v-for="n in 4"
-            :option="this.options[n + 3] ? this.options[n + 3] : undefined"
+            :option="options[n + 3] ? options[n + 3] : undefined"
             :index="n + 3"
             @click="selectOption(n + 3)"
         />
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue';
 import { VIEW_EVENTS_WHEEL_MENU } from '../../../../src/core/shared/enums/views.js';
-import { WebViewEventNames } from '../../../../src/core/shared/enums/webViewEvents.js';
 import { IWheelOption } from '../../../../src/core/shared/interfaces/wheelMenu.js';
 import WheelOption from './WheelOption.vue';
 
-const ComponentName = 'WheelMenu';
-export default defineComponent({
-    name: ComponentName,
-    components: {
-        WheelOption,
-    },
-    data() {
-        return {
-            label: '',
-            options: [] as Array<IWheelOption>,
-            showMenu: false,
-        };
-    },
-    methods: {
-        addOption(option: IWheelOption) {
-            this.options.push(option);
-        },
-        addOptions(label: string, options: Array<IWheelOption>) {
-            this.label = label;
-            this.options = [];
+let label = ref<string>('');
+let options = ref<IWheelOption[]>([]);
+let showMenu = ref<boolean>();
+let interval = ref<number>();
 
-            if (options.length > 8) {
-                console.warn(`Wheel menu only supports up to 8 items at a time, use nested menus for more options.`);
-            }
+function addOption(option: IWheelOption) {
+    options.value.push(option);
+}
 
-            for (let i = 0; i < options.length; i++) {
-                this.addOption(options[i]);
-            }
-        },
-        selectOption(index: number) {
-            if (!this.options[index]) {
-                return;
-            }
+function addOptions(menuName: string, newOptions: Array<IWheelOption>) {
+    label.value = menuName;
+    options.value = [];
 
-            if (!('alt' in window)) {
-                console.log(`Selected: ${this.options[index].uid}`);
-                return;
-            }
+    if (newOptions.length > 8) {
+        console.warn(`Wheel menu only supports up to 8 items at a time, use nested menus for more options.`);
+    }
 
-            alt.emit(VIEW_EVENTS_WHEEL_MENU.EXECUTE, this.options[index].uid);
-            this.options = [];
-        },
-        close() {
-            if (!('alt' in window)) {
-                return;
-            }
+    for (let i = 0; i < newOptions.length; i++) {
+        addOption(newOptions[i]);
+    }
+}
 
-            alt.emit(VIEW_EVENTS_WHEEL_MENU.CLOSE);
-        },
-        show(value: boolean) {
-            this.showMenu = value;
+function selectOption(index: number) {
+    if (!options.value[index]) {
+        return;
+    }
 
-            if (this.showMenu && 'alt' in window) {
-                alt.emit(VIEW_EVENTS_WHEEL_MENU.READY);
-            }
+    if (!('alt' in window)) {
+        console.log(`Selected: ${options.value[index].uid}`);
+        return;
+    }
 
-            if (!this.showMenu) {
-                this.options = [];
-            }
-        },
-        handleKeyUp(e) {
-            if (e.keyCode < 49 || e.keyCode > 56) {
-                return;
-            }
+    alt.emit(VIEW_EVENTS_WHEEL_MENU.EXECUTE, options.value[index].uid);
+    options.value = [];
+}
 
-            const index = e.keyCode - 49;
-            const option = this.options[index + this.optionIndex];
+function close() {
+    if (!('alt' in window)) {
+        return;
+    }
 
-            if (!option) {
-                return;
-            }
+    alt.emit(VIEW_EVENTS_WHEEL_MENU.CLOSE);
+}
 
-            this.selectOption(option.uid);
-        },
-    },
-    mounted() {
-        document.addEventListener('keyup', this.handleKeyUp);
+function show(value: boolean) {
+    showMenu.value = value;
 
-        if ('alt' in window) {
-            alt.on(VIEW_EVENTS_WHEEL_MENU.ADD_OPTIONS, this.addOptions);
-            alt.on(VIEW_EVENTS_WHEEL_MENU.SHOW, this.show);
-            alt.emit(VIEW_EVENTS_WHEEL_MENU.READY);
-            this.show(true);
-            return;
+    if (showMenu.value && 'alt' in window) {
+        alt.emit(VIEW_EVENTS_WHEEL_MENU.READY);
+
+        if (typeof interval.value === 'undefined') {
+            interval.value = setInterval(() => {
+                alt.emit(VIEW_EVENTS_WHEEL_MENU.IS_SHOWING, true);
+            }, 100);
+        }
+    }
+
+    if (!showMenu.value) {
+        if (interval.value) {
+            clearInterval(interval.value);
+            interval.value = undefined;
         }
 
-        this.label = 'Testing';
+        options.value = [];
+    }
+}
 
-        for (let i = 0; i < 600; i++) {
-            if (i === 4) {
-                this.addOption({
-                    name: `Option ${i}`,
-                    uid: `option-${i}`,
-                    image: '/assets/icons/bullpuprifle.png',
-                    bgImage: '/assets/images/bg.png',
-                });
-                continue;
-            }
+function handleKeyUp(e) {
+    // if (e.keyCode < 49 || e.keyCode > 56) {
+    //     return;
+    // }
+    // const index = e.keyCode - 49;
+    // const option = options.value[index + optionIndex.value];
+    // if (!option) {
+    //     return;
+    // }
+    // this.selectOption(option.uid);
+}
 
-            if (i === 5) {
-                this.addOption({
-                    name: `Option ${i}`,
-                    uid: `option-${i}`,
-                    icon: 'icon-checkmark',
-                    color: 'green',
-                });
-                continue;
-            }
+onMounted(() => {
+    if ('alt' in window) {
+        alt.on(VIEW_EVENTS_WHEEL_MENU.ADD_OPTIONS, addOptions);
+        alt.on(VIEW_EVENTS_WHEEL_MENU.SHOW, show);
+        return;
+    }
 
-            if (i === 2) {
-                this.addOption({
-                    name: `Option ${i}`,
-                    uid: `option-${i}`,
-                    icon: 'icon-close',
-                    color: 'yellow',
-                });
-                continue;
-            }
+    label.value = 'Testing';
 
-            if (i >= 4) {
-                this.addOption({
-                    name: `Option REALLY LONG THO ${i}`,
-                    uid: `option-${i}`,
-                });
-                continue;
-            }
-
-            this.addOption({
+    for (let i = 0; i < 600; i++) {
+        if (i === 4) {
+            addOption({
                 name: `Option ${i}`,
                 uid: `option-${i}`,
-                icon: 'icon-home',
+                image: '/assets/icons/bullpuprifle.png',
+                bgImage: '/assets/images/bg.png',
             });
-
-            this.show(true);
+            continue;
         }
-    },
-    unmounted() {
-        document.removeEventListener('keyup', this.handleKeyUp);
 
-        if ('alt' in window) {
-            alt.off(VIEW_EVENTS_WHEEL_MENU.ADD_OPTIONS, this.addOptions);
+        if (i === 5) {
+            addOption({
+                name: `Option ${i}`,
+                uid: `option-${i}`,
+                icon: 'icon-checkmark',
+                color: 'green',
+            });
+            continue;
         }
-    },
+
+        if (i === 2) {
+            addOption({
+                name: `Option ${i}`,
+                uid: `option-${i}`,
+                icon: 'icon-close',
+                color: 'yellow',
+            });
+            continue;
+        }
+
+        if (i >= 4) {
+            addOption({
+                name: `Option REALLY LONG THO ${i}`,
+                uid: `option-${i}`,
+            });
+            continue;
+        }
+
+        addOption({
+            name: `Option ${i}`,
+            uid: `option-${i}`,
+            icon: 'icon-home',
+        });
+
+        show(true);
+    }
 });
 </script>
