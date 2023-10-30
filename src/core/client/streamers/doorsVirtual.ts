@@ -79,7 +79,7 @@ function onStreamExit(entity: alt.Object) {
         doors.splice(i, 1);
     }
 
-    if (doors.length <= 0) {
+    if (doors.length <= 0 && typeof interval !== 'undefined') {
         alt.clearInterval(interval);
         interval = undefined;
     }

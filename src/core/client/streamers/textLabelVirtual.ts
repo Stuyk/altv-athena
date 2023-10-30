@@ -60,7 +60,7 @@ function onStreamExit(entity: alt.Object) {
         textDraws.splice(i, 1);
     }
 
-    if (textDraws.length <= 0) {
+    if (textDraws.length <= 0 && typeof interval !== 'undefined') {
         alt.clearInterval(interval);
         interval = undefined;
     }

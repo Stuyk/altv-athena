@@ -71,7 +71,7 @@ function onStreamExit(entity: alt.Object) {
         markers.splice(i, 1);
     }
 
-    if (markers.length <= 0) {
+    if (markers.length <= 0 && typeof interval !== 'undefined') {
         alt.clearInterval(interval);
         interval = undefined;
     }

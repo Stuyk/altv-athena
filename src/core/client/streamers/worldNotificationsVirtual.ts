@@ -68,7 +68,7 @@ function onStreamExit(entity: alt.Object) {
         worldNotifications.splice(i, 1);
     }
 
-    if (worldNotifications.length <= 0) {
+    if (worldNotifications.length <= 0 && typeof interval !== 'undefined') {
         alt.clearInterval(interval);
         interval = undefined;
     }
