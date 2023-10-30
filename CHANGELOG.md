@@ -19,6 +19,8 @@
 - Added getPlayerState to WebView state functions
 --- Has health, armour, speed, micLevel, isTalking, isDriving, isAiming, etc.
 --- Mainly adding this to ease the pain while writing HUDs
+- Fix Interval Bugs for Virtual Streams
+- Fix Object Attachment Bug
 ```
 
 ## 5.4.0
