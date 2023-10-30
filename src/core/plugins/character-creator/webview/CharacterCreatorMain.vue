@@ -14,6 +14,7 @@
 import { ref } from 'vue';
 import CCMain from './pages/CCMain.vue';
 import CCBody from './pages/CCBody.vue';
+import CCFaceStructure from './pages/CCFaceStructure.vue';
 import { hairOverlay } from './dataset/hairOverlays.js';
 import { Appearance } from '@AthenaShared/interfaces/appearance.js';
 import WebViewEvents from '@utility/webViewEvents.js';
@@ -22,6 +23,7 @@ import { MAIN_CHARACTER_CREATOR_EVENTS } from '../shared/events.js';
 const pages = {
     main: CCMain,
     body: CCBody,
+    structure: CCFaceStructure,
 };
 
 let pageName = ref<keyof typeof pages>('main');
