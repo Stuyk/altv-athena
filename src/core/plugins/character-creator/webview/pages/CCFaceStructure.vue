@@ -7,13 +7,13 @@
         </div>
         <div class="flex flex-col bg-neutral-900 rounded-md box-border text-neutral-200 font-semibold z-20 mt-2">
             <div
-                class="flex flex-col select-none flex-grow rounded m-2 text-center gap-2 max-h-96 overflow-y-auto pr-2"
+                class="flex flex-col select-none flex-grow rounded m-2 text-center gap-3 max-h-96 overflow-y-auto pr-2"
             >
                 <!-- micro morphs -->
                 <div
                     v-for="(name, index) in morphNames"
                     :key="index"
-                    class="flex flex-row justify-between items-center p-1 border-b pb-3 border-neutral-700"
+                    class="flex flex-row justify-between items-center p-1 border-b pb-4 pt-2 border-neutral-700"
                 >
                     <div class="w-24 pr-4 text-left text-xs">{{ name }}</div>
                     <div class="flex flex-row justify-between items-center flex-grow">

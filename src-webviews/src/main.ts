@@ -1,6 +1,7 @@
 import { App, createApp } from 'vue';
 import ActualApp from './App.vue';
 import { VUE_PLUGIN_IMPORTS } from './plugins/vue-plugin-imports.js';
+import { autoAnimatePlugin } from '@formkit/auto-animate/vue';
 
 import Button from './components/Button.vue';
 import Choice from './components/Choice.vue';
@@ -25,6 +26,9 @@ let app: App<Element>;
 export class ComponentRegistration {
     static init() {
         app = createApp(ActualApp);
+
+        app.use(autoAnimatePlugin);
+
         app.component('Button', Button);
         app.component('Choice', Choice);
         app.component('ColorSlider', ColorSlider);

@@ -3,6 +3,7 @@
         <div
             class="bg-neutral-900 rounded-md text-neutral-200 transition-all text-xs"
             :class="active ? ['opacity-100'] : ['opacity-0 hover:opacity-50']"
+            v-auto-animate
         >
             <p
                 v-if="active"

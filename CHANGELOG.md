@@ -21,6 +21,7 @@
 --- Mainly adding this to ease the pain while writing HUDs
 - Fix Interval Bugs for Virtual Streams
 - Fix Object Attachment Bug
+- Hair, Hair Color, Hair Highlights
 ```
 
 ## 5.4.0
