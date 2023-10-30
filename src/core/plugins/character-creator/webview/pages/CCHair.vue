@@ -22,31 +22,39 @@
                 </div>
                 <!-- Hair Color -->
                 <MenuCollapse title="Hair Color" class="border-b border-neutral-700 pb-2">
-                    <div class="flex flex-col justify-center p-1 bg-neutral-950 rounded mr-3 mt-2">
+                    <div
+                        class="flex flex-col justify-center p-1 bg-neutral-950 rounded mr-3 mt-2 border border-neutral-700"
+                    >
                         <div class="flex flex-row flex-wrap flex-grow gap-2 mt-4 mb-4 pl-3">
                             <div
                                 v-for="(color, index) in props.colorMaximums.primary"
                                 :key="index"
                                 :style="getColorPickerStyle(color)"
                                 @click="updateHairColor('hairColor1', index)"
-                                class="w-5 h-5 border border-transparent hover:border-neutral-700 hover:cursor-pointer hover:scale-125 rounded-sm"
+                                class="w-5 h-5 flex items-center justify-center border border-transparent hover:border-neutral-700 hover:cursor-pointer hover:scale-125 rounded"
                                 :class="props.character.hairColor1 === index ? ['scale-125'] : []"
-                            ></div>
+                            >
+                                <Icon :size="12" icon="icon-check" v-if="props.character.hairColor1 === index" />
+                            </div>
                         </div>
                     </div>
                 </MenuCollapse>
                 <!-- Hair Highlight -->
                 <MenuCollapse title="Hair Highlight" class="border-b border-neutral-700 pb-2">
-                    <div class="flex flex-col justify-center p-1 bg-neutral-950 rounded mr-3 mt-2">
+                    <div
+                        class="flex flex-col justify-center p-1 bg-neutral-950 rounded mr-3 mt-2 border border-neutral-700"
+                    >
                         <div class="flex flex-row flex-wrap flex-grow gap-2 mt-4 mb-4 pl-3">
                             <div
                                 v-for="(color, index) in props.colorMaximums.primary"
                                 :key="index"
                                 :style="getColorPickerStyle(color)"
                                 @click="updateHairColor('hairColor2', index)"
-                                class="w-5 h-5 border border-transparent hover:border-neutral-700 hover:cursor-pointer hover:scale-125 rounded-sm"
+                                class="w-5 h-5 flex items-center justify-center border border-transparent hover:border-neutral-700 hover:cursor-pointer hover:scale-125 rounded"
                                 :class="props.character.hairColor2 === index ? ['scale-125'] : []"
-                            ></div>
+                            >
+                                <Icon :size="12" icon="icon-check" v-if="props.character.hairColor2 === index" />
+                            </div>
                         </div>
                     </div>
                 </MenuCollapse>
