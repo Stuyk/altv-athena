@@ -1,11 +1,19 @@
 # Changelog
 
+## 5.3.2
+
+```
+- Fix Object Detach
+```
+
 ## 5.3.1
+
 ```
 - Fix Object Entity Selection
 ```
 
 ## 5.3.0
+
 ```
 - Update configs, and resource builder to toml only
 - Upgrade item drops to use alt.Object
@@ -148,7 +156,7 @@ Athena.commands
 Equip Namespace
 - Used to listen to unequip / equip from specific item types
 Athena.systems.inventory.equip.on
-Athena.systems.invnetory.equip.invoke 
+Athena.systems.invnetory.equip.invoke
 
 Basic Authentication
 - username/password based login
@@ -592,7 +600,6 @@ Discord Login
 - Starting Sunset of V4/V5 Discord Authentication with External APIs
 ```
 
-
 ## 4.0.0
 
 ```
@@ -631,7 +638,7 @@ Add sounds to Question Box
 RMLUI based menu similar to NativeUI -> AthenaClient.rmlui.menu
 Added console command in-client in debug mode: 'rmluicontrols'
 Change sprite interface for RMLUI to be 3D only
-Fix TextLabel update bug 
+Fix TextLabel update bug
 RMLUI based 3D in-world menu -> AthenaClient.rmlui.menu3D
 AthenaClient.webview.page -> A page constructor made easy.
 AthenaClient.spinner -> AthenaClient.screen.spinner
@@ -683,7 +690,7 @@ Created 'example-sprite' plugin for code references.
 AthenaClient.camera.target -> Used for the [E] interactions you see in-world
 AthenaClient.camera.target.addIgnoredEntity -> Lets you specify an entity handle to ignore interactions with
 AthenaClient.camera.target.removeIgnoredEntity -> Lets you specify an entity handle to remove from ignored interactions
-Updated Vehicle List -> Now Includes Fuel Types 
+Updated Vehicle List -> Now Includes Fuel Types
 Updated Fuel Stations to Specify Fuel Amount
 Interactions now display in-world descriptions
 Character Select does switch-out-switch-in

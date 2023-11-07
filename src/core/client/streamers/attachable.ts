@@ -76,8 +76,6 @@ const ClientAttachableSystem = {
             return;
         }
 
-        alt.log(`Deleting Attachable for ${entity.id}`);
-
         await ClientAttachableSystem.remove(entity);
 
         delete cache[entity.id];
@@ -99,7 +97,7 @@ const ClientAttachableSystem = {
                     continue;
                 }
 
-                const foundObject = alt.Object.all.find((x) => x.id === attachable.entityID);
+                const foundObject = alt.LocalObject.all.find((x) => x.id === attachable.entityID);
                 if (typeof foundObject === 'undefined' || foundObject === null || foundObject.valid === false) {
                     continue;
                 }
