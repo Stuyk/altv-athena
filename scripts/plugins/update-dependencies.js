@@ -1,13 +1,13 @@
 import * as path from 'path';
 import fs from 'fs';
 
+import { getEnabledPlugins } from './shared.js';
 import { promisify } from 'util';
 import { exec as execCallback } from 'child_process';
 import { sanitizePath } from '../shared/path.js';
 import { globSync } from '../shared/fileHelpers.js';
 
 const exec = promisify(execCallback);
-const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable'];
 
 const dependencies = [];
 const devDependencies = [];
@@ -48,13 +48,6 @@ function getPluginDependencies(pluginName) {
         githubDependencies: [],
     };
 
-    for (const disabler of viablePluginDisablers) {
-        const disabledPath = sanitizePath(path.join(pluginPath, disabler));
-        if (fs.existsSync(disabledPath)) {
-            return pluginDependencies;
-        }
-    }
-
     const dependencyPath = sanitizePath(path.join(pluginPath, 'dependencies.json'));
 
     if (!fs.existsSync(dependencyPath)) {
@@ -89,7 +82,7 @@ function getPluginDependencies(pluginName) {
 }
 
 function checkPluginDependencies() {
-    const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
+    const plugins = getEnabledPlugins();
 
     const missingDepdendencies = [];
 
@@ -117,7 +110,7 @@ function checkPluginDependencies() {
 }
 
 function checkPluginDevDependencies() {
-    const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
+    const plugins = getEnabledPlugins();
 
     const missingDevDepdendencies = [];
 
@@ -209,7 +202,7 @@ async function installDevDependencies(installedDevDeps, sanitizedMissingDevDeps,
 }
 
 async function installGithubDependencies() {
-    const plugins = globSync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
+    const plugins = getEnabledPlugins();
 
     for (const plugin of plugins) {
         const pluginName = path.basename(plugin);

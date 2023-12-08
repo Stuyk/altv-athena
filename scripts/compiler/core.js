@@ -1,31 +1,46 @@
 import swc from '@swc/core';
 import path from 'path';
 import fs from 'node:fs';
-import { copySync, getAllPluginFolders, getPluginFolder, globSync, writeFile } from '../shared/fileHelpers.js';
+import { copySync, getAllPluginFolders, globSync, writeFile } from '../shared/fileHelpers.js';
 import { sanitizePath } from '../shared/path.js';
 
-const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable'];
-
 let filesFailedToCompile = [];
+const disabledPlugins = [];
 
-function getEnabledPlugins() {
-    const pluginFolder = getPluginFolder();
+export function getEnabledPlugins() {
+    const pluginPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins'));
+    const pluginSettingsPath = sanitizePath(path.join(pluginPath, 'plugin-settings.json'));
+
+    let pluginConfigs;
+
+    try {
+        pluginConfigs = JSON.parse(fs.readFileSync(pluginSettingsPath, 'utf8'));
+    } catch (error) {
+        console.error('Error reading plugin-settings.json:', error);
+        pluginConfigs = {};
+    }
+
+    const enabledPlugins = [];
     const pluginFolders = getAllPluginFolders();
 
-    return pluginFolders.filter((pluginName) => {
-        const pluginPath = sanitizePath(path.join(pluginFolder, pluginName));
-
-        for (const fileName of viablePluginDisablers) {
-            const disabledPath = sanitizePath(path.join(pluginPath, fileName));
-
-            if (fs.existsSync(disabledPath)) {
-                return false;
+    pluginFolders.forEach((pluginName) => {
+        if (pluginName !== 'plugin-settings.json') {
+            const config = pluginConfigs[pluginName];
+            if ((config && !config.disabled) || !config) {
+                enabledPlugins.push(pluginName);
+            } else {
+                disabledPlugins.push(pluginName);
             }
         }
-
-        return true;
     });
+
+    return enabledPlugins;
 }
+
+const enabledPlugins = getEnabledPlugins();
+
+console.log('Enabled Plugins:', enabledPlugins);
+console.log('Disabled Plugins', disabledPlugins);
 
 function getFilesForTranspilation(enabledPlugins) {
     const rootPath = sanitizePath(path.join(process.cwd(), 'src/**/*.ts').replace(/\\/g, '/'));
@@ -118,7 +133,7 @@ async function transpileFile(file) {
         console.warn(`Failed to compile: ${targetPath}`);
     }
 
-    if (!result || !result.code) {
+    if (!result.code) {
         return;
     }
 

@@ -15,6 +15,7 @@
         "update": "npx altv-pkg d release",
         "check": "tsc -p ./tsconfig.json | node ./scripts/fileChecker/index.js",
         "fix": "node ./scripts/doctor/index.js",
+        "update-plugins": "node ./scripts/plugins/update-plugins.js",
         "[-] Vue WebView Deployment": "",
         "vue-dev": "node ./scripts/plugins/webview.js && node ./scripts/plugins/files.js && npx vite ./src-webviews --clearScreen=false --host=localhost --port=3000",
         "[-] Utility": "",
