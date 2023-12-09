@@ -122,7 +122,7 @@ const Internal = {
             });
         }
 
-        entityInfo.sort((a, b) => {
+        entityInfo = entityInfo.sort((a, b) => {
             return a.dist - b.dist;
         });
 
