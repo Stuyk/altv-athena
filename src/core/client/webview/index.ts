@@ -615,6 +615,22 @@ export function on<EventNames = string>(eventName: EventNames, callback: AnyCall
 }
 
 /**
+ * Unregisters an event.
+ *
+ * @static
+ * @param {string} pageName
+ * @param {(...args: any[]) => void} callback
+ *
+ */
+export function off<EventNames = string>(eventName: EventNames) {
+    if (ClientEvents[String(eventName)]) {
+        delete ClientEvents[String(eventName)]
+        return;
+    }
+    return;
+}
+
+/**
  * Emit through the WebViewEvents Helper
  * Ensures that there is a callback event on the other side.
  *
