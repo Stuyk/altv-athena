@@ -603,19 +603,31 @@ export function ready(pageName: string, callback: AnyCallback) {
  * @param {(...args: any[]) => void} callback
  *
  */
-export function on<EventNames = string>(eventName: EventNames, callback: AnyCallback, override: boolean = false) {
+export function on<EventNames = string>(eventName: EventNames, callback: AnyCallback) {
     if (ClientEvents[String(eventName)]) {
-        if (override) {
-            delete ClientEvents[String(eventName)];
-        } else {  
-            console.warn(`[Client] Duplicate Event Name (${eventName}) for Athena.webview.on (WebViewController.onInvoke)`);
-    
-            console.warn(`Did not register duplicate event.`);
-            return;
-        }
+        console.warn(`[Client] Duplicate Event Name (${eventName}) for Athena.webview.on (WebViewController.onInvoke)`);
+
+        console.warn(`Did not register duplicate event.`);
+        return;
     }
 
     ClientEvents[String(eventName)] = callback;
+}
+
+/**
+ * Unregisters an event.
+ *
+ * @static
+ * @param {string} pageName
+ * @param {(...args: any[]) => void} callback
+ *
+ */
+export function off<EventNames = string>(eventName: EventNames) {
+    if (ClientEvents[String(eventName)]) {
+        delete ClientEvents[String(eventName)]
+        return;
+    }
+    return;
 }
 
 /**
