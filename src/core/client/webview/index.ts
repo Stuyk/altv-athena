@@ -603,7 +603,7 @@ export function ready(pageName: string, callback: AnyCallback) {
  * @param {(...args: any[]) => void} callback
  *
  */
-export function on<EventNames = string>(eventName: EventNames, callback: AnyCallback, overide: boolean = false) {
+export function on<EventNames = string>(eventName: EventNames, callback: AnyCallback, override: boolean = false) {
     if (ClientEvents[String(eventName)]) {
         if (override) {
             delete ClientEvents[String(eventName)];
