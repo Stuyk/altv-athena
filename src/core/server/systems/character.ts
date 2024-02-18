@@ -181,10 +181,10 @@ export async function select(player: alt.Player, character: Character) {
         // Synchronization
         Athena.player.sync.currencyData(player);
 
-        player.setSyncedMeta(PLAYER_SYNCED_META.NAME, data.name);
-        player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
-        player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
-        player.setSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID, data._id.toString());
+        player.setStreamSyncedMeta(PLAYER_SYNCED_META.NAME, data.name);
+        player.setStreamSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
+        player.setStreamSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
+        player.setStreamSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID, data._id.toString());
 
         // Propagation
         // Athena.controllers.chat.populateCommands(player);

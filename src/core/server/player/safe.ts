@@ -179,7 +179,7 @@ export function setDimension(player: alt.Player, value: number) {
     }
 
     player.dimension = value;
-    player.setSyncedMeta(PLAYER_SYNCED_META.DIMENSION, value);
+    player.setStreamSyncedMeta(PLAYER_SYNCED_META.DIMENSION, value);
 }
 
 interface SafeFunctions {

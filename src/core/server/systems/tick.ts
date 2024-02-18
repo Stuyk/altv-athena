@@ -74,8 +74,8 @@ function handlePing(player: alt.Player): void {
         return;
     }
 
-    player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
-    player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
+    player.setStreamSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
+    player.setStreamSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
     player.nextPingTime = Date.now() + timeBetweenPings;
 
     // Handles General Saving / Synchronization

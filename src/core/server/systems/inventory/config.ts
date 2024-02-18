@@ -31,7 +31,7 @@ let DEFAULT_CONFIG = {
  */
 export function set(config: typeof DEFAULT_CONFIG) {
     DEFAULT_CONFIG = Object.assign(DEFAULT_CONFIG, config);
-    alt.setSyncedMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, DEFAULT_CONFIG.weight.enabled);
+    alt.setMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, DEFAULT_CONFIG.weight.enabled);
 }
 
 /**
@@ -48,5 +48,5 @@ export function get(): typeof DEFAULT_CONFIG {
  */
 export function disableWeight() {
     DEFAULT_CONFIG.weight.enabled = false;
-    alt.setSyncedMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, false);
+    alt.setMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, false);
 }

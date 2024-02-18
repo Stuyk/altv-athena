@@ -51,7 +51,7 @@ export function setPlayerIdentifier(player: alt.Player) {
         throw new Error(`Could not set identifier for player: ${player.id}, data was not defined.`);
     }
 
-    player.setSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID, identifier);
+    player.setStreamSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID, identifier);
 }
 
 /**

@@ -25,7 +25,7 @@ export async function account(player: alt.Player, accountData: Account): Promise
     const newToken = await Athena.systems.jwt.create(accountData as Account);
     alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, newToken);
 
-    player.setSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID, accountData.id);
+    player.setStreamSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID, accountData.id);
     emit.meta(player, 'permissions', accountData.permissions);
 
     Athena.document.account.bind(player, accountData);

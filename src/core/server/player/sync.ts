@@ -146,8 +146,8 @@ export function syncedMeta(player: alt.Player): void {
         return Overrides.syncedMeta(player);
     }
 
-    player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
-    player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
+    player.setStreamSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
+    player.setStreamSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
 }
 
 export function playTime(player: alt.Player): void {
