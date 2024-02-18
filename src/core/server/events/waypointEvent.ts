@@ -9,6 +9,6 @@ alt.onClient(ATHENA_EVENTS_PLAYER_CLIENT.WAYPOINT, (player: alt.Player, pos: alt
     }
 
     player.currentWaypoint = pos;
-    player.setSyncedMeta(PLAYER_SYNCED_META.WAYPOINT, pos);
+    player.setStreamSyncedMeta(PLAYER_SYNCED_META.WAYPOINT, pos);
     ClientEvents.trigger(ATHENA_EVENTS_PLAYER_CLIENT.WAYPOINT, player, pos);
 });
