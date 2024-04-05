@@ -16,9 +16,9 @@ class InternalFunctions {
      * @param {string} name
      *
      */
-    static verifyName(player: alt.Player, name: string) {
-        const isValidName = Athena.systems.character.isNameTaken(name);
-        alt.emitClient(player, CHARACTER_CREATOR_EVENTS.VERIFY_NAME, isValidName);
+    static async verifyName(player: alt.Player, name: string) {
+        const isNameTaken = await Athena.systems.character.isNameTaken(name);
+        alt.emitClient(player, CHARACTER_CREATOR_EVENTS.VERIFY_NAME, !isNameTaken);
     }
 
     /**
