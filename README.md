@@ -1,3 +1,9 @@
+> [!IMPORTANT]  
+> Athena will no longer be updated.
+> Consider using [Rebar Framework](https://rebarv.com/) for more up-to-date practices, and a plugin system.
+
+---
+
 <p align="center">
     <img src="https://i.imgur.com/iCY59PR.png" width="100">
 </p>
